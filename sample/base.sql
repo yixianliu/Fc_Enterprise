@@ -34,7 +34,7 @@ CREATE TABLE `#DB_PREFIX#Advertisement` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`ad_id`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 友情链接
@@ -53,7 +53,7 @@ CREATE TABLE `#DB_PREFIX#Friend_Link` (
     PRIMARY
     KEY (`link_id`),
     UNIQUE KEY `url` (`url`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 网站公告
@@ -67,7 +67,7 @@ CREATE TABLE `#DB_PREFIX#Announce` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`announce_id`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 管理员(包括审核,后台管理)
@@ -87,7 +87,7 @@ CREATE TABLE `#DB_PREFIX#Management` (
     PRIMARY
     KEY (`admin_id`),
     UNIQUE KEY `username` (`username`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 版块
@@ -111,7 +111,7 @@ CREATE TABLE `#DB_PREFIX#Section` (
     KEY (`section_id`),
     UNIQUE `sort_id` (`sort_id`),
     UNIQUE KEY `skey` (`skey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 配置
@@ -129,7 +129,7 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     KEY (`conf_id`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * * * * * * * * * * * * * * * * * * * * * *
@@ -168,7 +168,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     KEY (`user_id`),
     KEY `rkey` (`rkey`),
     UNIQUE KEY `username` (`username`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 用户设置
@@ -187,7 +187,7 @@ CREATE TABLE `#DB_PREFIX#User_Config` (
     PRIMARY
     KEY (`conf_id`),
     UNIQUE KEY `user_id` (`user_id`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 用户安全问题
@@ -202,7 +202,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
     PRIMARY
     KEY (`security_id`),
     UNIQUE KEY `skey` (`skey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * * * * * * * * * * * * * * * * * * * * * *
@@ -222,7 +222,7 @@ CREATE TABLE `#DB_PREFIX#User_Related_rp` (
     KEY (`rp_id`),
     KEY `rkey` (`rkey`),
     KEY `pkey` (`pkey`)
-) ENGINE=#DB_ENGINE# DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
  * 权限
@@ -243,7 +243,7 @@ CREATE TABLE `#DB_PREFIX#Power` (
     PRIMARY
     KEY (`power_id`),
     UNIQUE KEY `pkey` (`pkey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 角色
@@ -263,7 +263,7 @@ CREATE TABLE `#DB_PREFIX#Role` (
     KEY (`role_id`),
     KEY `rkey` (`rkey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * * * * * * * * * * * * * * * * * * * * * *
@@ -287,7 +287,7 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     KEY (`menu_id`),
     KEY `rkey` (`rkey`),
     UNIQUE KEY `mkey` (`mkey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 匹配菜单中的[角色 / 权限]
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `#DB_PREFIX#Menu_Relevance_rp` (
     KEY `menu_id` (`menu_id`),
     KEY `role_id` (`role_id`),
     KEY `power_id` (`power_id`)
-) ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 
 /**
@@ -343,7 +343,7 @@ CREATE TABLE `#DB_PREFIX#Movie` (
     KEY `ckey` (`ckey`),
     KEY `pkey` (`pkey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 电影资源分类
@@ -364,7 +364,7 @@ CREATE TABLE `#DB_PREFIX#Movie_Classify` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 电影资源设置
@@ -386,7 +386,7 @@ CREATE TABLE `#DB_PREFIX#Movie_Conf` (
     UNIQUE `servername` (`servername`),
     UNIQUE `port` (`port`),
     UNIQUE KEY `pkey` (`pkey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 音乐资源
@@ -407,7 +407,7 @@ CREATE TABLE `#DB_PREFIX#Music` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 音乐资源分类
@@ -428,7 +428,7 @@ CREATE TABLE `#DB_PREFIX#Music_Classify` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 音乐资源设置
@@ -445,7 +445,7 @@ CREATE TABLE `#DB_PREFIX#Music_Conf` (
     KEY (`conf_id`),
     UNIQUE KEY `pkey` (`pkey`),
     UNIQUE `path` (`path`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 文档资源
@@ -466,7 +466,7 @@ CREATE TABLE `#DB_PREFIX#Document` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 文档资源分类
@@ -487,7 +487,7 @@ CREATE TABLE `#DB_PREFIX#Document_Classify` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 文档资源设置
@@ -506,7 +506,7 @@ CREATE TABLE `#DB_PREFIX#Document_Conf` (
     KEY `rkey` (`rkey`),
     UNIQUE `path` (`path`),
     UNIQUE KEY `pkey` (`pkey`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 视频资源
@@ -527,7 +527,7 @@ CREATE TABLE `#DB_PREFIX#Video` (
     KEY `ckey` (`ckey`),
     KEY `rkey` (`rkey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 视频资源分类
@@ -548,7 +548,7 @@ CREATE TABLE `#DB_PREFIX#Video_Classify` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
  * 视频资源设置
@@ -567,4 +567,4 @@ CREATE TABLE `#DB_PREFIX#Video_Conf` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `pkey` (`pkey`),
     UNIQUE `path` (`path`)
-)ENGINE=#DB_ENGINE# DEFAULT CHARSET=#DB_CODE#;
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;

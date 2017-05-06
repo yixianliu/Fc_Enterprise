@@ -6,12 +6,9 @@
  */
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=train;charset=utd8',
+    'dsn' => 'mysql:host=localhost;dbname=Calendar;charset=utf8',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
-    'dbname' => '',
-    'dbpw' => '',
-    'dbhost' => '',
-    'dbuser' => '',
+    'tablePrefix' => 'F_',
 ];

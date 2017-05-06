@@ -31,8 +31,8 @@ use yii\helpers\Url;
 <div class="container">
 
     <div class="blog-header">
-        <h1 class="blog-title">引导博客</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+        <h1 class="blog-title">作者博客</h1>
+        <p class="lead blog-description">关于程序最新的更新,请关注作者博客...</p>
     </div>
 
     <div class="row">
@@ -41,8 +41,8 @@ use yii\helpers\Url;
 
             <div class="blog-post">
 
-                <h2 class="blog-post-title">样本博客</h2>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+                <h2 class="blog-post-title">程序使用指南</h2>
+                <p class="blog-post-meta">January 1, 2014 by <a href="#"><?= Yii::$app->params['COPYRIGHT'] ?></a></p>
 
                 <p>这篇博客文章展示了几种不同类型的内容，这些内容都是由引导引导的。基本的排版、图片和代码都得到了支持。</p>
                 <hr>
@@ -78,8 +78,8 @@ use yii\helpers\Url;
             <br />
 
             <div class="blog-post">
-                <h2 class="blog-post-title">Another blog post</h2>
-                <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+                <h2 class="blog-post-title">记录生活</h2>
+                <p class="blog-post-meta">December 23, 2013 by <a href="#"><?= Yii::$app->params['COPYRIGHT'] ?></a></p>
 
                 <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
                 <blockquote>
@@ -93,8 +93,8 @@ use yii\helpers\Url;
             <br />
 
             <div class="blog-post">
-                <h2 class="blog-post-title">New feature</h2>
-                <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
+                <h2 class="blog-post-title">严于律己</h2>
+                <p class="blog-post-meta">December 14, 2013 by <a href="#"><?= Yii::$app->params['COPYRIGHT'] ?></a></p>
 
                 <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                 <ul>
@@ -117,7 +117,7 @@ use yii\helpers\Url;
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module sidebar-module-inset">
-                <h4>About</h4>
+                <h4>关于作者</h4>
                 <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
             </div>
 
@@ -144,11 +144,11 @@ use yii\helpers\Url;
             <br />
 
             <div class="sidebar-module">
-                <h4>Elsewhere</h4>
+                <h4>联系作者</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">微博</a></li>
+                    <li><a href="#">企鹅号</a></li>
+                    <li><a href="#">微信号</a></li>
                 </ol>
             </div>
         </div><!-- /.blog-sidebar -->
