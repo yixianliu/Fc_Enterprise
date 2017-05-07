@@ -9,13 +9,26 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
+<style>
+
+</style>
+
 <div class="row">
     <div class="col-md-12">
-        <h2 id="form-text" style="color: red;font-weight: 700;"></h2>
+
+        <div class="error">
+            <h2 id="form-text" style="font-weight: 700;"></h2>
+        </div>
+
+        <div class="success">
+            <h2 id="form-text" style="font-weight: 700;"></h2>
+        </div>
+
     </div>
 </div>
 
 <?php if (isset($result['FormName'])): ?>
+
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -40,6 +53,8 @@ use yii\helpers\Url;
                         form.find(':submit').attr('disabled', false);
                         return false;
                     },
+
+                    // 发送
                     beforSend: function (data) {
                         form.find(':submit').attr('disabled', true);
                     },
@@ -81,6 +96,7 @@ use yii\helpers\Url;
 
         });
     </script>
+
 <?php else: ?>
 
     <div class="row">

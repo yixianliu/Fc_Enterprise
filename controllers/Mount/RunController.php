@@ -31,7 +31,7 @@ class RunController extends BaseController {
         $request = Yii::$app->request;
 
         if (!$request->isAjax) {
-//            return \yii\helpers\Json::encode(['msg' => '非法提交!']);
+            return \yii\helpers\Json::encode(['msg' => '非法提交!']);
         }
 
         $model = new MountRunForm();

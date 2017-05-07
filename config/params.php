@@ -15,10 +15,11 @@ return [
     'PHONE' => '+8613400000043',
     'COPYRIGHT' => '创始工作室室 - Founding Chamber',
     'EMAIL' => 'Admin_Fc@Yxlcms.com', // 管理员邮箱
-    'FIXPHONE' => '+8613400000043',
-    // +----------------------------------------------------------------------
-    // | 站点设置
-    // +----------------------------------------------------------------------
+    'FIXPHONE' => '+8613400000043', // 传真
+
+    /**
+     * 站点设置
+     */
     'CODE_STATUS' => 'On',
     'REG_STATUS' => 'On',
     'WEB_STATUS' => 'On',
@@ -38,7 +39,10 @@ return [
     'PRODUCT_VIEW_NUM' => '20',
     'LONG_VIEW_NUM' => '20',
     'MIC_VIEW_NUM' => '20', // 商户列表数量
-    // 上传
+
+    /**
+     * 上传
+     */
     'FILE_UPLOAD_TYPE' => 'zip,gz,rar,iso,doc,xsl,ppt,wps',
     'IMAGE_UPLOAD_TYPE' => 'jpg,gif,png',
     'FILE_UPLOAD_SIZE' => '5000000',

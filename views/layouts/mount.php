@@ -85,13 +85,19 @@ $this->title = '挂载中心';
                         [
                             'label' => '联系我们',
                             'url' => [
-                                '/site/contact'
+                                '/Mount/center/about'
                             ]
                         ],
                         [
                             'label' => '个人中心',
                             'url' => [
                                 '/Mount/user/index'
+                            ]
+                        ],
+                        [
+                            'label' => '注销',
+                            'url' => [
+                                '/Mount/member/logout'
                             ]
                         ],
                     ]

@@ -11,6 +11,54 @@ use yii\bootstrap\ActiveForm;
 use app\components\iAjax\AjaxMsg;
 ?>
 
+<style type="text/css">  
+.mycheck {  
+    width: 25px;  
+    margin: 20px 100px;  
+    position: relative;  
+}  
+.mycheck input[type=checkbox] {  
+    visibility: hidden;  
+}  
+.mycheck label {  
+    cursor: pointer;  
+    position: absolute;  
+    width: 25px;  
+    height: 25px;  
+    top: 0;  
+    left: 0;  
+    background: #fff;  
+    border:2px solid #ccc;  
+    -moz-border-radius: 3px;      /* Gecko browsers */  
+    -webkit-border-radius: 3px;   /* Webkit browsers */  
+    border-radius:3px;            /* W3C syntax */  
+}  
+.mycheck label:after {  
+    opacity: 0;  
+    content: '';  
+    position: absolute;  
+    width: 9px;  
+    height: 5px;  
+    background: transparent;  
+    top: 6px;  
+    left: 6px;  
+    border: 2px solid #333;  
+    border-top: none;  
+    border-right: none;  
+    -webkit-transform: rotate(-45deg);  
+    -moz-transform: rotate(-45deg);  
+    -o-transform: rotate(-45deg);  
+    -ms-transform: rotate(-45deg);  
+    transform: rotate(-45deg);  
+}  
+.mycheck label:hover::after {  
+ opacity: 0.5;  
+}  
+.mycheck input[type=checkbox]:checked + label:after {  
+    opacity: 1;  
+}  
+</style>  
+
 <br />
 <br />
 
@@ -19,14 +67,16 @@ use app\components\iAjax\AjaxMsg;
     <h1>准备开始安装 !!</h1>
 
     <br />
-    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+    <p class="lead">本次挂载,会重新安装程序,</p>
 
     <?php $form = ActiveForm::begin(['id' => $model->formName(), 'action' => ['Mount/run/install'], 'options' => ['class' => 'form-horizontal'], 'fieldConfig' => ['template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>", 'labelOptions' => ['class' => 'col-lg-1 control-label']]]); ?>
 
-    <div class="checkbox">
-        <label for="agreement">
-            <input type="checkbox" name="MountRunForm[agreement]" value="On" id="agreement" /> 同意
+    <div class="mycheck">
+         <label for="agreement">
+            同意
         </label>
+            <input type="checkbox" name="MountRunForm[agreement]" value="On" id="agreement" /> 
+       
     </div>
 
     <br />

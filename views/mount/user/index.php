@@ -7,7 +7,6 @@
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\components\iAjax\AjaxMsg;
 
 $this->title = '个人中心';
 ?>
@@ -21,7 +20,7 @@ $this->title = '个人中心';
 
         <dl class="dl-horizontal">
             <dt>用户名 : </dt>
-            <dd><?= Yii::$app->session['MountAdmin']['username']; ?></dd>
+            <dd><?= Yii::$app->session['MountAdmin']['username']; ?> </dd>
         </dl>
 
         <dl class="dl-horizontal">
@@ -31,6 +30,11 @@ $this->title = '个人中心';
 
         <dl class="dl-horizontal">
             <dt>登录时间 : </dt>
+            <dd><?= Yii::$app->formatter->asTime(Yii::$app->session['MountAdmin']['time']); ?></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>登录权限 : </dt>
             <dd><?= Yii::$app->formatter->asTime(Yii::$app->session['MountAdmin']['time']); ?></dd>
         </dl>
 

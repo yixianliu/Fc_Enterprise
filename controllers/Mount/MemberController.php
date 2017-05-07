@@ -39,7 +39,7 @@ class MemberController extends Controller {
             $session->open();
 
             $array = [
-                'username' => Yii::$app->request->post('username'),
+                'username' => Yii::$app->params['Username'],
                 'time' => time(),
             ];
 
@@ -61,7 +61,7 @@ class MemberController extends Controller {
         // 销毁session中所有已注册的数据
         $session->destroy();
 
-        return $this->redirect(['member/login']);
+        return $this->redirect(['/Mount/member/login']);
     }
 
 }
