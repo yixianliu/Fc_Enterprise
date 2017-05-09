@@ -32,7 +32,7 @@ class AjaxMsg extends Widget {
         $result['FormName'] = $this->config['FormName'];
         $result['Url'] = $this->config['Url'];
 
-        return $this->render('AjaxMsgTpl', ['result' => $result]);
+        return $this->render('AjaxMsgMountTpl', ['result' => $result]);
     }
 
 }

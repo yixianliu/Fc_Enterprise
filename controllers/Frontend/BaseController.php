@@ -20,4 +20,23 @@ class BaseController extends Controller {
     // 布局
     public $layout = 'default';
 
+    public function init() {
+
+        $session = Yii::$app->session;
+
+        // 检查 SESSION 是否开启
+        if ($session->isActive) {
+            return \yii\helpers\Json::encode(['msg' => 'SESSION 失败,请检查 !!']);
+        }
+
+        // 开启 SESSION
+        $session->open();
+
+        if ($session->get('Front.username')) {
+
+        }
+
+        return;
+    }
+
 }
