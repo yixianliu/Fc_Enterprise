@@ -27,6 +27,7 @@ VALUES
 (NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', '#IMAGE_UPLOAD_TYPE#', NULL, 'On', #TIME#),
 (NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', '#FILE_UPLOAD_SIZE#', NULL, 'On', #TIME#),
 (NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', '#IMAGE_UPLOAD_SIZE#', NULL, 'On', #TIME#),
+(NULL, 'TIME_FORMAT', '是否启用时间格式', '#TIME_FORMAT#', NULL, 'On', #TIME#),
 (NULL, 'CODE_STATUS', '是否启用验证码', '#CODE_STATUS#', NULL, 'On', #TIME#),
 (NULL, 'REG_STATUS', '是否启用注册', '#REG_STATUS#', NULL, 'On', #TIME#),
 (NULL, 'WEB_STATUS', '是否启用网站状态', '#WEB_STATUS#', NULL, 'On', #TIME#),
@@ -223,7 +224,7 @@ VALUES
 (NULL, 'HN4', 4, 'H1', 'R15', '文档资源', '各种文档资源', NULL, NULL, 'On', #TIME#),
 (NULL, 'HN5', 5, 'H1', 'R15', '视频资源', '各种视频资源', NULL, 'Video', 'On', #TIME#),
 (NULL, 'HN6', 6, 'H1', 'R15', '神推荐', '男神、女神、屌丝各方人士极力推荐', NULL, 'God', 'On', #TIME#),
-(NULL, 'HN7', 7, 'H1', 'R15', '集散文化', '这里就是产品的集散地,欢迎光临', NULL, 'Center', 'On', #TIME#),
+(NULL, 'HN7', 7, 'H1', 'R15', '驯力文化', '这里就是驯力文化的集散地,欢迎光临', NULL, 'Center', 'On', #TIME#),
 
 (NULL, 'HNS1', 1, 'HN2', 'R15', '电影资源分类', '资源分类', NULL, 'movie/classify', 'On', #TIME#),
 (NULL, 'HNS2', 2, 'HN2', 'R15', '热门资源', '全面喜欢的资源', NULL, 'movie/hot', 'On', #TIME#),

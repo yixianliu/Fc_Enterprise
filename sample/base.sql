@@ -205,6 +205,51 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
+ * 用户签到内容
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar`;
+CREATE TABLE `#DB_PREFIX#User_Problems` (
+    `calendar_id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
+    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
+    PRIMARY
+    KEY (`calendar_id`),
+    KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 用户签到内容 - 月
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Month`;
+CREATE TABLE `#DB_PREFIX#User_Problems` (
+    `calendar_id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
+    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
+    PRIMARY
+    KEY (`calendar_id`),
+    KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 用户签到内容 - 年
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Year`;
+CREATE TABLE `#DB_PREFIX#User_Problems` (
+    `calendar_id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
+    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
+    PRIMARY
+    KEY (`calendar_id`),
+    KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
  * * * * * * * * * * * * * * * * * * * * * *
  * 权限 / 角色
  * * * * * * * * * * * * * * * * * * * * * *
@@ -288,25 +333,6 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     KEY `rkey` (`rkey`),
     UNIQUE KEY `mkey` (`mkey`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 匹配菜单中的[角色 / 权限]
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Menu_Relevance_rp`;
-CREATE TABLE IF NOT EXISTS `#DB_PREFIX#Menu_Relevance_rp` (
-    `rp_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `role_id` INT(11) UNSIGNED NOT NULL COMMENT '角色ID',
-    `menu_id` INT(11) UNSIGNED NOT NULL COMMENT '菜单ID',
-    `power_id` INT(11) UNSIGNED NOT NULL COMMENT '权限ID',
-    `is_using` SET('On' , 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`rp_id`),
-    KEY `menu_id` (`menu_id`),
-    KEY `role_id` (`role_id`),
-    KEY `power_id` (`power_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
 
 /**
  * * * * * * * * * * * * * * * * * * * * * *
