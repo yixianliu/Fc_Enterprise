@@ -15,7 +15,10 @@ $config = [
                 'basePath' => '@app/themes/basic',
                 'baseUrl' => '@web/themes/basic',
                 'pathMap' => [
-                    '@app/views' => '@app/themes/basic'
+                    // 前台
+                    '@app/views/Frontend' => [
+                        '@app/views/default',
+                    ]
                 ]
             ]
         ],
@@ -53,14 +56,14 @@ $config = [
             ]
         ],
         'db' => require (__DIR__ . '/db.php'),
-    /*
-      'urlManager' => [
-      'enablePrettyUrl' => true,
-      'showScriptName' => false,
-      'rules' => [
-      ],
-      ],
-     */
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'Frontend/center/index',
+                'Frontend' => 'center/index',
+            ],
+        ],
     ],
     'params' => $params
 ];

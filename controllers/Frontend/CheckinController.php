@@ -11,6 +11,17 @@ use Yii;
 use yii\web\Controller;
 use app\models\MountForm;
 
-class MemberController extends Controller {
+class CheckinController extends BaseController {
+
+    public function init() {
+        parent::init();
+    }
+
+    /**
+     * @abstract 首页
+     */
+    public function actionIndex() {
+        
+    }
 
 }

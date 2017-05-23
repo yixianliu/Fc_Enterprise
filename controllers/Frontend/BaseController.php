@@ -32,10 +32,6 @@ class BaseController extends Controller {
         // 开启 SESSION
         $session->open();
 
-        if ($session->get('Front.username')) {
-
-        }
-
         return;
     }
 

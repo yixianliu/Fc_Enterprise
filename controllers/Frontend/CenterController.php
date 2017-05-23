@@ -21,7 +21,7 @@ class CenterController extends BaseController {
      * 首页
      */
     public function actionIndex() {
-        ;
+        return $this->render('index');
     }
 
     /**
