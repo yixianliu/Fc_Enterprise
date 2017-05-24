@@ -33,7 +33,6 @@ $this->title = '挂载中心';
 
             html, body, *, p {
                 font-family: 'Microsoft YaHei';
-                font-size: 14px;
                 letter-spacing: 1px;
             }
 
