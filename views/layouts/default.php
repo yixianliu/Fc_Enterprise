@@ -25,13 +25,11 @@ use yii\helpers\Url;
         <link rel="stylesheet" href="./themes/default/css/magnific-popup.css" type="text/css" />
         <link rel="stylesheet" href="./themes/default/css/responsive.css" type="text/css" />
 
-        <!-- Document Title
-        ============================================= -->
-        <title>Canvas | The Multi-Purpose HTML5 Template</title>
+        <title><?= Html::encode($this->title); ?> - <?= Yii::$app->params['NAME']; ?> - <?= Yii::$app->params['TITLE']; ?></title>
 
         <style>
 
-            html, body, *, p {
+            html, body, *, p, h1, h2, h3, h4 {
                 font-family: 'Microsoft YaHei';
                 letter-spacing: 1px;
             }
@@ -45,12 +43,10 @@ use yii\helpers\Url;
 
             <?= $this->render('../default/menu'); ?>
 
-            <!-- Page Title
-                ============================================= -->
             <section id="page-title" class="page-title-mini">
 
                 <div class="container clearfix">
-                    <h1>About Us</h1>
+                    <h1><?= Html::encode($this->title); ?></h1>
                     <span>Everything you need to know about our Company</span>
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
@@ -71,38 +67,29 @@ use yii\helpers\Url;
                 </div>
             </section>
 
-            <!-- Footer
-            ============================================= -->
             <footer id="footer" class="dark">
-
-                <!-- Copyrights
-                ============================================= -->
                 <div id="copyrights">
 
                     <div class="container center clearfix">
 
-                        Copyrights &copy; 2016 All Rights Reserved by SemiColonWeb<br>
-                        <div class="copyright-links"><a href="http://themeforest.net/user/semicolonweb/portfolio?ref=SemiColonWeb" target="_blank">Portfolio</a> / <a href="http://support.semicolonweb.com" target="_blank">Support</a></div>
+                        Copyrights &copy; 2016 All Rights Reserved by <?= Yii::$app->params['NAME']; ?><br>
+
+                        <div class="copyright-links">
+                            <a href="#" target="_blank">Portfolio</a> /
+                            <a href="#" target="_blank">Support</a>
+                        </div>
 
                     </div>
 
-                </div><!-- #copyrights end -->
+                </div>
+            </footer>
 
-            </footer><!-- #footer end -->
+        </div>
 
-        </div><!-- #wrapper end -->
-
-        <!-- Go To Top
-        ============================================= -->
         <div id="gotoTop" class="icon-angle-up"></div>
 
-        <!-- External JavaScripts
-        ============================================= -->
         <script type="text/javascript" src="./themes/default/js/jquery.js"></script>
         <script type="text/javascript" src="./themes/default/js/plugins.js"></script>
-
-        <!-- Footer Scripts
-        ============================================= -->
         <script type="text/javascript" src="./themes/default/js/functions.js"></script>
 
     </body>

@@ -5,31 +5,66 @@
  * and open the template in the editor.
  */
 
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use app\commands\models\Menu;
 ?>
 
 <header id="header" class="full-header">
-
     <div id="header-wrap">
 
         <div class="container clearfix">
 
             <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
-            <!-- Logo
-            ============================================= -->
             <div id="logo">
                 <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
                 <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
-            </div><!-- #logo end -->
+            </div>
 
-            <!-- Primary Navigation
-            ============================================= -->
             <nav id="primary-menu" class="mobile-menu-off-canvas dark">
-
                 <ul>
+
+                    <?php
+                    NavBar::begin([
+                        'brandLabel' => '自律日历',
+                        'brandUrl' => Yii::$app->homeUrl,
+                        'options' => [
+                            'class' => 'navbar-inverse navbar-fixed-top'
+                        ]
+                    ]);
+                    echo Nav::widget([
+                        'options' => [
+                            'class' => 'navbar-nav navbar-right'
+                        ],
+                        'items' => [
+                            [
+                                'label' => '首页',
+                                'url' => [
+                                    '/site/index'
+                                ]
+                            ],
+                            [
+                                'label' => '关于我们',
+                                'url' => [
+                                    '/site/about'
+                                ]
+                            ],
+                            [
+                                'label' => '联系我们',
+                                'url' => [
+                                    '/site/contact'
+                                ]
+                            ],
+                        ]
+                    ]);
+
+                    NavBar::end();
+                    ?>
+
                     <li><a href="index.html"><div>Home</div></a>
                         <ul>
                             <li><a href="index-corporate.html"><div>Home - Corporate</div></a>

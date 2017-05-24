@@ -1,8 +1,7 @@
 <?php
 
 /**
- * 配置控制
- *
+ * @abstract 配置控制器
  * @author Yxl <zccem@163.com>
  */
 

@@ -72,7 +72,7 @@ use yii\helpers\Url;
                                     location.href = "<?= $result['Url']; ?>";
                                 }
 
-                                fromtext.text('登录成功,请稍候, 等待跳转 ' + i-- + '秒...');
+                                fromtext.text('操作成功,请稍候, 等待跳转 ' + i-- + '秒...');
 
                             }, 1000);
 

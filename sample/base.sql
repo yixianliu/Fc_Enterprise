@@ -207,7 +207,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
  * 用户签到内容
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar`;
-CREATE TABLE `#DB_PREFIX#User_Problems` (
+CREATE TABLE `#DB_PREFIX#User_Calendar` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
@@ -222,7 +222,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
  * 用户签到内容 - 月
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Month`;
-CREATE TABLE `#DB_PREFIX#User_Problems` (
+CREATE TABLE `#DB_PREFIX#User_Calendar_Month` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
@@ -237,7 +237,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
  * 用户签到内容 - 年
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Year`;
-CREATE TABLE `#DB_PREFIX#User_Problems` (
+CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',

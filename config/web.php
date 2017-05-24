@@ -61,7 +61,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'Frontend/center/index',
-                'Frontend' => 'center/index',
+                'Mount' => 'Mount/center/view',
+                'Backend' => 'Backend/center/view',
             ],
         ],
     ],

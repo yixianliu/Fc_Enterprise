@@ -1,8 +1,26 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @abstract 用户控制器
+ * @author Yxl <zccem@163.com>
  */
 
+namespace app\controllers\Frontend;
+
+use Yii;
+use yii\web\Controller;
+
+class UserController extends BaseController {
+
+    public function init() {
+        parent::init();
+    }
+
+    /**
+     * @abstract 首页
+     */
+    public function actionIndex() {
+        
+    }
+
+}

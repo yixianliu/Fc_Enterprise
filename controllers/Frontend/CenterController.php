@@ -9,11 +9,7 @@
 namespace app\controllers\Frontend;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class CenterController extends BaseController {
 
@@ -28,7 +24,7 @@ class CenterController extends BaseController {
      * 周
      */
     public function actionWeek() {
-        ;
+        return $this->render('week');
     }
 
 }

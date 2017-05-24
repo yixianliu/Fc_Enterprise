@@ -21,6 +21,10 @@ class BaseController extends Controller {
      */
     public function init() {
 
+        if (file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
+            return;
+        }
+
         $session = Yii::$app->session;
 
         if (empty($session->get('MountAdmin'))) {

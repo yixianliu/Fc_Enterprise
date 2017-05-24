@@ -6,13 +6,15 @@
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+$this->title = '文化中心';
 ?>
 
 <div class="col_full">
 
     <div class="heading-block center nobottomborder">
-        <h2>Interactive Office Environment</h2>
-        <span>We value Work Ethics &amp; Environment as it helps in creating a Creative Thinktank</span>
+        <h2>完成了不起的工作</h2>
+        <span>让你每天都自律, &amp; 不再觉得茫然,因为自律使你充实 !!</span>
     </div>
 
     <div class="fslider" data-pagi="false" data-animation="fade">
@@ -70,7 +72,7 @@ use yii\helpers\Url;
     <div class="col-md-6 bottommargin">
         <div class="team team-list clearfix">
             <div class="team-image">
-                <img src="images/team/3.jpg" alt="John Doe">
+                <img src="./themes/default/images/team/3.jpg" alt="John Doe">
             </div>
             <div class="team-desc">
                 <div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
@@ -96,7 +98,7 @@ use yii\helpers\Url;
     <div class="col-md-6 bottommargin">
         <div class="team team-list clearfix">
             <div class="team-image">
-                <img src="images/team/2.jpg" alt="Josh Clark">
+                <img src="./themes/default/images/team/2.jpg" alt="Josh Clark">
             </div>
             <div class="team-desc">
                 <div class="team-title"><h4>Josh Clark</h4><span>Co-Founder</span></div>
@@ -122,7 +124,7 @@ use yii\helpers\Url;
     <div class="col-md-6 bottommargin">
         <div class="team team-list clearfix">
             <div class="team-image">
-                <img src="images/team/8.jpg" alt="Mary Jane">
+                <img src="./themes/default/images/team/8.jpg" alt="Mary Jane">
             </div>
             <div class="team-desc">
                 <div class="team-title"><h4>Mary Jane</h4><span>Sales</span></div>
@@ -148,7 +150,7 @@ use yii\helpers\Url;
     <div class="col-md-6 bottommargin">
         <div class="team team-list clearfix">
             <div class="team-image">
-                <img src="images/team/4.jpg" alt="Nix Maxwell">
+                <img src="./themes/default/images/team/4.jpg" alt="Nix Maxwell">
             </div>
             <div class="team-desc">
                 <div class="team-title"><h4>Nix Maxwell</h4><span>Support</span></div>
