@@ -20,6 +20,9 @@ class MemberController extends Controller {
      * 登录
      */
     public function actionLogin() {
+
+
+
         return $this->render('login');
     }
 

@@ -25,6 +25,7 @@ use app\commands\models\Menu;
             </div>
 
             <nav id="primary-menu" class="mobile-menu-off-canvas dark">
+
                 <ul>
 
                     <?php
@@ -32,12 +33,12 @@ use app\commands\models\Menu;
                         'brandLabel' => '自律日历',
                         'brandUrl' => Yii::$app->homeUrl,
                         'options' => [
-                            'class' => 'navbar-inverse navbar-fixed-top'
+//                            'class' => 'navbar-inverse navbar-fixed-top'
                         ]
                     ]);
                     echo Nav::widget([
                         'options' => [
-                            'class' => 'navbar-nav navbar-right'
+//                            'class' => 'navbar-nav navbar-right'
                         ],
                         'items' => [
                             [

@@ -21,7 +21,7 @@ class CheckinController extends BaseController {
      * @abstract 首页
      */
     public function actionIndex() {
-        
+        return $this->render('index');
     }
 
 }
