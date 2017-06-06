@@ -38,7 +38,7 @@ $this->title = '挂载中心';
 
         </style>
 
-        <script type="text/javascript" src="./themes/jquery.js"></script>
+        <?= Html::jsFile('@web/themes/jquery.js') ?>
 
     </head>
 

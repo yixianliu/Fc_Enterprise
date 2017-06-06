@@ -20,9 +20,6 @@ class MemberController extends Controller {
      * 登录
      */
     public function actionLogin() {
-
-
-
         return $this->render('login');
     }
 
@@ -31,6 +28,14 @@ class MemberController extends Controller {
      */
     public function actionReg() {
         return $this->render('reg');
+    }
+
+    /**
+     * 登入
+     */
+    public function actionPostLogin()
+    {
+
     }
 
 }
