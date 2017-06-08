@@ -1,12 +1,13 @@
 <?php
 
-$params = require (__DIR__ . '/params.php');
+$params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => [
-        'log'
+    'bootstrap' => ['debug'],
+    'modules' => [
+        'debug' => 'yii\debug\Module',
     ],
     'components' => [
         // 模板
@@ -55,9 +56,9 @@ $config = [
                 ]
             ]
         ],
-        'db' => require (__DIR__ . '/db.php'),
+        'db' => require(__DIR__ . '/db.php'),
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
             'rules' => [
                 '' => 'Frontend/center/index',

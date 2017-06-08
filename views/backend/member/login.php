@@ -10,12 +10,18 @@
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+use app\components\iAjax\AjaxMsg;
+use app\assets\AppAsset;
 
+AppAsset::register($this);
 $this->title = '登录系统';
 ?>
 
+<?php $this->beginPage(); ?>
+
 <!DOCTYPE html>
-<html class=" ">
+<html class=" " lang="<?= Yii::$app->language; ?>">
 <head>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
@@ -54,14 +60,16 @@ $this->title = '登录系统';
     <?= Html::cssFile('@web/themes/backend/assets/css/style.css') ?>
     <?= Html::cssFile('@web/themes/backend/assets/css/responsive.css') ?>
 
-    <?= Html::jsFile('@web/themes/backend/assets/js/jquery-1.11.2.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/js/jquery.easing.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/plugins/bootstrap/js/bootstrap.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/plugins/pace/pace.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/plugins/viewport/viewportchecker.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/plugins/icheck/icheck.min.js') ?>
-    <?= Html::jsFile('@web/themes/backend/assets/js/scripts.js') ?>
+    <?= Html::jsFile('@web/themes/jquery.js') ?>
+
+    <style>
+
+        html, body, *, p, h1, h2, h3, h4, input {
+            font-family: 'Microsoft YaHei';
+            letter-spacing: 1px;
+        }
+
+    </style>
 
 </head>
 <!-- END HEAD -->
@@ -69,47 +77,72 @@ $this->title = '登录系统';
 <!-- BEGIN BODY -->
 <body class=" login_page">
 
+<?php $this->beginBody() ?>
 
 <div class="login-wrapper">
     <div id="login"
          class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
-        <h1><a href="#" title="Login Page" tabindex="-1">Ultra Admin</a></h1>
+        <h1><a href="#" title="Login Page" tabindex="-1"><?= Yii::$app->params['NAME']; ?>
+                - <?= Yii::$app->params['TITLE']; ?></a></h1>
 
-        <form name="loginform" id="loginform" action="index.html" method="post">
-            <p>
-                <label for="user_login">Username<br/>
-                    <input type="text" name="log" id="user_login" class="input" value="demo" size="20"/>
-                </label>
-            </p>
-            <p>
-                <label for="user_pass">Password<br/>
-                    <input type="password" name="pwd" id="user_pass" class="input" value="demo" size="20"/></label>
-            </p>
-            <p class="forgetmenot">
-                <label class="icheck-label form-label" for="rememberme">
-                    <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="skin-square-orange"
-                           checked/>
-                    Remember me
-                </label>
-            </p>
+        <?php $form = ActiveForm::begin(['action' => ['Backend/member/login'], 'method' => 'post', 'id' => $model->formName(),]); ?>
 
-
-            <p class="submit">
-                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-orange btn-block" value="Sign In"/>
-            </p>
-        </form>
-
-        <p id="nav">
-            <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a>
-            <a class="pull-right" href="ui-register.html" title="Sign Up">Sign Up</a>
+        <p>
+            <label for="username" style="letter-spacing: 4px;">帐号<br/>
+                <?= $form->field($model, 'username')->textInput(['id' => 'username', 'class' => 'input', 'size' => 20, 'placeholder' => '填写帐号...', 'autofocus' => true])->label(false); ?>
+            </label>
         </p>
 
+        <p>
+            <label for"password" style="letter-spacing: 4px;">密码<br/>
+            <?= $form->field($model, 'password')->passwordInput(['id' => 'password', 'class' => 'input', 'size' => 20, 'placeholder' => '填写帐号...',])->label(false); ?>
+            </label>
+        </p>
+
+        <p class="forgetmenot">
+            <label class="icheck-label form-label" for="rememberme">
+                <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="skin-square-orange"
+                       checked/>
+                永久记住 (不安全)
+            </label>
+        </p>
+
+        <p class="submit">
+            <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-orange btn-block" value="登录系统"/>
+        </p>
+
+        <?php ActiveForm::end(); ?>
+
+        <?=
+        AjaxMsg::widget(['config' => [
+            'Tpl' => 'AjaxMsgBackendTpl',
+            'FormName' => $model->formName() . '11',
+            'Url' => Url::to(['Mount/center/view']),
+        ]]);
+        ?>
+
+        <p id="nav">
+            <a class="pull-left" href="#" title="Password Lost and Found"> 忘记密码 ?</a>
+            <a class="pull-right" href="#" title="Sign Up">论坛申请</a>
+        </p>
 
     </div>
 </div>
 
+
+<?php $this->endBody(); ?>
+
 </body>
 </html>
 
+<?php $this->endPage(); ?>
+
+<?= Html::jsFile('@web/themes/backend/assets/js/jquery.easing.min.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/plugins/bootstrap/js/bootstrap.min.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/plugins/pace/pace.min.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/plugins/viewport/viewportchecker.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/plugins/icheck/icheck.min.js') ?>
+<?= Html::jsFile('@web/themes/backend/assets/js/scripts.js') ?>
 
 

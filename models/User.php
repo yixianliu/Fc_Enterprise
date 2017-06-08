@@ -1,8 +1,21 @@
 <?php
 
+/**
+ *
+ * 管理员模型
+ *
+ * Created by Yixianliu.
+ * User: Yxl <zccem@163.com>
+ * Date: 2017/6/7
+ * Time: 9:18
+ */
+
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+
+class User extends ActiveRecord implements IdentityInterface
 {
     public $id;
     public $username;
@@ -11,6 +24,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $accessToken;
 
     private static $users = [
+
         '100' => [
             'id' => '100',
             'username' => 'admin',
@@ -18,6 +32,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'authKey' => 'test100key',
             'accessToken' => '100-token',
         ],
+
         '101' => [
             'id' => '101',
             'username' => 'demo',
@@ -27,6 +42,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         ],
     ];
 
+    public static function tableName()
+    {
+        return '{{%management}}';
+    }
 
     /**
      * @inheritdoc
@@ -100,5 +119,13 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    /**
+     * 列表
+     */
+    public function view()
+    {
+        return static::find()->andWhere(['is_using' => 'On']);
     }
 }

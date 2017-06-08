@@ -13,6 +13,8 @@ namespace app\controllers\Backend;
 
 use Yii;
 use yii\web\Controller;
+use yii\helpers\Json;
+use app\form\BackendLoginForm;
 
 class MemberController extends Controller
 {
@@ -24,6 +26,32 @@ class MemberController extends Controller
      */
     public function actionLogin()
     {
-        return $this->render('login');
+
+        $model = new BackendLoginForm();
+
+        if (Yii::$app->request->isPost) {
+
+            if ($model->load(Yii::$app->request->post())) {
+
+                if (!$model->login()) {
+                    return Json::encode(['msg' => '登录失败,请检查 !!']);
+                }
+
+                return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
+            }
+
+            return ['msg' => 'POST异常 !!'];
+        }
+
+        return $this->render('login', ['model' => $model]);
+    }
+
+    /**
+     * 注销
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return;
     }
 }

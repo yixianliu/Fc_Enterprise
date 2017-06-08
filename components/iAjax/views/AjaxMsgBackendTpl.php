@@ -1,8 +1,12 @@
 <?php
-
 /**
- * @abstract Ajax
- * @author Yxl <zccem@163.com>
+ *
+ * 后台返回信息模板
+ *
+ * Created by Yixianliu.
+ * User: Yxl <zccem@163.com>
+ * Date: 2017/6/8
+ * Time: 10:14
  */
 
 use yii\helpers\Html;
@@ -11,24 +15,23 @@ use yii\helpers\Url;
 if (empty($result['FormName']) || empty($result['Url'])) {
     exit('插件异常 !!');
 }
+
 ?>
 
-<style>
-
-</style>
-
-<div class="row">
-    <div class="col-md-12">
-
-        <div class="error">
-            <h2 id="form-text" style="font-weight: 700;"></h2>
-        </div>
-
-        <div class="success">
-            <h2 id="form-text" style="font-weight: 700;"></h2>
-        </div>
-
+<div id="SuccessMsg" class="alert alert-success alert-dismissible fade in" style="display: none;">
+    <div class="close" onclick="closeMsg()">
+        <span>×</span>
     </div>
+    <strong>Success:</strong> Well done!
+    <div class="form-text"></div>
+</div>
+
+<div id="ErrorMsg" class="alert alert-error alert-dismissible fade in" style="display: none;">
+    <div class="close" onclick="closeMsg()">
+        <span>×</span>
+    </div>
+    <strong>Danger:</strong> Oh snap!
+    <div id="form-text"></div>
 </div>
 
 <script type="text/javascript">
@@ -38,7 +41,8 @@ if (empty($result['FormName']) || empty($result['Url'])) {
         $("#<?= $result['FormName'] ?>").on('submit', function () {
 
             var form = $(this);
-
+            var errorId = $("#ErrorMsg");
+            var successId = $("#SuccessMsg");
             var fromtext = $("#form-text");
 
             form.find(':submit').attr('disabled', true);
@@ -52,6 +56,7 @@ if (empty($result['FormName']) || empty($result['Url'])) {
                 // 错误
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 
+                    errorId.show();
                     fromtext.text('访问网络失败！' + errorThrown);
                     form.find(':submit').attr('disabled', false);
                     return false;
@@ -60,12 +65,15 @@ if (empty($result['FormName']) || empty($result['Url'])) {
                 // 发送
                 beforSend: function (data) {
                     form.find(':submit').attr('disabled', true);
+                    return true;
                 },
 
                 // 成功
                 success: function (data) {
 
                     if (data === true) {
+
+                        successId.show();
 
                         var i = 4;
 
@@ -83,20 +91,22 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 
                     // error
                     else {
-
                         fromtext.text(data.msg);
                         form.find(':submit').attr('disabled', false);
                     }
 
-                    return false;
+                    return true;
                 }
 
             });
 
-            return false;
-
+            return true;
         });
 
     });
-</script>
 
+    function closeMsg() {
+        $(this).parent("div").hide();
+        return true;
+    }
+</script>

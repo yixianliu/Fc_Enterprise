@@ -9,16 +9,18 @@ namespace app\controllers\Mount;
 
 use Yii;
 use yii\web\Controller;
-use app\models\MountForm;
+use app\form\MountForm;
 
-class MemberController extends Controller {
+class MemberController extends Controller
+{
 
     public $layout = 'mount';
 
     /**
      * 登录
      */
-    public function actionLogin() {
+    public function actionLogin()
+    {
 
         $model = new MountForm();
 
@@ -54,7 +56,8 @@ class MemberController extends Controller {
     /**
      * @abstract 注销
      */
-    public function actionLogout() {
+    public function actionLogout()
+    {
 
         $session = Yii::$app->session;
 

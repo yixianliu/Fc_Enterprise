@@ -18,4 +18,12 @@ class BaseController extends Controller
 {
     public $layout = 'backend';
 
+    public function init()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/Backend/member/login']);
+        }
+
+        return;
+    }
 }

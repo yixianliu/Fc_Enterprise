@@ -17,7 +17,6 @@ use yii\web\Controller;
 class CenterController extends BaseController
 {
 
-
     /**
      * 首页
      */

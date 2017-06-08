@@ -14,7 +14,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\View;
 
-class AjaxMsg extends Widget {
+class AjaxMsg extends Widget
+{
 
     public $config = array();
 
@@ -32,7 +33,14 @@ class AjaxMsg extends Widget {
         $result['FormName'] = $this->config['FormName'];
         $result['Url'] = $this->config['Url'];
 
-        return $this->render('AjaxMsgMountTpl', ['result' => $result]);
+        if (empty($this->config['Tpl'])) {
+            $Tpl = 'AjaxMsgMountTpl';
+        } // 自定义模板
+        else {
+            $Tpl = $this->config['Tpl'];
+        }
+
+        return $this->render($Tpl, ['result' => $result]);
     }
 
 }
