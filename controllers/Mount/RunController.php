@@ -9,14 +9,16 @@ namespace app\controllers\Mount;
 
 use Yii;
 use yii\web\Controller;
-use app\models\MountRunForm;
+use app\form\MountRunForm;
 
-class RunController extends BaseController {
+class RunController extends BaseController
+{
 
     /**
      * @abstract 安装页面
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
 
         $model = new MountRunForm();
 
@@ -26,12 +28,13 @@ class RunController extends BaseController {
     /**
      * @abstract 运行
      */
-    public function actionInstall() {
+    public function actionInstall()
+    {
 
         $request = Yii::$app->request;
 
         if (!$request->isAjax) {
-//            return \yii\helpers\Json::encode(['msg' => '非法提交!']);
+            return \yii\helpers\Json::encode(['msg' => '非法提交!']);
         }
 
         $model = new MountRunForm();

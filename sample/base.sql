@@ -95,7 +95,7 @@ CREATE TABLE `#DB_PREFIX#Management` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Section`;
 CREATE TABLE `#DB_PREFIX#Section` (
     `section_id` INT(11) NULL AUTO_INCREMENT,
-    `skey` VARCHAR(20) NOT NULL COMMENT '版块关键KEY',
+    `skey` VARCHAR(35) NOT NULL COMMENT '版块关键KEY',
     `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
     `name` VARCHAR(55) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NULL COMMENT '描述',
@@ -109,7 +109,7 @@ CREATE TABLE `#DB_PREFIX#Section` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`section_id`),
-    UNIQUE `sort_id` (`sort_id`),
+    UNIQUE `name` (`name`),
     UNIQUE KEY `skey` (`skey`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -166,6 +166,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     PRIMARY
     KEY (`user_id`),
     KEY `rkey` (`rkey`),
+    UNIQUE `nickname` (`nickname`),
     UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -342,28 +343,25 @@ CREATE TABLE `#DB_PREFIX#Menu` (
  */
 
 /**
- * 电影资源
+ * 影视资源
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Movie`;
-CREATE TABLE `#DB_PREFIX#Movie` (
-    `movie_id` INT(11) NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `#DB_PREFIX#Video`;
+CREATE TABLE `#DB_PREFIX#Video` (
+    `video_id` INT(11) NULL AUTO_INCREMENT,
     `ckey` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
     `rkey` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
-    `name` VARCHAR(125) NOT NULL COMMENT '电影资源名称',
+    `name` VARCHAR(125) NOT NULL COMMENT '视频资源名称',
     `pkey` VARCHAR(55) NOT NULL COMMENT '资源路径关键KEY',
     `filename` VARCHAR(125) NOT NULL COMMENT '资源文件名',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `size` VARCHAR(55) NOT NULL COMMENT '资源大小',
     `img` VARCHAR(55) NOT NULL COMMENT '资源图片',
-    `actor` VARCHAR(255) NOT NULL COMMENT '演员',
-    `director` VARCHAR(255) NOT NULL COMMENT '导演',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `is_thumbnail` SET('On', 'Off') NOT NULL default 'Off' COMMENT '是否生成缩略图',
-    `grade` VARCHAR(15) NULL DEFAULT 0 COMMENT '影片评分',
     `views` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '浏览次数',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`movie_id`),
+    KEY (`video_id`),
     KEY `rkey` (`rkey`),
     KEY `ckey` (`ckey`),
     KEY `pkey` (`pkey`),
@@ -371,11 +369,11 @@ CREATE TABLE `#DB_PREFIX#Movie` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * 电影资源分类
+ * 视频资源分类
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Movie_Classify`;
-CREATE TABLE `#DB_PREFIX#Movie_Classify` (
-    `movie_id` INT(11) NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `#DB_PREFIX#Video_Classify`;
+CREATE TABLE `#DB_PREFIX#Video_Classify` (
+    `video_id` INT(11) NULL AUTO_INCREMENT,
     `ckey` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
     `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
@@ -385,21 +383,21 @@ CREATE TABLE `#DB_PREFIX#Movie_Classify` (
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`movie_id`),
+    KEY (`video_id`),
     KEY `rkey` (`rkey`),
     UNIQUE KEY `ckey` (`ckey`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * 电影资源设置
+ * 视频资源设置
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Movie_Conf`;
-CREATE TABLE `#DB_PREFIX#Movie_Conf` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Video_Conf`;
+CREATE TABLE `#DB_PREFIX#Video_Conf` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
     `pkey` VARCHAR(55) NOT NULL COMMENT '资源路径KEY',
     `rkey` VARCHAR(85) NOT NULL COMMENT '资源路径角色权限KEY',
-    `path` VARCHAR(255) NOT NULL COMMENT '电影资源完整路径',
+    `path` VARCHAR(255) NOT NULL COMMENT '视频资源完整路径',
     `servername` VARCHAR(255) NOT NULL COMMENT '虚拟路径',
     `port` VARCHAR(255) NOT NULL COMMENT '虚拟路径的访问端口',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
@@ -531,65 +529,4 @@ CREATE TABLE `#DB_PREFIX#Document_Conf` (
     KEY `rkey` (`rkey`),
     UNIQUE `path` (`path`),
     UNIQUE KEY `pkey` (`pkey`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 视频资源
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video`;
-CREATE TABLE `#DB_PREFIX#Video` (
-    `video_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(85) NOT NULL COMMENT '权限关键KEY',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(125) NOT NULL COMMENT '书籍名称',
-    `path` VARCHAR(255) NOT NULL COMMENT '路径',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `size` VARCHAR(55) NOT NULL COMMENT '大小',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`video_id`),
-    KEY `ckey` (`ckey`),
-    KEY `rkey` (`rkey`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 视频资源分类
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video_Classify`;
-CREATE TABLE `#DB_PREFIX#Video_Classify` (
-    `classify_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(55) NOT NULL COMMENT '名称',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`classify_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 视频资源设置
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video_Conf`;
-CREATE TABLE `#DB_PREFIX#Video_Conf` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `pkey` VARCHAR(85) NOT NULL COMMENT '资源路径KEY',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
-    `path` VARCHAR(255) NOT NULL COMMENT '资源完整路径',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `pkey` (`pkey`),
-    UNIQUE `path` (`path`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;

@@ -9,18 +9,20 @@ namespace app\controllers\Frontend;
 
 use Yii;
 use yii\web\Controller;
-use app\models\MountForm;
 
-class CheckinController extends BaseController {
+class CheckinController extends BaseController
+{
 
-    public function init() {
+    public function init()
+    {
         parent::init();
     }
 
     /**
      * @abstract 首页
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         return $this->render('index');
     }
 

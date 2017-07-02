@@ -11,7 +11,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 class Menu extends ActiveRecord
@@ -36,7 +35,25 @@ class Menu extends ActiveRecord
             return false;
         }
 
-        return static::find()->where(['is_using' => 'On', 'parent_id' => $parent])->orderBy('sort_id', 'ASC');
+        return static::find()->where(['is_using' => 'On', 'parent_id' => $parent])
+            ->orderBy('sort_id', 'ASC')
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     *
+     * 查找指定菜单
+     *
+     * @param $id
+     */
+    public static function findByMenu($id)
+    {
+        if (empty($id)) {
+            return false;
+        }
+
+        return static::find()->where(['mkey' => $id])->asArray()->one();
     }
 
 }

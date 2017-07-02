@@ -162,7 +162,7 @@ VALUES
 /**
  * 电影分类
  */
-INSERT INTO `#DB_PREFIX#Movie_Classify`
+INSERT INTO `#DB_PREFIX#Video_Classify`
 VALUES
 (NULL, 'C1', 1, 'R15', '喜剧', NULL, 'C0', 'On', #TIME#),
 (NULL, 'C2', 2, 'R15', '科幻', NULL, 'C0', 'On', #TIME#),
@@ -170,7 +170,9 @@ VALUES
 (NULL, 'C4', 4, 'R15', '文艺', NULL, 'C0', 'On', #TIME#),
 (NULL, 'C5', 5, 'R15', '武侠', NULL, 'C0', 'On', #TIME#),
 (NULL, 'C6', 6, 'R15', '动画', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C7', 7, 'R15', '爱情', NULL, 'C0', 'On', #TIME#);
+(NULL, 'C7', 7, 'R15', '爱情', NULL, 'C0', 'On', #TIME#),
+(NULL, 'C8', 1, 'R15', '大学教材', NULL, 'C0', 'On', #TIME#),
+(NULL, 'C9', 2, 'R15', '网络教材', NULL, 'C0', 'On', #TIME#);;
 
 /**
  * 音乐分类
@@ -193,14 +195,6 @@ VALUES
 (NULL, 'C2', 2, 'R15', '生活', NULL, 'C0', 'On', #TIME#),
 (NULL, 'C3', 3, 'R15', '人文社科', NULL, 'C0', 'On', #TIME#),
 (NULL, 'C4', 4, 'R15', '编程开发', NULL, 'C0', 'On', #TIME#);
-
-/**
- * 视频分类
- */
-INSERT INTO `#DB_PREFIX#Video_Classify`
-VALUES
-(NULL, 'C1', 1, 'R15', '大学教材', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C2', 2, 'R15', '网络教材', NULL, 'C0', 'On', #TIME#);
 
 /**
  * 版块

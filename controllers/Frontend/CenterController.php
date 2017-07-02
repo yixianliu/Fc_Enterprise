@@ -11,19 +11,23 @@ namespace app\controllers\Frontend;
 use Yii;
 use yii\web\Controller;
 
-class CenterController extends BaseController {
+class CenterController extends BaseController
+{
 
     /**
      * 首页
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
+
         return $this->render('index');
     }
 
     /**
      * 周
      */
-    public function actionWeek() {
+    public function actionWeek()
+    {
         return $this->render('week');
     }
 

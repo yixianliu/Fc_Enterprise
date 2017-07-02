@@ -63,9 +63,7 @@ AppAsset::register($this);
     </style>
 
 </head>
-<!-- END HEAD -->
 
-<!-- BEGIN BODY -->
 <body class=" ">
 
 <?php $this->beginBody() ?>

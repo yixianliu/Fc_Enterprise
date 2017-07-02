@@ -10,34 +10,31 @@ namespace app\controllers\Mount;
 use Yii;
 use yii\web\Controller;
 
-class CenterController extends BaseController {
+class CenterController extends BaseController
+{
 
     /**
      * @abstract 首页
      */
-    public function actionView() {
-        return $this->render('view');
-    }
-
-    /**
-     * @abstract 运行
-     */
-    public function actionRun() {
-        ;
-    }
-
-    /**
-     * @abstract 个人中心
-     */
-    public function actionUser() {
-        return $this->render('user');
+    public function actionView()
+    {
+        return $this->render('index');
     }
 
     /**
      * @abstract 关于我们
      */
-    public function actionAbout() {
+    public function actionAbout()
+    {
 
+    }
+
+    /**
+     * @abstract 联系我们
+     */
+    public function actionContact()
+    {
+        return $this->render('contact');
     }
 
 }

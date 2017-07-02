@@ -4,12 +4,13 @@
  * @abstract 挂载中心表单模型
  */
 
-namespace app\models;
+namespace app\form;
 
 use Yii;
 use yii\base\Model;
 
-class MountForm extends Model {
+class MountForm extends Model
+{
 
     public $username;
     public $password;
@@ -19,9 +20,11 @@ class MountForm extends Model {
     /**
      * 验证规则
      */
-    public function rules() {
+    public function rules()
+    {
 
         return [
+
             // dbhost
             [
                 [
@@ -30,6 +33,7 @@ class MountForm extends Model {
                 'required',
                 'message' => '帐号不可为空 !!'
             ],
+
             // dbname
             [
                 [
@@ -44,7 +48,8 @@ class MountForm extends Model {
     /**
      * @abstract 登录
      */
-    public function mLogin() {
+    public function mLogin()
+    {
 
         // 调用validate方法对表单数据进行验证，验证规则参考上面的rules方法
         if (!$this->validate()) {

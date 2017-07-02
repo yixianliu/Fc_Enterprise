@@ -5,19 +5,20 @@
  * @author Yxl <zccem@163.com>
  */
 
-namespace app\models;
+namespace app\form;
 
-use Yii;
 use yii\base\Model;
 
-class MountRunForm extends Model {
+class MountRunForm extends Model
+{
 
     public $agreement = NULL;
 
     /**
      * 验证规则
      */
-    public function rules() {
+    public function rules()
+    {
 
         return [
             [

@@ -1,25 +1,31 @@
 <?php
-
 /**
- * @abstract 配置控制器
- * @author Yxl <zccem@163.com>
+ *
+ * 前台配置控制器
+ *
+ * Created by Yixianliu.
+ * User: Yxl <zccem@163.com>
+ * Date: 2017/6/18
+ * Time: 15:57
  */
 
 namespace app\controllers\Frontend;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
-class BaseController extends Controller {
+class BaseController extends Controller
+{
 
     // 布局
     public $layout = 'default';
 
-    public function init() {
+    public function init()
+    {
+
+        if (!file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
+            return $this->redirect(['/Mount/center/view']);
+        }
 
         $session = Yii::$app->session;
 

@@ -24,7 +24,8 @@ class AjaxMsg extends Widget
      *
      * @return boolean
      */
-    public function run() {
+    public function run()
+    {
 
         if (empty($this->config) || empty($this->config['FormName'])) {
             return FALSE;

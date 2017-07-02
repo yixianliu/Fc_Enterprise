@@ -22,7 +22,7 @@ class BaseController extends Controller {
     public function init() {
 
         if (file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
-            return;
+            return $this->redirect(['/Frontend/member/login']);
         }
 
         $session = Yii::$app->session;

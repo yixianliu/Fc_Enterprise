@@ -47,9 +47,11 @@ return [
     'IMAGE_UPLOAD_TYPE' => 'jpg,gif,png',
     'FILE_UPLOAD_SIZE' => '5000000',
     'IMAGE_UPLOAD_SIZE' => '5000000',
+
     // 页面跳转描述
     'JUMP_SUCCEED_NUM' => '5',
     'JUMP_ERROR_NUM' => '5',
+
     // 主题
     'THEME_NAME' => 'Default',
     'THEME_CUSTOMIZE_PATH' => NULL, // 主题自定义路径

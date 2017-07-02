@@ -56,7 +56,11 @@ $config = [
                 ]
             ]
         ],
+
+        // 数据库
         'db' => require(__DIR__ . '/db.php'),
+
+        // 路径
         'urlManager' => [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
