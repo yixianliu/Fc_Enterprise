@@ -13,7 +13,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use app\models\Menu;
 
-$result = Menu::view('A3')->asArray();
+$result = Menu::view('A3');
 
 /**
  *
