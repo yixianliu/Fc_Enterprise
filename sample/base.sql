@@ -1,13 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  yixia_000
- * Created: 2017-4-23
- */
-
 
 /**
  * * * * * * * * * * * * * * * * * * * * * *
@@ -142,7 +132,8 @@ CREATE TABLE `#DB_PREFIX#Conf` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User`;
 CREATE TABLE `#DB_PREFIX#User` (
-    `user_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(80) NOT NULL COMMENT '用户ID',
     `username` VARCHAR(80) NOT NULL COMMENT '邮箱 / 用户名',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
     `rkey` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
@@ -157,6 +148,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     `reg_time` INT(11) UNSIGNED NOT NULL COMMENT '注册时间',
     `last_login_time` INT(11) UNSIGNED NOT NULL COMMENT '最后登陆时间',
     `login_ip` VARCHAR(85) NULL DEFAULT 0 COMMENT '登陆IP',
+    `consecutively` INT(11) UNSIGNED NOT NULL COMMENT '连续登录',
     `sex` SET('Male' , 'Female') NOT NULL DEFAULT 'Female' COMMENT '性别',
     `is_display` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '显示信息',
     `is_head` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '上传头像',
@@ -164,9 +156,11 @@ CREATE TABLE `#DB_PREFIX#User` (
     `is_using` SET('On', 'Off', 'Not') NOT NULL DEFAULT 'Off' COMMENT '是否可用',
     `grade` INT(11) UNSIGNED NOT NULL COMMENT '星级评分1-15, 工作人员审核评分',
     PRIMARY
-    KEY (`user_id`),
+    KEY `id` (`id`),
+    UNIQUE KEY (`user_id`),
     KEY `rkey` (`rkey`),
     UNIQUE `nickname` (`nickname`),
+    UNIQUE `signature` (`signature`),
     UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -177,8 +171,8 @@ DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
 CREATE TABLE `#DB_PREFIX#User_Config` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
-    `get_praise` SET('On', 'Off') NOT NULL COMMENT '接收 / 赞提醒',
-    `get_comment` SET('On', 'Off') NOT NULL COMMENT '接收 / 评论提醒',
+    `get_praise` SET('On', 'Off') NOT NULL COMMENT '接收 "赞" 提醒',
+    `get_comment` SET('On', 'Off') NOT NULL COMMENT '接收 "评论" 提醒',
     `is_access` SET('On', 'Off') NOT NULL COMMENT '是否开启访问',
     `is_show_phone` SET('On', 'Off') NOT NULL COMMENT '是否开启显示手机',
     `is_show_sex` SET('On', 'Off') NOT NULL COMMENT '是否开启显示性别',
@@ -186,6 +180,22 @@ CREATE TABLE `#DB_PREFIX#User_Config` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`conf_id`),
+    UNIQUE KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 用户计划
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Plan`;
+CREATE TABLE `#DB_PREFIX#User_Plan` (
+    `plan_id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(80) NOT NULL COMMENT '用户ID',
+    `plan_time` INT(4) UNSIGNED NOT NULL COMMENT '计划时间,7天,14天,21天',
+    `start_time` INT(8) UNSIGNED NOT NULL COMMENT '计划开始时间',
+    `end_time` INT(8) UNSIGNED NOT NULL COMMENT '计划结束时间',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    PRIMARY
+    KEY (`plan_id`),
     UNIQUE KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 

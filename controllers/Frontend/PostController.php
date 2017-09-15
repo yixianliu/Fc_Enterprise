@@ -14,7 +14,7 @@ namespace app\controllers\Frontend;
 use Yii;
 use yii\web\Controller;
 
-class CheckinController extends BaseController
+class PostController extends BaseController
 {
 
 }

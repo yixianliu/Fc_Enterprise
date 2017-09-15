@@ -2,14 +2,14 @@
 
 /**
  * @abstract 挂载中心
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Mount;
 
 use Yii;
-use yii\web\Controller;
 use app\form\MountRunForm;
+use yii\helpers\Json;
 
 class RunController extends BaseController
 {
@@ -22,7 +22,7 @@ class RunController extends BaseController
 
         $model = new MountRunForm();
 
-        return $this->render('index', ['model' => $model]);
+        return $this->render('../run', ['model' => $model]);
     }
 
     /**
@@ -34,7 +34,7 @@ class RunController extends BaseController
         $request = Yii::$app->request;
 
         if (!$request->isAjax) {
-            return \yii\helpers\Json::encode(['msg' => '非法提交!']);
+//            return Json::encode(['msg' => '非法提交!']);
         }
 
         $model = new MountRunForm();
@@ -93,16 +93,18 @@ class RunController extends BaseController
             }
 
             // 生成安装文件
-            file_put_contents(Yii::getAlias('@webroot') . '/FcCalendar.md', date('Y年m月d日 H时i分s秒') . ' - ' . Yii::$app->params['NAME'] . ' - ' . Yii::$app->params['TITLE'] . ' - ' . time());
+            file_put_contents(
+                Yii::getAlias('@webroot') . '/FcCalendar.md', date('Y年m月d日 H时i分s秒') . ' - ' . Yii::$app->params['NAME'] . ' - ' . Yii::$app->params['TITLE'] . ' - ' . time()
+            );
 
-            return \yii\helpers\Json::encode(TRUE);
+            return Json::encode(true);
         }
 
         // error msg
         $error = empty($model->getErrors()) ? '挂载异常,请检查程序 !!' : $model->getErrors();
 
         // 验证出错，得到所有的错误信息。
-        return \yii\helpers\Json::encode(['msg' => $error]);
+        return Json::encode(['msg' => $error]);
     }
 
 }

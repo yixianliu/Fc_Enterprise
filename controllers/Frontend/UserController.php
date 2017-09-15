@@ -2,25 +2,32 @@
 
 /**
  * @abstract 用户控制器
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Frontend;
 
-use Yii;
-use yii\web\Controller;
+use app\models\User;
 
-class UserController extends BaseController {
+class UserController extends BaseController
+{
 
-    public function init() {
-        parent::init();
+    /**
+     * @abstract 用户中心
+     */
+    public function actionIndex()
+    {
+        return $this->render('index');
     }
 
     /**
-     * @abstract 首页
+     * 签到
+     *
+     * @return string
      */
-    public function actionIndex() {
-        
+    public function actionCheck()
+    {
+        return $this->render('check');
     }
 
 }

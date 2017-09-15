@@ -2,7 +2,7 @@
 
 /**
  * @abstract 挂载中心
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Mount;
@@ -10,6 +10,7 @@ namespace app\controllers\Mount;
 use Yii;
 use yii\web\Controller;
 use app\form\MountForm;
+use yii\helpers\Json;
 
 class MemberController extends Controller
 {
@@ -27,14 +28,14 @@ class MemberController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             if (!$model->mLogin()) {
-                return \yii\helpers\Json::encode(['msg' => '登录失败,请检查 !!']);
+                return Json::encode(['msg' => '登录失败,请检查 !!']);
             }
 
             $session = Yii::$app->session;
 
             // 检查 SESSION 是否开启
             if (!$session->isActive) {
-                return \yii\helpers\Json::encode(['msg' => 'Session 失败,请检查 !!']);
+                return Json::encode(['msg' => 'Session 失败,请检查 !!']);
             }
 
             // 开启 SESSION
@@ -42,15 +43,15 @@ class MemberController extends Controller
 
             $array = [
                 'username' => Yii::$app->params['Username'],
-                'time' => time(),
+                'time'     => time(),
             ];
 
             $session->set('MountAdmin', $array);
 
-            return \yii\helpers\Json::encode(TRUE);
+            return Json::encode(true);
         }
 
-        return $this->render('login', ['model' => $model]);
+        return $this->render('../login', ['model' => $model]);
     }
 
     /**

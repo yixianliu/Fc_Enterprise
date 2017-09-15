@@ -3,114 +3,108 @@
 /**
  * 默认布局模板
  */
+
 use yii\helpers\Html;
 
 $this->title = '用户登录';
 ?>
 
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
+<?php $this->beginPage() ?>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!DOCTYPE html>
+    <html dir="ltr" lang="en-US">
+    <head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta content="description" name="<?= Yii::$app->params['DESCRIPTION']; ?>"/>
-    <meta content="author" name="<?= Yii::$app->params['COPYRIGHT']; ?>"/>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <link rel="shortcut icon" href="<?= Yii::getAlias("@web") ?>/web/favicon.ico" type="image/x-icon"/>
-    <!-- Favicon -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta content="description" name="<?= Yii::$app->params['DESCRIPTION']; ?>"/>
+        <meta content="author" name="<?= Yii::$app->params['COPYRIGHT']; ?>"/>
 
-    <link rel="apple-touch-icon-precomposed"
-          href="<?= Yii::getAlias("@web") ?>/themes/default/assets/images/apple-touch-icon-57-precomposed.png">
-    <!-- For iPhone -->
-    <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="<?= Yii::getAlias("@web") ?>/themes/default/assets/images/apple-touch-icon-114-precomposed.png">
-    <!-- For iPhone 4 Retina display -->
-    <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="<?= Yii::getAlias("@web") ?>/themes/default/assets/images/apple-touch-icon-72-precomposed.png">
-    <!-- For iPad -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="<?= Yii::getAlias("@web") ?>/themes/default/assets/images/apple-touch-icon-144-precomposed.png">
-    <!-- For iPad Retina display -->
+        <link rel="shortcut icon" href="<?= Yii::getAlias("@web") ?>/web/favicon.ico" type="image/x-icon"/>
 
-    <?= Html::cssFile('@web/themes/default/css/bootstrap.css') ?>
-    <?= Html::cssFile('@web/themes/default/style.css') ?>
-    <?= Html::cssFile('@web/themes/default/css/dark.css') ?>
-    <?= Html::cssFile('@web/themes/default/css/font-icons.css') ?>
-    <?= Html::cssFile('@web/themes/default/css/animate.css') ?>
-    <?= Html::cssFile('@web/themes/default/css/magnific-popup.css') ?>
-    <?= Html::cssFile('@web/themes/default/css/responsive.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/bootstrap.css') ?>
+        <?= Html::cssFile('@web/themes/default/style.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/dark.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/font-icons.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/animate.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/magnific-popup.css') ?>
+        <?= Html::cssFile('@web/themes/default/css/responsive.css') ?>
 
-    <title><?= Html::encode($this->title); ?> - <?= Yii::$app->params['NAME']; ?>
-        - <?= Yii::$app->params['TITLE']; ?></title>
+        <title><?= Html::encode($this->title); ?>- <?= Yii::$app->params['NAME']; ?> - <?= Yii::$app->params['TITLE']; ?></title>
 
-    <style>
+        <style>
+            html, body, * {
+                font-family: 'Microsoft YaHei';
+                letter-spacing: 1px;
+                font-weight: 400;
+            }
+        </style>
 
-        html, body, *, p, h1, h2, h3, h4, a {
-            font-family: 'Microsoft YaHei';
-            letter-spacing: 1px;
-            font-weight: 400;
-        }
+        <?= Html::jsFile('@web/themes/jquery.js') ?>
 
-    </style>
+    </head>
 
-    <?= Html::jsFile('@web/themes/jquery.js') ?>
+    <body class="stretched">
 
-</head>
+    <?php $this->beginBody() ?>
 
-<body class="stretched">
-<div id="wrapper" class="clearfix">
+    <div id="wrapper" class="clearfix">
 
-    <?= $this->render('../default/menu'); ?>
+        <?= $this->render('../default/menu'); ?>
 
-    <section id="page-title" class="page-title-mini">
+        <section id="page-title" class="page-title-mini">
 
-        <div class="container clearfix">
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pages</a></li>
-                <li class="active">About Us</li>
-            </ol>
-        </div>
-
-    </section>
-
-    <section id="content">
-        <div class="content-wrap">
             <div class="container clearfix">
-
-                <?= $content; ?>
-
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li class="active">About Us</li>
+                </ol>
             </div>
-        </div>
-    </section>
 
-    <footer id="footer" class="dark">
-        <div id="copyrights">
+        </section>
 
-            <div class="container center clearfix">
+        <section id="content">
+            <div class="content-wrap">
+                <div class="container clearfix">
 
-                Copyrights &copy; 2016 All Rights Reserved by <?= Yii::$app->params['NAME']; ?><br>
+                    <?= $content; ?>
 
-                <div class="copyright-links">
-                    <a href="#" target="_blank">Portfolio</a> /
-                    <a href="#" target="_blank">Support</a>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer" class="dark">
+            <div id="copyrights">
+
+                <div class="container center clearfix">
+
+                    Copyrights &copy; 2016 All Rights Reserved
+                    by <?= Yii::$app->params['NAME']; ?><br>
+
+                    <div class="copyright-links">
+                        <a href="#" target="_blank">Portfolio</a> /
+                        <a href="#" target="_blank">Support</a>
+                    </div>
+
                 </div>
 
             </div>
+        </footer>
 
-        </div>
-    </footer>
+    </div>
 
-</div>
+    <div id="gotoTop" class="icon-angle-up"></div>
 
-<div id="gotoTop" class="icon-angle-up"></div>
+    <script type="text/javascript" src="./themes/default/js/jquery.js"></script>
+    <script type="text/javascript" src="./themes/default/js/plugins.js"></script>
+    <script type="text/javascript" src="./themes/default/js/functions.js"></script>
 
-<script type="text/javascript" src="./themes/default/js/jquery.js"></script>
-<script type="text/javascript" src="./themes/default/js/plugins.js"></script>
-<script type="text/javascript" src="./themes/default/js/functions.js"></script>
+    <?php $this->endBody() ?>
 
-</body>
-</html>
+    </body>
+    </html>
+
+<?php $this->endPage() ?>

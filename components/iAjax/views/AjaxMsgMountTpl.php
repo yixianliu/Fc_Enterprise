@@ -13,19 +13,15 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 }
 ?>
 
-<style>
-
-</style>
-
 <div class="row">
     <div class="col-md-12">
 
         <div class="error">
-            <h2 id="form-text" style="font-weight: 700;"></h2>
+            <h4 id="form-text"></h4>
         </div>
 
         <div class="success">
-            <h2 id="form-text" style="font-weight: 700;"></h2>
+            <h4 id="form-text"></h4>
         </div>
 
     </div>
@@ -83,7 +79,6 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 
                     // error
                     else {
-
                         fromtext.text(data.msg);
                         form.find(':submit').attr('disabled', false);
                     }

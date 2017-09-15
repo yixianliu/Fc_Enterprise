@@ -2,7 +2,7 @@
 
 /**
  * @abstract 针对本程序的表单插件
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\components\iAjax;
@@ -17,7 +17,7 @@ use yii\web\View;
 class AjaxMsg extends Widget
 {
 
-    public $config = array();
+    public $config = [];
 
     /**
      * 运行
@@ -28,7 +28,7 @@ class AjaxMsg extends Widget
     {
 
         if (empty($this->config) || empty($this->config['FormName'])) {
-            return FALSE;
+            return false;
         }
 
         $result['FormName'] = $this->config['FormName'];

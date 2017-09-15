@@ -11,13 +11,23 @@ namespace app\form;
 
 use Yii;
 use yii\base\Model;
+use app\models\User;
 
 class LoginForm extends Model
 {
 
     public $username;
+
     public $password;
+
+    public $telphone;
+
+    public $email;
+
+    public $repassword;
+
     public $rememberMe = true;
+
     private $_user = false;
 
     /**
@@ -29,23 +39,42 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [
-                [
-                    'username',
-                    'password'
-                ],
-                'required'
-            ],
+            [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
+            [['username', 'password', 'email', 'telphone', 'repassword'], 'required', 'on' => 'reg'],
             // rememberMe must be a boolean value
-            [
-                'rememberMe',
-                'boolean'
-            ],
+            ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            [
-                'password',
-                'validatePassword'
-            ]
+            ['password', 'validatePassword'],
+            ['password', 'compare', 'compareAttribute' => 'repassword', 'on' => 'reg'],
+        ];
+    }
+
+    /**
+     * 设置字段名
+     *
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username'   => '帐号',
+            'password'   => '密码',
+            'email'      => '邮箱',
+            'telphone'   => '手机号码',
+            'repassword' => '二次密码',
+        ];
+    }
+
+    /**
+     * 场景
+     *
+     * @return array
+     */
+    public function scenarios()
+    {
+        return [
+            'login' => ['username', 'password'],
+            'reg'   => ['username', 'password', 'telphone', 'nickname', 'email', 'repassword'],
         ];
     }
 
@@ -53,10 +82,8 @@ class LoginForm extends Model
      * Validates the password.
      * This method serves as the inline validation for password.
      *
-     * @param string $attribute
-     *            the attribute currently being validated
-     * @param array $params
-     *            the additional name-value pairs given in the rule
+     * @param string $attribute the attribute currently being validated
+     * @param array  $params    the additional name-value pairs given in the rule
      */
     public function validatePassword($attribute, $params)
     {
@@ -77,7 +104,9 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            return Yii::$app->user->login(
+                $this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0
+            );
         }
 
         return false;
@@ -95,5 +124,22 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    public function userReg()
+    {
+        $Cls = new User();
+
+        $Cls->user_id = time() . '_' . rand(0, 999);
+        $Cls->username = $this->username;
+        $Cls->password = $this->password;
+        $Cls->telphone = $this->telphone;
+        $Cls->email = $this->email;
+
+        if (!$Cls->save()) {
+            return false;
+        }
+
+        return true;
     }
 }

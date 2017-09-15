@@ -13,8 +13,11 @@ class MountForm extends Model
 {
 
     public $username;
+
     public $password;
+
     public $rememberMe = true;
+
     private $_user = false;
 
     /**
@@ -25,23 +28,11 @@ class MountForm extends Model
 
         return [
 
-            // dbhost
-            [
-                [
-                    'username'
-                ],
-                'required',
-                'message' => '帐号不可为空 !!'
-            ],
+            // 帐号
+            [['username'], 'required', 'message' => '帐号不可为空 !!'],
 
-            // dbname
-            [
-                [
-                    'password'
-                ],
-                'required',
-                'message' => '密码不可为空 !!'
-            ]
+            // 密码
+            [['password'], 'required', 'message' => '密码不可为空 !!'],
         ];
     }
 
@@ -53,14 +44,14 @@ class MountForm extends Model
 
         // 调用validate方法对表单数据进行验证，验证规则参考上面的rules方法
         if (!$this->validate()) {
-            return FALSE;
+            return false;
         }
 
         if ($this->username != Yii::$app->params['Username'] || $this->password != Yii::$app->params['Password']) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
 }

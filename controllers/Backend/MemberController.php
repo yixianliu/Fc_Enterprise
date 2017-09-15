@@ -31,16 +31,16 @@ class MemberController extends Controller
 
         if (Yii::$app->request->isPost) {
 
-            if ($model->load(Yii::$app->request->post())) {
-
-                if (!$model->login()) {
-                    return Json::encode(['msg' => '登录失败,请检查 !!']);
-                }
-
-                return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
+            if (!$model->load(Yii::$app->request->post())) {
+                return ['msg' => 'POST异常 !!'];
             }
 
-            return ['msg' => 'POST异常 !!'];
+            if (!$model->login()) {
+                return Json::encode(['msg' => '登录失败,请检查 !!']);
+            }
+
+            return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
+
         }
 
         return $this->render('login', ['model' => $model]);

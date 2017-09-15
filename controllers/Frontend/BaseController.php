@@ -13,6 +13,7 @@ namespace app\controllers\Frontend;
 
 use Yii;
 use yii\web\Controller;
+use yii\helpers\Json;
 
 class BaseController extends Controller
 {
@@ -31,7 +32,7 @@ class BaseController extends Controller
 
         // 检查 SESSION 是否开启
         if ($session->isActive) {
-            return \yii\helpers\Json::encode(['msg' => 'SESSION 失败,请检查 !!']);
+            return Json::encode(['msg' => 'SESSION 失败,请检查 !!']);
         }
 
         // 开启 SESSION

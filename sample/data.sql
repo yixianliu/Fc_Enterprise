@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 /**
  * Author:  yixia_000
  * Created: 2017-4-23
@@ -27,14 +23,10 @@ VALUES
 (NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', '#IMAGE_UPLOAD_TYPE#', NULL, 'On', #TIME#),
 (NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', '#FILE_UPLOAD_SIZE#', NULL, 'On', #TIME#),
 (NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', '#IMAGE_UPLOAD_SIZE#', NULL, 'On', #TIME#),
-
-
 (NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', #TIME#),
 (NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', #TIME#),
-
 (NULL, 'COMMENT_NUM', '留言列表页数量', 25, NULL, 'On', #TIME#),
 (NULL, 'VIEW_NUM', '帖子列表页数量', 50, NULL, 'On', #TIME#),
-
 (NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', #TIME#),
 (NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', #TIME#),
 (NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', #TIME#),

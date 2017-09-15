@@ -2,7 +2,7 @@
 
 /**
  * @abstract 菜单模板
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 use yii\bootstrap\Nav;
@@ -14,11 +14,28 @@ $dataMenu = ShowMenu::ShowMenuData('H1');
 if (!is_array($dataMenu)) {
     $dataMenu = [
         'label' => '没有菜单 !!',
-        'url' => [
-            '/site/index'
-        ]
+        'url'   => [
+            '/site/index',
+        ],
     ];
 }
+
+$member = [
+    [
+        'label' => '登录',
+        'url'   => [
+            '/Frontend/member/login',
+        ],
+    ],
+    [
+        'label' => '注册',
+        'url'   => [
+            '/Frontend/member/reg',
+        ],
+    ],
+];
+
+$dataMenu = array_merge($dataMenu, $member);
 
 ?>
 
@@ -28,20 +45,22 @@ if (!is_array($dataMenu)) {
             <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
             <div id="logo">
-                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img
-                            src="<?= Yii::getAlias("@web") ?>/themes/default/images/logo.png"
-                            alt="<?= Yii::$app->params['TITLE']; ?>"></a>
-                <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img
-                            src="<?= Yii::getAlias("@web") ?>/themes/default/images/logo@2x.png"
-                            alt="<?= Yii::$app->params['TITLE']; ?>"></a>
+                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png">
+                    <img src="<?= Yii::getAlias("@web") ?>/themes/default/images/logo.png" alt="<?= Yii::$app->params['TITLE']; ?>">
+                </a>
+                <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
+                    <img src="<?= Yii::getAlias("@web") ?>/themes/default/images/logo@2x.png" alt="<?= Yii::$app->params['TITLE']; ?>">
+                </a>
             </div>
 
             <nav id="primary-menu">
 
-                <?php
-                echo Nav::widget([
-                    'items' => $dataMenu,
-                ]);
+                <?=
+                Nav::widget(
+                    [
+                        'items' => $dataMenu,
+                    ]
+                );
                 ?>
 
                 <div id="top-cart">

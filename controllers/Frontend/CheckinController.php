@@ -2,7 +2,7 @@
 
 /**
  * @abstract 签到控制器
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Frontend;

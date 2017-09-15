@@ -2,17 +2,15 @@
 
 /**
  * @abstract 用户登录控制器
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Frontend;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\form\LoginForm;
+use yii\helpers\Json;
 
 class MemberController extends Controller
 {
@@ -31,7 +29,9 @@ class MemberController extends Controller
 
         // 检查 SESSION 是否开启
         if ($session->isActive) {
-            return \yii\helpers\Json::encode(['msg' => 'SESSION 失败,请检查 !!']);
+            return Json::encode(
+                ['msg' => 'SESSION 失败,请检查 !!']
+            );
         }
 
         // 开启 SESSION
@@ -49,7 +49,16 @@ class MemberController extends Controller
      */
     public function actionLogin()
     {
-        return $this->render('login');
+
+        $model = new LoginForm();
+
+        $model->scenario = 'login';
+
+        if ($model->load(Yii::$app->request->post())) {
+
+        }
+
+        return $this->render('../center/login', ['model' => $model]);
     }
 
     /**
@@ -57,7 +66,35 @@ class MemberController extends Controller
      */
     public function actionReg()
     {
-        return $this->render('reg');
+
+        $model = new LoginForm();
+
+        $model->scenario = 'reg';
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (!$model->userReg()) {
+                return Json::encode(['msg' => '注册失败,请检查 !!']);
+            }
+
+            $session = Yii::$app->session;
+
+            // 检查 SESSION 是否开启
+            if (!$session->isActive) {
+                return Json::encode(['msg' => 'Session 失败,请检查 !!']);
+            }
+
+            // 开启 SESSION
+            $session->open();
+
+            $model->id;
+
+            $session->set('MountAdmin', $array);
+
+            return Json::encode(true);
+        }
+
+        return $this->render('../center/reg', ['model' => $model]);
     }
 
     /**

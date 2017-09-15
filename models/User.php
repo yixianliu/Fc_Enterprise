@@ -2,7 +2,7 @@
 
 /**
  *
- * 管理员模型
+ * 用户模型
  *
  * Created by Yixianliu.
  * User: Yxl <zccem@163.com>
@@ -17,34 +17,24 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-    public $id;
+
+    public $user_id;
+
     public $username;
+
     public $password;
+
+    public $telphone;
+
+    public $email;
+
     public $authKey;
+
     public $accessToken;
-
-    private static $users = [
-
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
 
     public static function tableName()
     {
-        return '{{%management}}';
+        return '{{%user}}';
     }
 
     /**
@@ -91,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->user_id;
     }
 
     /**
@@ -114,6 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Validates password
      *
      * @param string $password password to validate
+     *
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)

@@ -2,7 +2,7 @@
 
 /**
  * @abstract 挂载中心
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace app\controllers\Mount;
@@ -18,7 +18,7 @@ class CenterController extends BaseController
      */
     public function actionView()
     {
-        return $this->render('index');
+        return $this->render('../view');
     }
 
     /**
@@ -26,7 +26,7 @@ class CenterController extends BaseController
      */
     public function actionAbout()
     {
-
+        return $this->render('../about');
     }
 
     /**
@@ -34,7 +34,7 @@ class CenterController extends BaseController
      */
     public function actionContact()
     {
-        return $this->render('contact');
+        return $this->render('../contact');
     }
 
 }

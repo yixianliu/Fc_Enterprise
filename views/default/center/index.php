@@ -19,13 +19,17 @@ $this->title = '文化中心';
     <div class="fslider" data-pagi="false" data-animation="fade">
         <div class="flexslider">
             <div class="slider-wrap">
-                <div class="slide"><a href="#"><img src="./themes/default/images/about/4.jpg" alt="About Image"></a>
+                <div class="slide">
+                    <a href="#"><img src="./themes/default/images/about/4.jpg" alt="About Image"></a>
                 </div>
-                <div class="slide"><a href="#"><img src="./themes/default/images/about/5.jpg" alt="About Image"></a>
+                <div class="slide">
+                    <a href="#"><img src="./themes/default/images/about/5.jpg" alt="About Image"></a>
                 </div>
-                <div class="slide"><a href="#"><img src="./themes/default/images/about/6.jpg" alt="About Image"></a>
+                <div class="slide">
+                    <a href="#"><img src="./themes/default/images/about/6.jpg" alt="About Image"></a>
                 </div>
-                <div class="slide"><a href="#"><img src="./themes/default/images/about/7.jpg" alt="About Image"></a>
+                <div class="slide">
+                    <a href="#"><img src="./themes/default/images/about/7.jpg" alt="About Image"></a>
                 </div>
             </div>
         </div>
@@ -35,25 +39,19 @@ $this->title = '文化中心';
 
 <div class="col_one_fourth center" data-animate="bounceIn">
     <i class="i-plain i-xlarge divcenter nobottommargin icon-users"></i>
-    <div class="counter counter-large" style="color: #3498db;"><span data-from="100" data-to="8465"
-                                                                     data-refresh-interval="50"
-                                                                     data-speed="2000"></span></div>
+    <div class="counter counter-large" style="color: #3498db;"><span data-from="100" data-to="8465" data-refresh-interval="50" data-speed="2000"></span></div>
     <h5>Clients Served</h5>
 </div>
 
 <div class="col_one_fourth center" data-animate="bounceIn" data-delay="200">
     <i class="i-plain i-xlarge divcenter nobottommargin icon-code"></i>
-    <div class="counter counter-large" style="color: #e74c3c;"><span data-from="100" data-to="56841"
-                                                                     data-refresh-interval="50"
-                                                                     data-speed="2500"></span></div>
+    <div class="counter counter-large" style="color: #e74c3c;"><span data-from="100" data-to="56841" data-refresh-interval="50" data-speed="2500"></span></div>
     <h5>Lines of Code</h5>
 </div>
 
 <div class="col_one_fourth center" data-animate="bounceIn" data-delay="400">
     <i class="i-plain i-xlarge divcenter nobottommargin icon-briefcase"></i>
-    <div class="counter counter-large" style="color: #16a085;"><span data-from="100" data-to="2154"
-                                                                     data-refresh-interval="50"
-                                                                     data-speed="3500"></span></div>
+    <div class="counter counter-large" style="color: #16a085;"><span data-from="100" data-to="2154" data-refresh-interval="50" data-speed="3500"></span></div>
     <h5>No. of Projects</h5>
 </div>
 
