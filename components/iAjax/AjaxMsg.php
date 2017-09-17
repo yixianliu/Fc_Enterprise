@@ -27,12 +27,15 @@ class AjaxMsg extends Widget
     public function run()
     {
 
-        if (empty($this->config) || empty($this->config['FormName'])) {
+        if (empty($this->config) || empty($this->config['FormName']) || empty($this->config['FormUrl'])) {
             return false;
         }
 
+        // 表单名称
         $result['FormName'] = $this->config['FormName'];
-        $result['Url'] = $this->config['Url'];
+
+        // 跳转地址
+        $result['FormUrl'] = $this->config['FormUrl'];
 
         if (empty($this->config['Tpl'])) {
             $Tpl = 'AjaxMsgMountTpl';

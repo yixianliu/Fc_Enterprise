@@ -44,8 +44,8 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
-            ['password', 'compare', 'compareAttribute' => 'repassword', 'on' => 'reg'],
+            ['password', 'validatePassword', 'on' => 'login'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
         ];
     }
 
@@ -79,24 +79,6 @@ class LoginForm extends Model
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array  $params    the additional name-value pairs given in the rule
-     */
-    public function validatePassword($attribute, $params)
-    {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
-            }
-        }
-    }
-
-    /**
      * Logs in a user using the provided username and password.
      *
      * @return boolean whether the user is logged in successfully
@@ -113,19 +95,10 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[username]]
+     * 注册
      *
-     * @return User|null
+     * @return bool
      */
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
-        }
-
-        return $this->_user;
-    }
-
     public function userReg()
     {
         $Cls = new User();
@@ -136,10 +109,46 @@ class LoginForm extends Model
         $Cls->telphone = $this->telphone;
         $Cls->email = $this->email;
 
-        if (!$Cls->save()) {
+        if (!$Cls->save(false)) {
             return false;
         }
 
-        return true;
+        return $Cls;
     }
+
+    /**
+     * Validates the password.This method serves as the inline validation for password.
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param array $params the additional name-value pairs given in the rule
+     */
+    public function validatePassword($attribute, $params)
+    {
+
+        if (!$this->hasErrors()) {
+
+            // 获取用户
+            $user = $this->getUser();
+
+            if (!$user || !$user->validatePassword($this->password)) {
+                $this->addError($attribute, '帐号密码有误!');
+            }
+        }
+    }
+
+    /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    protected function getUser()
+    {
+
+        if ($this->_user == NULL) {
+            $this->_user = User::findByUsername($this->username);
+        }
+
+        return $this->_user;
+    }
+
 }

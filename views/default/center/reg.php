@@ -9,8 +9,10 @@
  * Time: 9:26
  */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\components\iAjax\AjaxMsg;
 
 ?>
 
@@ -24,7 +26,7 @@ use yii\widgets\ActiveForm;
     $form = ActiveForm::begin(
         [
             'action'  => ['Frontend/member/reg'],
-            'id'      => 'login-form',
+            'id'      => $model->formName(),
             'options' => ['class' => 'form-horizontal'],
         ]
     )
@@ -50,12 +52,25 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'repassword')->passwordInput()->label('repassword') ?>
     </div>
 
-    <div class="col_full nobottommargin">
+    <div class="col_full">
 
-        <?= Html::submitButton('立即注册', ['class'=>'button button-3d button-black nomargin','name' =>'submit-button']); ?>
+        <?= Html::submitButton('立即注册', ['class' => 'button button-3d button-black nomargin', 'name' => 'submit-button']); ?>
 
     </div>
 
     <?php ActiveForm::end() ?>
+
+    <?=
+    AjaxMsg::widget(
+        [
+            'config' => [
+
+                'Tpl'      => 'AjaxMsgFrontTpl',
+                'FormName' => $model->formName() . '11',
+                'FormUrl'  => Url::to(['Fronted/user/view']),
+            ],
+        ]
+    );
+    ?>
 
 </div>

@@ -71,27 +71,26 @@ class MemberController extends Controller
 
         $model->scenario = 'reg';
 
-        if ($model->load(Yii::$app->request->post())) {
+        if (Yii::$app->request->isAjax) {
 
-            if (!$model->userReg()) {
+            if (!$model->load(Yii::$app->request->post())) {
+                return \yii\helpers\Json::encode(['msg' => '提交内容有误 !!']);
+            }
+
+            // 验证失败
+            if (!$model->validate()) {
+                return \yii\helpers\Json::encode($model->getErrors());
+            }
+
+            if (!($user = $model->userReg())) {
                 return Json::encode(['msg' => '注册失败,请检查 !!']);
             }
 
-            $session = Yii::$app->session;
-
-            // 检查 SESSION 是否开启
-            if (!$session->isActive) {
-                return Json::encode(['msg' => 'Session 失败,请检查 !!']);
+            if (!Yii::$app->getUser()->login($user, (3600 * 24 * 30))) {
+                return Json::encode(['msg' => '登录异常 !!']);
             }
 
-            // 开启 SESSION
-            $session->open();
-
-            $model->id;
-
-            $session->set('MountAdmin', $array);
-
-            return Json::encode(true);
+            return Json::encode(['msg' => '注册成功 !!', 'status' => true]);
         }
 
         return $this->render('../center/reg', ['model' => $model]);
