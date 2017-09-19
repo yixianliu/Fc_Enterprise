@@ -74,12 +74,12 @@ class MemberController extends Controller
         if (Yii::$app->request->isAjax) {
 
             if (!$model->load(Yii::$app->request->post())) {
-                return \yii\helpers\Json::encode(['msg' => '提交内容有误 !!']);
+                return Json::encode(['msg' => '提交内容有误 !!']);
             }
 
             // 验证失败
             if (!$model->validate()) {
-                return \yii\helpers\Json::encode($model->getErrors());
+                return Json::encode($model->getErrors());
             }
 
             if (!($user = $model->userReg())) {
@@ -87,7 +87,7 @@ class MemberController extends Controller
             }
 
             if (!Yii::$app->getUser()->login($user, (3600 * 24 * 30))) {
-                return Json::encode(['msg' => '登录异常 !!']);
+                return Json::encode(['msg' => '注册用户异常 !!']);
             }
 
             return Json::encode(['msg' => '注册成功 !!', 'status' => true]);

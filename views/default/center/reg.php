@@ -33,11 +33,11 @@ use app\components\iAjax\AjaxMsg;
     ?>
 
     <div class="col_full">
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('username') ?>
+        <?= $form->field($model, 'username')->textInput(['placeholder' => '用户名...', 'autofocus' => true])->label('username') ?>
     </div>
 
     <div class="col_full">
-        <?= $form->field($model, 'telphone')->textInput()->label('telphone') ?>
+        <?= $form->field($model, 'telphone')->textInput(['placeholder' => '填写手机方便收取信息...'])->label('telphone') ?>
     </div>
 
     <div class="col_full">
@@ -66,7 +66,7 @@ use app\components\iAjax\AjaxMsg;
             'config' => [
 
                 'Tpl'      => 'AjaxMsgFrontTpl',
-                'FormName' => $model->formName() . '11',
+                'FormName' => $model->formName(),
                 'FormUrl'  => Url::to(['Fronted/user/view']),
             ],
         ]

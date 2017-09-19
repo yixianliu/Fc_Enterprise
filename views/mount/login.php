@@ -26,8 +26,6 @@ $this->title = '登录';
 
         <br/>
         <br/>
-
-
         <br/>
         <br/>
 
@@ -54,6 +52,7 @@ $this->title = '登录';
         AjaxMsg::widget(
             [
                 'config' => [
+                    'Tpl'      => 'AjaxMsgMountTpl',
                     'FormName' => $model->formName(),
                     'Url'      => Url::to(['Mount/center/view']),
                 ],

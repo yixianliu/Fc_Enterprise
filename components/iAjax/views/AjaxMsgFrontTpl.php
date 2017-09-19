@@ -46,7 +46,7 @@
                 data: form.serialize(),
                 dataType: 'JSON',
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    errormsg.show().find('#errorform_text').text(errorThrown);
+                    errormsg.show().find('#formMsgText').text(errorThrown);
                     form.find(':submit').attr('disabled', false);
                     return false;
                 },
@@ -58,8 +58,7 @@
 
                         successmsg.show().find('#formMsgText').html(data.msg);
 
-                        var i = 4;
-
+                        var i = 2;
                         setInterval(function () {
                             if (i == 0) {
                                 location.href = "<?= $result['FormUrl']; ?>";
@@ -67,8 +66,6 @@
                         }, 1000);
 
                         errormsg.hide();
-
-                        return false;
                     }
 
                     // error
@@ -83,11 +80,9 @@
                         errormsg.show().find('#formMsgText').html(html);
                         form.find(':submit').attr('disabled', false);
                         successmsg.hide();
-
-                        return false;
                     }
 
-                    return true;
+                    return false;
                 }
             });
 

@@ -7,12 +7,7 @@
 
 namespace app\components\iAjax;
 
-use Yii;
 use yii\base\Widget;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\web\View;
 
 class AjaxMsg extends Widget
 {

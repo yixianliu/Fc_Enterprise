@@ -25,30 +25,33 @@ class MemberController extends Controller
 
         $model = new MountForm();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if (Yii::$app->request->isAjax) {
 
-            if (!$model->mLogin()) {
-                return Json::encode(['msg' => '登录失败,请检查 !!']);
+            if ($model->load(Yii::$app->request->post())) {
+
+                if (!$model->mLogin()) {
+                    return Json::encode(['msg' => '登录失败,请检查 !!']);
+                }
+
+                $session = Yii::$app->session;
+
+                // 检查 SESSION 是否开启
+                if (!$session->isActive) {
+                    return Json::encode(['msg' => 'Session 失败,请检查 !!']);
+                }
+
+                // 开启 SESSION
+                $session->open();
+
+                $array = [
+                    'username' => Yii::$app->params['Username'],
+                    'time'     => time(),
+                ];
+
+                $session->set('MountAdmin', $array);
+
+                return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
             }
-
-            $session = Yii::$app->session;
-
-            // 检查 SESSION 是否开启
-            if (!$session->isActive) {
-                return Json::encode(['msg' => 'Session 失败,请检查 !!']);
-            }
-
-            // 开启 SESSION
-            $session->open();
-
-            $array = [
-                'username' => Yii::$app->params['Username'],
-                'time'     => time(),
-            ];
-
-            $session->set('MountAdmin', $array);
-
-            return Json::encode(true);
         }
 
         return $this->render('../login', ['model' => $model]);

@@ -28,7 +28,7 @@ class LoginForm extends Model
 
     public $rememberMe = true;
 
-    private $_user = false;
+    private $_user;
 
     /**
      * 验证规则
@@ -41,6 +41,10 @@ class LoginForm extends Model
             // username and password are both required
             [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
             [['username', 'password', 'email', 'telphone', 'repassword'], 'required', 'on' => 'reg'],
+
+            ['user_id', 'unique', 'targetClass' => '\app\models\User', 'message' => '用户ID已存在!', 'on' => 'reg'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
+
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -120,7 +124,7 @@ class LoginForm extends Model
      * Validates the password.This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param array  $params    the additional name-value pairs given in the rule
      */
     public function validatePassword($attribute, $params)
     {
@@ -144,7 +148,7 @@ class LoginForm extends Model
     protected function getUser()
     {
 
-        if ($this->_user == NULL) {
+        if ($this->_user == null) {
             $this->_user = User::findByUsername($this->username);
         }
 

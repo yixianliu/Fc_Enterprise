@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 if (empty($result['FormName']) || empty($result['Url'])) {
-    exit('插件异常 !!');
+
 }
 ?>
 
@@ -63,16 +63,13 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 
                     if (data === true) {
 
-                        var i = 4;
+                        var i = 2;
 
                         setInterval(function () {
-
                             if (i === 0) {
                                 location.href = "<?= $result['Url']; ?>";
                             }
-
                             fromtext.text('操作成功,请稍候, 等待跳转 ' + i-- + '秒...');
-
                         }, 1000);
 
                     }
