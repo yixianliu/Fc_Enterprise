@@ -25,8 +25,7 @@ $this->title = '挂载中心';
 
     <?= Html::csrfMetaTags(); ?>
 
-    <title><?= Html::encode($this->title); ?> - <?= Yii::$app->params['NAME']; ?>
-        - <?= Yii::$app->params['TITLE']; ?></title>
+    <title><?= Html::encode($this->title); ?> - <?= Yii::$app->params['NAME']; ?> - <?= Yii::$app->params['TITLE']; ?></title>
 
     <?php $this->head(); ?>
 

@@ -11,7 +11,8 @@ namespace app\controllers\Mount;
 use Yii;
 use yii\web\Controller;
 
-class BaseController extends Controller {
+class BaseController extends Controller
+{
 
     // 布局
     public $layout = 'mount';
@@ -19,7 +20,8 @@ class BaseController extends Controller {
     /**
      * @abstract 构造函数
      */
-    public function init() {
+    public function init()
+    {
 
         if (file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
             return $this->redirect(['/Frontend/member/login']);

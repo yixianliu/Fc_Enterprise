@@ -14,6 +14,11 @@ class AjaxMsg extends Widget
 
     public $config = [];
 
+    public function init()
+    {
+
+    }
+
     /**
      * 运行
      *

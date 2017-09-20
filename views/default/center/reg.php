@@ -64,7 +64,6 @@ use app\components\iAjax\AjaxMsg;
     AjaxMsg::widget(
         [
             'config' => [
-
                 'Tpl'      => 'AjaxMsgFrontTpl',
                 'FormName' => $model->formName(),
                 'FormUrl'  => Url::to(['Fronted/user/view']),

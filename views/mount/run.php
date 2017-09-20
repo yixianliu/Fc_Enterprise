@@ -30,11 +30,16 @@ use app\components\iAjax\AjaxMsg;
     <br/>
     <br/>
 
-    <?php $form = ActiveForm::begin(
-        ['id'          => $model->formName(), 'action' => ['Mount/run/install'], 'options' => ['class' => 'form-horizontal'],
-         'fieldConfig' => ['template'     => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                           'labelOptions' => ['class' => 'col-lg-1 control-label']]]
-    ); ?>
+    <?php
+    $form = ActiveForm::begin(
+        [
+            'id'      => $model->formName(),
+            'action'  => ['Mount/run/install'],
+            'options' => ['class' => 'form-horizontal'],
+
+        ]
+    );
+    ?>
 
     <div>
 
@@ -53,11 +58,13 @@ use app\components\iAjax\AjaxMsg;
         <?=
 
         AjaxMsg::widget(
-            ['config' => [
-                'Tpl'      => 'AjaxMsgMountTpl',
-                'FormName' => $model->formName() . '11',
-                'Url'      => Url::to(['Mount/center/view']),
-            ]]
+            [
+                'config' => [
+                    'Tpl'      => 'AjaxMsgMountTpl',
+                    'FormName' => $model->formName(),
+                    'FormUrl'      => Url::to(['Mount/center/view']),
+                ],
+            ]
         );
 
         ?>

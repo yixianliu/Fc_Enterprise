@@ -34,7 +34,7 @@ class RunController extends BaseController
         $request = Yii::$app->request;
 
         if (!$request->isAjax) {
-//            return Json::encode(['msg' => '非法提交!']);
+            return Json::encode(['msg' => '非法提交!']);
         }
 
         $model = new MountRunForm();
@@ -54,19 +54,6 @@ class RunController extends BaseController
             $Sql_Data = str_ireplace('#ICP#', Yii::$app->params['ICP'], $Sql_Data);
             $Sql_Data = str_ireplace('#PHONE#', Yii::$app->params['PHONE'], $Sql_Data);
             $Sql_Data = str_ireplace('#COPYRIGHT#', Yii::$app->params['COPYRIGHT'], $Sql_Data);
-
-            // 网站配置
-            $Sql_Data = str_ireplace('#TIME_FORMAT#', 'm . d . Y', $Sql_Data);
-            $Sql_Data = str_ireplace('#COMMENT_NUM#', 25, $Sql_Data);
-            $Sql_Data = str_ireplace('#VIEW_NUM#', 10, $Sql_Data);
-            $Sql_Data = str_ireplace('#FILE_UPLOAD_TYPE#', 'zip,gz,rar,iso,doc,xsl,ppt,wps', $Sql_Data);
-            $Sql_Data = str_ireplace('#IMAGE_UPLOAD_TYPE#', 'jpg,gif,png', $Sql_Data);
-            $Sql_Data = str_ireplace('#FILE_UPLOAD_SIZE#', 5000000, $Sql_Data);
-            $Sql_Data = str_ireplace('#IMAGE_UPLOAD_SIZE#', 5000000, $Sql_Data);
-            $Sql_Data = str_ireplace('#CODE_STATUS#', 'On', $Sql_Data);
-            $Sql_Data = str_ireplace('#REG_STATUS#', 'On', $Sql_Data);
-            $Sql_Data = str_ireplace('#WEB_STATUS#', 'On', $Sql_Data);
-            $Sql_Data = str_ireplace('#LOGIN_STATUS#', 'On', $Sql_Data);
 
             // 数据库
             $Sql_Data = str_ireplace('#DB_PREFIX#', Yii::$app->components['db']['tablePrefix'], $Sql_Data);

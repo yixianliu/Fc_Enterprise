@@ -17,6 +17,17 @@ class MemberController extends Controller
 
     public $layout = 'mount';
 
+    public function init()
+    {
+        $session = Yii::$app->session;
+
+        if (!empty($session->get('MountAdmin', null))) {
+            return $this->redirect(['/Mount/center/view']);
+        }
+
+        return ;
+    }
+
     /**
      * 登录
      */

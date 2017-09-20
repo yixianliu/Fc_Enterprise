@@ -51,15 +51,19 @@ use yii\helpers\Url;
                     Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere
                     consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
                 <blockquote>
-                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare
-                        vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p>
+                        抱着减少工作时间增多生活时间的目的，提高工作效率就有了动力。老板规定了坐班8小时和几个小时加班的不在讨论范围内，要知道一个小网站是斗不过老板的。
+                    </p>
                 </blockquote>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
-                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                <h2>Heading</h2>
-                <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
-                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.</p>
+                <p>
+                    Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
+                    fermentum. Aenean lacinia bibendum nulla sed consectetur.
+                </p>
+
+                <h2>每日任务</h2>
+                <p>
+                    是一款为创意工作者设计的时间管理应用,拥有任务清单、在线番茄钟、工作周报、云同步等功能,你可以随时在 Web、Android、iPhone 等设备上使用它。
+                </p>
 
                 <h3>简单而强大的任务列表</h3>
 

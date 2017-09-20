@@ -32,8 +32,10 @@ $this->title = '登录';
         <?php
         $form = ActiveForm::begin(
             [
-                'id'      => $model->formName(),
-                'options' => ['class' => 'form-horizontal'],
+                'action'               => ['Mount/member/login'],
+                'enableAjaxValidation' => true,
+                'id'                   => $model->formName(),
+                'options'              => ['class' => 'form-horizontal'],
             ]
         );
         ?>
@@ -54,7 +56,7 @@ $this->title = '登录';
                 'config' => [
                     'Tpl'      => 'AjaxMsgMountTpl',
                     'FormName' => $model->formName(),
-                    'Url'      => Url::to(['Mount/center/view']),
+                    'FormUrl'  => Url::to(['Mount/center/view']),
                 ],
             ]
         );

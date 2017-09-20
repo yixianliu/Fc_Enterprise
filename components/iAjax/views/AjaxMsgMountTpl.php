@@ -2,14 +2,14 @@
 
 /**
  * @abstract Ajax
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-if (empty($result['FormName']) || empty($result['Url'])) {
-
+if (empty($result['FormName']) || empty($result['FormUrl'])) {
+    return false;
 }
 ?>
 
@@ -32,7 +32,6 @@ if (empty($result['FormName']) || empty($result['Url'])) {
     $(document).ready(function () {
 
         $("#<?= $result['FormName'] ?>").on('submit', function () {
-
             var form = $(this);
 
             var fromtext = $("#form-text");
@@ -47,7 +46,6 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 
                 // 错误
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-
                     fromtext.text('访问网络失败！' + errorThrown);
                     form.find(':submit').attr('disabled', false);
                     return false;
@@ -67,7 +65,7 @@ if (empty($result['FormName']) || empty($result['Url'])) {
 
                         setInterval(function () {
                             if (i === 0) {
-                                location.href = "<?= $result['Url']; ?>";
+                                location.href = "<?= $result['FormUrl']; ?>";
                             }
                             fromtext.text('操作成功,请稍候, 等待跳转 ' + i-- + '秒...');
                         }, 1000);
