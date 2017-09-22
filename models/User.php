@@ -12,6 +12,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -19,17 +20,12 @@ class User extends ActiveRecord implements IdentityInterface
 {
 
     public $user_id;
-
     public $username;
-
     public $password;
-
+    public $nickname;
     public $telphone;
-
-    public $email;
-
+    public $grade;
     public $authKey;
-
     public $accessToken;
 
     public static function tableName()
@@ -42,7 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['user_id' => $id]);
+        return static::findOne(['id' => $id]);
     }
 
     /**
@@ -94,15 +90,36 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $password password to validate
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password) {
+    public function validatePassword($password)
+    {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**
-     * 列表
+     * 生成 "remember me" 认证key
+     */
+    public function generateAuthKey()
+    {
+        $this->authKey = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * 为model的password_hash字段生成密码的hash值
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * 用户列表
+     *
+     * @return $this
      */
     public function view()
     {
-        return static::find()->andWhere(['is_using' => 'On']);
+        return static::find()->Where(['is_using' => 'On']);
     }
 }

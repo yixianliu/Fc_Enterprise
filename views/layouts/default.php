@@ -21,7 +21,7 @@ $this->title = '用户登录';
         <meta content="description" name="<?= Yii::$app->params['DESCRIPTION']; ?>"/>
         <meta content="author" name="<?= Yii::$app->params['COPYRIGHT']; ?>"/>
 
-        <link rel="shortcut icon" href="<?= Yii::getAlias("@web") ?>/web/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="<?= Yii::getAlias("@web") ?>/favicon.ico" type="image/x-icon"/>
 
         <?= Html::cssFile('@web/themes/default/css/bootstrap.css') ?>
         <?= Html::cssFile('@web/themes/default/style.css') ?>
@@ -34,8 +34,8 @@ $this->title = '用户登录';
         <title><?= Html::encode($this->title); ?> - <?= Yii::$app->params['NAME']; ?> - <?= Yii::$app->params['TITLE']; ?></title>
 
         <style>
-            html, body, * {
-                font-family: 'Microsoft YaHei';
+            *, html, body, label, a {
+                font-family: "Microsoft YaHei", "微软雅黑", "Arial";
                 letter-spacing: 1px;
                 font-weight: 400;
             }

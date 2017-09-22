@@ -13,6 +13,9 @@ $this->title = '个人中心';
 
 <br />
 <br />
+<br />
+<br />
+<br />
 
 <div class="row">
 

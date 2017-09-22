@@ -13,7 +13,6 @@ namespace app\controllers\Frontend;
 
 use Yii;
 use yii\web\Controller;
-use yii\helpers\Json;
 
 class BaseController extends Controller
 {
@@ -21,24 +20,25 @@ class BaseController extends Controller
     // 布局
     public $layout = 'default';
 
+    // 构造
     public function init()
     {
 
-        if (!file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
+        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
             return $this->redirect(['/Mount/center/view']);
         }
 
-        $session = Yii::$app->session;
+        return;
+    }
 
-        // 检查 SESSION 是否开启
-        if ($session->isActive) {
-            return Json::encode(['msg' => 'SESSION 失败,请检查 !!']);
+    public function users()
+    {
+
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/Frontend/member/login']);
         }
 
-        // 开启 SESSION
-        $session->open();
-
-        return;
+        return ;
     }
 
 }

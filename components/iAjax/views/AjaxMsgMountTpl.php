@@ -59,7 +59,7 @@ if (empty($result['FormName']) || empty($result['FormUrl'])) {
                 // 成功
                 success: function (data) {
 
-                    if (data === true) {
+                    if (data.status === true) {
 
                         var i = 2;
 

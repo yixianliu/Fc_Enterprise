@@ -26,14 +26,18 @@ use app\components\iAjax\AjaxMsg;
     $form = ActiveForm::begin(
         [
             'action'  => ['Frontend/member/reg'],
-            'id'      => $model->formName(),
+            'id'      => $model->formName() . '11',
             'options' => ['class' => 'form-horizontal'],
         ]
     )
     ?>
 
     <div class="col_full">
-        <?= $form->field($model, 'username')->textInput(['placeholder' => '用户名...', 'autofocus' => true])->label('username') ?>
+        <?= $form->field($model, 'username')->textInput(['placeholder' => '用户名...', 'autofocus' => true])->label('username / e-mail') ?>
+    </div>
+
+    <div class="col_full">
+        <?= $form->field($model, 'nickname')->textInput(['placeholder' => '昵称...'])->label('nickname') ?>
     </div>
 
     <div class="col_full">
@@ -41,15 +45,11 @@ use app\components\iAjax\AjaxMsg;
     </div>
 
     <div class="col_full">
-        <?= $form->field($model, 'email')->textInput()->label('email') ?>
+        <?= $form->field($model, 'password')->passwordInput(['placeholder' => '密码...'])->label('password') ?>
     </div>
 
     <div class="col_full">
-        <?= $form->field($model, 'password')->passwordInput()->label('password') ?>
-    </div>
-
-    <div class="col_full">
-        <?= $form->field($model, 'repassword')->passwordInput()->label('repassword') ?>
+        <?= $form->field($model, 'repassword')->passwordInput(['placeholder' => '二次密码...'])->label('re-password') ?>
     </div>
 
     <div class="col_full">
@@ -65,7 +65,7 @@ use app\components\iAjax\AjaxMsg;
         [
             'config' => [
                 'Tpl'      => 'AjaxMsgFrontTpl',
-                'FormName' => $model->formName(),
+                'FormName' => $model->formName() . '11',
                 'FormUrl'  => Url::to(['Fronted/user/view']),
             ],
         ]

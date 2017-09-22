@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
         $form = ActiveForm::begin(
             [
                 'action'  => ['Frontend/member/login'],
-                'id'      => 'login-form',
+                'id'      => $model->formName(),
                 'options' => ['class' => 'form-horizontal'],
             ]
         )

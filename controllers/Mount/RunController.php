@@ -42,7 +42,7 @@ class RunController extends BaseController
         if ($model->load($request->post())) {
 
             // 批量SQL语句
-            $Sql_Data = file_get_contents(Yii::getAlias('@webroot') . '/Sample/base.sql') . file_get_contents(Yii::getAlias('@webroot') . '/Sample/data.sql');
+            $Sql_Data = file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/base.sql') . file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/data.sql');
 
             $Sql_Data = str_ireplace('#NAME#', Yii::$app->params['NAME'], $Sql_Data);
             $Sql_Data = str_ireplace('#TITLE#', Yii::$app->params['TITLE'], $Sql_Data);
@@ -84,7 +84,7 @@ class RunController extends BaseController
                 Yii::getAlias('@webroot') . '/FcCalendar.md', date('Y年m月d日 H时i分s秒') . ' - ' . Yii::$app->params['NAME'] . ' - ' . Yii::$app->params['TITLE'] . ' - ' . time()
             );
 
-            return Json::encode(true);
+            return Json::encode(['msg' => '挂载成功', 'status' => true]);
         }
 
         // error msg

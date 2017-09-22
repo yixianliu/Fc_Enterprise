@@ -21,7 +21,7 @@ $this->title = '挂载中心';
     <meta charset="<?= Yii::$app->charset; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link type="image/x-icon" href="<?= Yii::getAlias("@web") ?>/web/favicon.ico" rel="shortcut icon"/>
+    <link type="image/x-icon" href="./favicon.ico" rel="shortcut icon"/>
 
     <?= Html::csrfMetaTags(); ?>
 
@@ -30,7 +30,6 @@ $this->title = '挂载中心';
     <?php $this->head(); ?>
 
     <style type="text/css">
-
         html, body, *, p {
             font-family: 'Microsoft YaHei';
             letter-spacing: 1px;
@@ -70,21 +69,9 @@ $this->title = '挂载中心';
                     ]
                 ],
                 [
-                    'label' => '关于我们',
-                    'url' => [
-                        '/Mount/center/contact'
-                    ]
-                ],
-                [
                     'label' => '进行挂载',
                     'url' => [
                         '/Mount/run/index'
-                    ]
-                ],
-                [
-                    'label' => '联系我们',
-                    'url' => [
-                        '/Mount/center/about'
                     ]
                 ],
                 [
@@ -131,16 +118,6 @@ $this->title = '挂载中心';
     </div>
 
 </div>
-
-<footer class="footer">
-    <div class="container">
-
-        <p class="pull-left" style="">&copy; 所属版权 <?= Yii::$app->params['NAME']; ?></p>
-
-        <p class="pull-right"><?= Yii::$app->params['TITLE']; ?></p>
-
-    </div>
-</footer>
 
 <?php $this->endBody(); ?>
 

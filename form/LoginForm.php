@@ -17,17 +17,11 @@ class LoginForm extends Model
 {
 
     public $username;
-
     public $password;
-
+    public $nickname;
     public $telphone;
-
-    public $email;
-
     public $repassword;
-
     public $rememberMe = true;
-
     private $_user;
 
     /**
@@ -38,18 +32,20 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
-            [['username', 'password', 'email', 'telphone', 'repassword'], 'required', 'on' => 'reg'],
 
-            ['user_id', 'unique', 'targetClass' => '\app\models\User', 'message' => '用户ID已存在!', 'on' => 'reg'],
+            // string 字符串，这里我们限定的意思就是username至少包含2个字符，最多255个字符
+            ['username', 'string', 'min' => 6, 'max' => 50],
+            ['username', 'email'],
+
+            // 注册
+            [['username', 'nickname', 'password', 'email', 'telphone', 'repassword'], 'required', 'on' => 'reg'],
             ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
-
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword', 'on' => 'login'],
             ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
+
+            // 登录
+            [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
+            ['rememberMe', 'boolean', 'on' => 'login'],
+            ['password', 'validatePassword', 'on' => 'login'],
         ];
     }
 
@@ -63,7 +59,7 @@ class LoginForm extends Model
         return [
             'username'   => '帐号',
             'password'   => '密码',
-            'email'      => '邮箱',
+            'nickname'   => '昵称',
             'telphone'   => '手机号码',
             'repassword' => '二次密码',
         ];
@@ -78,7 +74,7 @@ class LoginForm extends Model
     {
         return [
             'login' => ['username', 'password'],
-            'reg'   => ['username', 'password', 'telphone', 'nickname', 'email', 'repassword'],
+            'reg'   => ['username', 'password', 'telphone', 'nickname', 'repassword'],
         ];
     }
 
@@ -105,13 +101,18 @@ class LoginForm extends Model
      */
     public function userReg()
     {
+
         $Cls = new User();
 
         $Cls->user_id = time() . '_' . rand(0, 999);
         $Cls->username = $this->username;
-        $Cls->password = $this->password;
+        $Cls->password = $Cls->setPassword($this->password);
+        $Cls->nickname = $this->nickname;
         $Cls->telphone = $this->telphone;
-        $Cls->email = $this->email;
+        $Cls->grade = 4;
+
+        // 生成 "remember me" 认证key
+        $Cls->generateAuthKey();
 
         if (!$Cls->save(false)) {
             return false;
@@ -124,7 +125,7 @@ class LoginForm extends Model
      * Validates the password.This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array  $params    the additional name-value pairs given in the rule
+     * @param array $params the additional name-value pairs given in the rule
      */
     public function validatePassword($attribute, $params)
     {

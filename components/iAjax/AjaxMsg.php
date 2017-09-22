@@ -31,20 +31,19 @@ class AjaxMsg extends Widget
             return false;
         }
 
+        // 初始化
+        $result = array();
+
         // 表单名称
         $result['FormName'] = $this->config['FormName'];
 
         // 跳转地址
         $result['FormUrl'] = $this->config['FormUrl'];
 
-        if (empty($this->config['Tpl'])) {
-            $Tpl = 'AjaxMsgMountTpl';
-        } // 自定义模板
-        else {
-            $Tpl = $this->config['Tpl'];
-        }
+        // 模板
+        $this->config['Tpl'] = (empty($this->config['Tpl'])) ? 'AjaxMsgMountTpl' : $this->config['Tpl'];
 
-        return $this->render($Tpl, ['result' => $result]);
+        return $this->render($this->config['Tpl'], ['result' => $result]);
     }
 
 }

@@ -21,27 +21,15 @@ class MemberController extends Controller
     // 构造
     public function init()
     {
-        if (!file_exists(Yii::$app->basePath . '/FcCalendar.md')) {
+        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
             return $this->redirect(['/Mount/center/view']);
         }
 
-        $session = Yii::$app->session;
-
-        // 检查 SESSION 是否开启
-        if ($session->isActive) {
-            return Json::encode(
-                ['msg' => 'SESSION 失败,请检查 !!']
-            );
+        if (!Yii::$app->user->isGuest) {
+//            return $this->redirect(['/Frontend/member/login']);
         }
 
-        // 开启 SESSION
-        $session->open();
-
-        $UserSession = $session->get('FrontUser');
-
-        if (!empty($UserSession['username'])) {
-            return $this->redirect(['/Frontend/user/center']);
-        }
+        return ;
     }
 
     /**
@@ -97,11 +85,14 @@ class MemberController extends Controller
     }
 
     /**
-     * 登入
+     * 注销用户
      */
-    public function actionPostLogin()
+    public function actionLogout()
     {
+        Yii::$app->user->logout();
+        Yii::$app->getSession()->destroy();
 
+        return $this->goHome();
     }
 
 }
