@@ -10,8 +10,8 @@
 /**
  * 广告
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Advertisement`;
-CREATE TABLE `#DB_PREFIX#Advertisement` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Ad`;
+CREATE TABLE `#DB_PREFIX#Ad` (
     `ad_id` INT(11) NULL AUTO_INCREMENT,
     `location` VARCHAR(55) NOT NULL COMMENT '广告位置',
     `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',

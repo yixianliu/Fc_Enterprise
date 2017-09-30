@@ -9,10 +9,9 @@
  * Time: 10:09
  */
 
-namespace app\controllers\Backend;
+namespace backend\controllers\admin;
 
 use Yii;
-use yii\web\Controller;
 use yii\data\Pagination;
 use app\models\User;
 

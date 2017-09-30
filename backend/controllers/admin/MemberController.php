@@ -9,7 +9,7 @@
  * Time: 14:15
  */
 
-namespace app\controllers\Backend;
+namespace backend\controllers\admin;
 
 use Yii;
 use yii\web\Controller;

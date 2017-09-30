@@ -1,25 +1,32 @@
 <?php
+
 /**
- *
- * 登录控制器
- *
- * Created by yixianliu.
- * User: zccem@163.com
- * Date: 2017/6/6
- * Time: 14:15
+ * @abstract 挂载中心
+ * @author   Yxl <zccem@163.com>
  */
 
-namespace backend\controllers\mount;
+namespace app\controllers\Mount;
 
 use Yii;
 use yii\web\Controller;
+use app\form\MountForm;
 use yii\helpers\Json;
-use app\form\BackendLoginForm;
 
 class MemberController extends Controller
 {
 
-    public $layout = false;
+    public $layout = 'mount';
+
+    public function init()
+    {
+        $session = Yii::$app->session;
+
+        if (!empty($session->get('MountAdmin', null))) {
+            return $this->redirect(['/Mount/center/view']);
+        }
+
+        return ;
+    }
 
     /**
      * 登录
@@ -27,31 +34,52 @@ class MemberController extends Controller
     public function actionLogin()
     {
 
-        $model = new BackendLoginForm();
+        $model = new MountForm();
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isAjax) {
 
-            if (!$model->load(Yii::$app->request->post())) {
-                return ['msg' => 'POST异常 !!'];
+            if ($model->load(Yii::$app->request->post())) {
+
+                if (!$model->mLogin()) {
+                    return Json::encode(['msg' => '登录失败,请检查 !!']);
+                }
+
+                $session = Yii::$app->session;
+
+                // 检查 SESSION 是否开启
+                if (!$session->isActive) {
+                    return Json::encode(['msg' => 'Session 失败,请检查 !!']);
+                }
+
+                // 开启 SESSION
+                $session->open();
+
+                $array = [
+                    'username' => Yii::$app->params['Username'],
+                    'time'     => time(),
+                ];
+
+                $session->set('MountAdmin', $array);
+
+                return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
             }
-
-            if (!$model->login()) {
-                return Json::encode(['msg' => '登录失败,请检查 !!']);
-            }
-
-            return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
-
         }
 
-        return $this->render('login', ['model' => $model]);
+        return $this->render('../login', ['model' => $model]);
     }
 
     /**
-     * 注销
+     * @abstract 注销
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-        return;
+
+        $session = Yii::$app->session;
+
+        // 销毁session中所有已注册的数据
+        $session->destroy();
+
+        return $this->redirect(['/Mount/member/login']);
     }
+
 }

@@ -13,10 +13,13 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [],
-    'components'          => [
-        'request'      => [
+
+    'components' => [
+
+        'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+
         'user'         => [
             'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
@@ -46,13 +49,22 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        'urlManager' => [
+        'urlManager'  => [
             'enablePrettyUrl' => true,
             'showScriptName'  => true,
-            'rules'           => [
-                //
+            "rules"           => [
+                "<controller:\w+>/<id:\d+>"     => "<controller>/view",
+                "<controller:\w+>/<action:\w+>" => "<controller>/<action>"
             ],
         ],
+
+        //components数组中加入authManager组件,有PhpManager和DbManager两种方式,
+        //PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
+        'authManager' => [
+            'class'        => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
     ],
-    'params'              => $params,
+
+    'params' => $params,
 ];
