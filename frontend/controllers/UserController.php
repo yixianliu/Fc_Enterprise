@@ -18,7 +18,7 @@ class UserController extends BaseController
     public function actionIndex()
     {
 
-
+        $this->isUser();
 
         return $this->render('index');
     }

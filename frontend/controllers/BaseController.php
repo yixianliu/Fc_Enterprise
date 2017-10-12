@@ -31,7 +31,12 @@ class BaseController extends Controller
         return;
     }
 
-    public function users()
+    /**
+     * 判断用户
+     *
+     * @return void|\yii\web\Response
+     */
+    public function isUser()
     {
 
         if (Yii::$app->user->isGuest) {
