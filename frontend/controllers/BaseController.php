@@ -9,7 +9,7 @@
  * Time: 15:57
  */
 
-namespace app\controllers\Frontend;
+namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -25,7 +25,7 @@ class BaseController extends Controller
     {
 
         if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return $this->redirect(['/Mount/center/view']);
+            return $this->redirect(['/center/index']);
         }
 
         return;
@@ -40,7 +40,7 @@ class BaseController extends Controller
     {
 
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/Frontend/member/login']);
+            return $this->redirect(['/member/login']);
         }
 
         return ;

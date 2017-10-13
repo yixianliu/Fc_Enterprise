@@ -53,6 +53,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => true,
             "rules"           => [
+
+                // 默认
+                '' => 'admin/center/index',
+
                 "<controller:\w+>/<id:\d+>"     => "<controller>/view",
                 "<controller:\w+>/<action:\w+>" => "<controller>/<action>"
             ],

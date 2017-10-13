@@ -13,6 +13,20 @@ return [
     'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
+
+        // 视图文件
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/frontend/views',
+                'baseUrl'  => '@web/frontend/views/themes',
+                'pathMap'  => [
+                    '@app/views' => [
+                        '@app/views/default'
+                    ],
+                ],
+            ],
+        ],
+
         'request'      => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -42,7 +56,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => true,
             'rules'           => [
-                //
+                // 默认
+                '' => 'center/index',
             ],
         ],
     ],

@@ -14,7 +14,7 @@ namespace backend\controllers\admin;
 use Yii;
 use yii\web\Controller;
 use yii\helpers\Json;
-use app\form\BackendLoginForm;
+use backend\models\LoginForm;
 
 class MemberController extends Controller
 {
@@ -27,7 +27,7 @@ class MemberController extends Controller
     public function actionLogin()
     {
 
-        $model = new BackendLoginForm();
+        $model = new LoginForm();
 
         if (Yii::$app->request->isPost) {
 
@@ -43,7 +43,7 @@ class MemberController extends Controller
 
         }
 
-        return $this->render('login', ['model' => $model]);
+        return $this->render('../center/login', ['model' => $model]);
     }
 
     /**

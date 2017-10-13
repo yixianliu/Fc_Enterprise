@@ -16,12 +16,12 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
-    public $layout = 'backend';
+    public $layout = 'admin';
 
     public function init()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/Backend/member/login']);
+            return $this->redirect(['/admin/member/login']);
         }
 
         return;

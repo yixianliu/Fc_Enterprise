@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Ad`;
 CREATE TABLE `#DB_PREFIX#Ad` (
     `ad_id` INT(11) NULL AUTO_INCREMENT,
     `location` VARCHAR(55) NOT NULL COMMENT '广告位置',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `weight` INT(11) UNSIGNED NOT NULL COMMENT '权重',
     `size` VARCHAR(55) NOT NULL COMMENT '广告形状大小',
     `url` VARCHAR(55) NOT NULL COMMENT '链接地址',
@@ -85,14 +85,14 @@ CREATE TABLE `#DB_PREFIX#Management` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Section`;
 CREATE TABLE `#DB_PREFIX#Section` (
     `section_id` INT(11) NULL AUTO_INCREMENT,
-    `skey` VARCHAR(35) NOT NULL COMMENT '版块关键KEY',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
-    `name` VARCHAR(55) NOT NULL COMMENT '名称',
+    `skey` VARCHAR(55) NOT NULL COMMENT '版块关键KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NULL COMMENT '描述',
     `keywords` VARCHAR(55) NULL COMMENT '关键字',
     `ico` VARCHAR(55) NOT NULL COMMENT '版块图标路径',
     `style` VARCHAR(55) NOT NULL COMMENT '版块样式',
-    `parent_id` VARCHAR(20) NOT NULL COMMENT '父类KEY',
+    `parent_key` VARCHAR(55) NOT NULL COMMENT '父类KEY',
     `ad_status` SET('On', 'Off') NOT NULL COMMENT '广告',
     `is_post` SET('On', 'Off') NOT NULL COMMENT '发布帖子',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
@@ -133,7 +133,7 @@ CREATE TABLE `#DB_PREFIX#Conf` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User`;
 CREATE TABLE `#DB_PREFIX#User` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(80) NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `username` VARCHAR(80) NOT NULL COMMENT '邮箱 / 用户名',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
     `rkey` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
@@ -170,7 +170,7 @@ CREATE TABLE `#DB_PREFIX#User` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
 CREATE TABLE `#DB_PREFIX#User_Config` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `get_praise` SET('On', 'Off') NOT NULL COMMENT '接收 "赞" 提醒',
     `get_comment` SET('On', 'Off') NOT NULL COMMENT '接收 "评论" 提醒',
     `is_access` SET('On', 'Off') NOT NULL COMMENT '是否开启访问',
@@ -189,7 +189,7 @@ CREATE TABLE `#DB_PREFIX#User_Config` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Plan`;
 CREATE TABLE `#DB_PREFIX#User_Plan` (
     `plan_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(80) NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `plan_time` INT(4) UNSIGNED NOT NULL COMMENT '计划时间,7天,14天,21天',
     `start_time` INT(8) UNSIGNED NOT NULL COMMENT '计划开始时间',
     `end_time` INT(8) UNSIGNED NOT NULL COMMENT '计划结束时间',
@@ -205,8 +205,8 @@ CREATE TABLE `#DB_PREFIX#User_Plan` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Problems`;
 CREATE TABLE `#DB_PREFIX#User_Problems` (
     `security_id` INT(11) NULL AUTO_INCREMENT,
-    `skey` VARCHAR(20) NOT NULL COMMENT '安全问题KEY',
-    `name` VARCHAR(55) NOT NULL COMMENT '问题',
+    `skey` VARCHAR(55) NOT NULL COMMENT '安全问题KEY',
+    `name` VARCHAR(85) NOT NULL COMMENT '问题',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
@@ -220,7 +220,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar`;
 CREATE TABLE `#DB_PREFIX#User_Calendar` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
@@ -235,7 +235,7 @@ CREATE TABLE `#DB_PREFIX#User_Calendar` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Month`;
 CREATE TABLE `#DB_PREFIX#User_Calendar_Month` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
@@ -250,7 +250,7 @@ CREATE TABLE `#DB_PREFIX#User_Calendar_Month` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Year`;
 CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
     `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` INT(11) UNSIGNED NOT NULL COMMENT '用户ID',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
@@ -306,9 +306,9 @@ CREATE TABLE `#DB_PREFIX#Power` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Role`;
 CREATE TABLE `#DB_PREFIX#Role` (
     `role_id` INT(11) NULL AUTO_INCREMENT,
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `rkey` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
-    `name` VARCHAR(55) NOT NULL COMMENT '名称',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `exp` INT(11) UNSIGNED NOT NULL COMMENT '经验值',
     `description` VARCHAR(255) NOT NULL COMMENT '角色描述',
     `ico_class` VARCHAR(125) NULL COMMENT '角色图标样式',
@@ -329,7 +329,7 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Menu`;
 CREATE TABLE `#DB_PREFIX#Menu` (
     `menu_id` INT(11) NULL AUTO_INCREMENT,
     `mkey` VARCHAR(55) NOT NULL COMMENT '菜单值',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
     `rkey` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
@@ -385,7 +385,7 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Video_Classify`;
 CREATE TABLE `#DB_PREFIX#Video_Classify` (
     `video_id` INT(11) NULL AUTO_INCREMENT,
     `ckey` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(125) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
@@ -449,9 +449,9 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Music_Classify`;
 CREATE TABLE `#DB_PREFIX#Music_Classify` (
     `classify_id` INT(11) NULL AUTO_INCREMENT,
     `ckey` VARCHAR(80) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(55) NOT NULL COMMENT '名称',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
@@ -508,9 +508,9 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Document_Classify`;
 CREATE TABLE `#DB_PREFIX#Document_Classify` (
     `classify_id` INT(11) NULL AUTO_INCREMENT,
     `ckey` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(6) UNSIGNED NOT NULL COMMENT '排序ID',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(55) NOT NULL COMMENT '名称',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',

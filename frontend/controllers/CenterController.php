@@ -6,7 +6,7 @@
  * @author Yxl <zccem@163.com>
  */
 
-namespace app\controllers\Frontend;
+namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -19,7 +19,6 @@ class CenterController extends BaseController
      */
     public function actionIndex()
     {
-
         return $this->render('index');
     }
 

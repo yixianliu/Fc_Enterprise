@@ -15,14 +15,14 @@ use backend\models\MountForm;
 class MemberController extends Controller
 {
 
-    public $layout = 'mount';
+    public $layout = false;
 
     public function init()
     {
         $session = Yii::$app->session;
 
         if (!empty($session->get('MountAdmin', null))) {
-            return $this->redirect(['/Mount/center/view']);
+            return $this->redirect(['/mount/center/view']);
         }
 
         return ;
@@ -30,6 +30,8 @@ class MemberController extends Controller
 
     /**
      * 登录
+     *
+     * @return string
      */
     public function actionLogin()
     {
