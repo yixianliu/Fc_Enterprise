@@ -1,4 +1,13 @@
 <?php
+/**
+ *
+ * 挂载布局模板
+ *
+ * Created by Yxl.
+ * User: <zccem@163.com>.
+ * Date: 2017/10/16
+ * Time: 17:28
+ */
 
 use yii\helpers\Html;
 use backend\assets\AppAsset;
@@ -13,26 +22,24 @@ $this->beginPage();
 <html class=" ">
 <head>
 
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
     <title>Ultra Admin : Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
 
     <?= Html::csrfMetaTags() ?>
 
     <?php $this->head() ?>
 
 </head>
-<!-- END HEAD -->
+<body class=" ">
 
-<!-- BEGIN BODY -->
-<body class=" "><!-- START TOPBAR -->
+<?php $this->beginBody() ?>
+
 <div class='page-topbar '>
-    <div class='logo-area'>
-
-    </div>
+    <div class='logo-area'></div>
     <div class='quick-area'>
         <div class='pull-left'>
             <ul class="info-menu left-links list-inline list-unstyled">
@@ -413,7 +420,6 @@ $this->beginPage();
             <!-- USER INFO - END -->
 
 
-
             <ul class='wraplist'>
 
 
@@ -435,7 +441,7 @@ $this->beginPage();
                         <span class="title">UI Elements</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="ui-typography.html">Typography</a>
                         </li>
@@ -492,7 +498,7 @@ $this->beginPage();
                         <span class="title">Forms</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="form-elements.html">Form Elements</a>
                         </li>
@@ -522,7 +528,7 @@ $this->beginPage();
                         <span class="title">Extra</span>
                         <span class="arrow "></span><span class="label label-orange">NEW</span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="ui-calendar.html">Calendar</a>
                         </li>
@@ -582,7 +588,7 @@ $this->beginPage();
                         <span class="title">Mailbox</span>
                         <span class="arrow "></span><span class="label label-orange">4</span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="mail-inbox.html">Inbox</a>
                         </li>
@@ -600,7 +606,7 @@ $this->beginPage();
                         <span class="title">Charts</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="charts-morris.html">Morris Charts</a>
                         </li>
@@ -627,7 +633,7 @@ $this->beginPage();
                         <span class="title">Tables</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="tables-basic.html">Basic tables</a>
                         </li>
@@ -645,7 +651,7 @@ $this->beginPage();
                         <span class="title">Layouts</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="layout-default.html">Default Layout</a>
                         </li>
@@ -666,7 +672,7 @@ $this->beginPage();
                         <span class="title">Maps</span>
                         <span class="arrow "></span>
                     </a>
-                    <ul class="sub-menu" >
+                    <ul class="sub-menu">
                         <li>
                             <a class="" href="ui-vectormaps.html">Vector Maps</a>
                         </li>
@@ -679,21 +685,21 @@ $this->beginPage();
                     </ul>
                 </li>
 
-                <li class=""> <a href="javascript:"> <i class="fa fa-folder-open"></i> <span class="title">Menu Levels</span> <span class="arrow "></span> </a>
+                <li class=""><a href="javascript:"> <i class="fa fa-folder-open"></i> <span class="title">Menu Levels</span> <span class="arrow "></span> </a>
                     <ul class="sub-menu">
-                        <li > <a href="javascript:"> <span class="title">Level 1.1</span> </a> </li>
-                        <li > <a href="javascript:"> <span class="title">Level 1.2</span> <span class="arrow "></span> </a>
+                        <li><a href="javascript:"> <span class="title">Level 1.1</span> </a></li>
+                        <li><a href="javascript:"> <span class="title">Level 1.2</span> <span class="arrow "></span> </a>
                             <ul class="sub-menu">
-                                <li > <a href="javascript:"> <span class="title">Level 2.1</span> </a></li>
-                                <li > <a href="ujavascript:;"> <span class="title">Level 2.2</span> <span class="arrow "></span></a>
+                                <li><a href="javascript:"> <span class="title">Level 2.1</span> </a></li>
+                                <li><a href="ujavascript:;"> <span class="title">Level 2.2</span> <span class="arrow "></span></a>
                                     <ul class="sub-menu">
-                                        <li > <a href="javascript:"> <span class="title">Level 3.1</span> <span class="arrow "></span></a>
+                                        <li><a href="javascript:"> <span class="title">Level 3.1</span> <span class="arrow "></span></a>
                                             <ul class="sub-menu">
-                                                <li > <a href="ujavascript:;"> <span class="title">Level 4.1</span> </a> </li>
-                                                <li > <a href="ujavascript:;"> <span class="title">Level 4.2</span> </a> </li>
+                                                <li><a href="ujavascript:;"> <span class="title">Level 4.1</span> </a></li>
+                                                <li><a href="ujavascript:;"> <span class="title">Level 4.2</span> </a></li>
                                             </ul>
                                         </li>
-                                        <li > <a href="ujavascript:;"> <span class="title">Level 3.2</span> </a> </li>
+                                        <li><a href="ujavascript:;"> <span class="title">Level 3.2</span> </a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -705,7 +711,6 @@ $this->beginPage();
 
         </div>
         <!-- MAIN MENU - END -->
-
 
 
         <div class="project-info">
@@ -733,7 +738,6 @@ $this->beginPage();
         </div>
 
 
-
     </div>
     <!--  SIDEBAR - END -->
     <!-- START CONTENT -->
@@ -744,7 +748,7 @@ $this->beginPage();
                 <div class="page-title">
 
                     <div class="pull-left">
-                        <h1 class="title">Dashboard</h1>                            </div>
+                        <h1 class="title">Dashboard</h1></div>
 
 
                 </div>
@@ -785,14 +789,15 @@ $this->beginPage();
                             </div>
 
 
-
                             <div class="col-md-6 col-sm-7 col-xs-12">
                                 <div class="r1_maingraph db_box">
                                             <span class='pull-left'>
-                                                <i class='icon-purple fa fa-square icon-xs'></i>&nbsp;<small>PAGE VIEWS</small>&nbsp; &nbsp;<i class='fa fa-square icon-xs icon-primary'></i>&nbsp;<small>UNIQUE VISITORS</small>
+                                                <i class='icon-purple fa fa-square icon-xs'></i>&nbsp;<small>PAGE VIEWS</small>&nbsp; &nbsp;<i
+                                                        class='fa fa-square icon-xs icon-primary'></i>&nbsp;<small>UNIQUE VISITORS</small>
                                             </span>
                                     <span class='pull-right switch'>
-                                                <i class='icon-default fa fa-line-chart icon-xs'></i>&nbsp; &nbsp;<i class='icon-secondary fa fa-bar-chart icon-xs'></i>&nbsp; &nbsp;<i class='icon-secondary fa fa-area-chart icon-xs'></i>
+                                                <i class='icon-default fa fa-line-chart icon-xs'></i>&nbsp; &nbsp;<i class='icon-secondary fa fa-bar-chart icon-xs'></i>&nbsp; &nbsp;<i
+                                                class='icon-secondary fa fa-area-chart icon-xs'></i>
                                             </span>
 
                                     <div id="db_morris_line_graph" style="height:272px;width:95%;"></div>
@@ -810,7 +815,8 @@ $this->beginPage();
                                     <h4 id='gauge-meter-text'></h4>
                                 </div>
                                 <div class="r1_graph5 db_box col-xs-6">
-                                    <span class=''><i class='icon-purple fa fa-square icon-xs icon-1'></i>&nbsp;<small>LONDON</small>&nbsp; &nbsp;<i class='fa fa-square icon-xs icon-2'></i>&nbsp;<small>PARIS</small></span>
+                                    <span class=''><i class='icon-purple fa fa-square icon-xs icon-1'></i>&nbsp;<small>LONDON</small>&nbsp; &nbsp;<i
+                                                class='fa fa-square icon-xs icon-2'></i>&nbsp;<small>PARIS</small></span>
                                     <div style="width:120px;height:120px;margin: 0 auto;">
                                         <span class="db_easypiechart1 easypiechart" data-percent="66"><span class="percent" style='line-height:120px;'></span></span>
                                     </div>
@@ -834,15 +840,24 @@ $this->beginPage();
                                         <div class="col-md-3 col-sm-3 col-xs-12 map_progress">
                                             <h4>Unique Visitors</h4>
                                             <span class='text-muted'><small>Last Week Rise by 62%</small></span>
-                                            <div class="progress"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div></div>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 62%"></div>
+                                            </div>
                                             <br>
                                             <h4>Registrations</h4>
                                             <span class='text-muted'><small>Up by 57% last 7 days</small></span>
-                                            <div class="progress"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%"></div></div>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 57%"></div>
+                                            </div>
                                             <br>
                                             <h4>Direct Sales</h4>
                                             <span class='text-muted'><small>Last Month Rise by 22%</small></span>
-                                            <div class="progress"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style="width: 22%"></div></div>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 22%"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -852,9 +867,10 @@ $this->beginPage();
                                 <div class="r2_graph1 db_box">
 
 
-
                                     <form id="rickshaw_side_panel">
-                                        <section><div id="legend"></div></section>
+                                        <section>
+                                            <div id="legend"></div>
+                                        </section>
                                         <section>
                                             <div id="renderer_form" class="toggler">
                                                 <select name="renderer">
@@ -932,9 +948,6 @@ $this->beginPage();
                         </div> <!-- End .row -->
 
 
-
-
-
                         <div class="row">
                             <div class="col-md-3 col-sm-6 col-xs-6">
                                 <div class="r4_counter db_box">
@@ -973,7 +986,6 @@ $this->beginPage();
                                 </div>
                             </div>
                         </div> <!-- End .row -->
-
 
 
                         <div class="row">
@@ -1123,14 +1135,14 @@ $this->beginPage();
                                                     <img src="data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
                                                 </div>
                                                 <div>
-                                                    <span class="name">
-                                                        <strong>Araceli Boatright</strong>
-                                                        <span class="time small">- 16th Mar</span>
-                                                        <span class="profile-status away pull-right"></span>
-                                                    </span>
+                                                            <span class="name">
+                                                                <strong>Araceli Boatright</strong>
+                                                                <span class="time small">- 16th Mar</span>
+                                                                <span class="profile-status away pull-right"></span>
+                                                            </span>
                                                     <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                                                                Sometimes it takes a lifetime to win a battle.
+                                                            </span>
                                                 </div>
                                             </a>
                                         </li>
@@ -1152,7 +1164,8 @@ $this->beginPage();
                                             </div>
                                             <div class="clearfix"></div>
                                             <div class="degree">
-                                                <i class='fa fa-cloud icon-lg text-white'></i><span>Now</span><h3>24°</h3>
+                                                <i class='fa fa-cloud icon-lg text-white'></i><span>Now</span>
+                                                <h3>24°</h3>
                                                 <div class="clearfix"></div>
                                                 <h4 class="text-white text-center">Hot & Sunny</h4>
                                             </div>
@@ -1196,27 +1209,27 @@ $this->beginPage();
                                                 <label class="icheck-label form-label" for="task-1">Office Projects</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" id="task-2" class="icheck-minimal-white todo-task" >
+                                                <input type="checkbox" id="task-2" class="icheck-minimal-white todo-task">
                                                 <label class="icheck-label form-label" for="task-2">Generate Invoice</label>
                                             </li>
 
                                             <li>
-                                                <input type="checkbox" id="task-3" class="icheck-minimal-white todo-task" >
+                                                <input type="checkbox" id="task-3" class="icheck-minimal-white todo-task">
                                                 <label class="icheck-label form-label" for="task-3">Ecommerce Theme</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" id="task-4" class="icheck-minimal-white todo-task" >
+                                                <input type="checkbox" id="task-4" class="icheck-minimal-white todo-task">
                                                 <label class="icheck-label form-label" for="task-4">PHP and jQuery</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" id="task-5" class="icheck-minimal-white todo-task" >
+                                                <input type="checkbox" id="task-5" class="icheck-minimal-white todo-task">
                                                 <label class="icheck-label form-label" for="task-5">Allocate&nbsp;Resource</label>
                                             </li>
                                         </ul>
 
                                     </div>
                                     <div class="wid-add-task">
-                                        <input type="text" class="form-control" placeholder="Add task" />
+                                        <input type="text" class="form-control" placeholder="Add task"/>
                                     </div>
                                 </div>
 
@@ -1229,10 +1242,11 @@ $this->beginPage();
                     </div>
                 </section>
             </div>
+
+
         </section>
     </section>
     <!-- END CONTENT -->
-
     <div class="page-chatapi hideit">
 
         <div class="search-bar">
@@ -1422,79 +1436,15 @@ $this->beginPage();
 
     </div>
 
-
     <div class="chatapi-windows ">
 
-
-    </div>    </div>
-<!-- END CONTAINER -->
-<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
-
-<!-- CORE JS FRAMEWORK - START -->
-<script src="assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="assets/js/jquery.easing.min.js" type="text/javascript"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-<script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
-<script src="assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
-<!-- CORE JS FRAMEWORK - END -->
-
-
-<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
-<script src="assets/plugins/rickshaw-chart/vendor/d3.v3.js" type="text/javascript"></script>
-<script src="assets/plugins/jquery-ui/smoothness/jquery-ui.min.js" type="text/javascript"></script>
-<script src="assets/plugins/rickshaw-chart/js/Rickshaw.All.js"></script>
-<script src="assets/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
-<script src="assets/plugins/easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
-<script src="assets/plugins/morris-chart/js/raphael-min.js" type="text/javascript"></script>
-<script src="assets/plugins/morris-chart/js/morris.min.js" type="text/javascript"></script>
-<script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.1.min.js" type="text/javascript"></script>
-<script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-<script src="assets/plugins/gauge/gauge.min.js" type="text/javascript"></script>
-<script src="assets/plugins/icheck/icheck.min.js" type="text/javascript"></script>
-<script src="assets/js/dashboard.js" type="text/javascript"></script>
-<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
-
-
-<!-- CORE TEMPLATE JS - START -->
-<script src="assets/js/scripts.js" type="text/javascript"></script>
-<!-- END CORE TEMPLATE JS - END -->
-
-<!-- Sidebar Graph - START -->
-<script src="assets/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
-<script src="assets/js/chart-sparkline.js" type="text/javascript"></script>
-<!-- Sidebar Graph - END -->
-
-<!-- General section box modal start -->
-<div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
-    <div class="modal-dialog animated bounceInDown">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Section Settings</h4>
-            </div>
-            <div class="modal-body">
-
-                Body goes here...
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
-            </div>
-        </div>
     </div>
 </div>
-<!-- modal end -->
+
+<?php $this->endBody(); ?>
+
 </body>
 </html>
 
+<?php $this->endPage() ?>
 
-
-
-
-<script type="text/javascript">
-
-
-</script>

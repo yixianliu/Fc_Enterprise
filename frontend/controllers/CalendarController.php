@@ -9,7 +9,7 @@ namespace app\controllers\Frontend;
 
 use Yii;
 use yii\web\Controller;
-use app\models\MountForm;
+use frontend\models\MountForm;
 
 class CalendarController extends BaseController {
 

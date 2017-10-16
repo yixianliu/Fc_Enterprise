@@ -40,31 +40,32 @@ class MemberController extends Controller
 
         if (Yii::$app->request->isAjax) {
 
-            if ($model->load(Yii::$app->request->post())) {
-
-                if (!$model->mLogin()) {
-                    return Json::encode(['msg' => '登录失败,请检查 !!']);
-                }
-
-                $session = Yii::$app->session;
-
-                // 检查 SESSION 是否开启
-                if (!$session->isActive) {
-                    return Json::encode(['msg' => 'Session 失败,请检查 !!']);
-                }
-
-                // 开启 SESSION
-                $session->open();
-
-                $array = [
-                    'username' => Yii::$app->params['Username'],
-                    'time'     => time(),
-                ];
-
-                $session->set('MountAdmin', $array);
-
-                return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
+            if (!$model->load(Yii::$app->request->post())) {
+                return Json::encode(['msg' => '载入内容有误 !!']);
             }
+
+            if (!$model->mLogin()) {
+                return Json::encode(['msg' => '登录失败,请检查 !!']);
+            }
+
+            $session = Yii::$app->session;
+
+            // 检查 SESSION 是否开启
+            if (!$session->isActive) {
+                return Json::encode(['msg' => 'Session 失败,请检查 !!']);
+            }
+
+            // 开启 SESSION
+            $session->open();
+
+            $array = [
+                'username' => Yii::$app->params['Username'],
+                'time'     => time(),
+            ];
+
+            $session->set('MountAdmin', $array);
+
+            return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
         }
 
         return $this->render('../login', ['model' => $model]);

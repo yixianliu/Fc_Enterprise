@@ -13,7 +13,6 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-
         'themes/assets/plugins/pace/pace-theme-flash.css',
         'themes/assets/plugins/bootstrap/css/bootstrap.min.css',
         'themes/assets/plugins/bootstrap/css/bootstrap-theme.min.css',
@@ -26,7 +25,6 @@ class AppAsset extends AssetBundle
         'assets/css/responsive.css',
     ];
     public $js = [
-
         'themes/assets/js/jquery-1.11.2.min.js',
         'themes/assets/js/jquery.easing.min.js',
         'themes/assets/plugins/bootstrap/js/bootstrap.min.js',

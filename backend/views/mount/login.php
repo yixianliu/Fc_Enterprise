@@ -1,17 +1,25 @@
 <?php
-
+/**
+ *
+ * 登录模板
+ *
+ * Created by Yxl.
+ * User: <zccem@163.com>.
+ * Date: 2017/10/16
+ * Time: 17:28
+ */
 use yii\helpers\Html;
 use backend\assets\AppAsset;
 
 AppAsset::register($this); // $this 代表视图对象
 
 $this->beginPage();
+
 ?>
 
 <!DOCTYPE html>
 <html class=" ">
 <head>
-
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
     <meta charset="utf-8"/>
     <title>Ultra Admin : Login Page</title>
@@ -24,6 +32,9 @@ $this->beginPage();
     <?php $this->head() ?>
 
 </head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
 <body class=" login_page">
 
 <?php $this->beginBody() ?>
@@ -35,13 +46,11 @@ $this->beginPage();
         <form name="loginform" id="loginform" action="index.html" method="post">
             <p>
                 <label for="user_login">Username<br/>
-                    <input type="text" name="log" id="user_login" class="input" value="demo" size="20"/>
-                </label>
+                    <input type="text" name="log" id="user_login" class="input" value="demo" size="20"/></label>
             </p>
             <p>
                 <label for="user_pass">Password<br/>
-                    <input type="password" name="pwd" id="user_pass" class="input" value="demo" size="20"/>
-                </label>
+                    <input type="password" name="pwd" id="user_pass" class="input" value="demo" size="20"/></label>
             </p>
             <p class="forgetmenot">
                 <label class="icheck-label form-label" for="rememberme">
@@ -60,30 +69,9 @@ $this->beginPage();
             <a class="pull-right" href="ui-register.html" title="Sign Up">Sign Up</a>
         </p>
 
+
     </div>
 </div>
-
-<!-- General section box modal start -->
-<div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
-    <div class="modal-dialog animated bounceInDown">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Section Settings</h4>
-            </div>
-            <div class="modal-body">
-
-                Body goes here...
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal end -->
 
 <?php $this->endBody(); ?>
 
@@ -91,4 +79,3 @@ $this->beginPage();
 </html>
 
 <?php $this->endPage() ?>
-
