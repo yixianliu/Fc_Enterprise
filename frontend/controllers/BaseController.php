@@ -25,7 +25,7 @@ class BaseController extends Controller
     {
 
         if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return $this->redirect(['/center/index']);
+            return false;
         }
 
         return;
@@ -43,7 +43,7 @@ class BaseController extends Controller
             return $this->redirect(['/member/login']);
         }
 
-        return ;
+        return;
     }
 
 }
