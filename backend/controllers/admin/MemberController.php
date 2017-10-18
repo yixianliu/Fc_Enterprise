@@ -27,6 +27,10 @@ class MemberController extends Controller
     public function actionLogin()
     {
 
+        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
+            return $this->redirect(['/mount/member/login']);
+        }
+
         $model = new LoginForm();
 
         if (Yii::$app->request->isPost) {

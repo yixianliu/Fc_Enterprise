@@ -4,7 +4,7 @@
  * @abstract 挂载中心表单模型
  */
 
-namespace app\form;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;

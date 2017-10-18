@@ -20,6 +20,11 @@ class BaseController extends Controller
 
     public function init()
     {
+
+        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
+            return $this->redirect(['/mount/member/login']);
+        }
+
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['/admin/member/login']);
         }
