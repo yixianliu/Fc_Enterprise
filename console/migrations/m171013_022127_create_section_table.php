@@ -24,19 +24,21 @@ class m171013_022127_create_section_table extends Migration
 
             'id' => $this->primaryKey(),
 
-            'skey'        => $this->string(55)->notNull()->unique()->comment('版块关键KEY'),
+            's_key'        => $this->string(55)->notNull()->unique()->comment('版块关键KEY'),
             'sort_id'     => $this->integer()->notNull()->unique(),
             'name'        => $this->string(85)->notNull()->unique(),
             'description' => $this->text(),
             'keywords'    => $this->string(125),
             'ico_class'   => $this->string(55),
-            'parent_id'   => $this->string(55),
-            'ad_status'   => $this->string(10)->defaultValue('On'),
-            'ad_status'   => $this->string(10)->defaultValue('On'),
+            'parent_key'  => $this->string(55),
+            'is_ad'       => $this->string(10)->defaultValue('On'),
             'is_post'     => $this->string(10)->defaultValue('On'),
             'is_using'    => $this->string(10)->defaultValue('On'),
             'published'   => $this->dateTime()->null(),
         ], $tableOptions);
+
+        // creates index for column `author_id`
+        $this->createIndex('idx-menu-s_key', '{{%section}}', 's_key');
     }
 
     /**

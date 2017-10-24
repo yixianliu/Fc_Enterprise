@@ -37,8 +37,8 @@ CREATE TABLE `#DB_PREFIX#Friend_Link` (
     `author` VARCHAR(55) NULL COMMENT '联系人',
     `img` VARCHAR(80) NULL COMMENT '图片地址',
     `url` VARCHAR(80) NULL COMMENT '链接地址',
-    `status` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '友情链接状态',
-    `audit` SET('On', 'Off') NOT NULL COMMENT '审核',
+    `is_status` SET('On', 'Off') NOT NULL COMMENT '友情链接状态',
+    `is_audit` SET('On', 'Off') NOT NULL COMMENT '审核',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`link_id`),
@@ -84,23 +84,22 @@ CREATE TABLE `#DB_PREFIX#Management` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Section`;
 CREATE TABLE `#DB_PREFIX#Section` (
-    `section_id` INT(11) NULL AUTO_INCREMENT,
-    `skey` VARCHAR(55) NOT NULL COMMENT '版块关键KEY',
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `s_key` VARCHAR(55) NOT NULL COMMENT '版块关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` VARCHAR(255) NULL COMMENT '描述',
+    `description` TEXT NULL COMMENT '描述',
     `keywords` VARCHAR(55) NULL COMMENT '关键字',
-    `ico` VARCHAR(55) NOT NULL COMMENT '版块图标路径',
-    `style` VARCHAR(55) NOT NULL COMMENT '版块样式',
+    `ico_class` VARCHAR(55) NOT NULL COMMENT '样式',
     `parent_key` VARCHAR(55) NOT NULL COMMENT '父类KEY',
-    `ad_status` SET('On', 'Off') NOT NULL COMMENT '广告',
+    `is_ad` SET('On', 'Off') NOT NULL COMMENT '是否开启广告',
     `is_post` SET('On', 'Off') NOT NULL COMMENT '发布帖子',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`section_id`),
+    KEY (`id`),
     UNIQUE `name` (`name`),
-    UNIQUE KEY `skey` (`skey`)
+    UNIQUE KEY `s_key` (`s_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -271,12 +270,12 @@ CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Related_rp`;
 CREATE TABLE `#DB_PREFIX#User_Related_rp` (
     `rp_id` int(11) NULL AUTO_INCREMENT,
-    `rkey` VARCHAR(85) NOT NULL COMMENT '角色关键值',
-    `pkey` VARCHAR(85) NOT NULL COMMENT '权限关键值',
+    `r_key` VARCHAR(85) NOT NULL COMMENT '角色关键值',
+    `p_key` VARCHAR(85) NOT NULL COMMENT '权限关键值',
     PRIMARY
     KEY (`rp_id`),
-    KEY `rkey` (`rkey`),
-    KEY `pkey` (`pkey`)
+    KEY `r_key` (`r_key`),
+    KEY `p_key` (`p_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**

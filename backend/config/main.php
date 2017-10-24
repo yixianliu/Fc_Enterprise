@@ -21,7 +21,7 @@ return [
         ],
 
         'user'         => [
-            'identityClass'   => 'common\models\Management',
+//            'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
             'identityCookie'  => [
                 'name'     => '_identity-backend',
@@ -45,6 +45,7 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

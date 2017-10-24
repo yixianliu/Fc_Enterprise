@@ -22,6 +22,7 @@ class m170930_013657_create_user_table extends Migration
 
         $this->createTable('{{%user}}', [
             'id'              => $this->primaryKey(),
+            'user_id'         => $this->string(55)->notNull()->unique(),
             'username'        => $this->string(85)->notNull()->unique(),
             'password'        => $this->string(255)->notNull(),
             'nickname'        => $this->string(85)->notNull()->unique(),
@@ -41,8 +42,7 @@ class m170930_013657_create_user_table extends Migration
             'grade'           => $this->integer(11)->null()->defaultValue(3),
         ], $tableOptions);
 
-        // creates index for column `author_id`
-        $this->createIndex('idx-user-username', '{{%user}}', 'username');
+        $this->createIndex('idx-user-user_id', '{{%user}}', 'user_id');
     }
 
     /**

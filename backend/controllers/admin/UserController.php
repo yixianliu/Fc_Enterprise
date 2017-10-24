@@ -13,7 +13,7 @@ namespace backend\controllers\admin;
 
 use Yii;
 use yii\data\Pagination;
-use app\models\User;
+use backend\models\User;
 
 class UserController extends BaseController
 {

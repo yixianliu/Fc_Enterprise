@@ -25,7 +25,7 @@ class m170930_013643_create_role_table extends Migration
             'id' => $this->primaryKey(),
 
             'sort_id'     => $this->integer(8)->notNull()->comment('排序'),
-            'rkey'        => $this->string(55)->notNull()->unique()->comment('角色关键KEY'),
+            'r_key'        => $this->string(55)->notNull()->unique()->comment('角色关键KEY'),
             'name'        => $this->string(55)->notNull()->unique()->comment('角色名称'),
             'exp'         => $this->integer(11)->null()->defaultValue(10),
             'description' => $this->text()->null(),
@@ -35,7 +35,7 @@ class m170930_013643_create_role_table extends Migration
         ], $tableOptions);
 
         // creates index for column `author_id`
-        $this->createIndex('idx-role-rkey', '{{%role}}', 'rkey');
+        $this->createIndex('idx-role-r_key', '{{%role}}', 'r_key');
     }
 
     /**

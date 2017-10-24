@@ -21,9 +21,10 @@ class m170930_073709_create_menu_table extends Migration
         }
 
         $this->createTable('{{%menu}}', [
+
             'id' => $this->primaryKey(),
 
-            'menu_id'   => $this->string(85)->notNull()->unique(),
+            'm_key'     => $this->string(85)->notNull()->unique(),
             'sort_id'   => $this->integer(11)->notNull(),
             'name'      => $this->string(55)->notNull()->unique(),
             'parent_id' => $this->string(55)->notNull()->comment('父类菜单KEY'),
@@ -35,7 +36,7 @@ class m170930_073709_create_menu_table extends Migration
         ], $tableOptions);
 
         // creates index for column `author_id`
-        $this->createIndex('idx-menu-menu_id', '{{%menu}}', 'menu_id');
+        $this->createIndex('idx-menu-m_key', '{{%menu}}', 'm_key');
     }
 
     /**
