@@ -45,7 +45,7 @@ $this->beginPage();
             </p>
             <p class="forgetmenot">
                 <label class="icheck-label form-label" for="rememberme">
-                    <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="skin-square-orange" checked>
+                    <input placeholder="" name="rememberme" type="checkbox" id="rememberme" value="forever" class="skin-square-orange" checked>
                     Remember me
                 </label>
             </p>

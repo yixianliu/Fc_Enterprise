@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle
     // 网站根本路
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+
     public $css = [
         'themes/assets/plugins/pace/pace-theme-flash.css',
         'themes/assets/plugins/bootstrap/css/bootstrap.min.css',
@@ -19,11 +20,11 @@ class AppAsset extends AssetBundle
         'themes/assets/fonts/font-awesome/css/font-awesome.css',
         'themes/assets/css/animate.min.css',
         'themes/assets/plugins/perfect-scrollbar/perfect-scrollbar.css',
-        'themes/assets/plugins/morris-chart/css/morris.css',
         'themes/assets/plugins/icheck/skins/square/orange.css',
         'themes/assets/css/style.css',
-        'assets/css/responsive.css',
+        'themes/assets/css/responsive.css',
     ];
+
     public $js = [
         'themes/assets/js/jquery-1.11.2.min.js',
         'themes/assets/js/jquery.easing.min.js',
@@ -36,6 +37,7 @@ class AppAsset extends AssetBundle
         'themes/assets/plugins/sparkline-chart/jquery.sparkline.min.js',
         'themes/assets/js/chart-sparkline.js',
     ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

@@ -5,7 +5,7 @@
  * @author   Yxl <zccem@163.com>
  */
 
-namespace app\controllers\Mount;
+namespace backend\controllers\mount;
 
 use Yii;
 use yii\web\Controller;

@@ -6,7 +6,7 @@
  * @author Yxl <zccem@163.com>
  */
 
-namespace app\controllers\Mount;
+namespace backend\controllers\mount;
 
 use Yii;
 use yii\web\Controller;
@@ -24,13 +24,13 @@ class BaseController extends Controller
     {
 
         if (file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return $this->redirect(['/Frontend/member/login']);
+            return $this->redirect(['/frontend/member/login']);
         }
 
         $session = Yii::$app->session;
 
-        if (empty($session->get('MountAdmin'))) {
-            return $this->redirect(['/Mount/member/login']);
+        if (empty($session->get('MountSession'))) {
+            return $this->redirect(['/mount/member/login']);
         }
 
         return;
