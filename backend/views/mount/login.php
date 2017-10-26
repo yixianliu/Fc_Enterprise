@@ -52,14 +52,14 @@ $this->beginPage();
 
             <p>
                 <?=
-                $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号'])
+                $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => '帐号'])
                     ->label('帐号');
                 ?>
             </p>
 
             <p>
                 <?=
-                $form->field($model, 'password')->textInput(['class' => 'input', 'placeholder' => '密码', 'maxlength' => true])
+                $form->field($model, 'password')->textInput(['class' => 'form-control', 'placeholder' => '密码', 'maxlength' => true])
                     ->label('密码');
                 ?>
             </p>

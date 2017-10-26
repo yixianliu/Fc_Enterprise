@@ -20,8 +20,8 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
 
-        'user'         => [
-//            'identityClass'   => 'common\models\Management',
+        'user'    => [
+            'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
             'identityCookie'  => [
                 'name'     => '_identity-backend',
@@ -29,14 +29,11 @@ return [
                 'httpOnly' => true,
             ],
         ],
-        'session'      => [
+        'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name'         => 'advanced-backend',
-            'cookieParams' => [
-                'path' => '/admin',
-            ],
+            'name' => 'advanced-backend',
         ],
-        'log'          => [
+        'log'     => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [

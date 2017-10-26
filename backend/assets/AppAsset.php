@@ -38,6 +38,12 @@ class AppAsset extends AssetBundle
         'themes/assets/js/chart-sparkline.js',
     ];
 
+    // Js在顶部加载
+    // $this->registerJsFile('xxx.js',['positon' => $this::POS_HEAD]); 加载单个Js文件
+    public $jsOptions = [
+        'position' => \yii\web\View::POS_HEAD
+    ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

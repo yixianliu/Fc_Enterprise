@@ -21,7 +21,8 @@
         "fxp/composer-asset-plugin": "*",
         "codeception/codeception": "*",
         "codeception/specify": "*",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -9,24 +9,12 @@ namespace backend\controllers\mount;
 
 use Yii;
 use yii\web\Controller;
-use yii\helpers\Json;
 use backend\models\MountForm;
 
 class MemberController extends Controller
 {
 
     public $layout = false;
-
-    public function init()
-    {
-        $session = Yii::$app->session;
-
-        if (!empty($session->get('MountAdmin', null))) {
-            return $this->redirect(['/mount/center/view']);
-        }
-
-        return;
-    }
 
     /**
      * 登录
@@ -40,13 +28,12 @@ class MemberController extends Controller
 
         $session = Yii::$app->session;
 
-        // 检查 SESSION 是否开启
-        if (!$session->isActive) {
-            Yii::$app->getSession()->setFlash('error', 'Session 失败,请检查 !!');
-        }
-
         // 开启 SESSION
         $session->open();
+
+        if (!empty($session->get('MountAdmin', null))) {
+            return $this->redirect(['/mount/center/view']);
+        }
 
         // Post
         if (Yii::$app->request->isPost) {
@@ -57,17 +44,15 @@ class MemberController extends Controller
 
             if (!$model->mLogin()) {
                 Yii::$app->getSession()->setFlash('error', '登录失败,请检查 !!');
-            } // 登录成
+            } // 登录成功
             else {
 
                 $array = [
-                    'username' => Yii::$app->params['Username'],
+                    'Username' => Yii::$app->params['Username'],
                     'time'     => time(),
                 ];
 
                 $session->set('MountSession', $array);
-
-                Yii::$app->getSession()->setFlash('success', '登录成功 !!');
 
                 return $this->redirect(['mount/center/view']);
             }

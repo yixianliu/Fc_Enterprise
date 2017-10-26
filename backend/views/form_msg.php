@@ -11,15 +11,18 @@ use yii\bootstrap\Alert;
 ?>
 
 <div class="col-md-12 col-sm-12 col-xs-12">
+
     <?php
 
     if (Yii::$app->getSession()->hasFlash('success')) {
+
         echo Alert::widget([
             'options' => [
                 'class' => 'alert-success', //这里是提示框的class
             ],
             'body'    => Yii::$app->getSession()->getFlash('success'), //消息体
         ]);
+
     }
 
     if (Yii::$app->getSession()->hasFlash('error')) {
@@ -32,4 +35,5 @@ use yii\bootstrap\Alert;
     }
 
     ?>
+
 </div>

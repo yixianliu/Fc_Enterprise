@@ -5,30 +5,35 @@
  * @author Yxl <zccem@163.com>
  */
 
-namespace app\form;
+namespace backend\models;
 
 use yii\base\Model;
 
 class MountRunForm extends Model
 {
 
-    public $agreement = NULL;
+    public $db_name;
+    public $mysql_data;
 
     /**
      * 验证规则
      */
     public function rules()
     {
-
         return [
-            [
-                [
-                    'agreement'
-                ],
-                'required',
-                'message' => '没有同意协议 !!'
-            ],
+            [['db_name', 'mysql_data'], 'required'],
         ];
     }
 
+    /**
+     * @abstract 标签
+     * @return type
+     */
+    public function attributeLabels()
+    {
+        return [
+            'db_name'    => '数据库名称',
+            'mysql_data' => '数据库包',
+        ];
+    }
 }

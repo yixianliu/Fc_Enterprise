@@ -191,11 +191,11 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Section`
 VALUES
-(NULL, 'S1', 1, '自律人生', NULL, NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S2', 2, '励志牛人', NULL, NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S4', 4, '音乐', NULL, NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S5', 5, '视频', NULL, NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#);
+(NULL, 'S1', 1, '自律人生', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
+(NULL, 'S2', 2, '励志牛人', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
+(NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
+(NULL, 'S4', 4, '音乐', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
+(NULL, 'S5', 5, '视频', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#);
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

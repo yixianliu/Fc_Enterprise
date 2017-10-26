@@ -21,13 +21,13 @@ class UserController extends BaseController
     /**
      * 列表
      */
-    public function actionIndex()
+    public function actionView()
     {
 
         $result = User::view();
 
         $pages = new Pagination(['totalCount' => $result->count(), 'pageSize' => '2']);
 
-        return $this->render('index', ['result' => $result, 'pages' => $pages]);
+        return $this->render('view', ['result' => $result, 'pages' => $pages]);
     }
 }

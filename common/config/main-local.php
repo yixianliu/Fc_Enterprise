@@ -1,6 +1,8 @@
 <?php
 return [
     'components' => [
+
+        // 数据库
         'db'     => [
             'class'       => 'yii\db\Connection',
             'dsn'         => 'mysql:host=localhost;dbname=fc_calendar',
@@ -9,6 +11,7 @@ return [
             'charset'     => 'utf8',
             'tablePrefix' => 'fc_',   //加入前缀名称fc_
         ],
+
         'mailer' => [
             'class'            => 'yii\swiftmailer\Mailer',
             'viewPath'         => '@common/mail',

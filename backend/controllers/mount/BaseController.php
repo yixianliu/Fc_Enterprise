@@ -29,11 +29,20 @@ class BaseController extends Controller
 
         $session = Yii::$app->session;
 
-        if (empty($session->get('MountSession'))) {
-            return $this->redirect(['/mount/member/login']);
+        // 检查session是否开启
+        if (!$session->isActive) {
+//            Yii::$app->getSession()->setFlash('error', 'Session 失败,请检查 !!');
+            exit('Session 失败,请检查 !!');
         }
 
-        return;
+        // 开启session
+        $session->open();
+
+        $data = $session->get('MountSession');
+
+        if (empty($data['Username'])) {
+            return $this->redirect(['/mount/member/login']);
+        }
     }
 
 }
