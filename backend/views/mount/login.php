@@ -44,7 +44,8 @@ $this->beginPage();
     <div class="login-wrapper">
         <div id="login" class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
 
-            <h1><a href="#" title="登录" tabindex="-1">Ultra Admin</a></h1>
+            <h1><a href="#" title="<?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?>" tabindex="-1"><?= Yii::$app->params['Conf']['NAME'] ?>
+                    - <?= Yii::$app->params['Conf']['TITLE'] ?></a></h1>
 
             <?php
             $form = ActiveForm::begin(['action' => ['mount/member/login'], 'method' => 'post', 'id' => $model->formName()]);
@@ -52,14 +53,14 @@ $this->beginPage();
 
             <p>
                 <?=
-                $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => '帐号'])
+                $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => '帐号...'])
                     ->label('帐号');
                 ?>
             </p>
 
             <p>
                 <?=
-                $form->field($model, 'password')->textInput(['class' => 'form-control', 'placeholder' => '密码', 'maxlength' => true])
+                $form->field($model, 'password')->textInput(['class' => 'form-control', 'placeholder' => '密码....'])
                     ->label('密码');
                 ?>
             </p>

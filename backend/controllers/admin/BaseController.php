@@ -13,6 +13,7 @@ namespace backend\controllers\admin;
 
 use Yii;
 use yii\web\Controller;
+use common\models\Conf;
 
 class BaseController extends Controller
 {
@@ -25,8 +26,12 @@ class BaseController extends Controller
             return $this->redirect(['/mount/member/login']);
         }
 
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/admin/member/login']);
+        $confData = Conf::findByAllData('On');
+
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                Yii::$app->params['Conf'][ $value['ckey'] ] = $value['parameter'];
+            }
         }
 
         return;

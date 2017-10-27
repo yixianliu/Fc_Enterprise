@@ -12,7 +12,8 @@ use yii\base\Model;
 class MountRunForm extends Model
 {
 
-    public $db_name;
+    public $name;
+    public $title;
     public $mysql_data;
 
     /**
@@ -21,7 +22,7 @@ class MountRunForm extends Model
     public function rules()
     {
         return [
-            [['db_name', 'mysql_data'], 'required'],
+            [['name', 'mysql_data', 'title'], 'required'],
         ];
     }
 
@@ -32,7 +33,8 @@ class MountRunForm extends Model
     public function attributeLabels()
     {
         return [
-            'db_name'    => '数据库名称',
+            'name'       => '网站名称',
+            'title'      => '网站标题',
             'mysql_data' => '数据库包',
         ];
     }

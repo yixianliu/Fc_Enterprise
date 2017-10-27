@@ -267,18 +267,18 @@ VALUES
 /*
     后台管理 / Admin
 */
-(NULL, 'A3', 1, 'M0', 'R1', '后台管理', '本站旨在为您提供更多的商机', NULL, 'Admin', 'On', #TIME#),
+(NULL, 'A3', 1, 'M0', 'R1', '后台管理', '后台管理', NULL, 'Admin', 'On', #TIME#),
 
-(NULL, 'AU1', 1, 'A3', 'R1', '用户管理', '搜索你需要的产品,找不到别怕,可以发帖求助', NULL, NULL, 'On', #TIME#),
-(NULL, 'AMOVIE1', 2, 'A3', 'R1', '电影资源管理', '管理资源操作,编辑 / 删除 / 列表', NULL, NULL, 'On', #TIME#),
-(NULL, 'AMUSIC1', 3, 'A3', 'R1', '音乐资源管理', '管理资源操作,编辑 / 删除 / 列表', NULL, NULL, 'On', #TIME#),
-(NULL, 'ADOC1', 4, 'A3', 'R1', '文档资源管理', '管理资源操作,编辑 / 删除 / 列表', NULL, NULL, 'On', #TIME#),
-(NULL, 'AVIDEO1', 5, 'A3', 'R1', '视频资源管理', '管理资源操作,编辑 / 删除 / 列表', NULL, NULL, 'On', #TIME#),
-(NULL, 'AM1', 6, 'A3', 'R1', '菜单管理', '管理菜单操作,编辑 / 删除 / 列表', NULL, NULL, 'On', #TIME#),
+(NULL, 'AU1', 1, 'A3', 'R1', '用户管理', '用户管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AMOVIE1', 2, 'A3', 'R1', '电影资源管理', '电影资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AMUSIC1', 3, 'A3', 'R1', '音乐资源管理', '音乐资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'ADOC1', 4, 'A3', 'R1', '文档资源管理', '文档资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AVIDEO1', 5, 'A3', 'R1', '视频资源管理', '视频资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AM1', 6, 'A3', 'R1', '菜单管理', '菜单管理', NULL, NULL, 'On', #TIME#),
 (NULL, 'AC2', 7, 'A3', 'R1', '管理中心', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
-(NULL, 'AC3', 8, 'A3', 'R1', '核心配置', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
-(NULL, 'AR1', 9, 'A3', 'R1', '角色管理', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
-(NULL, 'AP1', 10, 'A3', 'R1', '权限管理', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
+(NULL, 'AC3', 8, 'A3', 'R1', '核心配置', '核心配置', NULL, NULL, 'On', #TIME#),
+(NULL, 'AR1', 9, 'A3', 'R1', '角色管理', '角色管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AP1', 10, 'A3', 'R1', '权限管理', '权限管理', NULL, NULL, 'On', #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'R1', '所有用户', '查看所有用户', NULL, 'user', 'On', #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'R1', '查看用户', '查看用户', NULL, 'user/show', 'On', #TIME#),
@@ -286,32 +286,28 @@ VALUES
 
 (NULL, 'AMMV1', 1, 'AMOVIE1', 'R1', '所有电影资源', '查看所有电影资源', NULL, 'movie', 'On', #TIME#),
 (NULL, 'AMMV2', 2, 'AMOVIE1', 'R1', '添加电影资源', '添加新的电影资源', NULL, 'movie/create', 'On', #TIME#),
-(NULL, 'AMMV3', 3, 'AMOVIE1', 'R1', '扫描资源', '扫描指定磁盘内的电影资源,并添加', NULL, 'movie/scan', 'On', #TIME#),
 (NULL, 'AMMV4', 4, 'AMOVIE1', 'R1', '电影资源分类', '创建新的分类信息', NULL, 'movie/classify', 'On', #TIME#),
 (NULL, 'AMMV5', 5, 'AMOVIE1', 'R1', '添加资源分类', '创建新的分类信息', NULL, 'classify/movie', 'On', #TIME#),
 
 (NULL, 'AMMC1', 1, 'AMUSIC1', 'R1', '所有音乐资源', '查看所有音乐资源', NULL, 'music', 'On', #TIME#),
 (NULL, 'AMMC2', 2, 'AMUSIC1', 'R1', '添加音乐资源', '添加新的音乐资源', NULL, 'music/store', 'On', #TIME#),
-(NULL, 'AMMC3', 3, 'AMUSIC1', 'R1', '扫描资源', '扫描指定磁盘内的音乐资源,并添加', NULL, 'music/scan', 'On', #TIME#),
 (NULL, 'AMMC4', 4, 'AMUSIC1', 'R1', '音乐资源分类', '创建新的分类信息', NULL, 'music/classify', 'On', #TIME#),
 (NULL, 'AMMC5', 5, 'AMUSIC1', 'R1', '添加资源分类', '创建新的分类信息', NULL, 'classify/music', 'On', #TIME#),
 
 (NULL, 'AMDV1', 1, 'ADOC1', 'R1', '所有文档资源', '查看所有文档资源', NULL, 'document', 'On', #TIME#),
 (NULL, 'AMDV2', 2, 'ADOC1', 'R1', '添加文档资源', '添加新的文档资源', NULL, 'document/create', 'On', #TIME#),
-(NULL, 'AMDV3', 3, 'ADOC1', 'R1', '扫描资源', '扫描指定磁盘内的文档资源,并添加', NULL, 'document/scan', 'On', #TIME#),
 (NULL, 'AMDV4', 4, 'ADOC1', 'R1', '文档资源分类', '创建新的分类信息', NULL, 'document/classify', 'On', #TIME#),
 (NULL, 'AMDV5', 5, 'ADOC1', 'R1', '添加资源分类', '创建新的分类信息', NULL, 'classify/document', 'On', #TIME#),
 
 (NULL, 'AMVV1', 1, 'AVIDEO1', 'R1', '所有视频资源', '查看所有视频资源', NULL, 'video', 'On', #TIME#),
 (NULL, 'AMVV2', 2, 'AVIDEO1', 'R1', '添加视频资源', '添加新的视频资源', NULL, 'video/create', 'On', #TIME#),
-(NULL, 'AMVV3', 3, 'AVIDEO1', 'R1', '扫描资源', '扫描指定磁盘内的视频资源,并添加', NULL, 'video/scan', 'On', #TIME#),
 (NULL, 'AMVV4', 4, 'AVIDEO1', 'R1', '文档资源分类', '创建新的分类信息', NULL, 'video/classify', 'On', #TIME#),
 (NULL, 'AMVV5', 5, 'AVIDEO1', 'R1', '添加资源分类', '创建新的分类信息', NULL, 'classify/video', 'On', #TIME#),
 
 (NULL, 'AUMV1', 1, 'AM1', 'R1', '所有菜单', '查看所有菜单', NULL, 'menu', 'On', #TIME#),
 (NULL, 'AUMV2', 2, 'AM1', 'R1', '创建菜单', '创建新的菜单', NULL, 'menu/store', 'On', #TIME#),
 
-(NULL, 'AUCC1', 1, 'AC2', 'R1', '管理中心', '所发布的产品评测', NULL, 'center', 'On', #TIME#),
+(NULL, 'AUCC1', 1, 'AC2', 'R1', '管理中心', '管理中心', NULL, 'center', 'On', #TIME#),
 
 (NULL, 'ACCC1', 1, 'AC3', 'R1', '网站配置', '网站配置', NULL, 'conf', 'On', #TIME#),
 (NULL, 'ACCC2', 2, 'AC3', 'R1', '备份数据', '备份网站数据', NULL, 'conf/store', 'On', #TIME#),

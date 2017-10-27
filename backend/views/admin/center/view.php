@@ -1,13 +1,15 @@
 <?php
 /**
  *
- * 挂载中心首页
+ * 首页模板
  *
  * Created by Yxl.
  * User: <zccem@163.com>.
- * Date: 2017/10/16
- * Time: 17:51
+ * Date: 2017/10/13
+ * Time: 9:55
  */
+
+$this->title = '管理中心';
 
 function quick_dev_insights_phpinfo()
 {

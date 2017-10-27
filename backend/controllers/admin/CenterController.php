@@ -20,8 +20,8 @@ class CenterController extends BaseController
     /**
      * 首页
      */
-    public function actionIndex()
+    public function actionView()
     {
-        return $this->render('index');
+        return $this->render('view');
     }
 }

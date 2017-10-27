@@ -12,11 +12,9 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use yii\web\Controller;
-use yii\helpers\Json;
 use backend\models\LoginForm;
 
-class MemberController extends Controller
+class MemberController extends BaseController
 {
 
     public $layout = false;
@@ -27,8 +25,14 @@ class MemberController extends Controller
     public function actionLogin()
     {
 
+        // 是否安装
         if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
             return $this->redirect(['/mount/member/login']);
+        }
+
+        // 是否已经登录
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(['/admin/center/view']);
         }
 
         $model = new LoginForm();
@@ -36,14 +40,14 @@ class MemberController extends Controller
         if (Yii::$app->request->isPost) {
 
             if (!$model->load(Yii::$app->request->post())) {
-                return ['msg' => 'POST异常 !!'];
+                Yii::$app->getSession()->setFlash('error', 'POST异常 !!');
             }
 
             if (!$model->login()) {
-                return Json::encode(['msg' => '登录失败,请检查 !!']);
+                Yii::$app->getSession()->setFlash('error', '登录失败,请检查 !!');
+            } else {
+                return $this->redirect(['/admin/center/view']);
             }
-
-            return Json::encode(['msg' => '登录成功 !!', 'status' => true]);
 
         }
 
@@ -52,11 +56,13 @@ class MemberController extends Controller
 
     /**
      * 注销
+     *
+     * @return bool
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
-        return;
+        return true;
     }
 }

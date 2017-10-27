@@ -3,16 +3,16 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use common\models\Product;
-use backend\models\ProductSearch;
+use common\models\Role;
+use backend\models\RoleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * RoleController implements the CRUD actions for Role model.
  */
-class ProductController extends BaseController
+class RoleController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class ProductController extends BaseController
     }
 
     /**
-     * Lists all Product models.
+     * Lists all Role models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Role model.
      * @param integer $id
      * @return mixed
      */
@@ -57,16 +57,16 @@ class ProductController extends BaseController
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->role_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,7 +75,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -85,7 +85,7 @@ class ProductController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->role_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,7 +94,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class ProductController extends BaseController
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Role model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Role::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

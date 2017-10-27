@@ -1,25 +1,26 @@
 <?php
-/**
- *
- * 角色模型
- *
- * Created by Yixianliu.
- * User: Yxl <zccem@163.com>
- * Date: 2017/6/7
- * Time: 11:23
- */
 
 namespace common\models;
 
 use Yii;
-use yii\base\Model;
-use yii\db\ActiveRecord;
 
-class Role extends Model
+/**
+ * This is the model class for table "{{%role}}".
+ *
+ * @property integer $role_id
+ * @property string $sort_id
+ * @property string $rkey
+ * @property string $name
+ * @property string $exp
+ * @property string $description
+ * @property string $ico_class
+ * @property string $is_using
+ * @property string $published
+ */
+class Role extends \yii\db\ActiveRecord
 {
-
     /**
-     * @abstract 数据库表名
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -27,25 +28,37 @@ class Role extends Model
     }
 
     /**
-     * @abstract 所有
+     * @inheritdoc
      */
-    public static function findAllSection($status = null)
+    public function rules()
     {
+        return [
+            [['sort_id', 'rkey', 'name', 'exp', 'description', 'is_using', 'published'], 'required'],
+            [['sort_id', 'exp', 'published'], 'integer'],
+            [['is_using'], 'string'],
+            [['rkey'], 'string', 'max' => 55],
+            [['name'], 'string', 'max' => 85],
+            [['description'], 'string', 'max' => 255],
+            [['ico_class'], 'string', 'max' => 125],
+            [['name'], 'unique'],
+        ];
+    }
 
-        if (!empty($status)) {
-            $array = array(
-                self::tableName() . '.is_using' => $status
-            );
-        } // null
-        else {
-            $array = array(
-                '!=', self::tableName() . '.is_using', 'null'
-            );
-        }
-
-        return static::find()->select(Role::tableName() . ".name as rname, " . self::tableName() . ".*")
-            ->joinWith('role')
-            ->where($array)
-            ->asArray();
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'role_id' => 'Role ID',
+            'sort_id' => '角色排序',
+            'rkey' => '角色关键KEY',
+            'name' => '角色名称',
+            'exp' => 'Exp',
+            'description' => 'Description',
+            'ico_class' => 'Ico Class',
+            'is_using' => 'Is Using',
+            'published' => 'Published',
+        ];
     }
 }

@@ -28,6 +28,18 @@ class MountForm extends Model
     }
 
     /**
+     * @abstract 标签
+     * @return type
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => '帐号',
+            'password' => '密码',
+        ];
+    }
+
+    /**
      * @abstract 登录
      */
     public function mLogin()

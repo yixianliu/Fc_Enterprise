@@ -29,8 +29,13 @@ use kartik\select2\Select2;
                     ?>
 
                     <?=
-                    $form->field($model, 'db_name')->textInput(['class' => 'form-control', 'placeholder' => '数据库名称..', 'value' => ''])
-                        ->label('数据库名称');
+                    $form->field($model, 'name')->textInput(['class' => 'form-control', 'value' => Yii::$app->params['NAME']])
+                        ->label('网站名称');
+                    ?>
+
+                    <?=
+                    $form->field($model, 'title')->textInput(['class' => 'form-control', 'value' => Yii::$app->params['TITLE']])
+                        ->label('网站标题');
                     ?>
 
                     <?=

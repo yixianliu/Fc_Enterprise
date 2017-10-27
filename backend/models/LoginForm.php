@@ -13,7 +13,7 @@ namespace backend\models;
 
 use Yii;
 use yii\base\Model;
-use common\Models\Management;
+use common\models\Management as User;
 
 class LoginForm extends Model
 {
@@ -34,18 +34,16 @@ class LoginForm extends Model
             // 对username的值进行两边去空格过滤
             ['username', 'filter', 'filter' => 'trim'],
 
-            // required表示必须的，也就是说表单提交过来的值必须要有, message 是username不满足required规则时给的提示消息
-            ['username', 'required', 'message' => '用户名不可以为空'],
-
-            // unique表示唯一性，targetClass表示的数据模型 这里就是说UserBackend模型对应的数据表字段username必须唯一
-            ['username', 'unique', 'targetClass' => '\app\models\Management', 'message' => '用户名已存在.'],
+            [['username', 'password'], 'required'],
 
             // string 字符串，这里我们限定的意思就是username至少包含2个字符，最多255个字符
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             // 下面的规则基本上都同上，不解释了
-            ['password', 'required', 'message' => '密码不可以为空'],
             ['password', 'string', 'min' => 6, 'tooShort' => '密码至少填写6位'],
+
+            // 密码验证
+            ['password', 'validatePassword'],
         ];
     }
 
@@ -63,7 +61,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, '帐号和密码有误 !!');
             }
         }
     }
@@ -75,11 +73,11 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-            return Yii::$app->management->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        if (!$this->validate()) {
+            return false;
         }
 
-        return true;
+        return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
 
     /**
@@ -91,7 +89,7 @@ class LoginForm extends Model
     {
 
         if ($this->_user === false) {
-            $this->_user = Management::findByUsername($this->username);
+            $this->_user = User::findByUsername($this->username);
         }
 
         return $this->_user;
