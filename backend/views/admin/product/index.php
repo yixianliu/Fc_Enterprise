@@ -28,48 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="product-index">
 
                         <p>
-                            <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
                         </p>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel'  => $searchModel,
-                            'columns'      => [
-                                ['class' => 'yii\grid\SerialColumn'],
-
-                                'id',
-                                'product_id',
-                                'user_id',
-                                'l_key',
-                                'c_key',
-                                // 's_key',
-                                // 'title',
-                                // 'content:ntext',
-                                // 'price',
-                                // 'discount',
-                                // 'introduction',
-                                // 'keywords',
-                                // 'path',
-                                // 'praise',
-                                // 'forward',
-                                // 'collection',
-                                // 'share',
-                                // 'attention',
-                                // 'is_promote',
-                                // 'is_hot',
-                                // 'is_classic',
-                                // 'is_winnow',
-                                // 'is_recommend',
-                                // 'is_audit',
-                                // 'is_field',
-                                // 'is_comments',
-                                // 'is_img',
-                                // 'is_thumb',
-                                // 'grade',
-                                // 'user_grade',
-                                // 'published',
-
-                                ['class' => 'yii\grid\ActionColumn'],
-                            ],
                         ]); ?>
                     </div>
                 </div>

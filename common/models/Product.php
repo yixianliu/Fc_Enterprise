@@ -55,7 +55,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'user_id', 'l_key', 'c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade', 'published'], 'required'],
+            [['l_key', 'c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade', 'published'], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade', 'published'], 'integer'],
             [['product_id'], 'string', 'max' => 85],
@@ -74,14 +74,14 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'l_key'        => 'L Key',
+            'l_key'        => '等级角色',
             'c_key'        => '产品分类',
-            's_key'        => 'S Key',
+            's_key'        => '所属版块',
             'title'        => '产品标题',
-            'content'      => 'Content',
+            'content'      => '产品内容',
             'price'        => '产品价格',
             'discount'     => '折扣价',
-            'introduction' => 'Introduction',
+            'introduction' => '产品描述',
             'keywords'     => '产品关键词',
             'path'         => '产品文件夹路径',
             'praise'       => 'Praise',

@@ -26,9 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="product-create">
 
-                        <?= $this->render('_form', [
-                            'model' => $model,
-                        ]) ?>
+                        <?=
+                        $this->render('_form', [
+                            'model'  => $model,
+                            'result' => $result,
+                        ])
+                        ?>
 
                     </div>
                 </div>

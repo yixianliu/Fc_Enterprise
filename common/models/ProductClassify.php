@@ -5,29 +5,28 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%section}}".
+ * This is the model class for table "{{%product_classify}}".
  *
- * @property integer $id
- * @property string $s_key
+ * @property integer $classify_id
+ * @property string $c_key
  * @property string $sort_id
+ * @property string $r_key
  * @property string $name
  * @property string $description
  * @property string $keywords
  * @property string $ico_class
- * @property string $parent_key
- * @property string $is_ad
- * @property string $is_post
+ * @property string $parent_id
  * @property string $is_using
  * @property string $published
  */
-class Section extends \yii\db\ActiveRecord
+class ProductClassify extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%section}}';
+        return '{{%product_classify}}';
     }
 
     /**
@@ -36,13 +35,13 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['s_key', 'sort_id', 'name', 'ico_class', 'parent_key', 'is_ad', 'is_post', 'is_using', 'published'], 'required'],
+            [['c_key', 'sort_id', 'r_key', 'name', 'parent_id', 'is_using', 'published'], 'required'],
             [['sort_id', 'published'], 'integer'],
-            [['description', 'is_ad', 'is_post', 'is_using'], 'string'],
-            [['s_key', 'keywords', 'ico_class', 'parent_key'], 'string', 'max' => 55],
+            [['description', 'is_using'], 'string'],
+            [['c_key', 'r_key', 'keywords', 'ico_class', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
+            [['c_key'], 'unique'],
             [['name'], 'unique'],
-            [['s_key'], 'unique'],
         ];
     }
 
@@ -52,15 +51,15 @@ class Section extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            's_key'       => '版块关键KEY',
-            'sort_id'     => '版块排序',
-            'name'        => '版块名称',
+            'classify_id' => 'Classify ID',
+            'c_key'       => 'C Key',
+            'sort_id'     => 'Sort ID',
+            'r_key'       => 'R Key',
+            'name'        => 'Name',
             'description' => 'Description',
             'keywords'    => 'Keywords',
             'ico_class'   => 'Ico Class',
-            'parent_key'  => 'Parent Key',
-            'is_ad'       => 'Is Ad',
-            'is_post'     => 'Is Post',
+            'parent_id'   => 'Parent ID',
             'is_using'    => 'Is Using',
             'published'   => 'Published',
         ];

@@ -22,7 +22,8 @@
         "codeception/codeception": "*",
         "codeception/specify": "*",
         "dmstr/yii2-adminlte-asset": "2.*",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "kucha/ueditor": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -16,6 +16,7 @@ use backend\assets\AppAsset;
 AppAsset::register($this); // $this 代表视图对象
 
 $this->beginPage();
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +36,14 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
+    <style>
+        *, body, html, h1, h2, h3, h4, a, li {
+            font-family: 'Microsoft YaHei';
+            letter-spacing: 1px;
+        }
+    </style>
+
+
 </head>
 <body class=" login_page">
 
@@ -43,8 +52,7 @@ $this->beginPage();
 <div class="login-wrapper">
     <div id="login" class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
 
-        <h1><a href="#" title="<?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?>" tabindex="-1"><?= Yii::$app->params['Conf']['NAME'] ?>
-                - <?= Yii::$app->params['Conf']['TITLE'] ?></a></h1>
+        <h1><a href="#" title="<?= Yii::$app->params['Conf']['NAME'] ?>" tabindex="-1"><?= Yii::$app->params['Conf']['NAME'] ?></a></h1>
 
         <?php
         $form = ActiveForm::begin(['action' => ['admin/member/login'], 'method' => 'post', 'id' => $model->formName()]);
@@ -59,7 +67,7 @@ $this->beginPage();
 
         <p>
             <?=
-            $form->field($model, 'password')->textInput(['class' => 'form-control', 'placeholder' => '密码'])
+            $form->field($model, 'password')->passwordInput(['class' => 'form-control', 'placeholder' => '密码'])
                 ->label('密码');
             ?>
         </p>

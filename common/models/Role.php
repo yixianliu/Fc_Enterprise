@@ -61,4 +61,30 @@ class Role extends \yii\db\ActiveRecord
             'published' => 'Published',
         ];
     }
+
+    /**
+     * 所有
+     *
+     * @param null $status
+     * @return $this
+     */
+    public static function findAllSection($status = null)
+    {
+
+        if (!empty($status)) {
+            $array = array(
+                self::tableName() . '.is_using' => $status
+            );
+        } // null
+        else {
+            $array = array(
+                '!=', self::tableName() . '.is_using', 'null'
+            );
+        }
+
+        return static::find()->select(Role1::tableName() . ".name as rname, " . self::tableName() . ".*")
+            ->joinWith('role')
+            ->where($array)
+            ->asArray();
+    }
 }

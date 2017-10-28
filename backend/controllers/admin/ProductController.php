@@ -4,6 +4,8 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\Product;
+use common\models\ProductClassify;
+use common\models\Section;
 use backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,8 +70,27 @@ class ProductController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // 初始化
+            $result = array();
+
+            // 所有版块
+            $dataSection = Section::findAll(['is_using' => 'On']);
+
+            foreach ($dataSection as $value) {
+                $result['section'][ $value['s_key'] ] = $value['name'];
+            }
+
+            // 产品等级
+            $dataClassify = ProductClassify::findAll(['is_using' => 'On']);
+
+            foreach ($dataClassify as $value) {
+                $result['classify'][ $value['c_key'] ] = $value['name'];
+            }
+
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $result,
             ]);
         }
     }
