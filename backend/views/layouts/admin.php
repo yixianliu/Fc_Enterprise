@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use backend\assets\AppAsset;
-
+use common\widgets\iMenu\MenuList;
 
 AppAsset::register($this); // $this 代表视图对象
 
@@ -42,7 +42,39 @@ $this->beginPage();
 <div class="page-container row-fluid">
 
     <div class="page-sidebar ">
-        <?= Yii::$app->view->renderFile('@app/views/menu.php'); ?>
+
+        <!-- MAIN MENU - START -->
+        <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+
+            <!-- USER INFO - START -->
+            <div class="profile-info row">
+
+                <div class="profile-image col-md-4 col-sm-4 col-xs-4">
+                    <a href="ui-profile.html">
+                        <img src="data/profile/profile.png" class="img-responsive img-circle">
+                    </a>
+                </div>
+
+                <div class="profile-details col-md-8 col-sm-8 col-xs-8">
+
+                    <h3>
+                        <a href="#"><?= Yii::$app->session->get('MountSession')['Username'] ?></a>
+
+                        <!-- Available statuses: online, idle, busy, away and offline -->
+                        <span class="profile-status online"></span>
+                    </h3>
+
+                    <p class="profile-title"><?= Yii::$app->formatter->asTime(Yii::$app->session->get('MountSession')['time']) ?></p>
+
+                </div>
+
+            </div>
+
+            <!-- START X-NAVIGATION -->
+            <?= MenuList::widget(['config' => ['mkey' => 'A3', 'tpl' => 'admin']]); ?>
+            <!-- END X-NAVIGATION -->
+
+        </div>
     </div>
 
     <section id="main-content" class=" ">

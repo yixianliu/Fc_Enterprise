@@ -1,4 +1,3 @@
-
 /**
  * * * * * * * * * * * * * * * * * * * * * *
  * 基本表
@@ -89,8 +88,8 @@ CREATE TABLE `#DB_PREFIX#Section` (
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
-    `keywords` VARCHAR(55) NULL COMMENT '关键字',
-    `ico_class` VARCHAR(55) NOT NULL COMMENT '样式',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `ico_class` VARCHAR(55) NULL COMMENT '样式',
     `parent_key` VARCHAR(55) NOT NULL COMMENT '父类KEY',
     `is_ad` SET('On', 'Off') NOT NULL COMMENT '是否开启广告',
     `is_post` SET('On', 'Off') NOT NULL COMMENT '发布帖子',
@@ -108,15 +107,15 @@ CREATE TABLE `#DB_PREFIX#Section` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Conf`;
 CREATE TABLE `#DB_PREFIX#Conf` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(80) NOT NULL COMMENT '配置关键字KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '配置关键字KEY',
     `name` VARCHAR(80) NOT NULL COMMENT '名称',
     `parameter` VARCHAR(255) NOT NULL COMMENT '值 / 参数',
-    `description` VARCHAR(255) NULL COMMENT '描述',
+    `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`conf_id`),
-    UNIQUE KEY `ckey` (`ckey`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -135,7 +134,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `username` VARCHAR(80) NOT NULL COMMENT '邮箱 / 用户名',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
     `exp` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '经验值',
     `credit` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
     `nickname` VARCHAR(55) NULL DEFAULT NULL COMMENT '昵称',
@@ -153,13 +152,11 @@ CREATE TABLE `#DB_PREFIX#User` (
     `is_head` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '上传头像',
     `is_security` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '安全设置',
     `is_using` SET('On', 'Off', 'Not') NOT NULL DEFAULT 'Off' COMMENT '是否可用',
-    `grade` INT(11) UNSIGNED NOT NULL COMMENT '星级评分1-15, 工作人员审核评分',
     PRIMARY
     KEY `id` (`id`),
     UNIQUE KEY (`user_id`),
-    KEY `rkey` (`rkey`),
+    KEY `r_key` (`r_key`),
     UNIQUE `nickname` (`nickname`),
-    UNIQUE `signature` (`signature`),
     UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -284,7 +281,7 @@ CREATE TABLE `#DB_PREFIX#User_Related_rp` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Power`;
 CREATE TABLE `#DB_PREFIX#Power` (
     `power_id` INT(11) NULL AUTO_INCREMENT,
-    `pkey` VARCHAR(85) NOT NULL COMMENT '权限关键KEY',
+    `p_key` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(125) NULL COMMENT '描述',
     `path` VARCHAR(85) NOT NULL COMMENT '目录',
@@ -296,7 +293,7 @@ CREATE TABLE `#DB_PREFIX#Power` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`power_id`),
-    UNIQUE KEY `pkey` (`pkey`)
+    UNIQUE KEY `p_key` (`p_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -304,9 +301,9 @@ CREATE TABLE `#DB_PREFIX#Power` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Role`;
 CREATE TABLE `#DB_PREFIX#Role` (
-    `role_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `exp` INT(11) UNSIGNED NOT NULL COMMENT '经验值',
     `description` VARCHAR(255) NOT NULL COMMENT '角色描述',
@@ -314,8 +311,8 @@ CREATE TABLE `#DB_PREFIX#Role` (
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`role_id`),
-    KEY `rkey` (`rkey`),
+    KEY (`id`),
+    KEY `r_key` (`r_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -326,21 +323,21 @@ CREATE TABLE `#DB_PREFIX#Role` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Menu`;
 CREATE TABLE `#DB_PREFIX#Menu` (
-    `menu_id` INT(11) NULL AUTO_INCREMENT,
-    `mkey` VARCHAR(55) NOT NULL COMMENT '菜单值',
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `m_key` VARCHAR(55) NOT NULL COMMENT '菜单值',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
     `title` VARCHAR(125) NOT NULL COMMENT '菜单标题',
-    `ico_class` VARCHAR(85) NULL COMMENT '图标样式',
+    `ico_class` VARCHAR(55) NULL COMMENT '图标样式',
     `url` VARCHAR(85) NULL COMMENT '菜单链接地址',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`menu_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `mkey` (`mkey`)
+    KEY (`id`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `m_key` (`m_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -357,23 +354,23 @@ CREATE TABLE `#DB_PREFIX#Menu` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Video`;
 CREATE TABLE `#DB_PREFIX#Video` (
     `video_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
+    `p_key` VARCHAR(55) NOT NULL COMMENT '资源路径关键KEY',
     `name` VARCHAR(125) NOT NULL COMMENT '视频资源名称',
-    `pkey` VARCHAR(55) NOT NULL COMMENT '资源路径关键KEY',
     `filename` VARCHAR(125) NOT NULL COMMENT '资源文件名',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `size` VARCHAR(55) NOT NULL COMMENT '资源大小',
-    `img` VARCHAR(55) NOT NULL COMMENT '资源图片',
+    `img` VARCHAR(125) NOT NULL COMMENT '资源图片',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `is_thumbnail` SET('On', 'Off') NOT NULL default 'Off' COMMENT '是否生成缩略图',
     `views` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '浏览次数',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`video_id`),
-    KEY `rkey` (`rkey`),
-    KEY `ckey` (`ckey`),
-    KEY `pkey` (`pkey`),
+    KEY `r_key` (`r_key`),
+    KEY `c_key` (`c_key`),
+    KEY `p_key` (`p_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -382,42 +379,20 @@ CREATE TABLE `#DB_PREFIX#Video` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Video_Classify`;
 CREATE TABLE `#DB_PREFIX#Video_Classify` (
-    `video_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
+    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(125) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `parent_id` VARCHAR(85) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`video_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
+    KEY (`id`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 视频资源设置
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video_Conf`;
-CREATE TABLE `#DB_PREFIX#Video_Conf` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `pkey` VARCHAR(55) NOT NULL COMMENT '资源路径KEY',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '资源路径角色权限KEY',
-    `path` VARCHAR(255) NOT NULL COMMENT '视频资源完整路径',
-    `servername` VARCHAR(255) NOT NULL COMMENT '虚拟路径',
-    `port` VARCHAR(255) NOT NULL COMMENT '虚拟路径的访问端口',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
-    UNIQUE `path` (`path`),
-    UNIQUE `servername` (`servername`),
-    UNIQUE `port` (`port`),
-    UNIQUE KEY `pkey` (`pkey`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -426,8 +401,8 @@ CREATE TABLE `#DB_PREFIX#Video_Conf` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Music`;
 CREATE TABLE `#DB_PREFIX#Music` (
     `music_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
+    `c_key` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
+    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(125) NOT NULL COMMENT '歌曲名称',
     `path` VARCHAR(255) NOT NULL COMMENT '路径',
     `lyric` TEXT NOT NULL COMMENT '歌词',
@@ -436,8 +411,8 @@ CREATE TABLE `#DB_PREFIX#Music` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`music_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -447,9 +422,9 @@ CREATE TABLE `#DB_PREFIX#Music` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Music_Classify`;
 CREATE TABLE `#DB_PREFIX#Music_Classify` (
     `classify_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(80) NOT NULL COMMENT '分类关键KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
@@ -457,26 +432,9 @@ CREATE TABLE `#DB_PREFIX#Music_Classify` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`classify_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 音乐资源设置
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Music_Conf`;
-CREATE TABLE `#DB_PREFIX#Music_Conf` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `pkey` VARCHAR(85) NOT NULL COMMENT '资源路径KEY',
-    `path` VARCHAR(255) NOT NULL COMMENT '音乐资源完整路径',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
-    UNIQUE KEY `pkey` (`pkey`),
-    UNIQUE `path` (`path`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -485,8 +443,8 @@ CREATE TABLE `#DB_PREFIX#Music_Conf` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Document`;
 CREATE TABLE `#DB_PREFIX#Document` (
     `document_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(85) NOT NULL COMMENT '文档资源分类KEY',
-    `rkey` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
+    `c_key` VARCHAR(85) NOT NULL COMMENT '文档资源分类KEY',
+    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '书籍名称',
     `path` VARCHAR(255) NOT NULL COMMENT '路径',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
@@ -495,8 +453,8 @@ CREATE TABLE `#DB_PREFIX#Document` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`document_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -506,9 +464,9 @@ CREATE TABLE `#DB_PREFIX#Document` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Document_Classify`;
 CREATE TABLE `#DB_PREFIX#Document_Classify` (
     `classify_id` INT(11) NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
@@ -516,8 +474,8 @@ CREATE TABLE `#DB_PREFIX#Document_Classify` (
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`classify_id`),
-    KEY `rkey` (`rkey`),
-    UNIQUE KEY `ckey` (`ckey`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -527,17 +485,17 @@ CREATE TABLE `#DB_PREFIX#Document_Classify` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Document_Conf`;
 CREATE TABLE `#DB_PREFIX#Document_Conf` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `pkey` VARCHAR(55) NOT NULL COMMENT '资源路径KEY',
-    `rkey` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
+    `p_key` VARCHAR(55) NOT NULL COMMENT '资源路径KEY',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
     `path` VARCHAR(255) NOT NULL COMMENT '文档资源完整路径',
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
     KEY (`conf_id`),
-    KEY `rkey` (`rkey`),
+    KEY `r_key` (`r_key`),
     UNIQUE `path` (`path`),
-    UNIQUE KEY `pkey` (`pkey`)
+    UNIQUE KEY `p_key` (`p_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -598,7 +556,7 @@ CREATE TABLE `#DB_PREFIX#Product_Classify` (
     `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
-    `keywords` VARCHAR(55) NULL COMMENT '关键字',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
     `ico_class` VARCHAR(55) NULL COMMENT '分类图标样式',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',

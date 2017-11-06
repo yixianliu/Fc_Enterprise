@@ -50,15 +50,15 @@ class Role extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'role_id' => 'Role ID',
-            'sort_id' => '角色排序',
-            'rkey' => '角色关键KEY',
-            'name' => '角色名称',
-            'exp' => 'Exp',
+            'role_id'     => 'Role ID',
+            'sort_id'     => '角色排序',
+            'rkey'        => '角色关键KEY',
+            'name'        => '角色名称',
+            'exp'         => 'Exp',
             'description' => 'Description',
-            'ico_class' => 'Ico Class',
-            'is_using' => 'Is Using',
-            'published' => 'Published',
+            'ico_class'   => 'Ico Class',
+            'is_using'    => 'Is Using',
+            'published'   => 'Published',
         ];
     }
 

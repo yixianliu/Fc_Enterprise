@@ -22,7 +22,7 @@ class BaseController extends Controller
     public function init()
     {
 
-        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
+        if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
             return $this->redirect(['/mount/member/login']);
         }
 
@@ -30,7 +30,7 @@ class BaseController extends Controller
 
         if (!empty($confData)) {
             foreach ($confData as $key => $value) {
-                Yii::$app->params['Conf'][ $value['ckey'] ] = $value['parameter'];
+                Yii::$app->params['Conf'][ $value['c_key'] ] = $value['parameter'];
             }
         }
 

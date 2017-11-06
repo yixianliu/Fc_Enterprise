@@ -12,12 +12,7 @@ use yii\web\Controller;
 
 class CheckinController extends BaseController
 {
-
-    public function init()
-    {
-        parent::init();
-    }
-
+    
     /**
      * @abstract 首页
      */

@@ -48,7 +48,7 @@ if (empty($result['classify'])) {
     <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 
     <?=
-    $form->field($model, 'content')->widget('kucha\ueditor\UEditor',[
+    $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
         'clientOptions' => [
             //编辑区域大小
             'initialFrameHeight' => '400',

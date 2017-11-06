@@ -89,7 +89,7 @@ VALUES
 (NULL, 'U3', '上传音乐',  NULL, 'User', 'Upload', 'Music', NULL, 'On', 'On', #TIME#),
 
 /*
-    微商
+    商户
 */
 (NULL, 'MM1', '编辑商户',  NULL, 'Microhurt', 'Microhurt', 'Edit', NULL, 'On', 'On', #TIME#),
 (NULL, 'MM2', '查看商户',  NULL, 'Microhurt', 'Microhurt', 'Details', NULL, 'On', 'On', #TIME#),
@@ -248,11 +248,11 @@ VALUES
 /*
     搜索中心 / Search
 */
-(NULL, 'S1', 1, 'M0', 'R15', '搜索中心', '本站旨在为您提供更多的商机', NULL, 'Search', 'On', #TIME#),
+(NULL, 'S1', 1, 'M0', 'R15', '搜索中心', '搜索中心', NULL, 'Search', 'On', #TIME#),
 
 (NULL, 'SN1', 1, 'S1', 'R15', '搜索资源', '搜索你需要的资源,找不到别怕,可以发帖求助', NULL, NULL, 'On', #TIME#),
-(NULL, 'SN2', 2, 'S1', 'R15', '搜索用户', '对网站用户发布的产品,进行管理和操作', NULL, NULL, 'On', #TIME#),
-(NULL, 'SN3', 3, 'S1', 'R15', '搜索商户', '对网站用户发布的产品,进行管理和操作', NULL, NULL, 'On', #TIME#),
+(NULL, 'SN2', 2, 'S1', 'R15', '搜索用户', '搜索用户', NULL, NULL, 'On', #TIME#),
+(NULL, 'SN3', 3, 'S1', 'R15', '搜索商户', '搜索商户', NULL, NULL, 'On', #TIME#),
 
 (NULL, 'SNSP1', 1, 'SN1', 'R15', '搜索产品', '搜索你需要的产品', NULL, 'product', 'On', #TIME#),
 (NULL, 'SNSP2', 2, 'SN1', 'R15', '热门搜索', '好多人都在搜索的产品呢', NULL, 'product/hot', 'On', #TIME#),
@@ -269,16 +269,15 @@ VALUES
 */
 (NULL, 'A3', 1, 'M0', 'R1', '后台管理', '后台管理', NULL, 'Admin', 'On', #TIME#),
 
-(NULL, 'AU1', 1, 'A3', 'R1', '用户管理', '用户管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AMOVIE1', 2, 'A3', 'R1', '电影资源管理', '电影资源管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AMUSIC1', 3, 'A3', 'R1', '音乐资源管理', '音乐资源管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'ADOC1', 4, 'A3', 'R1', '文档资源管理', '文档资源管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AVIDEO1', 5, 'A3', 'R1', '视频资源管理', '视频资源管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AM1', 6, 'A3', 'R1', '菜单管理', '菜单管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AC2', 7, 'A3', 'R1', '管理中心', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
-(NULL, 'AC3', 8, 'A3', 'R1', '核心配置', '核心配置', NULL, NULL, 'On', #TIME#),
-(NULL, 'AR1', 9, 'A3', 'R1', '角色管理', '角色管理', NULL, NULL, 'On', #TIME#),
-(NULL, 'AP1', 10, 'A3', 'R1', '权限管理', '权限管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AC2', 1, 'A3', 'R1', '管理中心', '对网站进行全方位管理和操作', NULL, NULL, 'On', #TIME#),
+(NULL, 'AU1', 2, 'A3', 'R1', '用户管理', '用户管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AMOVIE1', 3, 'A3', 'R1', '电影资源管理', '电影资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AMUSIC1', 4, 'A3', 'R1', '音乐资源管理', '音乐资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'ADOC1', 5, 'A3', 'R1', '文档资源管理', '文档资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AVIDEO1', 6, 'A3', 'R1', '视频资源管理', '视频资源管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AM1', 7, 'A3', 'R1', '菜单管理', '菜单管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AR1', 8, 'A3', 'R1', '角色管理', '角色管理', NULL, NULL, 'On', #TIME#),
+(NULL, 'AP1', 9, 'A3', 'R1', '权限管理', '权限管理', NULL, NULL, 'On', #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'R1', '所有用户', '查看所有用户', NULL, 'user', 'On', #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'R1', '查看用户', '查看用户', NULL, 'user/show', 'On', #TIME#),
@@ -305,13 +304,11 @@ VALUES
 (NULL, 'AMVV5', 5, 'AVIDEO1', 'R1', '添加资源分类', '创建新的分类信息', NULL, 'classify/video', 'On', #TIME#),
 
 (NULL, 'AUMV1', 1, 'AM1', 'R1', '所有菜单', '查看所有菜单', NULL, 'menu', 'On', #TIME#),
-(NULL, 'AUMV2', 2, 'AM1', 'R1', '创建菜单', '创建新的菜单', NULL, 'menu/store', 'On', #TIME#),
+(NULL, 'AUMV2', 2, 'AM1', 'R1', '创建菜单', '创建新的菜单', NULL, 'menu/create', 'On', #TIME#),
 
 (NULL, 'AUCC1', 1, 'AC2', 'R1', '管理中心', '管理中心', NULL, 'center', 'On', #TIME#),
-
-(NULL, 'ACCC1', 1, 'AC3', 'R1', '网站配置', '网站配置', NULL, 'conf', 'On', #TIME#),
-(NULL, 'ACCC2', 2, 'AC3', 'R1', '备份数据', '备份网站数据', NULL, 'conf/store', 'On', #TIME#),
-(NULL, 'ACCC3', 3, 'AC3', 'R1', '网站环境', '查看服务器环境', NULL, 'conf/show', 'On', #TIME#),
+(NULL, 'ACCC2', 2, 'AC2', 'R1', '网站配置', '网站配置', NULL, 'conf', 'On', #TIME#),
+(NULL, 'ACCC3', 3, 'AC2', 'R1', '备份数据', '备份网站数据', NULL, 'conf/backup', 'On', #TIME#),
 
 (NULL, 'AURR1', 1, 'AR1', 'R1', '所有角色', '查看所有角色', NULL, 'role/', 'On', #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'R1', '查看角色', '查看角色', NULL, 'role/show', 'On', #TIME#),

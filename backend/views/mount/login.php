@@ -24,10 +24,10 @@ $this->beginPage();
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
         <meta charset="utf-8"/>
-        <title>登录中心</title>
+        <title>登录中心 - <?= Yii::$app->params['NAME'] ?> - <?= Yii::$app->params['TITLE'] ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <meta content="" name="description"/>
-        <meta content="" name="author"/>
+        <meta content="" name="<?= Yii::$app->params['DESCRIPTION'] ?>"/>
+        <meta content="" name="<?= Yii::$app->params['DEVELOPERS'] ?>"/>
 
         <?= Html::csrfMetaTags() ?>
 
@@ -51,7 +51,7 @@ $this->beginPage();
     <div class="login-wrapper">
         <div id="login" class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
 
-            <h1><a href="#" title="<?= Yii::$app->params['Conf']['NAME'] ?>" tabindex="-1"><?= Yii::$app->params['Conf']['NAME'] ?></a></h1>
+            <h1><a href="#" title="<?= Yii::$app->params['NAME'] ?>" tabindex="-1"><?= Yii::$app->params['NAME'] ?></a></h1>
 
             <?php
             $form = ActiveForm::begin(['action' => ['mount/member/login'], 'method' => 'post', 'id' => $model->formName()]);
@@ -59,20 +59,20 @@ $this->beginPage();
 
             <p>
                 <?=
-                $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => '帐号...'])
+                $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号...'])
                     ->label('帐号');
                 ?>
             </p>
 
             <p>
                 <?=
-                $form->field($model, 'password')->passwordInput(['class' => 'form-control', 'placeholder' => '密码....'])
+                $form->field($model, 'password')->passwordInput(['class' => 'input', 'placeholder' => '密码....'])
                     ->label('密码');
                 ?>
             </p>
 
             <p class="submit">
-                <?= Html::submitButton('登录', ['class' => 'btn btn-primary btn-block']) ?>
+                <?= Html::submitButton('登录', ['class' => 'btn btn-orange btn-block']) ?>
             </p>
 
             <?php ActiveForm::end() ?>

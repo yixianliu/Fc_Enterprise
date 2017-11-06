@@ -72,7 +72,7 @@ class MemberController extends Controller
         // 销毁session中所有已注册的数据
         $session->destroy();
 
-        return $this->redirect(['/Mount/member/login']);
+        return $this->redirect(['/mount/member/login']);
     }
 
 }

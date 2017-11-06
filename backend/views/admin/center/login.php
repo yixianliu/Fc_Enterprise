@@ -60,20 +60,20 @@ $this->beginPage();
 
         <p>
             <?=
-            $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => '帐号'])
+            $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号...'])
                 ->label('帐号');
             ?>
         </p>
 
         <p>
             <?=
-            $form->field($model, 'password')->passwordInput(['class' => 'form-control', 'placeholder' => '密码'])
+            $form->field($model, 'password')->passwordInput(['class' => 'input', 'placeholder' => '密码...'])
                 ->label('密码');
             ?>
         </p>
 
         <p class="submit">
-            <?= Html::submitButton('登录', ['class' => 'btn btn-primary btn-block']) ?>
+            <?= Html::submitButton('登录', ['class' => 'btn btn-orange btn-block']) ?>
         </p>
 
         <?php ActiveForm::end() ?>

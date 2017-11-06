@@ -26,7 +26,7 @@ class MemberController extends BaseController
     {
 
         // 是否安装
-        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
+        if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
             return $this->redirect(['/mount/member/login']);
         }
 
@@ -46,7 +46,7 @@ class MemberController extends BaseController
             if (!$model->login()) {
                 Yii::$app->getSession()->setFlash('error', '登录失败,请检查 !!');
             } else {
-                return $this->redirect(['/admin/center/view']);
+                return $this->redirect(['/admin/center/index']);
             }
 
         }

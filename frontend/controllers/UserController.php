@@ -7,7 +7,7 @@
 
 namespace app\controllers\Frontend;
 
-use app\models\User;
+use common\models\User;
 
 class UserController extends BaseController
 {

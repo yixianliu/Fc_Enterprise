@@ -11,17 +11,15 @@ use Yii;
 use yii\web\Controller;
 use frontend\models\MountForm;
 
-class CalendarController extends BaseController {
-
-    public function init() {
-        parent::init();
-    }
+class CalendarController extends BaseController
+{
 
     /**
      * @abstract 首页
      */
-    public function actionIndex() {
-        
+    public function actionIndex()
+    {
+
     }
 
 }
