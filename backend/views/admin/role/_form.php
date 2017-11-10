@@ -8,30 +8,27 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="role-form">
+<?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+<?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'rkey')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'rkey')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'exp')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'exp')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'ico_class')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ico_class')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'published')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'published')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+<div class="form-group">
+    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 </div>
+
+<?php ActiveForm::end(); ?>
+

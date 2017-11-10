@@ -26,7 +26,12 @@ class BaseController extends Controller
             return $this->redirect(['/mount/member/login']);
         }
 
-        $confData = Conf::findByAllData('On');
+        // 是否已经登录
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/admin/member/login']);
+        }
+
+        $confData = Conf::findByData('On');
 
         if (!empty($confData)) {
             foreach ($confData as $key => $value) {

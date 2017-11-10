@@ -15,9 +15,9 @@ use yii\helpers\Html;
 ?>
 
 <div class='page-topbar '>
-    <div class='logo-area'>
 
-    </div>
+    <div class='logo-area'></div>
+
     <div class='quick-area'>
         <div class='pull-left'>
             <ul class="info-menu left-links list-inline list-unstyled">
@@ -317,33 +317,35 @@ use yii\helpers\Html;
         <div class='pull-right'>
             <ul class="info-menu right-links list-inline list-unstyled">
                 <li class="profile">
+
                     <a href="#" data-toggle="dropdown" class="toggle">
                         <?= Html::img(Url::to('@web/themes/data/profile/profile.png'), ['class' => 'img-circle img-inline']); ?>
                         <span><i class="fa fa-angle-down"></i></span>
                     </a>
+
                     <ul class="dropdown-menu profile animated fadeIn">
                         <li>
                             <a href="#settings">
                                 <i class="fa fa-wrench"></i>
-                                Settings
+                                站点设置
                             </a>
                         </li>
                         <li>
                             <a href="#profile">
                                 <i class="fa fa-user"></i>
-                                Profile
+                                站点档案
                             </a>
                         </li>
                         <li>
-                            <a href="#help">
+                            <a href="<?= Url::to(['/admin/faq/index']) ?>">
                                 <i class="fa fa-info"></i>
-                                Help
+                                站点帮助
                             </a>
                         </li>
                         <li class="last">
-                            <a href="ui-login.html">
+                            <a href="<?= Url::to(['/admin/member/logout']) ?>">
                                 <i class="fa fa-lock"></i>
-                                Logout
+                                注销用户
                             </a>
                         </li>
                     </ul>

@@ -27,12 +27,15 @@ class Conf extends \yii\db\ActiveRecord
      * @param null $status
      * @return $this
      */
-    public static function findByAllData($status = null)
+    public static function findByData($status = null)
     {
 
         $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
 
-        return static::find()->where($array)->asArray()->all();
+        return static::find()
+            ->where($array)
+            ->asArray()
+            ->all();
     }
 
 }

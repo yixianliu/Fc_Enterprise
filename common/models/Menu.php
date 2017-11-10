@@ -11,13 +11,15 @@
 
 namespace common\models;
 
-use yii\base\Model;
+use common\models\Power;
 
-class Menu extends Model
+class Menu extends \yii\db\ActiveRecord
 {
 
     /**
-     * @abstract 数据库表名
+     * 数据库表名
+     *
+     * @return string
      */
     public static function tableName()
     {
@@ -25,18 +27,21 @@ class Menu extends Model
     }
 
     /**
-     * @abstract 所有
-     * @param string $parent 父类ID
+     * 所有
+     *
+     * @param $parent
+     * @return bool
      */
-    public static function view($parent)
+    public static function findByData($parent)
     {
 
-        if (empty($parent)) {
+        if (empty($parent))
             return false;
-        }
 
-        return static::find()->where(['is_using' => 'On', 'parent_id' => $parent])
+
+        return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
             ->orderBy('sort_id', 'ASC')
+            ->joinWith('power')
             ->asArray()
             ->all();
     }
@@ -47,13 +52,21 @@ class Menu extends Model
      *
      * @param $id
      */
-    public static function findByMenu($id)
+    public static function findByOne($id)
     {
         if (empty($id)) {
             return false;
         }
 
-        return static::find()->where(['mkey' => $id])->asArray()->one();
+        return static::find()->where(['m_key' => $id])
+            ->joinWith('power')
+            ->asArray()
+            ->one();
     }
 
+    // 权限
+    public function getPower()
+    {
+        return $this->hasOne(Power::className(), ['p_key' => 'p_key']);
+    }
 }

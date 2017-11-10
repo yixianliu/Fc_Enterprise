@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ProductSearch */
+/* @var $searchModel common\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '产品中心';
+$this->title = '新闻列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -30,12 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p>
                             <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
                         </p>
+
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel'  => $searchModel,
+                            'columns'      => [
+                                ['class' => 'yii\grid\SerialColumn'],
+                                'user_id',
+                                'c_key',
+                                'sort_id',
+                                'title',
+                                ['class' => 'yii\grid\ActionColumn'],
+                            ],
                         ]);
                         ?>
+
                     </div>
                 </div>
             </div>

@@ -1,10 +1,15 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
 use common\widgets\iMenu\MenuList;
 
 AppAsset::register($this); // $this 代表视图对象
+
+if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
+    return false;
+}
 
 $this->beginPage();
 
@@ -51,28 +56,24 @@ $this->beginPage();
 
                 <div class="profile-image col-md-4 col-sm-4 col-xs-4">
                     <a href="ui-profile.html">
-                        <img src="data/profile/profile.png" class="img-responsive img-circle">
+                        <?= Html::img(Url::to('@web/themes/data/profile/profile.png'), ['class' => 'img-responsive img-circle']); ?>
                     </a>
                 </div>
 
                 <div class="profile-details col-md-8 col-sm-8 col-xs-8">
 
                     <h3>
-                        <a href="#"><?= Yii::$app->session->get('MountSession')['Username'] ?></a>
-
-                        <!-- Available statuses: online, idle, busy, away and offline -->
-                        <span class="profile-status online"></span>
+                        <a href="#"><?= Yii::$app->user->identity->username; ?></a>
+                        <span class="profile-status online"><?= Yii::$app->user->identity->token; ?></span>
                     </h3>
 
-                    <p class="profile-title"><?= Yii::$app->formatter->asTime(Yii::$app->session->get('MountSession')['time']) ?></p>
+                    <p class="profile-title"><?= Yii::$app->user->identity->login_ip; ?></p>
 
                 </div>
 
             </div>
 
-            <!-- START X-NAVIGATION -->
-            <?= MenuList::widget(['config' => ['mkey' => 'A3', 'tpl' => 'admin']]); ?>
-            <!-- END X-NAVIGATION -->
+            <?= MenuList::widget(['config' => ['m_key' => 'A3', 'tpl' => 'admin']]); ?>
 
         </div>
     </div>

@@ -280,20 +280,19 @@ CREATE TABLE `#DB_PREFIX#User_Related_rp` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Power`;
 CREATE TABLE `#DB_PREFIX#Power` (
-    `power_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `p_key` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` VARCHAR(125) NULL COMMENT '描述',
-    `path` VARCHAR(85) NOT NULL COMMENT '目录',
-    `class` VARCHAR(55) NOT NULL COMMENT '类',
-    `fun` VARCHAR(55) NOT NULL COMMENT '函数',
-    `group` VARCHAR(55) NULL COMMENT '分组',
-    `effective` SET('On', 'Off') NOT NULL COMMENT '是否有效 / 经过程序判断,该权限是否有对应的类和函数',
+    `description` TEXT NULL COMMENT '描述',
+    `rules` VARCHAR(255) NULL COMMENT '路径规则',
+    `group` VARCHAR(255) NULL COMMENT '权限分组',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`power_id`),
-    UNIQUE KEY `p_key` (`p_key`)
+    KEY (`id`),
+    UNIQUE KEY `p_key` (`p_key`),
+    UNIQUE KEY `rules` (`rules`),
+    UNIQUE `group` (`group`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -329,9 +328,7 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
     `r_key` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
-    `title` VARCHAR(125) NOT NULL COMMENT '菜单标题',
-    `ico_class` VARCHAR(55) NULL COMMENT '图标样式',
-    `url` VARCHAR(85) NULL COMMENT '菜单链接地址',
+    `p_key` VARCHAR(55) NULL COMMENT '权限关键KEY',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
@@ -421,7 +418,7 @@ CREATE TABLE `#DB_PREFIX#Music` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Music_Classify`;
 CREATE TABLE `#DB_PREFIX#Music_Classify` (
-    `classify_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
@@ -431,7 +428,7 @@ CREATE TABLE `#DB_PREFIX#Music_Classify` (
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`classify_id`),
+    KEY (`id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
@@ -463,7 +460,7 @@ CREATE TABLE `#DB_PREFIX#Document` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Document_Classify`;
 CREATE TABLE `#DB_PREFIX#Document_Classify` (
-    `classify_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
@@ -473,7 +470,7 @@ CREATE TABLE `#DB_PREFIX#Document_Classify` (
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`classify_id`),
+    KEY (`id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
@@ -509,10 +506,10 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `product_id` VARCHAR(85) NOT NULL COMMENT '产品编号,唯一识别码',
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `l_key` VARCHAR(55) NOT NULL COMMENT '等级KEY',
-    `c_key` VARCHAR(55) NOT NULL COMMENT '产品分类KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
     `s_key` VARCHAR(55) NOT NULL COMMENT '版块KEY,版块默认为S0,意思是没有分配好相关版块.',
-    `title` VARCHAR(125) NOT NULL COMMENT '产品标题',
-    `content` TEXT NOT NULL COMMENT '产品内容',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
+    `content` TEXT NOT NULL COMMENT '内容',
     `price` INT(11) UNSIGNED NOT NULL COMMENT '一口价',
     `discount` INT(11) UNSIGNED NULL COMMENT '折扣价',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
@@ -550,7 +547,7 @@ CREATE TABLE `#DB_PREFIX#Product` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Product_Classify`;
 CREATE TABLE `#DB_PREFIX#Product_Classify` (
-    `classify_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
     `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
@@ -562,7 +559,68 @@ CREATE TABLE `#DB_PREFIX#Product_Classify` (
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
-    KEY (`classify_id`),
+    KEY (`id`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
+    UNIQUE `name` (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 新闻中心
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#News`;
+CREATE TABLE `#DB_PREFIX#News` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `news_id` VARCHAR(85) NOT NULL COMMENT '产品编号,唯一识别码',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '新闻分类KEY',
+    `sort_id` INT(11) UNSIGNED NULL COMMENT '排序',
+    `title` VARCHAR(125) NOT NULL COMMENT '产品标题',
+    `content` TEXT NOT NULL COMMENT '新闻内容',
+    `introduction` VARCHAR(255) NULL COMMENT '导读,获取介绍第一段.',
+    `keywords` VARCHAR(120) NULL COMMENT '关键字',
+    `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
+    `forward` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '转发数量',
+    `collection` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '收藏数量',
+    `share` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '分享数量',
+    `attention` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '关注数量',
+    `is_promote` SET('On', 'Off') NOT NULL COMMENT '推广',
+    `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
+    `is_winnow` SET('On', 'Off') NOT NULL COMMENT '精选',
+    `is_recommend` SET('On', 'Off') NOT NULL COMMENT '推荐',
+    `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
+    `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
+    `is_img` SET('On', 'Off') NOT NULL COMMENT '是否上传图片',
+    `is_thumb` SET('On', 'Off') NOT NULL COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    PRIMARY
+    KEY (`id`),
+    UNIQUE KEY `news_id` (`news_id`),
+    UNIQUE `title` (`title`),
+    KEY `user_id` (`user_id`),
+    KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 产品分类(产品属于那种类型,例如电子产品,服装产品,这里的分类是根据版块ID来分类的)
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#News_Classify`;
+CREATE TABLE `#DB_PREFIX#News_Classify` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `ico_class` VARCHAR(55) NULL COMMENT '分类图标样式',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    PRIMARY
+    KEY (`id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)

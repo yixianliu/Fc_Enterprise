@@ -17,25 +17,22 @@ $_SESSION['AdminSession']['url'] = empty($_SESSION['AdminSession']['url']) ? 'ma
  * @param null $active
  * @return bool|string
  */
-function recursiveIMenu($child, $url, $active = null)
+function recursiveIMenu($child, $url = null)
 {
     if (empty($child)) {
         return false;
     }
 
-    $html = '<ul>';
-
+    $html = '<ul class="sub-menu">';
     foreach ($child as $value) {
-
         $html .= '<li>';
-        $html .= '  <a href="' . Url::to([$_SESSION['AdminSession']['url'] . '/' . $url . '/' . $value['url']]) . '">' . $value['name'] . '</a>';
+        $html .= '  <a href="' . Url::to(['/admin/' . $url . '/' . $value['power']['rules']]) . '">' . $value['name'] . '</a>';
         $html .= '</li>';
 
         if (!empty($value['Child'])) {
-            $html .= recursiveIMenu($value['Child'], $value['url']);
+            $html .= recursiveIMenu($value['Child'], $value['power']['rules']);
         }
     }
-
     $html .= '</ul>';
 
     return $html;
@@ -48,10 +45,11 @@ function recursiveIMenu($child, $url, $active = null)
     <!-- 菜单列表 -->
     <?php foreach ($result as $key => $value): ?>
 
-        <li class="open <?php if ($value['active'] == true): ?>active<?php endif; ?>">
+        <li class="">
 
-            <a <?php if (!empty($value['Child'])): ?>href="javascript:" <?php else: ?>href="manager/<?= Url::to([$value['url']]); ?>" <?php endif; ?>title="<?= $value['name']; ?>"
-               class="open">
+            <a href="<?php if (!empty($value['Child'])): ?> # <?php else: ?> <?= Url::to(['/admin/' . $value['power']['rules']]); ?> <?php endif; ?>"
+               title="<?= $value['name']; ?>">
+
                 <i class="fa fa-dashboard"></i>
                 <span class="title"><?= $value['name']; ?></span>
                 <span class="arrow open"></span>
@@ -59,7 +57,7 @@ function recursiveIMenu($child, $url, $active = null)
 
             <?php if (!empty($value['Child'])): ?>
 
-                <?= recursiveIMenu($value['Child'], $value['url']); ?>
+                <?= recursiveIMenu($value['Child'], $value['power']['rules']); ?>
 
             <?php endif; ?>
 

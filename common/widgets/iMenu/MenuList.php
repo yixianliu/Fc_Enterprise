@@ -35,14 +35,14 @@ class MenuList extends InputWidget
             return false;
         }
 
-        $this->registerClientScript();
+        MenuAsset::register($this->view);
 
         // 获取GET mid
         $Mid = Yii::$app->request->get('mid');
         $activeMid = empty($Mid) ? 'AC2' : $Mid;
 
         // 查找一级目录
-        $data = Menu::findAllMenu($this->config['mkey']);
+        $data = Menu::findByData($this->config['m_key']);
 
         if (empty($data)) {
             return;
@@ -75,34 +75,19 @@ class MenuList extends InputWidget
             return false;
         }
 
-        $result = Menu::findWhereMenu($pid);
-
-        // 小写
-        $result['url'] = lcfirst($result['url']);
+        $result = Menu::findByOne($pid);
 
         if (empty($result)) {
             return;
         }
 
-        $data = Menu::findAllMenu($pid);
+        $data = Menu::findByData($pid);
 
         foreach ($data as $key => $value) {
             $result['Child'][] = $this->recursive($value['m_key']);
         }
 
         return $result;
-    }
-
-    /**
-     * 样式
-     */
-    public function registerClientScript()
-    {
-        MenuAsset::register($this->view);
-        //$script = "FormFileUpload.init();";
-        //$this->view->registerJs($script, View::POS_READY);
-
-        return;
     }
 
 }

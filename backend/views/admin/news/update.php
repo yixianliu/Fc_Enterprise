@@ -2,13 +2,13 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model common\models\Product */
+/* @var $model common\models\News */
 
-$this->title = '添加产品';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Update News: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => '新闻', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = '更新';
 ?>
 
 <div class="col-lg-12">

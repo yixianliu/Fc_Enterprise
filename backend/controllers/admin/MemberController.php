@@ -14,7 +14,7 @@ namespace backend\controllers\admin;
 use Yii;
 use backend\models\LoginForm;
 
-class MemberController extends BaseController
+class MemberController extends Controller
 {
 
     public $layout = false;
@@ -31,7 +31,7 @@ class MemberController extends BaseController
         }
 
         // 是否已经登录
-        if (!Yii::$app->user->isGuest) {
+        if (Yii::$app->user->isGuest) {
             return $this->redirect(['/admin/center/view']);
         }
 
@@ -39,16 +39,15 @@ class MemberController extends BaseController
 
         if (Yii::$app->request->isPost) {
 
-            if (!$model->load(Yii::$app->request->post())) {
+            if (!$model->load(Yii::$app->request->post()) || !$model->validate()) {
                 Yii::$app->getSession()->setFlash('error', 'POST异常 !!');
             }
 
             if (!$model->login()) {
                 Yii::$app->getSession()->setFlash('error', '登录失败,请检查 !!');
-            } else {
-                return $this->redirect(['/admin/center/index']);
             }
 
+            return $this->redirect(['/admin/center/index']);
         }
 
         return $this->render('../center/login', ['model' => $model]);
@@ -62,7 +61,6 @@ class MemberController extends BaseController
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
-        return true;
+        return $this->redirect(['/admin/member/login']);
     }
 }

@@ -111,6 +111,10 @@ $this->beginPage();
                     <a href="<?= Url::to(['mount/center/run']) ?>"><i class="fa fa-th"></i><span class="title">挂载中心</span></a>
                 </li>
 
+                <li class="">
+                    <a href="<?= Url::to(['mount/member/logout']) ?>"><i class="fa fa-th"></i><span class="title">注销</span></a>
+                </li>
+
             </ul>
 
         </div>
