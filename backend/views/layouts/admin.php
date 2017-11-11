@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
 use common\widgets\iMenu\MenuList;
+use common\widgets\iMenu\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
@@ -19,23 +20,11 @@ $this->beginPage();
 <html class=" ">
 <head>
 
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-    <meta charset="utf-8"/>
-    <title>管理中心 - <?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
+    <?= MenuList::widget(); ?>
 
-    <?= Html::csrfMetaTags() ?>
+    <title>管理中心</title>
 
     <?php $this->head() ?>
-
-    <style>
-        *, body, html, h1, h2, h3, h4, a, li {
-            font-family: 'Microsoft YaHei';
-            letter-spacing: 1px;
-        }
-    </style>
 
 </head>
 <body class=" ">

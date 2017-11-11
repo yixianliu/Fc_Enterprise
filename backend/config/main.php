@@ -63,8 +63,13 @@ return [
         //components数组中加入authManager组件,有PhpManager和DbManager两种方式,
         //PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
         'authManager' => [
-            'class'        => 'yii\rbac\DbManager',
-            'defaultRoles' => ['guest'],
+            'class'           => 'yii\rbac\DbManager',
+            'defaultRoles'    => ['guest'],
+
+            // Mysql 表
+            'itemTable'       => 'auth_item',
+            'assignmentTable' => 'auth_assignment',
+            'itemChildTable'  => 'auth_item_child',
         ],
     ],
 

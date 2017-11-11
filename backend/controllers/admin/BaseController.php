@@ -13,7 +13,6 @@ namespace backend\controllers\admin;
 
 use Yii;
 use yii\web\Controller;
-use common\models\Conf;
 
 class BaseController extends Controller
 {
@@ -25,20 +24,5 @@ class BaseController extends Controller
         if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
             return $this->redirect(['/mount/member/login']);
         }
-
-        // 是否已经登录
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/admin/member/login']);
-        }
-
-        $confData = Conf::findByData('On');
-
-        if (!empty($confData)) {
-            foreach ($confData as $key => $value) {
-                Yii::$app->params['Conf'][ $value['c_key'] ] = $value['parameter'];
-            }
-        }
-
-        return;
     }
 }

@@ -12,6 +12,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\assets\AppAsset;
+use common\widgets\iMenu\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
@@ -23,26 +24,11 @@ $this->beginPage();
 <html class=" ">
 <head>
 
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-    <meta charset="utf-8"/>
+    <?= MenuList::widget(); ?>
 
     <title>登录 - <?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?></title>
 
-    <?= Html::csrfMetaTags() ?>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-
     <?php $this->head() ?>
-
-    <style>
-        *, body, html, h1, h2, h3, h4, a, li {
-            font-family: 'Microsoft YaHei';
-            letter-spacing: 1px;
-        }
-    </style>
-
 
 </head>
 <body class=" login_page">
