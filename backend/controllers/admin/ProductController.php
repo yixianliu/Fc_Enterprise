@@ -3,13 +3,14 @@
 namespace backend\controllers\admin;
 
 use Yii;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use common\models\Product;
 use common\models\ProductClassify;
 use common\models\Section;
 use backend\models\ProductSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -22,6 +23,17 @@ class ProductController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [

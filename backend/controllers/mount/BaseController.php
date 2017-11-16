@@ -23,8 +23,8 @@ class BaseController extends Controller
     public function init()
     {
 
-        if (file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return $this->redirect(['/frontend/member/login']);
+        if (file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
+            return $this->redirect(['/admin/member/login']);
         }
 
         $session = Yii::$app->session;

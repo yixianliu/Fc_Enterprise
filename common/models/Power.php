@@ -23,7 +23,7 @@ class Power extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%power}}';
+        return '{{%itemrp}}';
     }
 
     /**

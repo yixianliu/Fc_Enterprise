@@ -49,15 +49,21 @@ class MemberController extends Controller
 
         if (Yii::$app->request->isPost) {
 
-            if (!$model->load(Yii::$app->request->post()) || !$model->validate()) {
-                Yii::$app->getSession()->setFlash('error', 'POST异常 !!');
-            }
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            if (!$model->login()) {
+                if ($model->login()) {
+
+                    // 授权
+                    $auth = Yii::$app->authManager;
+                    $auth->assign('admin', $model->getId());
+
+                    return $this->redirect(['/admin/center/index']);
+                }
+
                 Yii::$app->getSession()->setFlash('error', '登录失败,请检查 !!');
             }
 
-            return $this->redirect(['/admin/center/index']);
+            Yii::$app->getSession()->setFlash('error', '帐号密码有误 !!');
         }
 
         return $this->render('../center/login', ['model' => $model]);

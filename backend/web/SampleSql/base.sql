@@ -1,4 +1,57 @@
 /**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 权限 / 角色
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `#DB_PREFIX#Rules`;
+DROP TABLE IF EXISTS `#DB_PREFIX#Item_related`;
+DROP TABLE IF EXISTS `#DB_PREFIX#ItemRp`;
+
+/**
+ * 规则,规则类名
+ */
+CREATE TABLE `#DB_PREFIX#Rules` (
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `data` VARCHAR(255) NULL COMMENT '路径规则',
+    `description` TEXT NULL COMMENT '描述',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`name`),
+    UNIQUE KEY `data` (`data`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * (角色 + 权限)混搭
+ */
+CREATE TABLE `#DB_PREFIX#ItemRp` (
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `type` INT(11) UNSIGNED NULL COMMENT 'type字段区别，1为Role，2为Permission',
+    `rule_name` VARCHAR(65) NULL COMMENT '规则名称',
+    `data` TEXT NULL COMMENT '内容',
+    `description` VARCHAR(255) NOT NULL COMMENT '角色描述',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`name`),
+    KEY `type` (`type`),
+    CONSTRAINT `#DB_PREFIX#ItemRp` FOREIGN KEY (`rule_name`) REFERENCES `#DB_PREFIX#Rules` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 关联(角色 + 权限)
+ */
+CREATE TABLE `#DB_PREFIX#Item_related` (
+    `parent` VARCHAR(85) NOT NULL COMMENT '角色关键值',
+    `child` VARCHAR(85) NOT NULL COMMENT '权限关键值',
+    primary key (`parent`, `child`),
+    foreign key (`parent`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade,
+    foreign key (`child`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
  * * * * * * * * * * * * * * * * * * * * * *
  * 基本表
  * Author:  Yxl <zccem@163.com>
@@ -59,22 +112,21 @@ CREATE TABLE `#DB_PREFIX#Announce` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * 管理员(包括审核,后台管理)
+ * 管理员(包括审核,后台管理),这里的user_id是匹配yii2的rbac表
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Management`;
 CREATE TABLE `#DB_PREFIX#Management` (
-    `admin_id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` INT(11) NULL AUTO_INCREMENT,
     `username` VARCHAR(85) NOT NULL COMMENT '账号',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
     `area` VARCHAR(125) NULL COMMENT '当前登录地区',
-    `login_time` INT(11) UNSIGNED NOT NULL COMMENT '登陆时间',
-    `last_login_time` INT(11) UNSIGNED NOT NULL COMMENT '最后登陆时间',
     `login_ip` VARCHAR(55) COMMENT '登陆IP',
-    `token` INT(11) UNSIGNED NOT NULL COMMENT '权限ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     `remember_token` VARCHAR(55) NULL COMMENT '保存密码TOKEN',
-    PRIMARY
-    KEY (`admin_id`),
+    PRIMARY KEY (`user_id`),
     UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -142,9 +194,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     `telphone` VARCHAR(55) NULL DEFAULT NULL COMMENT '手机号码',
     `birthday` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '出生年月日',
     `answer` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户答案',
-    `skey` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户问题',
-    `reg_time` INT(11) UNSIGNED NOT NULL COMMENT '注册时间',
-    `last_login_time` INT(11) UNSIGNED NOT NULL COMMENT '最后登陆时间',
+    `s_key` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户问题',
     `login_ip` VARCHAR(85) NULL DEFAULT 0 COMMENT '登陆IP',
     `consecutively` INT(11) UNSIGNED NOT NULL COMMENT '连续登录',
     `sex` SET('Male' , 'Female') NOT NULL DEFAULT 'Female' COMMENT '性别',
@@ -152,12 +202,15 @@ CREATE TABLE `#DB_PREFIX#User` (
     `is_head` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '上传头像',
     `is_security` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '安全设置',
     `is_using` SET('On', 'Off', 'Not') NOT NULL DEFAULT 'Off' COMMENT '是否可用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY
     KEY `id` (`id`),
     UNIQUE KEY (`user_id`),
     KEY `r_key` (`r_key`),
     UNIQUE `nickname` (`nickname`),
-    UNIQUE KEY `username` (`username`)
+    UNIQUE KEY `username` (`username`),
+    foreign key (`r_key`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -257,78 +310,17 @@ CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 权限 / 角色
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
-
-/**
- * 关联 / 角色 + 权限
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Related_rp`;
-CREATE TABLE `#DB_PREFIX#User_Related_rp` (
-    `rp_id` int(11) NULL AUTO_INCREMENT,
-    `r_key` VARCHAR(85) NOT NULL COMMENT '角色关键值',
-    `p_key` VARCHAR(85) NOT NULL COMMENT '权限关键值',
-    PRIMARY
-    KEY (`rp_id`),
-    KEY `r_key` (`r_key`),
-    KEY `p_key` (`p_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/**
- * 权限
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Power`;
-CREATE TABLE `#DB_PREFIX#Power` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `p_key` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` TEXT NULL COMMENT '描述',
-    `rules` VARCHAR(255) NULL COMMENT '路径规则',
-    `group` VARCHAR(255) NULL COMMENT '权限分组',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
-    UNIQUE KEY `p_key` (`p_key`),
-    UNIQUE KEY `rules` (`rules`),
-    UNIQUE `group` (`group`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 角色
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Role`;
-CREATE TABLE `#DB_PREFIX#Role` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '权限关键KEY',
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `exp` INT(11) UNSIGNED NOT NULL COMMENT '经验值',
-    `description` VARCHAR(255) NOT NULL COMMENT '角色描述',
-    `ico_class` VARCHAR(125) NULL COMMENT '角色图标样式',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * * * * * * * * * * * * * * * * * * * * * *
  * 菜单
- * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Menu`;
 CREATE TABLE `#DB_PREFIX#Menu` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `m_key` VARCHAR(55) NOT NULL COMMENT '菜单值',
+    `m_key` VARCHAR(55) NOT NULL COMMENT '菜单关键KEY值',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
     `r_key` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
-    `p_key` VARCHAR(55) NULL COMMENT '权限关键KEY',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
@@ -625,3 +617,6 @@ CREATE TABLE `#DB_PREFIX#News_Classify` (
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# SET FOREIGN_KEY_CHECKS = 1;

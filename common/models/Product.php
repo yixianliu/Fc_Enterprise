@@ -55,7 +55,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['l_key', 'c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade', 'published'], 'required'],
+            [['l_key', 'c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade'], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade', 'published'], 'integer'],
             [['product_id'], 'string', 'max' => 85],
@@ -74,16 +74,19 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'l_key'        => '等级角色',
+
+            'product_id'   => '产品编号ID',
+            'user_id'      => '用户ID',
+            'l_key'        => '产品等级',
             'c_key'        => '产品分类',
-            's_key'        => '所属版块',
+            's_key'        => 'S Key',
             'title'        => '产品标题',
             'content'      => '产品内容',
             'price'        => '产品价格',
             'discount'     => '折扣价',
-            'introduction' => '产品描述',
+            'introduction' => '产品导读',
             'keywords'     => '产品关键词',
-            'path'         => '产品文件夹路径',
+            'path'         => 'Path',
             'praise'       => 'Praise',
             'forward'      => 'Forward',
             'collection'   => 'Collection',
@@ -101,6 +104,7 @@ class Product extends \yii\db\ActiveRecord
             'is_thumb'     => 'Is Thumb',
             'grade'        => 'Grade',
             'user_grade'   => 'User Grade',
+            'published'    => 'Published',
         ];
     }
 }

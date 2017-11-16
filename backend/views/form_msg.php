@@ -26,11 +26,23 @@ use yii\bootstrap\Alert;
     }
 
     if (Yii::$app->getSession()->hasFlash('error')) {
+
+        if (is_array(Yii::$app->getSession()->getFlash('error'))) {
+
+            $data = '<ul>';
+            foreach (Yii::$app->getSession()->getFlash('error') as $key => $value) {
+                $data .= '<li>' . $value[0] . '</li>';
+            }
+            $data .= '</ul>';
+        }else {
+            $data = Yii::$app->getSession()->getFlash('error');
+        }
+
         echo Alert::widget([
             'options' => [
                 'class' => 'alert alert-error alert-dismissible fade in',
             ],
-            'body'    => Yii::$app->getSession()->getFlash('error'),
+            'body'    => $data,
         ]);
     }
 

@@ -7,6 +7,7 @@
 
 namespace backend\controllers\mount;
 
+use backend\models\LoginForm;
 use Yii;
 use yii\web\Controller;
 use backend\models\MountRunForm;
@@ -77,11 +78,6 @@ class CenterController extends BaseController
                     Yii::$app->db->createCommand($value)->execute();
                 }
 
-                // 生成安装文件
-                file_put_contents(
-                    Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'], date('Y年m月d日 H时i分s秒') . "\n\r" . Yii::$app->params['NAME'] . "\n\r" . Yii::$app->params['TITLE']
-                );
-
                 Yii::$app->getSession()->setFlash('success', '挂载成功 !!');
 
             } else {
@@ -92,4 +88,120 @@ class CenterController extends BaseController
         return $this->render('../run', ['model' => $model]);
     }
 
+    /**
+     * 存入权限
+     *
+     * @return string
+     */
+    public function actionSetpower()
+    {
+
+        $model = new LoginForm();
+
+        $request = Yii::$app->request;
+
+        if ($request->isPost) {
+
+            $model->scenario = 'power';
+
+            if ($model->load($request->post()) && $model->validate()) {
+
+                // 管理员
+                $Admin = [
+                    'role'  => 'admin',
+                    'power' => [
+                        'center/view', 'center/conf', //管理中心
+                        'news/create', 'news/edit', 'news/index', 'news/view', // 新闻
+                        'newcls/create', 'newcls/edit', 'newcls/index', 'newcls/view', // 新闻分类
+                        'product/create', 'product/edit', 'product/index', 'product/view', // 产品
+                        'productcls/create', 'productcls/edit', 'productcls/index', 'productcls/view', // 产品分类
+                        'user/create', 'user/edit', 'user/index', 'user/view', // 用户
+                        'job/create', 'job/edit', 'job/index', 'job/view', // 招聘
+                    ]
+                ];
+
+                $this->createRole($Admin['role']);
+
+                foreach ($Admin['power'] as $value) {
+
+                    $this->createPermission($value);
+                    $this->addChild($Admin['role'], $value);
+                }
+
+                // 用户
+                $User = [
+                    'role'  => 'user',
+                    'power' => [
+                        'news/index', 'news/view', // 新闻
+                        'newcls/index', 'newcls/view', // 新闻分类
+                        'product/index', 'product/view', // 产品
+                        'productcls/index', 'productcls/view', // 产品分类
+                        'user/view', // 用户
+                    ]
+                ];
+
+                $this->createRole($User['role']);
+
+                foreach ($User['power'] as $value) {
+                    $this->addChild($User['role'], $value);
+                }
+
+                // 生成安装文件
+                file_put_contents(
+                    Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'], date('Y年m月d日 H时i分s秒') . "\n\r" . Yii::$app->params['NAME'] . "\n\r" . Yii::$app->params['TITLE']
+                );
+
+                Yii::$app->getSession()->setFlash('success', '添加数据包成功 !!');
+
+            } else {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            }
+        }
+
+        return $this->render('../setpower', ['model' => $model]);
+    }
+
+    // 添加权限
+    public function createPermission($name)
+    {
+        $auth = Yii::$app->authManager;
+        $createPost = $auth->createPermission($name);
+        $createPost->description = '创建了 ' . $name . ' 权限';
+        $auth->add($createPost);
+
+        return true;
+    }
+
+    // 添加角色
+    public function createRole($name)
+    {
+        $auth = Yii::$app->authManager;
+        $role = $auth->createRole($name);
+        $role->description = '创建了 ' . $name . ' 角色';
+        $auth->add($role);
+
+        return true;
+    }
+
+    // 关联
+    public function addChild($role, $power)
+    {
+        $auth = Yii::$app->authManager;
+        $parent = $auth->createRole($role); // 创建角色对象
+        $child = $auth->createPermission($power); // 创建权限对象
+        $auth->addChild($parent, $child); // 添加对应关系
+
+        return true;
+    }
+
+    // 将角色赋给用户
+    public function addItemChild($items)
+    {
+        $auth = Yii::$app->authManager;
+        $role = $auth->createRole($items['role']);                // 创建角色对象
+        $user_id = 1;                                             // 获取用户id，此处假设用户id=1
+        $auth->assign($role, $user_id);                           // 添加对应关系
+
+        return true;
+    }
 }

@@ -23,6 +23,7 @@ return [
         'user'    => [
             'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
+            'loginUrl'        => ['admin/member/login'],
             'identityCookie'  => [
                 'name'     => '_identity-backend',
                 'path'     => '/admin',
@@ -44,7 +45,7 @@ return [
         ],
 
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'admin/center/error',
         ],
 
         'urlManager'  => [
@@ -67,9 +68,10 @@ return [
             'defaultRoles'    => ['guest'],
 
             // Mysql 表
-            'itemTable'       => 'auth_item',
-            'assignmentTable' => 'auth_assignment',
-            'itemChildTable'  => 'auth_item_child',
+            'itemTable'       => 'fc_ItemRp', // 角色 + 权限
+            'assignmentTable' => 'fc_User', // 用户
+            'itemChildTable'  => 'fc_Item_related', // 关联
+            'ruleTable'       => 'fc_Rules', // 规则
         ],
     ],
 

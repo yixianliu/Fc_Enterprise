@@ -31,19 +31,29 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // 对username的值进行两边去空格过滤
-            ['username', 'filter', 'filter' => 'trim'],
 
             [['username', 'password'], 'required'],
 
+            // 对username的值进行两边去空格过滤
+            [['username', 'password'], 'filter', 'filter' => 'trim'],
+
             // string 字符串，这里我们限定的意思就是username至少包含2个字符，最多255个字符
             ['username', 'string', 'min' => 2, 'max' => 255],
-
-            // 下面的规则基本上都同上，不解释了
             ['password', 'string', 'min' => 6, 'tooShort' => '密码至少填写6位'],
 
             // 密码验证
             ['password', 'validatePassword'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => '帐号',
+            'password' => '密码',
         ];
     }
 

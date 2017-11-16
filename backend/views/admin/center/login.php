@@ -12,7 +12,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\assets\AppAsset;
-use common\widgets\iMenu\ConfList;
+use common\widgets\iConf\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
@@ -24,7 +24,7 @@ $this->beginPage();
 <html class=" ">
 <head>
 
-    <?= MenuList::widget(); ?>
+    <?= ConfList::widget(); ?>
 
     <title>登录 - <?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?></title>
 

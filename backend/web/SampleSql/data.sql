@@ -45,71 +45,8 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Management`
 VALUES
-(NULL, '#USERNAME#', '#PASSWORD#', NULL, #TIME#, #TIME#, NULL, 999, 'On', NULL),
-(NULL, '#USERNAME#_Admin', '#PASSWORD#', NULL, #TIME#, #TIME#, NULL, 999, 'On', NULL);
-
-/**
- * * * * * * * * * * * * * * * * * * * * * *
- * 权限
- * * * * * * * * * * * * * * * * * * * * * *
- */
-
-/**
- * 角色
- */
-INSERT INTO `#DB_PREFIX#Role`
-VALUES
-(NULL, 1, 'R1', '一代宗师', 10000, '所有板块最高级别', NULL, 'On', #TIME#),
-(NULL, 2, 'R2', '首席长老', 9000, '板块内最高级别', NULL, 'On', #TIME#),
-(NULL, 3, 'R3', '左右护法', 8000, '圈内最高级别', NULL, 'On', #TIME#),
-(NULL, 4, 'R4', '骨灰元老', 4000, '本论坛贡献最高者', NULL, 'On', #TIME#),
-(NULL, 5, 'R5', '江湖奇才', 7000, '本版块贡献最高者', NULL, 'On', #TIME#),
-(NULL, 6, 'R6', '金牌会员', 6000, '金牌会员', NULL, 'On', #TIME#),
-(NULL, 7, 'R7', '高级会员', 5000, '高级会员', NULL, 'On', #TIME#),
-(NULL, 8, 'R8', '特约撰稿人', 3000, '特约撰稿人', NULL, 'On', #TIME#),
-(NULL, 9, 'R9', '中级会员', 2000, '中级会员', NULL, 'On', #TIME#),
-(NULL, 10, 'R10', '初级会员', 1000,  '初级会员', NULL, 'On', #TIME#),
-(NULL, 11, 'R11', '普通会员', 500, '普通会员', NULL, 'On', #TIME#),
-(NULL, 12, 'R12', '验证用户', 100, '验证用户', NULL, 'On', #TIME#),
-(NULL, 13, 'R13', '禁止发言', 50, '禁止发言', NULL, 'On', #TIME#),
-(NULL, 14, 'R14', '未验证会员', 10, '未验证会员', NULL, 'On', #TIME#),
-(NULL, 15, 'R15', '游客', 0, '游客,还没注册的', NULL, 'On', #TIME#);
-
-/**
- * 权限
- */
-INSERT INTO `#DB_PREFIX#Power`
-VALUES
-
-/* 新闻 */
-(NULL, 'MM1', '编辑新闻',  NULL, '/news/edit', NULL, 'On', #TIME#),
-(NULL, 'MM2', '查看新闻',  NULL, '/news/view', NULL, 'On', #TIME#),
-(NULL, 'MM3', '浏览新闻',  NULL, '/news/index', NULL, 'On', #TIME#),
-(NULL, 'MM4', '删除新闻',  NULL, '/news/delect', NULL, 'On', #TIME#),
-(NULL, 'MM5', '添加新闻',  NULL, 'news/create', NULL, 'On', #TIME#),
-
-/* 用户 */
-(NULL, 'UA1', '编辑用户',  NULL, '/user/edit', NULL, 'On', #TIME#),
-(NULL, 'UA2', '查看用户',  NULL, '/user/view', NULL, 'On', #TIME#),
-(NULL, 'UA3', '浏览用户',  NULL, '/user/index', NULL, 'On', #TIME#),
-(NULL, 'UA4', '删除商户',  NULL, '/user/delect', NULL, 'On', #TIME#),
-(NULL, 'UA5', '添加用户',  NULL, '/user/create', NULL, 'On', #TIME#),
-
-/* 音乐资源 */
-(NULL, 'UP1', '编辑音乐资源',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UP2', '删除音乐资源',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UP3', '浏览音乐资源',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UP4', '创建音乐资源',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UP5', '音乐资源详情',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UP6', '音乐资源评论',  NULL, NULL, NULL, 'On', #TIME#),
-
-/* 电影资源 */
-(NULL, 'UM1', '编辑产品',  NULL, '/product/edit', NULL, 'On', #TIME#),
-(NULL, 'UM2', '删除产品',  NULL, '/product/delect', NULL, 'On', #TIME#),
-(NULL, 'UM3', '浏览产品',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UM4', '创建产品',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UM5', '产品详情',  NULL, NULL, NULL, 'On', #TIME#),
-(NULL, 'UM6', '产品评论',  NULL, NULL, NULL, 'On', #TIME#);
+(NULL, '#USERNAME#', '#PASSWORD#', 'R1', NULL, NULL, 'On', NULL, #TIME#, #TIME# ),
+(NULL, '#USERNAME#Zcc', '#PASSWORD#', 'R2', NULL, NULL, 'On', NULL, #TIME#, #TIME#);
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

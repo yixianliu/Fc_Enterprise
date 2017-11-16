@@ -11,7 +11,7 @@
 
 namespace common\models;
 
-use common\models\Power;
+use common\models\ItemRp;
 
 class Menu extends \yii\db\ActiveRecord
 {
@@ -41,7 +41,7 @@ class Menu extends \yii\db\ActiveRecord
 
         return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
             ->orderBy('sort_id', 'ASC')
-            ->joinWith('power')
+            ->joinWith('itemRp')
             ->asArray()
             ->all();
     }
@@ -59,14 +59,14 @@ class Menu extends \yii\db\ActiveRecord
         }
 
         return static::find()->where(['m_key' => $id])
-            ->joinWith('power')
+            ->joinWith('itemRp')
             ->asArray()
             ->one();
     }
 
-    // 权限
-    public function getPower()
+    // 角色
+    public function getItemRp()
     {
-        return $this->hasOne(Power::className(), ['p_key' => 'p_key']);
+        return $this->hasOne(ItemRp::className(), ['name' => 'r_key']);
     }
 }

@@ -45,7 +45,7 @@ class Management extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['admin_id' => $id]);
+        return static::findOne(['user_id' => $id]);
     }
 
     /**
@@ -144,7 +144,7 @@ class Management extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**

@@ -24,7 +24,13 @@ class MemberController extends Controller
     public function actionLogin()
     {
 
+        if (file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
+            return $this->redirect(['/admin/member/login']);
+        }
+
         $model = new MountForm();
+
+        $model->scenario = 'login';
 
         $session = Yii::$app->session;
 

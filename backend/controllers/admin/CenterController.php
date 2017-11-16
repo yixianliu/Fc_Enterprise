@@ -29,7 +29,6 @@ class CenterController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -46,5 +45,10 @@ class CenterController extends BaseController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionError()
+    {
+
     }
 }
