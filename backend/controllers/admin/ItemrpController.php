@@ -47,6 +47,7 @@ class ItemrpController extends BaseController
      */
     public function actionIndex()
     {
+
         $searchModel = new ItemRpSearch();
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -78,7 +79,26 @@ class ItemrpController extends BaseController
     {
         $model = new ItemRp();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $auth = Yii::$app->authManager;
+
+            if ($model->type == 2) {
+                $role = $auth->createPermission($model->name);
+            } else {
+                $role = $auth->createRole($model->name);
+            }
+
+            $role->description = $model->description;
+            $role->data = $model->data;
+            $role->type = $model->type;
+
+            $rzt = $auth->add($role);
+
+            if (!$rzt) {
+                Yii::$app->session->setFlash('error', '无法保存数据');
+            }
+
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
             return $this->render('create', [

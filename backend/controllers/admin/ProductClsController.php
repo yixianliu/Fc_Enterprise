@@ -2,20 +2,18 @@
 
 namespace backend\controllers\admin;
 
+use Faker\Provider\Base;
 use Yii;
+use common\models\ProductClassify;
+use common\models\ProductClassifySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use common\models\Product;
-use common\models\ProductClassify;
-use common\models\Section;
-use backend\models\ProductSearch;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * ProductClsController implements the CRUD actions for ProductClassify model.
  */
-class ProductController extends BaseController
+class ProductClsController extends BaseController
 {
     /**
      * @inheritdoc
@@ -23,7 +21,6 @@ class ProductController extends BaseController
     public function behaviors()
     {
         return [
-
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -33,7 +30,6 @@ class ProductController extends BaseController
                     ],
                 ],
             ],
-
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
@@ -44,12 +40,12 @@ class ProductController extends BaseController
     }
 
     /**
-     * Lists all Product models.
+     * Lists all ProductClassify models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new ProductClassifySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,7 +55,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single ProductClassify model.
      * @param integer $id
      * @return mixed
      */
@@ -71,15 +67,13 @@ class ProductController extends BaseController
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new ProductClassify model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
-
-        $model->product_id = time() . '_' . rand(000, 999);
+        $model = new ProductClassify();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,29 +82,24 @@ class ProductController extends BaseController
             // 初始化
             $result = array();
 
-            // 所有版块
-            $dataSection = Section::findAll(['is_using' => 'On']);
+            // 所有分类
+            $dataCls = ProductClassify::findAll(['is_using' => 'On']);
 
-            foreach ($dataSection as $value) {
-                $result['section'][ $value['s_key'] ] = $value['name'];
-            }
+            $result['classify']['C0'] = '父类';
 
-            // 产品等级
-            $dataClassify = ProductClassify::findAll(['is_using' => 'On']);
-
-            foreach ($dataClassify as $value) {
-                $result['classify'][ $value['c_key'] ] = $value['name'];
+            foreach ($dataCls as $value) {
+                $result['classify'][ $value->c_key ] = $value->name;
             }
 
             return $this->render('create', [
-                'model'  => $model,
+                'model' => $model,
                 'result' => $result,
             ]);
         }
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing ProductClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -122,14 +111,28 @@ class ProductController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // 初始化
+            $result = array();
+
+            // 所有分类
+            $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+
+            $result['classify']['C0'] = '父类';
+
+            foreach ($dataCls as $value) {
+                $result['classify'][ $value->c_key ] = $value->name;
+            }
+
             return $this->render('update', [
                 'model' => $model,
+                'result' => $result,
             ]);
         }
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing ProductClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -142,15 +145,15 @@ class ProductController extends BaseController
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the ProductClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return ProductClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = ProductClassify::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

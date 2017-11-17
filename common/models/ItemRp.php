@@ -41,7 +41,7 @@ class ItemRp extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description'], 'required'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
+            [['type'], 'integer'],
             [['data'], 'string'],
             [['name'], 'string', 'max' => 85],
             [['rule_name'], 'string', 'max' => 65],

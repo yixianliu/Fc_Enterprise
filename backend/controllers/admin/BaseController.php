@@ -20,9 +20,21 @@ class BaseController extends Controller
 
     public function init()
     {
-
         if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
             return $this->redirect(['/mount/member/login']);
+        }
+
+        return;
+    }
+
+    public function beforeAction($action)
+    {
+        $action = Yii::$app->controller->action->id;
+
+        if(Yii::$app->user->can($action)){
+            return true;
+        }else{
+            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
         }
     }
 }

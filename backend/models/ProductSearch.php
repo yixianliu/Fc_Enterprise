@@ -59,17 +59,17 @@ class ProductSearch extends Product
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'praise' => $this->praise,
-            'forward' => $this->forward,
+            'id'         => $this->id,
+            'price'      => $this->price,
+            'discount'   => $this->discount,
+            'praise'     => $this->praise,
+            'forward'    => $this->forward,
             'collection' => $this->collection,
-            'share' => $this->share,
-            'attention' => $this->attention,
-            'grade' => $this->grade,
+            'share'      => $this->share,
+            'attention'  => $this->attention,
+            'grade'      => $this->grade,
             'user_grade' => $this->user_grade,
-            'published' => $this->published,
+            'published'  => $this->published,
         ]);
 
         $query->andFilterWhere(['like', 'product_id', $this->product_id])

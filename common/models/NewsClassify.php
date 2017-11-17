@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%product_classify}}".
+ * This is the model class for table "{{%news_classify}}".
  *
  * @property integer $id
  * @property string $c_key
@@ -19,14 +19,14 @@ use Yii;
  * @property string $is_using
  * @property string $published
  */
-class ProductClassify extends \yii\db\ActiveRecord
+class NewsClassify extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%product_classify}}';
+        return '{{%news_classify}}';
     }
 
     /**
@@ -35,11 +35,12 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'parent_id', 'is_using', 'published'], 'required'],
-            [['sort_id', 'published'], 'integer'],
+            [['c_key', 'sort_id', 'r_key', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
+            [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'r_key', 'keywords', 'ico_class', 'parent_id'], 'string', 'max' => 55],
+            [['c_key', 'r_key', 'ico_class', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
+            [['keywords'], 'string', 'max' => 155],
             [['c_key'], 'unique'],
             [['name'], 'unique'],
         ];
@@ -51,14 +52,15 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key'       => '分类关键KEY',
-            'sort_id'     => '分类排序',
-            'name'        => '分类名称',
-            'description' => '分类描述',
-            'keywords'    => '分类关键词',
-            'ico_class'   => '分类样式',
-            'parent_id'   => '父类',
-            'is_using'    => '是否启用',
+            'c_key' => 'C Key',
+            'sort_id' => 'Sort ID',
+            'r_key' => 'R Key',
+            'name' => 'Name',
+            'description' => 'Description',
+            'keywords' => 'Keywords',
+            'ico_class' => 'Ico Class',
+            'parent_id' => 'Parent ID',
+            'is_using' => 'Is Using',
         ];
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ProductSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model common\models\ProductClassify */
 
-$this->title = '产品中心';
+$this->title = '创建产品分类';
+$this->params['breadcrumbs'][] = ['label' => '产品分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,26 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
         <header class="panel_header">
             <h2 class="title pull-left">
+
                 <?= Html::encode($this->title) ?>
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
             </h2>
         </header>
         <div class="content-body">
             <div class="row">
-
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr />
-
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p>
-                        <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
-                    </p>
+
                     <?=
-                    GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel'  => $searchModel,
+                    $this->render('_form', [
+                        'model'  => $model,
+                        'result' => $result,
                     ]);
                     ?>
+
                 </div>
             </div>
         </div>

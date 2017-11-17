@@ -55,11 +55,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['l_key', 'c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade'], 'required'],
+            [['c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade'], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'string'],
-            [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade', 'published'], 'integer'],
+            [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
             [['product_id'], 'string', 'max' => 85],
-            [['user_id', 'l_key', 'c_key', 's_key', 'path'], 'string', 'max' => 55],
+            [['c_key', 's_key', 'path'], 'string', 'max' => 55],
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 120],
@@ -74,37 +74,35 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-
             'product_id'   => '产品编号ID',
             'user_id'      => '用户ID',
-            'l_key'        => '产品等级',
             'c_key'        => '产品分类',
-            's_key'        => 'S Key',
+            's_key'        => '版块',
             'title'        => '产品标题',
             'content'      => '产品内容',
             'price'        => '产品价格',
             'discount'     => '折扣价',
             'introduction' => '产品导读',
             'keywords'     => '产品关键词',
-            'path'         => 'Path',
+            'path'         => '产品目录',
             'praise'       => 'Praise',
             'forward'      => 'Forward',
             'collection'   => 'Collection',
-            'share'        => 'Share',
+            'share'        => '分享次数',
             'attention'    => 'Attention',
             'is_promote'   => 'Is Promote',
             'is_hot'       => 'Is Hot',
             'is_classic'   => 'Is Classic',
             'is_winnow'    => 'Is Winnow',
             'is_recommend' => 'Is Recommend',
-            'is_audit'     => 'Is Audit',
-            'is_field'     => 'Is Field',
-            'is_comments'  => 'Is Comments',
-            'is_img'       => 'Is Img',
-            'is_thumb'     => 'Is Thumb',
-            'grade'        => 'Grade',
-            'user_grade'   => 'User Grade',
-            'published'    => 'Published',
+            'is_audit'     => '审核状态',
+            'is_field'     => '是否生成字段',
+            'is_comments'  => '是否开启评论',
+            'is_img'       => '是否上传图片',
+            'is_thumb'     => '是否生成缩略图',
+            'grade'        => '产品评分',
+            'user_grade'   => '用户评分',
+            'published'    => '发布时间',
         ];
     }
 }

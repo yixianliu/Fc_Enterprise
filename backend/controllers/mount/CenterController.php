@@ -110,11 +110,11 @@ class CenterController extends BaseController
                 $Admin = [
                     'role'  => 'admin',
                     'power' => [
-                        'center/view', 'center/conf', //管理中心
+                        'center/index', 'center/conf', // 管理中心
                         'news/create', 'news/edit', 'news/index', 'news/view', // 新闻
-                        'newcls/create', 'newcls/edit', 'newcls/index', 'newcls/view', // 新闻分类
+                        'news-cls/create', 'news-cls/edit', 'news-cls/index', 'news-cls/view', // 新闻分类
                         'product/create', 'product/edit', 'product/index', 'product/view', // 产品
-                        'productcls/create', 'productcls/edit', 'productcls/index', 'productcls/view', // 产品分类
+                        'product-cls/create', 'product-cls/edit', 'product-cls/index', 'product-cls/view', // 产品分类
                         'user/create', 'user/edit', 'user/index', 'user/view', // 用户
                         'job/create', 'job/edit', 'job/index', 'job/view', // 招聘
                     ]

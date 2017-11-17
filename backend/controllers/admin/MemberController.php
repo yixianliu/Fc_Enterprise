@@ -55,7 +55,7 @@ class MemberController extends Controller
 
                     // 授权
                     $auth = Yii::$app->authManager;
-                    $auth->assign('admin', $model->getId());
+                    $auth->assign(Yii::$app->user->identity->r_key, Yii::$app->user->identity->user_id);
 
                     return $this->redirect(['/admin/center/index']);
                 }

@@ -15,42 +15,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
         <header class="panel_header">
             <h2 class="title pull-left">
-
                 <?= Html::encode($this->title) ?>
-                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
             </h2>
         </header>
         <div class="content-body">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="product-index">
+                    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-                        <p>
-                            <?= Html::a('Create Item Rp', ['create'], ['class' => 'btn btn-success']) ?>
-                        </p>
-                        <?=
-                        GridView::widget([
-                            'dataProvider' => $dataProvider,
-                            'filterModel' => $searchModel,
-                            'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                    <hr />
 
-                                'name',
-                                'type',
-                                'rule_name',
-                                'data:ntext',
-                                'description',
-                                // 'created_at',
-                                // 'updated_at',
+                    <p>
+                        <?= Html::a('创建角色权限', ['create'], ['class' => 'btn btn-success']) ?>
+                    </p>
 
-                                ['class' => 'yii\grid\ActionColumn'],
-                            ],
-                        ]);
-                        ?>
+                    <?=
+                    GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'filterModel'  => $searchModel,
+                        'columns'      => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            'name',
+                            'type',
+                            'rule_name',
+                            'data:ntext',
+                            'description',
+                            ['class' => 'yii\grid\ActionColumn'],
+                        ],
+                    ]);
+                    ?>
 
-                    </div>
                 </div>
             </div>
         </div>

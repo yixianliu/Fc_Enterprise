@@ -47,6 +47,11 @@ class CenterController extends BaseController
         return $this->render('index');
     }
 
+    public function actionView()
+    {
+        return $this->render('view');
+    }
+
     public function actionError()
     {
 

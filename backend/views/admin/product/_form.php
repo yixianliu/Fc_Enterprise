@@ -15,10 +15,11 @@ if (empty($result['classify'])) {
 
 <?php $form = ActiveForm::begin(); ?>
 
+<?= $form->field($model, 'product_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
+
 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
 <?=
-
 $form->field($model, 'c_key')->widget(Select2::classname(), [
     'data'          => $result['classify'],
     'options'       => ['placeholder' => '选择产品分类...'],
@@ -26,7 +27,6 @@ $form->field($model, 'c_key')->widget(Select2::classname(), [
         'allowClear' => true
     ],
 ]);
-
 ?>
 
 <?=
@@ -41,8 +41,6 @@ $form->field($model, 's_key')->widget(Select2::classname(), [
 
 ?>
 
-<?= $form->field($model, 'l_key')->textInput(['maxlength' => true]) ?>
-
 <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 
 <?=
@@ -52,18 +50,6 @@ $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
         'initialFrameHeight' => '400',
         //设置语言
         'lang'               => 'zh-cn',
-        //定制菜单
-        'toolbars'           => [
-            [
-                'fullscreen', 'source', 'undo', 'redo', '|',
-                'fontsize',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
-                'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
-                'forecolor', 'backcolor', '|',
-                'lineheight', '|',
-                'indent', '|'
-            ],
-        ],
     ]
 ]);
 ?>
@@ -84,10 +70,17 @@ $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
 
 <?= $form->field($model, 'attention')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'is_promote')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_promote')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
 <?=
-
 $form->field($model, 'is_hot')->widget(Select2::classname(), [
     'data'          => ['On' => '开启', 'Off' => '关闭'],
     'options'       => ['placeholder' => '选择产品分类...'],
@@ -95,24 +88,87 @@ $form->field($model, 'is_hot')->widget(Select2::classname(), [
         'allowClear' => true
     ],
 ]);
-
 ?>
 
-<?= $form->field($model, 'is_classic')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_classic')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_winnow')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_winnow')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_recommend')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_recommend')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_audit')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_audit')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_field')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_field')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_comments')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_comments')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_img')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_img')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
-<?= $form->field($model, 'is_thumb')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_thumb')->widget(Select2::classname(), [
+    'data'          => ['On' => '开启', 'Off' => '关闭'],
+    'options'       => ['placeholder' => '选择...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
 
 <?= $form->field($model, 'grade')->textInput(['maxlength' => true]) ?>
 

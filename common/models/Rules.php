@@ -32,7 +32,7 @@ class Rules extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'is_using', 'created_at', 'updated_at'], 'required'],
+            [['name', 'is_using'], 'required'],
             [['description', 'is_using'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 85],
@@ -48,7 +48,7 @@ class Rules extends \yii\db\ActiveRecord
     {
         return [
             'name'        => '规则',
-            'data'        => 'Data',
+            'data'        => '规则内容',
             'description' => 'Description',
             'is_using'    => 'Is Using',
             'created_at'  => 'Created At',
