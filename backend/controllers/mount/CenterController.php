@@ -123,7 +123,6 @@ class CenterController extends BaseController
                 $this->createRole($Admin['role']);
 
                 foreach ($Admin['power'] as $value) {
-
                     $this->createPermission($value);
                     $this->addChild($Admin['role'], $value);
                 }
@@ -194,14 +193,4 @@ class CenterController extends BaseController
         return true;
     }
 
-    // 将角色赋给用户
-    public function addItemChild($items)
-    {
-        $auth = Yii::$app->authManager;
-        $role = $auth->createRole($items['role']);                // 创建角色对象
-        $user_id = 1;                                             // 获取用户id，此处假设用户id=1
-        $auth->assign($role, $user_id);                           // 添加对应关系
-
-        return true;
-    }
 }

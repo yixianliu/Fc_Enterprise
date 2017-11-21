@@ -15,9 +15,9 @@ DROP TABLE IF EXISTS `#DB_PREFIX#ItemRp`;
  */
 CREATE TABLE `#DB_PREFIX#Rules` (
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `data` VARCHAR(255) NULL COMMENT '路径规则',
+    `data` VARCHAR(255) NULL COMMENT '路径数据,可以为JSON',
     `description` TEXT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`name`),
