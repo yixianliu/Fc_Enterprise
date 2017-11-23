@@ -12,6 +12,8 @@ use yii\base\Model;
 class MountForm extends Model
 {
 
+    public $admin;
+    public $user;
     public $username;
     public $password;
     public $rememberMe = true;

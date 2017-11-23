@@ -7,10 +7,9 @@
 
 namespace backend\controllers\mount;
 
-use backend\models\LoginForm;
 use Yii;
 use yii\web\Controller;
-use backend\models\MountRunForm;
+use backend\models\MountForm;
 
 class CenterController extends BaseController
 {
@@ -28,7 +27,7 @@ class CenterController extends BaseController
      */
     public function actionRun()
     {
-        $model = new MountRunForm();
+        $model = new MountForm();
 
         $request = Yii::$app->request;
 
@@ -96,7 +95,7 @@ class CenterController extends BaseController
     public function actionSetpower()
     {
 
-        $model = new LoginForm();
+        $model = new MountForm();
 
         $request = Yii::$app->request;
 
@@ -191,6 +190,14 @@ class CenterController extends BaseController
         $auth->addChild($parent, $child); // 添加对应关系
 
         return true;
+    }
+
+    // 角色分配管理员
+    public function assign($item)
+    {
+        $auth = Yii::$app->authManager;
+        $reader = $auth->createRole($item['name']);
+        $auth->assign($reader, $item['description']);
     }
 
 }
