@@ -52,11 +52,6 @@ class MemberController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
                 if ($model->login()) {
-
-                    // 授权
-                    $auth = Yii::$app->authManager;
-                    $auth->assign('admin', Yii::$app->user->identity->user_id);
-
                     return $this->redirect(['/admin/center/index']);
                 }
 

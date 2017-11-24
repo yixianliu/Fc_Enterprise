@@ -10,6 +10,7 @@ namespace backend\controllers\mount;
 use Yii;
 use yii\web\Controller;
 use backend\models\MountForm;
+use backend\models\MountRunForm;
 
 class CenterController extends BaseController
 {
@@ -27,7 +28,7 @@ class CenterController extends BaseController
      */
     public function actionRun()
     {
-        $model = new MountForm();
+        $model = new MountRunForm();
 
         $request = Yii::$app->request;
 
@@ -105,44 +106,24 @@ class CenterController extends BaseController
 
             if ($model->load($request->post()) && $model->validate()) {
 
-                // 管理员
-                $Admin = [
-                    'role'  => 'admin',
-                    'power' => [
-                        'center/index', 'center/conf', // 管理中心
-                        'news/create', 'news/edit', 'news/index', 'news/view', // 新闻
-                        'news-cls/create', 'news-cls/edit', 'news-cls/index', 'news-cls/view', // 新闻分类
-                        'product/create', 'product/edit', 'product/index', 'product/view', // 产品
-                        'product-cls/create', 'product-cls/edit', 'product-cls/index', 'product-cls/view', // 产品分类
-                        'user/create', 'user/edit', 'user/index', 'user/view', // 用户
-                        'job/create', 'job/edit', 'job/index', 'job/view', // 招聘
-                    ]
+                $power = [
+                    'indexCenter', 'confCenter', // 管理中心
+                    'createNews', 'editNews', 'indexNews', 'viewNews', // 新闻
+                    'createNews-cls', 'editNews-cls', 'indexNews-cls', 'viewNews-cls', // 新闻分类
+                    'createProduct', 'editProduct', 'indexProduct', 'viewProduct', // 产品
+                    'createProduct-cls', 'editProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
+                    'createUser', 'userUser', 'indexUser', 'viewUser', // 用户
+                    'createJob', 'editJob', 'indexJob', 'viewJob', // 招聘
                 ];
 
-                $this->createRole($Admin['role']);
+                $role = $this->createRole('admin');
 
-                foreach ($Admin['power'] as $value) {
-                    $this->createPermission($value);
-                    $this->addChild($Admin['role'], $value);
+                foreach ($power as $value) {
+                    $permission = $this->createPermission($value);
+                    $this->addChild($role, $permission);
                 }
 
-                // 用户
-                $User = [
-                    'role'  => 'user',
-                    'power' => [
-                        'news/index', 'news/view', // 新闻
-                        'newcls/index', 'newcls/view', // 新闻分类
-                        'product/index', 'product/view', // 产品
-                        'productcls/index', 'productcls/view', // 产品分类
-                        'user/view', // 用户
-                    ]
-                ];
-
-                $this->createRole($User['role']);
-
-                foreach ($User['power'] as $value) {
-                    $this->addChild($User['role'], $value);
-                }
+                $this->assign($role);
 
                 // 生成安装文件
                 file_put_contents(
@@ -163,41 +144,45 @@ class CenterController extends BaseController
     public function createPermission($name)
     {
         $auth = Yii::$app->authManager;
-        $createPost = $auth->createPermission($name);
-        $createPost->description = '创建了 ' . $name . ' 权限';
-        $auth->add($createPost);
 
-        return true;
+        $permission = $auth->createPermission($name);
+        $permission->description = '创建了 ' . $name . ' 权限';
+
+        // add
+        $auth->add($permission);
+
+        return $permission;
     }
 
     // 添加角色
     public function createRole($name)
     {
         $auth = Yii::$app->authManager;
+
         $role = $auth->createRole($name);
         $role->description = '创建了 ' . $name . ' 角色';
+
+        // add
         $auth->add($role);
 
-        return true;
+        return $role;
     }
 
     // 关联
     public function addChild($role, $power)
     {
         $auth = Yii::$app->authManager;
-        $parent = $auth->createRole($role); // 创建角色对象
-        $child = $auth->createPermission($power); // 创建权限对象
-        $auth->addChild($parent, $child); // 添加对应关系
-
+        $auth->addChild($role, $power); // 添加对应关系
         return true;
     }
 
     // 角色分配管理员
-    public function assign($item)
+    public function assign($role)
     {
         $auth = Yii::$app->authManager;
-        $reader = $auth->createRole($item['name']);
-        $auth->assign($reader, $item['description']);
+        $auth->assign($role, 1);
+
+        return true;
     }
 
 }

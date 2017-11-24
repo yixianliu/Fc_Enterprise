@@ -27,7 +27,11 @@ class BaseController extends Controller
 
         $action = Yii::$app->controller->action->id;
 
-        if (Yii::$app->user->can($action)) {
+        $controllerID = Yii::$app->controller->id;
+
+        $power = $action . ucfirst(explode('/', $controllerID)[1]);
+
+        if (Yii::$app->user->can($power)) {
             return true;
         } else {
             throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');

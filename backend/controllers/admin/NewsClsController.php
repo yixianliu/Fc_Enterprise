@@ -3,11 +3,12 @@
 namespace backend\controllers\admin;
 
 use Yii;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use common\models\NewsClassify;
 use common\models\NewsClassifySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * NewsClsController implements the CRUD actions for NewsClassify model.
@@ -20,6 +21,17 @@ class NewsClsController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

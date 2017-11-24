@@ -6,6 +6,7 @@
 
 SET FOREIGN_KEY_CHECKS = 0;
 
+drop table if exists `#DB_PREFIX#Assignment`;
 DROP TABLE IF EXISTS `#DB_PREFIX#Rules`;
 DROP TABLE IF EXISTS `#DB_PREFIX#Item_related`;
 DROP TABLE IF EXISTS `#DB_PREFIX#ItemRp`;
@@ -49,6 +50,19 @@ CREATE TABLE `#DB_PREFIX#Item_related` (
     primary key (`parent`, `child`),
     foreign key (`parent`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade,
     foreign key (`child`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+  /**
+   * 关联(角色 + 用户)
+   */
+CREATE TABLE `#DB_PREFIX#Assignment`
+(
+    `item_name` VARCHAR(85) NOT NULL COMMENT '角色关键值',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户或者管理员ID',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    primary key (`item_name`, `user_id`),
+    foreign key (`item_name`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade,
+    key `#DB_PREFIX#Assignment_user_id_idx` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
