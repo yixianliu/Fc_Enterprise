@@ -7,26 +7,30 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\News */
 /* @var $form yii\widgets\ActiveForm */
+
+$result['classify'] = empty($result['classify']) ? array() : $result['classify'];
+
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'news_id')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'c_key')->widget(Select2::classname(), [
+    'data'    => $result['classify'],
+    'options' => ['placeholder' => '产品分类...'],
+]);
+?>
 
-<?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => '新闻的标题,千万不能直接复制..']) ?>
 
-<?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'introduction')->textarea(['rows' => 6, 'maxlength' => true, 'placeholder' => '新闻导读,内容也是十分重要的...']) ?>
 
 <?=
 $form->field($model, 'content')
     ->widget('kucha\ueditor\UEditor', [
         'clientOptions' => [
             // 编辑区域大小
-            'initialFrameHeight' => '400',
+            'initialFrameHeight' => '600',
             'elementPathEnabled' => false,
             'wordCount'          => false,
         ]
@@ -34,44 +38,59 @@ $form->field($model, 'content')
     ->label(false);
 ?>
 
-<?= $form->field($model, 'introduction')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>
 
-<?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'sort_id')->textInput(['maxlength' => true, 'placeholder' => '数值越大,越靠前...']) ?>
 
-<?= $form->field($model, 'praise')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_promote')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '推广...'],
+]);
+?>
 
-<?= $form->field($model, 'forward')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'collection')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'share')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'attention')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'is_promote')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'is_hot')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_hot')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '热门...'],
+]);
+?>
 
 <?=
 $form->field($model, 'is_winnow')->widget(Select2::classname(), [
     'data'    => ['On' => '启用', 'Off' => '未启用'],
-    'options' => ['placeholder' => '精选状态...'],
+    'options' => ['placeholder' => '精选...'],
 ]);
 ?>
 
-<?= $form->field($model, 'is_recommend')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_recommend')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '推荐...'],
+]);
+?>
 
-<?= $form->field($model, 'is_audit')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_audit')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '审核...'],
+]);
+?>
 
-<?= $form->field($model, 'is_comments')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'is_img')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'is_thumb')->textInput(['maxlength' => true]) ?>
+<?=
+$form->field($model, 'is_comments')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '评论...'],
+]);
+?>
 
 <?php if (!$model->isNewRecord): ?>
     <?= $form->field($model, 'published')->textInput(['maxlength' => true]) ?>
 <?php endif; ?>
+
+<?= $form->field($model, 'news_id')->hiddenInput(['value' => time() . '_' . rand(0000, 9999)]); ?>
+
+<?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->admin_id]); ?>
 
 <div class="form-group">
     <?= Html::submitButton($model->isNewRecord ? '发布新闻' : '更新新闻', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -79,3 +98,4 @@ $form->field($model, 'is_winnow')->widget(Select2::classname(), [
 
 <?php ActiveForm::end(); ?>
 
+<?= $this->render('../../form_msg'); ?>

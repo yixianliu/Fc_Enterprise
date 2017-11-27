@@ -44,10 +44,20 @@ class News extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['news_id', 'user_id', 'c_key', 'title', 'content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb', 'published'], 'required'],
+            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'is_promote', 'is_hot', 'is_winnow', 'introduction', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb', 'published'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention', 'published'], 'integer'],
             [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
@@ -71,23 +81,24 @@ class News extends \yii\db\ActiveRecord
             'c_key'        => '新闻分类',
             'sort_id'      => '新闻排序',
             'title'        => '新闻标题',
-            'content'      => 'Content',
-            'introduction' => 'Introduction',
-            'keywords'     => 'Keywords',
+            'content'      => '新闻内容',
+            'introduction' => '新闻导读',
+            'keywords'     => '新闻关键词',
             'praise'       => 'Praise',
             'forward'      => 'Forward',
             'collection'   => 'Collection',
-            'share'        => 'Share',
+            'share'        => '分享次数',
             'attention'    => 'Attention',
-            'is_promote'   => 'Is Promote',
-            'is_hot'       => 'Is Hot',
+            'is_promote'   => '推广状态',
+            'is_hot'       => '热门状态',
             'is_winnow'    => '精选状态',
-            'is_recommend' => 'Is Recommend',
-            'is_audit'     => 'Is Audit',
-            'is_comments'  => 'Is Comments',
-            'is_img'       => 'Is Img',
-            'is_thumb'     => 'Is Thumb',
-            'published'    => '发布时间',
+            'is_recommend' => '推荐状态',
+            'is_audit'     => '是否审核',
+            'is_comments'  => '是否开启评论',
+            'is_img'       => '是否上传图片',
+            'is_thumb'     => '缩略图',
+            'created_at'   => '添加数据时间',
+            'updated_at'   => '更新数据时间',
         ];
     }
 }

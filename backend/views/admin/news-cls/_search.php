@@ -15,13 +15,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'c_key') ?>
 
     <?= $form->field($model, 'sort_id') ?>
-
-    <?= $form->field($model, 'r_key') ?>
 
     <?= $form->field($model, 'name') ?>
 
@@ -33,13 +29,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'parent_id') ?>
 
-    <?php // echo $form->field($model, 'is_using') ?>
-
-    <?php // echo $form->field($model, 'published') ?>
+    <?= $form->field($model, 'is_using') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

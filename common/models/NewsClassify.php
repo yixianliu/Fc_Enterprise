@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%news_classify}}".
@@ -10,14 +11,12 @@ use Yii;
  * @property integer $id
  * @property string $c_key
  * @property string $sort_id
- * @property string $r_key
  * @property string $name
  * @property string $description
  * @property string $keywords
  * @property string $ico_class
  * @property string $parent_id
  * @property string $is_using
- * @property string $published
  */
 class NewsClassify extends \yii\db\ActiveRecord
 {
@@ -32,13 +31,23 @@ class NewsClassify extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'r_key', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
+            [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'r_key', 'ico_class', 'parent_id'], 'string', 'max' => 55],
+            [['c_key', 'ico_class', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['c_key'], 'unique'],
@@ -52,15 +61,16 @@ class NewsClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key' => 'C Key',
-            'sort_id' => 'Sort ID',
-            'r_key' => 'R Key',
-            'name' => 'Name',
-            'description' => 'Description',
-            'keywords' => 'Keywords',
-            'ico_class' => 'Ico Class',
-            'parent_id' => 'Parent ID',
-            'is_using' => 'Is Using',
+            'c_key'       => '分类关键KEY',
+            'sort_id'     => '分类排序',
+            'name'        => '分类名称',
+            'description' => '分类描述',
+            'keywords'    => '分类关键词',
+            'ico_class'   => '分类属性',
+            'parent_id'   => '分类父类',
+            'is_using'    => '是否启用',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 }

@@ -28,16 +28,7 @@ $form->field($model, 'parent_id')->widget(Select2::classname(), [
 
 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-<?=
-$form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
-    'clientOptions' => [
-        //编辑区域大小
-        'initialFrameHeight' => '400',
-        //设置语言
-        'lang'               => 'zh-cn',
-    ]
-]);
-?>
+<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
@@ -54,7 +45,7 @@ $form->field($model, 'is_using')->widget(Select2::classname(), [
 ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '创建产品分类' : '更新产品分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
 <?php ActiveForm::end(); ?>

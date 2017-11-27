@@ -15,38 +15,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
         <header class="panel_header">
             <h2 class="title pull-left">
-
                 <?= Html::encode($this->title) ?>
-                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
             </h2>
         </header>
         <div class="content-body">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="product-index">
+                    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-                        <p>
-                            <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
-                        </p>
 
-                        <?=
-                        GridView::widget([
-                            'dataProvider' => $dataProvider,
-                            'filterModel'  => $searchModel,
-                            'columns'      => [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                'user_id',
-                                'c_key',
-                                'sort_id',
-                                'title',
-                                ['class' => 'yii\grid\ActionColumn'],
-                            ],
-                        ]);
-                        ?>
+                    <p>
+                        <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
+                    </p>
 
-                    </div>
+                    <?=
+                    GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'columns'      => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            'user_id',
+                            'c_key',
+                            'sort_id',
+                            'title',
+                            ['class' => 'yii\grid\ActionColumn'],
+                        ],
+                    ]);
+                    ?>
+
                 </div>
             </div>
         </div>

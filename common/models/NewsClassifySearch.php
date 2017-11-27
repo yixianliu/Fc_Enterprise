@@ -61,11 +61,9 @@ class NewsClassifySearch extends NewsClassify
         $query->andFilterWhere([
             'id' => $this->id,
             'sort_id' => $this->sort_id,
-            'published' => $this->published,
         ]);
 
         $query->andFilterWhere(['like', 'c_key', $this->c_key])
-            ->andFilterWhere(['like', 'r_key', $this->r_key])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])

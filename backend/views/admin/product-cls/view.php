@@ -7,39 +7,53 @@ use yii\widgets\DetailView;
 /* @var $model common\models\ProductClassify */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Product Classifies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '产品分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-classify-view">
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">
+                <?= Html::encode($this->title) ?>
+            </h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                <div class="col-md-12 col-sm-12 col-xs-12">
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+                    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'c_key',
-            'sort_id',
-            'r_key',
-            'name',
-            'description:ntext',
-            'keywords',
-            'ico_class',
-            'parent_id',
-            'is_using',
-            'published',
-        ],
-    ]) ?>
+                    <p>
+                        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('删除', ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data'  => [
+                                'confirm' => '你真的需要删除这个分类吗?',
+                                'method'  => 'post',
+                            ],
+                        ]) ?>
+                    </p>
 
+                    <?= DetailView::widget([
+                        'model'      => $model,
+                        'attributes' => [
+                            'c_key',
+                            'sort_id',
+                            'name',
+                            'description:ntext',
+                            'keywords',
+                            'ico_class',
+                            'parent_id',
+                            'is_using',
+                            'created_at',
+                            'updated_at',
+                        ],
+                    ]) ?>
+
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+

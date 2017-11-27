@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = '更新';
             <h2 class="title pull-left">
 
                 <?= Html::encode($this->title) ?>
-                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
 
             </h2>
         </header>

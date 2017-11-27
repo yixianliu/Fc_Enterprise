@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%product_classify}}".
@@ -10,14 +11,12 @@ use Yii;
  * @property integer $id
  * @property string $c_key
  * @property string $sort_id
- * @property string $r_key
  * @property string $name
  * @property string $description
  * @property string $keywords
  * @property string $ico_class
  * @property string $parent_id
  * @property string $is_using
- * @property string $published
  */
 class ProductClassify extends \yii\db\ActiveRecord
 {
@@ -32,13 +31,23 @@ class ProductClassify extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'parent_id', 'is_using', 'published'], 'required'],
-            [['sort_id', 'published'], 'integer'],
+            [['c_key', 'sort_id', 'name', 'parent_id', 'is_using'], 'required'],
+            [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'r_key', 'keywords', 'ico_class', 'parent_id'], 'string', 'max' => 55],
+            [['c_key', 'keywords', 'ico_class', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['c_key'], 'unique'],
             [['name'], 'unique'],
@@ -59,6 +68,8 @@ class ProductClassify extends \yii\db\ActiveRecord
             'ico_class'   => '分类样式',
             'parent_id'   => '父类',
             'is_using'    => '是否启用',
+            'created_at	' => '添加数据时间',
+            'updated_at	' => '更新数据时间',
         ];
     }
 }

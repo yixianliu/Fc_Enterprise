@@ -33,7 +33,7 @@ class NewsClsController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -51,7 +51,7 @@ class NewsClsController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -80,8 +80,23 @@ class NewsClsController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // 初始化
+            $reuslt = array();
+
+            $dataCls = NewsClassify::findAll(['is_using' => 'On']);
+
+            foreach ($dataCls as $value) {
+                $result['classify'][ $value['c_key'] ] = $value['name'];
+            }
+
+            $array = array('C0' => '父类');
+
+            $result['classify'] = (!empty($result['classify'])) ? array_merge($result['classify'], $array) : $array;
+
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $result,
             ]);
         }
     }
@@ -99,8 +114,23 @@ class NewsClsController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // 初始化
+            $reuslt = array();
+
+            $dataCls = NewsClassify::findAll(['is_using' => 'On']);
+
+            foreach ($dataCls as $value) {
+                $result['classify'][ $value['c_key'] ] = $value['name'];
+            }
+
+            $array = array('C0' => '父类');
+
+            $result['classify'] = (!empty($result['classify'])) ? array_merge($result['classify'], $array) : $array;
+
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $result,
             ]);
         }
     }

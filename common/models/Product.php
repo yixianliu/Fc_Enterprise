@@ -52,6 +52,16 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -102,7 +112,8 @@ class Product extends \yii\db\ActiveRecord
             'is_thumb'     => '是否生成缩略图',
             'grade'        => '产品评分',
             'user_grade'   => '用户评分',
-            'published'    => '发布时间',
+            'created_at'   => '添加数据时间',
+            'updated_at'   => '更新数据时间',
         ];
     }
 }

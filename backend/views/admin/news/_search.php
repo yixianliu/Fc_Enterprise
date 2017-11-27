@@ -15,55 +15,17 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'news_id') ?>
-
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'title') ?>
 
     <?= $form->field($model, 'c_key') ?>
 
-    <?= $form->field($model, 'sort_id') ?>
+    <?= $form->field($model, 'content') ?>
 
-    <?php // echo $form->field($model, 'title') ?>
-
-    <?php // echo $form->field($model, 'content') ?>
-
-    <?php // echo $form->field($model, 'introduction') ?>
-
-    <?php // echo $form->field($model, 'keywords') ?>
-
-    <?php // echo $form->field($model, 'praise') ?>
-
-    <?php // echo $form->field($model, 'forward') ?>
-
-    <?php // echo $form->field($model, 'collection') ?>
-
-    <?php // echo $form->field($model, 'share') ?>
-
-    <?php // echo $form->field($model, 'attention') ?>
-
-    <?php // echo $form->field($model, 'is_promote') ?>
-
-    <?php // echo $form->field($model, 'is_hot') ?>
-
-    <?php // echo $form->field($model, 'is_winnow') ?>
-
-    <?php // echo $form->field($model, 'is_recommend') ?>
-
-    <?php // echo $form->field($model, 'is_audit') ?>
-
-    <?php // echo $form->field($model, 'is_comments') ?>
-
-    <?php // echo $form->field($model, 'is_img') ?>
-
-    <?php // echo $form->field($model, 'is_thumb') ?>
-
-    <?php // echo $form->field($model, 'published') ?>
+    <?= $form->field($model, 'introduction') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

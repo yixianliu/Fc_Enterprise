@@ -66,11 +66,11 @@ CREATE TABLE `#DB_PREFIX#Assignment`
 ) ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 基本表
  * Author:  Yxl <zccem@163.com>
  * Created: 2016-3-15
- * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
 
 /**
@@ -87,7 +87,8 @@ CREATE TABLE `#DB_PREFIX#Ad` (
     `is_audit` SET('On', 'Off') NOT NULL COMMENT '审核',
     `start_time` INT(11) UNSIGNED NOT NULL COMMENT '开始时间',
     `end_time` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY
     KEY (`ad_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
@@ -105,7 +106,8 @@ CREATE TABLE `#DB_PREFIX#Friend_Link` (
     `url` VARCHAR(80) NULL COMMENT '链接地址',
     `is_status` SET('On', 'Off') NOT NULL COMMENT '友情链接状态',
     `is_audit` SET('On', 'Off') NOT NULL COMMENT '审核',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY
     KEY (`link_id`),
     UNIQUE KEY `url` (`url`)
@@ -120,7 +122,8 @@ CREATE TABLE `#DB_PREFIX#Announce` (
     `title` VARCHAR(55) NOT NULL COMMENT '标题',
     `content` VARCHAR(80) NOT NULL COMMENT '内容',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY
     KEY (`announce_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
@@ -160,9 +163,9 @@ CREATE TABLE `#DB_PREFIX#Section` (
     `is_ad` SET('On', 'Off') NOT NULL COMMENT '是否开启广告',
     `is_post` SET('On', 'Off') NOT NULL COMMENT '发布帖子',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
     UNIQUE `name` (`name`),
     UNIQUE KEY `s_key` (`s_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
@@ -183,6 +186,37 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     KEY (`conf_id`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 幻灯片
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Slide`;
+CREATE TABLE `#DB_PREFIX#Slide` (
+    `slide_id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `path` VARCHAR(255) NOT NULL COMMENT '幻灯片路径',
+    `description` TEXT NULL COMMENT '描述',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    PRIMARY KEY (`slide_id`),
+    UNIQUE KEY `page_id` (`page_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 单页面
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Single_page`;
+CREATE TABLE `#DB_PREFIX#Single_page` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `name` VARCHAR(80) NOT NULL COMMENT '单页面名称',
+    `content` TEXT NULL COMMENT '单页面内容',
+    `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `page_id` (`page_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -333,13 +367,13 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     `m_key` VARCHAR(55) NOT NULL COMMENT '菜单关键KEY值',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '菜单角色关键KEY',
+    `rp_key` VARCHAR(55) NOT NULL COMMENT '菜单关联角色',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
-    KEY `r_key` (`r_key`),
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `rp_key` (`rp_key`),
     UNIQUE KEY `m_key` (`m_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
@@ -534,8 +568,8 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
     `is_field` SET('On', 'Off') NOT NULL COMMENT '是否生成字段JSON文件,没有生成的话,产品异常!',
     `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
-    `is_img` SET('On', 'Off') NOT NULL COMMENT '是否上传图片',
-    `is_thumb` SET('On', 'Off') NOT NULL COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
+    `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
+    `is_thumb` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
     `grade` INT(6) UNSIGNED NOT NULL COMMENT '本站评分,由我们网站人员进行评估.',
     `user_grade` INT(6) UNSIGNED NOT NULL COMMENT '用户评分,由本站用户进行评估.',
     `created_at` INT(11) UNSIGNED NOT NULL,
@@ -598,7 +632,8 @@ CREATE TABLE `#DB_PREFIX#News` (
     `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
     `is_img` SET('On', 'Off') NOT NULL COMMENT '是否上传图片',
     `is_thumb` SET('On', 'Off') NOT NULL COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY
     KEY (`id`),
     UNIQUE KEY `news_id` (`news_id`),

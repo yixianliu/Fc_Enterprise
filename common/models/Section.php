@@ -62,7 +62,8 @@ class Section extends \yii\db\ActiveRecord
             'is_ad'       => 'Is Ad',
             'is_post'     => 'Is Post',
             'is_using'    => 'Is Using',
-            'published'   => 'Published',
+            'created_at'   => '添加数据时间',
+            'updated_at'   => '更新数据时间',
         ];
     }
 }

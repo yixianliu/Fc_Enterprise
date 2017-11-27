@@ -8,40 +8,30 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="product-classify-search">
+<?php $form = ActiveForm::begin([
+    'action' => ['index'],
+    'method' => 'get',
+]); ?>
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+<?= $form->field($model, 'c_key') ?>
 
-    <?= $form->field($model, 'id') ?>
+<?= $form->field($model, 'sort_id') ?>
 
-    <?= $form->field($model, 'c_key') ?>
+<?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'sort_id') ?>
+<?php // echo $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'r_key') ?>
+<?= $form->field($model, 'keywords') ?>
 
-    <?= $form->field($model, 'name') ?>
+<?php // echo $form->field($model, 'ico_class') ?>
 
-    <?php // echo $form->field($model, 'description') ?>
+<?php // echo $form->field($model, 'parent_id') ?>
 
-    <?php // echo $form->field($model, 'keywords') ?>
+<?php // echo $form->field($model, 'is_using') ?>
 
-    <?php // echo $form->field($model, 'ico_class') ?>
-
-    <?php // echo $form->field($model, 'parent_id') ?>
-
-    <?php // echo $form->field($model, 'is_using') ?>
-
-    <?php // echo $form->field($model, 'published') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+<div class="form-group">
+    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+    <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
 </div>
+
+<?php ActiveForm::end(); ?>

@@ -18,7 +18,7 @@ class ProductClassifySearch extends ProductClassify
     public function rules()
     {
         return [
-            [['id', 'sort_id', 'published'], 'integer'],
+            [['id', 'sort_id'], 'integer'],
             [['c_key', 'name', 'description', 'keywords', 'ico_class', 'parent_id', 'is_using'], 'safe'],
         ];
     }
@@ -59,13 +59,11 @@ class ProductClassifySearch extends ProductClassify
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'      => $this->id,
             'sort_id' => $this->sort_id,
-            'published' => $this->published,
         ]);
 
         $query->andFilterWhere(['like', 'c_key', $this->c_key])
-            ->andFilterWhere(['like', 'r_key', $this->r_key])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])

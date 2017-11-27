@@ -2,12 +2,15 @@
 
 namespace backend\controllers\admin;
 
+
 use Yii;
 use common\models\News;
 use common\models\NewsSearch;
+use common\models\ProductClassify;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -29,7 +32,7 @@ class NewsController extends BaseController
                     ],
                 ],
             ],
-            'verbs' => [
+            'verbs'  => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
@@ -49,7 +52,7 @@ class NewsController extends BaseController
 
         return $this->render('index', [
             'searchModel'  => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -74,19 +77,28 @@ class NewsController extends BaseController
     {
         $model = new News();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } // 发布新闻
-        else {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // 初始化
-            $result = array();
-
-            return $this->render('create', [
-                'model'  => $model,
-                'result' => $result,
-            ]);
+            if (!$model->save()) {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            } else {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        // 初始化
+        $result = array();
+
+        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+
+        foreach ($dataCls as $key => $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
+        }
+
+        return $this->render('create', [
+            'model'  => $model,
+            'result' => $result,
+        ]);
     }
 
     /**
@@ -106,6 +118,12 @@ class NewsController extends BaseController
 
             // 初始化
             $result = array();
+
+            $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+
+            foreach ($dataCls as $key => $value) {
+                $result['classify'][ $value['c_key'] ] = $value['name'];
+            }
 
             return $this->render('update', [
                 'model'  => $model,
