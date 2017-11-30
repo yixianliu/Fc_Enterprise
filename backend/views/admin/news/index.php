@@ -22,8 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <?= $this->render('_search', ['model' => $searchModel]); ?>
+                    <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
+                    <hr />
 
                     <p>
                         <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ProductClassifySearch */
@@ -13,21 +14,40 @@ use yii\widgets\ActiveForm;
     'method' => 'get',
 ]); ?>
 
-<?= $form->field($model, 'c_key') ?>
+<table class="table table-hover">
+    <tbody>
+    <tr>
 
-<?= $form->field($model, 'sort_id') ?>
+        <td><?= $form->field($model, 'c_key') ?></td>
+        <td><?= $form->field($model, 'name') ?></td>
+        <td><?= $form->field($model, 'keywords') ?></td>
+        <td>
+            <?=
+            $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                'data'          => ['1' => '角色', '2' => '权限'],
+                'options'       => ['placeholder' => '产品分类...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
 
-<?= $form->field($model, 'name') ?>
+        <td>
+            <?=
+            $form->field($model, 'is_using')->widget(Select2::classname(), [
+                'data'          => ['On' => '启用', 'Off' => '未启用'],
+                'options'       => ['placeholder' => '是否启用...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
 
-<?php // echo $form->field($model, 'description') ?>
-
-<?= $form->field($model, 'keywords') ?>
-
-<?php // echo $form->field($model, 'ico_class') ?>
-
-<?php // echo $form->field($model, 'parent_id') ?>
-
-<?php // echo $form->field($model, 'is_using') ?>
+    </tr>
+    </tbody>
+</table>
 
 <div class="form-group">
     <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>

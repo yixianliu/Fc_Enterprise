@@ -38,7 +38,7 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Friend_link`
 VALUES
-(NULL, '#DEVELOPERS#', '#TITLE#', '#USERNAME#', NULL, '#SITE_URL#', 'On', 'On', #TIME#);
+(NULL, '#DEVELOPERS#', '#TITLE#', '#USERNAME#', NULL, '#SITE_URL#', 'On', 'On', #TIME#, #TIME#);
 
 /**
  * 管理员
@@ -113,11 +113,11 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Section`
 VALUES
-(NULL, 'S1', 1, '自律人生', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S2', 2, '励志牛人', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S4', 4, '音乐', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#),
-(NULL, 'S5', 5, '视频', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#);
+(NULL, 'S1', 1, '自律人生', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
+(NULL, 'S2', 2, '励志牛人', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
+(NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
+(NULL, 'S4', 4, '音乐', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
+(NULL, 'S5', 5, '视频', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#);
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -130,58 +130,58 @@ VALUES
 /*
     驯力文化 - 前台
 */
-(NULL, 'H1', 1, 'M0', 'R15', '驯力文化', 'On', #TIME#),
+(NULL, 'H1', 1, 'M0', 'R15', '驯力文化', 'On', #TIME#, #TIME#),
 
-(NULL, 'HN1', 1, 'H1', 'R15', '文化中心', 'On', #TIME#),
-(NULL, 'HN2', 2, 'H1', 'R15', '记录中心', 'On', #TIME#),
-(NULL, 'HN3', 3, 'H1', 'R15', '统计中心', 'On', #TIME#),
-(NULL, 'HN4', 4, 'H1', 'R15', '文档资源', 'On', #TIME#),
-(NULL, 'HN5', 5, 'H1', 'R15', '视频资源', 'On', #TIME#),
-(NULL, 'HN6', 6, 'H1', 'R15', '神推荐', 'On', #TIME#),
-(NULL, 'HN7', 7, 'H1', 'R15', '驯力文化', 'On', #TIME#),
+(NULL, 'HN1', 1, 'H1', 'R15', '文化中心', 'On', #TIME#, #TIME#),
+(NULL, 'HN2', 2, 'H1', 'R15', '记录中心', 'On', #TIME#, #TIME#),
+(NULL, 'HN3', 3, 'H1', 'R15', '统计中心', 'On', #TIME#, #TIME#),
+(NULL, 'HN4', 4, 'H1', 'R15', '文档资源', 'On', #TIME#, #TIME#),
+(NULL, 'HN5', 5, 'H1', 'R15', '视频资源', 'On', #TIME#, #TIME#),
+(NULL, 'HN6', 6, 'H1', 'R15', '神推荐', 'On', #TIME#, #TIME#),
+(NULL, 'HN7', 7, 'H1', 'R15', '驯力文化', 'On', #TIME#, #TIME#),
 
-(NULL, 'HNC1', 1, 'HN6', 'R15', '最强人气', 'On', #TIME#),
-(NULL, 'HNC2', 2, 'HN6', 'R15', '精选资源', 'On', #TIME#),
-(NULL, 'HNC3', 3, 'HN6', 'R15', '土豪的世界', 'On', #TIME#),
+(NULL, 'HNC1', 1, 'HN6', 'R15', '最强人气', 'On', #TIME#, #TIME#),
+(NULL, 'HNC2', 2, 'HN6', 'R15', '精选资源', 'On', #TIME#, #TIME#),
+(NULL, 'HNC3', 3, 'HN6', 'R15', '土豪的世界', 'On', #TIME#, #TIME#),
 
 /*
     后台管理 / Admin
 */
-(NULL, 'A3', 1, 'M0', 'R1', '后台管理', 'On', #TIME#),
+(NULL, 'A3', 1, 'M0', 'R1', '后台管理', 'On', #TIME#, #TIME#),
 
-(NULL, 'AC2', 1, 'A3', 'R1', '管理中心', 'On', #TIME#),
-(NULL, 'AU1', 2, 'A3', 'R1', '用户管理', 'On', #TIME#),
-(NULL, 'AP2', 3, 'A3', 'R1', '产品管理', 'On', #TIME#),
-(NULL, 'AN1', 4, 'A3', 'R1', '新闻管理', 'On', #TIME#),
-(NULL, 'AM1', 7, 'A3', 'R1', '菜单管理', 'On', #TIME#),
-(NULL, 'AR1', 8, 'A3', 'R1', '角色管理', 'On', #TIME#),
-(NULL, 'AP1', 9, 'A3', 'R1', '权限管理', 'On', #TIME#),
+(NULL, 'AC2', 1, 'A3', 'R1', '管理中心', 'On', #TIME#, #TIME#),
+(NULL, 'AU1', 2, 'A3', 'R1', '用户管理', 'On', #TIME#, #TIME#),
+(NULL, 'AP2', 3, 'A3', 'R1', '产品管理', 'On', #TIME#, #TIME#),
+(NULL, 'AN1', 4, 'A3', 'R1', '新闻管理', 'On', #TIME#, #TIME#),
+(NULL, 'AM1', 7, 'A3', 'R1', '菜单管理', 'On', #TIME#, #TIME#),
+(NULL, 'AR1', 8, 'A3', 'R1', '角色管理', 'On', #TIME#, #TIME#),
+(NULL, 'AP1', 9, 'A3', 'R1', '权限管理', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUUV1', 1, 'AU1', 'R1', '所有用户', 'On', #TIME#),
-(NULL, 'AUUV2', 2, 'AU1', 'R1', '查看用户', 'On', #TIME#),
-(NULL, 'AUUV3', 3, 'AU1', 'R1', '编辑用户', 'On', #TIME#),
+(NULL, 'AUUV1', 1, 'AU1', 'R1', '所有用户', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV2', 2, 'AU1', 'R1', '查看用户', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV3', 3, 'AU1', 'R1', '编辑用户', 'On', #TIME#, #TIME#),
 
-(NULL, 'AMMV1', 1, 'AP2', 'R1', '所有产品', 'On', #TIME#),
-(NULL, 'AMMV2', 2, 'AP2', 'R1', '添加产品', 'On', #TIME#),
-(NULL, 'AMMV4', 4, 'AP2', 'R1', '产品分类', 'On', #TIME#),
-(NULL, 'AMMV5', 5, 'AP2', 'R1', '添加产品分类', 'On', #TIME#),
+(NULL, 'AMMV1', 1, 'AP2', 'R1', '所有产品', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV2', 2, 'AP2', 'R1', '添加产品', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV4', 4, 'AP2', 'R1', '产品分类', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV5', 5, 'AP2', 'R1', '添加产品分类', 'On', #TIME#, #TIME#),
 
-(NULL, 'AMMC1', 1, 'AN1', 'R1', '所有新闻', 'On', #TIME#),
-(NULL, 'AMMC2', 2, 'AN1', 'R1', '添加新闻', 'On', #TIME#),
-(NULL, 'AMMC4', 4, 'AN1', 'R1', '新闻分类', 'On', #TIME#),
-(NULL, 'AMMC5', 5, 'AN1', 'R1', '添加新闻分类', 'On', #TIME#),
+(NULL, 'AMMC1', 1, 'AN1', 'R1', '所有新闻', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC2', 2, 'AN1', 'R1', '添加新闻', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC4', 4, 'AN1', 'R1', '新闻分类', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC5', 5, 'AN1', 'R1', '添加新闻分类', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUMV1', 1, 'AM1', 'R1', '所有菜单', 'On', #TIME#),
-(NULL, 'AUMV2', 2, 'AM1', 'R1', '创建菜单', 'On', #TIME#),
+(NULL, 'AUMV1', 1, 'AM1', 'R1', '所有菜单', 'On', #TIME#, #TIME#),
+(NULL, 'AUMV2', 2, 'AM1', 'R1', '创建菜单', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUCC1', 1, 'AC2', 'R1', '管理中心', 'On', #TIME#),
-(NULL, 'ACCC2', 2, 'AC2', 'R1', '网站配置', 'On', #TIME#),
-(NULL, 'ACCC3', 3, 'AC2', 'R1', '备份数据', 'On', #TIME#),
+(NULL, 'AUCC1', 1, 'AC2', 'R1', '管理中心', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC2', 2, 'AC2', 'R1', '网站配置', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC3', 3, 'AC2', 'R1', '备份数据', 'On', #TIME#, #TIME#),
 
-(NULL, 'AURR1', 1, 'AR1', 'R1', '所有角色', 'On', #TIME#),
-(NULL, 'AURR2', 2, 'AR1', 'R1', '查看角色', 'On', #TIME#),
-(NULL, 'AURR3', 3, 'AR1', 'R1', '创建角色', 'On', #TIME#),
+(NULL, 'AURR1', 1, 'AR1', 'R1', '所有角色', 'On', #TIME#, #TIME#),
+(NULL, 'AURR2', 2, 'AR1', 'R1', '查看角色', 'On', #TIME#, #TIME#),
+(NULL, 'AURR3', 3, 'AR1', 'R1', '创建角色', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUPP1', 1, 'AP1', 'R1', '所有权限', 'On', #TIME#),
-(NULL, 'AUPP2', 2, 'AP1', 'R1', '查看权限', 'On', #TIME#),
-(NULL, 'AUPP3', 3, 'AP1', 'R1', '创建权限', 'On', #TIME#)
+(NULL, 'AUPP1', 1, 'AP1', 'R1', '所有权限', 'On', #TIME#, #TIME#),
+(NULL, 'AUPP2', 2, 'AP1', 'R1', '查看权限', 'On', #TIME#, #TIME#),
+(NULL, 'AUPP3', 3, 'AP1', 'R1', '创建权限', 'On', #TIME#, #TIME#)

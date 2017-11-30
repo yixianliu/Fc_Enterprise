@@ -45,7 +45,11 @@ $form->field($model, 'is_using')->widget(Select2::classname(), [
 ?>
 
     <div class="form-group">
+
         <?= Html::submitButton($model->isNewRecord ? '创建产品分类' : '更新产品分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
     </div>
 
 <?php ActiveForm::end(); ?>

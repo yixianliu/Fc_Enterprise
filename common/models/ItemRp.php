@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use common\models\Rules;
 use common\models\User;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%itemrp}}".

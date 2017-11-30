@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-                    <hr />
+                    <hr/>
 
                     <p>
                         <?= Html::a('创建角色权限', ['create'], ['class' => 'btn btn-success']) ?>
@@ -33,13 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'filterModel'  => $searchModel,
                         'columns'      => [
                             ['class' => 'yii\grid\SerialColumn'],
                             'name',
-                            'type',
-                            'rule_name',
-                            'data:ntext',
+                            [
+                                'label'     => '类型',
+                                'attribute' => 'type',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        '1' => '角色',
+                                        '2' => '权限',
+                                    ];
+                                    return $state[ $model->type ];
+                                },
+                            ],
                             'description',
                             ['class' => 'yii\grid\ActionColumn'],
                         ],

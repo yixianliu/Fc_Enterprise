@@ -16,8 +16,11 @@ $result['classify'] = empty($result['classify']) ? array() : $result['classify']
 
 <?=
 $form->field($model, 'c_key')->widget(Select2::classname(), [
-    'data'    => $result['classify'],
-    'options' => ['placeholder' => '产品分类...'],
+    'data'          => $result['classify'],
+    'options'       => ['placeholder' => '新闻分类...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
 ]);
 ?>
 
@@ -29,7 +32,8 @@ $form->field($model, 'c_key')->widget(Select2::classname(), [
 $form->field($model, 'content')
     ->widget('kucha\ueditor\UEditor', [
         'clientOptions' => [
-            // 编辑区域大小
+            //设置语言
+            'lang'               => 'zh-cn',
             'initialFrameHeight' => '600',
             'elementPathEnabled' => false,
             'wordCount'          => false,
@@ -84,17 +88,29 @@ $form->field($model, 'is_comments')->widget(Select2::classname(), [
 ]);
 ?>
 
-<?php if (!$model->isNewRecord): ?>
-    <?= $form->field($model, 'published')->textInput(['maxlength' => true]) ?>
-<?php endif; ?>
 
-<?= $form->field($model, 'news_id')->hiddenInput(['value' => time() . '_' . rand(0000, 9999)]); ?>
+<?=
+$form->field($model, 'is_img')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '是否有上传图片...'],
+]);
+?>
 
-<?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->admin_id]); ?>
 
-<div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? '发布新闻' : '更新新闻', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-</div>
+<?=
+$form->field($model, 'is_thumb')->widget(Select2::classname(), [
+    'data'    => ['On' => '启用', 'Off' => '未启用'],
+    'options' => ['placeholder' => '是否有生成缩略图...'],
+]);
+?>
+
+<?= $form->field($model, 'news_id')->hiddenInput(['value' => time() . '_' . rand(0000, 9999)])->label(false); ?>
+
+<?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->user_id])->label(false); ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? '发布新闻' : '更新新闻', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
 
 <?php ActiveForm::end(); ?>
 

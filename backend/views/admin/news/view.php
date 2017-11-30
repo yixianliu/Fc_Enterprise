@@ -10,49 +10,67 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="news-view">
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">
+                <?= Html::encode($this->title) ?>
+            </h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                <div class="col-md-12 col-sm-12 col-xs-12">
 
-    <p>
-        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('删除', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '确认要删除这条新闻吗?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+                    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?=
-    DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'news_id',
-            'user_id',
-            'c_key',
-            'sort_id',
-            'title',
-            'content:ntext',
-            'introduction',
-            'keywords',
-            'praise',
-            'forward',
-            'collection',
-            'share',
-            'attention',
-            'is_promote',
-            'is_hot',
-            'is_winnow',
-            'is_recommend',
-            'is_audit',
-            'is_comments',
-            'is_img',
-            'is_thumb',
-            'published',
-        ],
-    ]);
-    ?>
+                    <p>
+                        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?=
+                        Html::a('删除', ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data'  => [
+                                'confirm' => '确认要删除这条新闻吗?',
+                                'method'  => 'post',
+                            ],
+                        ])
+                        ?>
+                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    </p>
 
+                    <?=
+                    DetailView::widget([
+                        'model'      => $model,
+                        'attributes' => [
+                            'news_id',
+                            'user_id',
+                            'c_key',
+                            'sort_id',
+                            'title',
+                            'content:ntext',
+                            'introduction',
+                            'keywords',
+                            'praise',
+                            'forward',
+                            'collection',
+                            'share',
+                            'attention',
+                            'is_promote',
+                            'is_hot',
+                            'is_winnow',
+                            'is_recommend',
+                            'is_audit',
+                            'is_comments',
+                            'is_img',
+                            'is_thumb',
+                            'created_at',
+                            'updated_at',
+                        ],
+                    ]);
+                    ?>
+
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

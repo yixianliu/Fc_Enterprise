@@ -21,8 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <h1><?= Html::encode($this->title) ?></h1>
                 <?= $this->render('_search', ['model' => $searchModel]); ?>
+
+                <hr/>
 
                 <p>
                     <?= Html::a('创建新闻分类', ['create'], ['class' => 'btn btn-success']) ?>

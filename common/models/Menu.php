@@ -67,6 +67,6 @@ class Menu extends \yii\db\ActiveRecord
     // 角色
     public function getItemRp()
     {
-        return $this->hasOne(ItemRp::className(), ['name' => 'r_key']);
+        return $this->hasOne(ItemRp::className(), ['name' => 'rp_key']);
     }
 }

@@ -49,12 +49,24 @@ class ProductController extends BaseController
      */
     public function actionIndex()
     {
+
         $searchModel = new ProductSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // 初始化
+        $result = array();
+
+        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+
+        foreach ($dataCls as $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
+        }
 
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'result'       => $result,
         ]);
     }
 

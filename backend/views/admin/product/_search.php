@@ -23,7 +23,7 @@ use kartik\select2\Select2;
 
             <?=
             $form->field($model, 'c_key')->widget(Select2::classname(), [
-                'data'          => ['1' => '角色', '2' => '权限'],
+                'data'          => $result['classify'],
                 'options'       => ['placeholder' => '产品分类...'],
                 'pluginOptions' => [
                     'allowClear' => true

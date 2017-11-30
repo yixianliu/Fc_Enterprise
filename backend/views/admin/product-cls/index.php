@@ -22,11 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <h1><?= Html::encode($this->title) ?></h1>
+
                 <?= $this->render('_search', ['model' => $searchModel]); ?>
+
+                <hr />
 
                 <p>
                     <?= Html::a('创建产品分类', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
+
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
@@ -34,16 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'c_key',
                         'sort_id',
                         'name',
-                        // 'description:ntext',
-                        // 'keywords',
-                        // 'ico_class',
-                        // 'parent_id',
-                        // 'is_using',
-                        // 'published',
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);
                 ?>
+
             </div>
         </div>
     </section>

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -65,8 +66,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 's_key', 'title', 'content', 'price', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb', 'grade', 'user_grade'], 'required'],
-            [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'string'],
+            [['c_key', 's_key', 'title', 'content', 'is_audit', 'is_field', 'is_comments'], 'required'],
+            [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
             [['product_id'], 'string', 'max' => 85],
             [['c_key', 's_key', 'path'], 'string', 'max' => 55],
@@ -75,6 +76,10 @@ class Product extends \yii\db\ActiveRecord
             [['keywords'], 'string', 'max' => 120],
             [['product_id'], 'unique'],
             [['title'], 'unique'],
+
+            // 默认值
+            [['price', 'grade', 'user_grade', 'discount',], 'default', 'value' => 0],
+            [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend',], 'default', 'value' => 'Off'],
         ];
     }
 

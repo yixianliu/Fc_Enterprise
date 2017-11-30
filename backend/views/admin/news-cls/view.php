@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'method'  => 'post',
                             ],
                         ]) ?>
+                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                     </p>
 
                     <?=

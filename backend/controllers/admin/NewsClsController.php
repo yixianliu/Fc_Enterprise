@@ -86,13 +86,11 @@ class NewsClsController extends BaseController
 
             $dataCls = NewsClassify::findAll(['is_using' => 'On']);
 
+            $result['classify'] = array('C0' => '父类');
+
             foreach ($dataCls as $value) {
                 $result['classify'][ $value['c_key'] ] = $value['name'];
             }
-
-            $array = array('C0' => '父类');
-
-            $result['classify'] = (!empty($result['classify'])) ? array_merge($result['classify'], $array) : $array;
 
             return $this->render('create', [
                 'model'  => $model,

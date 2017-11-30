@@ -21,21 +21,56 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
+                <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
-                <hr />
+                <hr/>
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p>
-                        <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
-                    </p>
-                    <?=
-                    GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel'  => $searchModel,
-                    ]);
-                    ?>
-                </div>
+                <p>
+                    <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
+
+                <?=
+                GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'options'      => ['class' => 'table table-hover'],
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'title',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
+
+                                return $data->name;
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_comments',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_comments ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_audit',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ]
+                ]);
+                ?>
+
             </div>
         </div>
     </section>

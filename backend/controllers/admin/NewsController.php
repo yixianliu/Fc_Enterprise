@@ -2,9 +2,9 @@
 
 namespace backend\controllers\admin;
 
-
 use Yii;
 use common\models\News;
+use common\models\NewsClassify;
 use common\models\NewsSearch;
 use common\models\ProductClassify;
 use yii\web\Controller;
@@ -32,7 +32,8 @@ class NewsController extends BaseController
                     ],
                 ],
             ],
-            'verbs'  => [
+
+            'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
@@ -50,9 +51,19 @@ class NewsController extends BaseController
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        // 初始化
+        $result = array();
+
+        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
+
+        foreach ($dataCls as $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
+        }
+
         return $this->render('index', [
             'searchModel'  => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'result'       => $result,
         ]);
     }
 
@@ -89,7 +100,7 @@ class NewsController extends BaseController
         // 初始化
         $result = array();
 
-        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
 
         foreach ($dataCls as $key => $value) {
             $result['classify'][ $value['c_key'] ] = $value['name'];

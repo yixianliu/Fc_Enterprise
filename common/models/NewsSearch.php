@@ -18,7 +18,7 @@ class NewsSearch extends News
     public function rules()
     {
         return [
-            [['id', 'sort_id', 'praise', 'forward', 'collection', 'share', 'attention', 'published'], 'integer'],
+            [['id', 'sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
             [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'keywords', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
         ];
     }
@@ -66,7 +66,6 @@ class NewsSearch extends News
             'collection' => $this->collection,
             'share' => $this->share,
             'attention' => $this->attention,
-            'published' => $this->published,
         ]);
 
         $query->andFilterWhere(['like', 'news_id', $this->news_id])

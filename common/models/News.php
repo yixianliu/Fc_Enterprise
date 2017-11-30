@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%news}}".
@@ -29,7 +30,6 @@ use Yii;
  * @property string $is_comments
  * @property string $is_img
  * @property string $is_thumb
- * @property string $published
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -57,8 +57,8 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'is_promote', 'is_hot', 'is_winnow', 'introduction', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb', 'published'], 'required'],
-            [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention', 'published'], 'integer'],
+            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'is_audit', 'is_comments'], 'required'],
+            [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
             [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
             [['user_id', 'c_key'], 'string', 'max' => 55],
@@ -67,6 +67,9 @@ class News extends \yii\db\ActiveRecord
             [['keywords'], 'string', 'max' => 120],
             [['news_id'], 'unique'],
             [['title'], 'unique'],
+
+            // 若 "level" 为空，则设其为 1
+            [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend',], 'default', 'value' => 'Off'],
         ];
     }
 

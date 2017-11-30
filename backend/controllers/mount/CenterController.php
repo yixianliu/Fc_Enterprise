@@ -108,13 +108,13 @@ class CenterController extends BaseController
 
                 $power = [
                     'indexCenter', 'confCenter', // 管理中心
-                    'createNews', 'editNews', 'indexNews', 'viewNews', // 新闻
+                    'createNews', 'updateNews', 'indexNews', 'viewNews', // 新闻
                     'createNews-cls', 'updateNews-cls', 'indexNews-cls', 'viewNews-cls', // 新闻分类
                     'createProduct', 'updateProduct', 'indexProduct', 'viewProduct', // 产品
                     'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
                     'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
                     'createJob', 'updateJob', 'indexJob', 'viewJob', // 招聘
-                    'createItemrp', 'updateItemrp', 'indexItemrp', 'viewItemrp', // 角色+权限
+                    'createItemrp', 'updateItemrp', 'indexItemrp', 'viewItemrp', // 角色 + 权限
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
                 ];
 
@@ -175,6 +175,7 @@ class CenterController extends BaseController
     {
         $auth = Yii::$app->authManager;
         $auth->addChild($role, $power); // 添加对应关系
+
         return true;
     }
 

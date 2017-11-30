@@ -2,32 +2,44 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\NewsSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="news-search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+<?php $form = ActiveForm::begin([
+    'action' => ['index'],
+    'method' => 'get',
+]); ?>
 
-    <?= $form->field($model, 'title') ?>
+    <table class="table table-hover">
+        <tbody>
+        <tr>
+            <td>
 
-    <?= $form->field($model, 'c_key') ?>
+                <?=
+                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '产品分类...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'content') ?>
-
-    <?= $form->field($model, 'introduction') ?>
+            </td>
+            <td><?= $form->field($model, 'content') ?></td>
+            <td><?= $form->field($model, 'introduction') ?></td>
+        </tr>
+        </tbody>
+    </table>
 
     <div class="form-group">
         <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
-
-</div>
+<?php ActiveForm::end(); ?>

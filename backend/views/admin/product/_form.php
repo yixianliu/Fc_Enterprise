@@ -46,10 +46,11 @@ $form->field($model, 's_key')->widget(Select2::classname(), [
 <?=
 $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
     'clientOptions' => [
-        //编辑区域大小
-        'initialFrameHeight' => '400',
         //设置语言
         'lang'               => 'zh-cn',
+        'initialFrameHeight' => '600',
+        'elementPathEnabled' => false,
+        'wordCount'          => false,
     ]
 ]);
 ?>
@@ -59,16 +60,6 @@ $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
 <?= $form->field($model, 'discount')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'praise')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'forward')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'collection')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'share')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'attention')->textInput(['maxlength' => true]) ?>
 
 <?=
 $form->field($model, 'is_promote')->widget(Select2::classname(), [
@@ -175,7 +166,11 @@ $form->field($model, 'is_thumb')->widget(Select2::classname(), [
 <?= $form->field($model, 'user_grade')->textInput(['maxlength' => true]) ?>
 
 <div class="form-group">
+
     <?= Html::submitButton($model->isNewRecord ? '发布产品' : '更新产品', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
 </div>
 
 <?php ActiveForm::end(); ?>

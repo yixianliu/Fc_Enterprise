@@ -33,7 +33,7 @@ class ItemrpController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -53,7 +53,7 @@ class ItemrpController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -154,4 +154,5 @@ class ItemrpController extends BaseController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
