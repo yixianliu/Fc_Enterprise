@@ -158,7 +158,7 @@ CREATE TABLE `#DB_PREFIX#Section` (
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
-    `ico_class` VARCHAR(55) NULL COMMENT '样式',
+    `json_data` VARCHAR(255) NULL COMMENT '样式',
     `parent_key` VARCHAR(55) NOT NULL COMMENT '父类KEY',
     `is_ad` SET('On', 'Off') NOT NULL COMMENT '是否开启广告',
     `is_post` SET('On', 'Off') NOT NULL COMMENT '发布帖子',
@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Slide`;
 CREATE TABLE `#DB_PREFIX#Slide` (
     `slide_id` INT(11) NULL AUTO_INCREMENT,
     `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `path` VARCHAR(255) NOT NULL COMMENT '幻灯片路径',
+    `path` VARCHAR(255) NOT NULL COMMENT '幻灯片图片路径',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     PRIMARY KEY (`slide_id`),
@@ -446,8 +446,7 @@ CREATE TABLE `#DB_PREFIX#Music` (
     `size` VARCHAR(55) NOT NULL COMMENT '大小',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`music_id`),
+    PRIMARY KEY (`music_id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
@@ -467,8 +466,7 @@ CREATE TABLE `#DB_PREFIX#Music_Classify` (
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
+    PRIMARY KEY (`id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
@@ -509,8 +507,7 @@ CREATE TABLE `#DB_PREFIX#Document_Classify` (
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
+    PRIMARY KEY (`id`),
     KEY `r_key` (`r_key`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
@@ -593,7 +590,7 @@ CREATE TABLE `#DB_PREFIX#Product_Classify` (
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
-    `ico_class` VARCHAR(55) NULL COMMENT '分类图标样式',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
@@ -634,8 +631,7 @@ CREATE TABLE `#DB_PREFIX#News` (
     `is_thumb` SET('On', 'Off') NOT NULL COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY
-    KEY (`id`),
+    PRIMARY KEY (`id`),
     UNIQUE KEY `news_id` (`news_id`),
     UNIQUE `title` (`title`),
     KEY `user_id` (`user_id`),
@@ -643,7 +639,7 @@ CREATE TABLE `#DB_PREFIX#News` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
- * 产品分类(产品属于那种类型,例如电子产品,服装产品,这里的分类是根据版块ID来分类的)
+ * 新闻分类
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#News_Classify`;
 CREATE TABLE `#DB_PREFIX#News_Classify` (
@@ -653,7 +649,7 @@ CREATE TABLE `#DB_PREFIX#News_Classify` (
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
-    `ico_class` VARCHAR(55) NULL COMMENT '分类图标样式',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
@@ -663,5 +659,75 @@ CREATE TABLE `#DB_PREFIX#News_Classify` (
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 招聘中心
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Job`;
+CREATE TABLE `#DB_PREFIX#Job` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `job_id` VARCHAR(85) NOT NULL COMMENT '招聘编号,唯一识别码',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
+    `keywords` VARCHAR(120) NULL COMMENT '关键字',
+    `path` VARCHAR(55) NULL COMMENT '招聘文件路径',
+    `is_promote` SET('On', 'Off') NOT NULL COMMENT '推广',
+    `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
+    `is_classic` SET('On', 'Off') NOT NULL COMMENT '经典',
+    `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
+    `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
+    `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
+    `is_thumb` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
+    `grade` INT(6) UNSIGNED NOT NULL COMMENT '本站评分,由我们网站人员进行评估.',
+    `user_grade` INT(6) UNSIGNED NOT NULL COMMENT '用户评分,由本站用户进行评估.',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `job_id` (`job_id`),
+    UNIQUE `title` (`title`),
+    KEY `user_id` (`user_id`),
+    KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 招聘类别
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Job_Classify`;
+CREATE TABLE `#DB_PREFIX#Job_Classify` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `json_data` VARCHAR(255) NULL COMMENT 'json数据',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`),
+    UNIQUE `name` (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 用户应聘
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Job_Classify`;
+CREATE TABLE `#DB_PREFIX#Job_Classify` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `job_id` VARCHAR(85) NOT NULL COMMENT '招聘ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `user_id` (`user_id`),
+    UNIQUE `job_id` (`job_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # SET FOREIGN_KEY_CHECKS = 1;

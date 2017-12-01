@@ -4,13 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Product */
+/* @var $model common\models\User */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = $model->username;
+$this->params['breadcrumbs'][] = ['label' => '用户', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -29,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::a('删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
-                            'confirm' => 'Are you sure you want to delete this item?',
+                            'confirm' => '是否删除这条记录?',
                             'method'  => 'post',
                         ],
                     ])
@@ -37,44 +36,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
-                <?= DetailView::widget([
+                <?=
+                DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'product_id',
                         'user_id',
-                        'l_key',
-                        'c_key',
+                        'username',
+                        'password',
+                        'r_key',
+                        'exp',
+                        'credit',
+                        'nickname',
+                        'signature',
+                        'telphone',
+                        'birthday',
+                        'answer',
                         's_key',
-                        'title',
-                        'content:ntext',
-                        'price',
-                        'discount',
-                        'introduction',
-                        'keywords',
-                        'path',
-                        'praise',
-                        'forward',
-                        'collection',
-                        'share',
-                        'attention',
-                        'is_promote',
-                        'is_hot',
-                        'is_classic',
-                        'is_winnow',
-                        'is_recommend',
-                        'is_audit',
-                        'is_field',
-                        'is_comments',
-                        'is_img',
-                        'is_thumb',
-                        'grade',
-                        'user_grade',
+                        'login_ip',
+                        'consecutively',
+                        'sex',
+                        'is_display',
+                        'is_head',
+                        'is_security',
+                        'is_using',
                         'created_at',
                         'updated_at',
                     ],
-                ]) ?>
+                ]);
+                ?>
 
             </div>
         </div>
     </section>
 </div>
+

@@ -1,33 +1,154 @@
 <?php
-/**
- *
- * 用户控制器
- *
- * Created by Yixianliu.
- * User: Yxl <zccem@163.com>
- * Date: 2017/6/7
- * Time: 10:09
- */
 
 namespace backend\controllers\admin;
 
+use common\models\ItemRp;
 use Yii;
-use yii\data\Pagination;
-use backend\models\User;
+use common\models\User;
+use common\models\UserSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
+/**
+ * UserController implements the CRUD actions for User model.
+ */
 class UserController extends BaseController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class'   => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
     /**
-     * 列表
+     * Lists all User models.
+     * @return mixed
      */
-    public function actionView()
+    public function actionIndex()
     {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $result = User::view();
+        return $this->render('index', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
-        $pages = new Pagination(['totalCount' => $result->count(), 'pageSize' => '2']);
+    /**
+     * Displays a single User model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
-        return $this->render('view', ['result' => $result, 'pages' => $pages]);
+    /**
+     * Creates a new User model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new User();
+
+        $model->scenario = 'backend';
+
+        $model->user_id = time() . '_' . rand(0000, 9999);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+
+            // 初始化
+            $result = array();
+
+            $dataRole = ItemRp::findAll(['type' => 1]);
+
+            foreach ($dataRole as $value) {
+                $result['role'][ $value['name'] ] = $value['name'];
+            }
+
+            return $this->render('create', [
+                'model'  => $model,
+                'result' => $result,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing User model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->scenario = 'backend';
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+
+            // 初始化
+            $result = array();
+
+            $dataRole = ItemRp::findAll(['type' => 1]);
+
+            foreach ($dataRole as $value) {
+                $result['role'][ $value['name'] ] = $value['name'];
+            }
+
+            return $this->render('update', [
+                'model'  => $model,
+                'result' => $result,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing User model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     *
+     * @param integer $id
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

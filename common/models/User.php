@@ -24,9 +24,9 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
 
+    public $repassword;
+    public $newpassword;
 
     /**
      * @inheritdoc
@@ -49,11 +49,56 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'user_id'     => '用户编号',
+            'username'    => '帐号',
+            'nickname'    => '昵称',
+            'telphone'    => '手机号码',
+            'is_using'    => '是否启用',
+            'login_ip'    => '登录 IP',
+            'r_key'       => '角色',
+            'sex'         => '性别',
+            'password'    => '密码',
+            'repassword'  => '确认密码',
+            'newpassword' => '新密码',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+            // 必填
+            [['username', 'password', 'nickname', 'sex', 'repassword', 'r_key'], 'required', 'on' => 'backend'],
+
+            // 对username的值进行两边去空格过滤
+            [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
+
+            // 两次密码是否一样
+            ['repassword', 'compare', 'compareAttribute' => 'password'],
+
+            [['exp', 'credit', 'birthday', 'signature'], 'default', 'value' => 0],
+
+            [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
+        ];
+    }
+
+    /**
+     * 场景
+     *
+     * @return array
+     */
+    public function scenarios()
+    {
+        return [
+            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'repassword', 'user_id'], // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         ];
     }
 
@@ -62,7 +107,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id]);
     }
 
     /**

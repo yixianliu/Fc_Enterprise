@@ -4,14 +4,15 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Product */
+/* @var $model common\models\User */
 
-$this->title = '添加产品';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = '创建用户';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 echo $this->render('_form', [
     'model'  => $model,
     'result' => $result,
 ]);
+
 ?>

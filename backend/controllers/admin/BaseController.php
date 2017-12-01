@@ -34,7 +34,7 @@ class BaseController extends Controller
         if (Yii::$app->user->can($power)) {
             return true;
         } else {
-            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
+//            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
         }
     }
 }

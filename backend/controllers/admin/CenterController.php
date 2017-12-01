@@ -52,8 +52,13 @@ class CenterController extends BaseController
         return $this->render('view');
     }
 
-    public function actionError()
+    /**
+     * 设置管理员密码
+     *
+     * @return string
+     */
+    public function actionSetpassword()
     {
-
+        return $this->render('setpassword');
     }
 }
