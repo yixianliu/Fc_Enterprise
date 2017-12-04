@@ -7,7 +7,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\NewsClassify;
 use common\models\NewsClassifySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**

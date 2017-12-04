@@ -2,12 +2,17 @@
 
 namespace backend\controllers\admin;
 
+
 use Yii;
 use common\models\Slide;
 use common\models\SlideSearch;
+use common\models\SinglePage;
+use yii\helpers\FileHelper;
 use yii\helpers\Json;
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -67,11 +72,40 @@ class SlideController extends BaseController
 
         $model->slide_id = time() . '_' . rand(0000, 9999);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        // 初始化
+        $data = array();
+
+        // 整合路径
+        if (!empty(Yii::$app->request->post())) {
+
+            $result = Yii::$app->request->post();
+
+            if (!empty($result['path'])) {
+
+                $data['path'] = null;
+
+                foreach ($result['path'] as $value) {
+                    $data['path'] .= $value;
+                }
+            }
+        }
+
+        // 初始化
+        $result = array();
+
+        // 单页面
+        $dataPage = SinglePage::findAll(['is_using' => 'On']);
+
+        foreach ($dataPage as $value) {
+            $result['page'][ $value['page_id'] ] = $value['name'];
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->slide_id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $result,
             ]);
         }
     }
@@ -129,13 +163,14 @@ class SlideController extends BaseController
      *
      * @return string
      */
-    public function actionImageUpload()
+    public function actionImageUpload($id)
     {
         $model = new Slide();
 
+        // 上传组件对应model
         $imageFile = UploadedFile::getInstance($model, 'path');
 
-        $directory = Yii::getAlias('@backend/web/img/temp') . DIRECTORY_SEPARATOR . 'Slide' . DIRECTORY_SEPARATOR;
+        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . 'Slide' . DIRECTORY_SEPARATOR;
 
         if (!is_dir($directory)) {
             FileHelper::createDirectory($directory);
@@ -149,7 +184,7 @@ class SlideController extends BaseController
 
             if ($imageFile->saveAs($filePath)) {
 
-                $path = '/img/temp/' . 'Slide' . DIRECTORY_SEPARATOR . $fileName;
+                $path = Yii::getAlias('@web') . '/temp/Slide' . DIRECTORY_SEPARATOR . $fileName;
 
                 return Json::encode([
                     'files' => [
@@ -158,8 +193,8 @@ class SlideController extends BaseController
                             'size'         => $imageFile->size,
                             'url'          => $path,
                             'thumbnailUrl' => $path,
-                            'deleteUrl'    => 'image-delete?name=' . $fileName,
-                            'deleteType'   => 'POST',
+                            'deleteUrl'    => 'admin/slide/image-delete?name=' . $fileName,
+                            'deleteType'   => 'GET',
                         ],
                     ],
                 ]);
@@ -177,23 +212,28 @@ class SlideController extends BaseController
      */
     public function actionImageDelete($name)
     {
-        $directory = Yii::getAlias('@backend/web/img/temp') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
+        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
+
         if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
             unlink($directory . DIRECTORY_SEPARATOR . $name);
         }
 
         $files = FileHelper::findFiles($directory);
+
         $output = [];
+
         foreach ($files as $file) {
+
             $fileName = basename($file);
-            $path = '/img/temp/' . Yii::$app->session->id . DIRECTORY_SEPARATOR . $fileName;
+            $path = '/img/temp/Slide' . DIRECTORY_SEPARATOR . $fileName;
+
             $output['files'][] = [
                 'name'         => $fileName,
                 'size'         => filesize($file),
                 'url'          => $path,
                 'thumbnailUrl' => $path,
-                'deleteUrl'    => 'image-delete?name=' . $fileName,
-                'deleteType'   => 'POST',
+                'deleteUrl'    => 'admin/slide/image-delete?name=' . $fileName,
+                'deleteType'   => 'GET',
             ];
         }
 

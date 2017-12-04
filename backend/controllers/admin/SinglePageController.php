@@ -3,16 +3,16 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use common\models\ItemRp;
-use common\models\ItemRpSearch;
+use common\models\SinglePage;
+use common\models\SinglePageSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * ItemRpController implements the CRUD actions for ItemRp model.
+ * SinglePageController implements the CRUD actions for SinglePage model.
  */
-class ItemrpController extends BaseController
+class SinglePageController extends BaseController
 {
     /**
      * @inheritdoc
@@ -20,19 +20,8 @@ class ItemrpController extends BaseController
     public function behaviors()
     {
         return [
-
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -41,25 +30,23 @@ class ItemrpController extends BaseController
     }
 
     /**
-     * Lists all ItemRp models.
+     * Lists all SinglePage models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $searchModel = new ItemRpSearch();
-
+        $searchModel = new SinglePageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single ItemRp model.
-     * @param string $id
+     * Displays a single SinglePage model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -70,35 +57,16 @@ class ItemrpController extends BaseController
     }
 
     /**
-     * Creates a new ItemRp model.
+     * Creates a new SinglePage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ItemRp();
+        $model = new SinglePage();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $auth = Yii::$app->authManager;
-
-            if ($model->type == 2) {
-                $role = $auth->createPermission($model->name);
-            } else {
-                $role = $auth->createRole($model->name);
-            }
-
-            $role->description = $model->description;
-            $role->data = $model->data;
-            $role->type = $model->type;
-
-            $rzt = $auth->add($role);
-
-            if (!$rzt) {
-                Yii::$app->session->setFlash('error', '无法保存数据');
-            }
-
-            return $this->redirect(['view', 'id' => $model->name]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -107,9 +75,9 @@ class ItemrpController extends BaseController
     }
 
     /**
-     * Updates an existing ItemRp model.
+     * Updates an existing SinglePage model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -117,7 +85,7 @@ class ItemrpController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -126,9 +94,9 @@ class ItemrpController extends BaseController
     }
 
     /**
-     * Deletes an existing ItemRp model.
+     * Deletes an existing SinglePage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -139,19 +107,28 @@ class ItemrpController extends BaseController
     }
 
     /**
-     * Finds the ItemRp model based on its primary key value.
+     * Finds the SinglePage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return ItemRp the loaded model
+     * @param integer $id
+     * @return SinglePage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ItemRp::findOne($id)) !== null) {
+        if (($model = SinglePage::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
+    /**
+     * 编辑 Html 文件
+     *
+     * @return string
+     */
+    public function actionEfile()
+    {
+        return $this->render('efile');
+    }
 }

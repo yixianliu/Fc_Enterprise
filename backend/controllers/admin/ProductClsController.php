@@ -2,11 +2,9 @@
 
 namespace backend\controllers\admin;
 
-use Faker\Provider\Base;
 use Yii;
 use common\models\ProductClassify;
 use common\models\ProductClassifySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

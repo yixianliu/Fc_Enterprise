@@ -7,7 +7,6 @@ use common\models\News;
 use common\models\NewsClassify;
 use common\models\NewsSearch;
 use common\models\ProductClassify;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

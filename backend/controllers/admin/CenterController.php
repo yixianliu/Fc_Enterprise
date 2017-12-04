@@ -12,7 +12,6 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -32,6 +31,13 @@ class CenterController extends BaseController
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],
+
+            'verbs' => [
+                'class'   => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
                 ],
             ],
         ];

@@ -13,6 +13,13 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<style type="text/css">
+    .template-download img {
+        width: 75px;
+        height: 50px;
+    }
+</style>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -28,7 +35,15 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'slide_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
-                    <?= $form->field($model, 'page_id')->textInput(['maxlength' => true]) ?>
+                    <?=
+                    $form->field($model, 'page_id')->widget(kartik\select2\Select2::classname(), [
+                        'data'          => $result['page'],
+                        'options'       => ['placeholder' => '选择...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
 
                     <hr/>
 
@@ -42,14 +57,25 @@ use dosamigos\fileupload\FileUploadUI;
                             'accept' => 'image/*'
                         ],
                         'clientOptions' => [
-                            'maxFileSize' => 2000000
+                            'maxFileSize' => 2000000,
+                            'dataType'    => 'json',
                         ],
+
                         // ...
                         'clientEvents'  => [
                             'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
-                                alert(data.message);
+                                
+                                var html = "";
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += "<input type=\'hidden\' name=\'Slide[path][]\' value=\'" + file.name + "\'>";
+                                });
+                                
+                                $("#SlideImg").append(html);
+                                
+                                return true;
                             }',
                             'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
@@ -58,6 +84,8 @@ use dosamigos\fileupload\FileUploadUI;
                         ],
                     ]);
                     ?>
+
+                    <div id="SlideImg"></div>
 
                     <hr/>
 

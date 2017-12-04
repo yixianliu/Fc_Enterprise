@@ -6,7 +6,6 @@ use common\models\ItemRp;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
