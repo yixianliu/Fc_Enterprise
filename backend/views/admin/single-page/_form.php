@@ -21,11 +21,21 @@ use yii\widgets\ActiveForm;
 
                     <?php $form = ActiveForm::begin(); ?>
 
-                    <?= $form->field($model, 'page_id')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'page_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                    <?=
+                    $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                        'clientOptions' => [
+                            //设置语言
+                            'lang'               => 'zh-cn',
+                            'initialFrameHeight' => '600',
+                            'elementPathEnabled' => false,
+                            'wordCount'          => false,
+                        ]
+                    ]);
+                    ?>
 
                     <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
 

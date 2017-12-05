@@ -20,6 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
+
+                <hr />
+
                 <p>
                     <?= Html::a('创建单页面', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
@@ -31,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['class' => 'yii\grid\SerialColumn'],
                         'page_id',
                         'name',
-                        'content:ntext',
                         'path',
                          'is_using',
                         ['class' => 'yii\grid\ActionColumn'],

@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                     </p>
 
-                    <?= DetailView::widget([
+                    <?=
+                    DetailView::widget([
                         'model'      => $model,
                         'attributes' => [
                             'c_key',
@@ -50,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'created_at',
                             'updated_at',
                         ],
-                    ]) ?>
+                    ]);
+                    ?>
 
                 </div>
             </div>

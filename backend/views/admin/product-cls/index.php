@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('创建产品分类', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?= GridView::widget([
+                <?=
+                GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],

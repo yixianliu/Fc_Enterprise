@@ -9,6 +9,7 @@ use common\models\SlideSearch;
 use common\models\SinglePage;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -41,6 +42,7 @@ class SlideController extends BaseController
     public function actionIndex()
     {
         $searchModel = new SlideSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -72,40 +74,16 @@ class SlideController extends BaseController
 
         $model->slide_id = time() . '_' . rand(0000, 9999);
 
-        // 初始化
-        $data = array();
-
         // 整合路径
-        if (!empty(Yii::$app->request->post())) {
+        $result = $this->zpath(Yii::$app->request->post());
 
-            $result = Yii::$app->request->post();
-
-            if (!empty($result['path'])) {
-
-                $data['path'] = null;
-
-                foreach ($result['path'] as $value) {
-                    $data['path'] .= $value;
-                }
-            }
-        }
-
-        // 初始化
-        $result = array();
-
-        // 单页面
-        $dataPage = SinglePage::findAll(['is_using' => 'On']);
-
-        foreach ($dataPage as $value) {
-            $result['page'][ $value['page_id'] ] = $value['name'];
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load($result) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->slide_id]);
         } else {
+
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => $this->page(),
             ]);
         }
     }
@@ -118,15 +96,88 @@ class SlideController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        // 整合路径
+        $result = $this->zpath(Yii::$app->request->post());
+
+        if ($model->load($result) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->slide_id]);
         } else {
+
+            $result = $this->page();
+
+            $dataImg = explode(', ', $model->path);
+
+            foreach ($dataImg as $value) {
+
+                if (empty($value))
+                    break;
+
+                $result['img'][] = $value;
+            }
+
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $result,
             ]);
         }
+    }
+
+    /**
+     * 路径整合
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function zpath($data)
+    {
+        // 整合路径
+        if (!empty($data)) {
+
+            $result = $data;
+
+            if (!empty($result['Slide']['path'])) {
+
+                $dataPage = null;
+
+                foreach ($result['Slide']['path'] as $value) {
+                    $dataPage .= $value . ', ';
+                }
+
+                $result['Slide']['path'] = $dataPage;
+            }
+        } else {
+            $result = array();
+        }
+
+        return $result;
+    }
+
+    /**
+     * 固定单页面
+     *
+     * @return array
+     */
+    public function page()
+    {
+        // 初始化
+        $result = array();
+
+        $result['page'] = [
+            'index' => '网站首页',
+            'job'   => '招聘中心',
+        ];
+
+        // 单页面
+        $dataPage = SinglePage::findAll(['is_using' => 'On']);
+
+        foreach ($dataPage as $value) {
+            $result['page'][ $value['page_id'] ] = $value['name'];
+        }
+
+        return $result;
     }
 
     /**
@@ -178,7 +229,7 @@ class SlideController extends BaseController
 
         if ($imageFile) {
 
-            $uid = uniqid(time(), true);
+            $uid = time() . '_' . rand(00000, 99999);
             $fileName = $uid . '.' . $imageFile->extension;
             $filePath = $directory . $fileName;
 
@@ -193,7 +244,7 @@ class SlideController extends BaseController
                             'size'         => $imageFile->size,
                             'url'          => $path,
                             'thumbnailUrl' => $path,
-                            'deleteUrl'    => 'admin/slide/image-delete?name=' . $fileName,
+                            'deleteUrl'    => Url::to(['admin/slide/image-delete', 'name' => $fileName]),
                             'deleteType'   => 'GET',
                         ],
                     ],
@@ -212,7 +263,7 @@ class SlideController extends BaseController
      */
     public function actionImageDelete($name)
     {
-        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
+        $directory = Yii::getAlias('@backend/web/temp/Slide');
 
         if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
             unlink($directory . DIRECTORY_SEPARATOR . $name);

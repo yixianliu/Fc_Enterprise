@@ -5,21 +5,35 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\SinglePage;
 use common\models\SinglePageSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SinglePageController implements the CRUD actions for SinglePage model.
  */
 class SinglePageController extends BaseController
 {
+
+    public $absolute = 'single_page';
+
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -64,6 +78,8 @@ class SinglePageController extends BaseController
     public function actionCreate()
     {
         $model = new SinglePage();
+
+        $model->page_id = time() . '_' . rand(0000, 9999);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -127,8 +143,15 @@ class SinglePageController extends BaseController
      *
      * @return string
      */
-    public function actionEfile()
+    public function actionEfile($id)
     {
-        return $this->render('efile');
+
+        $data = SinglePage::findOne(['page_id' => $id]);
+
+        if (!file_exists($data['path'])) {
+
+        }
+
+        return $this->render('efile', ['result' => $data]);
     }
 }

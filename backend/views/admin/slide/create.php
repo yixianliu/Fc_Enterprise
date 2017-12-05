@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 echo $this->render('_form', [
-    'model' => $model,
+    'model'  => $model,
+    'result' => $result,
 ]);
 
 ?>
