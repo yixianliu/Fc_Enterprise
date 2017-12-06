@@ -2,9 +2,11 @@
 
 namespace backend\controllers\admin;
 
+use Faker\Provider\File;
 use Yii;
 use common\models\SinglePage;
 use common\models\SinglePageSearch;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -81,7 +83,22 @@ class SinglePageController extends BaseController
 
         $model->page_id = time() . '_' . rand(0000, 9999);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        // 创建文件
+        if (!empty(Yii::$app->request->post())) {
+
+            $filename = Yii::getAlias('@frontend') . '/views/pages/' . Yii::$app->request->post('path') . '.php';
+
+            if (file_exists($filename)) {
+                $data = array();
+                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
+            }
+
+            FileHelper::createDirectory($filename);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -100,7 +117,26 @@ class SinglePageController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        // 更改文件
+        if (!empty(Yii::$app->request->post())) {
+
+            $filename = Yii::getAlias('@frontend') . 'views/pages/' . Yii::$app->request->post('path') . '.php';
+
+            if (file_exists($filename)) {
+                $data = array();
+                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
+            }
+
+            FileHelper::createDirectory($filename);
+
+            $oldFilename = Yii::getAlias('@frontend') . '/views/pages/' . $model->path . '.php';
+
+            unlink($oldFilename);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

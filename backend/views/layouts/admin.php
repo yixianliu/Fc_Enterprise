@@ -22,7 +22,7 @@ $this->beginPage();
 
     <?= ConfList::widget(); ?>
 
-    <title>管理中心</title>
+    <title>管理中心 - <?= Html::encode($this->title) ?></title>
 
     <?php $this->head() ?>
 

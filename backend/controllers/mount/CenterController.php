@@ -114,8 +114,9 @@ class CenterController extends BaseController
                     'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
                     'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
                     'createJob', 'updateJob', 'indexJob', 'viewJob', // 招聘
-                    'createItemrp', 'updateItemrp', 'indexItemrp', 'viewItemrp', // 角色 + 权限
+                    'createItemrp', 'updateItemrp', 'indexItemrp', 'viewItemrp', 'relatedItemrp', // 角色 + 权限
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
+                    'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', // 菜单
                 ];
 
                 $role = $this->createRole('admin');
