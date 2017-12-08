@@ -132,12 +132,12 @@ VALUES
 */
 (NULL, 'H1', 1, 'M0', 'admin', NULL, '驯力文化', 'On', #TIME#, #TIME#),
 
-(NULL, 'HN1', 1, 'H1', 'admin', NULL, '文化中心', 'On', #TIME#, #TIME#),
+(NULL, 'HN1', 1, 'H1', 'guest', NULL, '文化中心', 'On', #TIME#, #TIME#),
 (NULL, 'HN2', 2, 'H1', 'admin', NULL, '记录中心', 'On', #TIME#, #TIME#),
 (NULL, 'HN3', 3, 'H1', 'admin', NULL, '统计中心', 'On', #TIME#, #TIME#),
 (NULL, 'HN4', 4, 'H1', 'admin', NULL, '文档资源', 'On', #TIME#, #TIME#),
 (NULL, 'HN5', 5, 'H1', 'admin', NULL, '视频资源', 'On', #TIME#, #TIME#),
-(NULL, 'HN6', 6, 'H1', 'admin', NULL, '神推荐', 'On', #TIME#, #TIME#),
+(NULL, 'HN6', 6, 'H1', 'guest', NULL, '神推荐', 'On', #TIME#, #TIME#),
 (NULL, 'HN7', 7, 'H1', 'admin', NULL, '驯力文化', 'On', #TIME#, #TIME#),
 
 (NULL, 'HNC1', 1, 'HN6', 'admin', NULL, '最强人气', 'On', #TIME#, #TIME#),
@@ -155,27 +155,34 @@ VALUES
 (NULL, 'AN1', 4, 'A3', 'admin', NULL, '新闻管理', 'On', #TIME#, #TIME#),
 (NULL, 'AM1', 7, 'A3', 'admin', NULL, '菜单管理', 'On', #TIME#, #TIME#),
 (NULL, 'AR1', 8, 'A3', 'admin', NULL, '角色管理', 'On', #TIME#, #TIME#),
+(NULL, 'AJ1', 9, 'A3', 'admin', NULL, '招聘管理', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUUV1', 1, 'AU1', 'admin', NULL, '所有用户', 'On', #TIME#, #TIME#),
-(NULL, 'AUUV2', 2, 'AU1', 'admin', NULL, '查看用户', 'On', #TIME#, #TIME#),
-(NULL, 'AUUV3', 3, 'AU1', 'admin', NULL, '编辑用户', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV1', 1, 'AJ1', 'admin', 'job/index', '招聘信息', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/create', '添加招聘', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV3', 3, 'AJ1', 'admin', 'resume/index', '所有简历', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV4', 4, 'AJ1', 'admin', 'resume/create', '添加简历', 'On', #TIME#, #TIME#),
 
-(NULL, 'AMMV1', 1, 'AP2', 'admin', NULL, '所有产品', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV2', 2, 'AP2', 'admin', NULL, '添加产品', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV4', 4, 'AP2', 'admin', NULL, '产品分类', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV5', 5, 'AP2', 'admin', NULL, '添加产品分类', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV1', 1, 'AU1', 'admin', 'user/index', '所有用户', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV2', 2, 'AU1', 'admin', 'user/create', '添加用户', 'On', #TIME#, #TIME#),
+
+(NULL, 'AMMV1', 1, 'AP2', 'admin', 'product/index', '所有产品', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV2', 2, 'AP2', 'admin', 'product/create', '添加产品', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV4', 4, 'AP2', 'admin', 'product-cls/index', '产品分类', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV5', 5, 'AP2', 'admin', 'product-cls/create', '添加产品分类', 'On', #TIME#, #TIME#),
 
 (NULL, 'AMMC1', 1, 'AN1', 'admin', NULL, '所有新闻', 'On', #TIME#, #TIME#),
 (NULL, 'AMMC2', 2, 'AN1', 'admin', NULL, '添加新闻', 'On', #TIME#, #TIME#),
 (NULL, 'AMMC4', 4, 'AN1', 'admin', NULL, '新闻分类', 'On', #TIME#, #TIME#),
 (NULL, 'AMMC5', 5, 'AN1', 'admin', NULL, '添加新闻分类', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUMV1', 1, 'AM1', 'admin', NULL, '所有菜单', 'On', #TIME#, #TIME#),
-(NULL, 'AUMV2', 2, 'AM1', 'admin', NULL, '创建菜单', 'On', #TIME#, #TIME#),
+(NULL, 'AUMV1', 1, 'AM1', 'admin', 'menu/index', '所有菜单', 'On', #TIME#, #TIME#),
+(NULL, 'AUMV2', 2, 'AM1', 'admin', 'menu/create', '创建菜单', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUCC1', 1, 'AC2', 'admin', NULL, '管理中心', 'On', #TIME#, #TIME#),
-(NULL, 'ACCC2', 2, 'AC2', 'admin', NULL, '网站配置', 'On', #TIME#, #TIME#),
-(NULL, 'ACCC3', 3, 'AC2', 'admin', NULL, '备份数据', 'On', #TIME#, #TIME#),
+(NULL, 'AUCC1', 1, 'AC2', 'admin', 'center/index', '管理中心', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC2', 2, 'AC2', 'admin', 'center/conf', '网站配置', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC3', 3, 'AC2', 'admin', 'center/backup', '备份数据', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC4', 4, 'AC2', 'admin', NULL, '网站档案', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC5', 5, 'AC2', 'admin', 'center/seo', '网站SEO设置', 'On', #TIME#, #TIME#),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', NULL, '所有角色权限', 'On', #TIME#, #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'admin', NULL, '查看角色权限', 'On', #TIME#, #TIME#),

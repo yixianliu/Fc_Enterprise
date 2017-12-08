@@ -5,16 +5,17 @@ use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ProductClassify */
+/* @var $model common\models\Menu */
 /* @var $form yii\widgets\ActiveForm */
-
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
             <h2 class="title pull-left">
+
                 <?= Html::encode($this->title) ?>
+
             </h2>
         </header>
         <div class="content-body">
@@ -23,31 +24,30 @@ use kartik\select2\Select2;
 
                     <?php $form = ActiveForm::begin(); ?>
 
+                    <?= $form->field($model, 'm_key')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+
                     <?=
                     $form->field($model, 'parent_id')->widget(Select2::classname(), [
-                        'data'          => $result['classify'],
-                        'options'       => ['placeholder' => '选择产品分类...'],
+                        'data'          => ['On' => '启用', 'Off' => '未启用'],
+                        'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ]);
                     ?>
 
-                    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'rp_key')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
-
-                    <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
-
                     <?=
-                    $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
+                    $form->field($model, 'is_using')->widget(Select2::classname(), [
+                        'data'          => ['On' => '启用', 'Off' => '未启用'],
                         'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -56,11 +56,7 @@ use kartik\select2\Select2;
                     ?>
 
                     <div class="form-group">
-
-                        <?= Html::submitButton($model->isNewRecord ? '创建产品分类' : '更新产品分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-
-                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-
+                        <?= Html::submitButton($model->isNewRecord ? '创建菜单' : '更新菜单', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                     </div>
 
                     <?php ActiveForm::end(); ?>

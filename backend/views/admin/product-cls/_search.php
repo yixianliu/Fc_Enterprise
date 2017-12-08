@@ -21,17 +21,6 @@ use kartik\select2\Select2;
         <td><?= $form->field($model, 'c_key') ?></td>
         <td><?= $form->field($model, 'name') ?></td>
         <td><?= $form->field($model, 'keywords') ?></td>
-        <td>
-            <?=
-            $form->field($model, 'parent_id')->widget(Select2::classname(), [
-                'data'          => ['1' => '角色', '2' => '权限'],
-                'options'       => ['placeholder' => '产品分类...'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
-            ?>
-        </td>
 
         <td>
             <?=

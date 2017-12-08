@@ -9,39 +9,46 @@ use kartik\select2\Select2;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<?php if (!empty($result['classify']) && is_array($result['classify'])): ?>
 
-<?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
-]); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => ['index'],
+        'method' => 'get',
+    ]); ?>
 
-<table class="table table-hover">
-    <tbody>
-    <tr>
-        <td><?= $form->field($model, 'product_id') ?></td>
-        <td>
+    <table class="table table-hover">
+        <tbody>
+        <tr>
+            <td><?= $form->field($model, 'product_id') ?></td>
+            <td>
 
-            <?=
-            $form->field($model, 'c_key')->widget(Select2::classname(), [
-                'data'          => $result['classify'],
-                'options'       => ['placeholder' => '产品分类...'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
-            ?>
+                <?=
+                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '产品分类...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-        </td>
-        <td><?= $form->field($model, 'title') ?></td>
-        <td><?= $form->field($model, 'content') ?></td>
-        <td><?= $form->field($model, 'keywords') ?></td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+            <td><?= $form->field($model, 'title') ?></td>
+            <td><?= $form->field($model, 'content') ?></td>
+            <td><?= $form->field($model, 'keywords') ?></td>
+        </tr>
+        </tbody>
+    </table>
 
-<div class="form-group">
-    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
-    <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
-</div>
+    <div class="form-group">
+        <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+    </div>
 
-<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
+
+<?php else: ?>
+
+    <h3>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to('product-cls/create') ?>">产品分类</a> !!</h3>
+
+<?php endif ?>

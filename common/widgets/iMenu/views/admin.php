@@ -26,7 +26,7 @@ function recursiveIMenu($child, $url = null)
     $html = '<ul class="sub-menu">';
     foreach ($child as $value) {
         $html .= '<li>';
-        $html .= '  <a href="' . Url::to(['/admin/' . $url . '/' . $value['itemRp']['name']]) . '">' . $value['name'] . '</a>';
+        $html .= '    <a href="' . Url::to([$url . '/' . $value['url']]) . '">' . $value['name'] . '</a>';
         $html .= '</li>';
 
         if (!empty($value['Child'])) {
@@ -47,7 +47,7 @@ function recursiveIMenu($child, $url = null)
 
         <li class="">
 
-            <a href="<?php if (!empty($value['Child'])): ?> # <?php else: ?> <?= Url::to(['/admin/' . $value['power']['rules']]); ?> <?php endif; ?>"
+            <a href="<?php if (!empty($value['Child'])): ?> # <?php else: ?> <?= Url::to([$value['url']]); ?> <?php endif; ?>"
                title="<?= $value['name']; ?>">
 
                 <i class="fa fa-dashboard"></i>

@@ -44,7 +44,7 @@ $this->beginPage();
             <div class="profile-info row">
 
                 <div class="profile-image col-md-4 col-sm-4 col-xs-4">
-                    <a href="ui-profile.html">
+                    <a href="#">
                         <?= Html::img(Url::to('@web/themes/data/profile/profile.png'), ['class' => 'img-responsive img-circle']); ?>
                     </a>
                 </div>
@@ -56,7 +56,7 @@ $this->beginPage();
                         <span class="profile-status online">Admin</span>
                     </h3>
 
-                    <p class="profile-title"><?= Yii::$app->user->identity->login_ip; ?></p>
+                    <p class="profile-title"><?= Yii::$app->request->userIP; ?></p>
 
                 </div>
 

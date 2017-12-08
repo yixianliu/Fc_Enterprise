@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
+
                                 $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
 
                                 return $data->name;

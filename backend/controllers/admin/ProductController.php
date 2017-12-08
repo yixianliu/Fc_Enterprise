@@ -27,8 +27,9 @@ class ProductController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete',],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
@@ -39,6 +40,25 @@ class ProductController extends BaseController
                     'delete' => ['POST'],
                 ],
             ],
+        ];
+    }
+
+    /**
+     * 操作
+     *
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class'  => 'kucha\ueditor\UEditorAction',
+                'config' => [
+                    "imageUrlPrefix"  => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
+                    "imagePathFormat" => "/temp/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
+                    "imageRoot"       => Yii::getAlias("@webroot"),
+                ],
+            ]
         ];
     }
 
@@ -88,6 +108,7 @@ class ProductController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new Product();
 
         $model->product_id = time() . '_' . rand(000, 999);

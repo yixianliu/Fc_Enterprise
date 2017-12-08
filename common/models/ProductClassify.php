@@ -14,7 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $description
  * @property string $keywords
- * @property string $ico_class
+ * @property string $json_data
  * @property string $parent_id
  * @property string $is_using
  */
@@ -47,7 +47,7 @@ class ProductClassify extends \yii\db\ActiveRecord
             [['c_key', 'sort_id', 'name', 'parent_id', 'is_using'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'keywords', 'ico_class', 'parent_id'], 'string', 'max' => 55],
+            [['c_key', 'keywords', 'json_data', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['c_key'], 'unique'],
             [['name'], 'unique'],
@@ -65,7 +65,7 @@ class ProductClassify extends \yii\db\ActiveRecord
             'name'        => '分类名称',
             'description' => '分类描述',
             'keywords'    => '分类关键词',
-            'ico_class'   => '分类样式',
+            'json_data'   => '分类内容',
             'parent_id'   => '父类',
             'is_using'    => '是否启用',
             'created_at	' => '添加数据时间',

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -22,7 +23,8 @@ if (empty($result['classify'])) {
         </header>
         <div class="content-body">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <?php if (!empty($result['classify']) && is_array($result['classify'])): ?>
 
                     <?php $form = ActiveForm::begin(); ?>
 
@@ -65,6 +67,48 @@ if (empty($result['classify'])) {
                         ]
                     ]);
                     ?>
+
+                    <hr/>
+
+                    <?=
+                    FileUploadUI::widget([
+                        'model'         => $model,
+                        'attribute'     => 'path',
+                        'url'           => ['admin/upload/image-upload', ['id' => $model->product_id, 'type' => 'product']],
+                        'gallery'       => false,
+                        'fieldOptions'  => [
+                            'accept' => 'image/*'
+                        ],
+                        'clientOptions' => [
+                            'maxFileSize' => 2000000,
+                            'dataType'    => 'json',
+                        ],
+
+                        // ...
+                        'clientEvents'  => [
+                            'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                                
+                                var html = "";
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += "<input type=\'hidden\' class=\'" + file.name + "\' name=\'Slide[path][]\' value=\'" + file.name + "\'>";
+                                });
+                                
+                                $("#SlideImg").append(html);
+                                
+                                return true;
+                            }',
+                            'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                        ],
+                    ]);
+                    ?>
+
+                    <div id="SlideImg"></div>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -186,8 +230,16 @@ if (empty($result['classify'])) {
 
                     <?php ActiveForm::end(); ?>
 
-                </div>
+                <?php else: ?>
+
+                    <h1>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a></h1>
+
+                <?php endif ?>
+
             </div>
         </div>
+
+        <?= $this->render('../result_img', ['result' => $result,]); ?>
+
     </section>
 </div>

@@ -69,8 +69,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'is_thumb',
                         'grade',
                         'user_grade',
-                        'created_at',
-                        'updated_at',
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , H:i:s', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , H:i:s', $model->updated_at);
+                            },
+                        ],
                     ],
                 ]) ?>
 

@@ -113,8 +113,9 @@ class CenterController extends BaseController
                     'createProduct', 'updateProduct', 'indexProduct', 'viewProduct', // 产品
                     'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
                     'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
-                    'createJob', 'updateJob', 'indexJob', 'viewJob', // 招聘
-                    'createItemrp', 'updateItemrp', 'indexItemrp', 'viewItemrp', 'relatedItemrp', // 角色 + 权限
+                    'createJob', 'updateJob', 'indexJob', 'viewJob',// 招聘
+                    'createResume', 'updateResume', 'indexResume', 'viewResume',// 简历
+                    'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp', // 角色 + 权限
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
                     'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', // 菜单
                 ];
