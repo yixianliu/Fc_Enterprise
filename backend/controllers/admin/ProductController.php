@@ -113,30 +113,19 @@ class ProductController extends BaseController
 
         $model->product_id = time() . '_' . rand(000, 999);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = array();
+
+        if (!empty(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $data['images'] = $this->setImages($data['images']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
-            // 初始化
-            $result = array();
-
-            // 所有版块
-            $dataSection = Section::findAll(['is_using' => 'On']);
-
-            foreach ($dataSection as $value) {
-                $result['section'][ $value['s_key'] ] = $value['name'];
-            }
-
-            // 产品等级
-            $dataClassify = ProductClassify::findAll(['is_using' => 'On']);
-
-            foreach ($dataClassify as $value) {
-                $result['classify'][ $value['c_key'] ] = $value['name'];
-            }
-
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => $this->getData(),
             ]);
         }
     }
@@ -151,11 +140,19 @@ class ProductController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = array();
+
+        if (!empty(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $data['images'] = $this->setImages($data['images']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $this->getData(),
             ]);
         }
     }
@@ -187,5 +184,42 @@ class ProductController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function getData()
+    {
+        // 初始化
+        $result = array();
+
+        // 所有版块
+        $dataSection = Section::findAll(['is_using' => 'On']);
+
+        foreach ($dataSection as $value) {
+            $result['section'][ $value['s_key'] ] = $value['name'];
+        }
+
+        // 产品等级
+        $dataClassify = ProductClassify::findAll(['is_using' => 'On']);
+
+        foreach ($dataClassify as $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
+    }
+
+    public function setImages($data)
+    {
+        if (empty($data) || !is_array($data)) {
+            return false;
+        }
+
+        $result = null;
+
+        foreach ($data as $value) {
+            $result .= $value . ',';
+        }
+
+        return $result;
     }
 }

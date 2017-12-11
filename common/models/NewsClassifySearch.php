@@ -19,7 +19,7 @@ class NewsClassifySearch extends NewsClassify
     {
         return [
             [['sort_id'], 'integer'],
-            [['c_key', 'name', 'description', 'keywords', 'ico_class', 'parent_id', 'is_using'], 'safe'],
+            [['c_key', 'name', 'description', 'keywords', 'json_data', 'parent_id', 'is_using'], 'safe'],
         ];
     }
 
@@ -67,7 +67,7 @@ class NewsClassifySearch extends NewsClassify
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'ico_class', $this->ico_class])
+            ->andFilterWhere(['like', 'json_data', $this->ico_class])
             ->andFilterWhere(['like', 'parent_id', $this->parent_id])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 

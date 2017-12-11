@@ -8,7 +8,7 @@ use common\widgets\iConf\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
-if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
+if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE']) || Yii::$app->user->isGuest) {
     return false;
 }
 
@@ -22,7 +22,7 @@ $this->beginPage();
 
     <?= ConfList::widget(); ?>
 
-    <title>管理中心 - <?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title) ?> - 管理中心</title>
 
     <?php $this->head() ?>
 
@@ -53,7 +53,7 @@ $this->beginPage();
 
                     <h3>
                         <a href="#"><?= Yii::$app->user->identity->username; ?></a>
-                        <span class="profile-status online">Admin</span>
+                        <span class="profile-status online"><?= Yii::$app->user->identity->r_key; ?></span>
                     </h3>
 
                     <p class="profile-title"><?= Yii::$app->request->userIP; ?></p>

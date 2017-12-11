@@ -16,54 +16,80 @@ use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use common\models\Product;
+use common\models\Slide;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
  */
-class SlideController extends BaseController
+class UploadController extends BaseController
 {
 
     /**
      * 上传
      *
+     * @param $id
+     * @param $type
+     * @param string $attribute
      * @return string
+     * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id)
+    public function actionImageUpload($id, $type, $attribute = 'images')
     {
-        $model = new Slide();
+
+        if (empty($id) || empty($type)) {
+            return Json::encode(['message' => '参数有误 !!']);
+        }
+
+        switch ($type) {
+
+            case 'product':
+                $model = new Product();
+                break;
+
+            case 'slide':
+                $model = new Slide();
+                break;
+
+            default:
+                return Json::encode(['message' => '没有此模型 !!']);
+                break;
+        }
 
         // 上传组件对应model
-        $imageFile = UploadedFile::getInstance($model, 'path');
+        $imageFile = UploadedFile::getInstance($model, $attribute);
 
-        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . 'Slide' . DIRECTORY_SEPARATOR;
+        // 上传路径
+        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
 
         if (!is_dir($directory)) {
             FileHelper::createDirectory($directory);
         }
 
-        if ($imageFile) {
+        if (!$imageFile) {
+            return Json::encode(['message' => '上传文件失败 !!']);
+        }
 
-            $uid = time() . '_' . rand(00000, 99999);
-            $fileName = $uid . '.' . $imageFile->extension;
-            $filePath = $directory . $fileName;
+        $uid = time() . '_' . rand(00000, 99999);
+        $fileName = $uid . '.' . $imageFile->extension;
+        $filePath = $directory . $fileName;
 
-            if ($imageFile->saveAs($filePath)) {
+        if ($imageFile->saveAs($filePath)) {
 
-                $path = Yii::getAlias('@web') . '/temp/Slide' . DIRECTORY_SEPARATOR . $fileName;
+            $path = Yii::getAlias('@web') . '/temp/' . $type . DIRECTORY_SEPARATOR . $fileName;
 
-                return Json::encode([
-                    'files' => [
-                        [
-                            'name'         => $fileName,
-                            'size'         => $imageFile->size,
-                            'url'          => $path,
-                            'thumbnailUrl' => $path,
-                            'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName]),
-                            'deleteType'   => 'GET',
-                        ],
+            return Json::encode([
+                'files' => [
+                    [
+                        'name'         => $fileName,
+                        'size'         => $imageFile->size,
+                        'url'          => $path,
+                        'thumbnailUrl' => $path,
+                        'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName, 'type' => $type]),
+                        'deleteType'   => 'GET',
                     ],
-                ]);
-            }
+                ],
+            ]);
         }
 
         return Json::encode(['message' => '上传失败 !!']);
@@ -73,11 +99,17 @@ class SlideController extends BaseController
      * 删除
      *
      * @param $name
-     * @return mixed
+     * @param $type
+     * @return string
      */
-    public function actionImageDelete($name)
+    public function actionImageDelete($name, $type)
     {
-        $directory = Yii::getAlias('@backend/web/temp/Slide');
+
+        if (empty($name) || empty($type)) {
+            return Json::encode(['message' => '参数有误 !!']);
+        }
+
+        $directory = Yii::getAlias('@backend/web/temp/') . $type;
 
         if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
             unlink($directory . DIRECTORY_SEPARATOR . $name);
@@ -90,14 +122,14 @@ class SlideController extends BaseController
         foreach ($files as $file) {
 
             $fileName = basename($file);
-            $path = '/img/temp/Slide' . DIRECTORY_SEPARATOR . $fileName;
+            $path = '/img/temp/' . $type . DIRECTORY_SEPARATOR . $fileName;
 
             $output['files'][] = [
                 'name'         => $fileName,
                 'size'         => filesize($file),
                 'url'          => $path,
                 'thumbnailUrl' => $path,
-                'deleteUrl'    => 'admin/upload/image-delete?name=' . $fileName,
+                'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName, 'type' => $type]),
                 'deleteType'   => 'GET',
             ];
         }
@@ -105,7 +137,4 @@ class SlideController extends BaseController
         return Json::encode($output);
     }
 
-    public function getPath() {
-
-    }
 }

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\NewsSearch */
@@ -21,7 +20,7 @@ use kartik\select2\Select2;
             <td>
 
                 <?=
-                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['classify'],
                     'options'       => ['placeholder' => '产品分类...'],
                     'pluginOptions' => [

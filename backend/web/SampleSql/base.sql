@@ -543,7 +543,6 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `product_id` VARCHAR(85) NOT NULL COMMENT '产品编号,唯一识别码',
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `l_key` VARCHAR(55) NOT NULL COMMENT '等级KEY',
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
     `s_key` VARCHAR(55) NOT NULL COMMENT '版块KEY,版块默认为S0,意思是没有分配好相关版块.',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
@@ -552,7 +551,8 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `discount` INT(11) UNSIGNED NULL COMMENT '折扣价',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
-    `path` VARCHAR(55) NULL COMMENT '产品文件路径',
+    `path` VARCHAR(125) NULL COMMENT '产品文件路径',
+    `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
     `forward` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '转发数量',
     `collection` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '收藏数量',
@@ -569,7 +569,7 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
     `is_thumb` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
     `grade` INT(6) UNSIGNED NOT NULL COMMENT '本站评分,由我们网站人员进行评估.',
-    `user_grade` INT(6) UNSIGNED NOT NULL COMMENT '用户评分,由本站用户进行评估.',
+    `user_grade` INT(6) UNSIGNED NULL COMMENT '用户评分,由本站用户进行评估.',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
@@ -616,6 +616,7 @@ CREATE TABLE `#DB_PREFIX#News` (
     `title` VARCHAR(125) NOT NULL COMMENT '产品标题',
     `content` TEXT NOT NULL COMMENT '新闻内容',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取介绍第一段.',
+    `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
     `forward` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '转发数量',
@@ -675,10 +676,8 @@ CREATE TABLE `#DB_PREFIX#Job` (
     `content` TEXT NOT NULL COMMENT '内容',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
-    `path` VARCHAR(55) NULL COMMENT '招聘文件路径',
-    `is_promote` SET('On', 'Off') NOT NULL COMMENT '推广',
-    `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
-    `is_classic` SET('On', 'Off') NOT NULL COMMENT '经典',
+    `path` VARCHAR(125) NULL COMMENT '招聘文件路径',
+    `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
     `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
     `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
@@ -695,31 +694,10 @@ CREATE TABLE `#DB_PREFIX#Job` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
- * 招聘类别
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Job_Classify`;
-CREATE TABLE `#DB_PREFIX#Job_Classify` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
-    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` TEXT NULL COMMENT '描述',
-    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
-    `json_data` VARCHAR(255) NULL COMMENT 'json数据',
-    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `created_at` INT(11) UNSIGNED NOT NULL,
-    `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/**
  * 用户应聘
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Job_Classify`;
-CREATE TABLE `#DB_PREFIX#Job_Classify` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Job_Applyfor`;
+CREATE TABLE `#DB_PREFIX#Job_Applyfor` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `job_id` VARCHAR(85) NOT NULL COMMENT '招聘ID',

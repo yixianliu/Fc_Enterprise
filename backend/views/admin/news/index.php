@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = '新闻列表';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="col-lg-12">
@@ -20,31 +21,37 @@ $this->params['breadcrumbs'][] = $this->title;
         </header>
         <div class="content-body">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+                <?php if (!empty($result['classify'])): ?>
 
-                    <hr />
+                <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
-                    <p>
-                        <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
-                    </p>
+                <hr/>
 
-                    <?=
-                    GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'columns'      => [
-                            ['class' => 'yii\grid\SerialColumn'],
-                            'user_id',
-                            'c_key',
-                            'sort_id',
-                            'title',
-                            ['class' => 'yii\grid\ActionColumn'],
-                        ],
-                    ]);
-                    ?>
+                <p>
+                    <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-                </div>
+                <?=
+                GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'user_id',
+                        'c_key',
+                        'sort_id',
+                        'title',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]);
+                ?>
+
+                <?php else: ?>
+
+                <h3>请添加分类, 点<a href="<?= \yii\helpers\Url::to(['admin/news-cls/create']) ?>">这里</a> !!</h3>
+
+                <?php endif ?>
+
             </div>
         </div>
     </section>

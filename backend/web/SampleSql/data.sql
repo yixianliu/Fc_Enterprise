@@ -181,10 +181,15 @@ VALUES
 (NULL, 'AUCC1', 1, 'AC2', 'admin', 'center/index', '管理中心', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC2', 2, 'AC2', 'admin', 'center/conf', '网站配置', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC3', 3, 'AC2', 'admin', 'center/backup', '备份数据', 'On', #TIME#, #TIME#),
-(NULL, 'ACCC4', 4, 'AC2', 'admin', NULL, '网站档案', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC4', 4, 'AC2', 'admin', 'center/info', '网站档案', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'center/seo', '网站SEO设置', 'On', #TIME#, #TIME#),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', NULL, '所有角色权限', 'On', #TIME#, #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'admin', NULL, '查看角色权限', 'On', #TIME#, #TIME#),
 (NULL, 'AURR3', 3, 'AR1', 'admin', NULL, '创建角色权限', 'On', #TIME#, #TIME#),
-(NULL, 'AURR4', 4, 'AR1', 'admin', NULL, '角色关联权限', 'On', #TIME#, #TIME#)
+(NULL, 'AURR4', 4, 'AR1', 'admin', NULL, '角色关联权限', 'On', #TIME#, #TIME#),
+
+(NULL, 'AJJV1', 1, 'AJ1', 'admin', 'job/index', '所有招聘', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/create', '添加招聘', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV3', 3, 'AJ1', 'admin', 'resume/index', '人才简历', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/users', '用户应聘', 'On', #TIME#, #TIME#)

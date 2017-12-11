@@ -5,9 +5,9 @@ namespace backend\controllers\admin;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 use common\models\NewsClassify;
 use common\models\NewsClassifySearch;
-use yii\web\NotFoundHttpException;
 
 /**
  * NewsClsController implements the CRUD actions for NewsClassify model.
@@ -52,6 +52,7 @@ class NewsClsController extends BaseController
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'result'       => $this->getCls(),
         ]);
     }
 
@@ -80,20 +81,9 @@ class NewsClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            // 初始化
-            $reuslt = array();
-
-            $dataCls = NewsClassify::findAll(['is_using' => 'On']);
-
-            $result['classify'] = array('C0' => '父类');
-
-            foreach ($dataCls as $value) {
-                $result['classify'][ $value['c_key'] ] = $value['name'];
-            }
-
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => $this->getCls(),
             ]);
         }
     }
@@ -112,22 +102,9 @@ class NewsClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            // 初始化
-            $reuslt = array();
-
-            $dataCls = NewsClassify::findAll(['is_using' => 'On']);
-
-            foreach ($dataCls as $value) {
-                $result['classify'][ $value['c_key'] ] = $value['name'];
-            }
-
-            $array = array('C0' => '父类');
-
-            $result['classify'] = (!empty($result['classify'])) ? array_merge($result['classify'], $array) : $array;
-
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => $this->getCls(),
             ]);
         }
     }
@@ -159,5 +136,22 @@ class NewsClsController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function getCls()
+    {
+
+        // 初始化
+        $reuslt = array();
+
+        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
+
+        $result['classify'] = ['C0' => '父类'];
+
+        foreach ($dataCls as $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }

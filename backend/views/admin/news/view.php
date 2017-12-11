@@ -7,9 +7,11 @@ use yii\widgets\DetailView;
 /* @var $model common\models\News */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '新闻', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -20,66 +22,63 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <h1><?= Html::encode($this->title) ?></h1>
 
-                    <h1><?= Html::encode($this->title) ?></h1>
-
-                    <p>
-                        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?=
-                        Html::a('删除', ['delete', 'id' => $model->id], [
-                            'class' => 'btn btn-danger',
-                            'data'  => [
-                                'confirm' => '确认要删除这条新闻吗?',
-                                'method'  => 'post',
-                            ],
-                        ])
-                        ?>
-                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    </p>
-
+                <p>
+                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                     <?=
-                    DetailView::widget([
-                        'model'      => $model,
-                        'attributes' => [
-                            'news_id',
-                            'user_id',
-                            'c_key',
-                            'sort_id',
-                            'title',
-                            'content:ntext',
-                            'introduction',
-                            'keywords',
-                            'praise',
-                            'forward',
-                            'collection',
-                            'share',
-                            'attention',
-                            'is_promote',
-                            'is_hot',
-                            'is_winnow',
-                            'is_recommend',
-                            'is_audit',
-                            'is_comments',
-                            'is_img',
-                            'is_thumb',
-                            [
-                                'attribute' => 'created_at',
-                                'value'     => function ($model) {
-                                    return date('Y - m -d , h:i', $model->created_at);
-                                },
-                            ],
-                            [
-                                'attribute' => 'updated_at',
-                                'value'     => function ($model) {
-                                    return date('Y - m -d , h:i', $model->updated_at);
-                                },
-                            ],
+                    Html::a('删除', ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data'  => [
+                            'confirm' => '确认要删除这条新闻吗?',
+                            'method'  => 'post',
                         ],
-                    ]);
+                    ])
                     ?>
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                </p>
 
-                </div>
+                <?=
+                DetailView::widget([
+                    'model'      => $model,
+                    'attributes' => [
+                        'news_id',
+                        'user_id',
+                        'c_key',
+                        'sort_id',
+                        'title',
+                        'content:ntext',
+                        'introduction',
+                        'keywords',
+                        'praise',
+                        'forward',
+                        'collection',
+                        'share',
+                        'attention',
+                        'is_promote',
+                        'is_hot',
+                        'is_winnow',
+                        'is_recommend',
+                        'is_audit',
+                        'is_comments',
+                        'is_img',
+                        'is_thumb',
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->updated_at);
+                            },
+                        ],
+                    ],
+                ]);
+                ?>
+
             </div>
         </div>
     </section>

@@ -14,13 +14,20 @@ if (empty($result['classify'])) {
 }
 ?>
 
+<style type="text/css">
+    .preview img {
+        width: 120px;
+        height: 100px;
+    }
+</style>
+
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -73,8 +80,8 @@ if (empty($result['classify'])) {
                     <?=
                     FileUploadUI::widget([
                         'model'         => $model,
-                        'attribute'     => 'path',
-                        'url'           => ['admin/upload/image-upload', ['id' => $model->product_id, 'type' => 'product']],
+                        'attribute'     => 'images',
+                        'url'           => ['admin/upload/image-upload', 'id' => $model->product_id, 'type' => 'product'],
                         'gallery'       => false,
                         'fieldOptions'  => [
                             'accept' => 'image/*'
@@ -93,7 +100,7 @@ if (empty($result['classify'])) {
                                 var html = "";
                                 
                                 $.each(data.result.files, function (index, file) {
-                                    html += "<input type=\'hidden\' class=\'" + file.name + "\' name=\'Slide[path][]\' value=\'" + file.name + "\'>";
+                                    html += "<input type=\'hidden\' class=\'" + file.name + "\' name=\'Product[images][]\' value=\'" + file.name + "\'>";
                                 });
                                 
                                 $("#SlideImg").append(html);
@@ -109,6 +116,8 @@ if (empty($result['classify'])) {
                     ?>
 
                     <div id="SlideImg"></div>
+
+                    <hr/>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

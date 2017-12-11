@@ -21,7 +21,7 @@ use kartik\select2\Select2;
 
 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'ico_class')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
 
 <?=
 $form->field($model, 'parent_id')->widget(Select2::classname(), [
