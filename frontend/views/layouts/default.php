@@ -32,10 +32,10 @@ $this->beginPage();
     <?= ConfList::widget(); ?>
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/favicon.ico">
+    <link rel="apple-touch-icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon-114x114.png">
 
     <?php $this->head() ?>
 
@@ -52,113 +52,77 @@ $this->beginPage();
     </div>
 </div>
 
-<header class="nav-type-2">
+<header class="nav-type-1" id="home">
 
-    <nav class="navbar navbar-static-top">
-        <div class="navigation">
-            <div class="container relative">
-
-                <form method="get" class="search-wrap">
-                    <input type="search" class="form-control" placeholder="Type &amp; Hit Enter">
-                </form>
-
+    <nav class="navbar navbar-fixed-top">
+        <div class="navigation-overlay">
+            <div class="container-fluid relative">
                 <div class="row">
 
                     <div class="navbar-header">
-                        <!-- Logo -->
-                        <div class="logo-container">
-                            <div class="logo-wrap">
-                                <a href="#">
-                                    <?= Html::img(Url::to('@web/themes/enterprise/img/logo_dark.png'), ['alt' => '']); ?>
-                                </a>
-                            </div>
-                        </div>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
+
+                        <!-- Logo -->
+                        <div class="logo-container">
+                            <div class="logo-wrap local-scroll">
+                                <a href="#home">
+                                    <img class="logo" src="<?= Url::to('@web/themes/enterprise/img') ?>/logo_light.png" alt="logo">
+                                </a>
+                            </div>
+                        </div>
                     </div> <!-- end navbar-header -->
 
-                    <div class="col-md-9 nav-wrap right">
-                        <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <div class="col-md-8 col-xs-12 nav-wrap">
+                        <div class="collapse navbar-collapse text-center" id="navbar-collapse">
 
-                            <ul class="nav navbar-nav navbar-right">
+                            <?php
+                            NavBar::begin([
+                                'options'    => [
+                                    'class' => 'nav navbar-nav local-scroll text-center',
+                                ],
+                            ]);
 
-                                <li class="dropdown active">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index-mp.html">Home Multi-Page</a></li>
-                                        <li><a href="index.html">Home FS Revolution</a></li>
-                                        <li><a href="index-owl-slider.html">Home Owl Slider</a></li>
-                                        <li><a href="index-text-rotator.html">Home Text Rotator</a></li>
-                                        <li><a href="index-video-bg.html">Home Video Bg</a></li>
-                                        <li><a href="index-angles.html">Home Angles</a></li>
-                                        <li><a href="index-portfolio.html">Home Portfolio</a></li>
-                                    </ul>
-                                </li>
+                            $menuItems = [
+                                ['label' => '首页', 'url' => ['/site/index']],
+                                ['label' => '关于我们', 'url' => ['/site/about']],
+                                ['label' => '联系我们', 'url' => ['/site/contact']],
+                            ];
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="services.html">Services</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="404.html">404</a></li>
-                                    </ul>
-                                </li>
+                            echo Nav::widget([
+                                'options' => ['class' => 'navbar-nav navbar-right'],
+                                'items'   => $menuItems,
+                            ]);
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">Portfolio</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="portfolio-4.html">4 Columns</a></li>
-                                        <li><a href="portfolio-3.html">3 Columns</a></li>
-                                        <li><a href="portfolio-2.html">2 Columns</a></li>
-                                        <li><a href="portfolio-single.html">Single Project</a></li>
-                                    </ul>
-                                </li>
+                            NavBar::end();
+                            ?>
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">Blog</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="blog-standard.html">Standard</a></li>
-                                        <li><a href="blog-single.html">Single Post</a></li>
-                                    </ul>
-                                </li>
-
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">Features</a>
-                                    <ul class="dropdown-menu menu-right">
-                                        <li><a href="shortcodes.html">Shortcodes</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                    </ul>
-                                </li>
-
-                                <li id="mobile-search">
-                                    <form method="get" class="mobile-search">
-                                        <input type="search" class="form-control" placeholder="Search...">
-                                        <button type="submit" class="search-button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </form>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="nav-search">
-                                        <i class="fa fa-search search-trigger"></i>
-                                        <i class="fa fa-times search-close"></i>
-                                    </a>
-                                </li>
-
-                            </ul> <!-- end menu -->
-                        </div> <!-- end collapse -->
+                        </div>
                     </div> <!-- end col -->
+
+                    <div class="menu-socials hidden-sm hidden-xs">
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-behance"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div> <!-- end row -->
             </div> <!-- end container -->
         </div> <!-- end navigation -->
     </nav> <!-- end navbar -->
+
 </header>
 
 <div class="main-wrapper-mp oh">

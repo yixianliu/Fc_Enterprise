@@ -29,7 +29,7 @@ class ProductClsController extends BaseController
                     ],
                 ],
             ],
-            'verbs' => [
+            'verbs'  => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
@@ -78,21 +78,9 @@ class ProductClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            // 初始化
-            $result = array();
-
-            // 所有分类
-            $dataCls = ProductClassify::findAll(['is_using' => 'On']);
-
-            $result['classify']['C0'] = '父类';
-
-            foreach ($dataCls as $value) {
-                $result['classify'][ $value->c_key ] = $value->name;
-            }
-
             return $this->render('create', [
-                'model' => $model,
-                'result' => $result,
+                'model'  => $model,
+                'result' => $this->getData(),
             ]);
         }
     }
@@ -111,21 +99,9 @@ class ProductClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            // 初始化
-            $result = array();
-
-            // 所有分类
-            $dataCls = ProductClassify::findAll(['is_using' => 'On']);
-
-            $result['classify']['C0'] = '父类';
-
-            foreach ($dataCls as $value) {
-                $result['classify'][ $value->c_key ] = $value->name;
-            }
-
             return $this->render('update', [
-                'model' => $model,
-                'result' => $result,
+                'model'  => $model,
+                'result' => $this->getData(),
             ]);
         }
     }
@@ -157,5 +133,22 @@ class ProductClsController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function getData()
+    {
+        // 初始化
+        $result = array();
+
+        // 所有分类
+        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+
+        $result['classify']['C0'] = '父类';
+
+        foreach ($dataCls as $value) {
+            $result['classify'][ $value->c_key ] = $value->name;
+        }
+
+        return $result;
     }
 }

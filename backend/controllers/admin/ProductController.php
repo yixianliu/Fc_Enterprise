@@ -116,8 +116,12 @@ class ProductController extends BaseController
         $data = array();
 
         if (!empty(Yii::$app->request->post())) {
+
             $data = Yii::$app->request->post();
-            $data['images'] = $this->setImages($data['images']);
+
+            if (!empty($data['Product']['images'])) {
+                $data['Product']['images'] = $this->setImages($data['Product']['images']);
+            }
         }
 
         if ($model->load($data) && $model->save()) {
@@ -144,12 +148,18 @@ class ProductController extends BaseController
 
         if (!empty(Yii::$app->request->post())) {
             $data = Yii::$app->request->post();
-            $data['images'] = $this->setImages($data['images']);
+            $data['Product']['images'] = $this->setImages($data['Product']['images']);
         }
 
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // 取出图片
+            if (!empty($model->images)) {
+
+            }
+
             return $this->render('update', [
                 'model'  => $model,
                 'result' => $this->getData(),

@@ -16,8 +16,7 @@ if (empty($result['classify'])) {
 
 <style type="text/css">
     .preview img {
-        width: 120px;
-        height: 100px;
+        width: 120px;height: 100px;
     }
 </style>
 
@@ -80,7 +79,7 @@ if (empty($result['classify'])) {
                     <?=
                     FileUploadUI::widget([
                         'model'         => $model,
-                        'attribute'     => 'images',
+                        'attribute'     => 'images[]',
                         'url'           => ['admin/upload/image-upload', 'id' => $model->product_id, 'type' => 'product'],
                         'gallery'       => false,
                         'fieldOptions'  => [
@@ -228,6 +227,8 @@ if (empty($result['classify'])) {
                     <?= $form->field($model, 'grade')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'user_grade')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
 
                     <div class="form-group">
 

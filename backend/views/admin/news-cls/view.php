@@ -48,7 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             'keywords',
                             'ico_class',
                             'parent_id',
-                            'is_using',
+                            [
+                                'attribute' => 'is_using',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'On' => '开启',
+                                        'Off' => '未启用',
+                                    ];
+                                    return $state[ $model->is_using ];
+                                },
+                            ],
                             [
                                 'attribute' => 'created_at',
                                 'value'     => function ($model) {

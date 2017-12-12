@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\ProductClassify;
 use Yii;
 use yii\web\Controller;
 
@@ -19,7 +20,13 @@ class CenterController extends BaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        // 初始化
+        $result = array();
+
+        $result['product-cls'] = ProductClassify::findAll(['is_using' => 'On']);
+
+        return $this->render('index', ['result' => $result]);
     }
 
     /**

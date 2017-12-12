@@ -10,6 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => '产品分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -47,7 +48,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             'keywords',
                             'json_data',
                             'parent_id',
-                            'is_using',
+                            [
+                                'attribute' => 'is_using',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'On'  => '开启',
+                                        'Off' => '未启用',
+                                    ];
+
+                                    return $state[ $model->is_using ];
+                                },
+                            ],
                             [
                                 'attribute' => 'created_at',
                                 'value'     => function ($model) {

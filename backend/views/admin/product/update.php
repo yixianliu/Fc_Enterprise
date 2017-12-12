@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = '更新';
 
 echo $this->render('_form', [
     'model'  => $model,
+    'result' => $result,
 ]);
 
 ?>

@@ -35,8 +35,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'c_key',
-                        'sort_id',
                         'name',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On' => '开启',
+                                    'Off' => '未启用',
+                                ];
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);

@@ -37,7 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
-                <?= DetailView::widget([
+                <?=
+                DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
                         'product_id',
@@ -52,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'introduction',
                         'keywords',
                         'path',
+                        'images',
                         'praise',
                         'forward',
                         'collection',
@@ -82,7 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
-                ]) ?>
+                ]);
+                ?>
 
             </div>
         </div>

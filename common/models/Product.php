@@ -66,7 +66,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 's_key', 'title', 'content', 'is_audit', 'is_field', 'is_comments'], 'required'],
+            [['c_key', 's_key', 'title', 'content', 'user_id',], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
             [['product_id'], 'string', 'max' => 85],
@@ -74,12 +74,14 @@ class Product extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 120],
-            [['product_id'], 'unique'],
-            [['title'], 'unique'],
+            [['title', 'product_id'], 'unique'],
 
             // 默认值
-            [['price', 'grade', 'user_grade', 'discount',], 'default', 'value' => 0],
-            [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend',], 'default', 'value' => 'Off'],
+            [['images'], 'default', 'value' => ''],
+            [['l_key'], 'default', 'value' => 'L1'],
+            [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
+            [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend', 'is_field',], 'default', 'value' => 'Off'],
+            [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
         ];
     }
 
@@ -100,14 +102,15 @@ class Product extends \yii\db\ActiveRecord
             'introduction' => '产品导读',
             'keywords'     => '产品关键词',
             'path'         => '产品目录',
+            'images'       => '产品图片',
             'praise'       => 'Praise',
             'forward'      => 'Forward',
             'collection'   => 'Collection',
             'share'        => '分享次数',
             'attention'    => 'Attention',
-            'is_promote'   => 'Is Promote',
-            'is_hot'       => 'Is Hot',
-            'is_classic'   => 'Is Classic',
+            'is_promote'   => '是否设为推广',
+            'is_hot'       => '是否设为热门',
+            'is_classic'   => '是否设为经典',
             'is_winnow'    => 'Is Winnow',
             'is_recommend' => 'Is Recommend',
             'is_audit'     => '审核状态',
