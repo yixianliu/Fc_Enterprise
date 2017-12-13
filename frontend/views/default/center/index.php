@@ -58,7 +58,7 @@ $this->title = '首页';
                     <i class="icon icon-DesktopMonitor"></i>
                 </a>
                 <div class="service-item-box">
-                    <h3>Great Design</h3>
+                    <h3>容易上手</h3>
                     <p>Our web design team will spend time with our digital marketing team to ensure the core principles of effective websites.</p>
                 </div>
             </div> <!-- end service item -->
@@ -68,7 +68,7 @@ $this->title = '首页';
                     <i class="icon icon-Layers"></i>
                 </a>
                 <div class="service-item-box">
-                    <h3>Perfect Coding</h3>
+                    <h3>代码清晰</h3>
                     <p>Our web design team will spend time with our digital marketing team to ensure the core principles of effective websites.</p>
                 </div>
             </div> <!-- end service item -->
@@ -98,7 +98,7 @@ $this->title = '首页';
                     <i class="icon icon-Settings"></i>
                 </a>
                 <div class="service-item-box">
-                    <h3>Easy to Customize</h3>
+                    <h3>简单易用</h3>
                     <p>Our web design team will spend time with our digital marketing team to ensure the core principles of effective websites.</p>
                 </div>
             </div> <!-- end service item -->
@@ -108,8 +108,8 @@ $this->title = '首页';
                     <i class="icon icon-Timer"></i>
                 </a>
                 <div class="service-item-box">
-                    <h3>Fast Loading</h3>
-                    <p>Our web design team will spend time with our digital marketing team to ensure the core principles of effective websites.</p>
+                    <h3>YII2 框架为底层</h3>
+                    <p>Yii 自带了 丰富的功能，包括 MVC，DAO/ActiveRecord，I18N/L10N，缓存，身份验证和基于角色的访问控制，脚手架，测试等，可显著缩短开发时间。</p>
                 </div>
             </div> <!-- end service item -->
 
@@ -132,11 +132,13 @@ $this->title = '首页';
                     </div>
 
                     <div class="col-md-6 promo-description">
-                        <p class="subheading">Chase Your Dream</p>
-                        <h3 class="color-white">Best Html Template Ever</h3>
+                        <p class="">创建单网页</p>
+                        <h3 class="color-white">单网页内部可以自己进行 DIY</h3>
+
                         <p class="mb-30"> We want to tell your brand’s story with quality content that will help you inspire your audience, build meaningful connections and
                             grow your success. Different marketing goals mean different content tools.</p>
-                        <a href="#" class="btn btn-lg btn-color">Purchase Now</a>
+
+                        <a href="#" class="btn btn-lg btn-color">尝试了解...</a>
                         <div class="customNavigation mt-40">
                             <a class="prev"><i class="icon arrow_left"></i></a>
                             <a class="next"><i class="icon arrow_right"></i></a>
@@ -218,7 +220,7 @@ $this->title = '首页';
                     <a href="#" class="filter active" data-filter="*">所有分类</a>
 
                     <?php foreach ($result['product-cls'] as $value): ?>
-                    <a href="#" class="filter" data-filter=".web-design"><?= $value['name'] ?></a>
+                        <a href="#" class="filter" data-filter=".web-design"><?= $value['name'] ?></a>
                     <?php endforeach; ?>
 
                 </div>
@@ -335,7 +337,8 @@ $this->title = '首页';
                             <img src="<?= Url::to('@web/themes/enterprise/img') ?>/project_6.jpg" alt="">
                             <div class="portfolio-overlay">
                                 <div class="project-icons">
-                                    <a href="<?= Url::to('@web/themes/enterprise/img') ?>/project_6_big.jpg" class="lightbox-gallery" title="Stationery Mockup"><i class="fa fa-search"></i></a>
+                                    <a href="<?= Url::to('@web/themes/enterprise/img') ?>/project_6_big.jpg" class="lightbox-gallery" title="Stationery Mockup"><i
+                                                class="fa fa-search"></i></a>
                                     <a href="portfolio-single.html" class="project-icon"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>

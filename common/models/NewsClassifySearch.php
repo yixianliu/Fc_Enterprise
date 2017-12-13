@@ -67,7 +67,7 @@ class NewsClassifySearch extends NewsClassify
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'json_data', $this->ico_class])
+            ->andFilterWhere(['like', 'json_data', $this->json_data])
             ->andFilterWhere(['like', 'parent_id', $this->parent_id])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 

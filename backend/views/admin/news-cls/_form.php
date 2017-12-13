@@ -9,37 +9,51 @@ use kartik\select2\Select2;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">
+                <?= Html::encode($this->title) ?>
+            </h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
 
-<?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-<?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
+                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-<?=
-$form->field($model, 'parent_id')->widget(Select2::classname(), [
-    'data'    => $result['classify'],
-    'options' => ['placeholder' => '父类...'],
-]);
-?>
+                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
 
-<?=
-$form->field($model, 'is_using')->widget(Select2::classname(), [
-    'data'    => ['On' => '启用', 'Off' => '未启用'],
-    'options' => ['placeholder' => '是否启用...'],
-]);
-?>
+                <?=
+                $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                    'data'    => $result['classify'],
+                    'options' => ['placeholder' => '父类...'],
+                ]);
+                ?>
 
-<div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? '创建新闻分类' : '更新新闻分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'    => ['On' => '启用', 'Off' => '未启用'],
+                    'options' => ['placeholder' => '是否启用...'],
+                ]);
+                ?>
+
+                <div class="form-group">
+                    <?= Html::submitButton($model->isNewRecord ? '创建新闻分类' : '更新新闻分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+    </section>
 </div>
-
-<?php ActiveForm::end(); ?>
-

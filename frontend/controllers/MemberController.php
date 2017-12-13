@@ -5,22 +5,22 @@
  * @author   Yxl <zccem@163.com>
  */
 
-namespace app\controllers\Frontend;
+namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\form\LoginForm;
 use yii\helpers\Json;
+use frontend\models\LoginForm;
 
-class MemberController extends Controller
+class MemberController extends BaseController
 {
-
-    // 布局
-    public $layout = 'default';
 
     // 构造
     public function init()
     {
+
+        parent::init();
+
         if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
             return $this->redirect(['/Mount/center/view']);
         }

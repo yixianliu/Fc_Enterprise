@@ -56,7 +56,7 @@ use yii\helpers\Html;
                                 <li class=" status-away">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-2.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -73,7 +73,7 @@ use yii\helpers\Html;
                                 <li class=" status-busy">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-3.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -90,7 +90,7 @@ use yii\helpers\Html;
                                 <li class=" status-offline">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-4.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-4.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -107,7 +107,7 @@ use yii\helpers\Html;
                                 <li class=" status-offline">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-5.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-5.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -124,7 +124,7 @@ use yii\helpers\Html;
                                 <li class=" status-available">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-1.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -141,7 +141,7 @@ use yii\helpers\Html;
                                 <li class=" status-busy">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-2.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">
@@ -158,7 +158,7 @@ use yii\helpers\Html;
                                 <li class=" status-away">
                                     <a href="javascript:">
                                         <div class="user-img">
-                                            <img src="data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                                            <?= Html::img(Url::to('@web/themes/data/profile/avatar-3.png'), ['class' => 'img-circle img-inline']); ?>
                                         </div>
                                         <div>
                                                     <span class="name">

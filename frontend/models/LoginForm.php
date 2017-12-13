@@ -7,11 +7,11 @@
  *
  */
 
-namespace app\form;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use app\models\User;
+use common\models\User;
 
 class LoginForm extends Model
 {

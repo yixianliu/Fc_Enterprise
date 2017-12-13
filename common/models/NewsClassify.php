@@ -14,7 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $description
  * @property string $keywords
- * @property string $ico_class
+ * @property string $json_data
  * @property string $parent_id
  * @property string $is_using
  */

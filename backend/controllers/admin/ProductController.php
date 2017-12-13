@@ -113,18 +113,7 @@ class ProductController extends BaseController
 
         $model->product_id = time() . '_' . rand(000, 999);
 
-        $data = array();
-
-        if (!empty(Yii::$app->request->post())) {
-
-            $data = Yii::$app->request->post();
-
-            if (!empty($data['Product']['images'])) {
-                $data['Product']['images'] = $this->setImages($data['Product']['images']);
-            }
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -144,21 +133,9 @@ class ProductController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $data = array();
-
-        if (!empty(Yii::$app->request->post())) {
-            $data = Yii::$app->request->post();
-            $data['Product']['images'] = $this->setImages($data['Product']['images']);
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
-            // 取出图片
-            if (!empty($model->images)) {
-
-            }
 
             return $this->render('update', [
                 'model'  => $model,
@@ -196,6 +173,11 @@ class ProductController extends BaseController
         }
     }
 
+    /**
+     * 获取分类和版块
+     *
+     * @return array
+     */
     public function getData()
     {
         // 初始化
@@ -213,21 +195,6 @@ class ProductController extends BaseController
 
         foreach ($dataClassify as $value) {
             $result['classify'][ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
-    }
-
-    public function setImages($data)
-    {
-        if (empty($data) || !is_array($data)) {
-            return false;
-        }
-
-        $result = null;
-
-        foreach ($data as $value) {
-            $result .= $value . ',';
         }
 
         return $result;

@@ -37,7 +37,7 @@ class SinglePageController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -55,7 +55,7 @@ class SinglePageController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -88,14 +88,18 @@ class SinglePageController extends BaseController
         // 创建文件
         if (!empty(Yii::$app->request->post())) {
 
-            $filename = Yii::getAlias('@frontend') . '/views/pages/' . Yii::$app->request->post('path') . '.php';
+            $filePath = Yii::getAlias('@frontend') . '/views/pages/';
 
-            if (file_exists($filename)) {
+            $filename = $data['SinglePage']['path'] . '.php';
+
+            if (file_exists($filePath . $filename)) {
                 $data = array();
                 Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
             }
 
-            FileHelper::createDirectory($filename);
+            FileHelper::createDirectory($filePath);
+
+            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
         }
 
         if ($model->load($data) && $model->save()) {
@@ -120,20 +124,24 @@ class SinglePageController extends BaseController
         $data = Yii::$app->request->post();
 
         // 更改文件
-        if (!empty(Yii::$app->request->post())) {
+        if (!empty($data)) {
 
-            $filename = Yii::getAlias('@frontend') . 'views/pages/' . Yii::$app->request->post('path') . '.php';
+            $filePath = Yii::getAlias('@frontend') . 'views/pages/';
 
-            if (file_exists($filename)) {
+            $filename = $data['SinglePage']['path'] . '.php';
+
+            if (file_exists($filePath . $filename)) {
                 $data = array();
                 Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
             }
 
-            FileHelper::createDirectory($filename);
+            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
 
-            $oldFilename = Yii::getAlias('@frontend') . '/views/pages/' . $model->path . '.php';
+            $oldFilename = $filePath . $model->path . '.php';
 
-            unlink($oldFilename);
+            if (file_exists($oldFilename)) {
+                unlink($oldFilename);
+            }
         }
 
         if ($model->load($data) && $model->save()) {

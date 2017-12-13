@@ -16,7 +16,8 @@ if (empty($result['classify'])) {
 
 <style type="text/css">
     .preview img {
-        width: 120px;height: 100px;
+        width: 120px;
+        height: 100px;
     }
 </style>
 
@@ -79,30 +80,36 @@ if (empty($result['classify'])) {
                     <?=
                     FileUploadUI::widget([
                         'model'         => $model,
-                        'attribute'     => 'images[]',
+                        'attribute'     => 'images',
                         'url'           => ['admin/upload/image-upload', 'id' => $model->product_id, 'type' => 'product'],
                         'gallery'       => false,
                         'fieldOptions'  => [
                             'accept' => 'image/*'
                         ],
                         'clientOptions' => [
-                            'maxFileSize' => 2000000,
-                            'dataType'    => 'json',
+                            'maxFileSize'      => 2000000,
+                            'dataType'         => 'json',
+                            'maxNumberOfFiles' => 5,
                         ],
 
                         // ...
                         'clientEvents'  => [
+
                             'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
                                 var html = "";
                                 
+                                var ImagesContent = $("#ImagesContent");
+                                
                                 $.each(data.result.files, function (index, file) {
-                                    html += "<input type=\'hidden\' class=\'" + file.name + "\' name=\'Product[images][]\' value=\'" + file.name + "\'>";
+                                    html += file.name + \',\';
                                 });
                                 
-                                $("#SlideImg").append(html);
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
                                 
                                 return true;
                             }',
@@ -114,7 +121,7 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <div id="SlideImg"></div>
+                    <?= $form->field($model, 'images')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
                     <hr/>
 
@@ -249,7 +256,7 @@ if (empty($result['classify'])) {
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['result' => $result,]); ?>
+        <?= $this->render('../result_img', ['img' => $model->images, 'type' => 'product']); ?>
 
     </section>
 </div>
