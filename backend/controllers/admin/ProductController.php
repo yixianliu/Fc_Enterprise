@@ -55,8 +55,9 @@ class ProductController extends BaseController
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat" => "/temp/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
+                    "imagePathFormat" => "/UEditor/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
                     "imageRoot"       => Yii::getAlias("@webroot"),
+                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
                 ],
             ]
         ];

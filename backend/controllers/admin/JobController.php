@@ -3,18 +3,17 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use common\models\News;
-use common\models\NewsClassify;
-use common\models\NewsSearch;
-use common\models\ProductClassify;
+use common\models\Job;
+use common\models\JobSearch;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * NewsController implements the CRUD actions for News model.
+ * JobController implements the CRUD actions for Job model.
  */
-class NewsController extends BaseController
+class JobController extends BaseController
 {
     /**
      * @inheritdoc
@@ -22,12 +21,14 @@ class NewsController extends BaseController
     public function behaviors()
     {
         return [
+
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete',],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
@@ -42,43 +43,22 @@ class NewsController extends BaseController
     }
 
     /**
-     * 操作
-     *
-     * @return array
-     */
-    public function actions()
-    {
-        return [
-            'upload' => [
-                'class'  => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    "imageUrlPrefix"       => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat"      => "/UEditor/news/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
-                    "imageRoot"            => Yii::getAlias("@webroot"),
-                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/news",
-                ],
-            ]
-        ];
-    }
-
-    /**
-     * Lists all News models.
+     * Lists all Job models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewsSearch();
+        $searchModel = new JobSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $this->getCls(),
         ]);
     }
 
     /**
-     * Displays a single News model.
+     * Displays a single Job model.
      * @param integer $id
      * @return mixed
      */
@@ -90,32 +70,38 @@ class NewsController extends BaseController
     }
 
     /**
-     * Creates a new News model.
+     * Creates a new Job model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
+        $model = new Job();
 
-        $model = new News();
+        $model->job_id = time() . '_' . rand(0000, 9999);
 
-        if ($model->load(Yii::$app->request->post())) {
+        $model->user_id = '网站管理员';
 
-            if (!$model->save()) {
-                Yii::$app->getSession()->setFlash('error', $model->getErrors());
-            } else {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        $data = Yii::$app->request->post();
+
+        if (!empty($data) && $data['Job']['is_audit'] == 'On') {
+
+            $data['Job']['path'] = Yii::getAlias('@frontend/web/job') . DIRECTORY_SEPARATOR . $model->job_id;
+
+            FileHelper::createDirectory($data['Job']['path']);
         }
 
-        return $this->render('create', [
-            'model'  => $model,
-            'result' => $this->getCls(),
-        ]);
+        if ($model->load($data) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
-     * Updates an existing News model.
+     * Updates an existing Job model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -126,18 +112,15 @@ class NewsController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } // 更新新闻
-        else {
-
+        } else {
             return $this->render('update', [
-                'model'  => $model,
-                'result' => $this->getCls(),
+                'model' => $model,
             ]);
         }
     }
 
     /**
-     * Deletes an existing News model.
+     * Deletes an existing Job model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -150,32 +133,18 @@ class NewsController extends BaseController
     }
 
     /**
-     * Finds the News model based on its primary key value.
+     * Finds the Job model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return News the loaded model
+     * @return Job the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = News::findOne($id)) !== null) {
+        if (($model = Job::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function getCls()
-    {
-        // 初始化
-        $result = array();
-
-        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
-
-        foreach ($dataCls as $key => $value) {
-            $result['classify'][ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 }

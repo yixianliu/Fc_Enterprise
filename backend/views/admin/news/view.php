@@ -59,7 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'is_hot',
                         'is_winnow',
                         'is_recommend',
-                        'is_audit',
+                        [
+                            'attribute' => 'is_audit',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已通过审核',
+                                    'Off' => '未通过审核',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
                         'is_comments',
                         'is_img',
                         'is_thumb',

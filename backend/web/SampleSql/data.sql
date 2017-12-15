@@ -157,11 +157,6 @@ VALUES
 (NULL, 'AR1', 8, 'A3', 'admin', NULL, '角色管理', 'On', #TIME#, #TIME#),
 (NULL, 'AJ1', 9, 'A3', 'admin', NULL, '招聘管理', 'On', #TIME#, #TIME#),
 
-(NULL, 'AJJV1', 1, 'AJ1', 'admin', 'job/index', '招聘信息', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/create', '添加招聘', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV3', 3, 'AJ1', 'admin', 'resume/index', '所有简历', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV4', 4, 'AJ1', 'admin', 'resume/create', '添加简历', 'On', #TIME#, #TIME#),
-
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'user/index', '所有用户', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'user/create', '添加用户', 'On', #TIME#, #TIME#),
 
@@ -192,4 +187,4 @@ VALUES
 (NULL, 'AJJV1', 1, 'AJ1', 'admin', 'job/index', '所有招聘', 'On', #TIME#, #TIME#),
 (NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/create', '添加招聘', 'On', #TIME#, #TIME#),
 (NULL, 'AJJV3', 3, 'AJ1', 'admin', 'resume/index', '人才简历', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'job/users', '用户应聘', 'On', #TIME#, #TIME#)
+(NULL, 'AJJV4', 4, 'AJ1', 'admin', 'job/users', '用户应聘', 'On', #TIME#, #TIME#)

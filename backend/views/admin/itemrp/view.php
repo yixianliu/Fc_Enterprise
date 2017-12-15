@@ -47,8 +47,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             'rule_name',
                             'data:ntext',
                             'description',
-                            'created_at',
-                            'updated_at',
+                            [
+                                'attribute' => 'created_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->created_at);
+                                },
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->updated_at);
+                                },
+                            ],
                         ],
                     ])
                     ?>

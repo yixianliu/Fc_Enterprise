@@ -2,7 +2,6 @@
 
 namespace backend\controllers\admin;
 
-use Faker\Provider\File;
 use Yii;
 use common\models\SinglePage;
 use common\models\SinglePageSearch;

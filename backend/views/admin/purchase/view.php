@@ -4,13 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Product */
+/* @var $model common\models\Purchase */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Purchases', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -25,79 +24,70 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <p>
                     <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?=
-                    Html::a('删除', ['delete', 'id' => $model->id], [
+                    <?= Html::a('删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => 'Are you sure you want to delete this item?',
                             'method'  => 'post',
                         ],
-                    ])
-                    ?>
+                    ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
-                <?=
-                DetailView::widget([
+                <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'product_id',
+                        'purchase_id',
                         'user_id',
-                        'l_key',
-                        'c_key',
-                        's_key',
                         'title',
                         'content:ntext',
-                        'price',
-                        'discount',
-                        'introduction',
-                        'keywords',
                         'path',
-                        'images',
-                        'praise',
-                        'forward',
-                        'collection',
-                        'share',
-                        'attention',
-                        'is_promote',
-                        'is_hot',
-                        'is_classic',
-                        'is_winnow',
-                        'is_recommend',
+                        'price',
+                        'num',
+                        'unit',
+                        'type',
+                        'is_status',
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'start_at',
                             'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '通过审核',
-                                    'Off' => '未通过审核',
-                                ];
-
-                                return $state[ $model->is_audit ];
+                                return date('Y - m -d , h:i', $model->start_at);
                             },
                         ],
-                        'is_field',
-                        'is_comments',
-                        'is_img',
-                        'is_thumb',
-                        'grade',
-                        'user_grade',
+                        [
+                            'attribute' => 'end_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->end_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->created_at);
+                                return date('Y - m -d , h:i', $model->created_at);
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->updated_at);
+                                return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
                     ],
-                ]);
-                ?>
+                ]) ?>
 
             </div>
         </div>
     </section>
 </div>
+
+

@@ -88,7 +88,7 @@ if (!empty($img)) {
 
         <?php else: ?>
 
-            <h3>暂无相关图片 !!</h3>
+            <h3>暂无相关内容 !!</h3>
 
         <?php endif ?>
 

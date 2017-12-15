@@ -18,7 +18,6 @@ use yii\widgets\ActiveForm;
         <tbody>
         <tr>
             <td>
-
                 <?=
                 $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['classify'],
@@ -28,7 +27,6 @@ use yii\widgets\ActiveForm;
                     ],
                 ]);
                 ?>
-
             </td>
             <td><?= $form->field($model, 'content') ?></td>
             <td><?= $form->field($model, 'introduction') ?></td>

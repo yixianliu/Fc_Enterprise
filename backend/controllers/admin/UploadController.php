@@ -11,6 +11,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Job;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -49,6 +50,10 @@ class UploadController extends BaseController
 
             case 'slide':
                 $model = new Slide();
+                break;
+
+            case 'job':
+                $model = new Job();
                 break;
 
             default:

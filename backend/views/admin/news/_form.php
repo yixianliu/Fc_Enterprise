@@ -48,8 +48,7 @@ $result['classify'] = empty($result['classify']) ? array() : $result['classify']
                                 'elementPathEnabled' => false,
                                 'wordCount'          => false,
                             ]
-                        ])
-                        ->label(false);
+                        ]);
                     ?>
 
                     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>

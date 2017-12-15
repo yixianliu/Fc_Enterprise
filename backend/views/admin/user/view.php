@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -58,15 +59,83 @@ $this->params['breadcrumbs'][] = $this->title;
                         'is_display',
                         'is_head',
                         'is_security',
-                        'is_using',
-                        'created_at',
-                        'updated_at',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , H:i:s', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , H:i:s', $model->updated_at);
+                            },
+                        ],
                     ],
                 ]);
                 ?>
 
             </div>
         </div>
+
+        <div class="content-body">
+            <div class="row">
+
+                <h3>该用户发布的简历</h3>
+
+                <?= GridView::widget([
+                    'dataProvider' => $dataJobProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'title',
+                        'content:ntext',
+                        'keywords',
+                        'is_audit',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
+
+            </div>
+        </div>
+
+        <div class="content-body">
+            <div class="row">
+
+                <h3>该用户发布的采购信息</h3>
+
+                <?= GridView::widget([
+                    'dataProvider' => $dataPurchaseProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'title',
+                        'content:ntext',
+                        // 'path',
+                        'price',
+                        'num',
+                        'unit',
+                        'type',
+                        'is_status',
+                        // 'start_at',
+                        // 'end_at',
+                        'is_using',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
+
+            </div>
+        </div>
+
     </section>
 </div>
 

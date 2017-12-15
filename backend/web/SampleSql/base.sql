@@ -235,9 +235,11 @@ CREATE TABLE `#DB_PREFIX#User` (
     `username` VARCHAR(80) NOT NULL COMMENT '邮箱 / 用户名',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
     `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
-    `exp` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '经验值',
     `credit` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
+    `exp` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '经验值',
     `nickname` VARCHAR(55) NULL DEFAULT NULL COMMENT '昵称',
+    `enterprise` VARCHAR(55) NULL DEFAULT NULL COMMENT '企业名称',
+    `head` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户头像',
     `signature` VARCHAR(80) NULL DEFAULT NULL COMMENT '个性签名',
     `telphone` VARCHAR(55) NULL DEFAULT NULL COMMENT '手机号码',
     `birthday` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '出生年月日',
@@ -247,13 +249,13 @@ CREATE TABLE `#DB_PREFIX#User` (
     `consecutively` INT(11) UNSIGNED NOT NULL COMMENT '连续登录',
     `sex` SET('Male' , 'Female') NOT NULL DEFAULT 'Female' COMMENT '性别',
     `is_display` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '显示信息',
+    `is_auth` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '企业认证',
     `is_head` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '上传头像',
     `is_security` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '安全设置',
     `is_using` SET('On', 'Off', 'Not') NOT NULL DEFAULT 'Off' COMMENT '是否可用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY
-    KEY `id` (`id`),
+    PRIMARY KEY `id` (`id`),
     UNIQUE KEY (`user_id`),
     KEY `r_key` (`r_key`),
     UNIQUE `nickname` (`nickname`),
@@ -616,6 +618,7 @@ CREATE TABLE `#DB_PREFIX#News` (
     `title` VARCHAR(125) NOT NULL COMMENT '产品标题',
     `content` TEXT NOT NULL COMMENT '新闻内容',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取介绍第一段.',
+    `path` VARCHAR(125) NULL COMMENT '新闻文件路径',
     `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
@@ -670,34 +673,26 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Job`;
 CREATE TABLE `#DB_PREFIX#Job` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `job_id` VARCHAR(85) NOT NULL COMMENT '招聘编号,唯一识别码',
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '发布用户ID',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
-    `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `path` VARCHAR(125) NULL COMMENT '招聘文件路径',
     `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
-    `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
-    `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
-    `is_thumb` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
-    `grade` INT(6) UNSIGNED NOT NULL COMMENT '本站评分,由我们网站人员进行评估.',
-    `user_grade` INT(6) UNSIGNED NOT NULL COMMENT '用户评分,由本站用户进行评估.',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `job_id` (`job_id`),
     UNIQUE `title` (`title`),
-    KEY `user_id` (`user_id`),
-    KEY `c_key` (`c_key`)
+    KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
  * 用户应聘
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Job_Applyfor`;
-CREATE TABLE `#DB_PREFIX#Job_Applyfor` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Job_Apply_For`;
+CREATE TABLE `#DB_PREFIX#Job_Apply_For` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `job_id` VARCHAR(85) NOT NULL COMMENT '招聘ID',
@@ -716,8 +711,9 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Resume`;
 CREATE TABLE `#DB_PREFIX#Resume` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
-    `title` VARCHAR(125) NOT NULL COMMENT '招聘ID',
-    `content` TEXT NOT NULL COMMENT '内容',
+    `title` VARCHAR(125) NOT NULL COMMENT '简历标题',
+    `content` TEXT NOT NULL COMMENT '简历内容',
+    `path` VARCHAR(125) NULL COMMENT '上传简历路径',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
@@ -726,15 +722,59 @@ CREATE TABLE `#DB_PREFIX#Resume` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
+ * 采购
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Purchase`;
+CREATE TABLE `#DB_PREFIX#Purchase` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `purchase_id` VARCHAR(85) NOT NULL COMMENT '采购编号',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `title` VARCHAR(125) NOT NULL COMMENT '采购标题',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `path` VARCHAR(125) NULL COMMENT '上传采购文件',
+    `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
+    `num` INT(11) UNSIGNED NOT NULL COMMENT '采购数量',
+    `unit` INT(11) UNSIGNED NOT NULL COMMENT '单位',
+    `type` SET('Long', 'Short') NOT NULL COMMENT '采购类型 (分为长期 / 短期)',
+    `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
+    `start_at` INT(11) UNSIGNED NOT NULL COMMENT '起始时间',
+    `end_at` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `user_id` (`user_id`),
+    UNIQUE KEY `purchase_id` (`purchase_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 提交报价
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Purchase_Offer`;
+CREATE TABLE `#DB_PREFIX#Purchase_Offer` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `purchase_id` VARCHAR(85) NOT NULL COMMENT '采购编号',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `price` VARCHAR(85) NOT NULL COMMENT '提交价格',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `user_id` (`user_id`),
+    UNIQUE KEY `purchase_id` (`purchase_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 小程序
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
+
 /**
- * 用户简历
+ * 对接小程序
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#WeChat_`;
-CREATE TABLE `#DB_PREFIX#Resume` (
+DROP TABLE IF EXISTS `#DB_PREFIX#WeChat`;
+CREATE TABLE `#DB_PREFIX#WeChat` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `title` VARCHAR(125) NOT NULL COMMENT '招聘ID',

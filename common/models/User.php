@@ -25,9 +25,6 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
 
-    public $repassword;
-    public $newpassword;
-
     /**
      * @inheritdoc
      */
@@ -52,19 +49,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'user_id'     => '用户编号',
-            'username'    => '帐号',
-            'nickname'    => '昵称',
-            'telphone'    => '手机号码',
-            'is_using'    => '是否启用',
-            'login_ip'    => '登录 IP',
-            'r_key'       => '角色',
-            'sex'         => '性别',
-            'password'    => '密码',
-            'repassword'  => '确认密码',
-            'newpassword' => '新密码',
-            'created_at'  => '添加数据时间',
-            'updated_at'  => '更新数据时间',
+            'user_id'    => '用户编号',
+            'username'   => '帐号',
+            'nickname'   => '昵称',
+            'telphone'   => '手机号码',
+            'is_using'   => '是否启用',
+            'login_ip'   => '登录 IP',
+            'r_key'      => '角色',
+            'sex'        => '性别',
+            'password'   => '密码',
+            'signature'  => '个性签名',
+            'created_at' => '添加数据时间',
+            'updated_at' => '更新数据时间',
         ];
     }
 
@@ -76,15 +72,12 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 
             // 必填
-            [['username', 'password', 'nickname', 'sex', 'repassword', 'r_key'], 'required', 'on' => 'backend'],
+            [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
 
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
 
-            // 两次密码是否一样
-            ['repassword', 'compare', 'compareAttribute' => 'password'],
-
-            [['exp', 'credit', 'birthday', 'signature'], 'default', 'value' => 0],
+            [['exp', 'credit', 'birthday', 'signature', 'telphone'], 'default', 'value' => 0],
 
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
         ];
@@ -98,7 +91,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function scenarios()
     {
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'repassword', 'user_id'], // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
+            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'telphone'], // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         ];
     }
 

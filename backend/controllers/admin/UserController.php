@@ -3,11 +3,15 @@
 namespace backend\controllers\admin;
 
 use common\models\ItemRp;
+use common\models\Job;
+use common\models\Purchase;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -20,6 +24,17 @@ class UserController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
@@ -51,8 +66,27 @@ class UserController extends BaseController
      */
     public function actionView($id)
     {
+
+        // 招聘
+        $dataJobProvider = new ActiveDataProvider([
+            'query' => Job::find(['user_id' => $id]),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        // 采购
+        $dataPurchaseProvider = new ActiveDataProvider([
+            'query' => Purchase::find(['user_id' => $id]),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model'                => $this->findModel($id),
+            'dataJobProvider'      => $dataJobProvider,
+            'dataPurchaseProvider' => $dataPurchaseProvider,
         ]);
     }
 
@@ -69,7 +103,13 @@ class UserController extends BaseController
 
         $model->user_id = time() . '_' . rand(0000, 9999);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            $data['User']['password'] = Yii::$app->security->generatePasswordHash($data['User']['password']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
@@ -101,7 +141,13 @@ class UserController extends BaseController
 
         $model->scenario = 'backend';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            $data['User']['password'] = Yii::$app->security->generatePasswordHash($data['User']['password']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
@@ -150,4 +196,5 @@ class UserController extends BaseController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
