@@ -24,12 +24,20 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'telphone')->textInput(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'r_key')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['role'],
                     'options'       => ['placeholder' => '角色...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
+
+                <?=
+                $form->field($model, 'r_key')->widget(kartik\select2\Select2::classname(), [
+                    'data'          => ['user' => '普通用户', 'enterprise' => '企业用户', 'supplier' => '供应商用户'],
+                    'options'       => ['placeholder' => '用户类型...'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],

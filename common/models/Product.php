@@ -11,7 +11,6 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $id
  * @property string $product_id
  * @property string $user_id
- * @property string $l_key
  * @property string $c_key
  * @property string $s_key
  * @property string $title

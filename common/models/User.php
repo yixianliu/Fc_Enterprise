@@ -78,6 +78,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
 
             [['exp', 'credit', 'birthday', 'signature', 'telphone'], 'default', 'value' => 0],
+            [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'on' => 'backend', 'message' => '{attribute}必须为1开头的11位纯数字'],
 
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
         ];

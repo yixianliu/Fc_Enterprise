@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'themes/enterprise/css/bootstrap.min.css',
         'themes/enterprise/css/magnific-popup.css',
-        'themes/enterprise/css/css/font-icons.css',
+        'themes/enterprise/css/font-icons.css',
         'themes/enterprise/revolution/css/settings.css',
         'themes/enterprise/css/rev-slider.css',
         'themes/enterprise/css/sliders.css',

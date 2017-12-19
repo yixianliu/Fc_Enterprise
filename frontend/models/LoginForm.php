@@ -20,6 +20,7 @@ class LoginForm extends Model
     public $password;
     public $nickname;
     public $telphone;
+    public $is_type;
     public $repassword;
     public $rememberMe = true;
     private $_user;
@@ -59,7 +60,7 @@ class LoginForm extends Model
         return [
             'username'   => '帐号',
             'password'   => '密码',
-            'nickname'   => '昵称',
+            'enterprise'   => '企业名称',
             'telphone'   => '手机号码',
             'repassword' => '二次密码',
         ];
@@ -74,7 +75,7 @@ class LoginForm extends Model
     {
         return [
             'login' => ['username', 'password'],
-            'reg'   => ['username', 'password', 'telphone', 'nickname', 'repassword'],
+            'reg'   => ['username', 'password', 'repassword', 'is_type'],
         ];
     }
 

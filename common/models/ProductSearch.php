@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade', 'created_at', 'updated_at'], 'integer'],
-            [['product_id', 'user_id', 'l_key', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'path', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
+            [['product_id', 'user_id', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'path', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
         ];
     }
 
@@ -75,7 +75,6 @@ class ProductSearch extends Product
 
         $query->andFilterWhere(['like', 'product_id', $this->product_id])
             ->andFilterWhere(['like', 'user_id', $this->user_id])
-            ->andFilterWhere(['like', 'l_key', $this->l_key])
             ->andFilterWhere(['like', 'c_key', $this->c_key])
             ->andFilterWhere(['like', 's_key', $this->s_key])
             ->andFilterWhere(['like', 'title', $this->title])

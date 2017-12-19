@@ -232,21 +232,22 @@ DROP TABLE IF EXISTS `#DB_PREFIX#User`;
 CREATE TABLE `#DB_PREFIX#User` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `username` VARCHAR(80) NOT NULL COMMENT '邮箱 / 用户名',
+    `username` VARCHAR(80) NOT NULL COMMENT '手机号码',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
     `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
     `credit` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
     `exp` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '经验值',
     `nickname` VARCHAR(55) NULL DEFAULT NULL COMMENT '昵称',
     `enterprise` VARCHAR(55) NULL DEFAULT NULL COMMENT '企业名称',
+    `job` VARCHAR(55) NULL DEFAULT NULL COMMENT '所在企业的职位名称',
     `head` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户头像',
     `signature` VARCHAR(80) NULL DEFAULT NULL COMMENT '个性签名',
-    `telphone` VARCHAR(55) NULL DEFAULT NULL COMMENT '手机号码',
     `birthday` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '出生年月日',
     `answer` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户答案',
     `s_key` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户问题',
     `login_ip` VARCHAR(85) NULL DEFAULT 0 COMMENT '登陆IP',
     `consecutively` INT(11) UNSIGNED NOT NULL COMMENT '连续登录',
+    `is_type` SET('user' , 'enterprise', 'supplier') NOT NULL DEFAULT 'user' COMMENT '用户类型,用户、企业、供应商',
     `sex` SET('Male' , 'Female') NOT NULL DEFAULT 'Female' COMMENT '性别',
     `is_display` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '显示信息',
     `is_auth` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '企业认证',
@@ -763,28 +764,5 @@ CREATE TABLE `#DB_PREFIX#Purchase_Offer` (
     UNIQUE KEY `user_id` (`user_id`),
     UNIQUE KEY `purchase_id` (`purchase_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 小程序
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
-
-/**
- * 对接小程序
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#WeChat`;
-CREATE TABLE `#DB_PREFIX#WeChat` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
-    `title` VARCHAR(125) NOT NULL COMMENT '招聘ID',
-    `content` TEXT NOT NULL COMMENT '内容',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `created_at` INT(11) UNSIGNED NOT NULL,
-    `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `user_id` (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 # SET FOREIGN_KEY_CHECKS = 1;

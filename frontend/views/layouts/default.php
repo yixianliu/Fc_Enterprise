@@ -16,8 +16,55 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\iConf\ConfList;
+use common\models\Menu;
 
 AppAsset::register($this); // $this 代表视图对象
+
+$data = Menu::findAll(['is_using' => 'On', 'parent_id' => 'H1']);
+
+foreach ($data as $value) {
+
+    $dataMenu[] = [
+        'label' => $value['name'],
+        'url'   => [$value['url']],
+        'items' => recursionMenu($value),
+    ];
+
+}
+
+
+/**
+ * 递归菜单
+ *
+ * @param $data
+ * @return array|void
+ */
+function recursionMenu($data)
+{
+
+    if (empty($data) || empty($data['m_key'])) {
+        return;
+    }
+
+    $child = Menu::findAll(['is_using' => 'On', 'parent_id' => $data['m_key']]);
+
+    if (empty($child)) {
+        return;
+    }
+
+    // 初始化
+    $result = array();
+
+    foreach ($child as $value) {
+        $result[] = [
+            'label' => $value['name'],
+            'url'   => [$value['url']],
+            'items' => recursionMenu($value),
+        ];
+    }
+
+    return $result;
+}
 
 $this->beginPage();
 
@@ -31,7 +78,6 @@ $this->beginPage();
 
     <?= ConfList::widget(); ?>
 
-    <!-- Favicons -->
     <link rel="shortcut icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/favicon.ico">
     <link rel="apple-touch-icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon-72x72.png">
@@ -39,27 +85,40 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
+    <style type="text/css">
+        *, body, html, a {
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+
 </head>
 
 <body>
 
 <?php $this->beginBody() ?>
 
-<!-- Preloader -->
 <div class="loader-mask">
     <div class="loader">
         "Loading..."
     </div>
 </div>
 
-<header class="nav-type-1" id="home">
-
-    <nav class="navbar navbar-fixed-top">
-        <div class="navigation-overlay">
-            <div class="container-fluid relative">
+<header class="nav-type-2">
+    <nav class="navbar navbar-static-top">
+        <div class="navigation">
+            <div class="container relative">
                 <div class="row">
-
                     <div class="navbar-header">
+
+                        <!-- Logo -->
+                        <div class="logo-container">
+                            <div class="logo-wrap">
+                                <a href="index-mp.html">
+                                    <?= Html::img(Url::to('@web/themes/enterprise/img/logo_dark.png'), ['alt' => '', 'class' => 'logo']); ?>
+                                </a>
+                            </div>
+                        </div>
+
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -67,69 +126,31 @@ $this->beginPage();
                             <span class="icon-bar"></span>
                         </button>
 
-                        <!-- Logo -->
-                        <div class="logo-container">
-                            <div class="logo-wrap local-scroll">
-                                <a href="#home">
-                                    <img class="logo" src="<?= Url::to('@web/themes/enterprise/img') ?>/logo_light.png" alt="logo">
-                                </a>
-                            </div>
-                        </div>
                     </div> <!-- end navbar-header -->
 
-                    <div class="col-md-8 col-xs-12 nav-wrap">
-                        <div class="collapse navbar-collapse text-center" id="navbar-collapse">
+                    <div class="col-md-9 nav-wrap right">
+                        <div class="collapse navbar-collapse" id="navbar-collapse">
 
-                            <?php
-                            NavBar::begin([
-                                'options'    => [
-                                    'class' => 'nav navbar-nav local-scroll text-center',
-                                ],
-                            ]);
-
-                            $menuItems = [
-                                ['label' => '首页', 'url' => ['/site/index']],
-                                ['label' => '关于我们', 'url' => ['/site/about']],
-                                ['label' => '联系我们', 'url' => ['/site/contact']],
-                            ];
-
-                            echo Nav::widget([
+                            <?=
+                            Nav::widget([
                                 'options' => ['class' => 'navbar-nav navbar-right'],
-                                'items'   => $menuItems,
+                                'items'   => $dataMenu,
                             ]);
-
-                            NavBar::end();
                             ?>
 
                         </div>
-                    </div> <!-- end col -->
-
-                    <div class="menu-socials hidden-sm hidden-xs">
-                        <ul>
-                            <li>
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                        </ul>
                     </div>
 
-                </div> <!-- end row -->
-            </div> <!-- end container -->
-        </div> <!-- end navigation -->
-    </nav> <!-- end navbar -->
-
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
 
 <div class="main-wrapper-mp oh">
 
     <?= $content ?>
 
-    <!-- Footer Type-2 -->
     <footer class="footer footer-type-2 bg-dark">
         <div class="container">
             <div class="footer-widgets">
@@ -141,7 +162,8 @@ $this->beginPage();
                             <p class="mb-0">Enigma is a very slick and clean multi-purpose template with endless possibilities. Creating an awesome website with this Theme is easy
                                 than you can imagine. Our Theme is a very slick and clean template with endless possibilities.</p>
                         </div>
-                    </div> <!-- end about us -->
+                    </div>
+                    <!-- end about us -->
 
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="widget footer-get-in-touch">
@@ -163,7 +185,8 @@ $this->beginPage();
                                 <li><a href="#">Fully Responsive Theme</a></li>
                             </ul>
                         </div>
-                    </div> <!-- end useful links -->
+                    </div>
+                    <!-- end useful links -->
 
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="widget footer-posts last">
@@ -200,11 +223,10 @@ $this->beginPage();
         <div class="bottom-footer">
             <div class="container">
                 <div class="row">
-
                     <div class="col-sm-6 col-xs-12 copyright">
-              <span>
-                © 2015 Enigma Theme  |  Made by <a href="http://deothemes.com">DeoThemes</a>
-              </span>
+                        <div>
+                            © 2018 Enigma Theme | Made by <a href="http://deothemes.com">DeoThemes</a>
+                        </div>
                     </div>
 
                     <div class="col-sm-4 col-sm-offset-2 col-xs-12 footer-socials">

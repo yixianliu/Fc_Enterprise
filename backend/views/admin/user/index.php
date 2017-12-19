@@ -39,19 +39,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         // 'credit',
                         // 'nickname',
                         // 'signature',
-                        // 'telphone',
                         // 'birthday',
                         // 'answer',
                         // 's_key',
-                        'login_ip',
+                        'is_type',
                         // 'consecutively',
                         // 'sex',
                         // 'is_display',
                         // 'is_head',
                         // 'is_security',
-                        // 'is_using',
-                        // 'created_at',
-                        // 'updated_at',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);

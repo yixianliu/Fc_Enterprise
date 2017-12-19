@@ -94,7 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <h3>该用户发布的简历</h3>
 
-                <?= GridView::widget([
+                <?=
+                GridView::widget([
                     'dataProvider' => $dataJobProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
@@ -104,7 +105,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'is_audit',
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]); ?>
+                ]);
+                ?>
 
             </div>
         </div>

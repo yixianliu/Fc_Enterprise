@@ -5,7 +5,7 @@
  * @author   Yxl <zccem@163.com>
  */
 
-namespace app\controllers\Frontend;
+namespace frontend\controllers;
 
 use common\models\User;
 
@@ -18,7 +18,7 @@ class UserController extends BaseController
     public function actionIndex()
     {
 
-        $this->isUser();
+//        $this->isUser();
 
         return $this->render('index');
     }

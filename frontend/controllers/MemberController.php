@@ -12,8 +12,10 @@ use yii\web\Controller;
 use yii\helpers\Json;
 use frontend\models\LoginForm;
 
-class MemberController extends BaseController
+class MemberController extends Controller
 {
+
+    public $layout = 'default';
 
     // 构造
     public function init()
@@ -21,12 +23,12 @@ class MemberController extends BaseController
 
         parent::init();
 
-        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return $this->redirect(['/Mount/center/view']);
+        if (!file_exists(Yii::getAlias('@backend') . '/web/' . Yii::$app->params['RD_FILE'])) {
+            exit('Null');
         }
 
         if (!Yii::$app->user->isGuest) {
-//            return $this->redirect(['/Frontend/member/login']);
+            return $this->redirect(['user/view']);
         }
 
         return ;

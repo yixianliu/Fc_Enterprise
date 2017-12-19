@@ -16,8 +16,6 @@ $this->title = '首页';
 
 ?>
 
-
-<!-- Revolution Slider -->
 <section class="hero-wrap video-container text-center">
 
     <div class="container container-full-height">

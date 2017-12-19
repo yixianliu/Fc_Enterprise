@@ -1,32 +1,23 @@
-The Yii framework is free software. It is released under the terms of
-the following BSD License.
+企业站系统 v2.0 版本
 
-Copyright © 2008 by Yii Software LLC (http://www.yiisoft.com)
+Copyright © 2018 by YxL Software LLC (http://www.yxlcms.com)
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
+企业站点主要功能:
 
- * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in
-   the documentation and/or other materials provided with the
-   distribution.
- * Neither the name of Yii Software LLC nor the names of its
-   contributors may be used to endorse or promote products derived
-   from this software without specific prior written permission.
+ * 产品管理系统(具有CURD功能、推荐、热门、经典等等常用功能,还有关键词、导读、多图片等等功能).
+ * 新闻系统(具有CURD功能、推荐、热门等等常用功能,还有关键词、导读、多图片等等功能).
+ * 下载中心
+ * 网站后台管理功能
+ * 招聘系统
+ * 采购需求系统
+ * 用户系统(用户中心、登录注册、RBAC等等功能)
+ * 在线留言管理
+ * 手机版本同步功能
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
+```
+该软件由版权所有者和贡献者提供。“是”和任何明示或默示保证，包括但不限于适销性和适用性的默示保证
+为某一特定目的的担保。在任何情况下都不应版权所有人或贡献者对任何直接、间接的行为负责，
+附带的、特殊的、示范性的或后果性损害（包括，但不限于采购替代品或服务；丢失使用、数据或利润；或业务中断）
+任何责任理论，无论是在合同中，还是严格的责任或侵权行为（包括过失或其他）
+任何使用此软件的方法，即使被告知这种损害的可能性.
