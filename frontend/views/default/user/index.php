@@ -16,7 +16,13 @@ $this->title = '用户中心';
 
 ?>
 
-<section class="section-wrap blog-standard">
+<!-- Page Title -->
+<section class="page-title text-center" style="background-image: url(<?= Url::to('@web/themes/enterprise/img') ?>/blog/blog_title_bg.jpg);height: 500px;">
+    <div class="container relative clearfix">
+    </div>
+</section> <!-- end page title -->
+
+<section class="section-wrap blog-standard" style="padding: 60px 0">
     <div class="container relative">
         <div class="row">
             <div class="col-sm-3 sidebar blog-sidebar">
