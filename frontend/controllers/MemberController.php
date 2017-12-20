@@ -7,10 +7,11 @@
 
 namespace frontend\controllers;
 
+
 use Yii;
-use yii\web\Controller;
 use yii\helpers\Json;
-use frontend\models\LoginForm;
+use yii\web\Controller;
+use common\models\User;
 
 class MemberController extends Controller
 {
@@ -28,19 +29,21 @@ class MemberController extends Controller
         }
 
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['user/view']);
+            return $this->redirect(['/user/index']);
         }
 
-        return ;
+        return;
     }
 
     /**
      * 登录
+     *
+     * @return string
      */
     public function actionLogin()
     {
 
-        $model = new LoginForm();
+        $model = new User();
 
         $model->scenario = 'login';
 
@@ -57,30 +60,27 @@ class MemberController extends Controller
     public function actionReg()
     {
 
-        $model = new LoginForm();
+        $model = new User();
 
         $model->scenario = 'reg';
 
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isPost) {
 
-            if (!$model->load(Yii::$app->request->post())) {
-                return Json::encode(['msg' => '提交内容有误 !!']);
-            }
-
-            // 验证失败
-            if (!$model->validate()) {
-                return Json::encode($model->getErrors());
+            if (!$model->load(Yii::$app->request->post()) || !$model->validate()) {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
             }
 
             if (!($user = $model->userReg())) {
-                return Json::encode(['msg' => '注册失败,请检查 !!']);
+                Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
             }
 
-            if (!Yii::$app->getUser()->login($user, (3600 * 24 * 30))) {
-                return Json::encode(['msg' => '注册用户异常 !!']);
+            if (!Yii::$app->getUser()->login($model->getUser(), (3600 * 24 * 30))) {
+                Yii::$app->getSession()->setFlash('error', '无法保存时间 !!');
             }
 
-            return Json::encode(['msg' => '注册成功 !!', 'status' => true]);
+            if (!Yii::$app->user->isGuest) {
+                return $this->redirect(['/user/index']);
+            }
         }
 
         return $this->render('../center/reg', ['model' => $model]);
@@ -88,13 +88,28 @@ class MemberController extends Controller
 
     /**
      * 注销用户
+     *
+     * @return \yii\web\Response
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
         Yii::$app->getSession()->destroy();
-
         return $this->goHome();
+    }
+
+    public function actionSend()
+    {
+
+        if (!Yii::$app->request->isAjax) {
+            return Json::encode(['msg' => '提交方式有误 !!']);
+        }
+
+//        Yii::$app->smser->send('13660525467', rand(10000, 99999));
+
+        return Json::encode(Yii::$app->smser->send('13660525467', rand(10000, 99999)));
+
+//        return Json::encode(['status' => true]);
     }
 
 }

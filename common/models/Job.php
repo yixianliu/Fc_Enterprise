@@ -56,6 +56,8 @@ class Job extends \yii\db\ActiveRecord
             [['images'], 'string', 'max' => 255],
             [['job_id'], 'unique'],
             [['title'], 'unique'],
+
+            [['is_audit'], 'default', 'value' => 'Off'],
         ];
     }
 final

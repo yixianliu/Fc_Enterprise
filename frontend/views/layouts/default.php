@@ -86,8 +86,9 @@ $this->beginPage();
     <?php $this->head() ?>
 
     <style type="text/css">
-        *, body, html, a {
+        *, body, html, a, input,.btn, h5, p {
             font-family: 'Microsoft YaHei';
+            letter-spacing: 1px;
         }
     </style>
 

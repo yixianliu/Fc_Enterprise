@@ -12,6 +12,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class BaseController extends Controller
@@ -40,10 +41,11 @@ class BaseController extends Controller
     {
 
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/member/login']);
+            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to(['/member/login']) . '"; </script> ';
+            exit(false);
         }
 
-        return;
+        return true;
     }
 
 }

@@ -21,6 +21,7 @@ class LoginForm extends Model
     public $nickname;
     public $telphone;
     public $is_type;
+    public $msg;
     public $repassword;
     public $rememberMe = true;
     private $_user;
@@ -36,11 +37,10 @@ class LoginForm extends Model
 
             // string 字符串，这里我们限定的意思就是username至少包含2个字符，最多255个字符
             ['username', 'string', 'min' => 6, 'max' => 50],
-            ['username', 'email'],
 
             // 注册
-            [['username', 'nickname', 'password', 'email', 'telphone', 'repassword'], 'required', 'on' => 'reg'],
-            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
+            [['username', 'is_type', 'password', 'msg', 'repassword'], 'required', 'on' => 'reg'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
             ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
 
             // 登录
@@ -60,9 +60,11 @@ class LoginForm extends Model
         return [
             'username'   => '帐号',
             'password'   => '密码',
-            'enterprise'   => '企业名称',
+            'enterprise' => '企业名称',
             'telphone'   => '手机号码',
             'repassword' => '二次密码',
+            'is_type'    => '用户类型',
+            'msg'        => '手机短信',
         ];
     }
 
@@ -75,7 +77,7 @@ class LoginForm extends Model
     {
         return [
             'login' => ['username', 'password'],
-            'reg'   => ['username', 'password', 'repassword', 'is_type'],
+            'reg'   => ['username', 'password', 'repassword', 'is_type', 'msg'],
         ];
     }
 
@@ -108,18 +110,12 @@ class LoginForm extends Model
         $Cls->user_id = time() . '_' . rand(0, 999);
         $Cls->username = $this->username;
         $Cls->password = $Cls->setPassword($this->password);
-        $Cls->nickname = $this->nickname;
-        $Cls->telphone = $this->telphone;
-        $Cls->grade = 4;
+        $Cls->is_type = $this->is_type;
 
         // 生成 "remember me" 认证key
         $Cls->generateAuthKey();
 
-        if (!$Cls->save(false)) {
-            return false;
-        }
-
-        return $Cls;
+        return !$Cls->save(false)? false : $Cls;
     }
 
     /**

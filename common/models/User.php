@@ -25,6 +25,11 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
 
+    public $msg;
+    public $repassword;
+    public $auth_key;
+    private $_user;
+
     /**
      * @inheritdoc
      */
@@ -61,6 +66,12 @@ class User extends ActiveRecord implements IdentityInterface
             'signature'  => '个性签名',
             'created_at' => '添加数据时间',
             'updated_at' => '更新数据时间',
+
+            'enterprise' => '企业名称',
+            'telphone'   => '手机号码',
+            'repassword' => '二次密码',
+            'is_type'    => '用户类型',
+            'msg'        => '短信验证码',
         ];
     }
 
@@ -81,6 +92,16 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'on' => 'backend', 'message' => '{attribute}必须为1开头的11位纯数字'],
 
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
+
+            // 注册
+            [['username', 'is_type', 'password', 'msg', 'repassword'], 'required', 'on' => 'reg'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
+
+            // 登录
+            [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
+            ['rememberMe', 'boolean', 'on' => 'login'],
+            ['password', 'validatePassword', 'on' => 'login'],
         ];
     }
 
@@ -91,8 +112,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function scenarios()
     {
+        // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'telphone'], // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
+            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'telphone'],
+            'login'   => ['username', 'password'],
+            'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
         ];
     }
 
@@ -120,7 +144,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username]);
     }
 
     /**
@@ -137,7 +161,6 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status'               => self::STATUS_ACTIVE,
         ]);
     }
 
@@ -226,5 +249,39 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * 注册
+     *
+     * @return bool
+     */
+    public function userReg()
+    {
+
+        $this->user_id = time() . '_' . rand(0000, 9999);
+
+        $this->r_key = 'admin';
+
+        if (!$this->save(false)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    public function getUser()
+    {
+
+        if ($this->_user == null) {
+            $this->_user = self::findByUsername($this->username);
+        }
+
+        return $this->_user;
     }
 }

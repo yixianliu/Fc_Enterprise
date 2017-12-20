@@ -39,15 +39,18 @@ class JobSearch extends Job
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id = null)
     {
-        $query = Job::find();
+
+        if (empty($id)) {
+            $query = Job::find();
+        } else {
+            $query = Job::find()->where(['user_id' => $id]);
+        }
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
 
         $this->load($params);
 
@@ -59,13 +62,12 @@ class JobSearch extends Job
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'         => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'job_id', $this->job_id])
-            ->andFilterWhere(['like', 'user_id', $this->user_id])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
