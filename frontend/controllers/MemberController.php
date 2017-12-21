@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 
 use Yii;
+use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
 use common\models\User;
@@ -70,17 +71,32 @@ class MemberController extends Controller
                 Yii::$app->getSession()->setFlash('error', $model->getErrors());
             }
 
-            if (!($user = $model->userReg())) {
-                Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
+            $cookie = \Yii::$app->request->cookies;
+
+            //判断cookie是否存在
+            if (!$cookie->has('RegPhoneCode')) {
+                Yii::$app->getSession()->setFlash('error', '没有验证手机 !!');
+            } else {
+
+                if ($model->msg != $cookie->get('RegPhoneCode')) {
+                    Yii::$app->getSession()->setFlash('error', '与验证手机的验证码不一致 !!');
+                } else {
+
+                    if (!($user = $model->userReg())) {
+                        Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
+                    }
+
+                    if (!Yii::$app->getUser()->login($model->getUser(), (3600 * 24 * 30))) {
+                        Yii::$app->getSession()->setFlash('error', '无法保存时间 !!');
+                    }
+
+                    if (!Yii::$app->user->isGuest) {
+                        return $this->redirect(['/user/index']);
+                    }
+                }
+
             }
 
-            if (!Yii::$app->getUser()->login($model->getUser(), (3600 * 24 * 30))) {
-                Yii::$app->getSession()->setFlash('error', '无法保存时间 !!');
-            }
-
-            if (!Yii::$app->user->isGuest) {
-                return $this->redirect(['/user/index']);
-            }
         }
 
         return $this->render('../center/reg', ['model' => $model]);
@@ -95,6 +111,7 @@ class MemberController extends Controller
     {
         Yii::$app->user->logout();
         Yii::$app->getSession()->destroy();
+
         return $this->goHome();
     }
 
@@ -105,11 +122,32 @@ class MemberController extends Controller
             return Json::encode(['msg' => '提交方式有误 !!']);
         }
 
-//        Yii::$app->smser->send('13660525467', rand(10000, 99999));
+        $data = Yii::$app->request->post();
 
-        return Json::encode(Yii::$app->smser->send('13660525467', rand(10000, 99999)));
+        if (empty($data['username'])) {
+            return Json::encode(['msg' => '手机号码不正确 !!']);
+        }
 
-//        return Json::encode(['status' => true]);
+        // 验证码
+        $code = rand(10000, 99999);
+
+        // cookie
+        $cookie = new \yii\web\Cookie([
+            'name'     => 'RegPhoneCode',
+            'value'    => $code,
+            'expire'   => time() + 18000,
+            'httpOnly' => true
+        ]);
+
+        \Yii::$app->response->getCookies()->add($cookie);
+
+        // 短信模板
+        $content = '【湛江沃噻网络】您的验证码是' . $code . '。如非本人操作，请忽略本短信';
+
+        FileHelper::createDirectory(Yii::getAlias('@frontend/web/temp/') . $code);
+
+        return Json::encode(true);
+//        return Json::encode(Yii::$app->smser->send($data['username'], $content));
     }
 
 }

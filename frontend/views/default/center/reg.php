@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = '注册';
                         <?= $form->field($model, 'msg')->textInput(['maxlength' => 5]) ?>
                     </div>
 
-                    <div class="col-md-6 contact-name" style="margin-top: 35px;"><a id="SendMsg">发送短信验证码</a></div>
+                    <div class="col-md-6 contact-name" style="margin-top: 30px;"><input id="SendMsg" class="btn" type="button" value="发送短信验证码" /></div>
 
                 </div>
 
@@ -121,19 +121,31 @@ $this->params['breadcrumbs'][] = '注册';
 
         </div>
     </div>
+
+    <?= Yii::$app->view->renderFile('@app/views/default/form_msg.php'); ?>
+
 </section>
 
 <script type="text/javascript">
+
     $('#SendMsg').on('click', function () {
 
-        $(this).text('已发送,该注册验证码,1个小时内有效...');
+        var username = $('#username').val();
+
+        if (username == '') {
+            alert('请填写手机号码?' );
+            return false;
+        }
+
+        $(this).val('已发送,该注册验证码,1个小时内有效.').attr('disabled', 'disabled');
 
         $.ajax({
             url: '<?= Url::to(['member/send']) ?>',
-            type: 'POST', //GET
-            async: true,    //或false,是否异步
+            type: 'POST', // GET
+            async: false,    // 或false,是否异步
+            dataType: 'json',
             data: {
-                username: $('#username').val(),
+                username: username, '_csrf-frontend': "<?= Yii::$app->request->csrfToken ?>",
             },
             success: function (data, textStatus, jqXHR) {
                 console.log(data);

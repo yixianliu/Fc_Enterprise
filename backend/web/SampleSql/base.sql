@@ -205,8 +205,8 @@ CREATE TABLE `#DB_PREFIX#Slide` (
 /**
  * 单页面
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Single_page`;
-CREATE TABLE `#DB_PREFIX#Single_page` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Single_Page`;
+CREATE TABLE `#DB_PREFIX#Single_Page` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
     `name` VARCHAR(80) NOT NULL COMMENT '单页面名称',
@@ -217,6 +217,22 @@ CREATE TABLE `#DB_PREFIX#Single_page` (
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `page_id` (`page_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 在线留言
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Online_Msg`;
+CREATE TABLE `#DB_PREFIX#Online_Msg` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(85) NOT NULL COMMENT '账号',
+    `title` VARCHAR(155) NULL COMMENT '留言标题',
+    `content` TEXT NOT NULL COMMENT '留言内容',
+    `is_audit` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -744,7 +760,7 @@ CREATE TABLE `#DB_PREFIX#Purchase` (
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `user_id` (`user_id`),
+    KEY `user_id` (`user_id`),
     UNIQUE KEY `purchase_id` (`purchase_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -764,5 +780,12 @@ CREATE TABLE `#DB_PREFIX#Purchase_Offer` (
     UNIQUE KEY `user_id` (`user_id`),
     UNIQUE KEY `purchase_id` (`purchase_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 下载中心
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
 
 # SET FOREIGN_KEY_CHECKS = 1;

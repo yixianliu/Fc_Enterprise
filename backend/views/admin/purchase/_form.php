@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use dosamigos\datepicker\DatePicker;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
@@ -39,7 +40,55 @@ use dosamigos\datepicker\DatePicker;
                     ]);
                 ?>
 
-                <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                <hr/>
+
+                <?=
+                FileUploadUI::widget([
+                    'model'         => $model,
+                    'attribute'     => 'path',
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase'],
+                    'gallery'       => false,
+                    'fieldOptions'  => [
+                        'accept' => 'file/*'
+                    ],
+                    'clientOptions' => [
+                        'maxFileSize'      => 2000000,
+                        'dataType'         => 'json',
+                        'maxNumberOfFiles' => 5,
+                    ],
+
+                    // ...
+                    'clientEvents'  => [
+
+                        'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                                
+                                var html = "";
+                                
+                                var ImagesContent = $("#ImagesContent");
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += file.name + \',\';
+                                });
+                                
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
+                                
+                                return true;
+                            }',
+                        'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                    ],
+                ]);
+                ?>
+
+                <?= $form->field($model, 'path')->textarea(['id' => 'FileContent', 'style' => 'display:none;'])->label(false) ?>
+
+                <hr/>
 
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -86,6 +135,13 @@ use dosamigos\datepicker\DatePicker;
                 ]);
                 ?>
 
+                <?=
+                $form->field($model, 'is_send')->widget(Select2::classname(), [
+                    'data'    => ['On' => '群发供应商', 'Off' => '不群发'],
+                    'options' => ['placeholder' => '是否群发...'],
+                ]);
+                ?>
+
                 <div class="form-group">
 
                     <?= Html::submitButton($model->isNewRecord ? '发布采购' : '更新采购', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -98,7 +154,11 @@ use dosamigos\datepicker\DatePicker;
 
             </div>
         </div>
-    </section>
-</div>
 
-<?= $this->render('../../form_msg'); ?>
+        <?= $this->render('../result_img', ['file' => $model->path, 'type' => 'purchase']); ?>
+
+    </section>
+
+    <?= $this->render('../../form_msg'); ?>
+
+</div>

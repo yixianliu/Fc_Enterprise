@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\User;
 use Yii;
 use common\models\Purchase;
 use common\models\PurchaseSearch;
@@ -102,9 +103,17 @@ class PurchaseController extends BaseController
 
         $data = $this->setDate(Yii::$app->request->post());
 
+        // 群发短信
+        $this->qSend($data);
+
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            if (!empty($model->getErrors())) {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            }
+
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -127,9 +136,16 @@ class PurchaseController extends BaseController
 
         $data = $this->setDate(Yii::$app->request->post());
 
+        $this->qSend($data);
+
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            if (!empty($model->getErrors())) {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            }
+
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -182,6 +198,34 @@ class PurchaseController extends BaseController
         }
 
         return $data;
+    }
+
+    public function qSend($data)
+    {
+
+        // 初始化
+        $mobile = null;
+
+        if (empty($data) || $data['Purchase']['is_send'] != 'On') {
+            return false;
+        }
+
+        $user = User::findAll(['is_type' => 'supplier']);
+
+        if (empty($user)) {
+            return false;
+        }
+
+        $content = '【湛江沃噻网络】我司发布了一条新的采购信息 : "' . $data['title'] . '"。如果符合你公司的供应货品,请致电联系我司客服进行沟通.';
+
+        // 接收的手机号,多个手机号用英文逗号隔开
+        foreach ($user as $value) {
+            $mobile .= $value . ',';
+        }
+
+//        return Json::encode(Yii::$app->smser->send($mobile, $content));
+
+        return true;
     }
 
 }

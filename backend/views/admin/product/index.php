@@ -42,6 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
 
+                                if (empty($data)) {
+                                    return '没有分类';
+                                }
+
                                 return $data->name;
                             },
                         ],

@@ -27,6 +27,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Purchase extends \yii\db\ActiveRecord
 {
+
+    public $is_send;
+
     /**
      * @inheritdoc
      */
@@ -56,7 +59,6 @@ class Purchase extends \yii\db\ActiveRecord
             [['num'], 'integer'],
             [['purchase_id', 'user_id', 'price'], 'string', 'max' => 85],
             [['title', 'path'], 'string', 'max' => 125],
-            [['user_id'], 'unique'],
             [['purchase_id'], 'unique'],
         ];
     }
@@ -80,6 +82,7 @@ class Purchase extends \yii\db\ActiveRecord
             'start_at'    => '开始时间',
             'end_at'      => '结束时间',
             'is_using'    => '是否启用',
+            'is_send'     => '群发短信',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
