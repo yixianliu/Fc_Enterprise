@@ -13,6 +13,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [],
+    'homeUrl'             => '/admin',
 
     'components' => [
 
@@ -20,7 +21,7 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
 
-        'user'    => [
+        'user' => [
             'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
             'loginUrl'        => ['admin/member/login'],
@@ -36,7 +37,7 @@ return [
             'name' => 'advanced-backend',
         ],
 
-        'log'     => [
+        'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
