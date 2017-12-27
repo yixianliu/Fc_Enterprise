@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\MenuSearch */
@@ -18,19 +19,21 @@ use yii\widgets\ActiveForm;
 <table class="table table-hover">
     <tbody>
     <tr>
-
-        <?= $form->field($model, 'm_key') ?>
-
-        <?= $form->field($model, 'parent_id') ?>
-
-        <?= $form->field($model, 'rp_key') ?>
-
-        <?= $form->field($model, 'url') ?>
-
-        <?= $form->field($model, 'name') ?>
-
-        <?= $form->field($model, 'is_using') ?>
-
+        <td><?= $form->field($model, 'm_key') ?></td>
+        <td><?= $form->field($model, 'rp_key') ?></td>
+        <td><?= $form->field($model, 'url') ?></td>
+        <td><?= $form->field($model, 'name') ?></td>
+        <td>
+            <?=
+            $form->field($model, 'is_using')->widget(Select2::classname(), [
+                'data'          => ['On' => '启用', 'Off' => '未启用'],
+                'options'       => ['placeholder' => '是否启用...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
     </tr>
     </tbody>
 </table>

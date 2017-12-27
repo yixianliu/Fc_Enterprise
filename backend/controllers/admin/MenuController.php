@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class MenuController extends BaseController
 {
+
+    public $parent_id = 'M0';
+
     /**
      * @inheritdoc
      */
@@ -21,7 +24,7 @@ class MenuController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -35,12 +38,18 @@ class MenuController extends BaseController
      */
     public function actionIndex()
     {
+
         $searchModel = new MenuSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider = Menu::findAll(['parent_id' => Yii::$app->request->get('id', 'E1')]);
+
+        // 选项卡
+        $parent = Menu::findAll(['parent_id' => $this->parent_id]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'parent'       => $parent,
         ]);
     }
 
@@ -65,11 +74,14 @@ class MenuController extends BaseController
     {
         $model = new Menu();
 
+        $model->parent_id = Yii::$app->request->get('id', 'E1');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'parent' => $this->getMenu(),
             ]);
         }
     }
@@ -88,7 +100,8 @@ class MenuController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'parent' => $this->getMenu(),
             ]);
         }
     }
@@ -120,5 +133,43 @@ class MenuController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * 整理菜单为 select
+     *
+     * @return static[]
+     */
+    public function getMenu()
+    {
+
+        // 初始化
+        $result = array();
+
+        $dataMenu = Menu::findAll(['parent_id' => $this->parent_id]);
+
+        foreach ($dataMenu as $value) {
+            $result[ $value['name'] ] = $this->recursionMenu($value);
+        }
+
+        return $result;
+    }
+
+    public function recursionMenu($value)
+    {
+
+        if (empty($value))
+            return;
+
+        // 初始化
+        $result = array();
+
+        $dataMenu = Menu::findAll(['is_using' => 'On']);
+
+        foreach ($dataMenu as $value) {
+            $result[ $value['m_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }

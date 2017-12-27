@@ -6,13 +6,14 @@ use yii\helpers\Html;
 /* @var $model common\models\Menu */
 
 $this->title = '更新菜单: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '菜单中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 
 <?=
 $this->render('_form', [
-    'model' => $model,
+    'model'  => $model,
+    'parent' => $parent,
 ]);
 ?>

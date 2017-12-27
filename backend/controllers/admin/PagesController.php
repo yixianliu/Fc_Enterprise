@@ -3,17 +3,22 @@
 namespace backend\controllers\admin;
 
 use Yii;
+use common\models\SinglePage;
+use common\models\SinglePageSearch;
+use common\models\PagesClassify;
+use yii\helpers\FileHelper;
+use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\web\NotFoundHttpException;
-use common\models\NewsClassify;
-use common\models\NewsClassifySearch;
 
 /**
- * NewsClsController implements the CRUD actions for NewsClassify model.
+ * SinglePageController implements the CRUD actions for SinglePage model.
  */
-class NewsClsController extends BaseController
+class PagesController extends BaseController
 {
+
+    public $absolute = 'pages';
+
     /**
      * @inheritdoc
      */
@@ -41,23 +46,22 @@ class NewsClsController extends BaseController
     }
 
     /**
-     * Lists all NewsClassify models.
+     * Lists all SinglePage models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewsClassifySearch();
+        $searchModel = new SinglePageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $this->getCls(),
         ]);
     }
 
     /**
-     * Displays a single NewsClassify model.
+     * Displays a single SinglePage model.
      * @param integer $id
      * @return mixed
      */
@@ -69,18 +73,38 @@ class NewsClsController extends BaseController
     }
 
     /**
-     * Creates a new NewsClassify model.
+     * Creates a new SinglePage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NewsClassify();
+        $model = new SinglePage();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->page_id = time() . '_' . rand(0000, 9999);
+
+        $data = Yii::$app->request->post();
+
+        // 创建文件
+        if (!empty(Yii::$app->request->post('path'))) {
+
+            $filePath = Yii::getAlias('@frontend') . '/views/pages/';
+
+            $filename = $data['SinglePage']['path'] . '.php';
+
+            if (file_exists($filePath . $filename)) {
+                $data = array();
+                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
+            }
+
+            FileHelper::createDirectory($filePath);
+
+            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
             return $this->render('create', [
                 'model'  => $model,
                 'result' => $this->getCls(),
@@ -89,7 +113,7 @@ class NewsClsController extends BaseController
     }
 
     /**
-     * Updates an existing NewsClassify model.
+     * Updates an existing SinglePage model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,10 +122,32 @@ class NewsClsController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        // 更改文件
+        if (!empty(Yii::$app->request->post('path'))) {
+
+            $filePath = Yii::getAlias('@frontend') . 'views/pages/';
+
+            $filename = $data['SinglePage']['path'] . '.php';
+
+            if (file_exists($filePath . $filename)) {
+                $data = array();
+                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
+            }
+
+            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
+
+            $oldFilename = $filePath . $model->path . '.php';
+
+            if (file_exists($oldFilename)) {
+                unlink($oldFilename);
+            }
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
             return $this->render('update', [
                 'model'  => $model,
                 'result' => $this->getCls(),
@@ -110,7 +156,7 @@ class NewsClsController extends BaseController
     }
 
     /**
-     * Deletes an existing NewsClassify model.
+     * Deletes an existing SinglePage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -123,19 +169,36 @@ class NewsClsController extends BaseController
     }
 
     /**
-     * Finds the NewsClassify model based on its primary key value.
+     * Finds the SinglePage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return NewsClassify the loaded model
+     * @return SinglePage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = NewsClassify::findOne($id)) !== null) {
+        if (($model = SinglePage::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * 编辑 Html 文件
+     *
+     * @return string
+     */
+    public function actionEfile($id)
+    {
+
+        $data = SinglePage::findOne(['page_id' => $id]);
+
+        if (!file_exists($data['path'])) {
+
+        }
+
+        return $this->render('efile', ['result' => $data]);
     }
 
     public function getCls()
@@ -144,9 +207,7 @@ class NewsClsController extends BaseController
         // 初始化
         $result = array();
 
-        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
-
-        $result['classify'] = ['C0' => '父类'];
+        $dataCls = PagesClassify::findAll(['is_using' => 'On']);
 
         foreach ($dataCls as $value) {
             $result['classify'][ $value['c_key'] ] = $value['name'];

@@ -21,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                    <h1><?= Html::encode($this->title) ?></h1>
-
                     <p>
                         <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                         <?=
@@ -44,9 +42,40 @@ $this->params['breadcrumbs'][] = $this->title;
                             'name',
                             'content:ntext',
                             'path',
-                            'is_using',
-                            'created_at',
-                            'updated_at',
+                            [
+                                'attribute' => 'is_type',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'list'    => '列表内容类型',
+                                        'content' => '内容详情类型',
+                                    ];
+
+                                    return $state[ $model->is_type ];
+                                },
+                            ],
+                            [
+                                'attribute' => 'is_using',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'On'  => '开启',
+                                        'Off' => '未启用',
+                                    ];
+
+                                    return $state[ $model->is_using ];
+                                },
+                            ],
+                            [
+                                'attribute' => 'created_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->created_at);
+                                },
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->updated_at);
+                                },
+                            ],
                         ],
                     ]) ?>
 

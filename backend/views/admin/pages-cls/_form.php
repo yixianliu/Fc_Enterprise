@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SinglePage */
+/* @var $model common\models\PagesClassify */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -18,17 +18,28 @@ use yii\widgets\ActiveForm;
         <div class="content-body">
             <div class="row">
 
-
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'page_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
+                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+
+                <?=
+                $form->field($model, 'parent_id')->widget(kartik\select2\Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '选择分类...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
+
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 <?=
-                $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
                     'clientOptions' => [
-                        //设置语言
+                        // 设置语言
                         'lang'               => 'zh-cn',
                         'initialFrameHeight' => '600',
                         'elementPathEnabled' => false,
@@ -37,7 +48,9 @@ use yii\widgets\ActiveForm;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
@@ -51,7 +64,7 @@ use yii\widgets\ActiveForm;
 
                 <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '创建单页面' : '更新单页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '发布单页面分类' : '更新单页面分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 
@@ -63,4 +76,3 @@ use yii\widgets\ActiveForm;
         </div>
     </section>
 </div>
-

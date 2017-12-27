@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Menu */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '菜单中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-view">
@@ -36,9 +36,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'rp_key',
             'url:url',
             'name',
-            'is_using',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'is_using',
+                'value'     => function ($model) {
+                    $state = [
+                        'On'  => '开启',
+                        'Off' => '未启用',
+                    ];
+
+                    return $state[ $model->is_using ];
+                },
+            ],
+            [
+                'attribute' => 'created_at',
+                'value'     => function ($model) {
+                    return date('Y - m -d , h:i', $model->created_at);
+                },
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value'     => function ($model) {
+                    return date('Y - m -d , h:i', $model->updated_at);
+                },
+            ],
         ],
     ]);
     ?>

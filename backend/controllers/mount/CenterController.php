@@ -118,6 +118,10 @@ class CenterController extends BaseController
                     'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp', // 角色 + 权限
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
                     'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', // 菜单
+                    'createPages', 'updatePages', 'indexPages', 'viewPages', 'relatedPages', // 单页面管理 (最后的是关联单页面)
+                    'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls', // 单页面分类管理
+                    'createDownload', 'updateDownload', 'indexDownload', 'viewDownload', // 下载中心
+                    'createDownload-cls', 'updateDownload-cls', 'indexDownload-cls', 'viewDownload-cls', // 下载中心分类
                 ];
 
                 $role = $this->createRole('admin');

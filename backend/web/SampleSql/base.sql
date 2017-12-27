@@ -189,37 +189,6 @@ CREATE TABLE `#DB_PREFIX#Conf` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * 幻灯片
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Slide`;
-CREATE TABLE `#DB_PREFIX#Slide` (
-    `slide_id` INT(11) NULL AUTO_INCREMENT,
-    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `path` VARCHAR(255) NOT NULL COMMENT '幻灯片图片路径',
-    `description` TEXT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    PRIMARY KEY (`slide_id`),
-    UNIQUE KEY `page_id` (`page_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 单页面
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Single_Page`;
-CREATE TABLE `#DB_PREFIX#Single_Page` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `name` VARCHAR(80) NOT NULL COMMENT '单页面名称',
-    `content` TEXT NULL COMMENT '单页面内容',
-    `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    `created_at` INT(11) UNSIGNED NOT NULL,
-    `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `page_id` (`page_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
  * 在线留言
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Online_Msg`;
@@ -263,8 +232,8 @@ CREATE TABLE `#DB_PREFIX#User` (
     `s_key` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户问题',
     `login_ip` VARCHAR(85) NULL DEFAULT 0 COMMENT '登陆IP',
     `consecutively` INT(11) UNSIGNED NOT NULL COMMENT '连续登录',
-    `is_type` SET('user' , 'enterprise', 'supplier') NOT NULL DEFAULT 'user' COMMENT '用户类型,用户、企业、供应商',
     `sex` SET('Male' , 'Female') NOT NULL DEFAULT 'Female' COMMENT '性别',
+    `is_type` SET('user' , 'enterprise', 'supplier') NOT NULL DEFAULT 'user' COMMENT '用户类型,用户、企业、供应商',
     `is_display` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '显示信息',
     `is_auth` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '企业认证',
     `is_head` SET('On', 'Off') NOT NULL DEFAULT 'Off' COMMENT '上传头像',
@@ -281,41 +250,6 @@ CREATE TABLE `#DB_PREFIX#User` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
- * 用户设置
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
-CREATE TABLE `#DB_PREFIX#User_Config` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `get_praise` SET('On', 'Off') NOT NULL COMMENT '接收 "赞" 提醒',
-    `get_comment` SET('On', 'Off') NOT NULL COMMENT '接收 "评论" 提醒',
-    `is_access` SET('On', 'Off') NOT NULL COMMENT '是否开启访问',
-    `is_show_phone` SET('On', 'Off') NOT NULL COMMENT '是否开启显示手机',
-    `is_show_sex` SET('On', 'Off') NOT NULL COMMENT '是否开启显示性别',
-    `is_show_address` SET('On', 'Off') NOT NULL COMMENT '是否开启显示通讯地址',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
-    UNIQUE KEY `user_id` (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 用户计划
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Plan`;
-CREATE TABLE `#DB_PREFIX#User_Plan` (
-    `plan_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `plan_time` INT(4) UNSIGNED NOT NULL COMMENT '计划时间,7天,14天,21天',
-    `start_time` INT(8) UNSIGNED NOT NULL COMMENT '计划开始时间',
-    `end_time` INT(8) UNSIGNED NOT NULL COMMENT '计划结束时间',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`plan_id`),
-    UNIQUE KEY `user_id` (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
  * 用户安全问题
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Problems`;
@@ -328,51 +262,6 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
     PRIMARY
     KEY (`security_id`),
     UNIQUE KEY `skey` (`skey`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 用户签到内容
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar`;
-CREATE TABLE `#DB_PREFIX#User_Calendar` (
-    `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
-    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
-    PRIMARY
-    KEY (`calendar_id`),
-    KEY `user_id` (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 用户签到内容 - 月
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Month`;
-CREATE TABLE `#DB_PREFIX#User_Calendar_Month` (
-    `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
-    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
-    PRIMARY
-    KEY (`calendar_id`),
-    KEY `user_id` (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 用户签到内容 - 年
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#User_Calendar_Year`;
-CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
-    `calendar_id` INT(11) NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
-    `content` VARCHAR(255) NOT NULL COMMENT '签到内容',
-    `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '签到时间',
-    PRIMARY
-    KEY (`calendar_id`),
-    KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -395,161 +284,6 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     PRIMARY KEY (`id`),
     KEY `rp_key` (`rp_key`),
     UNIQUE KEY `m_key` (`m_key`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * * * * * * * * * * * * * * * * * * * * * *
- * 资源表
- * Author:  Yxl <zccem@163.com>
- * Created: 2016-3-15
- * * * * * * * * * * * * * * * * * * * * * *
- */
-
-/**
- * 影视资源
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video`;
-CREATE TABLE `#DB_PREFIX#Video` (
-    `video_id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
-    `p_key` VARCHAR(55) NOT NULL COMMENT '资源路径关键KEY',
-    `name` VARCHAR(125) NOT NULL COMMENT '视频资源名称',
-    `filename` VARCHAR(125) NOT NULL COMMENT '资源文件名',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `size` VARCHAR(55) NOT NULL COMMENT '资源大小',
-    `img` VARCHAR(125) NOT NULL COMMENT '资源图片',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `is_thumbnail` SET('On', 'Off') NOT NULL default 'Off' COMMENT '是否生成缩略图',
-    `views` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '浏览次数',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`video_id`),
-    KEY `r_key` (`r_key`),
-    KEY `c_key` (`c_key`),
-    KEY `p_key` (`p_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 视频资源分类
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Video_Classify`;
-CREATE TABLE `#DB_PREFIX#Video_Classify` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(125) NOT NULL COMMENT '名称',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `parent_id` VARCHAR(85) NOT NULL COMMENT '父类ID',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 音乐资源
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Music`;
-CREATE TABLE `#DB_PREFIX#Music` (
-    `music_id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(85) NOT NULL COMMENT '分类关键KEY',
-    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(125) NOT NULL COMMENT '歌曲名称',
-    `path` VARCHAR(255) NOT NULL COMMENT '路径',
-    `lyric` TEXT NOT NULL COMMENT '歌词',
-    `size` VARCHAR(55) NOT NULL COMMENT '大小',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY KEY (`music_id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 音乐资源分类
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Music_Classify`;
-CREATE TABLE `#DB_PREFIX#Music_Classify` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY KEY (`id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 文档资源
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Document`;
-CREATE TABLE `#DB_PREFIX#Document` (
-    `document_id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(85) NOT NULL COMMENT '文档资源分类KEY',
-    `r_key` VARCHAR(85) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(85) NOT NULL COMMENT '书籍名称',
-    `path` VARCHAR(255) NOT NULL COMMENT '路径',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `size` VARCHAR(55) NOT NULL COMMENT '大小',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`document_id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 文档资源分类
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Document_Classify`;
-CREATE TABLE `#DB_PREFIX#Document_Classify` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
-    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY KEY (`id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 文档资源设置
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Document_Conf`;
-CREATE TABLE `#DB_PREFIX#Document_Conf` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
-    `p_key` VARCHAR(55) NOT NULL COMMENT '资源路径KEY',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
-    `path` VARCHAR(255) NOT NULL COMMENT '文档资源完整路径',
-    `description` VARCHAR(255) NOT NULL COMMENT '描述',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
-    KEY `r_key` (`r_key`),
-    UNIQUE `path` (`path`),
-    UNIQUE KEY `p_key` (`p_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -786,6 +520,116 @@ CREATE TABLE `#DB_PREFIX#Purchase_Offer` (
  * 下载中心
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
+DROP TABLE IF EXISTS `#DB_PREFIX#Download`;
+CREATE TABLE `#DB_PREFIX#Download` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `title` VARCHAR(85) NOT NULL COMMENT '下载标题',
+    `path` VARCHAR(85) NOT NULL COMMENT '文件路径',
+    `content` TEXT NOT NULL COMMENT '文件描述',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE `title` (`title`),
+    KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/**
+ * 下载中心分类
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Download_Classify`;
+CREATE TABLE `#DB_PREFIX#Download_Classify` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 页面管理
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
+ * 幻灯片
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Slide`;
+CREATE TABLE `#DB_PREFIX#Slide` (
+    `slide_id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `path` VARCHAR(255) NOT NULL COMMENT '幻灯片图片路径',
+    `description` TEXT NULL COMMENT '描述',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    PRIMARY KEY (`slide_id`),
+    UNIQUE KEY `page_id` (`page_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 单页面
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Pages`;
+CREATE TABLE `#DB_PREFIX#Pages` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `name` VARCHAR(80) NOT NULL COMMENT '单页面名称',
+    `content` TEXT NULL COMMENT '单页面内容',
+    `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
+    `is_type` SET('list', 'content') NOT NULL COMMENT '单页面类型, 列表, 内容',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `page_id` (`page_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 单页面列表内容
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Pages_List`;
+CREATE TABLE `#DB_PREFIX#Pages_List` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `title` VARCHAR(80) NOT NULL COMMENT '列表标题',
+    `content` TEXT NULL COMMENT '单页面内容',
+    `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `title` (`title`),
+    KEY `page_id` (`page_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 单页面分类
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Pages_Classify`;
+CREATE TABLE `#DB_PREFIX#Pages_Classify` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 # SET FOREIGN_KEY_CHECKS = 1;

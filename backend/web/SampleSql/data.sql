@@ -74,52 +74,6 @@ VALUES
 (NULL, 'S13', '您配偶的生日是?', 'On', #TIME#);
 
 /**
- * 电影分类
- */
-INSERT INTO `#DB_PREFIX#Video_Classify`
-VALUES
-(NULL, 'C1', 1, 'R15', '喜剧', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C2', 2, 'R15', '科幻', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C3', 3, 'R15', '悬疑', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C4', 4, 'R15', '文艺', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C5', 5, 'R15', '武侠', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C6', 6, 'R15', '动画', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C7', 7, 'R15', '爱情', NULL, 'C0', 'On', #TIME#);
-
-/**
- * 音乐分类
- */
-INSERT INTO `#DB_PREFIX#Music_Classify`
-VALUES
-(NULL, 'C1', 1, 'R15', '电子', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C2', 2, 'R15', '怀旧', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C3', 3, 'R15', '流行', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C4', 4, 'R15', '摇滚', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C5', 5, 'R15', '古典', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C6', 6, 'R15', '粤语', NULL, 'C0', 'On', #TIME#);
-
-/**
- * 文档分类
- */
-INSERT INTO `#DB_PREFIX#Document_Classify`
-VALUES
-(NULL, 'C1', 1, 'R15', '科技', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C2', 2, 'R15', '生活', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C3', 3, 'R15', '人文社科', NULL, 'C0', 'On', #TIME#),
-(NULL, 'C4', 4, 'R15', '编程开发', NULL, 'C0', 'On', #TIME#);
-
-/**
- * 版块
- */
-INSERT INTO `#DB_PREFIX#Section`
-VALUES
-(NULL, 'S1', 1, '自律人生', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
-(NULL, 'S2', 2, '励志牛人', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
-(NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
-(NULL, 'S4', 4, '音乐', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
-(NULL, 'S5', 5, '视频', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#);
-
-/**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 菜单
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -145,6 +99,19 @@ VALUES
 (NULL, 'HNC3', 3, 'HN6', 'admin', NULL, '土豪的世界', 'On', #TIME#, #TIME#),
 
 /*
+    企业网站 - 前台
+*/
+(NULL, 'E1', 1, 'M0', 'guest', NULL, '企业文化', 'On', #TIME#, #TIME#),
+
+(NULL, 'EN1', 1, 'E1', 'guest', NULL, '网站首页', 'On', #TIME#, #TIME#),
+(NULL, 'EN2', 2, 'E1', 'guest', NULL, '公司简介', 'On', #TIME#, #TIME#),
+(NULL, 'EN3', 3, 'E1', 'guest', NULL, '产品中心', 'On', #TIME#, #TIME#),
+(NULL, 'EN4', 4, 'E1', 'guest', NULL, '新闻资讯', 'On', #TIME#, #TIME#),
+(NULL, 'EN5', 5, 'E1', 'guest', NULL, '招商加盟', 'On', #TIME#, #TIME#),
+(NULL, 'EN6', 6, 'E1', 'guest', NULL, '招贤纳士', 'On', #TIME#, #TIME#),
+(NULL, 'EN7', 7, 'E1', 'guest', NULL, '联系我们', 'On', #TIME#, #TIME#),
+
+/*
     后台管理 / Admin
 */
 (NULL, 'A3', 1, 'M0', 'admin', NULL, '后台管理', 'On', #TIME#, #TIME#),
@@ -156,14 +123,26 @@ VALUES
 (NULL, 'AM1', 7, 'A3', 'admin', NULL, '菜单管理', 'On', #TIME#, #TIME#),
 (NULL, 'AR1', 8, 'A3', 'admin', NULL, '角色管理', 'On', #TIME#, #TIME#),
 (NULL, 'AJ1', 9, 'A3', 'admin', NULL, '招聘管理', 'On', #TIME#, #TIME#),
+(NULL, 'AD1', 11, 'A3', 'admin', NULL, '下载中心', 'On', #TIME#, #TIME#),
+(NULL, 'AS1', 12, 'A3', 'admin', NULL, '单页面管理', 'On', #TIME#, #TIME#),
+
+(NULL, 'ADDD1', 1, 'AD1', 'admin', 'download/index', '下载中心列表', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD2', 2, 'AD1', 'admin', 'download/create', '添加下载内容', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD3', 3, 'AD1', 'admin', 'download-cls/index', '下载中心分类', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD4', 4, 'AD1', 'admin', 'download-cls/create', '添加下载中心分类', 'On', #TIME#, #TIME#),
+
+(NULL, 'ASSS1', 1, 'AS1', 'admin', 'pages/index', '所有单页面', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS2', 2, 'AS1', 'admin', 'pages/create', '添加单页面', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS3', 3, 'AS1', 'admin', 'pages-cls/index', '单页面分类', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS4', 4, 'AS1', 'admin', 'pages-cls/create', '添加单页面分类', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'user/index', '所有用户', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'user/create', '添加用户', 'On', #TIME#, #TIME#),
 
 (NULL, 'AMMV1', 1, 'AP2', 'admin', 'product/index', '所有产品', 'On', #TIME#, #TIME#),
 (NULL, 'AMMV2', 2, 'AP2', 'admin', 'product/create', '添加产品', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV4', 4, 'AP2', 'admin', 'product-cls/index', '产品分类', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV5', 5, 'AP2', 'admin', 'product-cls/create', '添加产品分类', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV3', 3, 'AP2', 'admin', 'product-cls/index', '产品分类', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV4', 4, 'AP2', 'admin', 'product-cls/create', '添加产品分类', 'On', #TIME#, #TIME#),
 
 (NULL, 'AMMC1', 1, 'AN1', 'admin', NULL, '所有新闻', 'On', #TIME#, #TIME#),
 (NULL, 'AMMC2', 2, 'AN1', 'admin', NULL, '添加新闻', 'On', #TIME#, #TIME#),

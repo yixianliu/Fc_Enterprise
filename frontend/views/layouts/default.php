@@ -20,7 +20,10 @@ use common\models\Menu;
 
 AppAsset::register($this); // $this 代表视图对象
 
-$data = Menu::findAll(['is_using' => 'On', 'parent_id' => 'H1']);
+// 初始化
+$dataMenu = array();
+
+$data = Menu::findAll(['is_using' => 'On', 'parent_id' => 'E1']);
 
 foreach ($data as $value) {
 

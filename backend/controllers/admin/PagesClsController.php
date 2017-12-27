@@ -3,21 +3,18 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use common\models\SinglePage;
-use common\models\SinglePageSearch;
-use yii\helpers\FileHelper;
+use common\models\PagesClassify;
+use common\models\PagesClassifySearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * SinglePageController implements the CRUD actions for SinglePage model.
+ * PagesClsController implements the CRUD actions for PagesClassify model.
  */
-class SinglePageController extends BaseController
+class PagesClsController extends BaseController
 {
-
-    public $absolute = 'single_page';
-
     /**
      * @inheritdoc
      */
@@ -45,12 +42,12 @@ class SinglePageController extends BaseController
     }
 
     /**
-     * Lists all SinglePage models.
+     * Lists all PagesClassify models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SinglePageSearch();
+        $searchModel = new PagesClassifySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +57,7 @@ class SinglePageController extends BaseController
     }
 
     /**
-     * Displays a single SinglePage model.
+     * Displays a single PagesClassify model.
      * @param integer $id
      * @return mixed
      */
@@ -72,46 +69,26 @@ class SinglePageController extends BaseController
     }
 
     /**
-     * Creates a new SinglePage model.
+     * Creates a new PagesClassify model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SinglePage();
+        $model = new PagesClassify();
 
-        $model->page_id = time() . '_' . rand(0000, 9999);
-
-        $data = Yii::$app->request->post();
-
-        // 创建文件
-        if (!empty(Yii::$app->request->post())) {
-
-            $filePath = Yii::getAlias('@frontend') . '/views/pages/';
-
-            $filename = $data['SinglePage']['path'] . '.php';
-
-            if (file_exists($filePath . $filename)) {
-                $data = array();
-                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
-            }
-
-            FileHelper::createDirectory($filePath);
-
-            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $this->getCls(),
             ]);
         }
     }
 
     /**
-     * Updates an existing SinglePage model.
+     * Updates an existing PagesClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -120,40 +97,18 @@ class SinglePageController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $data = Yii::$app->request->post();
-
-        // 更改文件
-        if (!empty($data)) {
-
-            $filePath = Yii::getAlias('@frontend') . 'views/pages/';
-
-            $filename = $data['SinglePage']['path'] . '.php';
-
-            if (file_exists($filePath . $filename)) {
-                $data = array();
-                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
-            }
-
-            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
-
-            $oldFilename = $filePath . $model->path . '.php';
-
-            if (file_exists($oldFilename)) {
-                unlink($oldFilename);
-            }
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => $this->getCls(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing SinglePage model.
+     * Deletes an existing PagesClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -166,35 +121,35 @@ class SinglePageController extends BaseController
     }
 
     /**
-     * Finds the SinglePage model based on its primary key value.
+     * Finds the PagesClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SinglePage the loaded model
+     * @return PagesClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SinglePage::findOne($id)) !== null) {
+        if (($model = PagesClassify::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
-    /**
-     * 编辑 Html 文件
-     *
-     * @return string
-     */
-    public function actionEfile($id)
+    public function getCls()
     {
 
-        $data = SinglePage::findOne(['page_id' => $id]);
+        // 初始化
+        $result = array();
 
-        if (!file_exists($data['path'])) {
+        $dataCls = PagesClassify::findAll(['is_using' => 'On']);
 
+        $result['classify'] = ['C0' => '顶级父类'];
+
+        foreach ($dataCls as $value) {
+            $result['classify'][ $value['c_key'] ] = $value['name'];
         }
 
-        return $this->render('efile', ['result' => $data]);
+        return $result;
     }
 }

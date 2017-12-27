@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-                <hr />
+                <hr/>
 
                 <p>
                     <?= Html::a('创建单页面', ['create'], ['class' => 'btn btn-success']) ?>
@@ -33,10 +33,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'page_id',
                         'name',
-                        'path',
-                         'is_using',
+                        [
+                            'attribute' => 'is_type',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'list'    => '列表内容类型',
+                                    'content' => '内容详情类型',
+                                ];
+
+                                return $state[ $model->is_type ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);

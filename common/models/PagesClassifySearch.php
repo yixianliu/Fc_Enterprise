@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\SinglePage;
+use common\models\PagesClassify;
 
 /**
- * SinglePageSearch represents the model behind the search form about `common\models\SinglePage`.
+ * PagesClassifySearch represents the model behind the search form about `common\models\PagesClassify`.
  */
-class SinglePageSearch extends SinglePage
+class PagesClassifySearch extends PagesClassify
 {
     /**
      * @inheritdoc
@@ -18,7 +18,8 @@ class SinglePageSearch extends SinglePage
     public function rules()
     {
         return [
-            [['page_id', 'name', 'content', 'path', 'is_using', 'c_key'], 'safe'],
+            [['id', 'sort_id', 'created_at', 'updated_at'], 'integer'],
+            [['c_key', 'name', 'description', 'keywords', 'json_data', 'parent_id', 'is_using'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class SinglePageSearch extends SinglePage
      */
     public function search($params)
     {
-        $query = SinglePage::find();
+        $query = PagesClassify::find();
 
         // add conditions that should always apply here
 
@@ -56,10 +57,20 @@ class SinglePageSearch extends SinglePage
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'page_id', $this->page_id])
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'sort_id' => $this->sort_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
+
+        $query->andFilterWhere(['like', 'c_key', $this->c_key])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'keywords', $this->keywords])
+            ->andFilterWhere(['like', 'json_data', $this->json_data])
+            ->andFilterWhere(['like', 'parent_id', $this->parent_id])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 
         return $dataProvider;
