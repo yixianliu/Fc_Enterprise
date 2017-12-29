@@ -5,7 +5,8 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\Menu;
 use common\models\MenuSearch;
-use yii\web\Controller;
+use common\models\MenuModel;
+use common\models\PagesClassify;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -76,12 +77,18 @@ class MenuController extends BaseController
 
         $model->parent_id = Yii::$app->request->get('id', 'E1');
 
+        $result = [
+            'parent'     => $this->getMenu(),
+            'menu_model' => $this->getModel(),
+            'pages'      => $this->getPages(),
+        ];
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model'  => $model,
-                'parent' => $this->getMenu(),
+                'result' => $result,
             ]);
         }
     }
@@ -96,12 +103,18 @@ class MenuController extends BaseController
     {
         $model = $this->findModel($id);
 
+        $result = [
+            'parent'     => $this->getMenu(),
+            'menu_model' => $this->getModel(),
+            'pages'      => $this->getPages(),
+        ];
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model'  => $model,
-                'parent' => $this->getMenu(),
+                'result' => $result,
             ]);
         }
     }
@@ -172,4 +185,34 @@ class MenuController extends BaseController
 
         return $result;
     }
+
+    public function getModel()
+    {
+
+        // 初始化
+        $data = array();
+
+        $result = MenuModel::findAll(['is_using' => 'On']);
+
+        foreach ($result as $value) {
+            $data[ $value['model_key'] ] = $value['name'];
+        }
+
+        return $data;
+    }
+
+    public function getPages()
+    {
+        // 初始化
+        $data = array();
+
+        $result = PagesClassify::findAll(['is_using' => 'On']);
+
+        foreach ($result as $value) {
+            $data[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $data;
+    }
+
 }

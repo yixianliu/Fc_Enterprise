@@ -17,7 +17,7 @@ $this->beginPage();
 ?>
 
 <!DOCTYPE html>
-<html class=" ">
+<html lang="zh-CN">
 <head>
 
     <?= ConfList::widget(); ?>

@@ -12,62 +12,13 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\iConf\ConfList;
 use common\models\Menu;
+use common\widgets\iConf\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
-// 初始化
-$dataMenu = array();
-
-$data = Menu::findAll(['is_using' => 'On', 'parent_id' => 'E1']);
-
-foreach ($data as $value) {
-
-    $dataMenu[] = [
-        'label' => $value['name'],
-        'url'   => [$value['url']],
-        'items' => recursionMenu($value),
-    ];
-
-}
-
-
-/**
- * 递归菜单
- *
- * @param $data
- * @return array|void
- */
-function recursionMenu($data)
-{
-
-    if (empty($data) || empty($data['m_key'])) {
-        return;
-    }
-
-    $child = Menu::findAll(['is_using' => 'On', 'parent_id' => $data['m_key']]);
-
-    if (empty($child)) {
-        return;
-    }
-
-    // 初始化
-    $result = array();
-
-    foreach ($child as $value) {
-        $result[] = [
-            'label' => $value['name'],
-            'url'   => [$value['url']],
-            'items' => recursionMenu($value),
-        ];
-    }
-
-    return $result;
-}
+$Cls = new Menu();
 
 $this->beginPage();
 
@@ -89,9 +40,8 @@ $this->beginPage();
     <?php $this->head() ?>
 
     <style type="text/css">
-        *, body, html, a, input,.btn, h5, p {
+        *, body, html, a, input, .btn, h5, p {
             font-family: 'Microsoft YaHei';
-            letter-spacing: 1px;
         }
     </style>
 
@@ -138,7 +88,7 @@ $this->beginPage();
                             <?=
                             Nav::widget([
                                 'options' => ['class' => 'navbar-nav navbar-right'],
-                                'items'   => $dataMenu,
+                                'items'   => $Cls->findMenuNav('E1'),
                             ]);
                             ?>
 

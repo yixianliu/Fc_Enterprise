@@ -8,12 +8,12 @@ use yii\helpers\Html;
 $this->title = '更新菜单: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => '菜单中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '更新';
 ?>
 
 <?=
 $this->render('_form', [
     'model'  => $model,
-    'parent' => $parent,
+    'result' => $result,
 ]);
 ?>

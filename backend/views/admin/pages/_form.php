@@ -7,7 +7,15 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\SinglePage */
 /* @var $form yii\widgets\ActiveForm */
 
+$result['classify'] = empty($result['classify']) ? null : $result['classify'];
 ?>
+
+<?php if (empty($result['classify'])): ?>
+
+
+<h1>请添加单页面分类先...<a href="<?= \yii\helpers\Url::to(['admin/pages-cls/create']) ?>">这里</a></h1>
+
+<?php else: ?>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -83,4 +91,4 @@ use yii\widgets\ActiveForm;
         </div>
     </section>
 </div>
-
+<?php endif; ?>

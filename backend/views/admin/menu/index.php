@@ -35,7 +35,7 @@ function recursionMenu($data)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加分类', ['create', 'id' => $data['m_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $data['m_key']], ['class' => "btn btn-primary"]);
     $html .= '    </div>';
     foreach ($child as $value) {
         $html .= '    <ul class="">';

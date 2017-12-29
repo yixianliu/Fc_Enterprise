@@ -78,6 +78,14 @@ VALUES
  * 菜单
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
+
+INSERT INTO `#DB_PREFIX#Menu_Model`
+VALUES
+(NULL, 'UP1', 1, 'product', '产品中心', 'On', #TIME#, #TIME#),
+(NULL, 'UN1', 2, 'news', '新闻中心', 'On', #TIME#, #TIME#),
+(NULL, 'UJ1', 3, 'job', '招聘中心', 'On', #TIME#, #TIME#),
+(NULL, 'UC1', 4, 'pages', '自定义页面', 'On', #TIME#, #TIME#);
+
 INSERT INTO `#DB_PREFIX#Menu`
 VALUES
 

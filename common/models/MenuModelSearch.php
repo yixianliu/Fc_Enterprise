@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Menu;
+use common\models\MenuModel;
 
 /**
- * MenuSearch represents the model behind the search form about `common\models\Menu`.
+ * MenuModelSearch represents the model behind the search form of `common\models\MenuModel`.
  */
-class MenuSearch extends Menu
+class MenuModelSearch extends MenuModel
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class MenuSearch extends Menu
     {
         return [
             [['id', 'sort_id', 'created_at', 'updated_at'], 'integer'],
-            [['m_key', 'parent_id', 'rp_key', 'model_key', 'name', 'is_using'], 'safe'],
+            [['model_key', 'url_key', 'name', 'is_using'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class MenuSearch extends Menu
      */
     public function search($params)
     {
-        $query = Menu::find();
+        $query = MenuModel::find();
 
         // add conditions that should always apply here
 
@@ -65,10 +65,8 @@ class MenuSearch extends Menu
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'm_key', $this->m_key])
-            ->andFilterWhere(['like', 'parent_id', $this->parent_id])
-            ->andFilterWhere(['like', 'rp_key', $this->rp_key])
-            ->andFilterWhere(['like', 'model_key', $this->model_key])
+        $query->andFilterWhere(['like', 'model_key', $this->model_key])
+            ->andFilterWhere(['like', 'url_key', $this->url_key])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 

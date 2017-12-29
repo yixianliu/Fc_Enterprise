@@ -20,11 +20,11 @@ $this->beginPage();
 ?>
 
     <!DOCTYPE html>
-    <html class=" ">
+    <html lang="zh-CN">
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
         <meta charset="utf-8"/>
-        <title>登录中心 - <?= Yii::$app->params['NAME'] ?> - <?= Yii::$app->params['TITLE'] ?></title>
+        <title> 登 录 - <?= Yii::$app->params['NAME'] ?> - <?= Yii::$app->params['TITLE'] ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta content="" name="<?= Yii::$app->params['DESCRIPTION'] ?>"/>
         <meta content="" name="<?= Yii::$app->params['DEVELOPERS'] ?>"/>
@@ -36,7 +36,6 @@ $this->beginPage();
         <style>
             *, body, html, h1, h2, h3, h4, a, li {
                 font-family: 'Microsoft YaHei';
-                letter-spacing: 1px;
             }
         </style>
 

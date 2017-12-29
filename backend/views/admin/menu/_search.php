@@ -21,7 +21,7 @@ use kartik\select2\Select2;
     <tr>
         <td><?= $form->field($model, 'm_key') ?></td>
         <td><?= $form->field($model, 'rp_key') ?></td>
-        <td><?= $form->field($model, 'url') ?></td>
+        <td><?= $form->field($model, 'model_key') ?></td>
         <td><?= $form->field($model, 'name') ?></td>
         <td>
             <?=

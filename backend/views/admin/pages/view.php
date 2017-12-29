@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                     </p>
 
-                    <?= DetailView::widget([
+                    <?=
+                    DetailView::widget([
                         'model'      => $model,
                         'attributes' => [
                             'page_id',
@@ -77,7 +78,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                         ],
-                    ]) ?>
+                    ]);
+                    ?>
 
                 </div>
             </div>

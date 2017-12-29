@@ -276,7 +276,8 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
     `parent_id` VARCHAR(55) NULL COMMENT '父类值',
     `rp_key` VARCHAR(85) NOT NULL COMMENT '菜单关联角色, 多个角色可用逗号分开',
-    `url` VARCHAR(85) NULL COMMENT '菜单地址',
+    `model_key` VARCHAR(85) NULL COMMENT '菜单模型',
+    `custom_key` VARCHAR(85) NULL COMMENT '和自定义页面的KEY对应,不是自定义页面不需要填写',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
@@ -284,6 +285,24 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     PRIMARY KEY (`id`),
     KEY `rp_key` (`rp_key`),
     UNIQUE KEY `m_key` (`m_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 菜单模型
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Menu_Model`;
+CREATE TABLE `#DB_PREFIX#Menu_Model` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `model_key` VARCHAR(55) NOT NULL COMMENT '菜单模型',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
+    `url_key` VARCHAR(85) NOT NULL COMMENT 'Url 模型',
+    `name` VARCHAR(85) NOT NULL COMMENT '模型名称',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `model_key` (`model_key`),
+    UNIQUE KEY `url_key` (`url_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**

@@ -28,7 +28,7 @@ use kartik\select2\Select2;
 
                     <?=
                     $form->field($model, 'parent_id')->widget(Select2::classname(), [
-                        'data'          => $parent,
+                        'data'          => $result['parent'],
                         'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -38,7 +38,25 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'rp_key')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+                    <?=
+                    $form->field($model, 'model_key')->widget(Select2::classname(), [
+                        'data'          => $result['menu_model'],
+                        'options'       => ['placeholder' => '选择菜单模型...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+
+                    <?=
+                    $form->field($model, 'custom_key')->widget(Select2::classname(), [
+                        'data'          => $result['pages'],
+                        'options'       => ['placeholder' => '选择自定义页面对应的分类...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
 
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -65,6 +83,9 @@ use kartik\select2\Select2;
                 </div>
             </div>
         </div>
+
+        <?= $this->render('../../form_msg'); ?>
+
     </section>
 </div>
 
