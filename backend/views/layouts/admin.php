@@ -2,11 +2,14 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\bootstrap\Nav;
 use backend\assets\AppAsset;
-use common\widgets\iMenu\MenuList;
+use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
+
+$ClsMenu = new Menu();
 
 if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE']) || Yii::$app->user->isGuest) {
     return false;
@@ -62,7 +65,12 @@ $this->beginPage();
 
             </div>
 
-            <?= MenuList::widget(['config' => ['m_key' => 'A3', 'tpl' => 'admin']]); ?>
+            <?=
+            Nav::widget([
+                'options' => ['class' => 'wraplist'],
+                'items'   => $ClsMenu->findMenuNav('A3'),
+            ]);
+            ?>
 
         </div>
     </div>
@@ -76,6 +84,10 @@ $this->beginPage();
     </section>
 
 </div>
+
+<script type="text/javascript">
+    $('#w0').removeClass('nav');
+</script>
 
 <?php $this->endBody(); ?>
 

@@ -279,6 +279,7 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     `model_key` VARCHAR(85) NULL COMMENT '菜单模型',
     `custom_key` VARCHAR(85) NULL COMMENT '和自定义页面的KEY对应,不是自定义页面不需要填写',
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
+    `url` VARCHAR(85) NULL COMMENT '菜单超链接',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,

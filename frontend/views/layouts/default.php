@@ -18,7 +18,7 @@ use common\widgets\iConf\ConfList;
 
 AppAsset::register($this); // $this 代表视图对象
 
-$Cls = new Menu();
+$ClsMenu = new Menu();
 
 $this->beginPage();
 
@@ -88,7 +88,7 @@ $this->beginPage();
                             <?=
                             Nav::widget([
                                 'options' => ['class' => 'navbar-nav navbar-right'],
-                                'items'   => $Cls->findMenuNav('E1'),
+                                'items'   => $ClsMenu->findMenuNav('E1'),
                             ]);
                             ?>
 

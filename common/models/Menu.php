@@ -153,7 +153,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/product-cls/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionDataMenu($values),
+                            'items' => $this->recursionMenu($values),
                         ];
                     }
                     break;
@@ -167,7 +167,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/news-cls/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionDataMenu($values),
+                            'items' => $this->recursionMenu($values),
                         ];
                     }
                     break;
@@ -182,9 +182,28 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/pages/index', 'id' => $values['custom_key']],
-                            'items' => $this->recursionDataMenu($values),
+                            'items' => $this->recursionMenu($values),
                         ];
                     }
+
+                    break;
+
+                // 超链接
+                case 'urls':
+
+                    if (!empty($value['url'])) {
+                        $url = [($value['parent_id'] == 'A3' ? 'admin/' . $value['url'] : $value['url'])];
+                    } else {
+                        $url = '#';
+                    }
+
+                    $array = [
+                        [
+                            'label' => $value['name'],
+                            'url'   => $url,
+                            'items' => $this->recursionUrlMenu($value, 'A3'),
+                        ]
+                    ];
 
                     break;
 
@@ -205,16 +224,6 @@ class Menu extends \yii\db\ActiveRecord
         }
 
         return $dataMenu;
-    }
-
-    public function recursionDataMenu($data)
-    {
-
-        // 初始化
-        $result = array();
-
-
-        return $result;
     }
 
     /**
@@ -244,6 +253,47 @@ class Menu extends \yii\db\ActiveRecord
                 'label' => $value['name'],
                 'url'   => [$value['menuModel']['url_key']],
                 'items' => $this->recursionMenu($value),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 递归 Url 菜单
+     *
+     * @param $data
+     * @param null $adminid
+     * @return array|void
+     */
+    public function recursionUrlMenu($data, $adminid = null)
+    {
+
+        if (empty($data) || empty($data['m_key'])) {
+            return;
+        }
+
+        $child = Menu::findByData($data['m_key']);
+
+        if (empty($child)) {
+            return;
+        }
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+
+            if (!empty($value['url'])) {
+                $url = ($adminid == 'A3' ? 'admin/' . $value['url'] : $value['url']);
+            } else {
+                $url = '#';
+            }
+
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => [$url],
+                'items' => $this->recursionUrlMenu($value, $adminid),
             ];
         }
 
