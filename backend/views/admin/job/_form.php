@@ -97,6 +97,9 @@ use dosamigos\fileupload\FileUploadUI;
                     $form->field($model, 'is_audit')->widget(Select2::classname(), [
                         'data'    => ['On' => '审核', 'Off' => '审核不过'],
                         'options' => ['placeholder' => '是否启用...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
                     ]);
                     ?>
 

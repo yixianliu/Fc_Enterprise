@@ -69,7 +69,7 @@ class UserController extends BaseController
 
         // 招聘
         $dataJobProvider = new ActiveDataProvider([
-            'query' => Job::find(['user_id' => $id]),
+            'query'      => Job::find(['user_id' => $id]),
             'pagination' => [
                 'pageSize' => 20,
             ],
@@ -77,7 +77,7 @@ class UserController extends BaseController
 
         // 采购
         $dataPurchaseProvider = new ActiveDataProvider([
-            'query' => Purchase::find(['user_id' => $id]),
+            'query'      => Purchase::find(['user_id' => $id]),
             'pagination' => [
                 'pageSize' => 20,
             ],

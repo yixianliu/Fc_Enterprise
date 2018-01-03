@@ -9,29 +9,29 @@
  */
 INSERT INTO `#DB_PREFIX#Conf`
 VALUES
-(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', #TIME#),
-(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', #TIME#),
-(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', #TIME#),
-(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', #TIME#),
-(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', #TIME#),
-(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', #TIME#),
-(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', #TIME#),
-(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', #TIME#),
-(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', #TIME#),
-(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', #TIME#),
-(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', #TIME#),
-(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', #TIME#),
-(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', #TIME#),
-(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', #TIME#),
-(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', #TIME#),
-(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', #TIME#),
-(NULL, 'COMMENT_NUM', '留言列表页数量', 25, NULL, 'On', #TIME#),
-(NULL, 'VIEW_NUM', '帖子列表页数量', 50, NULL, 'On', #TIME#),
-(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', #TIME#),
-(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', #TIME#),
-(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', #TIME#),
-(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', #TIME#),
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', #TIME#);
+(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'COMMENT_NUM', '留言列表页数量', 25, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'VIEW_NUM', '帖子列表页数量', 50, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#);
 
 /**
  * 友情链接
@@ -134,6 +134,10 @@ VALUES
 (NULL, 'AJ1', 9, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AD1', 11, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AS1', 12, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AC1', 13, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, 'On', #TIME#, #TIME#),
+
+(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', 'On', #TIME#, #TIME#),
+(NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', 'On', #TIME#, #TIME#),
@@ -161,7 +165,7 @@ VALUES
 (NULL, 'AUMV1', 1, 'AM1', 'admin', 'UU1', NULL, '所有菜单', 'menu/index', 'On', #TIME#, #TIME#),
 (NULL, 'AUMV2', 2, 'AM1', 'admin', 'UU1', NULL, '创建菜单', 'menu/create', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUCC1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'center/conf', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'center/backup', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', 'On', #TIME#, #TIME#),

@@ -57,7 +57,6 @@ class User extends ActiveRecord implements IdentityInterface
             'user_id'    => '用户编号',
             'username'   => '帐号',
             'nickname'   => '昵称',
-            'telphone'   => '手机号码',
             'is_using'   => '是否启用',
             'login_ip'   => '登录 IP',
             'r_key'      => '角色',
@@ -68,7 +67,6 @@ class User extends ActiveRecord implements IdentityInterface
             'updated_at' => '更新数据时间',
 
             'enterprise' => '企业名称',
-            'telphone'   => '手机号码',
             'repassword' => '二次密码',
             'is_type'    => '用户类型',
             'msg'        => '短信验证码',
@@ -88,7 +86,7 @@ class User extends ActiveRecord implements IdentityInterface
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
 
-            [['exp', 'credit', 'birthday', 'signature', 'telphone'], 'default', 'value' => 0],
+            [['exp', 'credit', 'birthday', 'signature'], 'default', 'value' => 0],
             [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'on' => 'backend', 'message' => '{attribute}必须为1开头的11位纯数字'],
 
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
@@ -114,7 +112,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'telphone'],
+            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id'],
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
         ];

@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
                 ?>
 
                 <?=
-                $form->field($model, 'r_key')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
                     'data'          => ['user' => '普通用户', 'enterprise' => '企业用户', 'supplier' => '供应商用户'],
                     'options'       => ['placeholder' => '用户类型...'],
                     'pluginOptions' => [

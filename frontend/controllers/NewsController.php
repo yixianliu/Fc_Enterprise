@@ -1,18 +1,18 @@
 <?php
 
-namespace backend\controllers\admin;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\Conf;
-use common\models\ConfSearch;
-use yii\web\Controller;
+use common\models\News;
+use common\models\NewsSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CenterController implements the CRUD actions for Conf model.
+ * NewsController implements the CRUD actions for News model.
  */
-class CenterController extends BaseController
+class NewsController extends BaseController
 {
     /**
      * @inheritdoc
@@ -21,7 +21,7 @@ class CenterController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -30,7 +30,26 @@ class CenterController extends BaseController
     }
 
     /**
-     * Displays a single Conf model.
+     * Lists all News models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => News::find(),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single News model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -43,13 +62,16 @@ class CenterController extends BaseController
     }
 
     /**
-     * Creates a new Conf model.
+     * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Conf();
+
+        exit(false);
+
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -61,7 +83,7 @@ class CenterController extends BaseController
     }
 
     /**
-     * Updates an existing Conf model.
+     * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -69,6 +91,9 @@ class CenterController extends BaseController
      */
     public function actionUpdate($id)
     {
+
+        exit(false);
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -81,41 +106,7 @@ class CenterController extends BaseController
     }
 
     /**
-     * 首页
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
-
-    /**
-     * 网站配置
-     *
-     * @return string
-     */
-    public function actionConf()
-    {
-
-        $searchModel = new ConfSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('conf', ['dataProvider' => $dataProvider]);
-    }
-
-    /**
-     * 设置管理员密码
-     *
-     * @return string
-     */
-    public function actionSetpassword()
-    {
-        return $this->render('setpassword');
-    }
-
-    /**
-     * Deletes an existing Conf model.
+     * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -129,15 +120,15 @@ class CenterController extends BaseController
     }
 
     /**
-     * Finds the Conf model based on its primary key value.
+     * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Conf the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Conf::findOne($id)) !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         }
 

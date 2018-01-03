@@ -11,6 +11,9 @@ AppAsset::register($this); // $this 代表视图对象
 
 $ClsMenu = new Menu();
 
+//print_r($ClsMenu->findMenuNav('A3'));
+//exit();
+
 if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE']) || Yii::$app->user->isGuest) {
     return false;
 }
@@ -86,7 +89,7 @@ $this->beginPage();
 </div>
 
 <script type="text/javascript">
-    $('#w0').removeClass('nav');
+    $('.wraplist').children('li').children('ul').removeClass('dropdown-menu').addClass('sub-menu');
 </script>
 
 <?php $this->endBody(); ?>

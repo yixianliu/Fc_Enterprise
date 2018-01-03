@@ -197,13 +197,7 @@ class Menu extends \yii\db\ActiveRecord
                         $url = '#';
                     }
 
-                    $array = [
-                        [
-                            'label' => $value['name'],
-                            'url'   => $url,
-                            'items' => $this->recursionUrlMenu($value, 'A3'),
-                        ]
-                    ];
+                    $array = $this->recursionUrlMenu($value, $value['parent_id']);
 
                     break;
 
@@ -275,9 +269,8 @@ class Menu extends \yii\db\ActiveRecord
 
         $child = Menu::findByData($data['m_key']);
 
-        if (empty($child)) {
+        if (empty($child))
             return;
-        }
 
         // 初始化
         $result = array();

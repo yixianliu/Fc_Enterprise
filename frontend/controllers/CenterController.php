@@ -36,6 +36,9 @@ class CenterController extends BaseController
      */
     public function actionAbout()
     {
+
+
+
         return $this->render('about');
     }
 

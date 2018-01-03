@@ -175,15 +175,16 @@ CREATE TABLE `#DB_PREFIX#Section` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Conf`;
 CREATE TABLE `#DB_PREFIX#Conf` (
-    `conf_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '配置关键字KEY',
     `name` VARCHAR(80) NOT NULL COMMENT '名称',
-    `parameter` VARCHAR(255) NOT NULL COMMENT '值 / 参数',
+    `parameter` TEXT NOT NULL COMMENT '值 / 参数',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
+    `is_language` SET('cn', 'en') NOT NULL COMMENT '多语言类别',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
     UNIQUE KEY `c_key` (`c_key`),
     UNIQUE `name` (`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;

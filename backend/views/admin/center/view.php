@@ -4,13 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ItemRp */
+/* @var $model common\models\Conf */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => '角色权限', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Confs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -22,15 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <h1><?= Html::encode($this->title) ?></h1>
-
                     <p>
-                        <?= Html::a('更新', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                         <?=
-                        Html::a('删除', ['delete', 'id' => $model->name], [
+                        Html::a('删除', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data'  => [
-                                'confirm' => '是否真的需要删除这条数据?',
+                                'confirm' => 'Are you sure you want to delete this item?',
                                 'method'  => 'post',
                             ],
                         ]);
@@ -42,11 +39,32 @@ $this->params['breadcrumbs'][] = $this->title;
                     DetailView::widget([
                         'model'      => $model,
                         'attributes' => [
+                            'c_key',
                             'name',
-                            'type',
-                            'rule_name',
-                            'data:ntext',
-                            'description',
+                            'parameter:ntext',
+                            'description:ntext',
+                            [
+                                'attribute' => 'is_language',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'cn' => '中文',
+                                        'en' => '英文',
+                                    ];
+
+                                    return $state[ $model->is_language ];
+                                },
+                            ],
+                            [
+                                'attribute' => 'is_using',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'On'  => '开启',
+                                        'Off' => '未启用',
+                                    ];
+
+                                    return $state[ $model->is_using ];
+                                },
+                            ],
                             [
                                 'attribute' => 'created_at',
                                 'value'     => function ($model) {
@@ -60,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                         ],
-                    ])
+                    ]);
                     ?>
 
                 </div>
