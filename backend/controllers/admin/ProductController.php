@@ -187,6 +187,8 @@ class ProductController extends BaseController
         // 所有版块
         $dataSection = Section::findAll(['is_using' => 'On']);
 
+        $result['section']['S0'] = '暂无';
+
         foreach ($dataSection as $value) {
             $result['section'][ $value['s_key'] ] = $value['name'];
         }

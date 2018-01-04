@@ -19,21 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
+<?= $this->render('../slide', ['pagekey' => 'product']); ?>
 
-                <?=
-                Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
-
-            </div>
-        </div>
-    </div>
-</section>
+<?= $this->render('../nav'); ?>
 
 <section class="section-wrap-mp pb-50">
     <div class="container">
@@ -56,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=
             ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView'     => '_product',
+                'itemView'     => '_list',
                 'viewParams'   => [
                     'fullView' => true,
                     'context'  => 'main-page',

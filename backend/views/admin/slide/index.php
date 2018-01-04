@@ -34,13 +34,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'slide_id',
-                        'page_id',
+                        [
+                            'attribute' => 'page_id',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'index'   => '网站首页',
+                                    'product' => '产品中心',
+                                    'news'    => '新闻中心',
+                                    'job'     => '招聘中心',
+                                ];
+
+                                return $state[ $model->page_id ];
+                            },
+                        ],
                         'path',
-                        'is_using',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);
                 ?>
+
             </div>
         </div>
     </section>

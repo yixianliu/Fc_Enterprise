@@ -15,14 +15,6 @@ use yii\helpers\HtmlPurifier;
     <div class="work-container">
         <div class="work-img">
             <img src="<?= Url::to('@web/themes/enterprise/img') ?>/project_1.jpg" alt="<?= Html::encode($model->title) ?>">
-            <div class="portfolio-overlay">
-                <div class="project-icons">
-                    <a href="<?= Url::to('@web/themes/enterprise/img') ?>/project_1_big.jpg" class="lightbox-gallery" title="Poster Mockup">
-                        <i class="fa fa-search"></i>
-                    </a>
-                    <a href="portfolio-single.html" class="project-icon"><i class="fa fa-link"></i></a>
-                </div>
-            </div>
         </div>
 
         <div class="work-description">

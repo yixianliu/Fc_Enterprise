@@ -5,10 +5,10 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\NewsSearch */
+/* @var $searchModel common\models\NewsClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '新闻中心';
+$this->title = '新闻列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=
                 ListView::widget([
                     'dataProvider' => $dataProvider,
-                    'itemView' => '_list',
+                    'itemView'     => '_list',
                 ]);
                 ?>
 

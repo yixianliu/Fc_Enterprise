@@ -44,14 +44,17 @@ class UploadController extends BaseController
 
         switch ($type) {
 
+            // 产品
             case 'product':
                 $model = new Product();
                 break;
 
+            // 幻灯片
             case 'slide':
                 $model = new Slide();
                 break;
 
+            // 招聘中心
             case 'job':
                 $model = new Job();
                 break;

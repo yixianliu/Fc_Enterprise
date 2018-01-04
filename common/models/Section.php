@@ -13,7 +13,7 @@ use Yii;
  * @property string $name
  * @property string $description
  * @property string $keywords
- * @property string $ico_class
+ * @property string $json_data
  * @property string $parent_key
  * @property string $is_ad
  * @property string $is_post
@@ -36,10 +36,10 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['s_key', 'sort_id', 'name', 'ico_class', 'parent_key', 'is_ad', 'is_post', 'is_using', 'published'], 'required'],
-            [['sort_id', 'published'], 'integer'],
+            [['s_key', 'sort_id', 'name', 'json_data', 'parent_key', 'is_ad', 'is_post', 'is_using'], 'required'],
+            [['sort_id'], 'integer'],
             [['description', 'is_ad', 'is_post', 'is_using'], 'string'],
-            [['s_key', 'keywords', 'ico_class', 'parent_key'], 'string', 'max' => 55],
+            [['s_key', 'keywords', 'json_data', 'parent_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['name'], 'unique'],
             [['s_key'], 'unique'],
@@ -55,15 +55,15 @@ class Section extends \yii\db\ActiveRecord
             's_key'       => '版块关键KEY',
             'sort_id'     => '版块排序',
             'name'        => '版块名称',
-            'description' => 'Description',
-            'keywords'    => 'Keywords',
-            'ico_class'   => 'Ico Class',
-            'parent_key'  => 'Parent Key',
+            'description' => '版块描述',
+            'keywords'    => '版块关键词',
+            'json_data'   => 'Json 数据',
+            'parent_key'  => '父类版块',
             'is_ad'       => 'Is Ad',
             'is_post'     => 'Is Post',
-            'is_using'    => 'Is Using',
-            'created_at'   => '添加数据时间',
-            'updated_at'   => '更新数据时间',
+            'is_using'    => '是否启用',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 }

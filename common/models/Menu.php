@@ -138,7 +138,7 @@ class Menu extends \yii\db\ActiveRecord
         $dataMenu = array();
         $array = array();
 
-        $data = Menu::findByData($pid);
+        $data = static::findByData($pid);
 
         foreach ($data as $value) {
 
@@ -214,6 +214,8 @@ class Menu extends \yii\db\ActiveRecord
                 'url'   => [$value['menuModel']['url_key'] . '/index', $customId],
                 'items' => $array,
             ];
+
+            $array = array();
 
         }
 

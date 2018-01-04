@@ -39,7 +39,7 @@ use dosamigos\fileupload\FileUploadUI;
                 <?=
                 $form->field($model, 'page_id')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['page'],
-                    'options'       => ['placeholder' => '选择...'],
+                    'options'       => ['placeholder' => '选择相对应的页面...'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -50,17 +50,20 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?=
                 FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/slide/image-upload', 'id' => $model->slide_id],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
+                    'model'        => $model,
+                    'attribute'    => 'path',
+                    'url'          => ['admin/upload/image-upload', 'id' => $model->slide_id, 'type' => 'slide', 'attribute' => 'path'],
+                    'gallery'      => false,
+                    'fieldOptions' => [
                         'accept' => 'image/*'
                     ],
+
                     'clientOptions' => [
-                        'maxFileSize' => 2000000,
-                        'dataType'    => 'json',
+                        'maxFileSize'      => 2000000,
+                        'dataType'         => 'json',
+                        'maxNumberOfFiles' => 5,
                     ],
+
 
                     // ...
                     'clientEvents'  => [
@@ -85,8 +88,6 @@ use dosamigos\fileupload\FileUploadUI;
                     ],
                 ]);
                 ?>
-
-                <hr/>
 
                 <div id="SlideImg"></div>
 
@@ -117,7 +118,7 @@ use dosamigos\fileupload\FileUploadUI;
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['result' => $result,]); ?>
+        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'slide']); ?>
 
     </section>
 </div>

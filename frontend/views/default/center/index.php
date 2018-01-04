@@ -16,37 +16,8 @@ $this->title = '首页';
 
 ?>
 
-<section class="hero-wrap video-container text-center">
+<?= $this->render('../slide', ['pagekey' => 'index']); ?>
 
-    <div class="container container-full-height">
-        <div class="video-wrap"
-             data-vide-bg="mp4: video/video, webm: video/video, ogv: video/video, poster: video/video"
-             data-vide-options="posterType: jpg, loop: true, muted: true, position: 50%">
-            <div class="video-overlay"></div>
-            <div class="video-img"></div>
-        </div>
-
-        <div class="hero-holder">
-            <div class="hero-message text-rotator">
-                <h1><span class="rotate">Awesome Features, Creative Design, Amazing Template</span></h1>
-                <h2 class="hero-subtitle hidden-xs">Enigma is a Creative Minimal Style Onepage. It is Fully Responsive and Retina Ready. Grab This Awesome Template Now.</h2>
-                <div class="buttons-holder mt-30">
-                    <a href="http://vimeo.com/19270640" class="btn btn-lg btn-transparent lightbox-video mfp-iframe">Play Video</a>
-                    <a href="#" class="btn btn-lg btn-white">Purchase it</a>
-                </div>
-                <div class="local-scroll">
-                    <a href="#intro" class="scroll-down">
-                        <i class="fa fa-angle-down"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-
-<!-- Our Services -->
 <section class="section-wrap-mp services style-2 pb-40 pb-mdm-50">
     <div class="container">
 

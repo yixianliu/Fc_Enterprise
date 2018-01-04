@@ -170,6 +170,7 @@ VALUES
 (NULL, 'ACCC3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'center/backup', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', 'On', #TIME#, #TIME#),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色权限', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '查看角色权限', NULL, 'On', #TIME#, #TIME#),

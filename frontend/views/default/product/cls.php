@@ -5,10 +5,10 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\NewsSearch */
+/* @var $searchModel common\models\ProductClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '新闻中心';
+$this->title = '产品列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -17,8 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
         display: none;
     }
 </style>
-
-<?= $this->render('../slide', ['pagekey' => 'news']); ?>
 
 <?= $this->render('../nav'); ?>
 
@@ -29,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12">
                 <div class="portfolio-filter">
 
-                    <a href="<?= Url::to(['news/index']); ?>" class="filter active">所有分类</a>
+                    <a href="<?= Url::to(['product/index']); ?>" class="filter active">所有分类</a>
 
                     <?php foreach ($result['classify'] as $value): ?>
-                        <a href="<?= Url::to(['news-cls/index', 'id' => $value['c_key']]); ?>" class="filter"><?= $value['name'] ?></a>
+                        <a href="<?= Url::to(['product-cls/index', 'id' => $value['c_key']]); ?>" class="filter"><?= $value['name'] ?></a>
                     <?php endforeach; ?>
 
                 </div>
@@ -45,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=
                 ListView::widget([
                     'dataProvider' => $dataProvider,
-                    'itemView' => '_list',
+                    'itemView'     => '_list',
                 ]);
                 ?>
 

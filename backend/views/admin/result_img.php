@@ -38,7 +38,7 @@ if (!empty($img)) {
                 <?php foreach ($images as $value): ?>
                     <div class="col-md-2 col-sm-6 col-xs-12">
 
-                        <?= Html::img(Url::to('@web/temp/') . '/' . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 180, 'height' => 100]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 180, 'height' => 100]); ?>
 
                         <div class="portfolio-info animated fadeInUp animated-duration-600ms">
 

@@ -88,7 +88,7 @@ class News extends \yii\db\ActiveRecord
             'introduction' => '新闻导读',
             'keywords'     => '新闻关键词',
             'praise'       => 'Praise',
-            'forward'      => 'Forward',
+            'forward'      => '转发',
             'collection'   => 'Collection',
             'share'        => '分享次数',
             'attention'    => 'Attention',
@@ -104,4 +104,21 @@ class News extends \yii\db\ActiveRecord
             'updated_at'   => '更新数据时间',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasMany(User::className(), ['user_id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdmin()
+    {
+        return $this->hasMany(Management::className(), ['user_id' => 'user_id']);
+    }
+
 }

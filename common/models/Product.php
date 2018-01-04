@@ -77,7 +77,6 @@ class Product extends \yii\db\ActiveRecord
 
             // 默认值
             [['images'], 'default', 'value' => ''],
-            [['l_key'], 'default', 'value' => 'L1'],
             [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend', 'is_field',], 'default', 'value' => 'Off'],
             [['is_audit', 'is_comments'], 'default', 'value' => 'On'],

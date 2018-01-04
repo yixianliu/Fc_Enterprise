@@ -2,17 +2,18 @@
 
 namespace frontend\controllers;
 
-use common\models\ProductClassify;
 use Yii;
 use common\models\Product;
+use common\models\ProductClassify;
+use common\models\ProductClassifySearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * ProductClsController implements the CRUD actions for ProductClassify model.
  */
-class ProductController extends BaseController
+class ProductClsController extends BaseController
 {
     /**
      * @inheritdoc
@@ -20,17 +21,19 @@ class ProductController extends BaseController
     public function behaviors()
     {
         return [
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+
         ];
     }
 
     /**
-     * Lists all Product models.
+     * Lists all ProductClassify models.
      * @return mixed
      */
     public function actionIndex()
@@ -44,22 +47,11 @@ class ProductController extends BaseController
 
         $result['classify'] = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
 
-        return $this->render('index', [
+        return $this->render('../product/cls', [
             'dataProvider' => $dataProvider,
-            'result' => $result,
+            'result'       => $result,
         ]);
     }
 
-    /**
-     * Displays a single Product model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
 }

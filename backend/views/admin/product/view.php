@@ -43,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'product_id',
                         'user_id',
-                        'l_key',
                         'c_key',
                         's_key',
                         'title',

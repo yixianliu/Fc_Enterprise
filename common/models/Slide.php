@@ -33,7 +33,7 @@ class Slide extends \yii\db\ActiveRecord
             [['description', 'is_using'], 'string'],
             [['page_id'], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['page_id'], 'unique'],
+            [['page_id', 'path'], 'unique'],
         ];
     }
 
@@ -49,5 +49,17 @@ class Slide extends \yii\db\ActiveRecord
             'description' => '描述',
             'is_using'    => '是否启用',
         ];
+    }
+
+    public function getData($pagekey)
+    {
+        if (empty($pagekey))
+            return false;
+
+        $result = static::findOne(['is_using' => 'On', 'page_id' => $pagekey]);
+
+        $dataSlide = explode(',', $result->path);
+
+        return $dataSlide;
     }
 }

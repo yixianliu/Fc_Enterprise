@@ -11,14 +11,15 @@ $this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
             <h2 class="title pull-left">
                 <?= Html::encode($this->title) ?>
             </h2>
         </header>
+
         <div class="content-body">
             <div class="row">
                 <h1><?= Html::encode($this->title) ?></h1>

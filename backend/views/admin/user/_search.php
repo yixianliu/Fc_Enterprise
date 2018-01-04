@@ -20,7 +20,7 @@ $form = ActiveForm::begin([
     <tr>
         <td><?= $form->field($model, 'username') ?></td>
         <td><?= $form->field($model, 'nickname') ?></td>
-        <td><?= $form->field($model, 'telphone') ?></td>
+        <td><?= $form->field($model, 'enterprise') ?></td>
         <td>
             <?=
             $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [

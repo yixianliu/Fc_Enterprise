@@ -103,7 +103,7 @@ class SlideController extends BaseController
 
             $result = $this->page();
 
-            $dataImg = explode(', ', $model->path);
+            $dataImg = explode(',', $model->path);
 
             foreach ($dataImg as $value) {
 
@@ -138,7 +138,7 @@ class SlideController extends BaseController
                 $dataPage = null;
 
                 foreach ($result['Slide']['path'] as $value) {
-                    $dataPage .= $value . ', ';
+                    $dataPage .= $value . ',';
                 }
 
                 $result['Slide']['path'] = $dataPage;
@@ -161,8 +161,10 @@ class SlideController extends BaseController
         $result = array();
 
         $result['page'] = [
-            'index' => '网站首页',
-            'job'   => '招聘中心',
+            'index'   => '网站首页',
+            'product' => '产品中心',
+            'news'    => '新闻中心',
+            'job'     => '招聘中心',
         ];
 
         // 单页面
