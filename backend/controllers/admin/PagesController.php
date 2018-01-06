@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\PagesTplFile;
 use Yii;
 use common\models\SinglePage;
 use common\models\SinglePageSearch;
@@ -107,7 +108,10 @@ class PagesController extends BaseController
         } else {
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $this->getCls(),
+                'result' => [
+                    'classify' => $this->getCls(),
+                    'file'     => $this->getFile(),
+                ],
             ]);
         }
     }
@@ -150,7 +154,10 @@ class PagesController extends BaseController
         } else {
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $this->getCls(),
+                'result' => [
+                    'classify' => $this->getCls(),
+                    'file'     => $this->getFile(),
+                ],
             ]);
         }
     }
@@ -192,7 +199,7 @@ class PagesController extends BaseController
     public function actionEfile($id)
     {
 
-        $data = SinglePage::findOne(['page_id' => $id]);
+        $data = SinglePage::findOne(['c_key' => $id]);
 
         if (!file_exists($data['path'])) {
 
@@ -201,6 +208,11 @@ class PagesController extends BaseController
         return $this->render('efile', ['result' => $data]);
     }
 
+    /**
+     * 获取目录
+     *
+     * @return array
+     */
     public function getCls()
     {
 
@@ -210,9 +222,25 @@ class PagesController extends BaseController
         $dataCls = PagesClassify::findAll(['is_using' => 'On']);
 
         foreach ($dataCls as $value) {
-            $result['classify'][ $value['c_key'] ] = $value['name'];
+            $result[ $value['c_key'] ] = $value['name'];
         }
 
         return $result;
     }
+
+    public function getFile()
+    {
+
+        // 初始化
+        $result = array();
+
+        $data = PagesTplFile::findAll(['is_using' => 'On']);
+
+        foreach ($data as $value) {
+            $result[ $value['path'] ] = $value['name'];
+        }
+
+        return $result;
+    }
+
 }

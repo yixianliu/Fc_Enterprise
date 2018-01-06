@@ -3,12 +3,13 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%slide}}".
  *
  * @property integer $slide_id
- * @property string $page_id
+ * @property string $c_key
  * @property string $path
  * @property string $description
  * @property string $is_using
@@ -26,14 +27,24 @@ class Slide extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['page_id', 'path', 'is_using'], 'required'],
+            [['c_key', 'path', 'is_using'], 'required'],
             [['description', 'is_using'], 'string'],
-            [['page_id'], 'string', 'max' => 55],
+            [['c_key'], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['page_id', 'path'], 'unique'],
+            [['c_key', 'path'], 'unique'],
         ];
     }
 
@@ -43,8 +54,7 @@ class Slide extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'slide_id'    => '幻灯片编号',
-            'page_id'     => '对应的单页面',
+            'c_key'       => '对应的单页面',
             'path'        => '路径',
             'description' => '描述',
             'is_using'    => '是否启用',
@@ -56,7 +66,10 @@ class Slide extends \yii\db\ActiveRecord
         if (empty($pagekey))
             return false;
 
-        $result = static::findOne(['is_using' => 'On', 'page_id' => $pagekey]);
+        $result = static::findOne(['is_using' => 'On', 'c_key' => $pagekey]);
+
+        if (empty($result))
+            return false;
 
         $dataSlide = explode(',', $result->path);
 

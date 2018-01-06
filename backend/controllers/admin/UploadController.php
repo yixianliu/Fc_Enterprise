@@ -12,6 +12,7 @@
 namespace backend\controllers\admin;
 
 use common\models\Job;
+use common\models\PagesTplFile;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -38,9 +39,12 @@ class UploadController extends BaseController
     public function actionImageUpload($id, $type, $attribute = 'images')
     {
 
-        if (empty($id) || empty($type)) {
+        if (empty($type)) {
             return Json::encode(['message' => '参数有误 !!']);
         }
+
+        // 初始化
+        $ext = array();
 
         switch ($type) {
 
@@ -59,6 +63,15 @@ class UploadController extends BaseController
                 $model = new Job();
                 break;
 
+                // 单页面
+            case 'pages':
+
+                $model = new PagesTplFile();
+
+                $ext = ['php', 'html', 'txt'];
+
+                break;
+
             default:
                 return Json::encode(['message' => '没有此模型 !!']);
                 break;
@@ -66,6 +79,12 @@ class UploadController extends BaseController
 
         // 上传组件对应model
         $imageFile = UploadedFile::getInstance($model, $attribute);
+
+        if (!empty($ext)) {
+            if (!in_array($imageFile->extension, $ext)) {
+                return Json::encode(['status' => false, 'message' => '上传格式有问题 !!']);
+            }
+        }
 
         // 上传路径
         $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
@@ -75,10 +94,10 @@ class UploadController extends BaseController
         }
 
         if (!$imageFile) {
-            return Json::encode(['message' => '上传文件失败 !!']);
+            return Json::encode(['status' => false, 'message' => '上传文件异常 !!']);
         }
 
-        $uid = time() . '_' . rand(00000, 99999);
+        $uid = time() . '_' . $type . '_' . rand(10000, 99999);
         $fileName = $uid . '.' . $imageFile->extension;
         $filePath = $directory . $fileName;
 
@@ -100,7 +119,7 @@ class UploadController extends BaseController
             ]);
         }
 
-        return Json::encode(['message' => '上传失败 !!']);
+        return Json::encode(['status' => false, 'message' => '上传失败 !!']);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace backend\controllers\admin;
 
 
+use common\models\SlideClassify;
 use Yii;
 use common\models\Slide;
 use common\models\SlideSearch;
@@ -67,13 +68,11 @@ class SlideController extends BaseController
     {
         $model = new Slide();
 
-        $model->slide_id = time() . '_' . rand(0000, 9999);
-
         // 整合路径
         $result = $this->zpath(Yii::$app->request->post());
 
         if ($model->load($result) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->slide_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
             return $this->render('create', [
@@ -98,8 +97,12 @@ class SlideController extends BaseController
         $result = $this->zpath(Yii::$app->request->post());
 
         if ($model->load($result) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->slide_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            if (!empty($model->getErrors())) {
+                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            }
 
             $result = $this->page();
 
@@ -160,12 +163,12 @@ class SlideController extends BaseController
         // 初始化
         $result = array();
 
-        $result['page'] = [
-            'index'   => '网站首页',
-            'product' => '产品中心',
-            'news'    => '新闻中心',
-            'job'     => '招聘中心',
-        ];
+        // 幻灯片分类
+        $dataPageCls = SlideClassify::findAll(['is_using' => 'On']);
+
+        foreach ($dataPageCls as $value) {
+            $result['page'][ $value['c_key'] ] = $value['name'];
+        }
 
         // 单页面
         $dataPage = SinglePage::findAll(['is_using' => 'On']);

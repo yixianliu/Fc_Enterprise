@@ -587,13 +587,31 @@ CREATE TABLE `#DB_PREFIX#Download_Classify` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Slide`;
 CREATE TABLE `#DB_PREFIX#Slide` (
-    `slide_id` INT(11) NULL AUTO_INCREMENT,
-    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '幻灯片关键KEY,假如为单页面的话,值为Pages',
     `path` VARCHAR(255) NOT NULL COMMENT '幻灯片图片路径',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    PRIMARY KEY (`slide_id`),
-    UNIQUE KEY `page_id` (`page_id`)
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 幻灯片分类
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Slide_Classify`;
+CREATE TABLE `#DB_PREFIX#Slide_Classify` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '幻灯片关键KEY',
+    `name` VARCHAR(255) NOT NULL COMMENT '分类名称',
+    `description` TEXT NULL COMMENT '描述',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -651,6 +669,23 @@ CREATE TABLE `#DB_PREFIX#Pages_Classify` (
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 单页面模板文件
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Pages_Tpl_File`;
+CREATE TABLE `#DB_PREFIX#Pages_Tpl_File` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `path` VARCHAR(255) NOT NULL COMMENT '文件目录',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`name`),
+    UNIQUE KEY `path` (`path`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 # SET FOREIGN_KEY_CHECKS = 1;

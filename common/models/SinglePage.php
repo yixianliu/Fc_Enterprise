@@ -63,7 +63,7 @@ class SinglePage extends \yii\db\ActiveRecord
         return [
             'page_id'    => '单页面关键 ID',
             'name'       => '单页面名称',
-            'c_key'      => '单页面分类',
+            'c_key'      => '单页面所属分类',
             'content'    => '单页面内容',
             'path'       => '单页面路径',
             'is_using'   => '是否启用',

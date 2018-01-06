@@ -4,24 +4,22 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Slide */
+/* @var $model common\models\SlideClassify */
 
-$this->title = $model->c_key;
-$this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => '幻灯片分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
-
         <header class="panel_header">
             <h2 class="title pull-left">
                 <?= Html::encode($this->title) ?>
             </h2>
         </header>
-
         <div class="content-body">
             <div class="row">
+
                 <h1><?= Html::encode($this->title) ?></h1>
 
                 <p>
@@ -32,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'confirm' => '是否删除这条记录?',
                             'method'  => 'post',
                         ],
-                    ]) ?>
+                    ]);
+                    ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                     <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
@@ -43,9 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'id',
                         'c_key',
-                        'path',
+                        'name',
                         'description:ntext',
                         'is_using',
+                        'created_at',
+                        'updated_at',
                     ],
                 ]);
                 ?>
@@ -54,4 +55,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </section>
 </div>
-

@@ -34,10 +34,8 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-                <?= $form->field($model, 'slide_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
                 <?=
-                $form->field($model, 'page_id')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['page'],
                     'options'       => ['placeholder' => '选择相对应的页面...'],
                     'pluginOptions' => [
@@ -52,7 +50,7 @@ use dosamigos\fileupload\FileUploadUI;
                 FileUploadUI::widget([
                     'model'        => $model,
                     'attribute'    => 'path',
-                    'url'          => ['admin/upload/image-upload', 'id' => $model->slide_id, 'type' => 'slide', 'attribute' => 'path'],
+                    'url'          => ['admin/upload/image-upload', 'id' => 1, 'type' => 'slide', 'attribute' => 'path'],
                     'gallery'      => false,
                     'fieldOptions' => [
                         'accept' => 'image/*'
@@ -117,6 +115,8 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
+
+        <?= Yii::$app->view->renderFile('@app/views/form_msg.php'); ?>
 
         <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'slide']); ?>
 

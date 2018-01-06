@@ -173,32 +173,23 @@ class Menu extends \yii\db\ActiveRecord
                     break;
 
                 // 自定义
-                case 'custom':
+                case 'pages':
 
                     // 自定义页面的KEY
-                    $custom = PagesClassify::findAll(['is_using' => 'On', 'c_key' => $value['custom_key']]);
+                    $custom = Pages::findAll(['is_using' => 'On', 'c_key' => $value['custom_key']]);
 
                     foreach ($custom as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/pages/index', 'id' => $values['custom_key']],
-                            'items' => $this->recursionMenu($values),
+                            'url'   => ['/pages/index', 'id' => $values['c_key']],
+                            'items' => $this->recursionPagesMenu($values),
                         ];
                     }
-
                     break;
 
                 // 超链接
                 case 'urls':
-
-                    if (!empty($value['url'])) {
-                        $url = [($value['parent_id'] == 'A3' ? 'admin/' . $value['url'] : $value['url'])];
-                    } else {
-                        $url = '#';
-                    }
-
                     $array = $this->recursionUrlMenu($value, $value['parent_id']);
-
                     break;
 
                 // 默认
@@ -249,6 +240,45 @@ class Menu extends \yii\db\ActiveRecord
                 'label' => $value['name'],
                 'url'   => [$value['menuModel']['url_key']],
                 'items' => $this->recursionMenu($value),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 单页面递归菜单
+     *
+     * @param $data
+     * @return array|void
+     */
+    public function recursionPagesMenu($data)
+    {
+
+        if (empty($data) || !empty($data['c_key'])) {
+            return;
+        }
+
+        // 子分类
+        $childCls = PagesClassify::findAll(['is_using' => 'On', 'parent_id' => $data['c_key']]);
+
+        if (empty($childCls))
+            return;
+
+        $child = Pages::findAll(['is_using' => 'On', 'c_key' => $childCls['c_key']]);
+
+        if (empty($child)) {
+            return;
+        }
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => ['/pages/view', 'id' => $value['page_id']],
+                'items' => $this->recursionPagesMenu($value),
             ];
         }
 

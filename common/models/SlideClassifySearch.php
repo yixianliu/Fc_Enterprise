@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Slide;
+use common\models\SlideClassify;
 
 /**
- * SlideSearch represents the model behind the search form about `common\models\Slide`.
+ * SlideClassifySearch represents the model behind the search form of `common\models\SlideClassify`.
  */
-class SlideSearch extends Slide
+class SlideClassifySearch extends SlideClassify
 {
     /**
      * @inheritdoc
@@ -18,7 +18,8 @@ class SlideSearch extends Slide
     public function rules()
     {
         return [
-            [['c_key', 'path', 'description', 'is_using'], 'safe'],
+            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['c_key', 'name', 'description', 'is_using'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class SlideSearch extends Slide
      */
     public function search($params)
     {
-        $query = Slide::find();
+        $query = SlideClassify::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +60,12 @@ class SlideSearch extends Slide
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'c_key', $this->c_key])
-            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 

@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <p>
                     <?= Html::a('创建单页面', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建单页面模板文件', ['admin/pages-tpl-file/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?=
@@ -34,6 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'name',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+
+                                $data = \common\models\PagesClassify::findOne(['c_key' => $model->c_key]);
+
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {

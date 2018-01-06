@@ -4,13 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Menu */
+/* @var $model common\models\PagesTplFile */
 
-$this->title = '菜单 : ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => '菜单中心', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => '单页面模板文件管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -31,27 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                DetailView::widget([
+                <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'm_key',
-                        'sort_id',
-                        [
-                            'attribute' => 'parent_id',
-                            'value'     => function ($model) {
-
-                                $data = \common\models\Menu::findOne(['m_key' => $model->parent_id]);
-
-                                return $data->name;
-                            },
-                        ],
-                        'rp_key',
-                        'model_key',
+                        'id',
                         'name',
+                        'description:ntext',
+                        'path',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -66,20 +53,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
+                                return date('Y - m -d , H:i:s', $model->created_at);
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->updated_at);
+                                return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
                     ],
-                ]);
-                ?>
+                ]) ?>
 
             </div>
         </div>
     </section>
 </div>
+
+

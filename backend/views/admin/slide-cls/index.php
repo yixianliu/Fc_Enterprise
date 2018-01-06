@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\SlideSearch */
+/* @var $searchModel common\models\SlideClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '幻灯片管理';
+$this->title = '幻灯片分类列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
@@ -21,9 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建幻灯片', ['create'], ['class' => 'btn btn-success']) ?>
 
-                    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建幻灯片分类', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('创建幻灯片', ['admin/slide/create'], ['class' => 'btn btn-success']) ?>
+
                 </p>
 
                 <?=
@@ -31,25 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        [
-                            'attribute' => 'c_key',
-                            'value'     => function ($model) {
-
-                                $data = \common\models\SlideClassify::findAll(['is_using' => 'On']);
-
-                                foreach ($data as $value) {
-                                    $state[ $value['c_key'] ] = $value['name'];
-                                }
-
-                                return $state[ $model->c_key ];
-                            },
-                        ],
-                        'path',
+                        'c_key',
+                        'name',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
-                                    'On'  => '启用',
+                                    'On'  => '开启',
                                     'Off' => '未启用',
                                 ];
 

@@ -87,6 +87,13 @@ VALUES
 (NULL, 'UC1', 4, 'pages', '自定义页面', 'On', #TIME#, #TIME#),
 (NULL, 'UU1', 5, 'urls', '外部链接', 'On', #TIME#, #TIME#);
 
+INSERT INTO `#DB_PREFIX#Slide_Classify`
+VALUES
+(NULL, 'index', '网站首页', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'news', '新闻中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'job', '招聘中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'product', '产品中心', NULL, 'On', #TIME#, #TIME#);
+
 INSERT INTO `#DB_PREFIX#Menu`
 VALUES
 
@@ -148,6 +155,8 @@ VALUES
 (NULL, 'ASSS2', 2, 'AS1', 'admin', 'UU1', NULL, '添加单页面', 'pages/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS5', 5, 'AS1', 'admin', 'UU1', NULL, '单页面模板文件', 'pages-tpl-file/index', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加模板文件', 'pages-tpl-file/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', 'On', #TIME#, #TIME#),

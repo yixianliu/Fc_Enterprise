@@ -17,8 +17,7 @@ use yii\widgets\ActiveForm;
     <tbody>
     <tr>
 
-        <td><?= $form->field($model, 'slide_id') ?></td>
-        <td><?= $form->field($model, 'page_id') ?></td>
+        <td><?= $form->field($model, 'c_key') ?></td>
         <td><?= $form->field($model, 'path') ?></td>
         <td
         <?=
