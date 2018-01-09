@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\PagesList;
 use Yii;
 use common\models\Pages;
 use common\models\PagesClassifySearch;
@@ -32,14 +33,16 @@ class PagesController extends BaseController
      * Lists all Pages models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new PagesClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
+
+        $result = PagesList::findAll(['is_using' => 'On', 'page_id' => $model->page_id]);
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model'  => $model,
+            'result' => $result,
         ]);
     }
 
@@ -51,76 +54,23 @@ class PagesController extends BaseController
      */
     public function actionView($id)
     {
+
+        $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
+
+        // 判断文件
+        $filename = Yii::getAlias('@frontend') . '/views/pages/' . $model->path;
+
+        if (!file_exists($filename)) {
+            return false;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Pages model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Pages();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
             'model' => $model,
         ]);
     }
 
-    /**
-     * Updates an existing Pages model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
+    public function actionDetails($id)
     {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Pages model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Pages model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Pages the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Pages::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

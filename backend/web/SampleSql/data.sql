@@ -157,6 +157,7 @@ VALUES
 (NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS5', 5, 'AS1', 'admin', 'UU1', NULL, '单页面模板文件', 'pages-tpl-file/index', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加模板文件', 'pages-tpl-file/create', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', 'On', #TIME#, #TIME#),

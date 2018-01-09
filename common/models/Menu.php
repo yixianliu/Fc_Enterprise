@@ -179,9 +179,24 @@ class Menu extends \yii\db\ActiveRecord
                     $custom = Pages::findAll(['is_using' => 'On', 'c_key' => $value['custom_key']]);
 
                     foreach ($custom as $values) {
+
+                        switch ($values['is_type']) {
+
+                            // 列表
+                            default:
+                            case 'list':
+                                $type = 'index';
+                                break;
+
+                            // 详情页
+                            case 'content':
+                                $type = 'view';
+                                break;
+                        }
+
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/pages/index', 'id' => $values['c_key']],
+                            'url'   => ['/pages/' . $type, 'id' => $values['page_id']],
                             'items' => $this->recursionPagesMenu($values),
                         ];
                     }

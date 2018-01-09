@@ -86,21 +86,9 @@ class PagesController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        // 创建文件
-        if (!empty(Yii::$app->request->post('path'))) {
-
-            $filePath = Yii::getAlias('@frontend') . '/views/pages/';
-
-            $filename = $data['SinglePage']['path'] . '.php';
-
-            if (file_exists($filePath . $filename)) {
-                $data = array();
-                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
-            }
-
-            FileHelper::createDirectory($filePath);
-
-            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
+        // 生成 PHP
+        if (!empty($data) && !empty($data['SinglePage']['path'])) {
+            $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
         }
 
         if ($model->load($data) && $model->save()) {
@@ -128,24 +116,12 @@ class PagesController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        // 更改文件
-        if (!empty(Yii::$app->request->post('path'))) {
-
-            $filePath = Yii::getAlias('@frontend') . 'views/pages/';
-
-            $filename = $data['SinglePage']['path'] . '.php';
-
-            if (file_exists($filePath . $filename)) {
-                $data = array();
-                Yii::$app->getSession()->setFlash('error', '文件已经存在 !!');
-            }
-
-            file_put_contents($filePath . $filename, $data['SinglePage']['content']);
-
-            $oldFilename = $filePath . $model->path . '.php';
-
-            if (file_exists($oldFilename)) {
-                unlink($oldFilename);
+        // 生成 PHP
+        if (!empty($data)) {
+            if (!empty($data['SinglePage']['path']) && empty($model->path)) {
+                $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
+            }else {
+                $data['SinglePage']['path'] = $model->path;
             }
         }
 
@@ -228,6 +204,11 @@ class PagesController extends BaseController
         return $result;
     }
 
+    /**
+     * 获取模板文件
+     *
+     * @return array
+     */
     public function getFile()
     {
 
@@ -243,4 +224,39 @@ class PagesController extends BaseController
         return $result;
     }
 
+    /**
+     * 设置单页面文件
+     *
+     * @param $path
+     * @param $id
+     * @return bool
+     * @throws \yii\base\Exception
+     */
+    public function setFile($path, $id)
+    {
+
+        if (empty($path) || empty($id))
+            return false;
+
+        $path = explode(',', $path);
+
+        $dataPath = Yii::getAlias('@backend/web/temp/pages/') . $path[0];
+
+        // 获取模板文件
+        if (!file_exists($dataPath))
+            return false;
+
+        $data = file_get_contents($dataPath);
+
+        // 生成前台模板文件
+        $filePath = Yii::getAlias('@frontend') . '/views/pages/';
+
+        $fileName = $id . '.php';
+
+        FileHelper::createDirectory($filePath);
+
+        file_put_contents($filePath . $fileName, $data);
+
+        return $fileName;
+    }
 }

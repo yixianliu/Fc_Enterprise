@@ -45,7 +45,6 @@ class SinglePage extends \yii\db\ActiveRecord
         return [
             [['page_id', 'name', 'is_using', 'c_key', 'is_type'], 'required'],
             [['content', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['page_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['path'], 'string', 'max' => 255],

@@ -61,6 +61,12 @@ class Slide extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 获取幻灯片数据
+     *
+     * @param $pagekey
+     * @return array|bool
+     */
     public function getData($pagekey)
     {
         if (empty($pagekey))

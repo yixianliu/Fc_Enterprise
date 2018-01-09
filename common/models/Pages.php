@@ -34,9 +34,8 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'c_key', 'name', 'path', 'is_type', 'is_using', 'created_at', 'updated_at'], 'required'],
+            [['page_id', 'c_key', 'name', 'path', 'is_type', 'is_using'], 'required'],
             [['content', 'is_type', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['page_id', 'c_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['path'], 'string', 'max' => 255],

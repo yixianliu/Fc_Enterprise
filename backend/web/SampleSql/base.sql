@@ -681,6 +681,7 @@ CREATE TABLE `#DB_PREFIX#Pages_Tpl_File` (
     `description` TEXT NULL COMMENT '描述',
     `path` VARCHAR(255) NOT NULL COMMENT '文件目录',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `is_position` SET('left', 'right', 'content') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),

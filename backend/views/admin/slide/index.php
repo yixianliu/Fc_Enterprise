@@ -41,6 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $state[ $value['c_key'] ] = $value['name'];
                                 }
 
+                                $data = \common\models\Pages::findAll(['is_using' => 'On']);
+
+                                foreach ($data as $value) {
+                                    $state[ $value['page_id'] ] = $value['name'];
+                                }
+
                                 return $state[ $model->c_key ];
                             },
                         ],

@@ -7,25 +7,63 @@ use yii\widgets\ListView;
 /* @var $searchModel common\models\PagesClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pages';
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="pages-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
 
-    <p>
-        <?= Html::a('Create Pages', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<?= $this->render('../nav'); ?>
 
-    <?=
-    ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-        },
-    ]);
-    ?>
-</div>
+<?=
+$this->render('../../pages/' . $model->path, [
+    'model'  => $model,
+]);
+?>
+
+<?= $this->render('../left'); ?>
+
+<section class="section-wrap-mp pb-50">
+    <div class="container">
+
+        <!-- filter -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portfolio-filter">
+                    <a href="#" class="filter active" data-filter="*">所有</a>
+                    <a href="#" class="filter" data-filter=".web-design">Web Design</a>
+                    <a href="#" class="filter" data-filter=".print">Print</a>
+                    <a href="#" class="filter" data-filter=".branding">Branding</a>
+                    <a href="#" class="filter" data-filter=".mockups">Mockups</a>
+                </div>
+            </div>
+        </div> <!-- end filter -->
+
+        <div class="row">
+
+            <?php foreach ($result as $value): ?>
+
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-9 col-xs-12">
+                <h2>Are you ready to work with us? Let's grow your business.</h2>
+            </div>
+
+            <div class="col-md-3 col-xs-12 cta-button">
+                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
+            </div>
+
+        </div>
+    </div>
+</section> <!-- end call to action -->
+
