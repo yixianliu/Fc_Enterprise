@@ -71,6 +71,10 @@ function recursionMenu($data)
 
                     <p>
                         <?= Html::a('创建菜单', ['create'], ['class' => 'btn btn-success']) ?>
+
+                        <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => 'btn btn-success']) ?>
+
+                        <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <hr/>

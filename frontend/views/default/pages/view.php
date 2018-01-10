@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Pages */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->c_key]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -16,8 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../nav'); ?>
 
-<?=
-$this->render('../../pages/' . $model->path, [
-    'model' => $model,
-]);
-?>
+<?php if (!empty($model->path)): ?>
+    <?=
+    $this->render('../../pages/' . $model->path, [
+        'model' => $model,
+    ]);
+    ?>
+<?php endif; ?>

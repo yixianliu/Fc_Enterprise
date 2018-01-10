@@ -1,9 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -13,24 +10,10 @@ $this->params['breadcrumbs'][] = ['label' => '产品列表', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
+<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
 
-                <?=
-                Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
+<?= $this->render('../nav'); ?>
 
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<!-- Portfolio Single -->
 <section class="section-wrap-mp portfolio-single">
     <div class="container">
         <div class="row">

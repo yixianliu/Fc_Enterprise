@@ -6,12 +6,14 @@
  * Time: 17:04
  */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => $result['parent']['name'], 'url' => ['list', 'id' => $result['parent']['c_key']]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
+<?= $this->render('../slide', ['pagekey' => $result['parent']['page_id']]); ?>
 
 <?= $this->render('../nav'); ?>
+
+

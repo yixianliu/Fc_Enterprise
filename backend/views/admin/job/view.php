@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Job */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Jobs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '招聘中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">

@@ -48,7 +48,6 @@ class Job extends \yii\db\ActiveRecord
         return [
             [['job_id', 'user_id', 'title', 'content', 'is_audit'], 'required'],
             [['content', 'is_audit'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['job_id'], 'string', 'max' => 85],
             [['user_id'], 'string', 'max' => 55],
             [['title', 'path'], 'string', 'max' => 125],
@@ -57,6 +56,7 @@ class Job extends \yii\db\ActiveRecord
             [['job_id'], 'unique'],
             [['title'], 'unique'],
 
+            // 审核
             [['is_audit'], 'default', 'value' => 'Off'],
         ];
     }
@@ -71,8 +71,7 @@ final
             'user_id'    => '发布者 ID',
             'title'      => '招聘标题',
             'content'    => '招聘内容',
-            'keywords'   => '招聘的关键词',
-            'path'       => '招聘的目录',
+            'keywords'   => '招聘键词',
             'images'     => '招聘相关图片',
             'is_audit'   => '是否审核通过',
             'created_at' => '添加数据时间',

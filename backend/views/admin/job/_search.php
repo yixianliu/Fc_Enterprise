@@ -19,15 +19,8 @@ use yii\widgets\ActiveForm;
         <tbody>
         <tr>
             <td><?= $form->field($model, 'title') ?></td>
-
             <td><?= $form->field($model, 'content') ?></td>
-
             <td><?= $form->field($model, 'keywords') ?></td>
-
-            <?php // echo $form->field($model, 'path') ?>
-
-            <?php // echo $form->field($model, 'images') ?>
-
             <td>
                 <?=
                 $form->field($model, 'is_audit')->widget(kartik\select2\Select2::classname(), [

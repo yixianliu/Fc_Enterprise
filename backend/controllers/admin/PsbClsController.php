@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers\admin;
 
 use Yii;
-use common\models\Purchase;
-use common\models\PurchaseSearch;
-use yii\data\ActiveDataProvider;
+use common\models\PsbClassify;
+use common\models\PsbClassifySearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PurchaseController implements the CRUD actions for Purchase model.
+ * PsbClsController implements the CRUD actions for PsbClassify model.
  */
-class PurchaseController extends BaseController
+class PsbClsController extends BaseController
 {
     /**
      * @inheritdoc
@@ -30,61 +30,57 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Lists all Purchase models.
+     * Lists all PsbClassify models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query'      => Purchase::find(),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $searchModel = new PsbClassifySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Purchase model.
+     * Displays a single PsbClassify model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-        $model = Purchase::findOne(['purchase_id' => $id]);
-
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Purchase model.
+     * Creates a new PsbClassify model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Purchase();
+        $model = new PsbClassify();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Purchase model.
+     * Updates an existing PsbClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -92,18 +88,19 @@ class PurchaseController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Purchase model.
+     * Deletes an existing PsbClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -113,18 +110,18 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Finds the Purchase model based on its primary key value.
+     * Finds the PsbClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Purchase the loaded model
+     * @return PsbClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Purchase::findOne($id)) !== null) {
+        if (($model = PsbClassify::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

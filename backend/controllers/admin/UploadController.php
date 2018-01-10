@@ -11,8 +11,7 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Job;
-use common\models\PagesTplFile;
+
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -20,6 +19,9 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\Product;
 use common\models\Slide;
+use common\models\Job;
+use common\models\PagesTplFile;
+use common\models\Purchase;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -63,13 +65,15 @@ class UploadController extends BaseController
                 $model = new Job();
                 break;
 
-                // 单页面
+            // 采购中心
+            case 'purchase':
+                $model = new Purchase();
+                break;
+
+            // 单页面
             case 'pages':
-
                 $model = new PagesTplFile();
-
                 $ext = ['php', 'html', 'txt'];
-
                 break;
 
             default:

@@ -18,8 +18,8 @@ class PurchaseSearch extends Purchase
     public function rules()
     {
         return [
-            [['id', 'num', 'start_at', 'end_at'], 'integer'],
-            [['purchase_id', 'user_id', 'title', 'content', 'path', 'price', 'type', 'is_status', 'is_using'], 'safe'],
+            [['num', 'start_at', 'end_at'], 'integer'],
+            [['purchase_id', 'c_key', 'user_id', 'title', 'content', 'path', 'price', 'is_type', 'is_status', 'is_using'], 'safe'],
         ];
     }
 
@@ -75,7 +75,7 @@ class PurchaseSearch extends Purchase
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'path', $this->path])
             ->andFilterWhere(['like', 'price', $this->price])
-            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'is_type', $this->is_type])
             ->andFilterWhere(['like', 'is_status', $this->is_status])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 

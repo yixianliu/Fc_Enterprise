@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Job */
+/* @var $model common\models\PsbClassify */
 
-$this->title = '发布招聘';
-$this->params['breadcrumbs'][] = ['label' => '招聘中心', 'url' => ['index']];
+$this->title = '添加分类';
+$this->params['breadcrumbs'][] = ['label' => '分类列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

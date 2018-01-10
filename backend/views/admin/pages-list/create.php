@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Purchase */
+/* @var $model common\models\PagesList */
 
-$this->title = '发布采购';
-$this->params['breadcrumbs'][] = ['label' => '采购中心', 'url' => ['index']];
+$this->title = '发布内容';
+$this->params['breadcrumbs'][] = ['label' => '单页面列表数据', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,4 +15,5 @@ $this->params['breadcrumbs'][] = $this->title;
     'model'  => $model,
     'result' => $result,
 ]) ?>
+
 

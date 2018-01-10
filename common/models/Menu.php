@@ -158,7 +158,49 @@ class Menu extends \yii\db\ActiveRecord
                     }
                     break;
 
-                // 新闻
+                // 采购模型
+                case 'purchase':
+
+                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+
+                    foreach ($product as $values) {
+                        $array[] = [
+                            'label' => $values['name'],
+                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'items' => $this->recursionMenu($values),
+                        ];
+                    }
+                    break;
+
+                // 供应模型
+                case 'supply':
+
+                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+
+                    foreach ($product as $values) {
+                        $array[] = [
+                            'label' => $values['name'],
+                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'items' => $this->recursionMenu($values),
+                        ];
+                    }
+                    break;
+
+                // 投标模型
+                case 'bid':
+
+                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+
+                    foreach ($product as $values) {
+                        $array[] = [
+                            'label' => $values['name'],
+                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'items' => $this->recursionMenu($values),
+                        ];
+                    }
+                    break;
+
+                // 新闻模型
                 case 'news':
 
                     $news = NewsClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
@@ -179,24 +221,9 @@ class Menu extends \yii\db\ActiveRecord
                     $custom = Pages::findAll(['is_using' => 'On', 'c_key' => $value['custom_key']]);
 
                     foreach ($custom as $values) {
-
-                        switch ($values['is_type']) {
-
-                            // 列表
-                            default:
-                            case 'list':
-                                $type = 'index';
-                                break;
-
-                            // 详情页
-                            case 'content':
-                                $type = 'view';
-                                break;
-                        }
-
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/pages/' . $type, 'id' => $values['page_id']],
+                            'url'   => ['/pages/' . $this->getPageType($values['is_type']), 'id' => $values['page_id']],
                             'items' => $this->recursionPagesMenu($values),
                         ];
                     }
@@ -213,11 +240,11 @@ class Menu extends \yii\db\ActiveRecord
                     break;
             }
 
-            $customId = empty($value['custom_key']) ? null : ['id' => $value['custom_key']];
+            $customId = empty($value['custom_key']) ? 1 : $value['custom_key'];
 
             $dataMenu[] = [
                 'label' => $value['name'],
-                'url'   => [$value['menuModel']['url_key'] . '/index', $customId],
+                'url'   => [$value['menuModel']['url_key'] . '/index', 'id' => $customId],
                 'items' => $array,
             ];
 
@@ -292,12 +319,38 @@ class Menu extends \yii\db\ActiveRecord
         foreach ($child as $value) {
             $result[] = [
                 'label' => $value['name'],
-                'url'   => ['/pages/view', 'id' => $value['page_id']],
+                'url'   => ['/pages/' . $this->getPageType($value['is_type']), 'id' => $value['page_id']],
                 'items' => $this->recursionPagesMenu($value),
             ];
         }
 
         return $result;
+    }
+
+    /**
+     * 获取单页面类型
+     *
+     * @param $type
+     * @return string
+     */
+    public function getPageType($type)
+    {
+        // 判断类型
+        switch ($type) {
+
+            // 列表
+            default:
+            case 'list':
+                $type = 'list';
+                break;
+
+            // 内容
+            case 'content':
+                $type = 'view';
+                break;
+        }
+
+        return $type;
     }
 
     /**

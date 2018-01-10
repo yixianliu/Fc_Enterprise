@@ -9,7 +9,17 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
+
+$result['classify'] = empty($result['classify']) ? null : $result['classify'];
+
 ?>
+
+<style type="text/css">
+    .preview img {
+        width: 180px;
+        height: 100px;
+    }
+</style>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -22,6 +32,14 @@ use dosamigos\fileupload\FileUploadUI;
             <div class="row">
 
                 <?php $form = ActiveForm::begin(); ?>
+
+                <?=
+                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    'data'    => $result['classify'],
+                    'options' => ['placeholder' => '采购分类...'],
+                ]);
+                ?>
+
 
                 <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
@@ -46,7 +64,7 @@ use dosamigos\fileupload\FileUploadUI;
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase'],
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
                         'accept' => 'file/*'
@@ -86,7 +104,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'path')->textarea(['id' => 'FileContent', 'style' => 'display:none;'])->label(false) ?>
+                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
                 <hr/>
 
@@ -115,7 +133,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]); ?>
 
                 <?=
-                $form->field($model, 'type')->widget(Select2::classname(), [
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
                     'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
                     'options' => ['placeholder' => '采购类型...'],
                 ]);
@@ -136,7 +154,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ?>
 
                 <?=
-                $form->field($model, 'is_send')->widget(Select2::classname(), [
+                $form->field($model, 'is_send_msg')->widget(Select2::classname(), [
                     'data'    => ['On' => '群发供应商', 'Off' => '不群发'],
                     'options' => ['placeholder' => '是否群发...'],
                 ]);

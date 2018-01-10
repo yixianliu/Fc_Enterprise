@@ -37,14 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'num',
                         'unit',
                         [
-                            'attribute' => 'type',
+                            'attribute' => 'is_type',
                             'value'     => function ($model) {
                                 $state = [
                                     'Long'  => '长期采购',
                                     'Short' => '短期采购',
                                 ];
 
-                                return $state[ $model->type ];
+                                return $state[ $model->is_type ];
                             },
                         ],
                         [
@@ -60,6 +60,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_send_msg',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '已启用',

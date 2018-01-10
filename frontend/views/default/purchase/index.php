@@ -1,47 +1,58 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PurchaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Purchases';
+$this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="purchase-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
 
-    <p>
-        <?= Html::a('Create Purchase', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+<?= $this->render('../nav'); ?>
 
-            'id',
-            'purchase_id',
-            'user_id',
-            'title',
-            'content:ntext',
-            // 'path',
-            // 'price',
-            // 'num',
-            // 'unit',
-            // 'type',
-            // 'is_status',
-            // 'start_at',
-            // 'end_at',
-            // 'is_using',
-            // 'created_at',
-            // 'updated_at',
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-</div>
+<section class="section-wrap-mp pb-50">
+    <div class="container">
+        <div class="row">
+
+            <?=
+            ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView'     => '_list',
+                'viewParams'   => [
+                    'fullView' => true,
+                    'context'  => 'main-page',
+                ],
+                'options'      => ['class' => 'works-grid titles'],
+            ]);
+            ?>
+
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-9 col-xs-12">
+                <h2>Are you ready to work with us? Let's grow your business.</h2>
+            </div>
+
+            <div class="col-md-3 col-xs-12 cta-button">
+                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
+            </div>
+
+        </div>
+    </div>
+</section> <!-- end call to action -->

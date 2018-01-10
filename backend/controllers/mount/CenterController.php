@@ -122,6 +122,9 @@ class CenterController extends BaseController
                     'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls', // 单页面分类管理
                     'createDownload', 'updateDownload', 'indexDownload', 'viewDownload', // 下载中心
                     'createDownload-cls', 'updateDownload-cls', 'indexDownload-cls', 'viewDownload-cls', // 下载中心分类
+                    'createPurchase', 'updatePurchase', 'indexPurchase', 'viewPurchase', // 采购
+                    'createSupply', 'updateSupply', 'indexSupply', 'viewSupply', // 供应
+                    'createBid', 'updateBid', 'indexBid', 'viewBid', // 投标
                 ];
 
                 $role = $this->createRole('admin');

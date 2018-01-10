@@ -4,12 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\JobSearch */
+/* @var $searchModel common\models\PagesListSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '招聘列表';
+$this->title = '单页面列表数据';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -25,31 +26,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('发布招聘', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布单页面相关数据', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                GridView::widget([
+                <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'user_id',
-                        'title',
-                        [
-                            'attribute' => 'is_audit',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '审核通过',
-                                    'Off' => '审核未通过',
-                                ];
 
-                                return $state[ $model->is_audit ];
-                            },
-                        ],
+                        'id',
+                        'page_id',
+                        'title',
+                        'content:ntext',
+                        'path',
+                        //'is_using',
+                        //'created_at',
+                        //'updated_at',
+
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]);
-                ?>
+                ]); ?>
 
             </div>
         </div>

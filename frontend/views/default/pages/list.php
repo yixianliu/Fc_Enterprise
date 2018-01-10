@@ -1,8 +1,15 @@
 <?php
+/**
+ * 单页面数据列表
+ *
+ * Created by Yxl.
+ * User: <zccem@163.com>.
+ * Date: 2018/1/10
+ * Time: 17:03
+ */
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\PagesClassifySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->c_key]];
@@ -42,7 +49,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="row">
 
-            <?= $model->content ?>
+            <?php foreach ($result['content'] as $value): ?>
+
+                <div class="col-md-3 col-sm-4 col-xs-6 work-item web-design mockups">
+                    <div class="work-container">
+                        <div class="work-img">
+
+                            <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
+                                <?= Html::img(Url::to('@web/themes/enterprise/img/project_1.jpg'), ['alt' => Html::encode($value['title']), 'class' => '']); ?>
+                            </a>
+
+                        </div>
+                        <div class="work-description">
+                            <h3><a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>"><?= $value['title'] ?></a></h3>
+                            <span><a href="#">Print</a></span>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
 
         </div>
     </div>
@@ -63,4 +88,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </section> <!-- end call to action -->
-

@@ -449,7 +449,6 @@ CREATE TABLE `#DB_PREFIX#Job` (
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
-    `path` VARCHAR(125) NULL COMMENT '招聘文件路径',
     `images` VARCHAR(255) NULL COMMENT '招聘图片',
     `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
     `created_at` INT(11) UNSIGNED NOT NULL,
@@ -494,23 +493,31 @@ CREATE TABLE `#DB_PREFIX#Resume` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 采购 + 供应 + 投标
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
  * 采购
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Purchase`;
 CREATE TABLE `#DB_PREFIX#Purchase` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `purchase_id` VARCHAR(85) NOT NULL COMMENT '采购编号',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `purchase_id` VARCHAR(85) NOT NULL COMMENT '编号',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
-    `title` VARCHAR(125) NOT NULL COMMENT '采购标题',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
-    `path` VARCHAR(125) NULL COMMENT '上传采购文件',
+    `path` VARCHAR(125) NULL COMMENT '上传文件',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
-    `num` INT(11) UNSIGNED NOT NULL COMMENT '采购数量',
+    `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
     `unit` INT(11) UNSIGNED NOT NULL COMMENT '单位',
-    `type` SET('Long', 'Short') NOT NULL COMMENT '采购类型 (分为长期 / 短期)',
+    `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
     `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
     `start_at` INT(11) UNSIGNED NOT NULL COMMENT '起始时间',
     `end_at` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
+    `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
@@ -520,20 +527,98 @@ CREATE TABLE `#DB_PREFIX#Purchase` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
- * 提交报价
+ * 供应
  */
-DROP TABLE IF EXISTS `#DB_PREFIX#Purchase_Offer`;
-CREATE TABLE `#DB_PREFIX#Purchase_Offer` (
+DROP TABLE IF EXISTS `#DB_PREFIX#Supply`;
+CREATE TABLE `#DB_PREFIX#Supply` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `purchase_id` VARCHAR(85) NOT NULL COMMENT '采购编号',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `supply_id` VARCHAR(85) NOT NULL COMMENT '编号',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
+    `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
+    `unit` INT(11) UNSIGNED NOT NULL COMMENT '单位',
+    `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
+    `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
+    `start_at` INT(11) UNSIGNED NOT NULL COMMENT '起始时间',
+    `end_at` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
+    `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`),
+    UNIQUE KEY `supply_id` (`supply_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 投标
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Bid`;
+CREATE TABLE `#DB_PREFIX#Bid` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `supply_id` VARCHAR(85) NOT NULL COMMENT '编号',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
+    `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
+    `unit` INT(11) UNSIGNED NOT NULL COMMENT '单位',
+    `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
+    `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
+    `start_at` INT(11) UNSIGNED NOT NULL COMMENT '起始时间',
+    `end_at` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
+    `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`),
+    UNIQUE KEY `supply_id` (`supply_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 供求 + 采购 + 投标分类
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#PSB_Classify`;
+CREATE TABLE `#DB_PREFIX#PSB_Classify` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 采购或者供应方提交报价
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#SP_Offer`;
+CREATE TABLE `#DB_PREFIX#SP_Offer` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `offer_id` VARCHAR(85) NOT NULL COMMENT '编号',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `price` VARCHAR(85) NOT NULL COMMENT '提交价格',
+    `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `user_id` (`user_id`),
-    UNIQUE KEY `purchase_id` (`purchase_id`)
+    UNIQUE KEY `offer_id` (`offer_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**

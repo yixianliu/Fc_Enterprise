@@ -85,14 +85,20 @@ VALUES
 (NULL, 'UN1', 2, 'news', '新闻中心', 'On', #TIME#, #TIME#),
 (NULL, 'UJ1', 3, 'job', '招聘中心', 'On', #TIME#, #TIME#),
 (NULL, 'UC1', 4, 'pages', '自定义页面', 'On', #TIME#, #TIME#),
-(NULL, 'UU1', 5, 'urls', '外部链接', 'On', #TIME#, #TIME#);
+(NULL, 'UU1', 5, 'urls', '外部链接', 'On', #TIME#, #TIME#),
+(NULL, 'UP2', 6, 'purchase', '采购中心', 'On', #TIME#, #TIME#),
+(NULL, 'US1', 7, 'supply', '供应中心', 'On', #TIME#, #TIME#),
+(NULL, 'UB1', 8, 'bid', '投标中心', 'On', #TIME#, #TIME#);
 
 INSERT INTO `#DB_PREFIX#Slide_Classify`
 VALUES
 (NULL, 'index', '网站首页', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'news', '新闻中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'job', '招聘中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'product', '产品中心', NULL, 'On', #TIME#, #TIME#);
+(NULL, 'product', '产品中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'purchase', '采购中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'supply', '供应中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'bid', '投标中心', NULL, 'On', #TIME#, #TIME#);
 
 INSERT INTO `#DB_PREFIX#Menu`
 VALUES
@@ -141,10 +147,20 @@ VALUES
 (NULL, 'AJ1', 9, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AD1', 11, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AS1', 12, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AP3', 13, 'A3', 'admin', 'UU1', NULL, '采购 + 供求 + 投标管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AC1', 13, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', 'On', #TIME#, #TIME#),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', 'On', #TIME#, #TIME#),
+
+(NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP2', 2, 'AP3', 'admin', 'UU1', NULL, '添加采购', 'purchase/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP3', 3, 'AP3', 'admin', 'UU1', NULL, '供求列表', 'supply/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP4', 4, 'AP3', 'admin', 'UU1', NULL, '添加供求', 'supply/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP5', 5, 'AP3', 'admin', 'UU1', NULL, '投标管理', 'bid/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP6', 6, 'AP3', 'admin', 'UU1', NULL, '添加投标', 'bid/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP7', 7, 'AP3', 'admin', 'UU1', NULL, '相关分类列表', 'psb-cls/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加分类', 'psb-cls/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', 'On', #TIME#, #TIME#),
@@ -157,7 +173,8 @@ VALUES
 (NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS5', 5, 'AS1', 'admin', 'UU1', NULL, '单页面模板文件', 'pages-tpl-file/index', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加模板文件', 'pages-tpl-file/create', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', 'On', #TIME#, #TIME#),

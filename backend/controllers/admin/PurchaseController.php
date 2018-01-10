@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\PsbClassify;
 use common\models\User;
 use Yii;
 use common\models\Purchase;
@@ -115,7 +116,10 @@ class PurchaseController extends BaseController
             }
 
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'classify' => $this->getCls(),
+                ],
             ]);
         }
     }
@@ -147,7 +151,10 @@ class PurchaseController extends BaseController
             }
 
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'classify' => $this->getCls(),
+                ],
             ]);
         }
     }
@@ -181,6 +188,12 @@ class PurchaseController extends BaseController
         }
     }
 
+    /**
+     * 设置时间
+     *
+     * @param $data
+     * @return array|bool
+     */
     public function setDate($data)
     {
         if (empty($data) || !is_array($data)) {
@@ -200,13 +213,19 @@ class PurchaseController extends BaseController
         return $data;
     }
 
+    /**
+     * 群发信息
+     *
+     * @param $data
+     * @return bool
+     */
     public function qSend($data)
     {
 
         // 初始化
         $mobile = null;
 
-        if (empty($data) || $data['Purchase']['is_send'] != 'On') {
+        if (empty($data) || $data['Purchase']['is_send_msg'] != 'On') {
             return false;
         }
 
@@ -226,6 +245,26 @@ class PurchaseController extends BaseController
 //        return Json::encode(Yii::$app->smser->send($mobile, $content));
 
         return true;
+    }
+
+    /**
+     * 获取分类和版块
+     *
+     * @return array
+     */
+    public function getCls()
+    {
+        // 初始化
+        $result = array();
+
+        // 所有版块
+        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase']);
+
+        foreach ($dataCls as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 
 }

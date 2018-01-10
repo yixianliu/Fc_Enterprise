@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Purchase */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Purchases', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '采购中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
@@ -45,8 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         'price',
                         'num',
                         'unit',
-                        'type',
-                        'is_status',
+                        [
+                            'attribute' => 'is_type',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'Long' => '长期采购', 'Short' => '短期采购'
+                                ];
+
+                                return $state[ $model->is_type ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_status',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On' => '采购中', 'Off' => '关闭'
+                                ];
+
+                                return $state[ $model->is_status ];
+                            },
+                        ],
                         [
                             'attribute' => 'start_at',
                             'value'     => function ($model) {

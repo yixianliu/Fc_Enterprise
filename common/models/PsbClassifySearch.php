@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Job;
+use common\models\PsbClassify;
 
 /**
- * JobSearch represents the model behind the search form about `common\models\Job`.
+ * PsbClassifySearch represents the model behind the search form of `common\models\PsbClassify`.
  */
-class JobSearch extends Job
+class PsbClassifySearch extends PsbClassify
 {
     /**
      * @inheritdoc
@@ -18,7 +18,8 @@ class JobSearch extends Job
     public function rules()
     {
         return [
-            [['job_id', 'user_id', 'title', 'content', 'keywords', 'images', 'is_audit'], 'safe'],
+            [['sort_id'], 'integer'],
+            [['c_key', 'name', 'description', 'keywords', 'json_data', 'parent_id', 'is_type', 'is_using'], 'safe'],
         ];
     }
 
@@ -38,18 +39,15 @@ class JobSearch extends Job
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $id = null)
+    public function search($params)
     {
-
-        if (empty($id)) {
-            $query = Job::find();
-        } else {
-            $query = Job::find()->where(['user_id' => $id]);
-        }
+        $query = PsbClassify::find();
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider(['query' => $query]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
         $this->load($params);
 
@@ -61,18 +59,20 @@ class JobSearch extends Job
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id'         => $this->id,
+            'id' => $this->id,
+            'sort_id' => $this->sort_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'job_id', $this->job_id])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content])
+        $query->andFilterWhere(['like', 'c_key', $this->c_key])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'path', $this->path])
-            ->andFilterWhere(['like', 'images', $this->images])
-            ->andFilterWhere(['like', 'is_audit', $this->is_audit]);
+            ->andFilterWhere(['like', 'json_data', $this->json_data])
+            ->andFilterWhere(['like', 'parent_id', $this->parent_id])
+            ->andFilterWhere(['like', 'is_type', $this->is_type])
+            ->andFilterWhere(['like', 'is_using', $this->is_using]);
 
         return $dataProvider;
     }

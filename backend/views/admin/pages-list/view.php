@@ -4,22 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Menu */
+/* @var $model common\models\PagesList */
 
-$this->title = '菜单 : ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => '菜单中心', 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => '单页面列表数据', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
-
         <header class="panel_header">
             <h2 class="title pull-left">
                 <?= Html::encode($this->title) ?>
             </h2>
         </header>
-
         <div class="content-body">
             <div class="row">
 
@@ -28,32 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
-                            'confirm' => '是否删除这条记录?',
+                            'confirm' => '是否删除这条数据?',
                             'method'  => 'post',
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                DetailView::widget([
+                <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'm_key',
-                        'sort_id',
-                        [
-                            'attribute' => 'parent_id',
-                            'value'     => function ($model) {
-
-                                $data = \common\models\Menu::findOne(['m_key' => $model->parent_id]);
-
-                                return $data->name;
-                            },
-                        ],
-                        'rp_key',
-                        'model_key',
-                        'name',
+                        'id',
+                        'page_id',
+                        'title',
+                        'content:ntext',
+                        'path',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -68,20 +55,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
+                                return date('Y - m -d , H:i:s', $model->created_at);
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->updated_at);
+                                return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
                     ],
-                ]);
-                ?>
+                ]) ?>
 
             </div>
         </div>
     </section>
 </div>
+

@@ -82,16 +82,7 @@ class JobController extends BaseController
 
         $model->user_id = '网站管理员';
 
-        $data = Yii::$app->request->post();
-
-        if (!empty($data) && $data['Job']['is_audit'] == 'On') {
-
-            $data['Job']['path'] = Yii::getAlias('@frontend/web/job') . DIRECTORY_SEPARATOR . $model->job_id;
-
-            FileHelper::createDirectory($data['Job']['path']);
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

@@ -1,18 +1,19 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers\admin;
 
+use common\models\Pages;
 use Yii;
-use common\models\Purchase;
-use common\models\PurchaseSearch;
-use yii\data\ActiveDataProvider;
+use common\models\PagesList;
+use common\models\PagesListSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PurchaseController implements the CRUD actions for Purchase model.
+ * PagesListController implements the CRUD actions for PagesList model.
  */
-class PurchaseController extends BaseController
+class PagesListController extends BaseController
 {
     /**
      * @inheritdoc
@@ -21,7 +22,7 @@ class PurchaseController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -30,61 +31,58 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Lists all Purchase models.
+     * Lists all PagesList models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query'      => Purchase::find(),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $searchModel = new PagesListSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Purchase model.
+     * Displays a single PagesList model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-        $model = Purchase::findOne(['purchase_id' => $id]);
-
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Purchase model.
+     * Creates a new PagesList model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Purchase();
+        $model = new PagesList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model'  => $model,
+            'result' => $this->getPage(),
+        ]);
     }
 
     /**
-     * Updates an existing Purchase model.
+     * Updates an existing PagesList model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -92,18 +90,20 @@ class PurchaseController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model'  => $model,
+            'result' => $this->getPage(),
+        ]);
     }
 
     /**
-     * Deletes an existing Purchase model.
+     * Deletes an existing PagesList model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -113,18 +113,39 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Finds the Purchase model based on its primary key value.
+     * Finds the PagesList model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Purchase the loaded model
+     * @return PagesList the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Purchase::findOne($id)) !== null) {
+        if (($model = PagesList::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * 获取页面
+     *
+     * @return array
+     */
+    public function getPage()
+    {
+        // 初始化
+        $result = array();
+
+        $dataPage = Pages::findAll(['is_using' => 'On', 'is_type' => 'list']);
+
+        $result['page'] = null;
+
+        foreach ($dataPage as $value) {
+            $result['page'][ $value['page_id'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }

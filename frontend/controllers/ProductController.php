@@ -57,8 +57,11 @@ class ProductController extends BaseController
      */
     public function actionView($id)
     {
+
+        $model = Product::findOne(['id' => $id]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

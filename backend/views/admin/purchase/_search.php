@@ -19,20 +19,12 @@ use kartik\select2\Select2;
     <tbody>
     <tr>
         <td><?= $form->field($model, 'title') ?></td>
-
         <td><?= $form->field($model, 'content') ?></td>
-
-        <?php // echo $form->field($model, 'path') ?>
-
         <td><?= $form->field($model, 'price') ?></td>
-
         <td><?= $form->field($model, 'num') ?></td>
-
-        <?php // echo $form->field($model, 'unit') ?>
-
         <td>
             <?=
-            $form->field($model, 'type')->widget(Select2::classname(), [
+            $form->field($model, 'is_type')->widget(Select2::classname(), [
                 'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
                 'options' => ['placeholder' => '采购类型...'],
             ]);

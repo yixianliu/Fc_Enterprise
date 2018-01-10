@@ -3,7 +3,6 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
@@ -13,15 +12,17 @@ $this->title = '产品列表';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+
+
+<?= $this->render('../slide', ['pagekey' => 'product']); ?>
+
+<?= $this->render('../nav'); ?>
+
 <style type="text/css">
     .summary {
         display: none;
     }
 </style>
-
-<?= $this->render('../slide', ['pagekey' => 'product']); ?>
-
-<?= $this->render('../nav'); ?>
 
 <section class="section-wrap-mp pb-50">
     <div class="container">

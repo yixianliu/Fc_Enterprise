@@ -49,10 +49,10 @@ use dosamigos\fileupload\FileUploadUI;
                     FileUploadUI::widget([
                         'model'         => $model,
                         'attribute'     => 'images',
-                        'url'           => ['admin/upload/image-upload', 'id' => $model->job_id, 'type' => 'product'],
+                        'url'           => ['admin/upload/image-upload', 'id' => $model->job_id, 'type' => 'job'],
                         'gallery'       => false,
                         'fieldOptions'  => [
-                            'accept' => 'file/*'
+                            'accept' => 'image/*'
                         ],
                         'clientOptions' => [
                             'maxFileSize'      => 2000000,
@@ -95,8 +95,8 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?=
                     $form->field($model, 'is_audit')->widget(Select2::classname(), [
-                        'data'    => ['On' => '审核', 'Off' => '审核不过'],
-                        'options' => ['placeholder' => '是否启用...'],
+                        'data'          => ['On' => '审核', 'Off' => '审核不过'],
+                        'options'       => ['placeholder' => '是否启用...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
