@@ -4,24 +4,28 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PurchaseSearch */
+/* @var $model common\models\SupplySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="purchase-search">
+<div class="supply-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'purchase_id') ?>
+    <?= $form->field($model, 'id') ?>
+
+    <?= $form->field($model, 'c_key') ?>
+
+    <?= $form->field($model, 'supply_id') ?>
 
     <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'content') ?>
+    <?php // echo $form->field($model, 'content') ?>
 
     <?php // echo $form->field($model, 'path') ?>
 
@@ -31,13 +35,15 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'unit') ?>
 
-    <?php // echo $form->field($model, 'type') ?>
+    <?php // echo $form->field($model, 'is_type') ?>
 
     <?php // echo $form->field($model, 'is_status') ?>
 
     <?php // echo $form->field($model, 'start_at') ?>
 
     <?php // echo $form->field($model, 'end_at') ?>
+
+    <?php // echo $form->field($model, 'is_send_msg') ?>
 
     <?php // echo $form->field($model, 'is_using') ?>
 

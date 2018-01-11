@@ -7,19 +7,9 @@ use dosamigos\datepicker\DatePicker;
 use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Purchase */
+/* @var $model common\models\Supply */
 /* @var $form yii\widgets\ActiveForm */
-
-$result['classify'] = empty($result['classify']) ? null : $result['classify'];
-
 ?>
-
-<style type="text/css">
-    .preview img {
-        width: 180px;
-        height: 100px;
-    }
-</style>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -36,11 +26,11 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
                 <?=
                 $form->field($model, 'c_key')->widget(Select2::classname(), [
                     'data'    => $result['classify'],
-                    'options' => ['placeholder' => '采购分类...'],
+                    'options' => ['placeholder' => '供应分类...'],
                 ]);
                 ?>
 
-                <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
+                <?= $form->field($model, 'supply_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -63,7 +53,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->supply_id, 'type' => 'supply', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
                         'accept' => 'file/*'
@@ -133,15 +123,15 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
-                    'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
-                    'options' => ['placeholder' => '采购类型...'],
+                    'data'    => ['Long' => '长期供应', 'Short' => '短期供应'],
+                    'options' => ['placeholder' => '供应类型...'],
                 ]);
                 ?>
 
                 <?=
                 $form->field($model, 'is_status')->widget(Select2::classname(), [
-                    'data'    => ['On' => '采购中', 'Off' => '关闭'],
-                    'options' => ['placeholder' => '采购状态...'],
+                    'data'    => ['On' => '供应中', 'Off' => '关闭'],
+                    'options' => ['placeholder' => '供应状态...'],
                 ]);
                 ?>
 
@@ -161,7 +151,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 
                 <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '发布采购信息' : '更新采购信息', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '发布供应信息' : '更新供应信息', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 
@@ -172,7 +162,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'purchase']); ?>
+        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'supply']); ?>
 
     </section>
 

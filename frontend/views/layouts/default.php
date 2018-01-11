@@ -28,9 +28,7 @@ $this->beginPage();
 <html lang="en">
 <head>
 
-    <title><?= Html::encode($this->title) ?></title>
-
-    <?= ConfList::widget(); ?>
+    <?= ConfList::widget(['config' => $this->title]); ?>
 
     <link rel="shortcut icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/favicon.ico">
     <link rel="apple-touch-icon" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon.png">
@@ -38,12 +36,6 @@ $this->beginPage();
     <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon-114x114.png">
 
     <?php $this->head() ?>
-
-    <style type="text/css">
-        *, body, html, a, input, .btn, h5, p {
-            font-family: 'Microsoft YaHei';
-        }
-    </style>
 
 </head>
 

@@ -26,9 +26,7 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-    <?= ConfList::widget(); ?>
-
-    <title><?= Html::encode($this->title) ?> - 管理中心</title>
+    <?= ConfList::widget(['config' => $this->title]); ?>
 
     <?php $this->head() ?>
 

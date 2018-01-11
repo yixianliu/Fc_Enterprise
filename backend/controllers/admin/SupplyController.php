@@ -1,19 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers\admin;
 
-use common\models\PsbClassify;
 use Yii;
-use common\models\Purchase;
-use common\models\PurchaseSearch;
-use yii\data\ActiveDataProvider;
+use common\models\Supply;
+use common\models\SupplySearch;
+use common\models\PsbClassify;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PurchaseController implements the CRUD actions for Purchase model.
+ * SupplyController implements the CRUD actions for Supply model.
  */
-class PurchaseController extends BaseController
+class SupplyController extends BaseController
 {
     /**
      * @inheritdoc
@@ -31,66 +30,64 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Lists all Purchase models.
+     * Lists all Supply models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query'      => Purchase::find(),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-
-        $result['classify'] = array();
-
-        $result['classify'] = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase', 'parent_id' => 'P0']);
+        $searchModel = new SupplySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'result' => $result,
         ]);
     }
 
     /**
-     * Displays a single Purchase model.
+     * Displays a single Supply model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-        $model = Purchase::findOne(['purchase_id' => $id]);
-
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Purchase model.
+     * Creates a new Supply model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Purchase();
+        $model = new Supply();
+
+        $model->supply_id = time() . '_' . rand(0000, 9999);
+
+        $model->user_id = '网站管理员';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'result' => [
+                'classify' => $this->getCls(),
+            ],
+        ]);
     }
 
     /**
-     * Updates an existing Purchase model.
+     * Updates an existing Supply model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -98,18 +95,22 @@ class PurchaseController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'result' => [
+                'classify' => $this->getCls(),
+            ],
+        ]);
     }
 
     /**
-     * Deletes an existing Purchase model.
+     * Deletes an existing Supply model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -119,18 +120,38 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * Finds the Purchase model based on its primary key value.
+     * Finds the Supply model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Purchase the loaded model
+     * @return Supply the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Purchase::findOne($id)) !== null) {
+        if (($model = Supply::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * 获取分类和版块
+     *
+     * @return array
+     */
+    public function getCls()
+    {
+        // 初始化
+        $result = array();
+
+        // 所有版块
+        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply']);
+
+        foreach ($dataCls as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }

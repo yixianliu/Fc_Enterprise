@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /* @var $model common\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '产品列表', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -39,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         </a>
                     </div>
 
-                </div> <!-- end owl carousel -->
-            </div> <!-- end slider -->
+                </div>
+            </div>
 
             <div class="col-md-4">
                 <div class="portfolio-description">

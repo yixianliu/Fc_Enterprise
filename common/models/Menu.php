@@ -161,12 +161,12 @@ class Menu extends \yii\db\ActiveRecord
                 // 采购模型
                 case 'purchase':
 
-                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+                    $purchase = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase']);
 
-                    foreach ($product as $values) {
+                    foreach ($purchase as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/psb-cls/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }
@@ -175,12 +175,12 @@ class Menu extends \yii\db\ActiveRecord
                 // 供应模型
                 case 'supply':
 
-                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+                    $product = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply']);
 
                     foreach ($product as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/psb-cls/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }

@@ -1,5 +1,49 @@
 // Bootstrap 991px breakpoint
-@media (max-width:991px){.navbar-header{float:none}.navbar-left,.navbar-nav,.navbar-right{float:none!important}.navbar-toggle{display:block}.navbar-collapse{border-top:1px solid transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.navbar-fixed-top{top:0;border-width:0 0 1px}.navbar-collapse.collapse{display:none!important}.navbar-nav{margin-top:7.5px}.navbar-nav>li{float:none}.navbar-nav>li>a{padding-top:10px;padding-bottom:10px}.collapse.in{display:block!important}.navbar-nav .open .dropdown-menu{position:static;float:none;width:auto;margin-top:0;background-color:transparent;border:0;-webkit-box-shadow:none;box-shadow:none}}
+@media (max-width: 991px) {
+  .navbar-header {
+    float: none
+  }
+  .navbar-left, .navbar-nav, .navbar-right {
+    float: none !important
+  }
+  .navbar-toggle {
+    display: block
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1)
+  }
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px
+  }
+  .navbar-collapse.collapse {
+    display: none !important
+  }
+  .navbar-nav {
+    margin-top: 7.5px
+  }
+  .navbar-nav > li {
+    float: none
+  }
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px
+  }
+  .collapse.in {
+    display: block !important
+  }
+  .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none
+  }
+}
 
 /*-------------------------------------------------------*/
 /* Navigation Onepage
@@ -38,13 +82,13 @@
 }
 
 .navigation-overlay {
-  background-color: rgba(17,17,17,.5);
+  background-color: rgba(17, 17, 17, .5);
   width: 100%;
   line-height: 0;
   @include transition ($all);
 
   &.sticky {
-    background-color: rgba(17,17,17,1);
+    background-color: rgba(17, 17, 17, 1);
     visibility: visible;
     opacity: 1;
   }
@@ -90,7 +134,6 @@
     border-color: $main-color;
   }
 }
-
 
 .logo-container {
   padding: 0 15px;
@@ -150,12 +193,11 @@
   border-color: #f2f2f2;
 }
 
-
 @media (max-width: 991px) {
 
   .navigation-overlay,
   .navigation-overlay.sticky {
-    background-color: rgba(17,17,17,.9);
+    background-color: rgba(17, 17, 17, .9);
   }
 
   .nav-wrap {
@@ -167,7 +209,7 @@
   .nav-type-1 .container-fluid {
     padding: 0 15px;
   }
-  
+
   .navbar-header {
     width: 100%;
     padding-right: 0;
@@ -194,7 +236,6 @@
 
 }
 
-
 /* Navigation Toggle
 -------------------------------------------------------*/
 
@@ -218,9 +259,8 @@
   &:hover .icon-bar {
     background-color: #f2f2f2;
   }
-  
-}
 
+}
 
 /*Go to Top*/
 
@@ -239,7 +279,7 @@
   @include transition (all 1s ease-in-out);
   background-color: #fff;
   text-decoration: none;
-  box-shadow: 1px 1.732px 12px 0px rgba( 0, 0, 0, .14 ), 1px 1.732px 3px 0px rgba( 0, 0, 0, .12 );
+  box-shadow: 1px 1.732px 12px 0px rgba(0, 0, 0, .14), 1px 1.732px 3px 0px rgba(0, 0, 0, .12);
 
   & i {
     @include transition (all 1s ease-in-out);
@@ -264,7 +304,6 @@
     color: #fff;
   }
 }
-
 
 /*-------------------------------------------------------*/
 /* Navigation Multi-Page
@@ -314,7 +353,7 @@
     width: 100%;
     height: 60px;
     top: 0;
-    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
     z-index: 1009;
   }
 
@@ -331,7 +370,6 @@
     line-height: 60px;
   }
 }
-
 
 .navbar-nav .dropdown-menu {
   left: 0;
@@ -351,7 +389,7 @@
   border-right: 1px solid #ebebeb;
   border-bottom: none;
   @include border-radius(0);
-  @include box-shadow (0 2px 4px rgba(0,0,0,.05));
+  @include box-shadow (0 2px 4px rgba(0, 0, 0, .05));
 
   & > li > a {
     padding: 10px 20px;
@@ -386,7 +424,7 @@
   color: $text-color;
 }
 
-.dropdown-menu, 
+.dropdown-menu,
 .dropdown-submenu > .dropdown-menu {
   display: block;
   visibility: hidden;
@@ -413,7 +451,6 @@
     margin-top: -2px;
   }
 }
-
 
 /* Menu Search
 -------------------------------------------------------*/
@@ -485,7 +522,6 @@
   display: none;
 }
 
-
 /*-------------------------------------------------------*/
 /* Navigation Portfolio
 /*-------------------------------------------------------*/
@@ -525,7 +561,7 @@
 
 .fs-menu {
   position: fixed;
-  background-color: rgba(12,12,12, 0.95);
+  background-color: rgba(12, 12, 12, 0.95);
   top: 0;
   left: 0;
   width: 100%;
@@ -541,7 +577,7 @@
     z-index: 200;
     @include transition (all .2s linear);
   }
-      
+
   &.open li {
     -webkit-animation: fadeInUp .35s ease forwards;
     -moz-animation: fadeInUp .35s ease forwards;
@@ -554,15 +590,26 @@
     -o-animation-delay: .10s;
     animation-delay: .10s;
   }
-   
-  &.open li:nth-of-type(2) { animation-delay: .15s; }
-  &.open li:nth-of-type(3) { animation-delay: .20s; }
-  &.open li:nth-of-type(4) { animation-delay: .25s; }
-  &.open li:nth-of-type(5) { animation-delay: .30s; }
-  &.open li:nth-of-type(6) { animation-delay: .35s; }
-  &.open li:nth-of-type(7) { animation-delay: .40s; }
-}
 
+  &.open li:nth-of-type(2) {
+    animation-delay: .15s;
+  }
+  &.open li:nth-of-type(3) {
+    animation-delay: .20s;
+  }
+  &.open li:nth-of-type(4) {
+    animation-delay: .25s;
+  }
+  &.open li:nth-of-type(5) {
+    animation-delay: .30s;
+  }
+  &.open li:nth-of-type(6) {
+    animation-delay: .35s;
+  }
+  &.open li:nth-of-type(7) {
+    animation-delay: .40s;
+  }
+}
 
 .overlay-menu {
   position: relative;
@@ -578,7 +625,7 @@
     position: relative;
     height: 100%;
   }
-      
+
   & ul li {
     display: block;
     position: relative;
@@ -606,8 +653,16 @@
   }
 }
 
-@keyframes fadeInUp { 0% { opacity: 0; bottom: 20%; } 100% { opacity: 1; bottom: 0; }}
-
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    bottom: 20%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}
 
 /* Nav icon */
 
@@ -673,7 +728,6 @@
   }
 }
 
-
 /*-------------------------------------------------------*/
 /* Navigation Leftside
 /*-------------------------------------------------------*/
@@ -726,7 +780,7 @@
   }
 
   & .navbar {
-    min-height: 100%; 
+    min-height: 100%;
   }
 
   & .logo-container {

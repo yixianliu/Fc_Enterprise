@@ -58,7 +58,8 @@ class Purchase extends \yii\db\ActiveRecord
             [['content', 'is_type', 'is_status', 'is_using', 'unit', 'path'], 'string'],
             [['num'], 'integer'],
             [['purchase_id', 'user_id', 'price'], 'string', 'max' => 85],
-            [['title', 'path'], 'string', 'max' => 125],
+            [['title',], 'string', 'max' => 125],
+            [['path',], 'string', 'max' => 1500],
             [['purchase_id'], 'unique'],
 
             // 默认

@@ -65,14 +65,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
 
-        <br/><br/><br/>
+        <br/><br/>
 
         <div class="row">
             <div class="col-md-12">
                 <?= $model->content ?>
             </div>
-
         </div>
+
+        <br/>
+        <br/>
+
+        <?= $this->render('../file', ['img' => $model->path, 'type' => 'purchase']); ?>
+
     </div>
 </section>
 
@@ -82,10 +87,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <hr/>
 
         <h4 class="heading-inline">推荐产品</h4>
+
         <div class="customNavigation right">
             <a class="btn prev"><i class="fa fa-angle-left"></i></a>
             <a class="btn next"><i class="fa fa-angle-right"></i></a>
         </div>
+
         <div class="row mt-20">
 
             <div id="owl-related-works" class="owl-carousel owl-theme">

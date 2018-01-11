@@ -56,7 +56,7 @@ use kartik\select2\Select2;
 
                         <?= Html::submitButton($model->isNewRecord ? '添加网站配置' : '更新网站配置', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('返回列表', ['conf'], ['class' => 'btn btn-primary']) ?>
 
                     </div>
 

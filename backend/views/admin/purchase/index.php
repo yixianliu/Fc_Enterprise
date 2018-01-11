@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\PurchaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '采购需求列表';
+$this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('发布采购', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布采购信息', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?= GridView::widget([

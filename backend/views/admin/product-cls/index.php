@@ -28,7 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr />
 
                 <p>
-                    <?= Html::a('创建产品分类', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('添加产品分类', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('添加产品', ['admin/product/create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?=

@@ -21,12 +21,10 @@ $this->beginPage();
 ?>
 
 <!DOCTYPE html>
-<html class=" ">
+<html lang="zh-CN">
 <head>
 
-    <?= ConfList::widget(); ?>
-
-    <title>登录 - <?= Yii::$app->params['Conf']['NAME'] ?> - <?= Yii::$app->params['Conf']['TITLE'] ?></title>
+    <?= ConfList::widget(['config' => '登录']); ?>
 
     <?php $this->head() ?>
 

@@ -18,6 +18,8 @@ use common\models\Conf;
 class ConfList extends InputWidget
 {
 
+    public $config = array();
+
     public function init()
     {
         return;
@@ -33,6 +35,8 @@ class ConfList extends InputWidget
 
         // 初始化
         $result = array();
+
+        $result['title'] = $this->config;
 
         $confData = Conf::findByData('On');
 

@@ -17,7 +17,6 @@
 
 }
 
-
 @media (max-width: 991px) {
 
   .section-wrap,
@@ -121,7 +120,7 @@
     padding: 0;
   }
 
-  .dropdown-menu, 
+  .dropdown-menu,
   .dropdown-submenu > .dropdown-menu {
     display: none;
     opacity: 1;
@@ -152,7 +151,7 @@
   }
 
   .navbar .navbar-collapse.in .navbar-nav .dropdown > a:after,
-  .dropdown-submenu > a:after{
+  .dropdown-submenu > a:after {
     font-family: "FontAwesome";
     position: absolute;
     content: "\f107";
@@ -163,7 +162,7 @@
   .navbar-nav .open .dropdown-menu > li > a {
     color: #7a7a7a;
   }
-  
+
   .navbar-nav .open .dropdown-menu > li > a:focus {
     background-color: transparent;
   }
@@ -225,7 +224,7 @@
   }
 
   .about-me .info {
-    padding-left: 0; 
+    padding-left: 0;
   }
 
   .content-wrap {
@@ -266,19 +265,18 @@
 
 }
 
-
 @media (max-width: 767px) {
-  
+
   .section-wrap {
     padding: 80px 0;
   }
-  
+
   .intro-heading {
     font-size: 22px
   }
 
   .heading-frame {
-    padding: 24px 30px; 
+    padding: 24px 30px;
   }
 
   .grid-3-col.grid-gutter .work-item {
@@ -395,7 +393,6 @@
 
 }
 
-
 @media (max-width: 640px) {
 
   .overlay-menu ul li a {
@@ -411,9 +408,8 @@
   }
 }
 
-
 @media (max-width: 480px) {
-    
+
   .entry-comments .comment-avatar {
     width: 60px;
   }
@@ -446,7 +442,6 @@
   }
 
 }
-
 
 @media (max-width: 380px) {
 
