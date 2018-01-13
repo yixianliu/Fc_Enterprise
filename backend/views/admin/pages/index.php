@@ -1,7 +1,7 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\SinglePageSearch */
@@ -9,7 +9,47 @@ use yii\grid\GridView;
 
 $this->title = '单页面列表';
 $this->params['breadcrumbs'][] = $this->title;
+
+/**
+ * 递归单页面
+ *
+ * @param $data
+ * @return array|void
+ */
+function recursionPages($data)
+{
+    if (empty($data))
+        return;
+
+    $html = null;
+
+    $html .= '<ul class="">';
+    foreach ($data as $values) {
+
+        $html .= '<li class="">';
+        $html .= '    <div class="uk-nestable-item">▸';
+        $html .= $values['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $values['id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $values['c_key']], ['class' => "btn btn-primary"]);
+        $html .= '    </div>';
+
+        if (!empty($values['child'])) {
+            foreach ($values['child'] as $value) {
+                $html .= '    <ul class="">';
+                $html .= recursionPages($value['child']);
+                $html .= '    </ul>';
+            }
+        }
+        $html .= '</li>';
+    }
+    $html .= '</ul>';
+
+    return $html;
+}
+
 ?>
+
+<?php $this->registerCssFile('@web/themes/assets/plugins/uikit/css/uikit.min.css'); ?>
+<?php $this->registerCssFile('@web/themes/assets/plugins/uikit/css/components/nestable.min.css'); ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -20,8 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
                 <hr/>
 
                 <p>
@@ -30,47 +68,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('发布单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'name',
-                        [
-                            'attribute' => 'c_key',
-                            'value'     => function ($model) {
+                <hr/>
 
-                                $data = \common\models\PagesClassify::findOne(['c_key' => $model->c_key]);
+                <ul class="uk-nestable"
+                    <?php foreach ($result as $value): ?>
+                        <li>
 
-                                return $data->name;
-                            },
-                        ],
-                        [
-                            'attribute' => 'is_type',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'list'    => '列表内容类型',
-                                    'content' => '内容详情类型',
-                                ];
+                            <a class="btn btn-primary" href="<?= Url::to(['admin/menu/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
 
-                                return $state[ $model->is_type ];
-                            },
-                        ],
-                        [
-                            'attribute' => 'is_using',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '开启',
-                                    'Off' => '未启用',
-                                ];
+                            <?php if (!empty($value['child'])): ?>
+                                <?= recursionPages($value['child']) ?>
+                            <?php endif; ?>
 
-                                return $state[ $model->is_using ];
-                            },
-                        ],
-                        ['class' => 'yii\grid\ActionColumn'],
-                    ],
-                ]);
-                ?>
+                        </li>
+
+                    <?php endforeach; ?>
+                </ul>
+
 
             </div>
         </div>

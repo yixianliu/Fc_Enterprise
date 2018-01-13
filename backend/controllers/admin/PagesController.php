@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Pages;
 use common\models\PagesTplFile;
 use Yii;
 use common\models\SinglePage;
@@ -52,13 +53,58 @@ class PagesController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new SinglePageSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // 初始化
+        $result = array();
+
+        $dataPages = PagesClassify::findAll(['parent_id' => 'C0']);
+
+        foreach ($dataPages as $key => $value) {
+            $result[ $key ] = $value->toArray();
+            $result[ $key ]['child'] = $this->recursionPages($value);
+        }
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
-            'dataProvider' => $dataProvider,
+            'result' => $result,
         ]);
+    }
+
+    /**
+     * 循环单页面
+     *
+     * @param $data
+     * @return array
+     */
+    public function recursionPages($data)
+    {
+
+        if (empty($data))
+            return;
+
+        // 初始化
+        $result = array();
+
+        $dataPages = Pages::findAll(['c_key' => $data['c_key']]);
+
+        if (!empty($dataPages)) {
+
+            foreach ($dataPages as $key => $value) {
+
+                $result[ $key ] = $value->toArray();
+                $result[ $key ]['child'] = PagesClassify::findAll(['parent_id' => $value['c_key']]);
+
+                if (empty($result[ $key ]['child']))
+                    continue;
+
+                foreach ($result[ $key ]['child'] as $keys => $values) {
+                    $result[ $key ]['child'][ $keys ] = $values->toArray();
+                    $result[ $key ]['child'][ $keys ]['child'] = $this->recursionPages($values);
+                }
+
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -120,7 +166,7 @@ class PagesController extends BaseController
         if (!empty($data)) {
             if (!empty($data['SinglePage']['path']) && empty($model->path)) {
                 $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
-            }else {
+            } else {
                 $data['SinglePage']['path'] = $model->path;
             }
         }

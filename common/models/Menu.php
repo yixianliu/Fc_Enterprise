@@ -166,7 +166,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($purchase as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/psb-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/psb-cls/index', 'id' => $values['c_key'], 'type' => 'purchase'],
                             'items' => $this->recursionMenu($values),
                         ];
                     }
@@ -180,7 +180,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($product as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/psb-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/supply/cls', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }

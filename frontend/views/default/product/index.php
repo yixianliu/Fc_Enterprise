@@ -27,18 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="section-wrap-mp pb-50">
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="portfolio-filter">
-                    <a href="#" class="filter active" data-filter="*">所有</a>
-
-                    <?php foreach ($result['classify'] as $value): ?>
-                        <a href="<?= Url::to(['product-cls/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
-                    <?php endforeach; ?>
-
-                </div>
-            </div>
-        </div>
+        <?= $this->render('../cls', ['result' => $result, 'type' => 'product']); ?>
 
         <div class="row">
 

@@ -70,7 +70,6 @@ class JobSearch extends Job
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'path', $this->path])
             ->andFilterWhere(['like', 'images', $this->images])
             ->andFilterWhere(['like', 'is_audit', $this->is_audit]);
 

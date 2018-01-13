@@ -33,10 +33,13 @@ class ProductController extends BaseController
      * Lists all Product models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null)
     {
+
+        $model = empty($type) ? Product::find() : Product::find()->where(['c_key' => $type]);
+
         $dataProvider = new ActiveDataProvider([
-            'query'      => Product::find(),
+            'query'      => $model,
             'pagination' => [
                 'pageSize' => 20,
             ],
@@ -46,7 +49,7 @@ class ProductController extends BaseController
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'result' => $result,
+            'result'       => $result,
         ]);
     }
 

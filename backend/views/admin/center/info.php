@@ -1,15 +1,15 @@
 <?php
 /**
  *
- * 首页模板
+ * 网站配置信息
  *
  * Created by Yxl.
  * User: <zccem@163.com>.
- * Date: 2017/10/13
- * Time: 9:55
+ * Date: 2018/1/12
+ * Time: 10:33
  */
 
-$this->title = '管理中心';
+$this->title = '网站档案';
 
 use yii\helpers\Html;
 

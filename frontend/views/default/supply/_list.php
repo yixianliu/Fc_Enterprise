@@ -19,7 +19,7 @@ use yii\helpers\HtmlPurifier;
 
         <div class="work-description">
             <h3>
-                <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?>
+                <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->supply_id]) ?>
             </h3>
         </div>
     </div>

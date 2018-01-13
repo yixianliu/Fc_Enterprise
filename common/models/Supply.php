@@ -77,4 +77,12 @@ class Supply extends \yii\db\ActiveRecord
             'updated_at'  => '更新数据时间',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPsb()
+    {
+        return $this->hasMany(PsbClassify::className(), ['c_key' => 'c_key']);
+    }
 }

@@ -34,16 +34,17 @@ class PurchaseController extends BaseController
      * Lists all Purchase models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null)
     {
+
+        $model = empty($type) ? Purchase::find() : Purchase::find()->where(['c_key' => $type]);
+
         $dataProvider = new ActiveDataProvider([
-            'query'      => Purchase::find(),
+            'query'      => $model,
             'pagination' => [
                 'pageSize' => 20,
             ],
         ]);
-
-        $result['classify'] = array();
 
         $result['classify'] = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase', 'parent_id' => 'P0']);
 

@@ -5,9 +5,9 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\Conf;
 use common\models\ConfSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CenterController implements the CRUD actions for Conf model.
@@ -20,8 +20,19 @@ class CenterController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -142,5 +153,15 @@ class CenterController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionInfo()
+    {
+        return $this->render('info');
+    }
+
+    public function actionSeo()
+    {
+        return $this->render('seo');
     }
 }

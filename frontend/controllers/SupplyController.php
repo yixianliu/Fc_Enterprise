@@ -2,10 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\PsbClassify;
 use Yii;
 use common\models\Supply;
 use common\models\SupplySearch;
-use yii\web\Controller;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -14,6 +15,9 @@ use yii\filters\VerbFilter;
  */
 class SupplyController extends BaseController
 {
+
+    public $parent_id = 'S0';
+
     /**
      * @inheritdoc
      */
@@ -21,7 +25,7 @@ class SupplyController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -33,13 +37,22 @@ class SupplyController extends BaseController
      * Lists all Supply models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null)
     {
-        $searchModel = new SupplySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $model = empty($type) ? Supply::find() : Supply::find()->where(['c_key' => $type]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query'      => $model,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        $result['classify'] = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply', 'parent_id' => $this->parent_id]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'result'       => $result,
             'dataProvider' => $dataProvider,
         ]);
     }

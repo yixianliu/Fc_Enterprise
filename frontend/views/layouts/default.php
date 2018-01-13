@@ -25,7 +25,7 @@ $this->beginPage();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 
     <?= ConfList::widget(['config' => $this->title]); ?>
@@ -36,6 +36,23 @@ $this->beginPage();
     <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to('@web/themes/enterprise/img') ?>/apple-touch-icon-114x114.png">
 
     <?php $this->head() ?>
+
+    <script type="text/javascript">
+
+        // JavaScript Document
+        function urlredirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            if ((sUserAgent.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i))) {
+                // PC跳转移动端
+                var thisUrl = window.location.href;
+                window.location.href = thisUrl.substr(0, thisUrl.lastIndexOf('/') + 1) + 'index.php/mobile/';
+
+            }
+        }
+
+        urlredirect();
+
+    </script>
 
 </head>
 

@@ -185,8 +185,7 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `c_key` (`c_key`),
-    UNIQUE `name` (`name`)
+    UNIQUE KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -555,24 +554,40 @@ CREATE TABLE `#DB_PREFIX#Supply` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
- * 投标
+ * 投标管理
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Bid`;
 CREATE TABLE `#DB_PREFIX#Bid` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
-    `supply_id` VARCHAR(85) NOT NULL COMMENT '编号',
+    `bid_id` VARCHAR(85) NOT NULL COMMENT '编号',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
-    `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
-    `unit` INT(11) UNSIGNED NOT NULL COMMENT '单位',
-    `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
-    `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
-    `start_at` INT(11) UNSIGNED NOT NULL COMMENT '起始时间',
-    `end_at` INT(11) UNSIGNED NOT NULL COMMENT '结束时间',
+    `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`),
+    UNIQUE KEY `bid_id` (`bid_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 招标管理
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Tender`;
+CREATE TABLE `#DB_PREFIX#Tender` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `tender_id` VARCHAR(85) NOT NULL COMMENT '编号',
+    `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
+    `title` VARCHAR(125) NOT NULL COMMENT '标题',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,

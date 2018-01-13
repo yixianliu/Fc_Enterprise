@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = '注册';
         </div>
     </div>
 
-    <?= Yii::$app->view->renderFile('@app/views/default/form_msg.php'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
 
 </section>
 

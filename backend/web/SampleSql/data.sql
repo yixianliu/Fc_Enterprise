@@ -31,6 +31,9 @@ VALUES
 (NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
 (NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
 (NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
 (NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#);
 
 /**
@@ -148,7 +151,7 @@ VALUES
 (NULL, 'AD1', 11, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AS1', 12, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AP3', 13, 'A3', 'admin', 'UU1', NULL, '采购 + 供求 + 投标管理', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AC1', 13, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AC1', 14, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', 'On', #TIME#, #TIME#),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', 'On', #TIME#, #TIME#),
@@ -159,8 +162,10 @@ VALUES
 (NULL, 'APPP4', 4, 'AP3', 'admin', 'UU1', NULL, '添加供求', 'supply/create', 'On', #TIME#, #TIME#),
 (NULL, 'APPP5', 5, 'AP3', 'admin', 'UU1', NULL, '投标管理', 'bid/index', 'On', #TIME#, #TIME#),
 (NULL, 'APPP6', 6, 'AP3', 'admin', 'UU1', NULL, '添加投标', 'bid/create', 'On', #TIME#, #TIME#),
-(NULL, 'APPP7', 7, 'AP3', 'admin', 'UU1', NULL, '相关分类列表', 'psb-cls/index', 'On', #TIME#, #TIME#),
-(NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加分类', 'psb-cls/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP7', 7, 'AP3', 'admin', 'UU1', NULL, '招标管理', 'tender/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加招标', 'tender/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '相关分类列表', 'psb-cls/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加分类', 'psb-cls/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', 'On', #TIME#, #TIME#),

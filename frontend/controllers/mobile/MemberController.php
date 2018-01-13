@@ -1,8 +1,12 @@
 <?php
-
 /**
- * @abstract 用户登录控制器
- * @author   Yxl <zccem@163.com>
+ *
+ * 用户登录控制器
+ *
+ * Created by Yxl.
+ * User: <zccem@163.com>.
+ * Date: 2018/1/12
+ * Time: 11:12
  */
 
 namespace frontend\controllers;

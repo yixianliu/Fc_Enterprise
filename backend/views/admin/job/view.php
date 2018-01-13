@@ -41,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'title',
                         'content:ntext',
                         'keywords',
-                        'path',
                         'images',
                         [
                             'attribute' => 'is_audit',

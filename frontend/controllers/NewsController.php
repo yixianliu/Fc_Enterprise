@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use Yii;
 use common\models\News;
 use common\models\NewsClassify;
-use common\models\NewsSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,11 +33,13 @@ class NewsController extends BaseController
      * Lists all News models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null)
     {
 
+        $model = empty($type) ? News::find() : News::find()->where(['c_key' => $type]);
+
         $dataProvider = new ActiveDataProvider([
-            'query'      => News::find(),
+            'query'      => $model,
             'pagination' => [
                 'pageSize' => 20,
             ],
