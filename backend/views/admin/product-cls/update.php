@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = '更新产品分类: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => '产品分类', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->c_key]];
 $this->params['breadcrumbs'][] = '更新';
 ?>
 

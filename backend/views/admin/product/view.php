@@ -43,7 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'product_id',
                         'user_id',
-                        'c_key',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+
+                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
+
+                                return $data->name;
+                            },
+                        ],
                         's_key',
                         'title',
                         'content:ntext',
@@ -60,9 +68,39 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attention',
                         'is_promote',
                         'is_hot',
-                        'is_classic',
-                        'is_winnow',
-                        'is_recommend',
+                        [
+                            'attribute' => 'is_classic',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_classic ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_winnow',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_winnow ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_recommend',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_recommend ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_audit',
                             'value'     => function ($model) {

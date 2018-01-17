@@ -15,7 +15,7 @@ use yii\helpers\HtmlPurifier;
 
 ?>
 
-<div class="col-md-4 col-xs-6 work-item web-design mockups">
+<div class="col-md-3 col-sm-4 col-xs-6 work-item web-design mockups">
     <div class="work-container">
 
         <div class="work-img">
@@ -23,9 +23,8 @@ use yii\helpers\HtmlPurifier;
         </div>
 
         <div class="work-description">
-            <h3>
-                <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?>
-            </h3>
+            <h3><?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?></h3>
+            <span><a href="#">Print</a></span>
         </div>
 
     </div>

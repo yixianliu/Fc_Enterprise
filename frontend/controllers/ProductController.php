@@ -2,12 +2,13 @@
 
 namespace frontend\controllers;
 
-use common\models\ProductClassify;
 use Yii;
+use common\models\ProductClassify;
 use common\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Sort;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -36,10 +37,22 @@ class ProductController extends BaseController
     public function actionIndex($type = null)
     {
 
+        $sort = new Sort([
+            'attributes' => [
+                'title',
+                'product_id' => [
+                    'asc'     => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
+                    'desc'    => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
+                    'default' => SORT_DESC,
+                    'label'   => 'Name',
+                ],
+            ],
+        ]);
+
         $model = empty($type) ? Product::find() : Product::find()->where(['c_key' => $type]);
 
         $dataProvider = new ActiveDataProvider([
-            'query'      => $model,
+            'query'      => $model->orderBy($sort->orders),
             'pagination' => [
                 'pageSize' => 20,
             ],

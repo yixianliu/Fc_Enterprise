@@ -74,4 +74,47 @@ class NewsClassify extends \yii\db\ActiveRecord
             'updated_at'  => '更新数据时间',
         ];
     }
+
+    /**
+     * 选项框
+     *
+     * @param $data
+     * @param int $num
+     */
+    public function recursionNewsSelect($data, $num = 1)
+    {
+
+        if (empty($data))
+            return;
+
+        // 初始化
+        $result = array();
+        $symbol = null;
+
+        $child = NewsClassify::findAll(['parent_id' => $data['c_key']]);
+
+        if (empty($child))
+            return;
+
+        if ($num != 0) {
+            for ($i = 0; $i <= $num; $i++) {
+                $symbol .= '――';
+            }
+        }
+
+        foreach ($child as $key => $value) {
+
+            $result[ $value['c_key'] ] = $symbol . $value['name'];
+
+            $childData = $this->recursionNewsSelect($value->toArray(), ($num + 1));
+
+            if (empty($childData))
+                continue;
+
+            $result = array_merge($result, $childData);
+
+        }
+
+        return $result;
+    }
 }

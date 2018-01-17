@@ -39,9 +39,9 @@ class PsbClassifySearch extends PsbClassify
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $type = 'Supply')
     {
-        $query = PsbClassify::find();
+        $query = PsbClassify::find()->where(['is_type' => $type]);
 
         // add conditions that should always apply here
 

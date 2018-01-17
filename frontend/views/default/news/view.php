@@ -83,12 +83,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <br/>
 
                         </div>
-                    </div> <!-- end entry -->
+                    </div>
 
-                </div> <!-- end entry item -->
-            </div> <!-- end col -->
+                </div>
+            </div>
 
-        </div> <!-- end row -->
+        </div>
 
-    </div> <!-- end container -->
-</section> <!-- end blog single -->
+    </div>
+</section>

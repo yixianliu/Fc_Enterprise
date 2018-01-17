@@ -17,9 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('../nav'); ?>
 
 <?php if (!empty($model->path)): ?>
+
     <?=
     $this->render('../../pages/' . $model->path, [
         'model' => $model,
     ]);
     ?>
+
 <?php endif; ?>
+
+<?= $model->content ?>

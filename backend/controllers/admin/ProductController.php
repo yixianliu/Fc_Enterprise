@@ -54,9 +54,9 @@ class ProductController extends BaseController
             'upload' => [
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat" => "/UEditor/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
-                    "imageRoot"       => Yii::getAlias("@webroot"),
+                    "imageUrlPrefix"       => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
+                    "imagePathFormat"      => "/UEditor/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
+                    "imageRoot"            => Yii::getAlias("@webroot"),
                     "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
                 ],
             ]
@@ -193,13 +193,25 @@ class ProductController extends BaseController
             $result['section'][ $value['s_key'] ] = $value['name'];
         }
 
-        // 产品等级
-        $dataClassify = ProductClassify::findAll(['is_using' => 'On']);
+        // 产品分类
+        $dataClassify = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
 
-        foreach ($dataClassify as $value) {
+        // 产品分类
+        $Cls = new ProductClassify();
+
+        foreach ($dataClassify as $key => $value) {
+
             $result['classify'][ $value['c_key'] ] = $value['name'];
+
+            $child = $Cls->recursionProductSelect($value->toArray());
+
+            if (empty($child))
+                continue;
+
+            $result['classify'] = array_merge($result['classify'], $child);
         }
 
         return $result;
     }
+
 }

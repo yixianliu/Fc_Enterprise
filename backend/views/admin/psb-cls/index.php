@@ -20,24 +20,32 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('发布分类', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'c_key',
-            'sort_id',
-            'name',
-            'is_type',
-            'is_using',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    <?= Html::a('发布分类', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid'], ['class' => 'btn btn-success']) ?>
+
+                </p>
+
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'c_key',
+                        'sort_id',
+                        'name',
+                        'is_type',
+                        'is_using',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
             </div>
         </div>
     </section>

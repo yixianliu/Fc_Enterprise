@@ -8,6 +8,7 @@ use common\models\PsbClassifySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PsbClsController implements the CRUD actions for PsbClassify model.
@@ -20,6 +21,18 @@ class PsbClsController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'view', 'update', 'delete',],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -33,10 +46,11 @@ class PsbClsController extends BaseController
      * Lists all PsbClassify models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null)
     {
+
         $searchModel = new PsbClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $type);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

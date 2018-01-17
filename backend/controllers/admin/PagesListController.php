@@ -9,6 +9,7 @@ use common\models\PagesListSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PagesListController implements the CRUD actions for PagesList model.
@@ -21,6 +22,17 @@ class PagesListController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [

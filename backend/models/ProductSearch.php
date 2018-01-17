@@ -41,12 +41,25 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
+
         $query = Product::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]);
+
+        // 排序
+        $dataProvider->setSort([
+            'attributes' => [
+                'product_id' => [
+                    'asc'   => ['product_id' => SORT_DESC],
+                    'desc'  => ['product_id' => SORT_DESC],
+                    'default' => SORT_DESC,
+                    'label' => '产品ID'
+                ],
+            ]
         ]);
 
         $this->load($params);

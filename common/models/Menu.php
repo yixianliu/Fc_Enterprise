@@ -45,15 +45,15 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['m_key', 'sort_id', 'rp_key', 'name', 'is_using', 'model_key'], 'required'],
-            [['sort_id', 'created_at', 'updated_at'], 'integer'],
+            [['m_key', 'sort_id', 'name', 'is_using', 'model_key'], 'required'],
+            [['sort_id',], 'integer'],
             [['is_using'], 'string'],
             [['m_key', 'parent_id'], 'string', 'max' => 55],
             [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
             [['m_key'], 'unique'],
 
             // 默认
-            [['custom_key'], 'default', 'value' => null],
+            [['custom_key', 'url', 'rp_key'], 'default', 'value' => null],
         ];
     }
 
@@ -69,6 +69,7 @@ class Menu extends \yii\db\ActiveRecord
             'rp_key'     => '角色关键KEY',
             'model_key'  => '菜单模型',
             'name'       => '菜单名称',
+            'url'        => '菜单外部链接',
             'is_using'   => '是否启用',
             'custom_key' => '自定义页面分类KEY',
             'created_at' => '添加数据时间',
@@ -166,7 +167,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($purchase as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/psb-cls/index', 'id' => $values['c_key'], 'type' => 'purchase'],
+                            'url'   => ['/purchase/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }
@@ -180,7 +181,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($product as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/supply/cls', 'id' => $values['c_key']],
+                            'url'   => ['/supply/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }
@@ -194,7 +195,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($product as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/bid/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }
@@ -242,9 +243,12 @@ class Menu extends \yii\db\ActiveRecord
 
             $customId = empty($value['custom_key']) ? 1 : $value['custom_key'];
 
+            // 自定义外部链接
+            $urls = ($value['menuModel']['url_key'] == 'urls' ? '#' : [$value['menuModel']['url_key'] . '/index', 'id' => $customId]);
+
             $dataMenu[] = [
                 'label' => $value['name'],
-                'url'   => [$value['menuModel']['url_key'] . '/index', 'id' => $customId],
+                'url'   => $urls,
                 'items' => $array,
             ];
 

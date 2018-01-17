@@ -170,10 +170,22 @@ class NewsController extends BaseController
         // 初始化
         $result = array();
 
-        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
+        // 分类
+        $dataClassify = NewsClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
 
-        foreach ($dataCls as $key => $value) {
+        // 分类
+        $Cls = new NewsClassify();
+
+        foreach ($dataClassify as $key => $value) {
+
             $result['classify'][ $value['c_key'] ] = $value['name'];
+
+            $child = $Cls->recursionNewsSelect($value->toArray());
+
+            if (empty($child))
+                continue;
+
+            $result['classify'] = array_merge($result['classify'], $child);
         }
 
         return $result;
