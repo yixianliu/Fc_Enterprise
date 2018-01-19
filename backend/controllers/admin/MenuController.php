@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\ItemRp;
 use Yii;
 use common\models\Menu;
 use common\models\MenuSearch;
@@ -52,15 +53,12 @@ class MenuController extends BaseController
     public function actionIndex()
     {
 
-        $searchModel = new MenuSearch();
-
-        $dataProvider = Menu::findAll(['parent_id' => Yii::$app->request->get('id', 'E1')]);
+        $dataProvider = Menu::findByAll(Yii::$app->request->get('id', 'E1'));
 
         // 选项卡
-        $parent = Menu::findAll(['parent_id' => $this->parent_id]);
+        $parent = Menu::findByAll($this->parent_id);
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             'parent'       => $parent,
         ]);
@@ -93,10 +91,11 @@ class MenuController extends BaseController
             'parent'     => $this->getMenu(),
             'menu_model' => $this->getModel(),
             'pages'      => $this->getPages(),
+            'role'       => $this->getRole(),
         ];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
             return $this->render('create', [
                 'model'  => $model,
@@ -119,10 +118,11 @@ class MenuController extends BaseController
             'parent'     => $this->getMenu(),
             'menu_model' => $this->getModel(),
             'pages'      => $this->getPages(),
+            'role'       => $this->getRole(),
         ];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
             return $this->render('update', [
                 'model'  => $model,
@@ -153,7 +153,7 @@ class MenuController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Menu::findOne($id)) !== null) {
+        if (($model = Menu::findOne(['m_key' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -222,6 +222,20 @@ class MenuController extends BaseController
 
         foreach ($result as $value) {
             $data[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $data;
+    }
+
+    public function getRole()
+    {
+        // 初始化
+        $data = array();
+
+        $result = ItemRp::findAll(['type' => 1]);
+
+        foreach ($result as $value) {
+            $data[ $value['name'] ] = $value['description'];
         }
 
         return $data;

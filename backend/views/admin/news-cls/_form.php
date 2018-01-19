@@ -21,24 +21,34 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'parent_id')->widget(Select2::classname(), [
                     'data'    => $result['classify'],
                     'options' => ['placeholder' => '父类...'],
                 ]);
                 ?>
+
+                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+                <?=
+                $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
+                        'clientOptions' => [
+                            //设置语言
+                            'lang'               => 'zh-cn',
+                            'initialFrameHeight' => '600',
+                            'elementPathEnabled' => false,
+                            'wordCount'          => false,
+                        ]
+                    ]);
+                ?>
+
+                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -48,7 +58,11 @@ use kartik\select2\Select2;
                 ?>
 
                 <div class="form-group">
+
                     <?= Html::submitButton($model->isNewRecord ? '创建新闻分类' : '更新新闻分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
                 </div>
 
                 <?php ActiveForm::end(); ?>

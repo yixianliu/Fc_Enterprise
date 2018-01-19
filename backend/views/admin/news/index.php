@@ -24,31 +24,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php if (!empty($result['classify'])): ?>
 
-                <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+                    <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
-                <hr/>
+                    <hr/>
 
-                <p>
-                    <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
+                    <p>
+                        <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
+                    </p>
 
-                <?=
-                GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'user_id',
-                        'c_key',
-                        'sort_id',
-                        'title',
-                        ['class' => 'yii\grid\ActionColumn'],
-                    ],
-                ]);
-                ?>
+                    <?=
+                    GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'columns'      => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            'user_id',
+                            [
+                                'attribute' => 'c_key',
+                                'value'     => function ($model) {
+
+                                    $data = \common\models\NewsClassify::findOne(['c_key' => $model->c_key]);
+
+                                    return $data['name'];
+                                },
+                            ],
+                            'sort_id',
+                            'title',
+                            'keywords',
+                            [
+                                'attribute' => 'is_audit',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'On'  => '启用',
+                                        'Off' => '未启用',
+                                        'Out' => '屏蔽',
+                                        'Not' => '未审核',
+                                    ];
+
+                                    return $state[ $model->is_audit ];
+                                },
+                            ],
+                            ['class' => 'yii\grid\ActionColumn'],
+                        ],
+                    ]);
+                    ?>
 
                 <?php else: ?>
 
-                <h3>请添加分类, 点<a href="<?= \yii\helpers\Url::to(['admin/news-cls/create']) ?>">这里</a> !!</h3>
+                    <h3>请添加分类, 点<a href="<?= \yii\helpers\Url::to(['admin/news-cls/create']) ?>">这里</a> !!</h3>
 
                 <?php endif ?>
 

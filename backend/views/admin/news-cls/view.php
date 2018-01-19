@@ -45,7 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'description:ntext',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+
+                                if ($model->parent_id != 'C0') {
+                                    $data = \common\models\NewsClassify::findOne(['c_key' => $model->parent_id]);
+                                }
+
+                                return empty($data['name']) ? '顶级父类' : $data['name'];
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

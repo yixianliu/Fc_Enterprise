@@ -9,12 +9,9 @@ use yii\widgets\ActiveForm;
 ?>
 
 
-<?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
-]); ?>
+<?php $form = ActiveForm::begin(['action' => ['index'], 'method' => 'get',]); ?>
 
-    <table class="table table-hover">
+    <table class="table">
         <tbody>
         <tr>
             <td>
@@ -30,6 +27,7 @@ use yii\widgets\ActiveForm;
             </td>
             <td><?= $form->field($model, 'content') ?></td>
             <td><?= $form->field($model, 'introduction') ?></td>
+            <td><?= $form->field($model, 'keywords') ?></td>
         </tr>
         </tbody>
     </table>

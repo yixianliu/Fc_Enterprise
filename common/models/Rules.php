@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%rules}}".
@@ -29,12 +30,21 @@ class Rules extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['name', 'is_using'], 'required'],
             [['description', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 85],
             [['data'], 'string', 'max' => 255],
             [['data'], 'unique'],

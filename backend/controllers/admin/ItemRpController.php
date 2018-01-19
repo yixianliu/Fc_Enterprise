@@ -48,8 +48,7 @@ class ItemRpController extends BaseController
     {
 
         $searchModel = new ItemRpSearch();
-
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->request->get('type', 'role'));
 
         return $this->render('index', [
             'searchModel'  => $searchModel,

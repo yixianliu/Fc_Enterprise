@@ -22,6 +22,7 @@ class NewsController extends BaseController
     public function behaviors()
     {
         return [
+
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -70,10 +71,14 @@ class NewsController extends BaseController
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $model = new NewsClassify();
+
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $this->getCls(),
+            'result'       => [
+                'classify' => $model->getClsSelect(),
+            ]
         ]);
     }
 
@@ -108,9 +113,13 @@ class NewsController extends BaseController
             }
         }
 
+        $modelCls = new NewsClassify();
+
         return $this->render('create', [
             'model'  => $model,
-            'result' => $this->getCls(),
+            'result' => [
+                'classify' => $modelCls->getClsSelect(),
+            ]
         ]);
     }
 
@@ -129,9 +138,13 @@ class NewsController extends BaseController
         } // 更新新闻
         else {
 
+            $modelCls = new NewsClassify();
+
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $this->getCls(),
+                'result' => [
+                    'classify' => $modelCls->getClsSelect(),
+                ]
             ]);
         }
     }
@@ -165,29 +178,4 @@ class NewsController extends BaseController
         }
     }
 
-    public function getCls()
-    {
-        // 初始化
-        $result = array();
-
-        // 分类
-        $dataClassify = NewsClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
-
-        // 分类
-        $Cls = new NewsClassify();
-
-        foreach ($dataClassify as $key => $value) {
-
-            $result['classify'][ $value['c_key'] ] = $value['name'];
-
-            $child = $Cls->recursionNewsSelect($value->toArray());
-
-            if (empty($child))
-                continue;
-
-            $result['classify'] = array_merge($result['classify'], $child);
-        }
-
-        return $result;
-    }
 }

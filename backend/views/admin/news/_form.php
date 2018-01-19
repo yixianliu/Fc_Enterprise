@@ -8,8 +8,6 @@ use kartik\select2\Select2;
 /* @var $model common\models\News */
 /* @var $form yii\widgets\ActiveForm */
 
-$result['classify'] = empty($result['classify']) ? array() : $result['classify'];
-
 ?>
 
     <div class="col-lg-12">
@@ -118,7 +116,11 @@ $result['classify'] = empty($result['classify']) ? array() : $result['classify']
                     <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->user_id])->label(false); ?>
 
                     <div class="form-group">
+
                         <?= Html::submitButton($model->isNewRecord ? '发布新闻' : '更新新闻', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
                     </div>
 
                     <?php ActiveForm::end(); ?>

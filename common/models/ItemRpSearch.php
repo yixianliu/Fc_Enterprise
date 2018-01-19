@@ -39,12 +39,21 @@ class ItemRpSearch extends ItemRp
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $type = null)
     {
-        $query = ItemRp::find();
+
+        $array = [
+            'role'       => 1,
+            'permission' => 2,
+        ];
+
+        if (empty($type)) {
+            $query = ItemRp::find();
+        } else {
+            $query = ItemRp::find()->where(['type' => $array[ $type ]]);
+        }
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -59,7 +68,7 @@ class ItemRpSearch extends ItemRp
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'type' => $this->type,
+            'type'       => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

@@ -46,13 +46,13 @@ class NewsClsController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new NewsClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $Cls = new NewsClassify();
+
+        $dataProvider = $Cls->getCls();
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $this->getCls(),
         ]);
     }
 
@@ -73,17 +73,21 @@ class NewsClsController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new NewsClassify();
 
+        $model->parent_id = empty($id) ? 'C0' : $id;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         } else {
 
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $this->getCls(),
+                'result' => [
+                    'classify' => $model->getClsSelect(),
+                ]
             ]);
         }
     }
@@ -99,12 +103,14 @@ class NewsClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         } else {
 
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $this->getCls(),
+                'result' => [
+                    'classify' => $model->getClsSelect(),
+                ]
             ]);
         }
     }
@@ -131,27 +137,10 @@ class NewsClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = NewsClassify::findOne($id)) !== null) {
+        if (($model = NewsClassify::findOne(['c_key' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function getCls()
-    {
-
-        // 初始化
-        $result = array();
-
-        $dataCls = NewsClassify::findAll(['is_using' => 'On']);
-
-        $result['classify'] = ['C0' => '父类'];
-
-        foreach ($dataCls as $value) {
-            $result['classify'][ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 }

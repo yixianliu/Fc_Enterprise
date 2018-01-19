@@ -20,6 +20,7 @@ class ProductClsController extends BaseController
     public function behaviors()
     {
         return [
+
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -29,6 +30,7 @@ class ProductClsController extends BaseController
                     ],
                 ],
             ],
+
             'verbs'  => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
@@ -71,11 +73,11 @@ class ProductClsController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id = 'C0')
+    public function actionCreate()
     {
         $model = new ProductClassify();
 
-        $model->parent_id = $id;
+        $model->parent_id = Yii::$app->request->get('id', 'C0');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
@@ -83,7 +85,9 @@ class ProductClsController extends BaseController
 
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $this->getData(),
+                'result' => [
+                    'classify' => $model->getClsSelect(),
+                ]
             ]);
         }
     }
@@ -104,7 +108,9 @@ class ProductClsController extends BaseController
 
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $this->getData(),
+                'result' => [
+                    'classify' => $model->getClsSelect(),
+                ]
             ]);
         }
     }
@@ -136,22 +142,5 @@ class ProductClsController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function getData()
-    {
-        // 初始化
-        $result = array();
-
-        // 所有分类
-        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
-
-        $result['classify']['C0'] = '父类';
-
-        foreach ($dataCls as $value) {
-            $result['classify'][ $value->c_key ] = $value->name;
-        }
-
-        return $result;
     }
 }

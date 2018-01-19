@@ -36,7 +36,15 @@ use kartik\select2\Select2;
                     ]);
                     ?>
 
-                    <?= $form->field($model, 'rp_key')->textInput(['maxlength' => true]) ?>
+                    <?=
+                    $form->field($model, 'rp_key')->widget(Select2::classname(), [
+                        'data'          => $result['role'],
+                        'options'       => ['placeholder' => '选择菜单模型...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
 
                     <?=
                     $form->field($model, 'model_key')->widget(Select2::classname(), [

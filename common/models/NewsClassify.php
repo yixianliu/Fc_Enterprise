@@ -20,6 +20,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class NewsClassify extends \yii\db\ActiveRecord
 {
+
+    public static $parent_id = 'C0';
+
     /**
      * @inheritdoc
      */
@@ -75,8 +78,94 @@ class NewsClassify extends \yii\db\ActiveRecord
         ];
     }
 
+    static public function findByAll($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? self::$parent_id : $parent_id;
+
+        return static::find()->where(['parent_id' => $parent_id])->orderBy('sort_id', SORT_DESC)->all();
+    }
+
     /**
-     * 选项框
+     * 获取分类(选项框)
+     *
+     * @return mixed
+     */
+    public function getClsSelect()
+    {
+
+        // 产品分类
+        $dataClassify = self::findByAll(static::$parent_id);
+
+        // 产品分类
+        $Cls = new NewsClassify();
+
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['c_key'] ] = $value['name'];
+
+            $child = $Cls->recursionNewsSelect($value->toArray());
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 获取分类
+     *
+     * @param string $parent_id
+     * @return array|bool
+     */
+    public function getCls($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
+
+        // 初始化
+        $result = array();
+
+        $parent = self::findByAll($parent_id);
+
+        foreach ($parent as $key => $value) {
+            $result[ $key ] = $this->recursionNews($value->toArray());
+        }
+
+        return $result;
+    }
+
+    /**
+     * 无限分类
+     *
+     * @param $data
+     */
+    public function recursionNews($data)
+    {
+        if (empty($data))
+            return;
+
+        $result = $data;
+
+        $child = self::findByAll($data['c_key']);
+
+        if (empty($child))
+            return $result;
+
+        foreach ($child as $value) {
+            $result['child'][] = $this->recursionNews($value->toArray());
+        }
+
+        return $result;
+    }
+
+    /**
+     * 无限分类(选项框)
      *
      * @param $data
      * @param int $num
@@ -91,7 +180,7 @@ class NewsClassify extends \yii\db\ActiveRecord
         $result = array();
         $symbol = null;
 
-        $child = NewsClassify::findAll(['parent_id' => $data['c_key']]);
+        $child = self::findByAll($data['c_key']);
 
         if (empty($child))
             return;

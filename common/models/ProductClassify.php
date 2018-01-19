@@ -20,6 +20,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class ProductClassify extends \yii\db\ActiveRecord
 {
+
+    public static $parent_id = 'C0';
+
     /**
      * @inheritdoc
      */
@@ -74,6 +77,20 @@ class ProductClassify extends \yii\db\ActiveRecord
     }
 
     /**
+     * 所有分类
+     *
+     * @param null $parent_id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function findByAll($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? self::$parent_id : $parent_id;
+
+        return static::find()->where(['parent_id' => $parent_id, 'is_using' => 'On'])->orderBy('sort_id', SORT_DESC)->all();
+    }
+
+    /**
      * 获取分类
      *
      * @param string $parent_id
@@ -85,7 +102,7 @@ class ProductClassify extends \yii\db\ActiveRecord
         // 初始化
         $result = array();
 
-        $parent = ProductClassify::findAll(['parent_id' => $parent_id]);
+        $parent = static::findByAll(['parent_id' => $parent_id]);
 
         foreach ($parent as $key => $value) {
             $result[ $key ] = $this->recursionProduct($value->toArray());
@@ -106,7 +123,7 @@ class ProductClassify extends \yii\db\ActiveRecord
 
         $result = $data;
 
-        $child = ProductClassify::findAll(['parent_id' => $data['c_key']]);
+        $child = static::findByAll($data['c_key']);
 
         if (empty($child))
             return $result;
@@ -119,7 +136,35 @@ class ProductClassify extends \yii\db\ActiveRecord
     }
 
     /**
-     * 选项框
+     * 获取分类(选项框)
+     *
+     * @return array
+     */
+    public function getClsSelect()
+    {
+
+        // 产品分类
+        $dataClassify = static::findByAll($this->parent_id);
+
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['c_key'] ] = $value['name'];
+
+            $child = $this->recursionProductSelect($value->toArray());
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 无限分类(选项框)
      *
      * @param $data
      * @param int $num
@@ -134,7 +179,7 @@ class ProductClassify extends \yii\db\ActiveRecord
         $result = array();
         $symbol = null;
 
-        $child = ProductClassify::findAll(['parent_id' => $data['c_key']]);
+        $child = static::findByAll($data['c_key']);
 
         if (empty($child))
             return;
@@ -155,7 +200,6 @@ class ProductClassify extends \yii\db\ActiveRecord
                 continue;
 
             $result = array_merge($result, $childData);
-
         }
 
         return $result;

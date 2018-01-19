@@ -3,8 +3,6 @@
 namespace common\models;
 
 use Yii;
-use common\models\Rules;
-use common\models\User;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -75,6 +73,11 @@ class ItemRp extends \yii\db\ActiveRecord
             'created_at'  => '添加时间',
             'updated_at'  => '修改时间',
         ];
+    }
+
+    static public function findByAll($parent_id)
+    {
+
     }
 
     /**

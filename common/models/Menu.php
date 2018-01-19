@@ -83,7 +83,7 @@ class Menu extends \yii\db\ActiveRecord
      * @param $parent
      * @return bool
      */
-    public static function findByData($parent)
+    public static function findByAll($parent)
     {
 
         if (empty($parent))
@@ -139,7 +139,7 @@ class Menu extends \yii\db\ActiveRecord
         $dataMenu = array();
         $array = array();
 
-        $data = static::findByData($pid);
+        $data = static::findByAll($pid);
 
         foreach ($data as $value) {
 
@@ -272,7 +272,7 @@ class Menu extends \yii\db\ActiveRecord
             return;
         }
 
-        $child = Menu::findByData($data['m_key']);
+        $child = Menu::findByAll($data['m_key']);
 
         if (empty($child)) {
             return;
@@ -371,7 +371,7 @@ class Menu extends \yii\db\ActiveRecord
             return;
         }
 
-        $child = Menu::findByData($data['m_key']);
+        $child = Menu::findByAll($data['m_key']);
 
         if (empty($child))
             return;
