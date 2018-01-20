@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class PagesClassify extends \yii\db\ActiveRecord
 {
+
+    static public $parent_id = 'C0';
+
     /**
      * @inheritdoc
      */
@@ -63,7 +66,6 @@ class PagesClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => 'ID',
             'c_key'       => '页面关键KEY',
             'sort_id'     => '页面排序',
             'name'        => '单页面名称',
@@ -75,5 +77,25 @@ class PagesClassify extends \yii\db\ActiveRecord
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
+    }
+
+    static public function findByAll($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+
+        return static::find()->where([static::tableName() . '.parent_id' => $parent_id])
+            ->joinWith('menu')
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMenu()
+    {
+        return $this->hasOne(Menu::className(), ['custom_key' => 'c_key']);
     }
 }

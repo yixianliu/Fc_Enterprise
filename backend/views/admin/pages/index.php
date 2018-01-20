@@ -27,7 +27,7 @@ function recursionPages($data)
     foreach ($data as $values) {
 
         $html .= '<li class="">';
-        $html .= '    <div class="uk-nestable-item">▸';
+        $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
         $html .= $values['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $values['id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $values['c_key']], ['class' => "btn btn-primary"]);
         $html .= '    </div>';
 
@@ -64,25 +64,37 @@ function recursionPages($data)
 
                 <p>
                     <?= Html::a('创建单页面', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('创建单页面模板文件', ['admin/pages-tpl-file/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('上传单页面模板文件', ['admin/pages-tpl-file/create'], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('发布单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <hr/>
 
                 <ul class="uk-nestable"
-                    <?php foreach ($result as $value): ?>
-                        <li>
+                <?php foreach ($result as $value): ?>
+                    <li class="">
 
-                            <a class="btn btn-primary" href="<?= Url::to(['admin/menu/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
+                        <div class="uk-nestable-item" style="padding: 5px;">
 
-                            <?php if (!empty($value['child'])): ?>
-                                <?= recursionPages($value['child']) ?>
+                            <?= Html::a($value['name'], ['admin/pages/index', 'id' => $value['c_key']], ['class' => 'btn btn-primary']) ?>
+
+                            <?php if (!empty($value['menu'])): ?>
+                                <?= Html::a($value['menu']['name'], ['admin/menu/update', 'id' => $value['menu']['m_key']], ['class' => 'btn btn-primary']) ?>
                             <?php endif; ?>
 
-                        </li>
+                            <?= Html::a('添加下级单页面', ['admin/pages/create', 'id' => $value['c_key']], ['class' => 'btn btn-success']) ?>
 
-                    <?php endforeach; ?>
+                            <?= Html::a('编辑', ['admin/pages/update', 'id' => $value['c_key']], ['class' => 'btn btn-success']) ?>
+
+                        </div>
+
+                        <?php if (!empty($value['child'])): ?>
+                            <?= recursionPages($value['child']) ?>
+                        <?php endif; ?>
+
+                    </li>
+
+                <?php endforeach; ?>
                 </ul>
 
 

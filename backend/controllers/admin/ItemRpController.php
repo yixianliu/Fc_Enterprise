@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Rules;
 use Yii;
 use common\models\ItemRp;
 use common\models\ItemRpSearch;
@@ -100,7 +101,10 @@ class ItemRpController extends BaseController
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'rules' => $this->getRules(),
+                ]
             ]);
         }
     }
@@ -119,7 +123,10 @@ class ItemRpController extends BaseController
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'rules' => $this->getRules(),
+                ]
             ]);
         }
     }
@@ -151,5 +158,25 @@ class ItemRpController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * 获取规则
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+
+        // 初始化
+        $result = array();
+
+        $data = Rules::findByAll();
+
+        foreach ($data as $value) {
+            $result[ $value['name'] ] = $value['description'];
+        }
+
+        return $result;
     }
 }

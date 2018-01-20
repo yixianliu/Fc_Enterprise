@@ -60,4 +60,22 @@ class Pages extends \yii\db\ActiveRecord
             'updated_at' => '更新数据时间',
         ];
     }
+
+    /**
+     * 所有内容
+     *
+     * @param $key
+     * @return array|bool|\yii\db\ActiveRecord[]
+     */
+    public static function findByAll($key)
+    {
+
+        if (empty($key))
+            return false;
+
+        return static::find()->where(['c_key' => $key])
+            ->orderBy('page_id', SORT_DESC)
+            ->asArray()
+            ->all();
+    }
 }

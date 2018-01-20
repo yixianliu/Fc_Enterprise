@@ -4,12 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\News */
+/* @var $model common\models\Rules */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '新闻', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => '规则列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
 
 <div class="col-lg-12">
@@ -23,55 +22,34 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?=
-                    Html::a('删除', ['delete', 'id' => $model->id], [
+                    <?= Html::a('更新', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('删除', ['delete', 'id' => $model->name], [
                         'class' => 'btn btn-danger',
                         'data'  => [
-                            'confirm' => '确认要删除这条新闻吗?',
+                            'confirm' => '是否确定删除这条记录?',
                             'method'  => 'post',
                         ],
-                    ])
-                    ?>
+                    ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                DetailView::widget([
+                <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'news_id',
-                        'user_id',
-                        'c_key',
-                        'sort_id',
-                        'title',
-                        'content:ntext',
-                        'introduction',
-                        'keywords',
-                        'praise',
-                        'forward',
-                        'collection',
-                        'share',
-                        'attention',
-                        'is_promote',
-                        'is_hot',
-                        'is_winnow',
-                        'is_recommend',
+                        'name',
+                        'data',
+                        'description:ntext',
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '已通过审核',
                                     'Off' => '未通过审核',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_using ];
                             },
                         ],
-                        'is_comments',
-                        'is_img',
-                        'is_thumb',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
@@ -85,10 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
-                ]);
-                ?>
+                ]) ?>
 
             </div>
         </div>
     </section>
 </div>
+

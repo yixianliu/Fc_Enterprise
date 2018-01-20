@@ -2,12 +2,11 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Pages;
-use common\models\PagesTplFile;
 use Yii;
 use common\models\SinglePage;
-use common\models\SinglePageSearch;
 use common\models\PagesClassify;
+use common\models\Pages;
+use common\models\PagesTplFile;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,10 +56,10 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $dataPages = PagesClassify::findAll(['parent_id' => 'C0']);
+        $dataPages = PagesClassify::findByAll();
 
         foreach ($dataPages as $key => $value) {
-            $result[ $key ] = $value->toArray();
+            $result[ $key ] = $value;
             $result[ $key ]['child'] = $this->recursionPages($value);
         }
 
@@ -84,20 +83,22 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $dataPages = Pages::findAll(['c_key' => $data['c_key']]);
+        $dataPages = Pages::findByAll($data['c_key']);
 
         if (!empty($dataPages)) {
 
             foreach ($dataPages as $key => $value) {
 
-                $result[ $key ] = $value->toArray();
-                $result[ $key ]['child'] = PagesClassify::findAll(['parent_id' => $value['c_key']]);
+                $result[ $key ] = $value;
+
+                // 子分类
+                $result[ $key ]['child'] = PagesClassify::findByAll($value['c_key']);
 
                 if (empty($result[ $key ]['child']))
                     continue;
 
                 foreach ($result[ $key ]['child'] as $keys => $values) {
-                    $result[ $key ]['child'][ $keys ] = $values->toArray();
+                    $result[ $key ]['child'][ $keys ] = $values;
                     $result[ $key ]['child'][ $keys ]['child'] = $this->recursionPages($values);
                 }
 
@@ -140,6 +141,9 @@ class PagesController extends BaseController
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $model->c_key = Yii::$app->request->get('id', 'C0');
+
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [

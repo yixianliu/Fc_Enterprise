@@ -204,10 +204,10 @@ VALUES
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', 'On', #TIME#, #TIME#),
 
-(NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色权限', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '查看角色权限', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AURR3', 3, 'AR1', 'admin', 'UU1', NULL, '创建角色权限', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AURR4', 4, 'AR1', 'admin', 'UU1', NULL, '角色关联权限', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色权限', 'item-rp/index', 'On', #TIME#, #TIME#),
+(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色权限', 'item-rp/create', 'On', #TIME#, #TIME#),
+(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '所有规则', 'rules/index', 'On', #TIME#, #TIME#),
+(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加规则', 'rules/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AJJV1', 1, 'AJ1', 'admin', 'UU1', NULL, '所有招聘', 'job/index', 'On', #TIME#, #TIME#),
 (NULL, 'AJJV2', 2, 'AJ1', 'admin', 'UU1', NULL, '添加招聘', 'job/create', 'On', #TIME#, #TIME#),

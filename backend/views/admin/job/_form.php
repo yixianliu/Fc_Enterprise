@@ -129,7 +129,7 @@ use dosamigos\fileupload\FileUploadUI;
 
     </section>
 
-    <?= $this->render('../../form_msg'); ?>
+    <?= $this->render('../../formMsg'); ?>
 
 </div>
 

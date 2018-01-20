@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\ProductClassify;
+use common\models\Download;
 
 /**
- * ProductClassifySearch represents the model behind the search form about `common\models\ProductClassify`.
+ * DownloadSearch represents the model behind the search form of `common\models\Download`.
  */
-class ProductClassifySearch extends ProductClassify
+class DownloadSearch extends Download
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ProductClassifySearch extends ProductClassify
     public function rules()
     {
         return [
-            [['id', 'sort_id'], 'integer'],
-            [['c_key', 'name', 'description', 'keywords', 'json_data', 'parent_id', 'is_using'], 'safe'],
+            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['c_key', 'title', 'path', 'content', 'is_using'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProductClassifySearch extends ProductClassify
      */
     public function search($params)
     {
-        $query = ProductClassify::find();
+        $query = Download::find();
 
         // add conditions that should always apply here
 
@@ -59,16 +59,15 @@ class ProductClassifySearch extends ProductClassify
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id'      => $this->id,
-            'sort_id' => $this->sort_id,
+            'id' => $this->id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'c_key', $this->c_key])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'json_data', $this->json_data])
-            ->andFilterWhere(['like', 'parent_id', $this->parent_id])
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'is_using', $this->is_using]);
 
         return $dataProvider;

@@ -21,11 +21,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <blockquote class="purple background">
-                    <p>是权限的话,必须是函数 + 控制器,例子: indexJob (控制器是为大写)</p>
-                    <small>友情提示 !!</small>
-                </blockquote>
-
                 <?=
                 $form->field($model, 'type')->widget(Select2::classname(), [
                     'data'          => ['1' => '角色', '2' => '权限'],
@@ -36,7 +31,15 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'rule_name')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'rule_name')->widget(Select2::classname(), [
+                    'data'          => $result['rules'],
+                    'options'       => ['placeholder' => '选择规则...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
                 <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
 
