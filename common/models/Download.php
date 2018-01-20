@@ -34,7 +34,6 @@ class Download extends \yii\db\ActiveRecord
         return [
             [['c_key', 'title', 'path', 'content', 'is_using'], 'required'],
             [['content', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['c_key'], 'string', 'max' => 55],
             [['title', 'path'], 'string', 'max' => 85],
             [['title'], 'unique'],
@@ -47,13 +46,13 @@ class Download extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key'      => 'C Key',
-            'title'      => 'Title',
-            'path'       => 'Path',
-            'content'    => 'Content',
-            'is_using'   => 'Is Using',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'c_key'      => '文件分类',
+            'title'      => '文件名称',
+            'path'       => '文件路径',
+            'content'    => '文件描述',
+            'is_using'   => '是否启用',
+            'created_at' => '添加数据时间',
+            'updated_at' => '更新数据时间',
         ];
     }
 }

@@ -2,17 +2,19 @@
 
 namespace backend\controllers\admin;
 
+use common\models\DownloadCls;
 use Yii;
 use common\models\Download;
 use common\models\DownloadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * DownloadController implements the CRUD actions for Download model.
  */
-class DownloadController extends Controller
+class DownloadController extends BaseController
 {
     /**
      * @inheritdoc
@@ -20,6 +22,17 @@ class DownloadController extends Controller
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -72,6 +85,9 @@ class DownloadController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'result' => [
+                'classify' => DownloadCls::getCls(),
+            ]
         ]);
     }
 

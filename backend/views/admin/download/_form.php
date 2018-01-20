@@ -2,34 +2,110 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Download */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="download-form">
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">
+                <?= Html::encode($this->title) ?>
+            </h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
 
-    <?php $form = ActiveForm::begin(); ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '选择下载分类...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                <hr/>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                <?=
+                FileUploadUI::widget([
+                    'model'         => $model,
+                    'attribute'     => 'path',
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download'],
+                    'gallery'       => false,
+                    'fieldOptions'  => [
+                        'accept' => 'file/*'
+                    ],
+                    'clientOptions' => [
+                        'maxFileSize'      => 2000000,
+                        'dataType'         => 'json',
+                        'maxNumberOfFiles' => 5,
+                    ],
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                    // ...
+                    'clientEvents'  => [
 
-    <?= $form->field($model, 'created_at')->textInput(['maxlength' => true]) ?>
+                        'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                                
+                                var html = "";
+                                
+                                var ImagesContent = $("#ImagesContent");
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += file.name + \',\';
+                                });
+                                
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
+                                
+                                return true;
+                            }',
+                        'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+                <hr/>
 
-    <?php ActiveForm::end(); ?>
+                <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+
+                <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+
+                <div class="form-group">
+
+                    <?= Html::submitButton($model->isNewRecord ? '添加下载内容' : '更新下载内容', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+
+        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'job']); ?>
+
+    </section>
+
+    <?= $this->render('../../formMsg'); ?>
 
 </div>

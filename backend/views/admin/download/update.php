@@ -5,17 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Download */
 
-$this->title = 'Update Download: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Downloads', 'url' => ['index']];
+$this->title = '更新内容: {nameAttribute}';
+$this->params['breadcrumbs'][] = ['label' => '下载中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '更新';
 ?>
-<div class="download-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?= $this->render('_form', [
+    'model'  => $model,
+    'result' => $result,
+]) ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>

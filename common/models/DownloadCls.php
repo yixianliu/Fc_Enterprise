@@ -36,7 +36,7 @@ class DownloadCls extends \yii\db\ActiveRecord
     {
         return [
             [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
-            [['sort_id', 'created_at', 'updated_at'], 'integer'],
+            [['sort_id',], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
@@ -52,16 +52,41 @@ class DownloadCls extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key'       => 'C Key',
-            'sort_id'     => 'Sort ID',
-            'name'        => 'Name',
-            'description' => 'Description',
-            'keywords'    => 'Keywords',
-            'json_data'   => 'Json Data',
-            'parent_id'   => 'Parent ID',
-            'is_using'    => 'Is Using',
-            'created_at'  => 'Created At',
-            'updated_at'  => 'Updated At',
+            'c_key'       => '下载分类',
+            'sort_id'     => '排序',
+            'name'        => '分类名称',
+            'description' => '分类描述',
+            'keywords'    => '分类关键词',
+            'json_data'   => 'Json 内容',
+            'parent_id'   => '父类',
+            'is_using'    => '是否启用',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
+    }
+
+    static public function findByAll()
+    {
+        return static::find()->where(['is_using' => 'On'])->orderBy('sort_id', SORT_DESC)->all();
+    }
+
+    /**
+     * 获取分类( 针对选项框)
+     *
+     * @param null $pid
+     * @return array
+     */
+    public static function getCls($pid = null)
+    {
+        // 初始化
+        $result = array();
+
+        $data = static::findByAll();
+
+        foreach ($data as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }
