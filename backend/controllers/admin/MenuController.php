@@ -88,7 +88,7 @@ class MenuController extends BaseController
         $model->parent_id = Yii::$app->request->get('id', 'E1');
 
         $result = [
-            'parent'     => $this->getMenu(),
+            'parent'     => $model->getSelectMenu(),
             'menu_model' => $this->getModel(),
             'pages'      => $this->getPages(),
             'role'       => $this->getRole(),
@@ -158,44 +158,6 @@ class MenuController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    /**
-     * 整理菜单为 select
-     *
-     * @return static[]
-     */
-    public function getMenu()
-    {
-
-        // 初始化
-        $result = array();
-
-        $dataMenu = Menu::findAll(['parent_id' => $this->parent_id]);
-
-        foreach ($dataMenu as $value) {
-            $result[ $value['name'] ] = $this->recursionMenu($value);
-        }
-
-        return $result;
-    }
-
-    public function recursionMenu($value)
-    {
-
-        if (empty($value))
-            return;
-
-        // 初始化
-        $result = array();
-
-        $dataMenu = Menu::findAll(['is_using' => 'On']);
-
-        foreach ($dataMenu as $value) {
-            $result[ $value['m_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 
     public function getModel()

@@ -3,18 +3,16 @@
 namespace backend\controllers\admin;
 
 use Yii;
+use common\models\Resume;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use common\models\Product;
-use common\models\ProductClassify;
-use common\models\Section;
-use backend\models\ProductSearch;
+use yii\filters\AccessControl;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * ResumeController implements the CRUD actions for Resume model.
  */
-class ProductController extends BaseController
+class ResumeController extends BaseController
 {
     /**
      * @inheritdoc
@@ -27,14 +25,14 @@ class ProductController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow'   => true,
-                        'roles'   => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
 
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -63,36 +61,25 @@ class ProductController extends BaseController
     }
 
     /**
-     * Lists all Product models.
+     * Lists all Resume models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $searchModel = new ProductSearch();
-
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        // 初始化
-        $result = array();
-
-        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
-
-        foreach ($dataCls as $value) {
-            $result['classify'][ $value['c_key'] ] = $value['name'];
-        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => Resume::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $result,
         ]);
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Resume model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -102,32 +89,31 @@ class ProductController extends BaseController
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Resume model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
+        $model = new Resume();
 
-        $model = new Product();
-
-        $model->product_id = time() . '_' . rand(000, 999);
+        $model->user_id = '网站管理员';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model'  => $model,
-                'result' => $this->getData(),
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Resume model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -135,20 +121,19 @@ class ProductController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-
-            return $this->render('update', [
-                'model'  => $model,
-                'result' => $this->getData(),
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Resume model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -158,59 +143,18 @@ class ProductController extends BaseController
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Resume model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Resume the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Resume::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    /**
-     * 获取分类和版块
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        // 初始化
-        $result = array();
-
-        // 所有版块
-        $dataSection = Section::findAll(['is_using' => 'On']);
-
-        $result['section']['S0'] = '暂无';
-
-        foreach ($dataSection as $value) {
-            $result['section'][ $value['s_key'] ] = $value['name'];
-        }
-
-        // 产品分类
-        $dataClassify = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
-
-        // 产品分类
-        $Cls = new ProductClassify();
-
-        foreach ($dataClassify as $key => $value) {
-
-            $result['classify'][ $value['c_key'] ] = $value['name'];
-
-            $child = $Cls->recursionProductSelect($value->toArray());
-
-            if (empty($child))
-                continue;
-
-            $result['classify'] = array_merge($result['classify'], $child);
-        }
-
-        return $result;
-    }
-
 }

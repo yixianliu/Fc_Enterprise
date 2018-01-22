@@ -41,7 +41,7 @@ use kartik\select2\Select2;
 
                     <?php ActiveForm::end(); ?>
 
-                    <?= $this->render('../../form_msg'); ?>
+                    <?= $this->render('../../formMsg'); ?>
 
                 </div>
             </div>

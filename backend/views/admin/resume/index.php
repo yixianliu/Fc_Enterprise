@@ -4,12 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\JobSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '招聘列表';
+$this->title = '简历中心';
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
 
 <div class="col-lg-12">
@@ -22,30 +20,25 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
-                    <?= Html::a('发布招聘', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布简历', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                GridView::widget([
+                <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'user_id',
                         'title',
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
-                                    'On'  => '审核通过',
-                                    'Off' => '审核未通过',
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_using ];
                             },
                         ],
                         [
@@ -62,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]);
-                ?>
+                ]); ?>
 
             </div>
         </div>
     </section>
 </div>
+

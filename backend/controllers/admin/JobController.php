@@ -2,9 +2,11 @@
 
 namespace backend\controllers\admin;
 
+use common\models\JobApplyFor;
 use Yii;
 use common\models\Job;
 use common\models\JobSearch;
+use yii\data\ActiveDataProvider;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,9 +28,8 @@ class JobController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'view', 'update', 'delete',],
-                        'allow'   => true,
-                        'roles'   => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -137,5 +138,17 @@ class JobController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionUsers()
+    {
+
+        $query = JobApplyFor::find();
+
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
+
+        return $this->render('users', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

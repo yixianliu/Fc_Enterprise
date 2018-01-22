@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\DownloadCls */
+/* @var $model common\models\Resume */
 
-$this->title = '创建下载分类';
-$this->params['breadcrumbs'][] = ['label' => '下载分类', 'url' => ['index']];
+$this->title = '发布简历';
+$this->params['breadcrumbs'][] = ['label' => '简历中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

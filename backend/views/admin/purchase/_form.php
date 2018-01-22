@@ -176,6 +176,6 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 
     </section>
 
-    <?= $this->render('../../form_msg'); ?>
+    <?= $this->render('../../formMsg'); ?>
 
 </div>

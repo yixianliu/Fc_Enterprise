@@ -6,35 +6,36 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Download Cls';
+$this->title = '下载分类';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="download-cls-index">
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                <p>
+                    <?= Html::a('创建下载分类', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-    <p>
-        <?= Html::a('Create Download Cls', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'c_key',
+                        'sort_id',
+                        'name',
+                        'is_using',
+                        'updated_at',
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'c_key',
-            'sort_id',
-            'name',
-            'description:ntext',
-            //'keywords',
-            //'json_data',
-            //'parent_id',
-            //'is_using',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+            </div>
+        </div>
+    </section>
 </div>
+

@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
@@ -20,41 +21,43 @@ use dosamigos\fileupload\FileUploadUI;
         <div class="content-body">
             <div class="row">
 
-                <?php $form = ActiveForm::begin(); ?>
+                <?php if (!empty($result['classify'])): ?>
 
-                <?=
-                $form->field($model, 'c_key')->widget(Select2::classname(), [
-                    'data'          => $result['classify'],
-                    'options'       => ['placeholder' => '选择下载分类...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
+                    <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                    <?=
+                    $form->field($model, 'c_key')->widget(Select2::classname(), [
+                        'data'          => $result['classify'],
+                        'options'       => ['placeholder' => '选择下载分类...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
 
-                <hr/>
+                    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'file/*'
-                    ],
-                    'clientOptions' => [
-                        'maxFileSize'      => 2000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 5,
-                    ],
+                    <hr/>
 
-                    // ...
-                    'clientEvents'  => [
+                    <?=
+                    FileUploadUI::widget([
+                        'model'         => $model,
+                        'attribute'     => 'path',
+                        'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download'],
+                        'gallery'       => false,
+                        'fieldOptions'  => [
+                            'accept' => 'file/*'
+                        ],
+                        'clientOptions' => [
+                            'maxFileSize'      => 2000000,
+                            'dataType'         => 'json',
+                            'maxNumberOfFiles' => 5,
+                        ],
 
-                        'fileuploaddone' => 'function(e, data) {
+                        // ...
+                        'clientEvents'  => [
+
+                            'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
@@ -72,32 +75,37 @@ use dosamigos\fileupload\FileUploadUI;
                                 
                                 return true;
                             }',
-                        'fileuploadfail' => 'function(e, data) {
+                            'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                             }',
-                    ],
-                ]);
-                ?>
+                        ],
+                    ]);
+                    ?>
 
-                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
+                    <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                <hr/>
+                    <hr/>
 
-                <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-                <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
 
-                <div class="form-group">
+                    <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '添加下载内容' : '更新下载内容', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        <?= Html::submitButton($model->isNewRecord ? '添加下载内容' : '更新下载内容', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 
+                    </div>
 
-                </div>
+                    <?php ActiveForm::end(); ?>
 
-                <?php ActiveForm::end(); ?>
+                <?php else: ?>
+
+                    <h3>暂无分类 !! 点 <a href="<?= Url::to(['admin/download-cls/create']) ?>">这里</a> 添加</h3>
+
+                <?php endif; ?>
 
             </div>
         </div>

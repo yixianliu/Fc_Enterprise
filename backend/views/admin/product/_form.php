@@ -259,4 +259,7 @@ if (empty($result['classify'])) {
         <?= $this->render('../result_img', ['img' => $model->images, 'type' => 'product']); ?>
 
     </section>
+
+    <?= $this->render('../../formMsg'); ?>
+
 </div>

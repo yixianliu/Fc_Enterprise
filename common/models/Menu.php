@@ -21,6 +21,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+
+    static public $parent_id = 'M0';
+
     /**
      * @inheritdoc
      */
@@ -235,9 +238,8 @@ class Menu extends \yii\db\ActiveRecord
                     $array = $this->recursionUrlMenu($value, $value['parent_id']);
                     break;
 
-                // 默认
                 default:
-                    $array = $this->recursionMenu($value);
+                    return false;
                     break;
             }
 
@@ -260,7 +262,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 递归菜单
+     * 递归菜单 (固定控制器使用)
      *
      * @param $data
      * @return array|void
@@ -293,7 +295,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 单页面递归菜单
+     * 递归菜单 (单页面使用)
      *
      * @param $data
      * @return array|void
@@ -392,6 +394,74 @@ class Menu extends \yii\db\ActiveRecord
                 'url'   => [$url],
                 'items' => $this->recursionUrlMenu($value, $adminid),
             ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 菜单 (选项框使用)
+     *
+     * @return static[]
+     */
+    public function getSelectMenu()
+    {
+
+        // 产品分类
+        $dataClassify = self::findByAll(static::$parent_id);
+
+        // 初始化
+        $result = array();
+
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['m_key'] ] = $value['name'];
+
+            $child = $this->recursionMenuSelect($value);
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
+        }
+
+        return $result;
+    }
+
+    public function recursionMenuSelect($data, $num = 1)
+    {
+
+        if (empty($data))
+            return;
+
+        // 初始化
+        $result = array();
+        $symbol = null;
+
+        $child = self::findByAll($data['m_key']);
+
+        if (empty($child))
+            return;
+
+        if ($num != 0) {
+            for ($i = 0; $i <= $num; $i++) {
+                $symbol .= '――――';
+            }
+        }
+
+        foreach ($child as $key => $value) {
+
+            $result[ $value['m_key'] ] = $symbol . $value['name'];
+
+            $childData = $this->recursionMenuSelect($value, ($num + 1));
+
+            if (empty($childData))
+                continue;
+
+            $result = array_merge($result, $childData);
+
         }
 
         return $result;

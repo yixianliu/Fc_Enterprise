@@ -1,13 +1,18 @@
 <?php
+/**
+ *
+ * 应聘用户
+ *
+ * Created by Yxl.
+ * User: <zccem@163.com>.
+ * Date: 2018/1/22
+ * Time: 16:31
+ */
 
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\JobSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = '招聘列表';
+$this->title = '应聘列表';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -22,10 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
                     <?= Html::a('发布招聘', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
@@ -36,16 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'user_id',
-                        'title',
+                        'job_id',
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '审核通过',
                                     'Off' => '审核未通过',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_using ];
                             },
                         ],
                         [

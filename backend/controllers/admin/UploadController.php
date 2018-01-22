@@ -22,6 +22,7 @@ use common\models\Slide;
 use common\models\Job;
 use common\models\PagesTplFile;
 use common\models\Purchase;
+use common\models\Resume;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -38,7 +39,7 @@ class UploadController extends BaseController
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id, $type, $attribute = 'images')
+    public function actionImageUpload($id = 1, $type, $attribute = 'images')
     {
 
         if (empty($type)) {
@@ -58,6 +59,11 @@ class UploadController extends BaseController
             // 幻灯片
             case 'slide':
                 $model = new Slide();
+                break;
+
+            // 简历中心
+            case 'resume':
+                $model = new Resume();
                 break;
 
             // 招聘中心
