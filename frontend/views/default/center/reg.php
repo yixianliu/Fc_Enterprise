@@ -21,24 +21,15 @@ $this->params['breadcrumbs'][] = '注册';
 
 ?>
 
-<section class="page-title text-center" style="background-image: url(<?= Url::to('@web/themes/enterprise/img') ?>/blog/blog_title_bg.jpg);height: 500px;">
-    <div class="container relative clearfix">
-    </div>
-</section>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
-                <?=
-                \yii\widgets\Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
-            </div>
-        </div>
-    </div>
-</section>
+<?= $this->render('../slide', ['pagekey' => 'member']); ?>
+
+<?= $this->render('../nav'); ?>
 
 <section class="section-wrap contact" id="contact" style="padding: 50px 0;">
     <div class="container">
@@ -109,7 +100,7 @@ $this->params['breadcrumbs'][] = '注册';
                         <?= $form->field($model, 'msg')->textInput(['maxlength' => 5]) ?>
                     </div>
 
-                    <div class="col-md-6 contact-name" style="margin-top: 30px;"><input id="SendMsg" class="btn" type="button" value="发送短信验证码" /></div>
+                    <div class="col-md-6 contact-name" style="margin-top: 28px;"><input id="SendMsg" class="btn" type="button" value="发送短信验证码" /></div>
 
                 </div>
 

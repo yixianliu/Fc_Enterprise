@@ -2,46 +2,122 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use dosamigos\datepicker\DatePicker;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="purchase-form">
+<section class="section-wrap blog-standard" style="padding: 60px 0">
+    <div class="container relative">
+        <div class="row">
 
-    <?php $form = ActiveForm::begin(); ?>
+            <div class="col-sm-3 sidebar blog-sidebar">
+                <?= $this->render('../user/_left'); ?>
+            </div>
 
-    <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true]) ?>
+            <div class="col-sm-9 blog-content">
 
-    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'content')
+                    ->widget('kucha\ueditor\UEditor', [
+                        'clientOptions' => [
+                            //设置语言
+                            'lang'               => 'zh-cn',
+                            'initialFrameHeight' => '600',
+                            'elementPathEnabled' => false,
+                            'wordCount'          => false,
+                        ]
+                    ]);
+                ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                <hr/>
 
-    <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
+                <?=
+                FileUploadUI::widget([
+                    'model'         => $model,
+                    'attribute'     => 'path',
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
+                    'gallery'       => false,
+                    'fieldOptions'  => [
+                        'accept' => 'file/*'
+                    ],
+                    'clientOptions' => [
+                        'maxFileSize'      => 2000000,
+                        'dataType'         => 'json',
+                        'maxNumberOfFiles' => 5,
+                    ],
 
-    <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
+                    // ...
+                    'clientEvents'  => [
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+                        'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                                
+                                var html = "";
+                                
+                                var ImagesContent = $("#ImagesContent");
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += file.name + \',\';
+                                });
+                                
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
+                                
+                                return true;
+                            }',
+                        'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'is_status')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-    <?= $form->field($model, 'start_at')->textInput(['maxlength' => true]) ?>
+                <hr/>
 
-    <?= $form->field($model, 'end_at')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'is_type')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'is_status')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'start_at')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'end_at')->textInput(['maxlength' => true]) ?>
+
+                <div class="form-group">
+
+                    <?= Html::submitButton($model->isNewRecord ? '发布采购信息' : '更新采购信息', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
 
-</div>
+</section>

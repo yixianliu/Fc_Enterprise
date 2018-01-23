@@ -261,11 +261,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         $this->r_key = 'admin';
 
-        if (!$this->save(false)) {
-            return false;
-        }
-
-        return true;
+        return $this->save(false) ? true : false;
     }
 
     /**

@@ -8,6 +8,7 @@ use common\models\JobSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * JobController implements the CRUD actions for Job model.
@@ -21,6 +22,22 @@ class JobController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update', 'delete',],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['index', 'view',],
+                        'allow' => true,
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [

@@ -24,7 +24,7 @@ class CenterController extends BaseController
         // 初始化
         $result = array();
 
-        $result['product-cls'] = ProductClassify::findAll(['is_using' => 'On']);
+        $result['product-cls'] = ProductClassify::findByAll('C0');
 
         return $this->render('index', ['result' => $result]);
     }

@@ -85,7 +85,9 @@ class MenuController extends BaseController
     {
         $model = new Menu();
 
-        $model->parent_id = Yii::$app->request->get('id', 'E1');
+        $parent_id = Menu::findByOne(Yii::$app->request->get('id', 'E1'));
+
+        $model->parent_id = empty($parent_id->parent_id) ? null : $parent_id->parent_id;
 
         $result = [
             'parent'     => $model->getSelectMenu(),
@@ -115,7 +117,7 @@ class MenuController extends BaseController
         $model = $this->findModel($id);
 
         $result = [
-            'parent'     => $this->getMenu(),
+            'parent'     => $model->getSelectMenu(),
             'menu_model' => $this->getModel(),
             'pages'      => $this->getPages(),
             'role'       => $this->getRole(),

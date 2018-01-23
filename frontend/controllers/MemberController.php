@@ -77,6 +77,17 @@ class MemberController extends Controller
                 Yii::$app->getSession()->setFlash('error', '没有验证手机 !!');
             } else {
 
+                if (!($user = $model->userReg())) {
+                    Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
+                }
+
+                if (!Yii::$app->getUser()->login($model->getUser(), (3600 * 24 * 30))) {
+                    Yii::$app->getSession()->setFlash('error', '无法保存时间 !!');
+                }
+
+                return $this->redirect(['/user/index']);
+
+
                 if ($model->msg != $cookie->get('RegPhoneCode')) {
                     Yii::$app->getSession()->setFlash('error', '与验证手机的验证码不一致 !!');
                 } else {
@@ -110,10 +121,15 @@ class MemberController extends Controller
     {
         Yii::$app->user->logout();
         Yii::$app->getSession()->destroy();
-
-        return $this->goHome();
+        return $this->redirect(['/center/index']);
     }
 
+    /**
+     * 发送短信
+     *
+     * @return string
+     * @throws \yii\base\Exception
+     */
     public function actionSend()
     {
 

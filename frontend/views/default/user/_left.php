@@ -20,14 +20,14 @@ use yii\helpers\Url;
 
 <!-- Categories -->
 <div class="widget categories">
-    <h3 class="widget-title">用户中心 / User Center</h3>
     <ul>
         <li class="active-cat"><a href="<?= Url::to(['user/index']) ?>">用户中心</a></li>
         <li><a href="#">用户资料</a></li>
         <li><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></li>
-        <li><a href="#">采购中心</a></li>
-        <li><a href="#">发布招聘</a></li>
+        <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
+        <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
         <li><a href="#">修改密码</a></li>
+        <li><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></li>
     </ul>
 </div>
 

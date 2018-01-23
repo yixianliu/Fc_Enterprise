@@ -144,6 +144,9 @@ class Menu extends \yii\db\ActiveRecord
 
         $data = static::findByAll($pid);
 
+        if (empty($data))
+            return;
+
         foreach ($data as $value) {
 
             switch ($value['menuModel']['url_key']) {
@@ -151,7 +154,7 @@ class Menu extends \yii\db\ActiveRecord
                 // 产品模型
                 case 'product':
 
-                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+                    $product = ProductClassify::findByAll('C0');
 
                     foreach ($product as $values) {
                         $array[] = [
@@ -207,7 +210,7 @@ class Menu extends \yii\db\ActiveRecord
                 // 新闻模型
                 case 'news':
 
-                    $news = NewsClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+                    $news = NewsClassify::findByAll('C0');
 
                     foreach ($news as $values) {
                         $array[] = [
@@ -239,14 +242,13 @@ class Menu extends \yii\db\ActiveRecord
                     break;
 
                 default:
-                    return false;
                     break;
             }
 
             $customId = empty($value['custom_key']) ? 1 : $value['custom_key'];
 
             // 自定义外部链接
-            $urls = ($value['menuModel']['url_key'] == 'urls' ? '#' : [$value['menuModel']['url_key'] . '/index', 'id' => $customId]);
+            $urls = ($value['menuModel']['url_key'] == 'urls' ? [$value['url']] : [$value['menuModel']['url_key'] . '/index', 'id' => $customId]);
 
             $dataMenu[] = [
                 'label' => $value['name'],
@@ -386,7 +388,7 @@ class Menu extends \yii\db\ActiveRecord
             if (!empty($value['url'])) {
                 $url = ($adminid == 'A3' ? 'admin/' . $value['url'] : $value['url']);
             } else {
-                $url = '#';
+                $url = $value['url'];
             }
 
             $result[] = [

@@ -9,6 +9,7 @@ use common\models\PurchaseSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PurchaseController implements the CRUD actions for Purchase model.
@@ -21,8 +22,24 @@ class PurchaseController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update', 'delete',],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['index', 'view',],
+                        'allow' => true,
+                    ],
+                ],
+            ],
+
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -50,7 +67,7 @@ class PurchaseController extends BaseController
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'result' => $result,
+            'result'       => $result,
         ]);
     }
 
@@ -77,6 +94,12 @@ class PurchaseController extends BaseController
     public function actionCreate()
     {
         $model = new Purchase();
+
+        $model->purchase_id = time() . '_' . rand(0000, 9999);
+
+        $model->is_using = 'Off';
+
+        $model->user_id = Yii::$app->user->identity->user_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

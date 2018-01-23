@@ -46,7 +46,6 @@ $this->beginPage();
                 // PC跳转移动端
                 var thisUrl = window.location.href;
                 window.location.href = thisUrl.substr(0, thisUrl.lastIndexOf('/') + 1) + 'index.php/mobile/';
-
             }
         }
 

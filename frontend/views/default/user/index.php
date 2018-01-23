@@ -13,27 +13,18 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = '用户中心';
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<section class="page-title text-center" style="background-image: url(<?= Url::to('@web/themes/enterprise/img') ?>/blog/blog_title_bg.jpg);height: 500px;">
-    <div class="container relative clearfix">
-    </div>
-</section>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
-                <?=
-                \yii\widgets\Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
-            </div>
-        </div>
-    </div>
-</section>
+<?= $this->render('../slide', ['pagekey' => 'user']); ?>
+
+<?= $this->render('../nav'); ?>
 
 <section class="section-wrap blog-standard" style="padding: 60px 0">
     <div class="container relative">

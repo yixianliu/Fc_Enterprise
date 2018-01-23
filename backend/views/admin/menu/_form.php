@@ -100,7 +100,40 @@ use kartik\select2\Select2;
 
 <script type="text/javascript">
 
-    $('#menu-model_key').on('change', function (data) {
+    $('.field-menu-custom_key').hide();
+
+    $('.field-menu-url').hide();
+
+    $('#menu-model_key').on('change', function () {
+
+        var selectVal = $(this).val();
+
+        if (selectVal == 'UC1') {
+            $('.field-menu-custom_key').show();
+
+            // 链接
+            $('.field-menu-url').hide();
+            $('#menu-url').val('');
+        }
+
+        if (selectVal == 'UU1') {
+            $('.field-menu-url').show();
+
+            // 单页面
+            $('.field-menu-custom_key').hide();
+            $('#menu-custom_key').attr("checked", '');
+        }
+
+        if (selectVal != 'UC1' && selectVal != 'UU1') {
+
+            // 单页面
+            $('.field-menu-custom_key').hide();
+            $('#menu-custom_key').attr("checked", "");
+
+            // 链接
+            $('.field-menu-url').hide();
+            $('#menu-url').val('');
+        }
 
         return true;
     });

@@ -10,25 +10,6 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<section class="page-title text-center" style="background-image: url(<?= Url::to('@web/themes/enterprise/img') ?>/blog/blog_title_bg.jpg);height: 500px;">
-    <div class="container relative clearfix">
-    </div>
-</section>
-
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
-                <?=
-                \yii\widgets\Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="section-wrap blog-standard" style="padding: 60px 0">
     <div class="container relative">
         <div class="row">
@@ -40,10 +21,6 @@ use dosamigos\fileupload\FileUploadUI;
             <div class="col-sm-9 blog-content">
 
                 <?php $form = ActiveForm::begin(); ?>
-
-                <?= $form->field($model, 'job_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
-                <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -119,8 +96,10 @@ use dosamigos\fileupload\FileUploadUI;
                 <?php ActiveForm::end(); ?>
 
             </div>
-
         </div>
     </div>
+
+    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
 </section>
 

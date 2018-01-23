@@ -11,6 +11,14 @@ $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'i
 $this->params['breadcrumbs'][] = '更新';
 ?>
 
+<style type="text/css">
+    .summary {display: none;}
+</style>
+
+<?= $this->render('../slide', ['pagekey' => 'job']); ?>
+
+<?= $this->render('../nav'); ?>
+
 <?= $this->render('_form', [
     'model' => $model,
 ]) ?>
