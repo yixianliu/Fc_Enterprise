@@ -25,7 +25,9 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
 
+    public $password_hash;
     public $msg;
+    public $newpassword;
     public $repassword;
     public $auth_key;
     private $_user;
@@ -66,10 +68,11 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => '添加数据时间',
             'updated_at' => '更新数据时间',
 
-            'enterprise' => '企业名称',
-            'repassword' => '二次密码',
-            'is_type'    => '用户类型',
-            'msg'        => '短信验证码',
+            'enterprise'  => '企业名称',
+            'repassword'  => '二次密码',
+            'newpassword' => '新密码',
+            'is_type'     => '用户类型',
+            'msg'         => '短信验证码',
         ];
     }
 
@@ -82,6 +85,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             // 必填
             [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
+            [['newpassword', 'password', 'repassword'], 'required', 'on' => 'setpsw'],
 
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
@@ -96,10 +100,13 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
             ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
 
+            // 修改密码,二次密码是否一致
+            ['repassword', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'setpsw'],
+
             // 登录
             [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
             ['rememberMe', 'boolean', 'on' => 'login'],
-            ['password', 'validatePassword', 'on' => 'login'],
+            ['password', 'validatePassword', 'on' => 'login, setpsw'],
         ];
     }
 
@@ -115,6 +122,7 @@ class User extends ActiveRecord implements IdentityInterface
             'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id'],
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
+            'setpsw'  => ['password', 'newpassword', 'repassword'],
         ];
     }
 
@@ -258,8 +266,29 @@ class User extends ActiveRecord implements IdentityInterface
     {
 
         $this->user_id = time() . '_' . rand(0000, 9999);
-
         $this->r_key = 'admin';
+
+        $this->setPassword($this->password);
+
+        $this->password = $this->password_hash;
+
+        $this->generateAuthKey();
+
+        return $this->save(false) ? true : false;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return bool
+     */
+    public function setPsw($password)
+    {
+
+        $this->setPassword($this->password);
+
+        if ($password != $this->password_hash)
+            return false;
 
         return $this->save(false) ? true : false;
     }
@@ -273,7 +302,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
 
         if ($this->_user == null) {
-            $this->_user = self::findByUsername($this->username);
+            $this->_user = static::findByUsername($this->username);
         }
 
         return $this->_user;

@@ -9,6 +9,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+
 ?>
 
 <div class="col-md-4 col-xs-6 work-item web-design mockups">

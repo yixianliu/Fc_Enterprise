@@ -6,16 +6,22 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Supply */
 
-$this->title = 'Create Supply';
-$this->params['breadcrumbs'][] = ['label' => 'Supplies', 'url' => ['index']];
+$this->title = '发布供应';
+$this->params['breadcrumbs'][] = ['label' => '供应中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="supply-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<?= $this->render('../slide', ['pagekey' => 'job']); ?>
 
-</div>
+<?= $this->render('../nav'); ?>
+
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>
+

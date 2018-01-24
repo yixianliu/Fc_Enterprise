@@ -6,12 +6,22 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
 
-$this->title = 'Create Purchase';
-$this->params['breadcrumbs'][] = ['label' => 'Purchases', 'url' => ['index']];
+$this->title = '发布采购';
+$this->params['breadcrumbs'][] = ['label' => '采购中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
+
+<?= $this->render('../slide', ['pagekey' => 'job']); ?>
+
+<?= $this->render('../nav'); ?>
+
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>
 

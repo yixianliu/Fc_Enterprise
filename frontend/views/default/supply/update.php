@@ -5,17 +5,23 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Supply */
 
-$this->title = 'Update Supply: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Supplies', 'url' => ['index']];
+$this->title = '更新供应: {nameAttribute}';
+$this->params['breadcrumbs'][] = ['label' => '供应中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '更新';
 ?>
-<div class="supply-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<?= $this->render('../slide', ['pagekey' => 'job']); ?>
 
-</div>
+<?= $this->render('../nav'); ?>
+
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>
+

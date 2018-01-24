@@ -12,7 +12,7 @@ if (Yii::$app->getSession()->hasFlash('success')) {
 
     echo Alert::widget([
         'options' => [
-            'class' => 'success', //这里是提示框的class
+            'class' => 'alert alert-success fade in alert-dismissible', //这里是提示框的class
         ],
         'body'    => Yii::$app->getSession()->getFlash('success'), //消息体
     ]);
@@ -28,13 +28,14 @@ if (Yii::$app->getSession()->hasFlash('error')) {
             $data .= '<li>' . $value[0] . '</li>';
         }
         $data .= '</ul>';
+
     } else {
         $data = Yii::$app->getSession()->getFlash('error');
     }
 
     echo Alert::widget([
         'options' => [
-            'class' => 'error',
+            'class' => 'alert alert-warning fade in alert-dismissible',
         ],
         'body'    => $data,
     ]);

@@ -77,21 +77,14 @@ class MemberController extends Controller
                 Yii::$app->getSession()->setFlash('error', '没有验证手机 !!');
             } else {
 
-                if (!($user = $model->userReg())) {
-                    Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
-                }
-
-                if (!Yii::$app->getUser()->login($model->getUser(), (3600 * 24 * 30))) {
-                    Yii::$app->getSession()->setFlash('error', '无法保存时间 !!');
-                }
-
-                return $this->redirect(['/user/index']);
-
-
+                // 验证手机验证码
                 if ($model->msg != $cookie->get('RegPhoneCode')) {
+
                     Yii::$app->getSession()->setFlash('error', '与验证手机的验证码不一致 !!');
+
                 } else {
 
+                    // 插入数据
                     if (!($user = $model->userReg())) {
                         Yii::$app->getSession()->setFlash('error', '注册失败,请检查 !!');
                     }
@@ -103,10 +96,10 @@ class MemberController extends Controller
                     if (!Yii::$app->user->isGuest) {
                         return $this->redirect(['/user/index']);
                     }
+
+                    Yii::$app->getSession()->setFlash('error', '注册异常 !!');
                 }
-
             }
-
         }
 
         return $this->render('../center/reg', ['model' => $model]);
@@ -162,6 +155,7 @@ class MemberController extends Controller
         FileHelper::createDirectory(Yii::getAlias('@frontend/web/temp/') . $code);
 
         return Json::encode(true);
+
 //        return Json::encode(Yii::$app->smser->send($data['username'], $content));
     }
 

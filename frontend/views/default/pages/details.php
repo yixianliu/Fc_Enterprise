@@ -15,5 +15,3 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('../slide', ['pagekey' => $result['parent']['page_id']]); ?>
 
 <?= $this->render('../nav'); ?>
-
-

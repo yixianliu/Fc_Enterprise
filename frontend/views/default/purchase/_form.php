@@ -116,8 +116,9 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
+
+        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
     </div>
-
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
 </section>
+

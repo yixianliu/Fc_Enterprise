@@ -93,6 +93,10 @@ class JobController extends BaseController
 
         $model->user_id = Yii::$app->user->identity->user_id;
 
+        if (!empty($model->getErrors())) {
+            Yii::$app->getSession()->setFlash('error', $model->getErrors());
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -111,6 +115,10 @@ class JobController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if ($model->user_id != Yii::$app->user->identity->user_id) {
+            return $this->redirect(['index']);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

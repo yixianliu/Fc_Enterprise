@@ -29,8 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 <?php endif; ?>
 
-<?= $this->render('../left'); ?>
-
 <section class="section-wrap-mp pb-50">
     <div class="container">
 

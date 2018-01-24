@@ -36,17 +36,18 @@ class ConfList extends InputWidget
         // 初始化
         $result = array();
 
-        $result['title'] = $this->config;
+        $result['title'] = $this->config[0];
 
         $confData = Conf::findByData('On');
 
         if (!empty($confData)) {
-
             foreach ($confData as $key => $value) {
                 $result['Conf'][ $value['c_key'] ] = $value['parameter'];
             }
         }
 
-        return $this->render('head', ['result' => $result]);
+        $this->config[1] = empty($this->config[1]) ? 'head' : $this->config[1];
+
+        return $this->render($this->config[1], ['result' => $result]);
     }
 }

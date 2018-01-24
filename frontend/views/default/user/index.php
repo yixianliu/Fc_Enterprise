@@ -14,6 +14,7 @@ use yii\helpers\Html;
 
 $this->title = '用户中心';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <style type="text/css">

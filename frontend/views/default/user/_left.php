@@ -10,6 +10,7 @@
  */
 
 use yii\helpers\Url;
+use common\widgets\iConf\ConfList;
 
 ?>
 
@@ -26,40 +27,15 @@ use yii\helpers\Url;
         <li><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></li>
         <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
         <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
-        <li><a href="#">修改密码</a></li>
+        <li><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></li>
         <li><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></li>
     </ul>
 </div>
 
-<div class="widget latest-posts">
-    <h3 class="widget-title">Recent Posts</h3>
-    <ul>
-        <li class="clearfix">
-            <a href="blog-single-post.html">
-                <img src="<?= Url::to('@web/themes/enterprise/img') ?>/blog/latest_posts_1.jpg" alt="">
-                This is standard blog post title
-                <div class="entry-meta">
-                    <span class="entry-date">July 3, 2015</span>
-                </div>
-            </a>
-        </li>
-        <li class="clearfix">
-            <a href="blog-single-post.html">
-                <img src="<?= Url::to('@web/themes/enterprise/img') ?>/blog/latest_posts_2.jpg" alt="">
-                Enigma perfect minimal onepage
-                <div class="entry-meta">
-                    <span class="entry-date">July 2, 2015</span>
-                </div>
-            </a>
-        </li>
-        <li class="clearfix">
-            <a href="blog-single-post.html">
-                <img src="<?= Url::to('@web/themes/enterprise/img') ?>/blog/latest_posts_3.jpg" alt="">
-                Building your business with our themes
-                <div class="entry-meta">
-                    <span class="entry-date">July 1, 2015</span>
-                </div>
-            </a>
-        </li>
-    </ul>
+<br/>
+<h3 class="widget-title">联系我们</h3>
+
+<div class="widget categories">
+    <?= ConfList::widget(['config' => [$this->title, 'left']]); ?>
 </div>
+

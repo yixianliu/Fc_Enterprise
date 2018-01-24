@@ -7,7 +7,9 @@
 
 namespace frontend\controllers;
 
+use Yii;
 use common\models\Job;
+use common\models\User;
 
 class UserController extends BaseController
 {
@@ -35,6 +37,32 @@ class UserController extends BaseController
     public function actionCheck()
     {
         return $this->render('check');
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return string
+     */
+    public function actionSetpassword()
+    {
+
+        $model = User::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+
+        $model->scenario = 'setpsw';
+
+        $password = $model->password;
+        $model->password = null;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->setPsw($password)) {
+                Yii::$app->getSession()->setFlash('error', '原密码有误 !!');
+            } else {
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('setpassword', ['model' => $model]);
     }
 
 }

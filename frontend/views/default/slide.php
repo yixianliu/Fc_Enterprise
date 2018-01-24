@@ -23,9 +23,11 @@ $dataSlide = $ClsSlide->getData($pagekey);
 if (empty($dataSlide))
     return false;
 
-foreach ($dataSlide as $key => $value) {
-    if (empty($value)) {
-        unset($dataSlide[ $key ]);
+if (is_array($dataSlide)) {
+    foreach ($dataSlide as $key => $value) {
+        if (empty($value)) {
+            unset($dataSlide[ $key ]);
+        }
     }
 }
 
@@ -33,32 +35,52 @@ $alt = empty($alt) ? null : $alt;
 
 ?>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<?php if (is_array($dataSlide)): ?>
 
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-    <div class="carousel-inner">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
 
-        <?php foreach ($dataSlide as $value): ?>
-            <div class="item active">
-                <?= Html::img(Url::to('@web/../../backend/web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
-            </div>
-        <?php endforeach; ?>
+        <div class="carousel-inner">
+
+            <?php foreach ($dataSlide as $value): ?>
+
+                <div class="item active">
+                    <?= Html::img(Url::to('@web/../../backend/web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">上一张</span>
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">下一张</span>
+        </a>
 
     </div>
 
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
+<?php else: ?>
 
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, world!</h1>
 
-</div>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a
+                starting point to create something more unique.</p>
+
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+
+        </div>
+    </div>
+
+<?php endif; ?>

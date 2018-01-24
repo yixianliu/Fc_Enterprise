@@ -77,26 +77,24 @@ $this->params['breadcrumbs'][] = '登录';
 
             <div class="col-md-9">
 
-                <?php
-                $form = ActiveForm::begin(['action' => ['member/login'], 'method' => 'post', 'id' => $model->formName()]);
-                ?>
+                <?php $form = ActiveForm::begin(['action' => ['member/login'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
                 <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
 
+                <?= Html::submitButton('立即登录', ['class' => 'btn btn-color btn-submit']) ?>
 
-                <?= Html::submitButton('立即登录', ['class' => 'btn btn-lg btn-color btn-submit']) ?>
-
+                <?= Html::a('注册', ['member/reg'], ['class' => 'btn']) ?>
 
                 <?php ActiveForm::end() ?>
 
             </div>
 
         </div>
+
+        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
     </div>
-
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
 </section>
 

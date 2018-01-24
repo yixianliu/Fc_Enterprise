@@ -77,9 +77,7 @@ $this->params['breadcrumbs'][] = '注册';
 
             <div class="col-md-9">
 
-                <?php
-                $form = ActiveForm::begin(['action' => ['member/reg'], 'method' => 'post', 'id' => $model->formName()]);
-                ?>
+                <?php $form = ActiveForm::begin(['action' => ['member/reg'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
@@ -100,21 +98,22 @@ $this->params['breadcrumbs'][] = '注册';
                         <?= $form->field($model, 'msg')->textInput(['maxlength' => 5]) ?>
                     </div>
 
-                    <div class="col-md-6 contact-name" style="margin-top: 28px;"><input id="SendMsg" class="btn" type="button" value="发送短信验证码" /></div>
+                    <div class="col-md-6 contact-name" style="margin-top: 28px;"><input id="SendMsg" class="btn" type="button" value="发送短信验证码"/></div>
 
                 </div>
 
-                <?= Html::submitButton('注册', ['class' => 'btn btn-lg btn-color btn-submit']) ?>
+                <?= Html::submitButton('立即注册', ['class' => 'btn btn-color btn-submit']) ?>
+
+                <?= Html::a('登录', ['member/login'], ['class' => 'btn']) ?>
 
                 <?php ActiveForm::end() ?>
 
             </div>
-
         </div>
+
+        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
     </div>
-
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
 </section>
 
 <script type="text/javascript">
@@ -124,7 +123,7 @@ $this->params['breadcrumbs'][] = '注册';
         var username = $('#username').val();
 
         if (username == '') {
-            alert('请填写手机号码?' );
+            alert('请填写手机号码?');
             return false;
         }
 
