@@ -60,7 +60,7 @@ use kartik\select2\Select2;
 
                     <?php ActiveForm::end() ?>
 
-                    <?= Yii::$app->view->renderFile('@app/views/form_msg.php'); ?>
+                    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
 
                 </div>
             </div>
