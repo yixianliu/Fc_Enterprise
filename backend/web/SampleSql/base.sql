@@ -594,7 +594,7 @@ CREATE TABLE `#DB_PREFIX#Tender` (
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
-    UNIQUE KEY `supply_id` (`supply_id`)
+    UNIQUE KEY `tender_id` (`tender_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
@@ -624,7 +624,7 @@ CREATE TABLE `#DB_PREFIX#PSB_Classify` (
 DROP TABLE IF EXISTS `#DB_PREFIX#SP_Offer`;
 CREATE TABLE `#DB_PREFIX#SP_Offer` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `offer_id` VARCHAR(85) NOT NULL COMMENT '编号',
+    `offer_id` VARCHAR(85) NOT NULL COMMENT '对应的类目 ID',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `price` VARCHAR(85) NOT NULL COMMENT '提交价格',
     `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
