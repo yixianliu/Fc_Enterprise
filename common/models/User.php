@@ -30,6 +30,8 @@ class User extends ActiveRecord implements IdentityInterface
     public $newpassword;
     public $repassword;
     public $auth_key;
+    public $rememberMe = true;
+
     private $_user;
 
     /**
@@ -291,6 +293,30 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
 
         return $this->save(false) ? true : false;
+    }
+
+    /**
+     * 登录
+     *
+     * @return bool
+     */
+    public function login()
+    {
+
+        $data = static::findByUsername($this->username);
+
+        if (empty($data))
+            return false;
+
+        $this->setPassword($this->password);
+
+        $this->password = $this->password_hash;
+
+        if ($this->password ==  $data->password) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        }
+
+        return false;
     }
 
     /**

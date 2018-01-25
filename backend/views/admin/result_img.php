@@ -48,10 +48,11 @@ if (!empty($img)) {
 
                         <?php endif; ?>
 
-                        <h5 style="word-wrap: break-word;"><?= $value ?></h5><br/>
-
                         <div class="portfolio-info">
-                            <button class="btn btn-danger delete deleteH5" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
+
+                            <h5 class="deleteH5" style="word-wrap: break-word;"><?= $value ?></h5><br/>
+
+                            <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
                                 <i class="glyphicon glyphicon-trash"></i>
                                 <span>删除</span>
                             </button>
@@ -66,7 +67,7 @@ if (!empty($img)) {
 
                 $('.portfolio-info').on('click', function () {
 
-                    var h5 = $(this).find('.deleteH5').html();
+                    var h5 = $(this).find('.deleteH5').text();
 
                     // 获取 ID
                     var ImageId = $('#ImagesContent');

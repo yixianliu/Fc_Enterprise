@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => '下载分类', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<?= $this->render('_form', [
+    'model'  => $model,
+    'result' => $result,
+]) ?>
 

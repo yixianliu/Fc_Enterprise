@@ -43,26 +43,6 @@ class ProductController extends BaseController
     }
 
     /**
-     * 操作
-     *
-     * @return array
-     */
-    public function actions()
-    {
-        return [
-            'upload' => [
-                'class'  => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    "imageUrlPrefix"       => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat"      => "/UEditor/product/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
-                    "imageRoot"            => Yii::getAlias("@webroot"),
-                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
-                ],
-            ]
-        ];
-    }
-
-    /**
      * Lists all Product models.
      * @return mixed
      */
@@ -202,7 +182,7 @@ class ProductController extends BaseController
 
             $result['classify'][ $value['c_key'] ] = $value['name'];
 
-            $child = $Cls->recursionProductSelect($value->toArray());
+            $child = $Cls->recursionClsSelect($value);
 
             if (empty($child))
                 continue;

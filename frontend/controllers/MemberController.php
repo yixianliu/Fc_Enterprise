@@ -49,6 +49,13 @@ class MemberController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
+            if (!$model->login()) {
+                Yii::$app->getSession()->setFlash('error', '帐号密码有误 !!');
+            } else {
+                return $this->redirect(['/user/index']);
+            }
+
+            $model->password = null;
         }
 
         return $this->render('../center/login', ['model' => $model]);
@@ -114,6 +121,7 @@ class MemberController extends Controller
     {
         Yii::$app->user->logout();
         Yii::$app->getSession()->destroy();
+
         return $this->redirect(['/center/index']);
     }
 

@@ -167,12 +167,8 @@ class PagesController extends BaseController
         $data = Yii::$app->request->post();
 
         // 生成 PHP
-        if (!empty($data)) {
-            if (!empty($data['SinglePage']['path']) && empty($model->path)) {
-                $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
-            } else {
-                $data['SinglePage']['path'] = $model->path;
-            }
+        if (!empty($data['SinglePage']['path'])) {
+            $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
         }
 
         if ($model->load($data) && $model->save()) {
@@ -302,6 +298,10 @@ class PagesController extends BaseController
         $filePath = Yii::getAlias('@frontend') . '/views/pages/';
 
         $fileName = $id . '.php';
+
+        if (file_exists($filePath . $fileName)) {
+            @unlink($filePath . $fileName);
+        }
 
         FileHelper::createDirectory($filePath);
 

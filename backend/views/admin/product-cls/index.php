@@ -10,13 +10,13 @@ use yii\grid\GridView;
 $this->title = '产品分类';
 $this->params['breadcrumbs'][] = $this->title;
 
+// 初始化
+$result = null;
+
 if (!empty($dataProvider)) {
 
-    // 初始化
-    $dataCls = null;
-
     foreach ($dataProvider as $value) {
-        $dataCls .= recursion($value);
+        $result .= recursion($value);
     }
 }
 
@@ -33,7 +33,7 @@ function recursion($data)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的分类', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
@@ -81,7 +81,11 @@ function recursion($data)
                 <hr/>
 
                 <ul class="uk-nestable" style="font-size: 13px;">
-                    <?= $dataCls ?>
+                    <?php if (!empty($result)): ?>
+                        <?= $result ?>
+                    <?php else: ?>
+                        <h3>暂无分类 !!</h3>
+                    <?php endif; ?>
                 </ul>
 
             </div>

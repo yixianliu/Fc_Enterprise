@@ -45,7 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'description:ntext',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->parent_id]);
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

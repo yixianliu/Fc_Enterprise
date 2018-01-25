@@ -50,7 +50,6 @@ if (empty($result['classify'])) {
                     ?>
 
                     <?=
-
                     $form->field($model, 's_key')->widget(Select2::classname(), [
                         'data'          => $result['section'],
                         'options'       => ['placeholder' => '选择版块...'],
@@ -58,7 +57,6 @@ if (empty($result['classify'])) {
                             'allowClear' => true
                         ],
                     ]);
-
                     ?>
 
                     <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>

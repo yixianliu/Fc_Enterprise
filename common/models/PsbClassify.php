@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class PsbClassify extends \yii\db\ActiveRecord
 {
+
+    static public $parent_id = 'S0';
+
     /**
      * @inheritdoc
      */
@@ -75,5 +78,64 @@ class PsbClassify extends \yii\db\ActiveRecord
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
+    }
+
+    static public function findByAll($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+
+        return static::find()
+            ->where(['parent_id' => $parent_id])
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * 获取分类
+     *
+     * @param string $parent_id
+     * @return array|bool
+     */
+    public function getCls($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
+
+        // 初始化
+        $result = array();
+
+        $parent = static::findByAll($parent_id);
+
+        foreach ($parent as $key => $value) {
+            $result[ $key ] = $this->recursionCls($value);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 无限分类
+     *
+     * @param $data
+     */
+    public function recursionCls($data)
+    {
+        if (empty($data))
+            return;
+
+        $result = $data;
+
+        $child = static::findByAll($data['c_key']);
+
+        if (empty($child))
+            return $result;
+
+        foreach ($child as $value) {
+            $result['child'][] = $this->recursionCls($value->toArray());
+        }
+
+        return $result;
     }
 }

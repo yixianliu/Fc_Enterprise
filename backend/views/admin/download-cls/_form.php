@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\DownloadCls */
@@ -20,25 +21,41 @@ use yii\widgets\ActiveForm;
 
                 <?php $form = ActiveForm::begin(); ?>
 
+                <?=
+                $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                    'data'    => $result['classify'],
+                    'options' => ['placeholder' => '是否启用...'],
+                ]);
+                ?>
+
                 <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                <?=
+                $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
+                    'clientOptions' => [
+                        //设置语言
+                        'lang'               => 'zh-cn',
+                        'initialFrameHeight' => '600',
+                        'elementPathEnabled' => false,
+                        'wordCount'          => false,
+                    ]
+                ]);
+                ?>
 
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'created_at')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'    => ['On' => '启用', 'Off' => '未启用'],
+                    'options' => ['placeholder' => '是否启用...'],
+                ]);
+                ?>
 
                 <div class="form-group">
 

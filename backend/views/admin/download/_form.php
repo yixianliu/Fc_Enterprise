@@ -89,7 +89,12 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-                    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                    <?=
+                    $form->field($model, 'is_using')->widget(Select2::classname(), [
+                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'options' => ['placeholder' => '是否启用...'],
+                    ]);
+                    ?>
 
                     <div class="form-group">
 

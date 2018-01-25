@@ -81,9 +81,13 @@ class NewsClassify extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? self::$parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
 
-        return static::find()->where(['parent_id' => $parent_id])->orderBy('sort_id', SORT_DESC)->all();
+        return static::find()
+            ->where(['parent_id' => $parent_id])
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
     }
 
     /**
@@ -95,7 +99,7 @@ class NewsClassify extends \yii\db\ActiveRecord
     {
 
         // 产品分类
-        $dataClassify = self::findByAll(static::$parent_id);
+        $dataClassify = static::findByAll(static::$parent_id);
 
         // 产品分类
         $Cls = new NewsClassify();
@@ -106,7 +110,7 @@ class NewsClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = $Cls->recursionNewsSelect($value->toArray());
+            $child = $Cls->recursionClsSelect($value);
 
             if (empty($child))
                 continue;
@@ -131,10 +135,10 @@ class NewsClassify extends \yii\db\ActiveRecord
         // 初始化
         $result = array();
 
-        $parent = self::findByAll($parent_id);
+        $parent = static::findByAll($parent_id);
 
         foreach ($parent as $key => $value) {
-            $result[ $key ] = $this->recursionNews($value->toArray());
+            $result[ $key ] = $this->recursionCls($value);
         }
 
         return $result;
@@ -145,20 +149,20 @@ class NewsClassify extends \yii\db\ActiveRecord
      *
      * @param $data
      */
-    public function recursionNews($data)
+    public function recursionCls($data)
     {
         if (empty($data))
             return;
 
         $result = $data;
 
-        $child = self::findByAll($data['c_key']);
+        $child = static::findByAll($data['c_key']);
 
         if (empty($child))
             return $result;
 
         foreach ($child as $value) {
-            $result['child'][] = $this->recursionNews($value->toArray());
+            $result['child'][] = $this->recursionCls($value);
         }
 
         return $result;
@@ -170,7 +174,7 @@ class NewsClassify extends \yii\db\ActiveRecord
      * @param $data
      * @param int $num
      */
-    public function recursionNewsSelect($data, $num = 1)
+    public function recursionClsSelect($data, $num = 1)
     {
 
         if (empty($data))
@@ -180,7 +184,7 @@ class NewsClassify extends \yii\db\ActiveRecord
         $result = array();
         $symbol = null;
 
-        $child = self::findByAll($data['c_key']);
+        $child = static::findByAll($data['c_key']);
 
         if (empty($child))
             return;
@@ -195,13 +199,12 @@ class NewsClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = $this->recursionNewsSelect($value->toArray(), ($num + 1));
+            $childData = $this->recursionClsSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;
 
             $result = array_merge($result, $childData);
-
         }
 
         return $result;

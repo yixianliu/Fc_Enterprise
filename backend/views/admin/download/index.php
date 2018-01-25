@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
                 <p>
+
                     <?= Html::a('发布文件', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布下载分类', ['admin/download-cls/create'], ['class' => 'btn btn-success']) ?>
+
                 </p>
 
                 <?=

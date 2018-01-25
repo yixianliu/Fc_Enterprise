@@ -67,7 +67,7 @@ function recursionMenu($data, $model = null)
                     $html .= menuHtml($value['name'], $create, $update);
 
                     $html .= '    <ul class="">';
-                    $html .= recursionProductData($value->toArray());
+                    $html .= recursionProductData($value);
                     $html .= '    </ul>';
 
                     $html .= '</li>';
@@ -90,7 +90,7 @@ function recursionMenu($data, $model = null)
                     $html .= menuHtml($value['name'], $create, $update);
 
                     $html .= '    <ul class="">';
-                    $html .= recursionNewsData($value->toArray());
+                    $html .= recursionNewsData($value);
                     $html .= '    </ul>';
 
                     $html .= '</li>';
@@ -142,7 +142,7 @@ function recursionProductData($data)
         $html .= menuHtml($value['name'], $create, $update);
 
         $html .= '    <ul class="">';
-        $html .= recursionProductData($value->toArray());
+        $html .= recursionProductData($value);
         $html .= '    </ul>';
 
         $html .= '</li>';
@@ -179,7 +179,7 @@ function recursionNewsData($data)
         $html .= menuHtml($value['name'], $create, $update);
 
         $html .= '    <ul class="">';
-        $html .= recursionNewsData($value->toArray());
+        $html .= recursionNewsData($value);
         $html .= '    </ul>';
 
         $html .= '</li>';
@@ -203,6 +203,7 @@ function recursionPagesData($data)
 
     // 单页面分类
     $pagesClsKey = empty($data['custom_key']) ? $data['c_key'] : $data['custom_key'];
+
     $childCls = PagesClassify::findByAll($pagesClsKey);
 
     if (!empty($childCls)) {
@@ -210,12 +211,12 @@ function recursionPagesData($data)
         foreach ($childCls as $value) {
 
             $create = Html::a('添加单页面分类', ['admin/pages-cls/create'], ['class' => "btn btn-primary"]);
-            $update = Html::a('编辑单页面分类', ['admin/pages-cls/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
+            $update = Html::a('编辑单页面分类', ['admin/pages-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
             $html .= '<li class="">';
             $html .= menuHtml($value['name'], $create, $update);
             $html .= '    <ul class="">';
-            $html .= recursionNewsData($value);
+            $html .= recursionPagesData($value);
             $html .= '    </ul>';
             $html .= '</li>';
         }
@@ -223,16 +224,20 @@ function recursionPagesData($data)
     }
 
     // 单页面
-    $child = Pages::findByAll($data['custom_key']);
+    $child = Pages::findByAll($pagesClsKey);
 
-    foreach ($child as $value) {
+    if (!empty($child)) {
 
-        $create = Html::a('添加单页面', ['admin/pages/create'], ['class' => "btn btn-primary"]);
-        $update = Html::a('编辑单页面', ['admin/pages/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
+        foreach ($child as $value) {
 
-        $html .= '<li class="">';
-        $html .= menuHtml($value['name'], $create, $update);
-        $html .= '</li>';
+            $create = Html::a('添加单页面', ['admin/pages/create'], ['class' => "btn btn-primary"]);
+            $update = Html::a('编辑单页面', ['admin/pages/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
+
+            $html .= '<li class="">';
+            $html .= menuHtml($value['name'], $create, $update);
+            $html .= '</li>';
+        }
+
     }
 
     return $html;

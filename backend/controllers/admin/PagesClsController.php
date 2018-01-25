@@ -4,8 +4,6 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\PagesClassify;
-use common\models\PagesClassifySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -47,11 +45,11 @@ class PagesClsController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new PagesClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new PagesClassify();
+
+        $dataProvider = $model->getCls(Yii::$app->request->get('id', 'C0'));
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -77,8 +75,10 @@ class PagesClsController extends BaseController
     {
         $model = new PagesClassify();
 
+        $model->parent_id = Yii::$app->request->get('id', 'C0');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         } else {
             return $this->render('create', [
                 'model'  => $model,
@@ -98,7 +98,7 @@ class PagesClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         } else {
             return $this->render('update', [
                 'model'  => $model,
@@ -129,7 +129,7 @@ class PagesClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = PagesClassify::findOne($id)) !== null) {
+        if (($model = PagesClassify::findOne(['c_key' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

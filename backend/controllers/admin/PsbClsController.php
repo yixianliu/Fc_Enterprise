@@ -4,8 +4,6 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\PsbClassify;
-use common\models\PsbClassifySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -26,7 +24,6 @@ class PsbClsController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'view', 'update', 'delete',],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -46,14 +43,14 @@ class PsbClsController extends BaseController
      * Lists all PsbClassify models.
      * @return mixed
      */
-    public function actionIndex($type = null)
+    public function actionIndex()
     {
 
-        $searchModel = new PsbClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $type);
+        $model = new PsbClassify();
+
+        $dataProvider = $model->getCls(Yii::$app->request->get('id', 'S0'));
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -81,7 +78,7 @@ class PsbClsController extends BaseController
         $model = new PsbClassify();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('create', [
@@ -101,7 +98,7 @@ class PsbClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('update', [
@@ -132,7 +129,7 @@ class PsbClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = PsbClassify::findOne($id)) !== null) {
+        if (($model = PsbClassify::findOne(['c_key' => $id])) !== null) {
             return $model;
         }
 

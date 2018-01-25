@@ -52,7 +52,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         'rp_key',
-                        'model_key',
+                        [
+                            'attribute' => 'model_key',
+                            'value'     => function ($model) {
+                                $data = \common\models\MenuModel::findOne(['model_key'  => $model->model_key]);
+                                return $data->name;
+                            },
+                        ],
                         'name',
                         [
                             'attribute' => 'is_using',

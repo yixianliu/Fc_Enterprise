@@ -5,7 +5,6 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\DownloadCls;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -33,7 +32,7 @@ class DownloadClsController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -47,9 +46,10 @@ class DownloadClsController extends BaseController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => DownloadCls::find(),
-        ]);
+
+        $Cls = new DownloadCls();
+
+        $dataProvider = $Cls->getCls();
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -79,11 +79,14 @@ class DownloadClsController extends BaseController
         $model = new DownloadCls();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'classify' => $model->getClsSelect(),
+            ]
         ]);
     }
 
@@ -99,11 +102,14 @@ class DownloadClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'result' => [
+                'classify' => $model->getClsSelect(),
+            ]
         ]);
     }
 
@@ -116,6 +122,7 @@ class DownloadClsController extends BaseController
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -130,7 +137,7 @@ class DownloadClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = DownloadCls::findOne($id)) !== null) {
+        if (($model = DownloadCls::findOne(['c_key' => $id])) !== null) {
             return $model;
         }
 

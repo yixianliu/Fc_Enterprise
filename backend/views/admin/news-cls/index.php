@@ -19,7 +19,7 @@ if (!empty($dataProvider)) {
         if (empty($value))
             continue;
 
-        $result .= recursionNewsCls($value);
+        $result .= recursionCls($value);
     }
 }
 
@@ -29,20 +29,20 @@ if (!empty($dataProvider)) {
  * @param $data
  * @return array|void
  */
-function recursionNewsCls($data)
+function recursionCls($data)
 {
     if (empty($data))
         return;
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
         foreach ($data['child'] as $value) {
             $html .= '    <ul class="">';
-            $html .= recursionNewsCls($value);
+            $html .= recursionCls($value);
             $html .= '    </ul>';
         }
     }

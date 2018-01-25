@@ -23,12 +23,40 @@ use common\models\Job;
 use common\models\PagesTplFile;
 use common\models\Purchase;
 use common\models\Resume;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
  */
 class UploadController extends BaseController
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * 上传

@@ -98,4 +98,51 @@ class PagesClassify extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Menu::className(), ['custom_key' => 'c_key']);
     }
+
+    /**
+     * 获取分类
+     *
+     * @param string $parent_id
+     * @return array|bool
+     */
+    public function getCls($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
+
+        // 初始化
+        $result = array();
+
+        $parent = static::findByAll($parent_id);
+
+        foreach ($parent as $key => $value) {
+            $result[ $key ] = $this->recursionCls($value);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 无限分类
+     *
+     * @param $data
+     */
+    public function recursionCls($data)
+    {
+        if (empty($data))
+            return;
+
+        $result = $data;
+
+        $child = static::findByAll($data['c_key']);
+
+        if (empty($child))
+            return $result;
+
+        foreach ($child as $value) {
+            $result['child'][] = $this->recursionCls($value);
+        }
+
+        return $result;
+    }
 }

@@ -76,7 +76,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                <div>上传格式为 : txt, php, html</div>
+                <div>上传格式为 : php文件,切勿随便上传.</div>
 
                 <hr/>
 

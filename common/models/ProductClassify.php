@@ -63,14 +63,15 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key'          => '分类关键KEY',
-            'sort_id'        => '分类排序',
-            'name'           => '分类名称',
-            'description'    => '分类描述',
-            'keywords'       => '分类关键词',
-            'json_data'      => '分类内容',
-            'parent_id'      => '父类',
-            'is_using'       => '是否启用',
+            'c_key'       => '分类关键KEY',
+            'sort_id'     => '分类排序',
+            'name'        => '分类名称',
+            'description' => '分类描述',
+            'keywords'    => '分类关键词',
+            'json_data'   => 'Json 内容',
+            'parent_id'   => '父类',
+            'is_using'    => '是否启用',
+
             'created_at	' => '添加数据时间',
             'updated_at	' => '更新数据时间',
         ];
@@ -87,7 +88,10 @@ class ProductClassify extends \yii\db\ActiveRecord
 
         $parent_id = empty($parent_id) ? self::$parent_id : $parent_id;
 
-        return static::find()->where(['parent_id' => $parent_id, 'is_using' => 'On'])->orderBy('sort_id', SORT_DESC)->all();
+        return static::find()->where(['parent_id' => $parent_id, 'is_using' => 'On'])
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
     }
 
     /**
@@ -105,7 +109,7 @@ class ProductClassify extends \yii\db\ActiveRecord
         $parent = static::findByAll(['parent_id' => $parent_id]);
 
         foreach ($parent as $key => $value) {
-            $result[ $key ] = $this->recursionProduct($value->toArray());
+            $result[ $key ] = $this->recursionCls($value);
         }
 
         return $result;
@@ -116,7 +120,7 @@ class ProductClassify extends \yii\db\ActiveRecord
      *
      * @param $data
      */
-    public function recursionProduct($data)
+    public function recursionCls($data)
     {
         if (empty($data))
             return;
@@ -129,7 +133,7 @@ class ProductClassify extends \yii\db\ActiveRecord
             return $result;
 
         foreach ($child as $value) {
-            $result['child'][] = $this->recursionProduct($value->toArray());
+            $result['child'][] = $this->recursionCls($value);
         }
 
         return $result;
@@ -152,7 +156,7 @@ class ProductClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = $this->recursionProductSelect($value->toArray());
+            $child = $this->recursionClsSelect($value);
 
             if (empty($child))
                 continue;
@@ -169,7 +173,7 @@ class ProductClassify extends \yii\db\ActiveRecord
      * @param $data
      * @param int $num
      */
-    public function recursionProductSelect($data, $num = 1)
+    public function recursionClsSelect($data, $num = 1)
     {
 
         if (empty($data))
@@ -194,7 +198,7 @@ class ProductClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = $this->recursionProductSelect($value->toArray(), ($num + 1));
+            $childData = $this->recursionClsSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;
