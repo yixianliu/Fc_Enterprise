@@ -199,6 +199,9 @@ function recursionPagesData($data)
     if (empty($data))
         return;
 
+    if (empty($data['custom_key']) && empty($data['c_key']))
+        return;
+
     $html = null;
 
     // 单页面分类

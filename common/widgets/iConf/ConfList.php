@@ -36,7 +36,7 @@ class ConfList extends InputWidget
         // 初始化
         $result = array();
 
-        $result['title'] = $this->config[0];
+        $result['title'] = (empty($this->config[0]) ? '没有标题' : $this->config[0]);
 
         $confData = Conf::findByData('On');
 

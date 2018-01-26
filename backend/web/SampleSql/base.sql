@@ -181,11 +181,11 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     `parameter` TEXT NOT NULL COMMENT '值 / 参数',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    `is_language` SET('cn', 'en') NOT NULL COMMENT '多语言类别',
+    `is_language` SET('cn', 'en') NULL COMMENT '多语言类别',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `c_key` (`c_key`)
+    KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -195,9 +195,12 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Online_Msg`;
 CREATE TABLE `#DB_PREFIX#Online_Msg` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `user_id` VARCHAR(85) NOT NULL COMMENT '账号',
+    `email` VARCHAR(85)  NULL COMMENT '邮箱',
+    `telephone` VARCHAR(85)  NULL COMMENT '联系电话',
+    `address` VARCHAR(255)  NULL COMMENT '联系地址',
     `title` VARCHAR(155) NULL COMMENT '留言标题',
     `content` TEXT NOT NULL COMMENT '留言内容',
-    `is_audit` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `is_audit` SET('On', 'Off') NOT NULL COMMENT '是否审核',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
@@ -761,9 +764,9 @@ CREATE TABLE `#DB_PREFIX#Pages_Classify` (
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',
-    `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
+    `keywords` VARCHAR(155) NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
-    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `parent_id` VARCHAR(55) NULL COMMENT '父类ID',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,

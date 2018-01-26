@@ -1,11 +1,10 @@
-
 /**
  * Author:  yixia_000
  * Created: 2017-4-23
  */
 
 /**
- * 网站配置参数
+ * 网站配置参数 (中文版)
  */
 INSERT INTO `#DB_PREFIX#Conf`
 VALUES
@@ -19,22 +18,42 @@ VALUES
 (NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'cn', #TIME#, #TIME#),
 (NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'cn', #TIME#, #TIME#),
 (NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'COMMENT_NUM', '留言列表页数量', 25, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'VIEW_NUM', '帖子列表页数量', 50, NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'ADDRESS', '公司地址', '#ADDRESS#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'PERSON', '公司负责人', '#PERSON#', NULL, 'On', 'cn', #TIME#, #TIME#),
 
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'cn', #TIME#, #TIME#);
+/* 网站配置 */
+(NULL, 'TIME_FORMAT', '时间格式', 'm . d . Y', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'THEME_NAME', '主题名称', '默认', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'THEME_CUSTOMIZE_PATH', '主题路径', NULL, NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'COMMENT_NUM', '留言列表页数量', 50, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'POST_VIEW_NUM', '帖子列表页数量', 25, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'PRODUCT_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'MIC_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', NULL, #TIME#, #TIME#),
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', NULL, #TIME#, #TIME#),
+
+/* 英文版 */
+(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'ADDRESS', '公司地址', 'On', NULL, 'On', 'en', #TIME#, #TIME#),
+(NULL, 'PERSON', '公司负责人', 'On', NULL, 'On', 'en', #TIME#, #TIME#);
 
 /**
  * 友情链接
@@ -50,6 +69,14 @@ INSERT INTO `#DB_PREFIX#Management`
 VALUES
 (NULL, '#USERNAME#', '#PASSWORD#', 'R1', NULL, NULL, 'On', NULL, #TIME#, #TIME# ),
 (NULL, '#USERNAME#Zcc', '#PASSWORD#', 'R2', NULL, NULL, 'On', NULL, #TIME#, #TIME#);
+
+/**
+ * 规则
+ */
+INSERT INTO `#DB_PREFIX#Rules`
+VALUES
+('admin', NULL, NULL, 'On', #TIME#, #TIME#),
+('guest', NULL, NULL, 'On', #TIME#, #TIME#);
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -77,6 +104,19 @@ VALUES
 (NULL, 'S13', '您配偶的生日是?', 'On', #TIME#);
 
 /**
+ * 幻灯片分类
+ */
+INSERT INTO `#DB_PREFIX#Slide_Classify`
+VALUES
+(NULL, 'index', '网站首页', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'news', '新闻中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'job', '招聘中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'product', '产品中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'purchase', '采购中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'supply', '供应中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'bid', '投标中心', NULL, 'On', #TIME#, #TIME#);
+
+/**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 菜单
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -93,16 +133,17 @@ VALUES
 (NULL, 'US1', 7, 'supply', '供应中心', 'On', #TIME#, #TIME#),
 (NULL, 'UB1', 8, 'bid', '投标中心', 'On', #TIME#, #TIME#);
 
-INSERT INTO `#DB_PREFIX#Slide_Classify`
+/**
+ * 单页面分类
+ */
+INSERT INTO `#DB_PREFIX#Pages_Classify`
 VALUES
-(NULL, 'index', '网站首页', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'news', '新闻中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'job', '招聘中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'product', '产品中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'purchase', '采购中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'supply', '供应中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'bid', '投标中心', NULL, 'On', #TIME#, #TIME#);
+(NULL, 'ABOUT', 1, '关于我们的单页面分类', NULL, NULL, NULL, NULL, 'On', #TIME#, #TIME#),
+(NULL, 'BUSINESS', 2, '招商加盟的单页面分类', NULL, NULL, NULL, NULL, 'On', #TIME#, #TIME#);
 
+/**
+ * 菜单
+ */
 INSERT INTO `#DB_PREFIX#Menu`
 VALUES
 
@@ -128,13 +169,13 @@ VALUES
 */
 (NULL, 'E1', 1, 'M0', 'guest', NULL, NULL, '企业文化', NULL, 'On', #TIME#, #TIME#),
 
-(NULL, 'EN1', 1, 'E1', 'guest', NULL, NULL, '网站首页', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN2', 2, 'E1', 'guest', NULL, NULL, '公司简介', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN3', 3, 'E1', 'guest', NULL, NULL, '产品中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN4', 4, 'E1', 'guest', NULL, NULL, '新闻资讯', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN5', 5, 'E1', 'guest', NULL, NULL, '招商加盟', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN6', 6, 'E1', 'guest', NULL, NULL, '招贤纳士', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN7', 7, 'E1', 'guest', NULL, NULL, '联系我们', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN1', 1, 'E1', 'guest', 'UU1', NULL, '网站首页', 'center/index', 'On', #TIME#, #TIME#),
+(NULL, 'EN2', 2, 'E1', 'guest', 'UC1', 'ABOUT', '公司简介', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN5', 5, 'E1', 'guest', 'UC1', 'BUSINESS', '招商加盟', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '招贤纳士', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN7', 7, 'E1', 'guest', 'UC1', NULL, '联系我们', NULL, 'On', #TIME#, #TIME#),
 
 /*
     后台管理 / Admin
@@ -206,8 +247,8 @@ VALUES
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色权限', 'item-rp/index', 'On', #TIME#, #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色权限', 'item-rp/create', 'On', #TIME#, #TIME#),
-(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '所有规则', 'rules/index', 'On', #TIME#, #TIME#),
-(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加规则', 'rules/create', 'On', #TIME#, #TIME#),
+(NULL, 'AURR3', 3, 'AR1', 'admin', 'UU1', NULL, '所有规则', 'rules/index', 'On', #TIME#, #TIME#),
+(NULL, 'AURR4', 4, 'AR1', 'admin', 'UU1', NULL, '添加规则', 'rules/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AJJV1', 1, 'AJ1', 'admin', 'UU1', NULL, '所有招聘', 'job/index', 'On', #TIME#, #TIME#),
 (NULL, 'AJJV2', 2, 'AJ1', 'admin', 'UU1', NULL, '添加招聘', 'job/create', 'On', #TIME#, #TIME#),

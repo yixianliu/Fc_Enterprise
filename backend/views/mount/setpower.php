@@ -22,47 +22,45 @@ use kartik\select2\Select2;
         </header>
         <div class="content-body">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <?php
-                    $form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]);
-                    ?>
+                <?php
+                $form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]);
+                ?>
 
-                    <?=
+                <?=
 
-                    // Normal select with ActiveForm & model
-                    $form->field($model, 'admin')->widget(Select2::classname(), [
-                        'data'          => ['On' => '启用', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '是否开启管理员权限包 ...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
+                // Normal select with ActiveForm & model
+                $form->field($model, 'admin')->widget(Select2::classname(), [
+                    'data'          => ['On' => '启用', 'Off' => '关闭'],
+                    'options'       => ['placeholder' => '是否开启管理员权限包 ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
 
-                    ?>
+                ?>
 
-                    <?=
+                <?=
 
-                    // Normal select with ActiveForm & model
-                    $form->field($model, 'user')->widget(Select2::classname(), [
-                        'data'          => ['On' => '启用', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '是否开启普通用户权限包 ...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
+                // Normal select with ActiveForm & model
+                $form->field($model, 'user')->widget(Select2::classname(), [
+                    'data'          => ['On' => '启用', 'Off' => '关闭'],
+                    'options'       => ['placeholder' => '是否开启普通用户权限包 ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
 
-                    ?>
+                ?>
 
-                    <p class="submit">
-                        <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
-                    </p>
+                <p class="submit">
+                    <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
+                </p>
 
-                    <?php ActiveForm::end() ?>
+                <?php ActiveForm::end() ?>
 
-                    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+                <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
 
-                </div>
             </div>
         </div>
     </section>

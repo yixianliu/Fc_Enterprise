@@ -34,13 +34,6 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
-    <style>
-        *, body, html, h1, h2, h3, h4, a, li {
-            font-family: 'Microsoft YaHei';
-            letter-spacing: 1px;
-        }
-    </style>
-
 </head>
 <body class=" ">
 
@@ -124,13 +117,12 @@ $this->beginPage();
         </div>
     </div>
 
-    <section id="main-content" class=" ">
+    <section id="main-content" class="">
         <section class="wrapper" style='margin-top:60px;display:inline-block;width:100%;padding:15px 0 0 15px;'>
-
             <?= $content ?>
-
         </section>
     </section>
+
 </div>
 
 <?php $this->endBody(); ?>

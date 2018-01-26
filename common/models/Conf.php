@@ -40,7 +40,8 @@ class Conf extends \yii\db\ActiveRecord
      * 网站配置数据
      *
      * @param null $status
-     * @return $this
+     * @param string $language
+     * @return array|\yii\db\ActiveRecord[]
      */
     public static function findByData($status = null, $language = 'cn')
     {

@@ -22,44 +22,41 @@ use kartik\select2\Select2;
         </header>
         <div class="content-body">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <?php
-                    $form = ActiveForm::begin(['action' => ['mount/center/run'], 'method' => 'post', 'id' => $model->formName()]);
-                    ?>
+                <?php $form = ActiveForm::begin(['action' => ['mount/center/run'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
-                    <?=
-                    $form->field($model, 'name')->textInput(['class' => 'form-control', 'value' => Yii::$app->params['NAME']])
-                        ->label('网站名称');
-                    ?>
+                <?= $form->field($model, 'name')->textInput(['value' => Yii::$app->params['NAME']]); ?>
 
-                    <?=
-                    $form->field($model, 'title')->textInput(['class' => 'form-control', 'value' => Yii::$app->params['TITLE']])
-                        ->label('网站标题');
-                    ?>
+                <?= $form->field($model, 'title')->textInput(['value' => Yii::$app->params['TITLE']]); ?>
 
-                    <?=
+                <?= $form->field($model, 'description')->textarea(['value' => Yii::$app->params['DESCRIPTION']]); ?>
 
-                    // Normal select with ActiveForm & model
-                    $form->field($model, 'mysql_data')->widget(Select2::classname(), [
-                        'data'          => ['On' => '启用', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '请选择 ...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
+                <?= $form->field($model, 'keywords')->textarea(['value' => Yii::$app->params['KEYWORDS']]); ?>
 
-                    ?>
+                <?= $form->field($model, 'phone')->textarea(['value' => Yii::$app->params['PHONE']]); ?>
 
-                    <p class="submit">
-                        <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
-                    </p>
+                <?= $form->field($model, 'person')->textarea(['value' => Yii::$app->params['PERSON']]); ?>
 
-                    <?php ActiveForm::end() ?>
+                <?= $form->field($model, 'address')->textarea(['value' => Yii::$app->params['ADDRESS']]); ?>
 
-                    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+                <?=
+                $form->field($model, 'mysql_data')->widget(Select2::classname(), [
+                    'data'          => ['On' => '启用', 'Off' => '关闭'],
+                    'options'       => ['placeholder' => '请选择 ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-                </div>
+                <p class="submit">
+                    <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
+                </p>
+
+                <?php ActiveForm::end() ?>
+
+                <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
             </div>
         </div>
     </section>

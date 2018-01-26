@@ -33,9 +33,14 @@ class MountRunForm extends Model
     public function attributeLabels()
     {
         return [
-            'name'       => '网站名称',
-            'title'      => '网站标题',
-            'mysql_data' => '数据库包',
+            'name'        => '网站名称',
+            'title'       => '网站标题',
+            'person'      => '公司负责人',
+            'address'     => '公司地址',
+            'phone'       => '联系电话',
+            'keywords'    => '网站关键词',
+            'description' => '网站描述',
+            'mysql_data'  => '数据库包',
         ];
     }
 }

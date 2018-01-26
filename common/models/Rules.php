@@ -68,7 +68,10 @@ class Rules extends \yii\db\ActiveRecord
 
     public static function findByAll()
     {
-        return static::find()->where(['is_using' => 'On'])->orderBy('name', SORT_DESC)->all();
+        return static::find()->where(['is_using' => 'On'])
+            ->orderBy('name', SORT_DESC)
+            ->asArray()
+            ->all();
     }
 
     /**

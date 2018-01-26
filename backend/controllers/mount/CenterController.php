@@ -43,15 +43,17 @@ class CenterController extends BaseController
                 // 批量SQL语句
                 $Sql_Data = file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/base.sql') . $mysql_data;
 
-                $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm')['name'], $Sql_Data);
-                $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm')['title'], $Sql_Data);
-                $Sql_Data = str_ireplace('#DESCRIPTION#', Yii::$app->params['DESCRIPTION'], $Sql_Data);
-                $Sql_Data = str_ireplace('#KEYWORDS#', Yii::$app->params['KEYWORDS'], $Sql_Data);
+                $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm.name', Yii::$app->params['NAME']), $Sql_Data);
+                $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm.title', Yii::$app->params['NAME']), $Sql_Data);
+                $Sql_Data = str_ireplace('#DESCRIPTION#', $request->post('MountRunForm.description', Yii::$app->params['DESCRIPTION']), $Sql_Data);
+                $Sql_Data = str_ireplace('#KEYWORDS#', $request->post('MountRunForm.keywords', Yii::$app->params['KEYWORDS']), $Sql_Data);
+                $Sql_Data = str_ireplace('#ADDRESS#', $request->post('MountRunForm.address', Yii::$app->params['ADDRESS']), $Sql_Data);
+                $Sql_Data = str_ireplace('#PERSON#', $request->post('MountRunForm.person', Yii::$app->params['PERSON']), $Sql_Data);
+                $Sql_Data = str_ireplace('#PHONE#', $request->post('MountRunForm.phone', Yii::$app->params['PHONE']), $Sql_Data);
                 $Sql_Data = str_ireplace('#DEVELOPERS#', Yii::$app->params['DEVELOPERS'], $Sql_Data);
                 $Sql_Data = str_ireplace('#EMAIL#', Yii::$app->params['EMAIL'], $Sql_Data);
                 $Sql_Data = str_ireplace('#SITE_URL#', Yii::$app->params['SITE_URL'], $Sql_Data);
                 $Sql_Data = str_ireplace('#ICP#', Yii::$app->params['ICP'], $Sql_Data);
-                $Sql_Data = str_ireplace('#PHONE#', Yii::$app->params['PHONE'], $Sql_Data);
                 $Sql_Data = str_ireplace('#COPYRIGHT#', Yii::$app->params['COPYRIGHT'], $Sql_Data);
 
                 // 数据库
@@ -108,24 +110,38 @@ class CenterController extends BaseController
 
                 $power = [
                     'indexCenter', 'confCenter', // 管理中心
-                    'createNews', 'updateNews', 'indexNews', 'viewNews', // 新闻
-                    'createNews-cls', 'updateNews-cls', 'indexNews-cls', 'viewNews-cls', // 新闻分类
-                    'createProduct', 'updateProduct', 'indexProduct', 'viewProduct', // 产品
-                    'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
-                    'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
-                    'createJob', 'updateJob', 'indexJob', 'viewJob',// 招聘
-                    'createResume', 'updateResume', 'indexResume', 'viewResume',// 简历
-                    'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp', // 角色 + 权限
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
                     'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', // 菜单
-                    'createPages', 'updatePages', 'indexPages', 'viewPages', 'relatedPages', // 单页面管理 (最后的是关联单页面)
-                    'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls', // 单页面分类管理
+                    'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
+                    'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp', // 角色 + 权限
+
+                    // 新闻
+                    'createNews', 'updateNews', 'indexNews', 'viewNews',
+                    'createNews-cls', 'updateNews-cls', 'indexNews-cls', 'viewNews-cls', // 新闻分类
+
+                    // 产品
+                    'createProduct', 'updateProduct', 'indexProduct', 'viewProduct',
+                    'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
+
+                    // 招聘
+                    'createJob', 'updateJob', 'indexJob', 'viewJob',
+                    'createResume', 'updateResume', 'indexResume', 'viewResume',// 简历
+
+                    // 单页面
+                    'createPages', 'updatePages', 'indexPages', 'viewPages', 'relatedPages', // 最后的是关联单页面
+                    'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls',
+                    'createPages-tpl-file', 'updatePages-tpl-file', 'indexPages-tpl-file', 'viewPages-tpl-file',
+                    'createPages-list', 'updatePages-list', 'indexPages-list', 'viewPages-list',
+
                     'createDownload', 'updateDownload', 'indexDownload', 'viewDownload', // 下载中心
                     'createDownload-cls', 'updateDownload-cls', 'indexDownload-cls', 'viewDownload-cls', // 下载中心分类
                     'createPurchase', 'updatePurchase', 'indexPurchase', 'viewPurchase', // 采购
                     'createSupply', 'updateSupply', 'indexSupply', 'viewSupply', // 供应
                     'createBid', 'updateBid', 'indexBid', 'viewBid', // 投标
+                    'createRules', 'updateRules', 'indexRules', 'viewRules', // 规则
                 ];
+
+                $this->createRole('guest');
 
                 $role = $this->createRole('admin');
 

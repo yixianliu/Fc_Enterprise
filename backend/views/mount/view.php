@@ -70,11 +70,7 @@ $data = quick_dev_insights_phpinfo();
         </header>
         <div class="content-body">
             <div class="row" style="word-break : break-all;">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-
-                    <?= $data ?>
-
-                </div>
+                <?= $data ?>
             </div>
         </div>
     </section>

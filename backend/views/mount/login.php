@@ -33,12 +33,6 @@ $this->beginPage();
 
         <?php $this->head() ?>
 
-        <style>
-            *, body, html, h1, h2, h3, h4, a, li {
-                font-family: 'Microsoft YaHei';
-            }
-        </style>
-
     </head>
     <!-- END HEAD -->
 
