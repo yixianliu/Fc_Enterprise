@@ -229,6 +229,8 @@ VALUES
 (NULL, 'AMMV2', 2, 'AP2', 'admin', 'UU1', NULL, '添加产品', 'product/create', 'On', #TIME#, #TIME#),
 (NULL, 'AMMV3', 3, 'AP2', 'admin', 'UU1', NULL, '产品分类', 'product-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'AMMV4', 4, 'AP2', 'admin', 'UU1', NULL, '添加产品分类', 'product-cls/create', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV5', 5, 'AP2', 'admin', 'UU1', NULL, '导航分类', 'nav-cls/index', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV6', 6, 'AP2', 'admin', 'UU1', NULL, '添加导航分类', 'nav-cls/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AMMC1', 1, 'AN1', 'admin', 'UU1', NULL, '所有新闻', 'news/index', 'On', #TIME#, #TIME#),
 (NULL, 'AMMC2', 2, 'AN1', 'admin', 'UU1', NULL, '添加新闻', 'news/create', 'On', #TIME#, #TIME#),

@@ -792,4 +792,32 @@ CREATE TABLE `#DB_PREFIX#Pages_Tpl_File` (
     UNIQUE KEY `path` (`path`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 采购供应平台分类
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
+ * 导航分类
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Nav_Classify`;
+CREATE TABLE `#DB_PREFIX#Nav_Classify` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
+    `p_key` VARCHAR(55) NOT NULL COMMENT '对应分类KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` TEXT NULL COMMENT '描述',
+    `keywords` VARCHAR(155) NULL COMMENT '关键字',
+    `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
+    `parent_id` VARCHAR(55) NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `c_key` (`c_key`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
 # SET FOREIGN_KEY_CHECKS = 1;
