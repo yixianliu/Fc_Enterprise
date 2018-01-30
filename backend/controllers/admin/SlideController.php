@@ -10,6 +10,7 @@ use common\models\SlideSearch;
 use common\models\SinglePage;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -22,6 +23,17 @@ class SlideController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [

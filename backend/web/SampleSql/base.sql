@@ -184,8 +184,7 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     `is_language` SET('cn', 'en') NULL COMMENT '多语言类别',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `c_key` (`c_key`)
+    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**

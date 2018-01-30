@@ -9,10 +9,10 @@ use yii\helpers\Html;
 $this->title = '新闻分类';
 $this->params['breadcrumbs'][] = $this->title;
 
-if (!empty($dataProvider)) {
+// 初始化
+$result = null;
 
-    // 初始化
-    $result = null;
+if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
@@ -75,7 +75,11 @@ function recursionCls($data)
                 <hr/>
 
                 <ul class="uk-nestable" style="font-size: 13px;">
-                    <?= $result ?>
+                    <?php if (!empty($result)): ?>
+                        <?= $result ?>
+                    <?php else: ?>
+                        <h3>暂无分类 !!</h3>
+                    <?php endif; ?>
                 </ul>
 
             </div>

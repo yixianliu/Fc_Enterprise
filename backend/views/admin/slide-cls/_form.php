@@ -49,5 +49,8 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </section>
+
+    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
 </div>
 

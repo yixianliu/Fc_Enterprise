@@ -4,11 +4,10 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\SlideClassify;
-use common\models\SlideClassifySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 
 /**
  * SlideClsController implements the CRUD actions for SlideClassify model.
@@ -47,11 +46,16 @@ class SlideClsController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new SlideClassifySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = SlideClassify::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

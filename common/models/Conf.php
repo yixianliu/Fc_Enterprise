@@ -67,7 +67,6 @@ class Conf extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 80],
             [['parameter'], 'string', 'max' => 255],
             [['c_key'], 'unique'],
-            [['name'], 'unique'],
         ];
     }
 

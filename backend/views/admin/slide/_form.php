@@ -116,11 +116,12 @@ use dosamigos\fileupload\FileUploadUI;
             </div>
         </div>
 
-        <?= Yii::$app->view->renderFile('@app/views/form_msg.php'); ?>
-
         <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'slide']); ?>
 
     </section>
+
+    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
 </div>
 
 
