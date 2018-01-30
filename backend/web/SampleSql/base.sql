@@ -806,7 +806,7 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Nav_Classify`;
 CREATE TABLE `#DB_PREFIX#Nav_Classify` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
-    `p_key` VARCHAR(55) NOT NULL COMMENT '对应分类KEY',
+    `p_key` VARCHAR(255) NOT NULL COMMENT '对应分类KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
     `description` TEXT NULL COMMENT '描述',

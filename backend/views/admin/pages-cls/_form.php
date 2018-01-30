@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PagesClassify */
@@ -53,7 +54,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
 
                 <?=
-                $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
                     'data'          => ['On' => '开启', 'Off' => '关闭'],
                     'options'       => ['placeholder' => '选择...'],
                     'pluginOptions' => [
@@ -75,4 +76,7 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </section>
+
+    <?= $this->render('../../formMsg'); ?>
+
 </div>

@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = '登录';
 
                 <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
                 <?= Html::submitButton('立即登录', ['class' => 'btn btn-color btn-submit']) ?>
 

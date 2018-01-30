@@ -207,6 +207,7 @@ VALUES
 (NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加招标', 'tender/create', 'On', #TIME#, #TIME#),
 (NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '相关分类列表', 'psb-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加分类', 'psb-cls/create', 'On', #TIME#, #TIME#),
+(NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看用户提交价格', 'sp-offer/index', 'On', #TIME#, #TIME#),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', 'On', #TIME#, #TIME#),

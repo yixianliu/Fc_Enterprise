@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
 
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
 
         <div class="content-body">

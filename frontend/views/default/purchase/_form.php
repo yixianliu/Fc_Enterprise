@@ -9,6 +9,7 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <section class="section-wrap blog-standard" style="padding: 60px 0">
@@ -23,7 +24,12 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
+                <?=
+                $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    'data'    => $result['classify'],
+                    'options' => ['placeholder' => '采购分类...'],
+                ]);
+                ?>
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -96,13 +102,37 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'is_type')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'start_at')->widget(
+                    DatePicker::className(), [
+                    'template'      => '{addon}{input}',
+                    'clientOptions' => [
+                        'autoclose' => true,
+                        'format'    => 'dd-M-yyyy'
+                    ]
+                ]); ?>
 
-                <?= $form->field($model, 'is_status')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'end_at')->widget(
+                    DatePicker::className(), [
+                    'template'      => '{addon}{input}',
+                    'clientOptions' => [
+                        'autoclose' => true,
+                        'format'    => 'dd-M-yyyy'
+                    ]
+                ]); ?>
 
-                <?= $form->field($model, 'start_at')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
+                    'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
+                    'options' => ['placeholder' => '采购类型...'],
+                ]);
+                ?>
 
-                <?= $form->field($model, 'end_at')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_status')->widget(Select2::classname(), [
+                    'data'    => ['On' => '采购中', 'Off' => '关闭'],
+                    'options' => ['placeholder' => '采购状态...'],
+                ]);
+                ?>
 
                 <div class="form-group">
 

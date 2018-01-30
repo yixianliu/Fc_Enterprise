@@ -74,16 +74,24 @@ class NavClassify extends \yii\db\ActiveRecord
             'description' => '分类描述',
             'keywords'    => '分类关键词',
             'json_data'   => 'Json 内容',
-            'parent_id'   => '父类',
+            'parent_id'   => '父类名称',
             'is_using'    => '是否启用',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
     }
 
+    /**
+     * 查询所有
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public static function findByAll()
     {
-        return static::find()->where(['parent_id' => static::$parent_id])->all();
+        return static::find()->where(['is_using' => 'On'])
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
     }
 
     /**

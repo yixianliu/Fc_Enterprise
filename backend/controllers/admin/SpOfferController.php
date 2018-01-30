@@ -1,24 +1,20 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers\admin;
 
-use common\models\PsbClassify;
 use Yii;
-use common\models\Supply;
-use common\models\SupplySearch;
+use common\models\SpOffer;
 use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * SupplyController implements the CRUD actions for Supply model.
+ * SpOfferController implements the CRUD actions for SpOffer model.
  */
-class SupplyController extends BaseController
+class SpOfferController extends BaseController
 {
-
-    public $parent_id = 'S0';
-
     /**
      * @inheritdoc
      */
@@ -30,19 +26,14 @@ class SupplyController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'delete', 'upload'],
-                        'allow'   => true,
-                        'roles'   => ['@'],
-                    ],
-                    [
-                        'actions' => ['index', 'view',],
-                        'allow'   => true,
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
 
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -51,31 +42,23 @@ class SupplyController extends BaseController
     }
 
     /**
-     * Lists all Supply models.
+     * Lists all SpOffer models.
      * @return mixed
      */
-    public function actionIndex($type = null)
+    public function actionIndex()
     {
 
-        $model = empty($type) ? Supply::find() : Supply::find()->where(['c_key' => $type]);
-
         $dataProvider = new ActiveDataProvider([
-            'query'      => $model,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
+            'query' => SpOffer::find(['is_type' => Yii::$app->request->get('type', 'Supply')]),
         ]);
 
-        $result['classify'] = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply', 'parent_id' => $this->parent_id]);
-
         return $this->render('index', [
-            'result'       => $result,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Supply model.
+     * Displays a single SpOffer model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -88,36 +71,27 @@ class SupplyController extends BaseController
     }
 
     /**
-     * Creates a new Supply model.
+     * Creates a new SpOffer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Supply();
+        $model = new SpOffer();
 
-        $model->supply_id = time() . '_' . rand(0000, 9999);
-
-        $model->is_using = 'Off';
-
-        $model->is_send_msg = 'Off';
-
-        $model->user_id = Yii::$app->user->identity->user_id;
+        $model->user_id = '网站管理员';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model'  => $model,
-            'result' => [
-                'classify' => $this->getCls(),
-            ]
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Supply model.
+     * Updates an existing SpOffer model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -132,15 +106,12 @@ class SupplyController extends BaseController
         }
 
         return $this->render('update', [
-            'model'  => $model,
-            'result' => [
-                'classify' => $this->getCls(),
-            ]
+            'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing Supply model.
+     * Deletes an existing SpOffer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -154,33 +125,18 @@ class SupplyController extends BaseController
     }
 
     /**
-     * Finds the Supply model based on its primary key value.
+     * Finds the SpOffer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Supply the loaded model
+     * @return SpOffer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Supply::findOne($id)) !== null) {
+        if (($model = SpOffer::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function getCls()
-    {
-        // 初始化
-        $result = array();
-
-        // 所有版块
-        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply']);
-
-        foreach ($dataCls as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 }

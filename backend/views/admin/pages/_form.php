@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SinglePage */
@@ -41,7 +42,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
                     ?>
 
                     <?=
-                    $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
+                    $form->field($model, 'is_type')->widget(Select2::classname(), [
                         'data'          => ['list' => '列表内容类型', 'content' => '内容详情类型'],
                         'options'       => ['placeholder' => '选择内容类型...'],
                         'pluginOptions' => [
@@ -75,7 +76,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
                     ?>
 
                     <?=
-                    $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
+                    $form->field($model, 'is_using')->widget(Select2::classname(), [
                         'data'          => ['On' => '开启', 'Off' => '关闭'],
                         'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [

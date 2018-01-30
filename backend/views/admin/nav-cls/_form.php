@@ -2,42 +2,71 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\NavClassify */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="nav-classify-form">
+<?php $this->registerCssFile('@web/themes/assets/plugins/icheck/skins/all.css'); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+<div class="col-lg-12">
+    <section class="box ">
 
-    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+        <header class="panel_header">
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
+        </header>
 
-    <?= $form->field($model, 'p_key')->textInput(['maxlength' => true]) ?>
+        <div class="content-body">
+            <div class="row">
 
-    <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
+                <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
 
-        <?= Html::submitButton($model->isNewRecord ? '发布分类' : '更新分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'          => ['On' => '开启', 'Off' => '关闭'],
+                    'options'       => ['placeholder' => '选择...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                <hr/>
 
-    </div>
+                <?php echo $form->field($model, 'p_key')->CheckBoxList($result['classify'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
 
-    <?php ActiveForm::end(); ?>
+                <hr/>
+
+                <div class="form-group">
+
+                    <?= Html::submitButton($model->isNewRecord ? '发布分类' : '更新分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+    </section>
+
+    <?= $this->render('../../formMsg'); ?>
 
 </div>

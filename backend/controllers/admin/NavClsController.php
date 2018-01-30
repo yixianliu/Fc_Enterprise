@@ -2,10 +2,9 @@
 
 namespace backend\controllers\admin;
 
+use common\models\ProductClassify;
 use Yii;
 use common\models\NavClassify;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -49,6 +48,20 @@ class NavClsController extends BaseController
     {
         $dataProvider = NavClassify::findByAll();
 
+        foreach ($dataProvider as $key => $value) {
+
+            $clsArray = explode(',', $value['p_key']);
+
+            foreach ($clsArray as $valuePkey) {
+
+                if (empty($valuePkey))
+                    continue;
+
+                $dataProvider[$key ]['child'][] = ProductClassify::findOne(['c_key' => $valuePkey]);
+            }
+
+        }
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -76,12 +89,21 @@ class NavClsController extends BaseController
     {
         $model = new NavClassify();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
+        }
+
+        if ($model->load($data) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'classify' => $this->getProductCls(),
+            ]
         ]);
     }
 
@@ -97,11 +119,27 @@ class NavClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->c_key]);
+        }
+
+        // 初始化
+        $result = array();
+
+        $result['classify'] = $this->getProductCls();
+
+        $checkedData = explode(',', $model->p_key);
+
+        foreach ($result['classify'] as $values) {
+            foreach ($checkedData as $value) {
+                if ($values['pkey'] == $value['pkey']) {
+                    array_push($result['check'], $value['pkey']);
+                }
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => $result,
         ]);
     }
 
@@ -128,10 +166,53 @@ class NavClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = NavClassify::findOne($id)) !== null) {
+        if (($model = NavClassify::findOne(['c_key' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * 获取产品分类
+     *
+     * @return array
+     */
+    public function getProductCls()
+    {
+
+        $dataCls = ProductClassify::findByAll();
+
+        if (empty($dataCls))
+            return false;
+
+        foreach ($dataCls as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 设置产品分类
+     *
+     * @param $array
+     * @return null|string
+     */
+    public function setProductCls($array)
+    {
+
+        // 初始化
+        $result = null;
+
+        foreach ($array as $value) {
+
+            if (empty($value))
+                continue;
+
+            $result .= $value . ',';
+        }
+
+        return $result;
     }
 }

@@ -1,16 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ProductClassify */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => '产品分类', 'url' => ['index']];
+$this->title = '价格中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -21,40 +19,29 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <h1><?= Html::encode($this->title) ?></h1>
-
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->c_key], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('删除', ['delete', 'id' => $model->c_key], [
-                        'class' => 'btn btn-danger',
-                        'data'  => [
-                            'confirm' => '你真的需要删除这个分类吗?',
-                            'method'  => 'post',
-                        ],
-                    ]) ?>
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('发布价格', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('采购价格', ['index', 'type' => 'Supply'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('供应价格', ['index', 'type' => 'Purchase'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                DetailView::widget([
-                    'model'      => $model,
-                    'attributes' => [
-                        'c_key',
-                        'sort_id',
-                        'name',
-                        'description:ntext',
-                        'keywords',
-                        'json_data',
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'offer_id',
+                        'user_id',
+                        'price',
                         [
-                            'attribute' => 'parent_id',
+                            'attribute' => 'is_type',
                             'value'     => function ($model) {
+                                $state = [
+                                    'Supply'   => '供应',
+                                    'Purchase' => '采购',
+                                    'Bid'      => '投标'
+                                ];
 
-                                if ($model->parent_id == 'C0') {
-                                    return ($data['name'] = '顶级分类 !!');
-                                }
-
-                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->parent_id]);
-                                return $data->name;
+                                return $state[ $model->is_type ];
                             },
                         ],
                         [
@@ -80,12 +67,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
+
+                        ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]);
-                ?>
+                ]); ?>
 
             </div>
         </div>
     </section>
 </div>
-

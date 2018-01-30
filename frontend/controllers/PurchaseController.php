@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\PsbClassify;
 use Yii;
 use common\models\Purchase;
-use common\models\PurchaseSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,13 +26,13 @@ class PurchaseController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'delete',],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'actions' => ['create', 'update', 'delete', 'upload'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                     [
                         'actions' => ['index', 'view',],
-                        'allow' => true,
+                        'allow'   => true,
                     ],
                 ],
             ],
@@ -54,7 +53,7 @@ class PurchaseController extends BaseController
     public function actionIndex($type = null)
     {
 
-        $model = empty($type) ? Purchase::find() : Purchase::find()->where(['c_key' => $type]);
+        $model = empty($type) ? Purchase::find()->where(['is_using' => 'On']) : Purchase::find()->where(['c_key' => $type, 'is_using' => 'On']);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $model,
@@ -79,7 +78,10 @@ class PurchaseController extends BaseController
     public function actionView($id)
     {
 
-        $model = Purchase::findOne(['purchase_id' => $id]);
+        $model = Purchase::findOne(['purchase_id' => $id, 'is_using' => 'On']);
+
+        if (empty($model))
+            return $this->redirect(['index']);
 
         return $this->render('view', [
             'model' => $model,
@@ -99,13 +101,22 @@ class PurchaseController extends BaseController
 
         $model->is_using = 'Off';
 
+        $model->is_send_msg = 'Off';
+
         $model->user_id = Yii::$app->user->identity->user_id;
 
+        if (!empty($model->getErrors())) {
+            Yii::$app->getSession()->setFlash('error', $model->getErrors());
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'classify' => $this->getCls(),
+                ]
             ]);
         }
     }
@@ -124,7 +135,10 @@ class PurchaseController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'  => $model,
+                'result' => [
+                    'classify' => $this->getCls(),
+                ]
             ]);
         }
     }
@@ -156,5 +170,20 @@ class PurchaseController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function getCls()
+    {
+        // 初始化
+        $result = array();
+
+        // 所有版块
+        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase']);
+
+        foreach ($dataCls as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
     }
 }

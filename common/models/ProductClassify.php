@@ -69,11 +69,10 @@ class ProductClassify extends \yii\db\ActiveRecord
             'description' => '分类描述',
             'keywords'    => '分类关键词',
             'json_data'   => 'Json 内容',
-            'parent_id'   => '父类',
+            'parent_id'   => '父类名称',
             'is_using'    => '是否启用',
-
-            'created_at	' => '添加数据时间',
-            'updated_at	' => '更新数据时间',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 

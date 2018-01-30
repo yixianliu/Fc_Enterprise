@@ -87,7 +87,8 @@ class User extends ActiveRecord implements IdentityInterface
 
             // 必填
             [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
-            [['newpassword', 'password', 'repassword'], 'required', 'on' => 'setpsw'],
+            [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
+            [['nickname', 'sex'], 'required', 'on' => 'info'],
 
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
@@ -109,6 +110,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
             ['rememberMe', 'boolean', 'on' => 'login'],
             ['password', 'validatePassword', 'on' => 'login, setpsw'],
+
+            [['enterprise', 'signature'], 'default', 'value' => null],
         ];
     }
 
@@ -125,6 +128,7 @@ class User extends ActiveRecord implements IdentityInterface
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
             'setpsw'  => ['password', 'newpassword', 'repassword'],
+            'info'    => ['nickname', 'sex', 'enterprise', 'signature'],
         ];
     }
 
@@ -312,7 +316,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         $this->password = $this->password_hash;
 
-        if ($this->password ==  $data->password) {
+        if ($this->password == $data->password) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
 
@@ -333,4 +337,5 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $this->_user;
     }
+
 }

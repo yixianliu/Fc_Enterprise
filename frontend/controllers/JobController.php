@@ -54,7 +54,7 @@ class JobController extends BaseController
     public function actionIndex()
     {
 
-        $model = Job::find();
+        $model = Job::find()->where(['is_audit' => 'On']);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $model,
@@ -75,8 +75,14 @@ class JobController extends BaseController
      */
     public function actionView($id)
     {
+
+        $model = Job::findOne(['id' => $id, 'is_audit' => 'On']);
+
+        if (empty($model))
+            return $this->redirect(['index']);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -93,12 +99,14 @@ class JobController extends BaseController
 
         $model->user_id = Yii::$app->user->identity->user_id;
 
+        $model->is_audit = 'Off';
+
         if (!empty($model->getErrors())) {
             Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -151,7 +159,7 @@ class JobController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Job::findOne(['job_id' => $id])) !== null) {
+        if (($model = Job::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

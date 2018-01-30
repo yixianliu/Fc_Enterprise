@@ -45,11 +45,12 @@ use dosamigos\fileupload\FileUploadUI;
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'images',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->job_id, 'type' => 'product'],
+                    'url'           => ['upload/image-upload', 'id' => $model->job_id, 'type' => 'job'],
                     'gallery'       => false,
                     'fieldOptions'  => [
                         'accept' => 'file/*'
                     ],
+
                     'clientOptions' => [
                         'maxFileSize'      => 2000000,
                         'dataType'         => 'json',

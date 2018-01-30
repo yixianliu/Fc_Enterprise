@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    // 网站根本路
+    // 网站根本样式
     public $basePath = '@webroot';
     public $baseUrl = '@web';
 

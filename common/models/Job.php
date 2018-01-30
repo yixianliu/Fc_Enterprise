@@ -53,11 +53,10 @@ class Job extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 125],
             [['keywords'], 'string', 'max' => 120],
             [['images'], 'string', 'max' => 1500],
-            [['job_id'], 'unique'],
-            [['title'], 'unique'],
+            [['job_id', 'title'], 'unique'],
 
             // 审核
-            [['is_audit'], 'default', 'value' => 'Off'],
+            [['is_audit', ], 'default', 'value' => 'Off'],
         ];
     }
 final

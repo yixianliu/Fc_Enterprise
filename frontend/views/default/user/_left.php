@@ -14,19 +14,21 @@ use common\widgets\iConf\ConfList;
 
 ?>
 
-<form role="form" class="relative">
-    <input type="search" class="searchbox" placeholder="搜索从这里开始...">
-    <button type="submit" class="search-button"><i class="icon icon_search"></i></button>
-</form>
-
-<!-- Categories -->
 <div class="widget categories">
     <ul>
+        <li><?= Yii::$app->user->identity->username ?></li>
         <li class="active-cat"><a href="<?= Url::to(['user/index']) ?>">用户中心</a></li>
-        <li><a href="#">用户资料</a></li>
-        <li><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></li>
-        <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
-        <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
+        <li><a href="<?= Url::to(['user/info']) ?>">用户资料</a></li>
+
+        <?php if (Yii::$app->user->identity->is_type == 'enterprise'): ?>
+            <li><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></li>
+        <?php endif ?>
+
+        <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
+            <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
+            <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
+        <?php endif ?>
+
         <li><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></li>
         <li><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></li>
     </ul>
