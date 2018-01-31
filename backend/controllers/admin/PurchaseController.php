@@ -83,7 +83,12 @@ class PurchaseController extends BaseController
 
         $model->user_id = '网站管理员';
 
-        $data = $this->setDate(Yii::$app->request->post());
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            if (!($data = $this->setDate($data)))
+                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        }
 
         // 群发短信
         $this->qSend($data);
@@ -115,11 +120,15 @@ class PurchaseController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $model->start_at = date('Y - m -d', $model->start_at);
+        $model->start_at = date('Y-m-d H:i', $model->start_at);
+        $model->end_at = date('Y-m-d H:i', $model->end_at);
 
-        $model->end_at = date('Y - m -d', $model->end_at);
+        $data = Yii::$app->request->post();
 
-        $data = $this->setDate(Yii::$app->request->post());
+        if (!empty($data)) {
+            if (!($data = $this->setDate($data)))
+                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        }
 
         $this->qSend($data);
 
@@ -173,19 +182,18 @@ class PurchaseController extends BaseController
      * 设置时间
      *
      * @param $data
-     * @return array|bool
+     * @return bool
      */
     public function setDate($data)
     {
-        if (empty($data) || !is_array($data)) {
+
+        if (empty($data['Purchase']))
             return false;
-        }
 
-        // 开始
-        $data['Purchase']['start_at'] = strtotime($data['Purchase']['start_at']);
-
-        // 结束
-        $data['Purchase']['end_at'] = strtotime($data['Purchase']['end_at']);
+        $data['Purchase'] = [
+            'start_at' => strtotime($data['Purchase']['start_at']),
+            'end_at'   => strtotime($data['Purchase']['end_at']),
+        ];
 
         if ($data['Purchase']['start_at'] > $data['Purchase']['end_at']) {
             return false;
@@ -206,7 +214,7 @@ class PurchaseController extends BaseController
         // 初始化
         $mobile = null;
 
-        if (empty($data) || $data['Purchase']['is_send_msg'] != 'On') {
+        if (empty($data['Purchase']['is_send_msg']) || $data['Purchase']['is_send_msg'] != 'On') {
             return false;
         }
 
@@ -223,7 +231,8 @@ class PurchaseController extends BaseController
             $mobile .= $value . ',';
         }
 
-//        return Json::encode(Yii::$app->smser->send($mobile, $content));
+        if (!Yii::$app->smser->send($mobile, $content))
+            return false;
 
         return true;
     }

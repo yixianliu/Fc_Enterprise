@@ -85,33 +85,34 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
 
-            // 必填
+            // 后台
             [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
-            [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
-            [['nickname', 'sex'], 'required', 'on' => 'info'],
-
-            // 对username的值进行两边去空格过滤
-            [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim', 'on' => 'backend'],
-
-            [['exp', 'credit', 'birthday', 'signature'], 'default', 'value' => 0],
-            [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'on' => 'backend', 'message' => '{attribute}必须为1开头的11位纯数字'],
-
-            [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
 
             // 注册
-            [['username', 'is_type', 'password', 'msg', 'repassword'], 'required', 'on' => 'reg'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!', 'on' => 'reg'],
-            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
+            [['username', 'is_type', 'password', 'repassword'], 'required', 'on' => 'reg'],
 
-            // 修改密码,二次密码是否一致
-            ['repassword', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'setpsw'],
+            // 资料修改
+            [['nickname', 'sex'], 'required', 'on' => 'info'],
 
             // 登录
-            [['username', 'password',], 'required', 'on' => 'login', 'message' => '不能为空'],
-            ['rememberMe', 'boolean', 'on' => 'login'],
-            ['password', 'validatePassword', 'on' => 'login, setpsw'],
+            [['username', 'password',], 'required', 'on' => 'login'],
 
+            // 修改密码
+            [['password', 'newpassword', 'repassword'], 'required', 'on' => 'setpsw'],
+            ['repassword', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'setpsw'],
+
+            // 对username的值进行两边去空格过滤
+            [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim'],
+            [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'message' => '{attribute}必须为1开头的11位纯数字'],
+            [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
+            ['rememberMe', 'boolean',],
+            ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
+
+            // 默认
             [['enterprise', 'signature'], 'default', 'value' => null],
+            [['exp', 'credit', 'birthday'], 'default', 'value' => 0],
         ];
     }
 
@@ -273,6 +274,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         $this->user_id = time() . '_' . rand(0000, 9999);
         $this->r_key = 'admin';
+        $this->is_using = 'Not';
 
         $this->setPassword($this->password);
 

@@ -137,7 +137,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
-                    'data'    => ['On' => '审核', 'Off' => '审核不过'],
+                    'data'    => ['On' => '启用', 'Off' => '不启用'],
                     'options' => ['placeholder' => '是否启用...'],
                 ]);
                 ?>
@@ -166,6 +166,6 @@ use dosamigos\fileupload\FileUploadUI;
 
     </section>
 
-    <?= $this->render('../../form_msg'); ?>
+    <?= $this->render('../../formMsg'); ?>
 
 </div>

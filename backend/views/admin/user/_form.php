@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -20,12 +21,12 @@ use yii\widgets\ActiveForm;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
+                <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
 
-                <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
 
                 <?=
-                $form->field($model, 'r_key')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'r_key')->widget(Select2::classname(), [
                     'data'          => $result['role'],
                     'options'       => ['placeholder' => '角色...'],
                     'pluginOptions' => [
@@ -35,7 +36,7 @@ use yii\widgets\ActiveForm;
                 ?>
 
                 <?=
-                $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
                     'data'          => ['user' => '普通用户', 'enterprise' => '企业用户', 'supplier' => '供应商用户'],
                     'options'       => ['placeholder' => '用户类型...'],
                     'pluginOptions' => [
@@ -45,7 +46,7 @@ use yii\widgets\ActiveForm;
                 ?>
 
                 <?=
-                $form->field($model, 'sex')->widget(kartik\select2\Select2::classname(), [
+                $form->field($model, 'sex')->widget(Select2::classname(), [
                     'data'          => ['Male' => '男', 'Female' => '女'],
                     'options'       => ['placeholder' => '性别...'],
                     'pluginOptions' => [
@@ -56,7 +57,12 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'    => ['On' => '启用', 'Off' => '不启用', 'Not' => '未审核'],
+                    'options' => ['placeholder' => '是否启用...'],
+                ]);
+                ?>
 
                 <div class="form-group">
 

@@ -69,7 +69,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
                     'data'          => ['On' => '启用', 'Off' => '未启用'],

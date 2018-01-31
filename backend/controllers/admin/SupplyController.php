@@ -33,7 +33,7 @@ class SupplyController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -51,7 +51,7 @@ class SupplyController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -82,12 +82,19 @@ class SupplyController extends BaseController
 
         $model->user_id = '网站管理员';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            if (!($data = $this->setDate($data)))
+                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
             'result' => [
                 'classify' => $this->getCls(),
             ],
@@ -105,12 +112,22 @@ class SupplyController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->start_at = date('Y-m-d H:i', $model->start_at);
+        $model->end_at = date('Y-m-d H:i', $model->end_at);
+
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            if (!($data = $this->setDate($data)))
+                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
             'result' => [
                 'classify' => $this->getCls(),
             ],
@@ -145,6 +162,30 @@ class SupplyController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * 设置时间
+     *
+     * @param $data
+     * @return bool
+     */
+    public function setDate($data)
+    {
+
+        if (empty($data['Supply']))
+            return false;
+
+        $data['Supply'] = [
+            'start_at' => strtotime($data['Supply']['start_at']),
+            'end_at'   => strtotime($data['Supply']['end_at']),
+        ];
+
+        if ($data['Supply']['start_at'] > $data['Supply']['end_at']) {
+            return false;
+        }
+
+        return $data;
     }
 
     /**

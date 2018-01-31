@@ -58,6 +58,9 @@ class UserController extends BaseController
             if (!$model->save()) {
                 Yii::$app->getSession()->setFlash('error', '修改资料有误 !!');
             } else {
+
+                Yii::$app->getSession()->setFlash('success', '修改资料成功 !!');
+
                 return $this->redirect(['info']);
             }
         }

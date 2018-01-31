@@ -29,11 +29,11 @@ class MemberController extends Controller
         parent::init();
 
         if (!file_exists(Yii::getAlias('@backend') . '/web/' . Yii::$app->params['RD_FILE'])) {
-            exit('Null');
+            exit(null);
         }
 
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/user/index']);
+            return $this->redirect(['/mobile/user/index']);
         }
 
         return;

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%supply}}".
@@ -39,13 +40,23 @@ class Supply extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['c_key', 'supply_id', 'user_id', 'title', 'content', 'price', 'num', 'unit', 'is_type', 'is_status', 'start_at', 'end_at', 'is_send_msg', 'is_using'], 'required'],
             [['content', 'is_type', 'is_status', 'is_send_msg', 'is_using'], 'string'],
             [['num'], 'integer'],
-            [['c_key', 'start_at', 'end_at', 'unit'], 'string', 'max' => 55],
+            [['c_key', 'unit'], 'string', 'max' => 55],
             [['supply_id', 'user_id', 'price'], 'string', 'max' => 85],
             [['title', 'path'], 'string', 'max' => 125],
             [['supply_id'], 'unique'],

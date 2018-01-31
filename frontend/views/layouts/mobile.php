@@ -23,5 +23,3 @@ $ClsMenu = new Menu();
 $this->beginPage();
 
 ?>
-
-

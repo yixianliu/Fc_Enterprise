@@ -32,9 +32,11 @@ class ProductController extends BaseController
 
     /**
      * Lists all Product models.
-     * @return mixed
+     *
+     * @param null $id
+     * @return string
      */
-    public function actionIndex($type = null)
+    public function actionIndex($id = null)
     {
 
         $sort = new Sort([
@@ -49,7 +51,7 @@ class ProductController extends BaseController
             ],
         ]);
 
-        $model = empty($type) ? Product::find() : Product::find()->where(['c_key' => $type]);
+        $model = (empty($id) || $id == 1) ? Product::find() : Product::find()->where(['c_key' => $id]);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $model->orderBy($sort->orders),

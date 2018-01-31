@@ -139,7 +139,7 @@ class PagesController extends BaseController
         }
 
         if ($model->load($data) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->page_id]);
         } else {
 
             $model->c_key = Yii::$app->request->get('id', 'C0');
@@ -172,7 +172,7 @@ class PagesController extends BaseController
         }
 
         if ($model->load($data) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->page_id]);
         } else {
             return $this->render('update', [
                 'model'  => $model,
@@ -204,9 +204,9 @@ class PagesController extends BaseController
      * @return SinglePage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function  findModel($id)
     {
-        if (($model = SinglePage::findOne($id)) !== null) {
+        if (($model = SinglePage::findOne(['page_id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

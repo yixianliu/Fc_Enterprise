@@ -159,7 +159,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($product as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/product-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/product/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }

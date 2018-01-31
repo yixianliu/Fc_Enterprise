@@ -37,10 +37,50 @@ $this->params['breadcrumbs'][] = $this->title;
                         'user_id',
                         'title',
                         'price',
-                        'num',
-                        'unit',
-                        'is_type',
-                        'is_status',
+                        [
+                            'attribute' => 'is_type',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'Long'  => '长期采购',
+                                    'Short' => '短期采购',
+                                ];
+
+                                return $state[ $model->is_type ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_status',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '采购中',
+                                    'Off' => '暂停采购',
+                                ];
+
+                                return $state[ $model->is_status ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_send_msg',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]); ?>

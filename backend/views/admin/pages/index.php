@@ -28,7 +28,7 @@ function recursionPages($data)
 
         $html .= '<li class="">';
         $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-        $html .= $values['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $values['id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $values['c_key']], ['class' => "btn btn-primary"]);
+        $html .= $values['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $values['page_id']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $values['c_key']], ['class' => "btn btn-primary"]);
         $html .= '    </div>';
 
         if (!empty($values['child'])) {
@@ -84,7 +84,7 @@ function recursionPages($data)
 
                             <?= Html::a('添加下级单页面', ['admin/pages/create', 'id' => $value['c_key']], ['class' => 'btn btn-success']) ?>
 
-                            <?= Html::a('编辑', ['admin/pages/update', 'id' => $value['c_key']], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('编辑', ['admin/pages-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-success']) ?>
 
                         </div>
 

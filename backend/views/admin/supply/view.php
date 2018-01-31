@@ -51,12 +51,43 @@ $this->params['breadcrumbs'][] = $this->title;
                         'unit',
                         'is_type',
                         'is_status',
-                        'start_at',
-                        'end_at',
                         'is_send_msg',
-                        'is_using',
-                        'created_at',
-                        'updated_at',
+                        [
+                            'attribute' => 'start_at',
+                            'value'     => function ($model) {
+                                return date('Y-m-d H:i', $model->start_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'end_at',
+                            'value'     => function ($model) {
+                                return date('Y-m-d H:i', $model->end_at);
+                            },
+                        ],
+                        'is_send_msg',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y-m-d H:i', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y-m-d H:i', $model->updated_at);
+                            },
+                        ],
                     ],
                 ]);
                 ?>

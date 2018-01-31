@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%pages_tpl_file}}".
@@ -23,6 +24,16 @@ class PagesTplFile extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%pages_tpl_file}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**

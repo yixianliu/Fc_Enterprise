@@ -147,7 +147,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
-                    'data'    => ['On' => '审核', 'Off' => '审核不过'],
+                    'data'    => ['On' => '启用', 'Off' => '不启用'],
                     'options' => ['placeholder' => '是否启用...'],
                 ]);
                 ?>

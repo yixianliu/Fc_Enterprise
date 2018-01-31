@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'price',
                         'num',
                         'unit',
+                        'is_send_msg',
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -68,13 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'start_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->start_at);
+                                return date('Y-m-d H:i', $model->start_at);
                             },
                         ],
                         [
                             'attribute' => 'end_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->end_at);
+                                return date('Y-m-d H:i', $model->end_at);
                             },
                         ],
                         [
@@ -91,13 +92,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
+                                return date('Y-m-d H:i', $model->created_at);
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->updated_at);
+                                return date('Y-m-d H:i', $model->updated_at);
                             },
                         ],
                     ],
