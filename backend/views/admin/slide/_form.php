@@ -16,9 +16,9 @@ use dosamigos\fileupload\FileUploadUI;
 ?>
 
 <style type="text/css">
-    .template-download img {
-        width: 75px;
-        height: 50px;
+    .preview img {
+        width: 180px;
+        height: 100px;
     }
 </style>
 
@@ -48,34 +48,37 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?=
                 FileUploadUI::widget([
-                    'model'        => $model,
-                    'attribute'    => 'path',
-                    'url'          => ['admin/upload/image-upload', 'id' => 1, 'type' => 'slide', 'attribute' => 'path'],
-                    'gallery'      => false,
-                    'fieldOptions' => [
+                    'model'         => $model,
+                    'attribute'     => 'path',
+                    'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'slide', 'attribute' => 'path'],
+                    'gallery'       => false,
+                    'fieldOptions'  => [
                         'accept' => 'image/*'
                     ],
-
                     'clientOptions' => [
                         'maxFileSize'      => 2000000,
                         'dataType'         => 'json',
                         'maxNumberOfFiles' => 5,
                     ],
 
-
                     // ...
                     'clientEvents'  => [
+
                         'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
                                 var html = "";
                                 
+                                var ImagesContent = $("#ImagesContent");
+                                
                                 $.each(data.result.files, function (index, file) {
-                                    html += "<input type=\'hidden\' class=\'" + file.name + "\' name=\'Slide[path][]\' value=\'" + file.name + "\'>";
+                                    html += file.name + \',\';
                                 });
                                 
-                                $("#SlideImg").append(html);
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
                                 
                                 return true;
                             }',
@@ -87,7 +90,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <div id="SlideImg"></div>
+                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
                 <hr/>
 
@@ -123,12 +126,3 @@ use dosamigos\fileupload\FileUploadUI;
     <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
 
 </div>
-
-
-<script type="text/javascript">
-    $('.delete').on('click', function () {
-        var val = $(this).attr('class');
-        $("." + val).remove();
-    });
-</script>
-

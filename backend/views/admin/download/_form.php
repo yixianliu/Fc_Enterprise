@@ -13,11 +13,11 @@ use dosamigos\fileupload\FileUploadUI;
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -43,7 +43,7 @@ use dosamigos\fileupload\FileUploadUI;
                     FileUploadUI::widget([
                         'model'         => $model,
                         'attribute'     => 'path',
-                        'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download'],
+                        'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download', 'attribute' => 'path'],
                         'gallery'       => false,
                         'fieldOptions'  => [
                             'accept' => 'file/*'

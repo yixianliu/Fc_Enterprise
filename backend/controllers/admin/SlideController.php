@@ -105,10 +105,7 @@ class SlideController extends BaseController
 
         $model = $this->findModel($id);
 
-        // 整合路径
-        $result = $this->zpath(Yii::$app->request->post());
-
-        if ($model->load($result) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 

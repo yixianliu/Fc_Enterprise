@@ -40,7 +40,7 @@ if (!empty($img)) {
 
                         <?php if ($type != 'pages' && $type != 'purchase'): ?>
 
-                            <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 180, 'height' => 100]); ?>
+                            <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
 
                         <?php else: ?>
 

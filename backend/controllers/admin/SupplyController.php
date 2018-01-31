@@ -176,10 +176,8 @@ class SupplyController extends BaseController
         if (empty($data['Supply']))
             return false;
 
-        $data['Supply'] = [
-            'start_at' => strtotime($data['Supply']['start_at']),
-            'end_at'   => strtotime($data['Supply']['end_at']),
-        ];
+        $data['Supply']['start_at'] = strtotime($data['Supply']['start_at']);
+        $data['Supply']['end_at'] = strtotime($data['Supply']['end_at']);
 
         if ($data['Supply']['start_at'] > $data['Supply']['end_at']) {
             return false;

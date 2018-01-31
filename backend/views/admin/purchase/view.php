@@ -45,7 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'price',
                         'num',
                         'unit',
-                        'is_send_msg',
+                        [
+                            'attribute' => 'is_send_msg',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '群发供应商',
+                                    'Off' => '不群发',
+                                ];
+
+                                return $state[ $model->is_send_msg ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {

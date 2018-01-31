@@ -190,10 +190,8 @@ class PurchaseController extends BaseController
         if (empty($data['Purchase']))
             return false;
 
-        $data['Purchase'] = [
-            'start_at' => strtotime($data['Purchase']['start_at']),
-            'end_at'   => strtotime($data['Purchase']['end_at']),
-        ];
+        $data['Purchase']['start_at'] = strtotime($data['Purchase']['start_at']);
+        $data['Purchase']['end_at'] = strtotime($data['Purchase']['end_at']);
 
         if ($data['Purchase']['start_at'] > $data['Purchase']['end_at']) {
             return false;
