@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
-use common\models\PsbClassify;
+
+use common\models\SpOffer;
 use Yii;
 use common\models\Purchase;
+use common\models\PsbClassify;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -83,8 +85,11 @@ class PurchaseController extends BaseController
         if (empty($model))
             return $this->redirect(['index']);
 
+        $modelOffer = new SpOffer();
+
         return $this->render('view', [
-            'model' => $model,
+            'model'      => $model,
+            'modelOffer' => $modelOffer,
         ]);
     }
 

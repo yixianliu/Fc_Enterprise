@@ -27,6 +27,7 @@ use common\widgets\iConf\ConfList;
         <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
             <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
             <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
+            <li><a href="<?= Url::to(['sp-offer/index']) ?>">提交价格的产品</a></li>
         <?php endif ?>
 
         <li><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></li>

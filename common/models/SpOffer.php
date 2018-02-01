@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%sp_offer}}".
@@ -24,6 +25,16 @@ class SpOffer extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%sp_offer}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**

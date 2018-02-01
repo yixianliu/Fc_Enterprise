@@ -8,6 +8,8 @@ use yii\helpers\Url;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '采购中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 
 <?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
@@ -72,6 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $model->content ?>
             </div>
         </div>
+
+        <?= $this->render('../offer', ['modelOffer' => $modelOffer, 'id' => $model->purchase_id, 'type' => 'Purchase']); ?>
 
         <br/>
         <br/>
