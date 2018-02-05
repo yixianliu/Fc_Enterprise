@@ -16,15 +16,12 @@ $type = empty($type) ? 'supply' : $type;
 
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="portfolio-filter">
-            <a href="#" class="filter active" data-filter="*">所有</a>
+<div class="corre-classify">
 
-            <?php foreach ($result['classify'] as $value): ?>
-                <a href="<?= Url::to([$type . '/index', 'type' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
-            <?php endforeach; ?>
+    <span>相关分类：</span>
 
-        </div>
-    </div>
+    <?php foreach ($result['classify'] as $value): ?>
+        <a href="<?= Url::to([$type . '/index', 'type' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
+    <?php endforeach; ?>
+
 </div>

@@ -1,0 +1,106 @@
+/* 幻灯片 */
+.carousel-control {
+    padding-top: 12%;
+}
+
+/* 用户注册 */
+.member-user-reg {
+    width: 600px;
+    position: absolute;
+    left: 31%;
+    top: 25%;
+    padding: 30px 80px;
+    background: #fff;
+    z-index: 9;
+    border-radius: 10px;
+}
+
+.user-reg-cont {
+    margin-top: 20px;
+}
+
+.user-reg-cont .glyphicon-pass {
+    width: 14px;
+    height: 19px;
+    background: url("../images/password.png") no-repeat center 0;
+}
+
+.user-reg-cont .glyphicon-code {
+    width: 14px;
+    height: 19px;
+    background: url("../images/code.png") no-repeat center 0;
+}
+
+.user-reg-cont .code-red {
+    color: #fff;
+    background: #dc0616;
+    border: 1px solid #dc0616;
+}
+
+.user-reg-cont .radio {
+    padding-top: 0;
+}
+
+.user-reg-cont .radio .col-sm-9 {
+    padding-left: 8px;
+    padding-right: 0;
+}
+
+.user-reg-cont .input-group .btn-red {
+    width: 100%;
+    color: #fff;
+    border-radius: 0;
+    background: #dc0616;
+}
+
+.user-reg-cont .btn-red {
+    width: 100%;
+    color: #fff;
+    margin-top: 5px;
+    background: #dc0616;
+}
+
+/* 案例中心 */
+
+@media screen and (min-width: 1360px) and (max-width: 1438px) {
+    .member-user-reg {
+        left: 28%;
+        top: 19%
+    }
+
+    .carousel-indicators {
+        bottom: 2px;
+    }
+}
+
+@media screen and (min-width: 1439px) and (max-width: 1500px) {
+    .member-user-reg {
+        left: 30%;
+        top: 20%
+    }
+
+    .carousel-indicators {
+        bottom: 2px;
+    }
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1700px) {
+    .member-user-reg {
+        left: 32%;
+        top: 21%
+    }
+}
+
+@media screen and (min-width: 1700px) and (max-width: 1800px) {
+    .member-user-reg {
+        left: 33%;
+        top: 23%
+    }
+}
+
+@media screen and (min-width: 1900px){
+    .member-user-reg {
+        left: 34%;
+        top: 24%
+    }
+}

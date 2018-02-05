@@ -27,7 +27,15 @@ $this->title = '网站配置';
             <div class="row">
 
                 <p>
+
                     <?= Html::a('添加网站配置', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => 'btn btn-success']) ?>
+
                 </p>
 
                 <?=
@@ -38,7 +46,21 @@ $this->title = '网站配置';
                         'c_key',
                         'name',
                         'parameter',
-                        'is_language',
+                        [
+                            'attribute' => 'is_language',
+                            'value'     => function ($model) {
+
+                                if (empty($model->is_language))
+                                    return '系统配置';
+
+                                $state = [
+                                    'cn' => '中文',
+                                    'en' => '英文',
+                                ];
+
+                                return $state[ $model->is_language ];
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);

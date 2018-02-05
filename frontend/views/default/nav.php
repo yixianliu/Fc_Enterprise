@@ -1,15 +1,11 @@
-<section class="page-title style-2">
-    <div class="container relative clearfix">
-        <div class="title-holder">
-            <div class="title-text">
+<div class="location">
 
-                <?=
-                \yii\widgets\Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]);
-                ?>
+    <font><?= $this->title ?></font>
 
-            </div>
-        </div>
-    </div>
-</section>
+    <?=
+    \yii\widgets\Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]);
+    ?>
+
+</div>

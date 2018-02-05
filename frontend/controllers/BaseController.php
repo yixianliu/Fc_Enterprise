@@ -19,7 +19,7 @@ class BaseController extends Controller
 {
 
     // 布局
-    public $layout = 'default';
+    public $layout = 'qijian';
 
     // 构造
     public function init()

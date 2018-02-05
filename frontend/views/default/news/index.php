@@ -20,37 +20,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../slide', ['pagekey' => 'news']); ?>
 
-<?= $this->render('../nav'); ?>
+<div class="container content">
 
-<section class="section-wrap-mp pb-50">
-    <div class="container">
+    <?= $this->render('../_left', ['type' => 'news']); ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="portfolio-filter">
+    <div class="right">
 
-                    <a href="<?= Url::to(['news/index']); ?>" class="filter active">所有分类</a>
+        <?= $this->render('../nav'); ?>
 
-                    <?php foreach ($result['classify'] as $value): ?>
-                        <a href="<?= Url::to(['news-cls/index', 'id' => $value['c_key']]); ?>" class="filter"><?= $value['name'] ?></a>
-                    <?php endforeach; ?>
+        <hr/>
 
-                </div>
-            </div>
+        <div class="content_news_list">
+
+            <?=
+            ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView'     => '_list',
+            ]);
+            ?>
+
         </div>
-
-        <div class="row">
-            <div class="works-grid titles">
-
-                <?=
-                ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemView'     => '_list',
-                ]);
-                ?>
-
-            </div>
-        </div>
-
     </div>
-</section>
+
+</div>

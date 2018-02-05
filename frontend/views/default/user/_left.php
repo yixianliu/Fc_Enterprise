@@ -9,36 +9,53 @@
  * Time: 10:14
  */
 
+use yii\helpers\Html;
 use yii\helpers\Url;
 use common\widgets\iConf\ConfList;
 
 ?>
 
-<div class="widget categories">
-    <ul>
-        <li><?= Yii::$app->user->identity->username ?></li>
-        <li class="active-cat"><a href="<?= Url::to(['user/index']) ?>">用户中心</a></li>
-        <li><a href="<?= Url::to(['user/info']) ?>">用户资料</a></li>
+<div class="left">
 
-        <?php if (Yii::$app->user->identity->is_type == 'enterprise'): ?>
-            <li><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></li>
-        <?php endif ?>
+    <div class="user-cont">
+        <h3>
+            <img class="image_fade" src="../images/200x200.gif">
+        </h3>
+        <p>用户名 : <?= Yii::$app->user->identity->username ?></p>
+        <p>上次登录时间 : <?= date('Y / m / d', Yii::$app->user->identity->updated_at) ?></p>
 
-        <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
-            <li><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></li>
-            <li><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></li>
-            <li><a href="<?= Url::to(['sp-offer/index']) ?>">提交价格的产品</a></li>
-        <?php endif ?>
+    </div>
 
-        <li><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></li>
-        <li><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></li>
-    </ul>
+    <?php if (Yii::$app->user->identity->is_type == 'enterprise'): ?>
+        <div class="cat_list">
+            <h3>企业用户</h3>
+            <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
+        </div>
+    <?php endif ?>
+
+    <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
+        <div class="cat_list">
+            <h3>商户中心</h3>
+            <p><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></p>
+            <p><a href="<?= Url::to(['supply/index']) ?>">供应中心</a></p>
+            <p><a href="<?= Url::to(['sp-offer/index']) ?>">提交价格的产品</a></p>
+        </div>
+    <?php endif ?>
+
+    <div class="cat_list">
+        <h3>用户中心</h3>
+        <p><a href="<?= Url::to(['user/index']) ?>">用户中心</a></p>
+        <p><a href="<?= Url::to(['user/info']) ?>">用户资料</a></p>
+        <p><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></p>
+        <p><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></p>
+    </div>
+
+    <div class="contact">
+
+        <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
+
+        <?= ConfList::widget(['config' => [$this->title, 'left']]); ?>
+
+    </div>
+
 </div>
-
-<br/>
-<h3 class="widget-title">联系我们</h3>
-
-<div class="widget categories">
-    <?= ConfList::widget(['config' => [$this->title, 'left']]); ?>
-</div>
-

@@ -14,6 +14,9 @@ use common\models\User;
 class UserController extends BaseController
 {
 
+    // 布局
+    public $layout = 'user';
+
     public function init()
     {
 

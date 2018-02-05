@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 ?>
 
-<ul>
+<ul class="contact_us">
     <li><a>公司名称：<?= $result['Conf']['NAME'] ?></a></li>
     <li><a>联系人：李xx 总经理</a></li>
     <li><a>联系电话：<span><?= $result['Conf']['PHONE'] ?></span></a></li>

@@ -46,9 +46,14 @@ class ConfSearch extends Conf
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $type = 'cn')
     {
-        $query = Conf::find();
+
+        if ($type == 'system') {
+            $query = Conf::find()->where(['is_language' => null]);
+        } else {
+            $query = Conf::find()->where(['is_language' => $type]);
+        }
 
         // add conditions that should always apply here
 

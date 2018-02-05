@@ -167,3 +167,106 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </section> <!-- end related projects-->
+
+<!-- 内容中心 -->
+<div class="container content">
+
+    <!-- 当前位置 -->
+    <div class="location">
+        <font>全部产品</font>
+        <span>当前位置：<a title="" href="">首页</a> &gt; <a title="" href="">产品中心</a> &gt; <a title="" href="">产品中心</a> &gt;</span>
+    </div>
+    <!-- #当前位置 -->
+
+    <!-- 可变化内容 -->
+    <div class="conY">
+        <div class="conY_tit">七建产品</div>
+        <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：2018-1-30</div>
+
+        <div class="conY_text">
+
+            <!-- 产品开始 -->
+            <div class="right-extra">
+
+                <!--产品参数开始-->
+                <div class="tendcont">
+                    <div class="tend-left">
+                        <!-- 大图 -->
+                        <div id="preview" class="spec-preview">
+                                        <span class="jqzoom">
+                                            <img alt="" jqimg="images/ser-left-1.jpg" src="images/ser-left-1.jpg"/>
+                                        </span>
+                        </div>
+                        <!-- #大图 -->
+
+                        <!--缩图开始-->
+                        <div class="spec-scroll">
+                            <a class="prev"></a>
+                            <a class="next"></a>
+                            <div class="items">
+                                <ul>
+                                    <li>
+                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-left-1.jpg" onmousemove="preview(this);">
+                                    </li>
+
+                                    <li>
+                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-left-2.jpg" onmousemove="preview(this);">
+                                    </li>
+
+                                    <li>
+                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-right-1.jpg" onmousemove="preview(this);">
+                                    </li>
+
+                                    <li>
+                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-right-2.jpg" onmousemove="preview(this);">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--缩图结束-->
+                    </div>
+
+                    <!-- 产品参数 -->
+                    <div class="tend-right">
+                        <p>产品参数: 12cm * 12cm</p>
+                        <p>产品参数: 12cm * 12cm</p>
+                        <p>产品参数: 12cm * 12cm</p>
+                        <p>产品参数: 12cm * 12cm</p>
+                        <p>产品参数: 12cm * 12cm</p>
+                    </div>
+                    <!-- #产品参数 -->
+                </div>
+                <!--产品参数结束-->
+
+                <div style="clear:both;height:10px;"></div>
+
+                <!-- 内容,评论 -->
+                <div class="m" id="comment">
+                    <!-- 切换按钮 -->
+                    <ul class="tab clearfix">
+                        <li onclick="tabs('#comment',0)" class="curr">
+                            商品详情<strong></strong>
+                        </li>
+                    </ul>
+                    <!-- #切换按钮 -->
+
+                    <!-- 图文介绍 -->
+                    <div class="mc tabcon" style="display:block;">
+                        <div class="norecode">
+                            湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建湛江七建
+                        </div>
+                    </div>
+                    <!-- #图文介绍 -->
+                </div>
+                <!-- #内容,评论 -->
+
+            </div>
+            <!-- #产品结束 -->
+
+        </div>
+
+    </div>
+    <!-- #可变化内容 -->
+
+</div>
+<!-- #内容中心 -->

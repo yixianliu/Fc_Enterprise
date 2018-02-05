@@ -10,11 +10,11 @@ use yii\widgets\ListView;
 
 $this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile('@web/themes/qijian/css/product.css');
 ?>
 
 <?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
-
-<?= $this->render('../nav'); ?>
 
 <style type="text/css">
     .summary {
@@ -22,20 +22,63 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<section class="section-wrap-mp pb-50">
-    <div class="container">
+<div class="container content">
 
-        <?= $this->render('../cls', ['result' => $result, 'type' => 'purchase']); ?>
+    <!-- 当前位置 -->
+    <?= $this->render('../nav'); ?>
+    <!-- #当前位置 -->
 
-        <div class="row">
+    <!-- 相关分类 -->
+    <?= $this->render('../cls', ['result' => $result, 'type' => 'purchase']); ?>
+    <!-- #相关分类 -->
 
-            <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
-                <div class="col-md-12 col-sm-4 col-xs-6 work-item web-design mockups">
-                    <?= Html::a('发布采购', ['create'], ['class' => 'btn']) ?>
-                </div>
+    <!-- 多项选择 -->
+    <div class="corre-nav">
+        <ul class="nav nav-pills">
+            <li><a title="" href="">综合</a></li>
+            <li><a title="" href="">人气</a></li>
+            <li><a title="" href="">销量</a></li>
+            <li class="dropdown">
+                <a title="" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" href="">
+                    全国地区
+                    <!-- 三角形图标 -->
+                    <span class="caret"></span>
+                </a>
 
-                <br/> <br/> <br/>
-            <?php endif; ?>
+                <ul class="dropdown-menu">
+                    <li><a title="" href="">赤坎</a></li>
+                    <li><a title="" href="">霞山</a></li>
+                    <li><a title="" href="">麻章</a></li>
+                    <li><a title="" href="">徐闻</a></li>
+                    <li><a title="" href="">雷州</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a title="" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" href="">
+                    价钱排序
+                    <!-- 三角形图标 -->
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a title="" href="">价格从低到高</a></li>
+                    <li><a title="" href="">价格从高到低</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
+        <div class="col-md-12 col-sm-4 col-xs-6 work-item web-design mockups">
+            <?= Html::a('发布采购', ['create'], ['class' => 'btn']) ?>
+        </div>
+
+        <br/> <br/> <br/>
+    <?php endif; ?>
+
+    <div class="content_product_list">
+        <ul>
 
             <?=
             ListView::widget([
@@ -44,27 +87,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'viewParams'   => [
                     'fullView' => true,
                     'context'  => 'main-page',
-                ],
-                'options'      => ['class' => 'works-grid titles'],
+                ]
             ]);
             ?>
 
-        </div>
+        </ul>
     </div>
-</section>
 
-<section class="call-to-action bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9 col-xs-12">
-                <h2>Are you ready to work with us? Let's grow your business.</h2>
-            </div>
-
-            <div class="col-md-3 col-xs-12 cta-button">
-                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
-            </div>
-
-        </div>
-    </div>
-</section>
+</div>

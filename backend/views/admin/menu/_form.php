@@ -99,9 +99,18 @@ use kartik\select2\Select2;
 
 <script type="text/javascript">
 
-    $('.field-menu-custom_key').hide();
+    var ModelKey = $('#menu-model_key').val();
 
+    $('.field-menu-custom_key').hide();
     $('.field-menu-url').hide();
+
+    if (ModelKey == 'UU1') {
+        $('.field-menu-url').show();
+    }
+
+    if (ModelKey == 'UC1') {
+        $('.field-menu-custom_key').show();
+    }
 
     $('#menu-model_key').on('change', function () {
 

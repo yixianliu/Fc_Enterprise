@@ -11,21 +11,22 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\helpers\HtmlPurifier;
 
 ?>
 
-<div class="col-md-3 col-sm-4 col-xs-6 work-item web-design mockups">
-    <div class="work-container">
-
-        <div class="work-img">
-            <img src="<?= Url::to('@web/themes/enterprise/img') ?>/project_1.jpg" alt="<?= Html::encode($model->title) ?>">
-        </div>
-
-        <div class="work-description">
-            <h3><?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?></h3>
-            <span><a href="#">Print</a></span>
-        </div>
-
+<li>
+    <div class="list-img">
+        <a href="<?= Url::to(['view', 'id' => $model->product_id]) ?>">
+            <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title]); ?>
+        </a>
     </div>
-</div>
+
+    <dvi class="list-cont">
+        <p><span>￥</span> <?= Html::encode($model->price) ?></p>
+        <p>
+            <a title="" href="<?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?>"><?= Html::encode($model->title) ?></a>
+        </p>
+        <p><?= Html::encode($model->title) ?></p>
+        <p><?= Html::encode($model->title) ?></p>
+    </dvi>
+</li>

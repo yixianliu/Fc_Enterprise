@@ -110,7 +110,7 @@ class CenterController extends BaseController
     {
 
         $searchModel = new ConfSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->request->get('type', 'cn'));
 
         return $this->render('conf', ['dataProvider' => $dataProvider]);
     }
