@@ -19,54 +19,93 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<style type="text/css">
-    .summary {
-        display: none;
-    }
-</style>
+<div class="right">
 
-<?= $this->render('../slide', ['pagekey' => 'user']); ?>
+    <div class="col_full userdata-cont">
 
-<?= $this->render('../nav'); ?>
+        <div class="cont-title">
+            <span>修改个人资料</span>
+        </div>
 
-<section class="section-wrap blog-standard" style="padding: 60px 0">
-    <div class="container relative">
         <div class="row">
+            <div class="col-xs-12" style="font-size: 12px;margin: 0;padding: 20px 0px;">
 
-            <div class="col-sm-3 sidebar blog-sidebar">
-                <?= $this->render('../user/_left'); ?>
-            </div>
-
-            <div class="col-sm-9 blog-content">
-
-                <?php $form = ActiveForm::begin(['action' => ['user/info'], 'method' => 'POST',]); ?>
-
-                <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
-
-                <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
-
-                <?php if ($model->is_type == 'enterprise' || $model->is_type == 'supplier'): ?>
-                    <?= $form->field($model, 'enterprise')->textInput(['maxlength' => true]) ?>
-                <?php endif ?>
-
-                <?= $form->field($model, 'signature')->textarea(['rows' => 10]) ?>
-
-                <?=
-                $form->field($model, 'sex')->widget(Select2::classname(), [
-                    'data'    => ['Male' => '男', 'Female' => '女'],
-                    'options' => ['placeholder' => '性别...'],
+                <?php
+                $form = ActiveForm::begin([
+                    'action'      => ['user/info'],
+                    'method'      => 'post',
+                    'id'          => $model->formName(),
+                    'fieldConfig' => [
+                        'template'     => '<div>{input}</div>',
+                        'inputOptions' => ['class' => 'form-control'],
+                    ],
+                    'options'     => ['class' => 'form-horizontal']
                 ]);
                 ?>
 
-                <?= Html::submitButton('修改用户资料', ['class' => 'btn btn-color btn-submit']) ?>
+                <div class="form-group">
+                    <label for="nickname" class="col-sm-2 control-label">昵称:</label>
+                    <div class="col-sm-10">
+
+                        <?=
+                        $form->field($model, 'nickname')
+                            ->textInput(['maxlength' => true, 'aria-describedby' => '昵称', 'placeholder' => '昵称'])
+                            ->label(false)
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="enterprise" class="col-sm-2 control-label">企业名称:</label>
+                    <div class="col-sm-10">
+
+                        <?=
+                        $form->field($model, 'enterprise')
+                            ->textInput(['maxlength' => true, 'aria-describedby' => '企业名称', 'placeholder' => '企业名称'])
+                            ->label(false)
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nickname" class="col-sm-2 control-label">性别:</label>
+                    <div class="col-sm-10">
+                        <?=
+                        $form->field($model, 'sex')->widget(Select2::classname(), [
+                            'data'    => ['Male' => '男', 'Female' => '女'],
+                            'options' => ['placeholder' => '性别...'],
+                        ])->label(false);
+                        ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="person" class="col-sm-2 control-label">个性签名:</label>
+                    <div class="col-sm-10">
+
+                        <?= $form->field($model, 'signature')->textarea(['rows' => 10])->label(false) ?>
+                        <font style="color: #aaa;">(限制128字符之内)</font>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <?= Html::submitButton('修改用户资料', ['class' => 'btn btn-red']) ?>
+                    </div>
+                </div>
 
                 <?php ActiveForm::end() ?>
 
             </div>
 
+            <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
         </div>
 
-        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
     </div>
-</section>
+
+</div>
+

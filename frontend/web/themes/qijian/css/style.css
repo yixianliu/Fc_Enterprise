@@ -142,6 +142,7 @@ a:active {
 
 .navbar-default .nav-pills > li > a:hover, .navbar-default .nav-pills > li > a:focus {
     color: #fff;
+    background: #dc0616;
     border-radius: 0;
 }
 
@@ -997,23 +998,69 @@ a:active {
     font-weight: bold;
 }
 
-/* 会员中心 */
-.home-case-list {
-    display: block;
-    background: url("../images/pro-bg.jpg") no-repeat center 0;
+/* 工程案例 */
+.home-case-cont {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.shortcut{height:28px;line-height:28px;font-size:12px;background:#EEEEEE;text-transform:uppercase;box-shadow:1px 0px 2px rgba(0,0,0,0.2);border-bottom:1px solid #DDDDDD;}
-.shortcut h1{font-size:14px;font-family:"微软雅黑","宋体";}
-.shortcut a,.shortcut h1{padding:0px 10px;letter-spacing:1px;color:#333;text-shadow:0px 1px 1px #fff;display:block;float:left;}
-.shortcut a:hover{background:#fff;}
-.shortcut span.right{float:right;}
-.shortcut span.right a{float:left;display:block;color:#ff6600;font-weight:800;}
-.headeline{height:40px;overflow:hidden;}
-.adv960x90{width:960px;height:90px;overflow:hidden;border:solid 1px #E6E6E6;margin:0 auto;}
-.adv728x90{width:728px;height:90px;overflow:hidden;border:solid 1px #E6E6E6;margin:0 auto;}
 
-.acttabbox{
+.home-case-list {
+    overflow: hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.shortcut {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    background: #EEEEEE;
+    text-transform: uppercase;
+    box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.shortcut h1 {
+    font-size:14px;
+    font-family:"微软雅黑","宋体";
+}
+
+.shortcut a,.shortcut h1 {
+    padding:0px 10px;
+    letter-spacing:1px;
+    color:#333;
+    text-shadow:0px 1px 1px #fff;
+    display:block;
+    float:left;
+}
+
+.shortcut a:hover {
+    background:#fff;
+}
+
+.shortcut span.right {
+    float:right;
+}
+
+.shortcut span.right a {
+    float:left;
+    display:block;
+    color:#ff6600;
+    font-weight:800;
+}
+
+.headeline {
+    height:40px;
+    overflow:hidden;
+}
+
+.acttabbox {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -1023,26 +1070,26 @@ a:active {
     background: #222021;
 }
 
-.tabcon{
+.tabcon {
     float: right;
     width: 820px;
-    height: 320px;
+    height: 440px;
     padding-right: 65px;
     overflow:hidden;
 }
 
-.tabcon li{
+.tabcon li {
     width: 100%;
     height: 100%;
 }
 
-.tabcon li img{
+.tabcon li img {
     width: 100%;
     height: 100%;
     float: left;
 }
 
-.tabnav{
+.tabnav {
     width: 290px;
     float: left;
 }
@@ -1068,12 +1115,6 @@ a:active {
     color: #fff;
 }
 
-.tabnav .cur{
-    background: #dc0616;
-    border:1px solid #dc0616;
-    z-index:9;
-}
-
 .tabnav li a .pro-icon {
     width: 18px;
     height: 8px;
@@ -1081,10 +1122,20 @@ a:active {
     position: relative;
     top: 19px;
     left: 30px;
-    background: url(../images/pro-icon.jpg) no-repeat center 0;
+    background: url(../images/pro-icon.png) no-repeat center 0;
 }
 
-/* 下载中心 */
+.tabnav .cur {
+    background: #dc0616;
+    border:1px solid #dc0616;
+    z-index:9;
+}
+
+.tabnav .cur .pro-icon {
+    background: none;
+}
+
+    /* 下载中心 */
 .content_down_list {
     width: 100%;
     display: inline-block;

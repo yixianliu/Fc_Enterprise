@@ -21,7 +21,7 @@ $type = empty($type) ? 'supply' : $type;
     <span>相关分类：</span>
 
     <?php foreach ($result['classify'] as $value): ?>
-        <a href="<?= Url::to([$type . '/index', 'type' => $value['c_key']]) ?>"><?= $value['name'] ?></a>
+        <a href="<?= Url::to([$type . '/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a> /
     <?php endforeach; ?>
 
 </div>

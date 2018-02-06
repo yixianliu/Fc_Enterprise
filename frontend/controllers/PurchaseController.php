@@ -33,7 +33,7 @@ class PurchaseController extends BaseController
                         'roles'   => ['@'],
                     ],
                     [
-                        'actions' => ['index', 'view',],
+                        'actions' => ['index', 'view', 'center'],
                         'allow'   => true,
                     ],
                 ],
@@ -46,6 +46,11 @@ class PurchaseController extends BaseController
                 ],
             ],
         ];
+    }
+
+    public function actionCenter()
+    {
+        return $this->render('center');
     }
 
     /**

@@ -17,42 +17,71 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['view', 'id
 
 ?>
 
-<style type="text/css">
-    .summary {
-        display: none;
-    }
-</style>
+<div class="right">
 
-<?= $this->render('../slide', ['pagekey' => 'user']); ?>
+    <div class="col_full userdata-cont">
 
-<?= $this->render('../nav'); ?>
+        <div class="cont-title">
+            <span>修改个人资料</span>
+        </div>
 
-<section class="section-wrap blog-standard" style="padding: 60px 0">
-    <div class="container relative">
         <div class="row">
-            <div class="col-sm-3 sidebar blog-sidebar">
-                <?= $this->render('../user/_left'); ?>
-            </div>
+            <div class="col-xs-12" style="font-size: 12px;margin: 0;padding: 20px 0px;">
 
-            <div class="col-sm-9 blog-content">
+                <?php
+                $form = ActiveForm::begin([
+                    'action'      => ['user/setpassword'],
+                    'method'      => 'post',
+                    'id'          => $model->formName(),
+                    'fieldConfig' => [
+                        'template'     => '<div>{input}</div>',
+                        'inputOptions' => ['class' => 'form-control'],
+                    ],
+                    'options'     => ['class' => 'form-horizontal']
+                ]);
+                ?>
 
-                <?php $form = ActiveForm::begin(['action' => ['user/setpassword'], 'method' => 'post', 'id' => $model->formName()]); ?>
+                <div class="form-group">
+                    <label for="nickname" class="col-sm-2 control-label">当前密码:</label>
+                    <div class="col-sm-10">
 
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->label(false) ?>
 
-                <?= $form->field($model, 'newpassword')->passwordInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
 
-                <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => true]) ?>
+                <div class="form-group">
+                    <label for="enterprise" class="col-sm-2 control-label">新密码:</label>
+                    <div class="col-sm-10">
 
-                <?= Html::submitButton('修改密码', ['class' => 'btn btn-color btn-submit']) ?>
+                        <?= $form->field($model, 'newpassword')->passwordInput(['maxlength' => true])->label(false) ?>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="enterprise" class="col-sm-2 control-label">确认新密码:</label>
+                    <div class="col-sm-10">
+
+                        <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => true])->label(false) ?>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <?= Html::submitButton('修改密码', ['class' => 'btn btn-red']) ?>
+                    </div>
+                </div>
 
                 <?php ActiveForm::end() ?>
 
             </div>
 
+            <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
         </div>
 
-        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
     </div>
-</section>
+
+</div>

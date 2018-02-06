@@ -13,10 +13,8 @@ use yii\helpers\Json;
 use yii\web\Controller;
 use common\models\User;
 
-class MemberController extends Controller
+class MemberController extends BaseController
 {
-
-    public $layout = 'default';
 
     // 构造
     public function init()
@@ -80,7 +78,7 @@ class MemberController extends Controller
             $cookie = \Yii::$app->request->cookies;
 
             //判断cookie是否存在
-            if ($cookie->has('RegPhoneCode')) {
+            if (!$cookie->has('RegPhoneCode')) {
                 Yii::$app->getSession()->setFlash('error', '没有验证手机 !!');
             } else {
 

@@ -24,9 +24,10 @@ use yii\helpers\Html;
     <dvi class="list-cont">
         <p><span>￥</span> <?= Html::encode($model->price) ?></p>
         <p>
-            <a title="" href="<?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id]) ?>"><?= Html::encode($model->title) ?></a>
+            <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id], ['title' => $model->title]) ?>
         </p>
-        <p><?= Html::encode($model->title) ?></p>
-        <p><?= Html::encode($model->title) ?></p>
+        <p></p>
+        <p><?= Html::encode($model->user_id) ?></p>
     </dvi>
+
 </li>

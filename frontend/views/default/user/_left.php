@@ -19,7 +19,7 @@ use common\widgets\iConf\ConfList;
 
     <div class="user-cont">
         <h3>
-            <img class="image_fade" src="../images/200x200.gif">
+            <?= Html::img(Url::to('@web/themes/qijian/images/200x200.gif'), ['alt' => Yii::$app->user->identity->username]); ?>
         </h3>
         <p>用户名 : <?= Yii::$app->user->identity->username ?></p>
         <p>上次登录时间 : <?= date('Y / m / d', Yii::$app->user->identity->updated_at) ?></p>
