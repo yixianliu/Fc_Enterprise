@@ -9,27 +9,23 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $model common\models\SinglePage */
 /* @var $form yii\widgets\ActiveForm */
 
-$result['classify'] = empty($result['classify']) ? null : $result['classify'];
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'page_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
                 <?=
                 $form->field($model, 'm_key')->widget(Select2::classname(), [
-                    'data'          => [$model->menu->m_key => $model->menu->name],
-                    'options'       => ['readonly' => ''],
+                    'data'          => $result['menu'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -135,5 +131,8 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 
             </div>
         </div>
+
+        <?= $this->render('../../formMsg'); ?>
+
     </section>
 </div>

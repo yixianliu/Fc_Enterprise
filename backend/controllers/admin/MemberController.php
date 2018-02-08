@@ -72,7 +72,6 @@ class MemberController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->redirect(['/admin/member/login']);
     }
 }

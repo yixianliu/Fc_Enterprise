@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('更新', ['update', 'id' => $model->page_id], ['class' => 'btn btn-primary']) ?>
                     <?=
-                    Html::a('删除', ['delete', 'id' => $model->id], [
+                    Html::a('删除', ['delete', 'id' => $model->page_id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => '是否删除这条记录?',

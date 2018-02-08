@@ -2,18 +2,18 @@
 
 namespace backend\controllers\admin;
 
+use common\models\MenuModel;
 use Yii;
-use common\models\SinglePage;
-use common\models\PagesClassify;
 use common\models\Pages;
-use common\models\PagesTplFile;
+use common\models\PagesClassify;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\widgets\Menu;
 
 /**
- * SinglePageController implements the CRUD actions for SinglePage model.
+ * PagesController implements the CRUD actions for Pages model.
  */
 class PagesController extends BaseController
 {
@@ -47,7 +47,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Lists all SinglePage models.
+     * Lists all Pages models.
      * @return mixed
      */
     public function actionIndex()
@@ -109,7 +109,7 @@ class PagesController extends BaseController
     }
 
     /**
-     * Displays a single SinglePage model.
+     * Displays a single Pages model.
      * @param integer $id
      * @return mixed
      */
@@ -121,40 +121,37 @@ class PagesController extends BaseController
     }
 
     /**
-     * Creates a new SinglePage model.
+     * Creates a new Pages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SinglePage();
+        $model = new Pages();
 
         $model->page_id = time() . '_' . rand(0000, 9999);
 
-        $data = Yii::$app->request->post();
+        $model->c_key = self::getRandomString();
 
-        // 生成 PHP
-        if (!empty($data) && !empty($data['SinglePage']['path'])) {
-            $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
+        if (!empty($model->getErrors())) {
+            Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
-        if ($model->load($data) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->page_id]);
         } else {
-
-            $model->c_key = Yii::$app->request->get('id', 'C0');
 
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $this->getCls(),
+                    'menu' => $this->getMenu(),
                 ],
             ]);
         }
     }
 
     /**
-     * Updates an existing SinglePage model.
+     * Updates an existing Pages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -165,9 +162,8 @@ class PagesController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        // 生成 PHP
-        if (!empty($data['SinglePage']['path'])) {
-            $data['SinglePage']['path'] = $this->setFile($data['SinglePage']['path'], $model->page_id);
+        if (!empty($model->getErrors())) {
+            Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
         if ($model->load($data) && $model->save()) {
@@ -176,14 +172,14 @@ class PagesController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $this->getCls(),
+                    'menu' => $this->getMenu(),
                 ],
             ]);
         }
     }
 
     /**
-     * Deletes an existing SinglePage model.
+     * Deletes an existing Pages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -196,13 +192,13 @@ class PagesController extends BaseController
     }
 
     /**
-     * Finds the SinglePage model based on its primary key value.
+     * Finds the Pages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SinglePage the loaded model
+     * @return Pages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function  findModel($id)
+    protected function findModel($id)
     {
         if (($model = Pages::find()->where([Pages::tableName() . '.page_id' => $id])->joinWith('menu')->one()) !== null) {
             return $model;
@@ -219,7 +215,7 @@ class PagesController extends BaseController
     public function actionFiles($id)
     {
 
-        $data = SinglePage::findOne(['c_key' => $id]);
+        $data = Pages::findOne(['c_key' => $id]);
 
         if (!file_exists($data['path'])) {
 
@@ -233,58 +229,21 @@ class PagesController extends BaseController
      *
      * @return array
      */
-    public function getCls()
+    public function getMenu()
     {
 
         // 初始化
         $result = array();
 
-        $dataCls = PagesClassify::findAll(['is_using' => 'On']);
+        $dataModel = MenuModel::findOne(['name' => '自定义页面']);
 
-        foreach ($dataCls as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
+        $dataMenu = \common\models\Menu::findAll(['model_key' => $dataModel->model_key]);
+
+        foreach ($dataMenu as $value) {
+            $result[ $value['m_key'] ] = $value['name'];
         }
 
         return $result;
     }
 
-    /**
-     * 设置单页面文件
-     *
-     * @param $path
-     * @param $id
-     * @return bool
-     * @throws \yii\base\Exception
-     */
-    public function setFile($path, $id)
-    {
-
-        if (empty($path) || empty($id))
-            return false;
-
-        $path = explode(',', $path);
-
-        $dataPath = Yii::getAlias('@backend/web/temp/pages/') . $path[0];
-
-        // 获取模板文件
-        if (!file_exists($dataPath))
-            return false;
-
-        $data = file_get_contents($dataPath);
-
-        // 生成前台模板文件
-        $filePath = Yii::getAlias('@frontend') . '/views/pages/';
-
-        $fileName = $id . '.php';
-
-        if (file_exists($filePath . $fileName)) {
-            @unlink($filePath . $fileName);
-        }
-
-        FileHelper::createDirectory($filePath);
-
-        file_put_contents($filePath . $fileName, $data);
-
-        return $fileName;
-    }
 }

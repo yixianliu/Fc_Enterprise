@@ -90,6 +90,8 @@ class MenuController extends BaseController
 
         $model->parent_id = empty($parent_id->parent_id) ? null : $parent_id->parent_id;
 
+        $model->m_key = self::getRandomString();
+
         $result = [
             'parent'     => $model->getSelectMenu(),
             'menu_model' => $this->getModel(),

@@ -57,5 +57,8 @@ use kartik\select2\Select2;
 
             </div>
         </div>
+
+        <?= $this->render('../../formMsg'); ?>
+
     </section>
 </div>

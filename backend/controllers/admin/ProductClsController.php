@@ -77,6 +77,8 @@ class ProductClsController extends BaseController
     {
         $model = new ProductClassify();
 
+        $model->c_key = self::getRandomString();
+
         $model->parent_id = Yii::$app->request->get('id', 'C0');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

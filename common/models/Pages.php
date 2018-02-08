@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%pages}}".
@@ -31,14 +32,24 @@ class Pages extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['page_id', 'c_key', 'm_key', 'is_type', 'is_using'], 'required'],
-            [['content', 'is_type', 'is_using'], 'string'],
-            [['page_id', 'c_key', 'm_key'], 'string', 'max' => 55],
+            [['content', 'is_type', 'is_using', 'parent_id', ], 'string'],
+            [['page_id', 'c_key', 'm_key', 'parent_id', ], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['page_id'], 'unique'],
+            [['page_id', 'm_key', 'c_key',], 'unique'],
 
             [['parent_id', 'content', 'path'], 'default', 'value' => null],
         ];
@@ -55,6 +66,7 @@ class Pages extends \yii\db\ActiveRecord
             'm_key'      => '对应的菜单',
             'content'    => '单页面内容',
             'path'       => '单页面路径',
+            'parent_id'  => '父类',
             'is_type'    => '类型',
             'is_using'   => '是否启用',
             'created_at' => '添加数据时间',
