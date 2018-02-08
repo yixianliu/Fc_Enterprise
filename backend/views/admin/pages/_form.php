@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SinglePage */
@@ -21,81 +22,116 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
         <div class="content-body">
             <div class="row">
 
-                <?php if (empty($result['classify'])): ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-                    <h1>请添加单页面分类先...<a href="<?= \yii\helpers\Url::to(['admin/pages-cls/create']) ?>">这里</a></h1>
+                <?= $form->field($model, 'page_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
-                <?php else: ?>
+                <?=
+                $form->field($model, 'm_key')->widget(Select2::classname(), [
+                    'data'          => [$model->menu->m_key => $model->menu->name],
+                    'options'       => ['readonly' => ''],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-                    <?php $form = ActiveForm::begin(); ?>
+                <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'page_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
+                <?=
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
+                    'data'          => ['list' => '列表内容类型', 'content' => '内容详情类型', 'show' => '展示详情类型'],
+                    'options'       => ['placeholder' => '选择内容类型...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-                    <?=
-                    $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
-                        'data'          => $result['classify'],
-                        'options'       => ['placeholder' => '选择分类...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
+                <hr/>
 
-                    <?=
-                    $form->field($model, 'is_type')->widget(Select2::classname(), [
-                        'data'          => ['list' => '列表内容类型', 'content' => '内容详情类型'],
-                        'options'       => ['placeholder' => '选择内容类型...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
+                <?=
+                FileUploadUI::widget([
+                    'model'         => $model,
+                    'attribute'     => 'path',
+                    'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages', 'attribute' => 'path'],
+                    'gallery'       => false,
+                    'fieldOptions'  => [
+                        'accept' => 'file/*',
+                    ],
+                    'clientOptions' => [
+                        'maxFileSize'      => 5000000,
+                        'dataType'         => 'json',
+                        'maxNumberOfFiles' => 1,
+                    ],
 
-                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                    // ...
+                    'clientEvents'  => [
 
-                    <?=
-                    $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
-                        'clientOptions' => [
-                            //设置语言
-                            'lang'               => 'zh-cn',
-                            'initialFrameHeight' => '600',
-                            'elementPathEnabled' => false,
-                            'wordCount'          => false,
-                        ]
-                    ]);
-                    ?>
+                        'fileuploaddone' => 'function(e, data) {
 
-                    <?=
-                    $form->field($model, 'path')->widget(kartik\select2\Select2::classname(), [
-                        'data'          => $result['file'],
-                        'options'       => ['placeholder' => '选择对应模板...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
+                                if (data.result.status == false) {
+                                    alert(data.result.message);
+                                    return true;
+                                }
+                              
+                                var html = "";
+                                
+                                var ImagesContent = $("#ImagesContent");
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += file.name + \',\';
+                                });
+                                
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
+                                
+                                return true;
+                            }',
+                        'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                    ],
+                ]);
+                ?>
 
-                    <?=
-                    $form->field($model, 'is_using')->widget(Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '选择...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
+                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                    <div class="form-group">
+                <hr/>
 
-                        <?= Html::submitButton($model->isNewRecord ? '创建单页面' : '更新单页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?=
+                $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                    'clientOptions' => [
+                        //设置语言
+                        'lang'               => 'zh-cn',
+                        'initialFrameHeight' => '600',
+                        'elementPathEnabled' => false,
+                        'wordCount'          => false,
+                    ]
+                ]);
+                ?>
 
-                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'          => ['On' => '开启', 'Off' => '关闭'],
+                    'options'       => ['placeholder' => '选择...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-                    </div>
+                <div class="form-group">
 
-                    <?php ActiveForm::end(); ?>
+                    <?= Html::submitButton($model->isNewRecord ? '创建单页面' : '更新单页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                <?php endif; ?>
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+                </div>
+
+                <?php ActiveForm::end(); ?>
 
             </div>
         </div>

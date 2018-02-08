@@ -225,14 +225,18 @@ class Menu extends \yii\db\ActiveRecord
                 case 'pages':
 
                     // 自定义页面的KEY
-                    $custom = Pages::findAll(['is_using' => 'On', 'c_key' => $value['custom_key']]);
+                    $customPages = Pages::findOne(['is_using' => 'On', 'm_key' => $value['m_key']]);
 
-                    foreach ($custom as $values) {
-                        $array[] = [
-                            'label' => $values['name'],
-                            'url'   => ['/pages/' . $this->getPageType($values['is_type']), 'id' => $values['page_id']],
-                            'items' => $this->recursionPagesMenu($values),
-                        ];
+                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['c_key']]);
+
+                    if (!empty($custom)) {
+                        foreach ($custom as $values) {
+                            $array[] = [
+                                'label' => $value['name'],
+                                'url'   => ['/pages/' . $this->getPageType($values['is_type']), 'id' => $values['page_id']],
+                                'items' => $this->recursionPagesMenu($values),
+                            ];
+                        }
                     }
                     break;
 
@@ -240,19 +244,29 @@ class Menu extends \yii\db\ActiveRecord
                 case 'urls':
                     $array = $this->recursionUrlMenu($value, $value['parent_id']);
                     break;
-
-                default:
-                    break;
             }
 
-            $customId = empty($value['custom_key']) ? 1 : $value['custom_key'];
+            // 菜单超链接
+            switch ($value['menuModel']['url_key']) {
 
-            // 自定义外部链接
-            $urls = ($value['menuModel']['url_key'] == 'urls' ? [$value['url']] : [$value['menuModel']['url_key'] . '/index', 'id' => $customId]);
+                // 单页面
+                case 'pages':
+                    $urls = $value['menuModel']['url_key'] . '/' . $this->getPageType($customPages['is_type']) . '?id=' . $customPages['page_id'];
+                    break;
+
+                case 'urls':
+                    $urls =  $value['url'];
+                    break;
+
+                default:
+                    $urls = $value['menuModel']['url_key'] . '/index';
+                    break;
+
+            }
 
             $dataMenu[] = [
                 'label' => $value['name'],
-                'url'   => $urls,
+                'url'   => [$urls],
                 'items' => $array,
             ];
 
@@ -310,21 +324,15 @@ class Menu extends \yii\db\ActiveRecord
         }
 
         // 子分类
-        $childCls = PagesClassify::findAll(['is_using' => 'On', 'parent_id' => $data['c_key']]);
+        $childCls = Pages::findAll(['is_using' => 'On', 'parent_id' => $data['c_key']]);
 
         if (empty($childCls))
             return;
 
-        $child = Pages::findAll(['is_using' => 'On', 'c_key' => $childCls['c_key']]);
-
-        if (empty($child)) {
-            return;
-        }
-
         // 初始化
         $result = array();
 
-        foreach ($child as $value) {
+        foreach ($childCls as $value) {
             $result[] = [
                 'label' => $value['name'],
                 'url'   => ['/pages/' . $this->getPageType($value['is_type']), 'id' => $value['page_id']],
@@ -355,6 +363,10 @@ class Menu extends \yii\db\ActiveRecord
             // 内容
             case 'content':
                 $type = 'view';
+                break;
+
+            case 'show':
+                $type = 'showup';
                 break;
         }
 

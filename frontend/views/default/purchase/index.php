@@ -32,42 +32,7 @@ $this->registerCssFile('@web/themes/qijian/css/product.css');
     <?= $this->render('../cls', ['result' => $result, 'type' => 'purchase']); ?>
     <!-- #相关分类 -->
 
-    <!-- 多项选择 -->
-    <div class="corre-nav">
-        <ul class="nav nav-pills">
-            <li><a title="" href="">综合</a></li>
-            <li><a title="" href="">人气</a></li>
-            <li><a title="" href="">销量</a></li>
-            <li class="dropdown">
-                <a title="" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" href="">
-                    全国地区
-                    <!-- 三角形图标 -->
-                    <span class="caret"></span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a title="" href="">赤坎</a></li>
-                    <li><a title="" href="">霞山</a></li>
-                    <li><a title="" href="">麻章</a></li>
-                    <li><a title="" href="">徐闻</a></li>
-                    <li><a title="" href="">雷州</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a title="" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" href="">
-                    价钱排序
-                    <!-- 三角形图标 -->
-                    <span class="caret"></span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a title="" href="">价格从低到高</a></li>
-                    <li><a title="" href="">价格从高到低</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    <hr/>
 
     <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
         <div class="col-md-12 col-sm-4 col-xs-6 work-item web-design mockups">

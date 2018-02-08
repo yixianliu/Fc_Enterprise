@@ -7,7 +7,7 @@ use common\models\SlideClassify;
 use Yii;
 use common\models\Slide;
 use common\models\SlideSearch;
-use common\models\SinglePage;
+use common\models\Pages;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -80,10 +80,7 @@ class SlideController extends BaseController
     {
         $model = new Slide();
 
-        // 整合路径
-        $result = $this->zpath(Yii::$app->request->post());
-
-        if ($model->load($result) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
@@ -133,36 +130,6 @@ class SlideController extends BaseController
     }
 
     /**
-     * 路径整合
-     *
-     * @param $data
-     * @return mixed
-     */
-    public function zpath($data)
-    {
-        // 整合路径
-        if (!empty($data)) {
-
-            $result = $data;
-
-            if (!empty($result['Slide']['path'])) {
-
-                $dataPage = null;
-
-                foreach ($result['Slide']['path'] as $value) {
-                    $dataPage .= $value . ',';
-                }
-
-                $result['Slide']['path'] = $dataPage;
-            }
-        } else {
-            $result = array();
-        }
-
-        return $result;
-    }
-
-    /**
      * 固定单页面
      *
      * @return array
@@ -180,10 +147,10 @@ class SlideController extends BaseController
         }
 
         // 单页面
-        $dataPage = SinglePage::findAll(['is_using' => 'On']);
+        $dataPage = Pages::findByAll();
 
         foreach ($dataPage as $value) {
-            $result['page'][ $value['page_id'] ] = $value['name'];
+            $result['page'][ $value['page_id'] ] = $value['menu']['name'];
         }
 
         return $result;

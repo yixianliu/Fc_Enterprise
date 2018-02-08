@@ -21,7 +21,6 @@ use yii\widgets\ActiveForm;
         <td><?= $form->field($model, 'page_id') ?></td>
         <td><?= $form->field($model, 'name') ?></td>
         <td><?= $form->field($model, 'content') ?></td>
-        <td><?= $form->field($model, 'path') ?></td>
         <td>
             <?=
             $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [

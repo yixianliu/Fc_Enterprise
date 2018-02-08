@@ -48,6 +48,11 @@ class PurchaseController extends BaseController
         ];
     }
 
+    /**
+     * 采购中心
+     *
+     * @return string
+     */
     public function actionCenter()
     {
         return $this->render('center');

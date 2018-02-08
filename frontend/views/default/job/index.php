@@ -18,33 +18,28 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'job']); ?>
+<?= $this->render('../slide', ['pagekey' => 'news']); ?>
 
-<?= $this->render('../nav'); ?>
+<div class="container content">
 
-<section class="section-wrap-mp pb-50">
-    <div class="container">
+    <?= $this->render('../_left', ['type' => 'job']); ?>
 
-        <div class="row">
-            <div class="works-grid titles">
+    <div class="right">
 
-                <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
-                    <div class="col-md-12 col-sm-4 col-xs-6 work-item web-design mockups">
-                        <?= Html::a('发布招聘', ['create'], ['class' => 'btn']) ?>
-                    </div>
+        <?= $this->render('../nav'); ?>
 
-                    <br/> <br/> <br/>
-                <?php endif; ?>
+        <hr/>
 
-                <?=
-                ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemView'     => '_list',
-                ]);
-                ?>
+        <div class="content_news_list">
 
-            </div>
+            <?=
+            ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView'     => '_list',
+            ]);
+            ?>
+
         </div>
-
     </div>
-</section>
+
+</div>

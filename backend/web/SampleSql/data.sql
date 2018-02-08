@@ -122,6 +122,11 @@ VALUES
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
 
+INSERT INTO `#DB_PREFIX#Pages`
+VALUES
+(NULL, '#TIME#_1500', 'EN2', 'EN2', NULL, NULL, NULL, 'content', 'On', #TIME#, #TIME#),
+(NULL, '#TIME#_1501', 'EN5', 'EN2', NULL, NULL, NULL, 'content', 'On', #TIME#, #TIME#);
+
 INSERT INTO `#DB_PREFIX#Menu_Model`
 VALUES
 (NULL, 'UP1', 1, 'product', '产品中心', 'On', #TIME#, #TIME#),
@@ -132,14 +137,6 @@ VALUES
 (NULL, 'UP2', 6, 'purchase', '采购中心', 'On', #TIME#, #TIME#),
 (NULL, 'US1', 7, 'supply', '供应中心', 'On', #TIME#, #TIME#),
 (NULL, 'UB1', 8, 'bid', '投标中心', 'On', #TIME#, #TIME#);
-
-/**
- * 单页面分类
- */
-INSERT INTO `#DB_PREFIX#Pages_Classify`
-VALUES
-(NULL, 'ABOUT', 1, '关于我们的单页面分类', NULL, NULL, NULL, NULL, 'On', #TIME#, #TIME#),
-(NULL, 'BUSINESS', 2, '招商加盟的单页面分类', NULL, NULL, NULL, NULL, 'On', #TIME#, #TIME#);
 
 /**
  * 菜单
@@ -170,12 +167,13 @@ VALUES
 (NULL, 'E1', 1, 'M0', 'guest', NULL, NULL, '企业文化', NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'EN1', 1, 'E1', 'guest', 'UU1', NULL, '网站首页', 'center/index', 'On', #TIME#, #TIME#),
-(NULL, 'EN2', 2, 'E1', 'guest', 'UC1', 'ABOUT', '公司简介', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN2', 2, 'E1', 'guest', 'UC1', NULL, '公司简介', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN5', 5, 'E1', 'guest', 'UC1', 'BUSINESS', '招商加盟', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '招贤纳士', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN5', 5, 'E1', 'guest', 'UC1', NULL, '工程案例', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '人才汇聚', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'EN7', 7, 'E1', 'guest', 'UC1', NULL, '联系我们', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN8', 8, 'E1', 'guest', 'UP2', NULL, '采购中心', NULL, 'On', #TIME#, #TIME#),
 
 /*
     后台管理 / Admin
@@ -191,7 +189,7 @@ VALUES
 (NULL, 'AJ1', 9, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AD1', 11, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AS1', 12, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AP3', 13, 'A3', 'admin', 'UU1', NULL, '采购 + 供求 + 投标管理', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AP3', 13, 'A3', 'admin', 'UU1', NULL, '采购管理', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AC1', 14, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', 'On', #TIME#, #TIME#),
@@ -218,8 +216,6 @@ VALUES
 (NULL, 'ASSS2', 2, 'AS1', 'admin', 'UU1', NULL, '添加单页面', 'pages/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS5', 5, 'AS1', 'admin', 'UU1', NULL, '单页面模板文件', 'pages-tpl-file/index', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS6', 6, 'AS1', 'admin', 'UU1', NULL, '添加模板文件', 'pages-tpl-file/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', 'On', #TIME#, #TIME#),
 
@@ -247,7 +243,7 @@ VALUES
 (NULL, 'ACCC4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', 'On', #TIME#, #TIME#),
 (NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', 'On', #TIME#, #TIME#),
-(NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', 'On', #TIME#, #TIME#),
+(NULL, 'ACCC7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', 'On', #TIME#, #TIME#),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色权限', 'item-rp/index', 'On', #TIME#, #TIME#),
 (NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色权限', 'item-rp/create', 'On', #TIME#, #TIME#),

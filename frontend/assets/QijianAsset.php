@@ -32,7 +32,6 @@ class QijianAsset extends AssetBundle
     public $js = [
         'themes/qijian/js/jquery.js',
         'themes/qijian/js/bootstrap.js',
-        'themes/qijian/js/popup.js',
     ];
 
     // Js在顶部加载

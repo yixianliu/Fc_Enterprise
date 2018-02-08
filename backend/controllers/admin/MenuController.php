@@ -3,6 +3,7 @@
 namespace backend\controllers\admin;
 
 use common\models\ItemRp;
+use common\models\Pages;
 use Yii;
 use common\models\Menu;
 use common\models\MenuSearch;
@@ -92,9 +93,20 @@ class MenuController extends BaseController
         $result = [
             'parent'     => $model->getSelectMenu(),
             'menu_model' => $this->getModel(),
-            'pages'      => $this->getPages(),
             'role'       => $this->getRole(),
         ];
+
+        // 创建单页面
+        if (!empty(Yii::$app->request->post())) {
+
+            $data = Yii::$app->request->post();
+
+            if ($data['Menu']['model_key'] == 'UC1') {
+
+                $Cls = new Pages();
+                $Cls->saveData($data['Menu']['m_key']);
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);
@@ -119,7 +131,6 @@ class MenuController extends BaseController
         $result = [
             'parent'     => $model->getSelectMenu(),
             'menu_model' => $this->getModel(),
-            'pages'      => $this->getPages(),
             'role'       => $this->getRole(),
         ];
 
@@ -172,20 +183,6 @@ class MenuController extends BaseController
 
         foreach ($result as $value) {
             $data[ $value['model_key'] ] = $value['name'];
-        }
-
-        return $data;
-    }
-
-    public function getPages()
-    {
-        // 初始化
-        $data = array();
-
-        $result = PagesClassify::findAll(['is_using' => 'On']);
-
-        foreach ($result as $value) {
-            $data[ $value['c_key'] ] = $value['name'];
         }
 
         return $data;

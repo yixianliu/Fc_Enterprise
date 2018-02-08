@@ -41,10 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $state[ $value['c_key'] ] = $value['name'];
                                 }
 
-                                $data = \common\models\Pages::findAll(['is_using' => 'On']);
+                                $data = \common\models\Pages::findByAll(['is_using' => 'On']);
 
                                 foreach ($data as $value) {
-                                    $state[ $value['page_id'] ] = $value['name'];
+                                    $state[ $value['page_id'] ] = $value['menu']['name'];
                                 }
 
                                 return $state[ $model->c_key ];

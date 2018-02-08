@@ -76,7 +76,7 @@ class JobController extends BaseController
     public function actionView($id)
     {
 
-        $model = Job::findOne(['id' => $id, 'is_audit' => 'On']);
+        $model = Job::findOne(['job_id' => $id, 'is_audit' => 'On']);
 
         if (empty($model))
             return $this->redirect(['index']);

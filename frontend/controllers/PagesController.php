@@ -38,6 +38,9 @@ class PagesController extends BaseController
 
         $model = Pages::findOne(['is_using' => 'On', 'c_key' => $id]);
 
+        if (empty($model))
+            return $this->redirect(['/']);
+
         // 所属菜单
         $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $id]);
 
@@ -62,7 +65,7 @@ class PagesController extends BaseController
         $filename = Yii::getAlias('@frontend') . '/views/pages/' . $model->path;
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $model->c_key]);
+        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
 
         if (!file_exists($filename)) {
             return false;
@@ -117,5 +120,13 @@ class PagesController extends BaseController
             'model'  => $model,
             'result' => $result,
         ]);
+    }
+
+    public function actionShowup()
+    {
+
+        $model = Pages::findByOne(Yii::$app->request->get('id', null));
+
+        return $this->render('showup', ['model' => $model]);
     }
 }

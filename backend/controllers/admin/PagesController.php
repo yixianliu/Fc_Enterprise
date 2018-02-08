@@ -56,7 +56,7 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $dataPages = PagesClassify::findByAll();
+        $dataPages = Pages::findByAll();
 
         foreach ($dataPages as $key => $value) {
             $result[ $key ] = $value;
@@ -148,7 +148,6 @@ class PagesController extends BaseController
                 'model'  => $model,
                 'result' => [
                     'classify' => $this->getCls(),
-                    'file'     => $this->getFile(),
                 ],
             ]);
         }
@@ -178,7 +177,6 @@ class PagesController extends BaseController
                 'model'  => $model,
                 'result' => [
                     'classify' => $this->getCls(),
-                    'file'     => $this->getFile(),
                 ],
             ]);
         }
@@ -206,7 +204,7 @@ class PagesController extends BaseController
      */
     protected function  findModel($id)
     {
-        if (($model = SinglePage::findOne(['page_id' => $id])) !== null) {
+        if (($model = Pages::find()->where([Pages::tableName() . '.page_id' => $id])->joinWith('menu')->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -218,7 +216,7 @@ class PagesController extends BaseController
      *
      * @return string
      */
-    public function actionEfile($id)
+    public function actionFiles($id)
     {
 
         $data = SinglePage::findOne(['c_key' => $id]);
@@ -245,26 +243,6 @@ class PagesController extends BaseController
 
         foreach ($dataCls as $value) {
             $result[ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
-    }
-
-    /**
-     * 获取模板文件
-     *
-     * @return array
-     */
-    public function getFile()
-    {
-
-        // 初始化
-        $result = array();
-
-        $data = PagesTplFile::findAll(['is_using' => 'On']);
-
-        foreach ($data as $value) {
-            $result[ $value['path'] ] = $value['name'];
         }
 
         return $result;

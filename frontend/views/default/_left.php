@@ -28,6 +28,27 @@ switch ($type) {
         $classifyName = '新闻中心';
 
         break;
+
+    // 招聘
+    case 'job':
+
+        $classifyName = '招聘中心';
+
+        break;
+
+    // 单页面
+    case 'pages':
+
+        if (empty($id))
+            return false;
+
+        $pages = \common\models\Pages::findOne(['page_id' => $id]);
+
+        $menuData = \common\models\Menu::findOne(['m_key' => $pages['m_key']]);
+
+        $classifyName = $menuData['name'];
+
+        break;
 }
 
 ?>
@@ -38,11 +59,15 @@ switch ($type) {
 
     <div class="cat_list">
 
-        <div class="cur"><a href="#">公司新闻</a></div>
+        <?php if (!empty($classify)): ?>
 
-        <?php foreach ($classify as $value): ?>
-            <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> ><a href="#"><?= $value['name'] ?></a></div>
-        <?php endforeach; ?>
+            <div class="cur"><a href="#">公司新闻</a></div>
+
+            <?php foreach ($classify as $value): ?>
+                <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> ><a href="#"><?= $value['name'] ?></a></div>
+            <?php endforeach; ?>
+
+        <?php endif; ?>
 
     </div>
 

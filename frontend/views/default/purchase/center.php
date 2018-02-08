@@ -9,454 +9,32 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+$this->title = '采购平台';
+
 $this->registerCssFile('@web/themes/qijian/css/nav.css');
+
 $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
 $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 
 ?>
 
-<!-- 商城分类 -->
 <div class="container-fluid classfi-bg">
-
     <div class="container shop-classfiy">
-
-        <!-- 搜索 -->
-        <div class="search">
-
-            <form name="search" action="">
-
-                <div class="input-group">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">产品 <span
-                                    class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a title="" href="">金属</a></li>
-                            <li><a title="" href="">木材</a></li>
-                            <li><a title="" href="">竹</a></li>
-                        </ul>
-                    </div>
-                    <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字">
-                    <span class="input-group-btn">
-                                <a class="btn btn-red" title="" href="purchasing.html">搜索</a>
-                            </span>
-                </div>
-
-            </form>
-
-        </div>
-        <!-- #搜索 -->
-
-        <!-- 分类导航 -->
-        <div id="nav">
-
-            <!-- 分类标题 -->
-            <div class="mod_cate_hd">全部商品分类</div>
-
-            <ul class="tit">
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="mod_cate">
-                    <h2>
-                        <i class="arrow_dot fr"></i>
-                        <a title="" href="">金属 /</a>
-                        <a title="" href="">木材 /</a>
-                        <a title="" href="">竹</a>
-                    </h2>
-
-                    <div class="mod_subcate">
-
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>商家产品</dt>
-                                <dd>
-                                    <a title="" href="">金属 /</a>
-                                    <a title="" href="">木材 /</a>
-                                    <a title="" href="">竹</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-
-        </div>
-        <!-- #分类导航 -->
-
-        <!-- 采购列表 -->
-        <div class="nav-cont" style="float: right;">
-
-            <!-- 用户登录,注册 -->
-            <div class="pur-user-login">
-
-                <div class="nav-cont-title">
-                    会员登录
-                </div>
-
-                <form name="" action="">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" class="form-control" placeholder="帐号" aria-describedby="帐号">
-                    </div>
-
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
-                        <input type="text" class="form-control" placeholder="密码" aria-describedby="密码">
-                    </div>
-
-                    <div class="input-group">
-                        <a class="btn btn-red" title="" href="user/user-config.html">登录</a>
-                    </div>
-
-                    <div class="input-group">
-                        <a class="reg" title="" href="member.html">免费注册 ></a>
-                    </div>
-                </form>
-
-            </div>
-            <!-- #用户登录,注册 -->
-
-            <!-- 采购列表 -->
-            <div class="purchase-cont">
-
-                <div class="nav-cont-title">
-                    采购动态<a title="" href="purchasing.html">...</a>
-                </div>
-
-                <div class="purchase-cont-list">
-                    <ul>
-                        <li><a title href="purchasingdetailed.html">[采购] 钢材采购订单</a></li>
-                        <li><a title href="purchasingdetailed.html">[采购] 钢材采购订单</a></li>
-                        <li><a title href="purchasingdetailed.html">[采购] 钢材采购订单</a></li>
-                        <li><a title href="purchasingdetailed.html">[采购] 钢材采购订单</a></li>
-                        <li><a title href="purchasingdetailed.html">[采购] 钢材采购订单</a></li>
-                    </ul>
-                </div>
-
-            </div>
-            <!-- #采购列表 -->
-
-        </div>
-        <!-- #用户,采购列表 -->
-
+        <?= $this->render('_cls'); ?>
     </div>
-
 </div>
-<!-- 商城分类 -->
 
-<!-- 幻灯片 -->
-<div id="myCarousel" class="carousel slide">
-
-    <!-- 轮播（Carousel）指标 -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <!-- 轮播（Carousel）项目 -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img alt="" src="images/banar2.jpg">
-        </div>
-        <div class="item">
-            <img alt="" src="images/banar2.jpg">
-        </div>
-        <div class="item">
-            <img alt="" src="images/banar2.jpg">
-        </div>
-    </div>
-
-    <!-- 轮播（Carousel）导航 -->
-    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-
-</div>
-<!-- #幻灯片 -->
+<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
 
 <!-- 数据 -->
 <div class="container-fluid pur-data">
-
     <div class="container">
-
-        <!-- 数据分析 -->
-        <div class="data-cont">
-            <ul>
-                <li class="col-xs-4">
-                    <div class="ad-num">2357万</div>
-                    <div class="ad-text">供货商进驻量</div>
-                </li>
-
-                <li class="col-xs-4">
-                    <div class="ad-num">584亿</div>
-                    <div class="ad-text">供应商交易额</div>
-                </li>
-
-                <li class="col-xs-4">
-                    <div class="ad-num">605810</div>
-                    <div class="ad-text">会员注册人数</div>
-                </li>
-            </ul>
-        </div>
-        <!-- 数据分析 -->
 
         <!-- 采购列表 -->
         <div class="data-list">
 
             <div class="left">
-                <img alt="" src="images/tender-1.jpg">
+                <?= Html::img(Url::to('@web/themes/qijian/images/tender-1.jpg'), ['alt' => $this->title]); ?>
             </div>
 
             <div class="right">
@@ -575,7 +153,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 <!-- #数据 -->
 
 <!-- 精彩 -->
-<div class="container-fluid pru-marvellous">
+<div class="container-fluid pru-marvellous" style="background: url(<?= Url::to('@web/themes/qijian/images/guanggao.jpg') ?>) no-repeat center 0;">
 
     <div class="container">
 
@@ -606,7 +184,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 
         <div class="left">
             <a title="" href="">
-                <img alt="" src="images/news_big.jpg"/>
+                <?= Html::img(Url::to('@web/themes/qijian/images/news_big.jpg'), ['alt' => $this->title]); ?>
             </a>
         </div>
 
@@ -615,7 +193,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                 <li>
                     <div class="news-left">
                         <a title="" href="">
-                            <img alt="" src="images/news-1.jpg"/>
+                            <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $this->title]); ?>
                         </a>
                     </div>
 
@@ -630,7 +208,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                 <li>
                     <div class="news-left">
                         <a title="" href="">
-                            <img alt="" src="images/news-2.jpg"/>
+                            <?= Html::img(Url::to('@web/themes/qijian/images/news-2.jpg'), ['alt' => $this->title]); ?>
                         </a>
                     </div>
 
@@ -645,7 +223,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                 <li>
                     <div class="news-left">
                         <a title="" href="">
-                            <img alt="" src="images/news-3.jpg"/>
+                            <?= Html::img(Url::to('@web/themes/qijian/images/news-3.jpg'), ['alt' => $this->title]); ?>
                         </a>
                     </div>
 
@@ -660,7 +238,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                 <li>
                     <div class="news-left">
                         <a title="" href="">
-                            <img alt="" src="images/news-4.jpg"/>
+                            <?= Html::img(Url::to('@web/themes/qijian/images/news-4.jpg'), ['alt' => $this->title]); ?>
                         </a>
                     </div>
 
@@ -677,5 +255,17 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
     </div>
 
 </div>
-<!-- #新闻 -->
 
+<script type="text/javascript">
+
+    // 商城分类插件
+    $("#nav .tit").slide({
+        type: "menu",
+        titCell: ".mod_cate",
+        targetCell: ".mod_subcate",
+        delayTime: 0,
+        triggerTime: 10,
+        defaultPlay: false,
+        returnDefault: true
+    });
+</script>

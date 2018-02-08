@@ -43,13 +43,13 @@ class CenterController extends BaseController
                 // 批量SQL语句
                 $Sql_Data = file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/base.sql') . $mysql_data;
 
-                $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm.name', Yii::$app->params['NAME']), $Sql_Data);
-                $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm.title', Yii::$app->params['NAME']), $Sql_Data);
-                $Sql_Data = str_ireplace('#DESCRIPTION#', $request->post('MountRunForm.description', Yii::$app->params['DESCRIPTION']), $Sql_Data);
-                $Sql_Data = str_ireplace('#KEYWORDS#', $request->post('MountRunForm.keywords', Yii::$app->params['KEYWORDS']), $Sql_Data);
-                $Sql_Data = str_ireplace('#ADDRESS#', $request->post('MountRunForm.address', Yii::$app->params['ADDRESS']), $Sql_Data);
-                $Sql_Data = str_ireplace('#PERSON#', $request->post('MountRunForm.person', Yii::$app->params['PERSON']), $Sql_Data);
-                $Sql_Data = str_ireplace('#PHONE#', $request->post('MountRunForm.phone', Yii::$app->params['PHONE']), $Sql_Data);
+                $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm')['name'], $Sql_Data);
+                $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm')['title'], $Sql_Data);
+                $Sql_Data = str_ireplace('#DESCRIPTION#', $request->post('MountRunForm')['description'], $Sql_Data);
+                $Sql_Data = str_ireplace('#KEYWORDS#', $request->post('MountRunForm')['keywords'], $Sql_Data);
+                $Sql_Data = str_ireplace('#ADDRESS#', $request->post('MountRunForm')['address'], $Sql_Data);
+                $Sql_Data = str_ireplace('#PERSON#', $request->post('MountRunForm')['person'], $Sql_Data);
+                $Sql_Data = str_ireplace('#PHONE#', $request->post('MountRunForm')['phone'], $Sql_Data);
                 $Sql_Data = str_ireplace('#DEVELOPERS#', Yii::$app->params['DEVELOPERS'], $Sql_Data);
                 $Sql_Data = str_ireplace('#EMAIL#', Yii::$app->params['EMAIL'], $Sql_Data);
                 $Sql_Data = str_ireplace('#SITE_URL#', Yii::$app->params['SITE_URL'], $Sql_Data);

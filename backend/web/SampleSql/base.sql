@@ -723,11 +723,12 @@ DROP TABLE IF EXISTS `#DB_PREFIX#Pages`;
 CREATE TABLE `#DB_PREFIX#Pages` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `c_key` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `name` VARCHAR(80) NOT NULL COMMENT '单页面名称',
+    `m_key` VARCHAR(55) NOT NULL COMMENT '对应的菜单KEY',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '单页面关键KEY',
     `content` TEXT NULL COMMENT '单页面内容',
-    `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
-    `is_type` SET('list', 'content') NOT NULL COMMENT '单页面类型, 列表, 内容',
+    `parent_id` VARCHAR(85) NULL COMMENT '父类,为空的话,为顶级',
+    `path` VARCHAR(255) NULL COMMENT '页面相关图片和文件',
+    `is_type` SET('list', 'content', 'show') NOT NULL COMMENT '单页面类型, 列表, 内容, 展示',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
@@ -741,7 +742,7 @@ CREATE TABLE `#DB_PREFIX#Pages` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Pages_List`;
 CREATE TABLE `#DB_PREFIX#Pages_List` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '页面ID',
     `title` VARCHAR(80) NOT NULL COMMENT '列表标题',
     `content` TEXT NULL COMMENT '单页面内容',
     `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
@@ -750,7 +751,7 @@ CREATE TABLE `#DB_PREFIX#Pages_List` (
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `title` (`title`),
-    KEY `page_id` (`page_id`)
+    KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -759,6 +760,7 @@ CREATE TABLE `#DB_PREFIX#Pages_List` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Pages_Classify`;
 CREATE TABLE `#DB_PREFIX#Pages_Classify` (
     `id` INT(11) NULL AUTO_INCREMENT,
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
     `c_key` VARCHAR(55) NOT NULL COMMENT '分类KEY',
     `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序',
     `name` VARCHAR(85) NOT NULL COMMENT '名称',
@@ -771,24 +773,6 @@ CREATE TABLE `#DB_PREFIX#Pages_Classify` (
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `c_key` (`c_key`)
-)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
-
-/**
- * 单页面模板文件
- */
-DROP TABLE IF EXISTS `#DB_PREFIX#Pages_Tpl_File`;
-CREATE TABLE `#DB_PREFIX#Pages_Tpl_File` (
-    `id` INT(11) NULL AUTO_INCREMENT,
-    `name` VARCHAR(85) NOT NULL COMMENT '名称',
-    `description` TEXT NULL COMMENT '描述',
-    `path` VARCHAR(255) NOT NULL COMMENT '文件目录',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-    `is_position` SET('left', 'right', 'content') NOT NULL COMMENT '是否启用',
-    `created_at` INT(11) UNSIGNED NOT NULL,
-    `updated_at` INT(11) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `name` (`name`),
-    UNIQUE KEY `path` (`path`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 

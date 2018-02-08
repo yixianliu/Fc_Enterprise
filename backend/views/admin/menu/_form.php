@@ -55,16 +55,6 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?=
-                $form->field($model, 'custom_key')->widget(Select2::classname(), [
-                    'data'          => $result['pages'],
-                    'options'       => ['placeholder' => '选择自定义页面对应的分类...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
-
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
@@ -101,15 +91,10 @@ use kartik\select2\Select2;
 
     var ModelKey = $('#menu-model_key').val();
 
-    $('.field-menu-custom_key').hide();
     $('.field-menu-url').hide();
 
     if (ModelKey == 'UU1') {
         $('.field-menu-url').show();
-    }
-
-    if (ModelKey == 'UC1') {
-        $('.field-menu-custom_key').show();
     }
 
     $('#menu-model_key').on('change', function () {
