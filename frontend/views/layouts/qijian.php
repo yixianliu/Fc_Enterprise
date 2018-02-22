@@ -24,6 +24,14 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
+    <script type="text/javascript">
+        $(function () {
+            funs();
+            slides();
+            myScrolls();
+        });
+    </script>
+
 </head>
 
 <body>

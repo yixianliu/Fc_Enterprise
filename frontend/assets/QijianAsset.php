@@ -33,6 +33,8 @@ class QijianAsset extends AssetBundle
     public $js = [
         'themes/qijian/js/jquery.js',
         'themes/qijian/js/bootstrap.js',
+        'themes/qijian/js/function.js',
+        'themes/qijian/js/popup.js',
     ];
 
     // Js在顶部加载
@@ -42,7 +44,7 @@ class QijianAsset extends AssetBundle
     ];
 
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+//        'yii\web\YiiAsset',
+//        'yii\bootstrap\BootstrapAsset',
     ];
 }
