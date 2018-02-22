@@ -66,14 +66,18 @@ class SlideController extends BaseController
      */
     public function actionView($id)
     {
+
+        $model = Slide::findByOne($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
     /**
      * Creates a new Slide model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -136,6 +140,7 @@ class SlideController extends BaseController
      */
     public function page()
     {
+
         // 初始化
         $result = array();
 
@@ -164,6 +169,7 @@ class SlideController extends BaseController
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -172,6 +178,7 @@ class SlideController extends BaseController
     /**
      * Finds the Slide model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
      * @return Slide the loaded model
      * @throws NotFoundHttpException if the model cannot be found

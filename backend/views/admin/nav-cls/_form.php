@@ -7,6 +7,9 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\NavClassify */
 /* @var $form yii\widgets\ActiveForm */
+
+$result['classify'] = empty($result['classify']) ? array() : $result['classify'];
+
 ?>
 
 <?php $this->registerCssFile('@web/themes/assets/plugins/icheck/skins/all.css'); ?>
@@ -23,19 +26,15 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'json_data')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'json_data')->textarea(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -49,13 +48,13 @@ use kartik\select2\Select2;
 
                 <hr/>
 
-                <?php echo $form->field($model, 'p_key')->CheckBoxList($result['classify'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
+                <?= $form->field($model, 'p_key')->CheckBoxList($result['classify'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
 
                 <hr/>
 
                 <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '发布分类' : '更新分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '发布导航分类' : '更新导航分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 

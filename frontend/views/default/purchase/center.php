@@ -11,8 +11,6 @@ use yii\helpers\Html;
 
 $this->title = '采购平台';
 
-$this->registerCssFile('@web/themes/qijian/css/nav.css');
-
 $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
 $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 
@@ -44,101 +42,31 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                     <div class="data-title-left">采购寻源</div>
 
                     <div class="data-title-right">
-                        <a title="" href="purchasing.html">更多 ></a>
+                        <a title="" href="<?= Url::to(['/purchase/index']) ?>">更多 >>></a>
                     </div>
 
                 </div>
 
                 <div class="data-right-list">
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>钢材采购订单</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
 
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>采购大量抛光瓷砖</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
+                    <?php if (!empty($result['result'])): ?>
 
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>钢材采购订单</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
+                        <?php foreach ($result['result'] as $value): ?>
+                            <div>
+                                <ul>
+                                    <li>【采购】</li>
+                                    <li>钢材采购订单</li>
+                                    <li>广东 湛江</li>
+                                    <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
+                                </ul>
+                            </div>
+                        <?php endforeach; ?>
 
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>采购大量抛光瓷砖</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
+                    <?php else: ?>
 
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>钢材采购订单</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
+                    <h1>暂无采购信息 !!</h1>
 
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>采购大量抛光瓷砖</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>钢材采购订单</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>采购大量抛光瓷砖</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>钢材采购订单</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul>
-                            <li>【采购】</li>
-                            <li>采购大量抛光瓷砖</li>
-                            <li>广东 湛江</li>
-                            <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
-                        </ul>
-                    </div>
+                    <?php endif; ?>
 
                 </div>
 
@@ -255,17 +183,3 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
     </div>
 
 </div>
-
-<script type="text/javascript">
-
-    // 商城分类插件
-    $("#nav .tit").slide({
-        type: "menu",
-        titCell: ".mod_cate",
-        targetCell: ".mod_subcate",
-        delayTime: 0,
-        triggerTime: 10,
-        defaultPlay: false,
-        returnDefault: true
-    });
-</script>

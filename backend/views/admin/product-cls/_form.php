@@ -32,9 +32,9 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [

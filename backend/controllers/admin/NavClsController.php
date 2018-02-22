@@ -57,7 +57,7 @@ class NavClsController extends BaseController
                 if (empty($valuePkey))
                     continue;
 
-                $dataProvider[$key ]['child'][] = ProductClassify::findOne(['c_key' => $valuePkey]);
+                $dataProvider[ $key ]['child'][] = ProductClassify::findOne(['c_key' => $valuePkey]);
             }
 
         }
@@ -87,6 +87,7 @@ class NavClsController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new NavClassify();
 
         $data = Yii::$app->request->post();
@@ -94,6 +95,8 @@ class NavClsController extends BaseController
         if (!empty($data)) {
             $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
         }
+
+        $data['c_key'] = self::getRandomString();
 
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
@@ -186,6 +189,9 @@ class NavClsController extends BaseController
         if (empty($dataCls))
             return false;
 
+        // 初始化
+        $result = array();
+
         foreach ($dataCls as $value) {
             $result[ $value['c_key'] ] = $value['name'];
         }
@@ -204,6 +210,9 @@ class NavClsController extends BaseController
 
         // 初始化
         $result = null;
+
+        if (empty($array))
+            return;
 
         foreach ($array as $value) {
 

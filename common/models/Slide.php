@@ -62,6 +62,19 @@ class Slide extends \yii\db\ActiveRecord
     }
 
     /**
+     * 查单条记录
+     *
+     * @param $id
+     * @return Slide
+     */
+    public static function findByOne($id)
+    {
+        return static::find()->where([static::tableName() . '.id' => $id])
+            ->joinWith('cls')
+            ->one();
+    }
+
+    /**
      * 获取幻灯片数据
      *
      * @param $pagekey
@@ -80,5 +93,13 @@ class Slide extends \yii\db\ActiveRecord
         $dataSlide = explode(',', $result->path);
 
         return $dataSlide;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCls()
+    {
+        return $this->hasOne(SlideClassify::className(), ['c_key' => 'c_key']);
     }
 }

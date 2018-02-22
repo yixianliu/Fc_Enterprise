@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Slide */
 
-$this->title = $model->c_key;
+$this->title = $model['cls']['name'];
 $this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
 
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
 
         <div class="content-body">
@@ -25,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('删除', ['delete', 'id' => $model->id], [
+                    <?= Html::a('更新', ['update', 'id' => $model['id']], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('删除', ['delete', 'id' => $model['id']], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => '是否删除这条记录?',

@@ -26,6 +26,7 @@ class QijianAsset extends AssetBundle
         'themes/qijian/css/bootstrap.css',
         'themes/qijian/css/bootstrap-theme.css',
         'themes/qijian/css/style.css',
+        'themes/qijian/css/nav.css',
     ];
 
     // js

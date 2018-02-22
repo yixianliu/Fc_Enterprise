@@ -22,6 +22,9 @@ $ClsMenu = new Menu();
 
 $this->beginPage();
 
+// 滚动
+$this->registerJsFile('@web/themes/qijian/js/jquery.js');
+
 ?>
 
 <!DOCTYPE html>
