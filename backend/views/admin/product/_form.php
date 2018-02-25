@@ -35,8 +35,6 @@ if (empty($result['classify'])) {
 
                     <?php $form = ActiveForm::begin(); ?>
 
-                    <?= $form->field($model, 'product_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
-
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                     <?=

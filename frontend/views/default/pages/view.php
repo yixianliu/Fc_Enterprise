@@ -14,11 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
 
-
 <!-- 左右框架 -->
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'id' => $model['page_id']]); ?>
+    <?= $this->render('../_left', ['type' => 'pages', 'id' => $model->page_id]); ?>
 
     <!-- 右边 -->
     <div class="right">
@@ -30,10 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- 可变化内容 -->
         <div class="conY">
             <div class="conY_text">
-                <p style="font-size:26px;"><strong>广东省湛江市七建有限公司</strong></p>
-                <p style="font-size: 16px;">财富热线<span style="font-size: 16px;">：0759-XXXXXXX</span></p>
-                <p style="font-size:16px;"><strong>地址：</strong>广东省湛江市XXXXXX</p>
+
+                <?= $model->content ?>
+
             </div>
+
             <div class="conY_fanye">
                 <div class="conY_fanyel">
                     上一篇：<a href="#" title="">上一篇</a>

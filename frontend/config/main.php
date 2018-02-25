@@ -29,17 +29,17 @@ return [
             ],
         ],
 
-        'request'      => [
+        'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
 
-        'user'         => [
+        'user' => [
             'identityClass'   => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie'  => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
 
-        'session'      => [
+        'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
@@ -63,6 +63,20 @@ return [
             'rules'           => [
                 // 默认
                 '' => 'center/index',
+            ],
+        ],
+
+        // 管理样式文件
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset'       => [
+                    'css'        => [],  // 去除 bootstrap.css
+                    'sourcePath' => null, // 防止在 frontend/web/asset 下生产文件
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'         => [],  // 去除 bootstrap.js
+                    'sourcePath' => null,  // 防止在 frontend/web/asset 下生产文件
+                ],
             ],
         ],
 

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\SinglePage */
 
 $this->title = $model->menu->name;
-$this->params['breadcrumbs'][] = ['label' => '查看单页面', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '查看自定义页面', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'model'      => $model,
                     'attributes' => [
                         'page_id',
-                        'content:ntext',
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -76,6 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
+                        'content:html',
                     ],
                 ]);
                 ?>

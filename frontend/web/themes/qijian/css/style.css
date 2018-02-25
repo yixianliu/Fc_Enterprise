@@ -1217,9 +1217,10 @@ a:active {
 }
 
 .breadcrumb {
-    margin-top: 20px;
-    border-left: 5px solid #e4a753;
+    background: #fff;
+    float: right;
     margin-left: 5px;
+    margin-bottom: 0;
 }
 
 .contact {

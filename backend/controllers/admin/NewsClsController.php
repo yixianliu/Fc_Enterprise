@@ -7,7 +7,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use common\models\NewsClassify;
-use common\models\NewsClassifySearch;
 
 /**
  * NewsClsController implements the CRUD actions for NewsClassify model.
@@ -78,6 +77,8 @@ class NewsClsController extends BaseController
         $model = new NewsClassify();
 
         $model->parent_id = empty($id) ? 'C0' : $id;
+
+        $model->c_key = self::getRandomString();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);

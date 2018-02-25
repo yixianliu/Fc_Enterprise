@@ -742,7 +742,8 @@ CREATE TABLE `#DB_PREFIX#Pages` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Pages_List`;
 CREATE TABLE `#DB_PREFIX#Pages_List` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `c_key` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '单页面分类KEY',
     `title` VARCHAR(80) NOT NULL COMMENT '列表标题',
     `content` TEXT NULL COMMENT '单页面内容',
     `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',

@@ -144,7 +144,8 @@ class PagesController extends BaseController
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'menu' => $this->getMenu(),
+                    'menu'     => $this->getMenu(),
+                    'classify' => $this->getCls(),
                 ],
             ]);
         }
@@ -172,7 +173,8 @@ class PagesController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'menu' => $this->getMenu(),
+                    'menu'     => $this->getMenu(),
+                    'classify' => $this->getCls(),
                 ],
             ]);
         }
@@ -225,7 +227,32 @@ class PagesController extends BaseController
     }
 
     /**
-     * 获取目录
+     * 获取分类
+     *
+     * @return array
+     */
+    public function getCls()
+    {
+
+        // 初始化
+        $result = array();
+
+        $data = PagesClassify::findByAll();
+
+        $result['C0'] = '顶级类目 !!';
+
+        if (empty($data))
+            return $result;
+
+        foreach ($data as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 获取菜单
      *
      * @return array
      */

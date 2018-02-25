@@ -6,7 +6,22 @@ use yii\helpers\Html;
 /* @var $searchModel common\models\PsbClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '分类列表';
+switch ($id) {
+    default:
+    case 'S0':
+        $this->title = '供应分类列表';
+        break;
+
+    case 'P0':
+        $this->title = '采购分类列表';
+        break;
+
+    case 'B0':
+        $this->title = '投标分类列表';
+        break;
+}
+
+
 $this->params['breadcrumbs'][] = $this->title;
 
 // 初始化
@@ -59,15 +74,13 @@ function recursionCls($data)
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布分类', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布分类', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('供应中心分类', ['index', 'id' => 'S0'], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('采购中心分类', ['index', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('投标中心分类', ['index', 'id' => 'B0'], ['class' => 'btn btn-success']) ?>

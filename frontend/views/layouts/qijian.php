@@ -27,8 +27,7 @@ $this->beginPage();
     <script type="text/javascript">
         $(function () {
             funs();
-            slides();
-            myScrolls();
+            shows();
         });
     </script>
 

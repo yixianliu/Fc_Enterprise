@@ -32,7 +32,15 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '选择父类...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
@@ -121,7 +129,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '创建单页面' : '更新单页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '创建自定义页面' : '更新自定义页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 

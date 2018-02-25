@@ -8,15 +8,13 @@ use yii\widgets\DetailView;
 /* @var $model common\models\User */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => '用户', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '用户中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
@@ -43,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'user_id',
                         'username',
-                        'password',
                         'r_key',
                         'exp',
                         'credit',
@@ -64,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $state = [
                                     'On'  => '开启',
                                     'Off' => '未启用',
+                                    'Not' => '未查看',
                                 ];
 
                                 return $state[ $model->is_using ];

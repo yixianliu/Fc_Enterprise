@@ -11,7 +11,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = $model->name;
+$this->title = $result['menu']['name'];
 $this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->c_key]];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -19,70 +19,38 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
 
-<?= $this->render('../nav'); ?>
+<!-- 左右框架 -->
+<div class="container content">
 
-<?php if (!empty($model->path)): ?>
-    <?=
-    $this->render('../../pages/' . $model->path, [
-        'model' => $model,
-    ]);
-    ?>
-<?php endif; ?>
+    <?= $this->render('../_left', ['type' => 'pages', 'id' => $model->page_id]); ?>
 
-<section class="section-wrap-mp pb-50">
-    <div class="container">
+    <!-- 右边 -->
+    <div class="right">
 
-        <!-- filter -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="portfolio-filter">
-                    <a href="#" class="filter active" data-filter="*">所有</a>
-                    <a href="#" class="filter" data-filter=".web-design">Web Design</a>
-                    <a href="#" class="filter" data-filter=".print">Print</a>
-                    <a href="#" class="filter" data-filter=".branding">Branding</a>
-                    <a href="#" class="filter" data-filter=".mockups">Mockups</a>
-                </div>
-            </div>
-        </div> <!-- end filter -->
+        <?= $this->render('../nav'); ?>
 
-        <div class="row">
+        <hr/>
 
-            <?php foreach ($result['content'] as $value): ?>
+        <?php if (!empty($result['data'])): ?>
 
-                <div class="col-md-3 col-sm-4 col-xs-6 work-item web-design mockups">
-                    <div class="work-container">
-                        <div class="work-img">
+            <?php foreach ($result['data'] as $value): ?>
 
-                            <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
-                                <?= Html::img(Url::to('@web/themes/enterprise/img/project_1.jpg'), ['alt' => Html::encode($value['title']), 'class' => '']); ?>
-                            </a>
-
-                        </div>
-                        <div class="work-description">
-                            <h3><a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>"><?= $value['title'] ?></a></h3>
-                            <span><a href="#">Print</a></span>
-                        </div>
-                    </div>
+                <div>
+                    <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
+                        <?= Html::encode($model->title) ?>
+                    </a>
+                    <span><?= date('Y - m - d', $model->updated_at) ?></span>
                 </div>
 
             <?php endforeach; ?>
 
-        </div>
+        <?php else: ?>
+
+        <h1>暂无数据 !!</h1>
+
+        <?php endif; ?>
+
     </div>
-</section>
+    <!-- 右边 -->
 
-<section class="call-to-action bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9 col-xs-12">
-                <h2>Are you ready to work with us? Let's grow your business.</h2>
-            </div>
-
-            <div class="col-md-3 col-xs-12 cta-button">
-                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
-            </div>
-
-        </div>
-    </div>
-</section> <!-- end call to action -->
+</div>

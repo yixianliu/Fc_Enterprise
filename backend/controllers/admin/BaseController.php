@@ -87,7 +87,7 @@ class BaseController extends Controller
             $str .= $chars[ mt_rand(0, $lc) ];
         }
 
-        $str = $str . time() . rand(00, 99);
+        $str = $str . time() . rand(0000, 9999);
 
         return $str;
     }

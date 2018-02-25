@@ -21,9 +21,11 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
+                <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'r_key')->widget(Select2::classname(), [

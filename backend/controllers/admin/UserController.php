@@ -105,11 +105,7 @@ class UserController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        if (!empty($data)) {
-            $data['User']['password'] = Yii::$app->security->generatePasswordHash($data['User']['password']);
-        }
-
-        if ($model->load($data) && $model->save()) {
+        if ($model->load($data) && $model->userReg()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
@@ -151,18 +147,13 @@ class UserController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            // 初始化
-            $result = array();
-
-            $dataRole = ItemRp::findAll(['type' => 1]);
-
-            foreach ($dataRole as $value) {
-                $result['role'][ $value['name'] ] = $value['name'];
-            }
+            $model->password = null;
 
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => [
+                    'role' => $this->getRole()
+                ],
             ]);
         }
     }
@@ -195,6 +186,20 @@ class UserController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function getRole()
+    {
+        // 初始化
+        $result = array();
+
+        $dataRole = ItemRp::findAll(['type' => 1]);
+
+        foreach ($dataRole as $value) {
+            $result[ $value['name'] ] = $value['name'];
+        }
+
+        return $result;
     }
 
 }

@@ -45,11 +45,11 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'c_key', 'm_key', 'is_type', 'is_using'], 'required'],
+            [['page_id', 'm_key', 'is_type', 'is_using'], 'required'],
             [['content', 'is_type', 'is_using', 'parent_id', ], 'string'],
-            [['page_id', 'c_key', 'm_key', 'parent_id', ], 'string', 'max' => 55],
+            [['page_id', 'm_key', 'parent_id', ], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['page_id', 'm_key', 'c_key',], 'unique'],
+            [['page_id', 'm_key', ], 'unique'],
 
             [['parent_id', 'content', 'path'], 'default', 'value' => null],
         ];
@@ -61,7 +61,7 @@ class Pages extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'page_id'    => '单页面ID',
+            'page_id'    => '单页面 ID',
             'c_key'      => '单页面分类',
             'm_key'      => '对应的菜单',
             'content'    => '单页面内容',
@@ -77,11 +77,13 @@ class Pages extends \yii\db\ActiveRecord
     /**
      * 所有内容
      *
-     * @param null $where
-     * @return array|\yii\db\ActiveRecord[]
+     * @param null $ckey
+     * @return array|Pages[]|\yii\db\ActiveRecord[]
      */
     public static function findByAll($ckey = null)
     {
+
+        $ckey = empty($ckey) ? 'C0' : $ckey;
 
         return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.parent_id' => $ckey])
             ->orderBy(static::tableName() . '.page_id', SORT_DESC)

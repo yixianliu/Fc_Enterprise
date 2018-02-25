@@ -4,7 +4,7 @@
 /* @var $searchModel common\models\PagesClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $model->name;
+$this->title = $result['menu']['name'];
 $this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->c_key]];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -13,14 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
 
 <?= $this->render('../nav'); ?>
-
-<?php if (!empty($model->path)): ?>
-    <?=
-    $this->render('../../pages/' . $model->path, [
-        'model' => $model,
-    ]);
-    ?>
-<?php endif; ?>
 
 <section class="section-wrap-mp pb-50">
     <div class="container">
@@ -40,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="row">
 
-            <?= $model->content ?>
+
 
         </div>
     </div>

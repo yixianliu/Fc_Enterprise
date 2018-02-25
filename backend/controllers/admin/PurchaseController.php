@@ -2,7 +2,6 @@
 
 namespace backend\controllers\admin;
 
-
 use Yii;
 use common\models\Purchase;
 use common\models\PurchaseSearch;
@@ -79,7 +78,7 @@ class PurchaseController extends BaseController
     {
         $model = new Purchase();
 
-        $model->purchase_id = time() . '_' . rand(0000, 9999);
+        $model->purchase_id = self::getRandomString();
 
         $model->user_id = '网站管理员';
 

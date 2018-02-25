@@ -15,5 +15,5 @@ use yii\helpers\Html;
     <a href="<?= Url::to(['news/view', 'id' => $model->news_id]) ?>" title="<?= Html::encode($model->title) ?>">
         <?= Html::encode($model->title) ?>
     </a>
-    <span>2018.1.30</span>
+    <span><?= date('Y - m - d', $model->updated_at) ?></span>
 </div>

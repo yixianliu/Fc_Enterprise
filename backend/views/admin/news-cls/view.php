@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'c_key',
                         'sort_id',
                         'name',
-                        'description:ntext',
                         'keywords',
                         'json_data',
                         [
@@ -77,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
+                        'description:html',
                     ],
                 ]);
                 ?>

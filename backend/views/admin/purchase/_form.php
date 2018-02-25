@@ -24,9 +24,7 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
@@ -39,8 +37,6 @@ $result['classify'] = empty($result['classify']) ? null : $result['classify'];
                     'options' => ['placeholder' => '采购分类...'],
                 ]);
                 ?>
-
-                <?= $form->field($model, 'purchase_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

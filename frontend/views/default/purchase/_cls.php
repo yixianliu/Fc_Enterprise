@@ -375,7 +375,7 @@ $this->registerJsFile('@web/themes/qijian/js/scroll.js');
         </div>
 
         <div class="input-group">
-            <a class="reg" title="" href=<?= Url::to(['/member/reg']); ?>">免费注册 ></a>
+            <a class="reg" title="" href="<?= Url::to(['/member/reg']); ?>">免费注册</a>
         </div>
 
         <?php ActiveForm::end(); ?>

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -54,7 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         's_key',
                         'title',
-                        'content:ntext',
                         'price',
                         'discount',
                         'introduction',
@@ -66,8 +65,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'collection',
                         'share',
                         'attention',
-                        'is_promote',
-                        'is_hot',
+                        [
+                            'attribute' => 'is_promote',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_promote ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_hot',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_hot ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_classic',
                             'value'     => function ($model) {
@@ -112,10 +131,50 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->is_audit ];
                             },
                         ],
-                        'is_field',
-                        'is_comments',
-                        'is_img',
-                        'is_thumb',
+                        [
+                            'attribute' => 'is_field',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已生成',
+                                    'Off' => '未生成',
+                                ];
+
+                                return $state[ $model->is_field ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_comments',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未开启',
+                                ];
+
+                                return $state[ $model->is_comments ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_img',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已上传图片',
+                                    'Off' => '未上传图片',
+                                ];
+
+                                return $state[ $model->is_img ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_thumb',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已生成',
+                                    'Off' => '未生成',
+                                ];
+
+                                return $state[ $model->is_thumb ];
+                            },
+                        ],
                         'grade',
                         'user_grade',
                         [
@@ -130,6 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
+                        'content:html',
                     ],
                 ]);
                 ?>

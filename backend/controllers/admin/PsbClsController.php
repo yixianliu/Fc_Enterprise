@@ -24,14 +24,14 @@ class PsbClsController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow'   => true,
-                        'roles'   => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -48,10 +48,13 @@ class PsbClsController extends BaseController
 
         $model = new PsbClassify();
 
-        $dataProvider = $model->getCls(Yii::$app->request->get('id', 'S0'));
+        $id = Yii::$app->request->get('id', 'S0');
+
+        $dataProvider = $model->getCls($id);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'id'           => $id,
         ]);
     }
 
@@ -77,12 +80,17 @@ class PsbClsController extends BaseController
     {
         $model = new PsbClassify();
 
+        $model->c_key = self::getRandomString();
+
+        $id = Yii::$app->request->get('id', 'S0');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'id'    => $id,
         ]);
     }
 
@@ -101,8 +109,11 @@ class PsbClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
+        $id = Yii::$app->request->get('id', 'S0');
+
         return $this->render('update', [
             'model' => $model,
+            'id'    => $id,
         ]);
     }
 
@@ -134,5 +145,10 @@ class PsbClsController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function getCls()
+    {
+
     }
 }

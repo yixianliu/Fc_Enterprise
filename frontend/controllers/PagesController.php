@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Menu;
+use common\models\PagesClassify;
 use Yii;
 use common\models\Pages;
 use common\models\PagesList;
@@ -41,6 +42,9 @@ class PagesController extends BaseController
         if (empty($model))
             return $this->redirect(['/']);
 
+        // 初始化
+        $result = array();
+
         // 所属菜单
         $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $id]);
 
@@ -61,15 +65,8 @@ class PagesController extends BaseController
 
         $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
 
-        // 判断文件
-        $filename = Yii::getAlias('@frontend') . '/views/pages/' . $model->path;
-
         // 所属菜单
         $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
-
-        if (!file_exists($filename)) {
-            return false;
-        }
 
         return $this->render('view', [
             'model'  => $model,
@@ -86,12 +83,19 @@ class PagesController extends BaseController
     public function actionList($id)
     {
 
+        // 初始化
+        $result = array();
+
         $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
 
         $result['content'] = PagesList::find()->where(['is_using' => 'On', 'page_id' => $id])->all();
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $model->c_key]);
+        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
+
+        $result['classify'] = PagesClassify::findByAll($id);
+
+        $result['data'] = PagesList::findByAll();
 
         return $this->render('list', [
             'model'  => $model,

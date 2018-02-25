@@ -106,7 +106,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'message' => '{attribute}必须为1开头的11位纯数字'],
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!'],
-            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => 'reg'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg', 'backend']],
             ['rememberMe', 'boolean',],
             ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
 
@@ -125,7 +125,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id'],
+            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'repassword'],
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
             'setpsw'  => ['password', 'newpassword', 'repassword'],
@@ -275,9 +275,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->user_id = time() . '_' . rand(0000, 9999);
         $this->r_key = 'admin';
         $this->is_using = 'Not';
-
         $this->setPassword($this->password);
-
         $this->password = $this->password_hash;
 
         $this->generateAuthKey();

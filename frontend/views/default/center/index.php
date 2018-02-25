@@ -178,51 +178,52 @@ $this->title = '首页';
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋" />
+                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟" />
+                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋" />
+                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟" />
+                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋" />
+                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟" />
+                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟" />
+                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
                     </a>
                 </li>
             </ul>
 
             <ul class="tabnav">
+
                 <li class="cur">
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>碧桂园项目1
                     </a>
                 </li>
 
@@ -295,69 +296,35 @@ $this->title = '首页';
         </div>
 
         <div class="right">
-            <ul>
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => '']); ?>
-                        </a>
-                    </div>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+            <?php if (!empty($result['news'])): ?>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <img alt="" src="images/news-2.jpg"/>
-                        </a>
-                    </div>
+                <ul>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+                    <?php foreach ($result['news'] as $value): ?>
+                        <li>
+                            <div class="news-left">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['id']]) ?>">
+                                    <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $value['title']]); ?>
+                                </a>
+                            </div>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <img alt="" src="images/news-3.jpg"/>
-                        </a>
-                    </div>
+                            <div class="news-right">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['id']]) ?>">
+                                    <p><?= $value['title'] ?></p>
+                                    <p><?= $value['introduction'] ?></p>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+                </ul>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <img alt="" src="images/news-4.jpg"/>
-                        </a>
-                    </div>
+            <?php else: ?>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+            <?php endif; ?>
+
         </div>
-
     </div>
 
 </div>
@@ -369,7 +336,7 @@ $this->title = '首页';
         <div class="starter-template">
             <h1 class="text-center text-color"><span style="color: #cf0d15;font-weight: bold;">建筑辅材</span> 采购招标火热招募中</h1>
             <h5 class="text-center text-color">追求绿色环保、完美空间创造的精神</h5>
-            <h5 class="text-center"><a class="hjob-btn" title="" href="">立即前往 >></a></h5>
+            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to(['/purchase/center']) ?>">立即前往 >></a></h5>
         </div>
     </div>
 </div>

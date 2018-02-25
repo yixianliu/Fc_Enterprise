@@ -8,9 +8,8 @@
 
 namespace frontend\controllers;
 
+use common\models\News;
 use common\models\ProductClassify;
-use Yii;
-use yii\web\Controller;
 
 class CenterController extends BaseController
 {
@@ -26,6 +25,8 @@ class CenterController extends BaseController
 
         $result['product-cls'] = ProductClassify::findByAll('C0');
 
+        $result['news'] = News::findAll(['is_audit' => 'On']);
+
         return $this->render('index', ['result' => $result]);
     }
 
@@ -36,8 +37,6 @@ class CenterController extends BaseController
      */
     public function actionAbout()
     {
-
-
 
         return $this->render('about');
     }
