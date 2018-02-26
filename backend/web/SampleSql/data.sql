@@ -124,8 +124,9 @@ VALUES
 
 INSERT INTO `#DB_PREFIX#Pages`
 VALUES
-(NULL, '#TIME#_1500', 'EN2', 'EN2', NULL, NULL, NULL, 'content', 'On', #TIME#, #TIME#),
-(NULL, '#TIME#_1501', 'EN5', 'EN2', NULL, NULL, NULL, 'content', 'On', #TIME#, #TIME#);
+(NULL, '1519630269_1500', 'EN2', 'EN_1519630269_1', NULL, NULL, NULL, 'view', 'On', #TIME#, #TIME#),
+(NULL, '1519630269_1501', 'EN7', 'EN_1519630269_2', NULL, NULL, NULL, 'view', 'On', #TIME#, #TIME#),
+(NULL, '1519630269_1502', 'EN5', 'EN_1519630269_3', NULL, NULL, NULL, 'show', 'On', #TIME#, #TIME#);
 
 INSERT INTO `#DB_PREFIX#Menu_Model`
 VALUES
@@ -145,35 +146,18 @@ INSERT INTO `#DB_PREFIX#Menu`
 VALUES
 
 /*
-    驯力文化 - 前台
-*/
-(NULL, 'H1', 1, 'M0', 'admin', NULL, NULL, '驯力文化', NULL, 'On', #TIME#, #TIME#),
-
-(NULL, 'HN1', 1, 'H1', 'guest', NULL, NULL, '文化中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN2', 2, 'H1', 'admin', NULL, NULL, '记录中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN3', 3, 'H1', 'admin', NULL, NULL, '统计中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN4', 4, 'H1', 'admin', NULL, NULL, '文档资源', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN5', 5, 'H1', 'admin', NULL, NULL, '视频资源', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN6', 6, 'H1', 'guest', NULL, NULL, '神推荐', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HN7', 7, 'H1', 'admin', NULL, NULL, '驯力文化', NULL, 'On', #TIME#, #TIME#),
-
-(NULL, 'HNC1', 1, 'HN6', 'admin', NULL, NULL, '最强人气', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HNC2', 2, 'HN6', 'admin', NULL, NULL, '精选资源', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'HNC3', 3, 'HN6', 'admin', NULL, NULL, '土豪的世界', NULL, 'On', #TIME#, #TIME#),
-
-/*
     企业网站 - 前台
 */
 (NULL, 'E1', 1, 'M0', 'guest', NULL, NULL, '企业文化', NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'EN1', 1, 'E1', 'guest', 'UU1', NULL, '网站首页', 'center/index', 'On', #TIME#, #TIME#),
 (NULL, 'EN2', 2, 'E1', 'guest', 'UC1', NULL, '公司简介', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', 'product/index', 'On', #TIME#, #TIME#),
+(NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', 'news/index', 'On', #TIME#, #TIME#),
 (NULL, 'EN5', 5, 'E1', 'guest', 'UC1', NULL, '工程案例', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '人才汇聚', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '人才汇聚', 'job/index', 'On', #TIME#, #TIME#),
 (NULL, 'EN7', 7, 'E1', 'guest', 'UC1', NULL, '联系我们', NULL, 'On', #TIME#, #TIME#),
-(NULL, 'EN8', 8, 'E1', 'guest', 'UP2', NULL, '采购中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'EN8', 8, 'E1', 'guest', 'UP2', NULL, '采购中心', 'purchase/index', 'On', #TIME#, #TIME#),
 
 /*
     后台管理 / Admin

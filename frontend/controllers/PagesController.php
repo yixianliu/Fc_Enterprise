@@ -126,11 +126,16 @@ class PagesController extends BaseController
         ]);
     }
 
-    public function actionShowup()
+    /**
+     * 单页面展示内容
+     *
+     * @return string
+     */
+    public function actionShow()
     {
 
         $model = Pages::findByOne(Yii::$app->request->get('id', null));
 
-        return $this->render('showup', ['model' => $model]);
+        return $this->render('show', ['model' => $model]);
     }
 }

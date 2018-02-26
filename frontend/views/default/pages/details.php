@@ -7,7 +7,7 @@
  */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => $result['parent']['name'], 'url' => ['list', 'id' => $result['parent']['c_key']]];
+$this->params['breadcrumbs'][] = ['label' => $result['parent']['name'], 'url' => ['list', 'id' => $result['parent']['page_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

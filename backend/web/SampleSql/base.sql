@@ -724,16 +724,17 @@ CREATE TABLE `#DB_PREFIX#Pages` (
     `id` INT(11) NULL AUTO_INCREMENT,
     `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
     `m_key` VARCHAR(55) NOT NULL COMMENT '对应的菜单KEY',
-    `c_key` VARCHAR(55) NOT NULL COMMENT '单页面关键KEY',
+    `p_key` VARCHAR(55) NOT NULL COMMENT '单页面关键KEY',
     `content` TEXT NULL COMMENT '单页面内容',
     `parent_id` VARCHAR(85) NULL COMMENT '父类,为空的话,为顶级',
     `path` VARCHAR(255) NULL COMMENT '页面相关图片和文件',
-    `is_type` SET('list', 'content', 'show') NOT NULL COMMENT '单页面类型, 列表, 内容, 展示',
+    `is_type` SET('list', 'view', 'show') NOT NULL COMMENT '单页面类型, 列表, 内容, 展示',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `page_id` (`page_id`)
+    UNIQUE KEY `page_id` (`page_id`),
+    UNIQUE KEY `p_key` (`p_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -742,11 +743,12 @@ CREATE TABLE `#DB_PREFIX#Pages` (
 DROP TABLE IF EXISTS `#DB_PREFIX#Pages_List`;
 CREATE TABLE `#DB_PREFIX#Pages_List` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `page_id` VARCHAR(55) NOT NULL COMMENT '页面ID',
-    `c_key` VARCHAR(55) NOT NULL COMMENT '单页面分类KEY',
+    `page_id` VARCHAR(55) NOT NULL COMMENT '对应的页面ID',
+    `c_key` VARCHAR(55) NOT NULL COMMENT '单页面列表分类KEY',
     `title` VARCHAR(80) NOT NULL COMMENT '列表标题',
     `content` TEXT NULL COMMENT '单页面内容',
     `path` VARCHAR(255) NOT NULL COMMENT '单页面路径',
+    `is_recommend` SET('On', 'Off') NOT NULL COMMENT '推荐',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,

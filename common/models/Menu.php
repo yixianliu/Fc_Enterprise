@@ -227,17 +227,18 @@ class Menu extends \yii\db\ActiveRecord
                     // 自定义页面的KEY
                     $customPages = Pages::findOne(['is_using' => 'On', 'm_key' => $value['m_key']]);
 
-                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['c_key']]);
+                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['m_key']]);
 
                     if (!empty($custom)) {
                         foreach ($custom as $values) {
                             $array[] = [
                                 'label' => $value['name'],
-                                'url'   => ['/pages/' . $this->getPageType($values['is_type']), 'id' => $values['page_id']],
+                                'url'   => ['/pages/' . $values['is_type'], 'id' => $values['page_id']],
                                 'items' => $this->recursionPagesMenu($values),
                             ];
                         }
                     }
+
                     break;
 
                 // 超链接
@@ -251,7 +252,7 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 单页面
                 case 'pages':
-                    $urls = $value['menuModel']['url_key'] . '/' . $this->getPageType($customPages['is_type']) . '?id=' . $customPages['page_id'];
+                    $urls = $value['menuModel']['url_key'] . '/' . $customPages['is_type'] . '?id=' . $customPages['page_id'];
                     break;
 
                 case 'urls':
@@ -341,36 +342,6 @@ class Menu extends \yii\db\ActiveRecord
         }
 
         return $result;
-    }
-
-    /**
-     * 获取单页面类型
-     *
-     * @param $type
-     * @return string
-     */
-    public function getPageType($type)
-    {
-        // 判断类型
-        switch ($type) {
-
-            // 列表
-            default:
-            case 'list':
-                $type = 'list';
-                break;
-
-            // 内容
-            case 'content':
-                $type = 'view';
-                break;
-
-            case 'show':
-                $type = 'showup';
-                break;
-        }
-
-        return $type;
     }
 
     /**

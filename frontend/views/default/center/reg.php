@@ -166,7 +166,7 @@ $this->registerCssFile('@web/themes/qijian/css/member.css');
         <div class="starter-template">
             <h1 class="text-center text-color"><span style="color: #cf0d15;font-weight: bold;">建筑辅材</span> 采购招标火热招募中</h1>
             <h5 class="text-center text-color">追求绿色环保、完美空间创造的精神</h5>
-            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to(['/purchase/index']) ?>">立即前往 >></a></h5>
+            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to(['/purchase/center']) ?>">立即前往 >></a></h5>
         </div>
 
     </div>

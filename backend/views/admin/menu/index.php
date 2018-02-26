@@ -22,8 +22,8 @@ if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
-        $create = null;
         $update = Html::a('编辑菜单', ['admin/menu/update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+        $create = Html::a('添加子菜单', ['admin/menu/create', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
 
         $result .= '<li class="">';
         $result .= menuHtml($value['name'], $create, $update);

@@ -77,6 +77,7 @@ class PagesListController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new PagesList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

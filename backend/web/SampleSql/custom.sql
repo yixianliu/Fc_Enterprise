@@ -302,3 +302,32 @@ VALUES
 (NULL, 'S3', 3, '大杂烩', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
 (NULL, 'S4', 4, '音乐', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#),
 (NULL, 'S5', 5, '视频', NULL, NULL, NULL, 'S0', 'On', 'On', 'On', #TIME#, #TIME#);
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 写入数据
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
+ * 菜单
+ */
+INSERT INTO `#DB_PREFIX#Menu`
+VALUES
+
+/*
+    驯力文化
+*/
+(NULL, 'H1', 1, 'M0', 'admin', NULL, NULL, '驯力文化', NULL, 'On', #TIME#, #TIME#),
+
+(NULL, 'HN1', 1, 'H1', 'guest', NULL, NULL, '文化中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN2', 2, 'H1', 'admin', NULL, NULL, '记录中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN3', 3, 'H1', 'admin', NULL, NULL, '统计中心', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN4', 4, 'H1', 'admin', NULL, NULL, '文档资源', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN5', 5, 'H1', 'admin', NULL, NULL, '视频资源', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN6', 6, 'H1', 'guest', NULL, NULL, '神推荐', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HN7', 7, 'H1', 'admin', NULL, NULL, '驯力文化', NULL, 'On', #TIME#, #TIME#),
+
+(NULL, 'HNC1', 1, 'HN6', 'admin', NULL, NULL, '最强人气', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HNC2', 2, 'HN6', 'admin', NULL, NULL, '精选资源', NULL, 'On', #TIME#, #TIME#),
+(NULL, 'HNC3', 3, 'HN6', 'admin', NULL, NULL, '土豪的世界', NULL, 'On', #TIME#, #TIME#);
