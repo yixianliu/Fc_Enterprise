@@ -22,6 +22,13 @@ class SpOfferController extends BaseController
         ]);
     }
 
+    /**
+     * 提交价格
+     *
+     * @param $id
+     * @param $type
+     * @return \yii\web\Response
+     */
     public function actionCreate($id, $type)
     {
 

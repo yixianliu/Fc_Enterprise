@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <div class="col-sm-9 sidebar blog-sidebar">
+
                 <?=
                 GridView::widget([
                     'dataProvider' => $dataProvider,

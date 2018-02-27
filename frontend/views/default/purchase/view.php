@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
@@ -86,14 +87,23 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                         <hr>
                         </p>
 
+                        <?php
+                        $form = ActiveForm::begin([
+                            'action'      => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
+                            'method'      => 'post',
+                            'id'          => $modelOffer->formName(),
+                        ]);
+                        ?>
+
                         <p class="right-tar">
-                            <span class="right-color">提交价格 : </span><textarea cols="50" rows="5" tabindex="4"></textarea>
+                            <span class="right-color">提交价格 : </span>
+                            <?= $form->field($modelOffer, 'price')->textarea(['cols' => 50, 'rows' => 5])->label(false) ?>
                         </p>
                         <p>
-                            <a class="btn btn-red" title="" href="">
-                                发送
-                            </a>
+                            <?= Html::submitButton('提交价格', ['class' => 'btn btn-red']) ?>
                         </p>
+
+                        <?php ActiveForm::end(); ?>
 
                     </div>
                     <!-- #产品参数 -->
