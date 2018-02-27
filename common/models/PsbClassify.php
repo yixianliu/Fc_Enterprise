@@ -56,7 +56,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
-            [['c_key', 'is_type'], 'unique'],
+            [['c_key'], 'unique'],
         ];
     }
 
@@ -80,13 +80,19 @@ class PsbClassify extends \yii\db\ActiveRecord
         ];
     }
 
-    static public function findByAll($parent_id = null)
+    /**
+     * 列表
+     *
+     * @param null $parent_id
+     * @param string $type
+     * @return array|PsbClassify[]|\yii\db\ActiveRecord[]
+     */
+    static public function findByAll($parent_id = null, $type = 'Supply')
     {
 
         $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
 
-        return static::find()
-            ->where(['parent_id' => $parent_id])
+        return static::find()->where(['parent_id' => $parent_id, 'is_type' => $type])
             ->orderBy('sort_id', SORT_DESC)
             ->asArray()
             ->all();
@@ -95,10 +101,11 @@ class PsbClassify extends \yii\db\ActiveRecord
     /**
      * 获取分类
      *
-     * @param string $parent_id
-     * @return array|bool
+     * @param null $parent_id
+     * @param null $type
+     * @return array
      */
-    public function getCls($parent_id = null)
+    public function getCls($parent_id = null, $type = 'Supply')
     {
 
         $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
@@ -106,10 +113,27 @@ class PsbClassify extends \yii\db\ActiveRecord
         // 初始化
         $result = array();
 
-        $parent = static::findByAll($parent_id);
+        switch ($type) {
+
+            default:
+            case 'Supply':
+                $result['S0'] = '顶级父类 !!';
+                break;
+
+            case 'Purchase':
+                $result['P0'] = '顶级父类 !!';
+                break;
+
+            case 'Bid':
+                $result['B0'] = '顶级父类 !!';
+                break;
+        }
+
+        $parent = static::findByAll($parent_id, $type);
 
         foreach ($parent as $key => $value) {
-            $result[ $key ] = $this->recursionCls($value);
+//            $result[ $key ] = $this->recursionCls($value);
+            $result[ $value['c_key']] = $value['name'];
         }
 
         return $result;
@@ -133,7 +157,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             return $result;
 
         foreach ($child as $value) {
-            $result['child'][] = $this->recursionCls($value->toArray());
+            $result['child'][] = $this->recursionCls($value);
         }
 
         return $result;

@@ -20,15 +20,6 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
 ?>
 
-
-<!-- 商城分类 -->
-<div class="container-fluid classfi-bg">
-    <div class="container shop-classfiy">
-        <?= $this->render('_cls'); ?>
-    </div>
-</div>
-<!-- 商城分类 -->
-
 <?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
 
 <!-- 内容中心 -->
@@ -40,8 +31,8 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
     <!-- 可变化内容 -->
     <div class="conY">
-        <div class="conY_tit">七建订单</div>
-        <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：2018-1-30</div>
+        <div class="conY_tit"><?= $model->title ?></div>
+        <div class="conY_dat">所有者：<?= $model->user_id ?>&nbsp;&nbsp;&nbsp;时间：<?= date('Y - m - d', $model->updated_at) ?></div>
 
         <div class="conY_text">
 
@@ -90,25 +81,24 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
                     <!-- 产品参数 -->
                     <div class="tend-right">
-                        <p class="t-money"><span class="right-color">价格 : </span><font>1111</font></p>
-                        <p><span class="right-color">交货周期 : </span>7天</p>
-                        <p><span class="right-color">销售范围 : </span>中国</p>
-                        <p><span class="right-color">免费拿样 : </span>是</p>
+                        <p class="t-money"><span class="right-color">价格 : </span><font><?= $model->price ?></font></p>
                         <p>
                         <hr>
                         </p>
+
                         <p class="right-tar">
-                            <span class="right-color">询价信 : </span><textarea cols="50" rows="5" tabindex="4"></textarea>
+                            <span class="right-color">提交价格 : </span><textarea cols="50" rows="5" tabindex="4"></textarea>
                         </p>
                         <p>
                             <a class="btn btn-red" title="" href="">
                                 发送
                             </a>
                         </p>
+
                     </div>
                     <!-- #产品参数 -->
 
-                    <!-- 商家信息 -->
+                    <!-- 商家信息
                     <div class="tend-right-right">
 
                         <div class="tend-border">
@@ -120,16 +110,6 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                             <p><span class="right-color">手机 : </span>XXXXXXXXXXX</p>
                             <p><span class="right-color">QQ : </span>XXXXXXXXX</p>
 
-                        </div>
-
-                        <div class="tend-border-btn">
-                            <a class="btn btn-default" title="" href="">
-                                进入空间
-                            </a>
-
-                            <a class="btn btn-default" title="" href="">
-                                关注商家
-                            </a>
                         </div>
 
                     </div>
@@ -153,7 +133,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                     <!-- 图文介绍 -->
                     <div class="mc tabcon" style="display:block;">
                         <div class="norecode">
-                            <?= $model->title ?>
+                            <?= $model->content ?>
                         </div>
                     </div>
                     <!-- #图文介绍 -->

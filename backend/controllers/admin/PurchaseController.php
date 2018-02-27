@@ -245,7 +245,7 @@ class PurchaseController extends BaseController
         $result = array();
 
         // 所有版块
-        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase']);
+        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'parent_id' => 'P0', 'is_type' => 'Purchase']);
 
         foreach ($dataCls as $value) {
             $result[ $value['c_key'] ] = $value['name'];

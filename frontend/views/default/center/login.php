@@ -29,7 +29,7 @@ $this->registerCssFile('@web/themes/qijian/css/member.css');
 
         <?php
         $form = ActiveForm::begin([
-            'action'      => ['member/reg'],
+            'action'      => ['member/login'],
             'method'      => 'post',
             'id'          => $model->formName(),
             'fieldConfig' => [

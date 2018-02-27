@@ -27,71 +27,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row shop-cont">
 
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
+                <?php if (empty($result['product'])): ?>
 
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
+                    <?php foreach ($result['product'] as $value): ?>
+                        <div class="col-md-4">
+                            <div class="shop-img">
+                                <a title="" href="">
+                                    <?= Html::img(Url::to('@web/themes/qijian/images/200x200.gif'), ['alt' => '', 'class' => '']); ?>
+                                </a>
+                            </div>
+                            <div class="shop-txt">
+                                <a title="" href=""><?= $value['title'] ?></a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
 
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
+                <?php else: ?>
 
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
+                <h1>暂无数据 !!</h1>
 
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
-
-<div class="col-md-4">
-    <div class="shop-img">
-        <a title="" href="">
-            <img src="../images/200x200.gif">
-        </a>
-    </div>
-    <div class="shop-txt">
-        <a title="" href="">七建产品</a>
-    </div>
-</div>
+                <?php endif; ?>
 
             </div>
         </div>

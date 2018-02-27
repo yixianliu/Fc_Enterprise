@@ -96,7 +96,7 @@ class NavClsController extends BaseController
             $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
         }
 
-        $data['c_key'] = self::getRandomString();
+        $model->c_key = self::getRandomString();
 
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
@@ -119,9 +119,16 @@ class NavClsController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if (!empty($data)) {
+            $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
+        }
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
@@ -130,12 +137,20 @@ class NavClsController extends BaseController
 
         $result['classify'] = $this->getProductCls();
 
-        $checkedData = explode(',', $model->p_key);
+        if (empty($model->p_key)) {
 
-        foreach ($result['classify'] as $values) {
-            foreach ($checkedData as $value) {
-                if ($values['pkey'] == $value['pkey']) {
-                    array_push($result['check'], $value['pkey']);
+            // 分解
+            $checkedData = explode(',', $model->p_key);
+
+            foreach ($result['classify'] as $values) {
+                foreach ($checkedData as $value) {
+
+                    if (empty($value['p_key']))
+                        continue;
+
+                    if ($values['p_key'] == $value['p_key']) {
+                        array_push($result['check'], $value['p_key']);
+                    }
                 }
             }
         }

@@ -7,17 +7,18 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\PsbClassify */
 /* @var $form yii\widgets\ActiveForm */
 
-switch ($id) {
+switch ($model->is_type) {
+
     default:
-    case 'S0':
+    case 'Supply':
         $title = '供应';
         break;
 
-    case 'P0':
+    case 'Purchase':
         $title = '采购';
         break;
 
-    case 'B0':
+    case 'Bid':
         $title = '投标';
         break;
 }
@@ -33,6 +34,16 @@ switch ($id) {
             <div class="row">
 
                 <?php $form = ActiveForm::begin(); ?>
+
+                <?=
+                $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
+                    'data'          => ['Supply' => '供应类型', 'Purchase' => '采购类型', 'Bid' => '投标类型'],
+                    'options'       => ['placeholder' => '选择类型...', 'disabled' => 'disabled'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
                 <?=
                 $form->field($model, 'parent_id')->widget(kartik\select2\Select2::classname(), [
@@ -53,16 +64,6 @@ switch ($id) {
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'json_data')->textarea(['rows' => 6]) ?>
-
-                <?=
-                $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
-                    'data'          => ['Supply' => '供应类型', 'Purchase' => '采购类型', 'Bid' => '投标类型'],
-                    'options'       => ['placeholder' => '选择类型...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [

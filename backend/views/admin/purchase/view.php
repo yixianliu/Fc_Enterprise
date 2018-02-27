@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'purchase_id',
                         'user_id',
                         'title',
-                        'content:ntext',
                         'path',
                         'price',
                         'num',
@@ -111,6 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y-m-d H:i', $model->updated_at);
                             },
                         ],
+                        'content:html',
                     ],
                 ]) ?>
 

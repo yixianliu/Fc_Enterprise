@@ -7,6 +7,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Product;
 use Yii;
 use common\models\Job;
 use common\models\User;
@@ -31,7 +32,11 @@ class UserController extends BaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        // 初始化
+        $result['product'] = Product::findAll(['is_audit' => 'On']);
+
+        return $this->render('index', ['result' => $result]);
     }
 
     /**
@@ -86,8 +91,10 @@ class UserController extends BaseController
         $password = $model->password;
         $model->password = null;
 
+        $data = Yii::$app->request->post();
+
         if ($model->load(Yii::$app->request->post())) {
-            if (!$model->setPsw($password)) {
+            if (!$model->setPsw($data['User']['password'])) {
                 Yii::$app->getSession()->setFlash('error', '原密码有误 !!');
             } else {
                 return $this->redirect(['index']);

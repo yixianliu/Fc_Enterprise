@@ -275,8 +275,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->user_id = time() . '_' . rand(0000, 9999);
         $this->r_key = 'admin';
         $this->is_using = 'Not';
-        $this->setPassword($this->password);
-        $this->password = $this->password_hash;
+        $this->password = md5($this->password);
 
         $this->generateAuthKey();
 
@@ -291,9 +290,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function setPsw($password)
     {
 
-        $this->setPassword($this->password);
+        $data = static::findByUsername($this->username);
 
-        if ($password != $this->password_hash)
+        if (md5($password) != $data->password)
             return false;
 
         return $this->save(false) ? true : false;
@@ -312,11 +311,7 @@ class User extends ActiveRecord implements IdentityInterface
         if (empty($data))
             return false;
 
-        $this->setPassword($this->password);
-
-        $this->password = $this->password_hash;
-
-        if ($this->password == $data->password) {
+        if (md5($this->password) == $data->password) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
 

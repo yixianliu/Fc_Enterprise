@@ -78,7 +78,7 @@ class MemberController extends BaseController
             $cookie = \Yii::$app->request->cookies;
 
             //判断cookie是否存在
-            if (!$cookie->has('RegPhoneCode')) {
+            if ($cookie->has('RegPhoneCode')) {
                 Yii::$app->getSession()->setFlash('error', '没有验证手机 !!');
             } else {
 

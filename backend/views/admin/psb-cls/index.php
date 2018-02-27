@@ -6,17 +6,18 @@ use yii\helpers\Html;
 /* @var $searchModel common\models\PsbClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-switch ($id) {
+switch ($type) {
+
     default:
-    case 'S0':
+    case 'Supply':
         $this->title = '供应分类列表';
         break;
 
-    case 'P0':
+    case 'Purchase':
         $this->title = '采购分类列表';
         break;
 
-    case 'B0':
+    case 'Bid':
         $this->title = '投标分类列表';
         break;
 }
@@ -28,12 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
 $result = null;
 
 if (!empty($dataProvider)) {
+
     foreach ($dataProvider as $value) {
 
         if (empty($value))
             continue;
 
-        $result .= recursionCls($value);
+        $result .= recursionCls($value, $type, $id);
     }
 }
 
@@ -41,22 +43,24 @@ if (!empty($dataProvider)) {
  * 递归菜单
  *
  * @param $data
- * @return array|void
+ * @param $type
+ * @param $id
+ * @return string|void
  */
-function recursionCls($data)
+function recursionCls($data, $type, $id)
 {
     if (empty($data))
         return;
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type], ['class' => "btn btn-primary"]);
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
         foreach ($data['child'] as $value) {
             $html .= '    <ul class="">';
-            $html .= recursionCls($value);
+            $html .= recursionCls($value, $type, $id);
             $html .= '    </ul>';
         }
     }
@@ -80,10 +84,10 @@ function recursionCls($data)
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布分类', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('供应中心分类', ['index', 'id' => 'S0'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('采购中心分类', ['index', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('投标中心分类', ['index', 'id' => 'B0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布分类', ['create', 'type' => $type,'id' => $id], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <hr/>
