@@ -136,6 +136,8 @@ class PagesController extends BaseController
 
         $model = Pages::findByOne(Yii::$app->request->get('id', null));
 
-        return $this->render('show', ['model' => $model]);
+        $result['data'] = PagesList::findByAll($model['page_id']);
+
+        return $this->render('show', ['model' => $model, 'result' => $result]);
     }
 }

@@ -46,10 +46,10 @@ class Pages extends \yii\db\ActiveRecord
     {
         return [
             [['page_id', 'm_key', 'is_type', 'is_using'], 'required'],
-            [['content', 'is_type', 'is_using', 'parent_id', ], 'string'],
-            [['page_id', 'm_key', 'parent_id', ], 'string', 'max' => 55],
+            [['content', 'is_type', 'is_using', 'parent_id',], 'string'],
+            [['page_id', 'm_key', 'parent_id',], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['page_id', 'm_key', ], 'unique'],
+            [['page_id', 'm_key',], 'unique'],
 
             [['parent_id', 'content', 'path'], 'default', 'value' => null],
         ];
@@ -96,11 +96,19 @@ class Pages extends \yii\db\ActiveRecord
      * 查找
      *
      * @param $id
+     * @param string $type
      * @return array|null|\yii\db\ActiveRecord
      */
-    public static function findByOne($id)
+    public static function findByOne($id, $type = 'page_id')
     {
-        return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.page_id' => $id])
+
+        if ($type == 'page_id') {
+            $where = [static::tableName() . '.is_using' => 'On', static::tableName() . '.page_id' => $id];
+        } else {
+            $where = [static::tableName() . '.is_using' => 'On', static::tableName() . '.m_key' => $id];
+        }
+
+        return static::find()->where($where)
             ->orderBy(static::tableName() . '.page_id', SORT_DESC)
             ->joinWith('menu')
             ->asArray()
@@ -111,18 +119,22 @@ class Pages extends \yii\db\ActiveRecord
      * 针对菜单的保存功能
      *
      * @param $mkey
+     * @param $page_id
+     * @param $type
+     * @param $parent_id
      * @return bool
      */
-    public function saveData($mkey)
+    public function saveData($mkey, $page_id, $type, $parent_id)
     {
 
-        if (empty($mkey))
+        if (empty($mkey) || empty($page_id) || empty($type))
             return false;
 
-        $this->page_id = time() . '_' . rand(0000, 9999);
+        $this->page_id = $page_id;
         $this->m_key = $mkey;
-        $this->c_key = $mkey;
-        $this->is_type = 'content';
+        $this->p_key = $mkey;
+        $this->parent_id = $parent_id;
+        $this->is_type = $type;
         $this->is_using = 'On';
 
         return $this->save() ? true : false;

@@ -50,6 +50,7 @@ class NewsController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'result'       => $result,
+            'id'           => $type,
         ]);
     }
 

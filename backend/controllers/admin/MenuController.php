@@ -86,17 +86,11 @@ class MenuController extends BaseController
     {
         $model = new Menu();
 
-        $parent_id = Menu::findByOne(Yii::$app->request->get('id', 'E1'));
+        $parent_id = Menu::findByOne(Yii::$app->request->get('id', null));
 
-        $model->parent_id = empty($parent_id->parent_id) ? null : $parent_id->parent_id;
+        $model->parent_id = empty($parent_id['parent_id']) ? null : $parent_id['m_key'];
 
         $model->m_key = self::getRandomString();
-
-        $result = [
-            'parent'     => $model->getSelectMenu(),
-            'menu_model' => $this->getModel(),
-            'role'       => $this->getRole(),
-        ];
 
         // 创建单页面
         if (!empty(Yii::$app->request->post())) {
@@ -105,14 +99,23 @@ class MenuController extends BaseController
 
             if ($data['Menu']['model_key'] == 'UC1') {
 
+                $parentPage_id = Pages::findOne(['m_key' => $model->parent_id]);
+
                 $Cls = new Pages();
-                $Cls->saveData($data['Menu']['m_key']);
+                $Cls->saveData($model->m_key, self::getRandomString(), $data['is_type'], $parentPage_id->page_id);
             }
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
+
+            $result = [
+                'parent'     => $model->getSelectMenu(),
+                'menu_model' => $this->getModel(),
+                'role'       => $this->getRole(),
+            ];
+
             return $this->render('create', [
                 'model'  => $model,
                 'result' => $result,

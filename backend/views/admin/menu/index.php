@@ -22,11 +22,16 @@ if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
+        $create = null;
         $update = Html::a('编辑菜单', ['admin/menu/update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
-        $create = Html::a('添加子菜单', ['admin/menu/create', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+        $del = Html::a('删除菜单', ['admin/menu/delete', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+
+        if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1') {
+            $create = Html::a('添加子菜单', ['admin/menu/create', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+        }
 
         $result .= '<li class="">';
-        $result .= menuHtml($value['name'], $create, $update);
+        $result .= menuHtml($value['name'], $create, $update, $del);
 
         $result .= '    <ul class="">';
         $result .= recursionMenu($value);
@@ -53,6 +58,7 @@ function recursionMenu($data, $model = null)
     // 选择模型
     switch ($data['menuModel']['url_key']) {
 
+        // 产品
         case 'product':
 
             $child = ProductClassify::findByAll();
@@ -62,9 +68,10 @@ function recursionMenu($data, $model = null)
 
                     $create = Html::a('添加分类', ['admin/product-cls/create'], ['class' => "btn btn-primary"]);
                     $update = Html::a('编辑分类', ['admin/product-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+                    $del = Html::a('删除分类', ['admin/product-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
                     $html .= '<li class="">';
-                    $html .= menuHtml($value['name'], $create, $update);
+                    $html .= menuHtml($value['name'], $create, $update, $del);
 
                     $html .= '    <ul class="">';
                     $html .= recursionProductData($value);
@@ -76,6 +83,7 @@ function recursionMenu($data, $model = null)
 
             break;
 
+        // 新闻
         case 'news':
 
             $child = NewsClassify::findByAll();
@@ -85,9 +93,10 @@ function recursionMenu($data, $model = null)
 
                     $create = Html::a('添加分类', ['admin/news-cls/create'], ['class' => "btn btn-primary"]);
                     $update = Html::a('编辑分类', ['admin/news-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+                    $del = Html::a('删除分类', ['admin/news-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
                     $html .= '<li class="">';
-                    $html .= menuHtml($value['name'], $create, $update);
+                    $html .= menuHtml($value['name'], $create, $update, $del);
 
                     $html .= '    <ul class="">';
                     $html .= recursionNewsData($value);
@@ -105,11 +114,53 @@ function recursionMenu($data, $model = null)
 
         case 'urls':
             $html .= recursionUrlData($data);
+            break;
+
+        case 'purchase':
+            $html .= recursionPurchaseData($data);
+            break;
 
         default:
             break;
     }
 
+
+    return $html;
+}
+
+/**
+ * 采购信息
+ *
+ * @param $data
+ * @return null|string|void
+ */
+function recursionPurchaseData($data)
+{
+    if (empty($data))
+        return;
+
+    // 初始化
+    $html = null;
+
+    $child = Menu::findAll(['model_key' => 'UU1', 'parent_id' => $data['m_key']]);
+
+    if (empty($child))
+        return;
+
+    foreach ($child as $value) {
+
+        $create = Html::a('添加单页面分类', ['admin/menu/create'], ['class' => "btn btn-primary"]);
+        $update = Html::a('编辑单页面分类', ['admin/menu/update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+        $del = Html::a('删除单页面分类', ['admin/menu/delete', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+
+        $html .= '<li class="">';
+        $html .= menuHtml($value['name'], $create, $update, $del);
+        $html .= '    <ul class="">';
+        $html .= recursionPurchaseData($value);
+        $html .= '    </ul>';
+        $html .= '</li>';
+
+    }
 
     return $html;
 }
@@ -137,9 +188,10 @@ function recursionProductData($data)
 
         $create = Html::a('添加分类', ['admin/product-cls/create'], ['class' => "btn btn-primary"]);
         $update = Html::a('编辑分类', ['admin/product-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+        $del = Html::a('删除分类', ['admin/product-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
         $html .= '<li class="">';
-        $html .= menuHtml($value['name'], $create, $update);
+        $html .= menuHtml($value['name'], $create, $update, $del);
 
         $html .= '    <ul class="">';
         $html .= recursionProductData($value);
@@ -174,9 +226,10 @@ function recursionNewsData($data)
 
         $create = Html::a('添加分类', ['admin/news-cls/create'], ['class' => "btn btn-primary"]);
         $update = Html::a('编辑分类', ['admin/news-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+        $del = Html::a('删除分类', ['admin/news-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
         $html .= '<li class="">';
-        $html .= menuHtml($value['name'], $create, $update);
+        $html .= menuHtml($value['name'], $create, $update, $del);
 
         $html .= '    <ul class="">';
         $html .= recursionNewsData($value);
@@ -199,25 +252,23 @@ function recursionPagesData($data)
     if (empty($data))
         return;
 
-    if (empty($data['custom_key']) && empty($data['c_key']))
-        return;
-
     $html = null;
 
-    // 单页面分类
-    $pagesClsKey = empty($data['custom_key']) ? $data['c_key'] : $data['custom_key'];
+    $parentData = Pages::findByOne($data['m_key'], 'm_key');
 
-    $childCls = PagesClassify::findByAll($pagesClsKey);
+    // 单页面
+    $child = Pages::findByAll($parentData['page_id']);
 
-    if (!empty($childCls)) {
+    if (!empty($child)) {
 
-        foreach ($childCls as $value) {
+        foreach ($child as $value) {
 
-            $create = Html::a('添加单页面分类', ['admin/pages-cls/create'], ['class' => "btn btn-primary"]);
-            $update = Html::a('编辑单页面分类', ['admin/pages-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+            $create = Html::a('添加子自定义页面', ['admin/pages/create'], ['class' => "btn btn-primary"]);
+            $update = Html::a('编辑自定义页面', ['admin/pages/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
+            $del = Html::a('删除自定义页面', ['admin/pages/delete', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
 
             $html .= '<li class="">';
-            $html .= menuHtml($value['name'], $create, $update);
+            $html .= menuHtml($value['menu']['name'], $create, $update, $del);
             $html .= '    <ul class="">';
             $html .= recursionPagesData($value);
             $html .= '    </ul>';
@@ -226,26 +277,15 @@ function recursionPagesData($data)
 
     }
 
-    // 单页面
-    $child = Pages::findByAll($pagesClsKey);
-
-    if (!empty($child)) {
-
-        foreach ($child as $value) {
-
-            $create = Html::a('添加单页面', ['admin/pages/create'], ['class' => "btn btn-primary"]);
-            $update = Html::a('编辑单页面', ['admin/pages/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
-
-            $html .= '<li class="">';
-            $html .= menuHtml($value['name'], $create, $update);
-            $html .= '</li>';
-        }
-
-    }
-
     return $html;
 }
 
+/**
+ * 编辑超链接
+ *
+ * @param $data
+ * @return null|string|void
+ */
 function recursionUrlData($data)
 {
     if (empty($data))
@@ -263,11 +303,12 @@ function recursionUrlData($data)
 
         $create = Html::a('添加单页面分类', ['admin/menu/create'], ['class' => "btn btn-primary"]);
         $update = Html::a('编辑单页面分类', ['admin/menu/update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+        $del = Html::a('删除单页面分类', ['admin/menu/delete', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
 
         $html .= '<li class="">';
-        $html .= menuHtml($value['name'], $create, $update);
+        $html .= menuHtml($value['name'], $create, $update, $del);
         $html .= '    <ul class="">';
-        $html .= recursionNewsData($value);
+        $html .= recursionUrlData($value);
         $html .= '    </ul>';
         $html .= '</li>';
 
@@ -284,13 +325,13 @@ function recursionUrlData($data)
  * @param $createHtml
  * @return null|string
  */
-function menuHtml($name, $updateHtml, $createHtml)
+function menuHtml($name, $updateHtml, $createHtml, $delHtml)
 {
 
     $html = null;
 
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $name . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml . '&nbsp;' . $createHtml;
+    $html .= $name . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml . '&nbsp;' . $createHtml . '&nbsp;' . $delHtml;
     $html .= '    </div>';
 
     return $html;

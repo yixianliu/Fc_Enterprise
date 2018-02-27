@@ -44,7 +44,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
-                    'data'          => ['list' => '列表内容类型', 'content' => '内容详情类型', 'show' => '展示详情类型'],
+                    'data'          => ['list' => '列表内容类型', 'view' => '内容详情类型', 'show' => '展示详情类型'],
                     'options'       => ['placeholder' => '选择内容类型...'],
                     'pluginOptions' => [
                         'allowClear' => true

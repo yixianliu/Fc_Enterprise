@@ -168,15 +168,16 @@ class Menu extends \yii\db\ActiveRecord
                 // 采购模型
                 case 'purchase':
 
-                    $purchase = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Purchase']);
+                    $purchase = Menu::findAll(['is_using' => 'On', 'model_key' => 'UU1', 'parent_id' => $value['m_key']]);
 
                     foreach ($purchase as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/purchase/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionMenu($values),
+                            'url'   => ['/purchase/center', 'id' => $values['m_key']],
+                            'items' => $this->recursionPurchaseMenu($values),
                         ];
                     }
+
                     break;
 
                 // 供应模型
@@ -227,12 +228,12 @@ class Menu extends \yii\db\ActiveRecord
                     // 自定义页面的KEY
                     $customPages = Pages::findOne(['is_using' => 'On', 'm_key' => $value['m_key']]);
 
-                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['m_key']]);
+                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['page_id']]);
 
                     if (!empty($custom)) {
                         foreach ($custom as $values) {
                             $array[] = [
-                                'label' => $value['name'],
+                                'label' => $values['menu']['name'],
                                 'url'   => ['/pages/' . $values['is_type'], 'id' => $values['page_id']],
                                 'items' => $this->recursionPagesMenu($values),
                             ];
@@ -279,6 +280,42 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
+     * 采购平台
+     *
+     * @param $data
+     * @return array|void
+     */
+    public function recursionPurchaseMenu($data)
+    {
+        if (empty($data) || empty($data['m_key'])) {
+            return;
+        }
+
+        $child = Menu::findByAll($data['m_key']);
+
+        if (empty($child))
+            return;
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+
+            if (!empty($value['url'])) {
+                $url = $value['url'];
+            }
+
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => [$url],
+                'items' => $this->recursionPurchaseMenu($value),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
      * 递归菜单 (固定控制器使用)
      *
      * @param $data
@@ -320,12 +357,12 @@ class Menu extends \yii\db\ActiveRecord
     public function recursionPagesMenu($data)
     {
 
-        if (empty($data) || !empty($data['c_key'])) {
+        if (empty($data) || !empty($data['page_id'])) {
             return;
         }
 
         // 子分类
-        $childCls = Pages::findAll(['is_using' => 'On', 'parent_id' => $data['c_key']]);
+        $childCls = Pages::findByAll($data['page_id']);
 
         if (empty($childCls))
             return;
@@ -335,8 +372,8 @@ class Menu extends \yii\db\ActiveRecord
 
         foreach ($childCls as $value) {
             $result[] = [
-                'label' => $value['name'],
-                'url'   => ['/pages/' . $this->getPageType($value['is_type']), 'id' => $value['page_id']],
+                'label' => $value['menu']['name'],
+                'url'   => ['/pages/' . $value['is_type'], 'id' => $value['page_id']],
                 'items' => $this->recursionPagesMenu($value),
             ];
         }

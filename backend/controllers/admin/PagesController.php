@@ -129,9 +129,7 @@ class PagesController extends BaseController
     {
         $model = new Pages();
 
-        $model->page_id = time() . '_' . rand(0000, 9999);
-
-        $model->c_key = self::getRandomString();
+        $model->page_id = self::getRandomString();
 
         if (!empty($model->getErrors())) {
             Yii::$app->getSession()->setFlash('error', $model->getErrors());
@@ -237,7 +235,7 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $data = PagesClassify::findByAll();
+        $data = Pages::findByAll();
 
         $result['C0'] = '顶级类目 !!';
 

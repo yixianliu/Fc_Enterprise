@@ -25,6 +25,10 @@ switch ($type) {
 
         $classify = \common\models\NewsClassify::findByAll();
 
+        foreach ($classify as $key => $value) {
+            $classify[ $key ]['url'] = Url::to(['/news/index', 'id' => $value['c_key']]);
+        }
+
         $classifyName = '新闻中心';
 
         break;
@@ -48,6 +52,12 @@ switch ($type) {
 
         $classifyName = $menuData['name'];
 
+        $classify = \common\models\Pages::findByAll($pages['parent_id']);
+
+        foreach ($classify as $key => $value) {
+            $classify[ $key ]['url'] = Url::to(['/pages/' . $value['is_type'], 'id' => $value['page_id']]);
+        }
+
         break;
 }
 
@@ -61,11 +71,19 @@ switch ($type) {
 
         <?php if (!empty($classify)): ?>
 
-            <div class="cur"><a href="#">公司新闻</a></div>
+            <?php if ($type == 'pages'): ?>
 
-            <?php foreach ($classify as $value): ?>
-                <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> ><a href="#"><?= $value['name'] ?></a></div>
-            <?php endforeach; ?>
+                <?php foreach ($classify as $value): ?>
+                    <div <?php if ($value['page_id'] == $id): ?> class="cur" <?php endif; ?> ><a href="<?= $value['url'] ?>"><?= $value['menu']['name'] ?></a></div>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <?php foreach ($classify as $value): ?>
+                    <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> ><a href="<?= $value['url'] ?>"><?= $value['name'] ?></a></div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
 
         <?php endif; ?>
 

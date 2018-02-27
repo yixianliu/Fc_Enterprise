@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'news']); ?>
+    <?= $this->render('../_left', ['type' => 'news', 'id' => $id]); ?>
 
     <div class="right">
 

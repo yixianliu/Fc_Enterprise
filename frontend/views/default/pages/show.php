@@ -30,59 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- 可变化内容 -->
         <div class="content_product_list">
 
+            <?php if (!empty($result['data'])): ?>
             <ul>
 
+                <?php foreach ($result['data'] as $value): ?>
                 <li>
                     <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
+                    <a href=""><span><?= $value['title'] ?></span></a>
                 </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
-
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span>案例列表</span></a>
-                </li>
+                <?php endforeach; ?>
 
             </ul>
+            <?php else: ?>
+
+            <h1>暂无数据 !!</h1>
+
+            <?php endif; ?>
 
         </div>
         <!-- 可变化内容 -->
