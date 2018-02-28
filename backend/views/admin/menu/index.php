@@ -20,35 +20,34 @@ if (!empty($dataProvider)) {
     // 初始化
     $result = null;
 
+    // 循环一级目录
     foreach ($dataProvider as $value) {
 
         $create = null;
         $update = Html::a('编辑菜单', ['admin/menu/update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
         $del = Html::a('删除菜单', ['admin/menu/delete', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
 
+        // 新闻和产品没有子菜单
         if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1') {
             $create = Html::a('添加子菜单', ['admin/menu/create', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
         }
 
         $result .= '<li class="">';
         $result .= menuHtml($value['name'], $create, $update, $del);
-
         $result .= '    <ul class="">';
         $result .= recursionMenu($value);
         $result .= '    </ul>';
-
         $result .= '</li>';
     }
 }
 
 /**
- * 递归菜单
+ * 递归一级菜单
  *
  * @param $data
- * @param null $model
- * @return string|void
+ * @return null|string|void
  */
-function recursionMenu($data, $model = null)
+function recursionMenu($data)
 {
     if (empty($data))
         return;
@@ -63,20 +62,22 @@ function recursionMenu($data, $model = null)
 
             $child = ProductClassify::findByAll();
 
+            // 子类
             if (!empty($child)) {
+
+                // 循环
                 foreach ($child as $value) {
 
                     $create = Html::a('添加分类', ['admin/product-cls/create'], ['class' => "btn btn-primary"]);
                     $update = Html::a('编辑分类', ['admin/product-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
                     $del = Html::a('删除分类', ['admin/product-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
+                    // Html
                     $html .= '<li class="">';
                     $html .= menuHtml($value['name'], $create, $update, $del);
-
                     $html .= '    <ul class="">';
                     $html .= recursionProductData($value);
                     $html .= '    </ul>';
-
                     $html .= '</li>';
                 }
             }
@@ -89,19 +90,19 @@ function recursionMenu($data, $model = null)
             $child = NewsClassify::findByAll();
 
             if (!empty($child)) {
+
                 foreach ($child as $value) {
 
                     $create = Html::a('添加分类', ['admin/news-cls/create'], ['class' => "btn btn-primary"]);
                     $update = Html::a('编辑分类', ['admin/news-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
                     $del = Html::a('删除分类', ['admin/news-cls/delete', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
 
+                    // Html
                     $html .= '<li class="">';
                     $html .= menuHtml($value['name'], $create, $update, $del);
-
                     $html .= '    <ul class="">';
                     $html .= recursionNewsData($value);
                     $html .= '    </ul>';
-
                     $html .= '</li>';
                 }
             }
@@ -254,21 +255,22 @@ function recursionPagesData($data)
 
     $html = null;
 
-    $parentData = Pages::findByOne($data['m_key'], 'm_key');
-
-    // 单页面
-    $child = Pages::findByAll($parentData['page_id']);
+    // 查找相对应的菜单
+    $child = Menu::findByAll($data['m_key']);
 
     if (!empty($child)) {
 
         foreach ($child as $value) {
 
+            if (empty($value['pages']['page_id']))
+                continue;
+
             $create = Html::a('添加子自定义页面', ['admin/pages/create'], ['class' => "btn btn-primary"]);
-            $update = Html::a('编辑自定义页面', ['admin/pages/update', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
-            $del = Html::a('删除自定义页面', ['admin/pages/delete', 'id' => $value['page_id']], ['class' => 'btn btn-primary']);
+            $update = Html::a('编辑自定义页面', ['admin/pages/update', 'id' => $value['pages']['page_id']], ['class' => 'btn btn-primary']);
+            $del = Html::a('删除自定义页面', ['admin/pages/delete', 'id' => $value['pages']['page_id']], ['class' => 'btn btn-primary']);
 
             $html .= '<li class="">';
-            $html .= menuHtml($value['menu']['name'], $create, $update, $del);
+            $html .= menuHtml($value['name'], $create, $update, $del);
             $html .= '    <ul class="">';
             $html .= recursionPagesData($value);
             $html .= '    </ul>';

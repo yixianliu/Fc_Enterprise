@@ -33,16 +33,6 @@ use dosamigos\fileupload\FileUploadUI;
                 ?>
 
                 <?=
-                $form->field($model, 'parent_id')->widget(Select2::classname(), [
-                    'data'          => $result['classify'],
-                    'options'       => ['placeholder' => '选择父类...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
-
-                <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
                     'data'          => ['list' => '列表内容类型', 'view' => '内容详情类型', 'show' => '展示详情类型'],
                     'options'       => ['placeholder' => '选择内容类型...'],

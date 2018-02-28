@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 
+use common\models\NavClassify;
+use common\models\News;
 use common\models\SpOffer;
 use Yii;
 use common\models\Purchase;
@@ -55,7 +57,19 @@ class PurchaseController extends BaseController
      */
     public function actionCenter()
     {
-        return $this->render('center');
+
+        // 初始化
+        $result = array();
+
+        $result['result'] = Purchase::findAll(['is_using' => 'On']);
+
+        $result['news'] = News::findAll(['is_audit' => 'On']);
+
+        $result['nav'] = NavClassify::findByAll();
+
+        return $this->render('center', [
+            'result' => $result,
+        ]);
     }
 
     /**

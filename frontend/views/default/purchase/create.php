@@ -23,9 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../nav'); ?>
 
-<?= $this->render('_form', [
+<?=
+$this->render('_form', [
     'model'  => $model,
     'result' => $result,
-]) ?>
+])
+?>
 
 </div>

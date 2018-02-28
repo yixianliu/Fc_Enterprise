@@ -18,7 +18,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 
 <div class="container-fluid classfi-bg">
     <div class="container shop-classfiy">
-        <?= $this->render('_cls'); ?>
+        <?= $this->render('_cls', ['result' => $result]); ?>
     </div>
 </div>
 
@@ -55,16 +55,24 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
                             <div>
                                 <ul>
                                     <li>【采购】</li>
-                                    <li>钢材采购订单</li>
-                                    <li>广东 湛江</li>
-                                    <li><a title="" href="purchasingdetailed.html">查看详情</a></li>
+                                    <li><?= $value['title'] ?></li>
+                                    <li>
+
+                                        <?php if ($value['is_type'] == 'Long'): ?>
+                                            长期采购
+                                        <?php else: ?>
+                                            短期采购
+                                        <?php endif; ?>
+
+                                    </li>
+                                    <li><a title="" href="<?= Url::to(['/purchase/view', 'id' => $value['purchase_id']]) ?>">查看详情</a></li>
                                 </ul>
                             </div>
                         <?php endforeach; ?>
 
                     <?php else: ?>
 
-                    <h1>暂无采购信息 !!</h1>
+                        <h1>暂无采购信息 !!</h1>
 
                     <?php endif; ?>
 
@@ -117,67 +125,36 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
         </div>
 
         <div class="right">
-            <ul>
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $this->title]); ?>
-                        </a>
-                    </div>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+            <?php if (!empty($result['news'])): ?>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <?= Html::img(Url::to('@web/themes/qijian/images/news-2.jpg'), ['alt' => $this->title]); ?>
-                        </a>
-                    </div>
+                <ul>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+                    <?php foreach ($result['news'] as $value): ?>
+                        <li>
+                            <div class="news-left">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['id']]) ?>">
+                                    <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $value['title']]); ?>
+                                </a>
+                            </div>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <?= Html::img(Url::to('@web/themes/qijian/images/news-3.jpg'), ['alt' => $this->title]); ?>
-                        </a>
-                    </div>
+                            <div class="news-right">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['news_id']]) ?>">
+                                    <p><?= $value['title'] ?></p>
+                                    <p><?= $value['introduction'] ?></p>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
+                </ul>
 
-                <li>
-                    <div class="news-left">
-                        <a title="" href="">
-                            <?= Html::img(Url::to('@web/themes/qijian/images/news-4.jpg'), ['alt' => $this->title]); ?>
-                        </a>
-                    </div>
+            <?php else: ?>
 
-                    <div class="news-right">
-                        <a title="" href="">
-                            <p>合作联盟，优势互补好经营</p>
-                            <p>合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,合作联盟，优势互补好经营,</p>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+                <h1>暂无新闻 !!</h1>
+
+            <?php endif; ?>
+
         </div>
 
     </div>

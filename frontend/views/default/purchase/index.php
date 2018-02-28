@@ -34,14 +34,6 @@ $this->registerCssFile('@web/themes/qijian/css/product.css');
 
     <hr/>
 
-    <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
-        <div class="col-md-12 col-sm-4 col-xs-6 work-item web-design mockups">
-            <?= Html::a('发布采购', ['create'], ['class' => 'btn']) ?>
-        </div>
-
-        <br/> <br/> <br/>
-    <?php endif; ?>
-
     <div class="content_product_list">
         <ul>
 

@@ -89,13 +89,13 @@ $this->title = '首页';
             <div class="left">
 
                 <div>
-                    <a title="" href="">
+                    <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                         <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => '']); ?>
                     </a>
                 </div>
 
                 <div>
-                    <a title="" href="">
+                    <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                         <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-2.jpg'), ['alt' => '']); ?>
                     </a>
                 </div>
@@ -105,7 +105,7 @@ $this->title = '首页';
             <div class="right">
 
                 <div class="ser-right-title">
-                    <a title="" href="">
+                    <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                         <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-1.jpg'), ['alt' => '']); ?>
                     </a>
                 </div>
@@ -115,13 +115,13 @@ $this->title = '首页';
                     <div class="ser-right-left">
 
                         <div>
-                            <a title="" href="">
+                            <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                                 <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-2.jpg'), ['alt' => '']); ?>
                             </a>
                         </div>
 
                         <div>
-                            <a title="" href="">
+                            <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                                 <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-3.jpg'), ['alt' => '']); ?>
                             </a>
                         </div>
@@ -131,7 +131,7 @@ $this->title = '首页';
                     <div class="ser-right-right">
 
                         <div>
-                            <a title="" href="">
+                            <a title="" href="<?= Url::to(['/purchase/center']) ?>">
                                 <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-4.jpg'), ['alt' => '']); ?>
                             </a>
                         </div>
@@ -178,43 +178,43 @@ $this->title = '首页';
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1MdL7Xg4cXXak1cjj-702-300.jpg" alt="活埋"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <img width="702" height="300" src="images/T1STrHXlVqXXak1cjj-702-300.jpg" alt="复仇者联盟"/>
+                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
                     </a>
                 </li>
             </ul>
@@ -223,49 +223,49 @@ $this->title = '首页';
 
                 <li class="cur">
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目1
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
 
                 <li>
                     <a href="" target="_blank">
-                        <span class="pro-icon"></span>碧桂园项目
+                        <span class="pro-icon"></span>第七建筑工程项目
                     </a>
                 </li>
             </ul>
@@ -304,13 +304,13 @@ $this->title = '首页';
                     <?php foreach ($result['news'] as $value): ?>
                         <li>
                             <div class="news-left">
-                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['id']]) ?>">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['news_id']]) ?>">
                                     <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $value['title']]); ?>
                                 </a>
                             </div>
 
                             <div class="news-right">
-                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['id']]) ?>">
+                                <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['news_id']]) ?>">
                                     <p><?= $value['title'] ?></p>
                                     <p><?= $value['introduction'] ?></p>
                                 </a>
@@ -321,6 +321,8 @@ $this->title = '首页';
                 </ul>
 
             <?php else: ?>
+
+            <h1>暂无新闻 !!</h1>
 
             <?php endif; ?>
 

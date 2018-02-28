@@ -49,7 +49,7 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
 
             <!-- LOGO -->
             <div class="col-xs-2">
-                <a class="navbar-brand" title="" href="../index.html">
+                <a class="navbar-brand" title="" href="<?= Url::to(['/']) ?>">
                     <?= Html::img(Url::to('@web/themes/qijian/images/logo.jpg'), ['alt' => '']); ?>
                 </a>
             </div>

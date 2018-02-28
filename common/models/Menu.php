@@ -86,16 +86,16 @@ class Menu extends \yii\db\ActiveRecord
      * @param $parent
      * @return bool
      */
-    public static function findByAll($parent)
+    public static function findByAll($parent = null)
     {
 
-        if (empty($parent))
-            return false;
+        $parent = empty($parent) ? 'E1' : $parent;
 
         return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
             ->orderBy('sort_id', 'ASC')
             ->joinWith('itemRp')
             ->joinWith('menuModel')
+            ->joinWith('pages')
             ->asArray()
             ->all();
     }
@@ -128,6 +128,12 @@ class Menu extends \yii\db\ActiveRecord
     public function getItemRp()
     {
         return $this->hasOne(ItemRp::className(), ['name' => 'rp_key']);
+    }
+
+    // 角色
+    public function getPages()
+    {
+        return $this->hasOne(Pages::className(), ['m_key' => 'm_key']);
     }
 
     /**
@@ -216,7 +222,7 @@ class Menu extends \yii\db\ActiveRecord
                     foreach ($news as $values) {
                         $array[] = [
                             'label' => $values['name'],
-                            'url'   => ['/news-cls/index', 'id' => $values['c_key']],
+                            'url'   => ['/news/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
                         ];
                     }

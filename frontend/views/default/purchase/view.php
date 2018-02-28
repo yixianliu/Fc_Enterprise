@@ -47,9 +47,10 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                         <!-- 大图 -->
                         <div id="preview" class="spec-preview">
 
-                                        <span class="jqzoom">
-                                            <img alt="" jqimg="images/ser-left-1.jpg" src="images/ser-left-1.jpg"/>
-                                        </span>
+                            <span class="jqzoom">
+                                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'jqimg' => Url::to('@web/themes/qijian/images/ser-left-1.jpg')]); ?>
+                            </span>
+
                         </div>
                         <!-- #大图 -->
 
@@ -60,19 +61,19 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                             <div class="items">
                                 <ul>
                                     <li>
-                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-left-1.jpg" onmousemove="preview(this);">
+                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
                                     </li>
 
                                     <li>
-                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-left-2.jpg" onmousemove="preview(this);">
+                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
                                     </li>
 
                                     <li>
-                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-right-1.jpg" onmousemove="preview(this);">
+                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
                                     </li>
 
                                     <li>
-                                        <img alt="" bimg="images/pro-1.jpg" src="images/ser-right-2.jpg" onmousemove="preview(this);">
+                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
                                     </li>
                                 </ul>
                             </div>

@@ -21,9 +21,15 @@ use yii\helpers\Html;
     <dvi class="list-cont">
         <p><span>￥</span> <?= Html::encode($model->price) ?></p>
         <p>
-            <a title="" href="<?= Html::a(Html::encode($model->title), ['view', 'id' => $model->purchase_id]) ?>"><?= Html::encode($model->title) ?></a>
+            <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->purchase_id]) ?>
         </p>
-        <p><?= Html::encode($model->title) ?></p>
-        <p><?= Html::encode($model->title) ?></p>
+        <p><?= Html::encode($model->user_id) ?></p>
+        <p>
+            <?php if ($model->is_type == 'Long'): ?>
+                长期采购
+            <?php else: ?>
+                短期采购
+            <?php endif; ?>
+        </p>
     </dvi>
 </li>

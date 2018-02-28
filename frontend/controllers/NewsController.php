@@ -31,12 +31,14 @@ class NewsController extends BaseController
 
     /**
      * Lists all News models.
-     * @return mixed
+     *
+     * @param null $id
+     * @return string
      */
-    public function actionIndex($type = null)
+    public function actionIndex($id = null)
     {
 
-        $model = empty($type) ? News::find() : News::find()->where(['c_key' => $type]);
+        $model = empty($id) ? News::find() : News::find()->where(['c_key' => $id]);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $model,
@@ -50,7 +52,7 @@ class NewsController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'result'       => $result,
-            'id'           => $type,
+            'id'           => $id,
         ]);
     }
 
@@ -134,7 +136,7 @@ class NewsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = News::find()->where(['news_id' => $id])->joinWith('admin')->one()) !== null) {
+        if (($model = News::find()->where(['news_id' => $id, 'is_audit' => 'On'])->joinWith('admin')->one()) !== null) {
             return $model;
         }
 

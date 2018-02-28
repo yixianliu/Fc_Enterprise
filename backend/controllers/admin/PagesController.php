@@ -83,7 +83,7 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $dataPages = Pages::findByAll($data['c_key']);
+        $dataPages = Pages::findByAll($data['page_id']);
 
         if (!empty($dataPages)) {
 
@@ -92,7 +92,7 @@ class PagesController extends BaseController
                 $result[ $key ] = $value;
 
                 // 子分类
-                $result[ $key ]['child'] = PagesClassify::findByAll($value['c_key']);
+                $result[ $key ]['child'] = PagesClassify::findByAll($value['page_id']);
 
                 if (empty($result[ $key ]['child']))
                     continue;
@@ -143,7 +143,6 @@ class PagesController extends BaseController
                 'model'  => $model,
                 'result' => [
                     'menu'     => $this->getMenu(),
-                    'classify' => $this->getCls(),
                 ],
             ]);
         }
@@ -222,31 +221,6 @@ class PagesController extends BaseController
         }
 
         return $this->render('efile', ['result' => $data]);
-    }
-
-    /**
-     * 获取分类
-     *
-     * @return array
-     */
-    public function getCls()
-    {
-
-        // 初始化
-        $result = array();
-
-        $data = Pages::findByAll();
-
-        $result['C0'] = '顶级类目 !!';
-
-        if (empty($data))
-            return $result;
-
-        foreach ($data as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 
     /**

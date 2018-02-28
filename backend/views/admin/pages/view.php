@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
                                 $state = [
-                                    'list'    => '列表内容类型',
-                                    'content' => '内容详情类型',
-                                    'show'    => '展示详情类型',
+                                    'list' => '列表内容类型',
+                                    'view' => '内容详情类型',
+                                    'show' => '展示详情类型',
                                 ];
 
                                 return $state[ $model->is_type ];

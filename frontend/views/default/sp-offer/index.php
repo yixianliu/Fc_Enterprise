@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => 'user']); ?>
+<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
 
 <?= $this->render('../nav'); ?>
 
@@ -75,20 +75,3 @@ $this->params['breadcrumbs'][] = $this->title;
     </div> <!-- end row -->
     </div> <!-- end container -->
 </section> <!-- end blog standard -->
-
-
-<section class="call-to-action bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9 col-xs-12">
-                <h2>Are you ready to work with us? Let's grow your business.</h2>
-            </div>
-
-            <div class="col-md-3 col-xs-12 cta-button">
-                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
-            </div>
-
-        </div>
-    </div>
-</section>
