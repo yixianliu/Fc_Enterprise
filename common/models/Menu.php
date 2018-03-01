@@ -173,17 +173,7 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 采购模型
                 case 'purchase':
-
-                    $purchase = Menu::findAll(['is_using' => 'On', 'model_key' => 'UU1', 'parent_id' => $value['m_key']]);
-
-                    foreach ($purchase as $values) {
-                        $array[] = [
-                            'label' => $values['name'],
-                            'url'   => ['/purchase/center', 'id' => $values['m_key']],
-                            'items' => $this->recursionPurchaseMenu($values),
-                        ];
-                    }
-
+                    $array = $this->recursionPurchaseMenu($value);
                     break;
 
                 // 供应模型
@@ -230,22 +220,7 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 自定义
                 case 'pages':
-
-                    // 自定义页面的KEY
-                    $customPages = Pages::findOne(['is_using' => 'On', 'm_key' => $value['m_key']]);
-
-                    $custom = Pages::findByAll(['is_using' => 'On', 'parent_id' => $customPages['page_id']]);
-
-                    if (!empty($custom)) {
-                        foreach ($custom as $values) {
-                            $array[] = [
-                                'label' => $values['menu']['name'],
-                                'url'   => ['/pages/' . $values['is_type'], 'id' => $values['page_id']],
-                                'items' => $this->recursionPagesMenu($values),
-                            ];
-                        }
-                    }
-
+                    $array = $this->recursionPagesMenu($value);
                     break;
 
                 // 超链接
@@ -259,11 +234,11 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 单页面
                 case 'pages':
-                    $urls = $value['menuModel']['url_key'] . '/' . $customPages['is_type'] . '?id=' . $customPages['page_id'];
+                    $urls = null;
                     break;
 
                 case 'urls':
-                    $urls =  $value['url'];
+                    $urls = $value['url'];
                     break;
 
                 default:
@@ -293,9 +268,8 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function recursionPurchaseMenu($data)
     {
-        if (empty($data) || empty($data['m_key'])) {
+        if (empty($data) || empty($data['m_key']))
             return;
-        }
 
         $child = Menu::findByAll($data['m_key']);
 
@@ -306,14 +280,9 @@ class Menu extends \yii\db\ActiveRecord
         $result = array();
 
         foreach ($child as $value) {
-
-            if (!empty($value['url'])) {
-                $url = $value['url'];
-            }
-
             $result[] = [
                 'label' => $value['name'],
-                'url'   => [$url],
+                'url'   => $this->setMenuModel($value),
                 'items' => $this->recursionPurchaseMenu($value),
             ];
         }
@@ -330,15 +299,13 @@ class Menu extends \yii\db\ActiveRecord
     public function recursionMenu($data)
     {
 
-        if (empty($data) || empty($data['m_key'])) {
+        if (empty($data) || empty($data['m_key']))
             return;
-        }
 
         $child = Menu::findByAll($data['m_key']);
 
-        if (empty($child)) {
+        if (empty($child))
             return;
-        }
 
         // 初始化
         $result = array();
@@ -363,12 +330,11 @@ class Menu extends \yii\db\ActiveRecord
     public function recursionPagesMenu($data)
     {
 
-        if (empty($data) || !empty($data['page_id'])) {
+        if (empty($data))
             return;
-        }
 
         // 子分类
-        $childCls = Pages::findByAll($data['page_id']);
+        $childCls = Menu::findByAll($data['m_key']);
 
         if (empty($childCls))
             return;
@@ -377,9 +343,13 @@ class Menu extends \yii\db\ActiveRecord
         $result = array();
 
         foreach ($childCls as $value) {
+
+            if (empty($value['pages']['page_id']))
+                continue;
+
             $result[] = [
-                'label' => $value['menu']['name'],
-                'url'   => ['/pages/' . $value['is_type'], 'id' => $value['page_id']],
+                'label' => $value['name'],
+                'url'   => $this->setMenuModel($value),
                 'items' => $this->recursionPagesMenu($value),
             ];
         }
@@ -410,16 +380,9 @@ class Menu extends \yii\db\ActiveRecord
         $result = array();
 
         foreach ($child as $value) {
-
-            if (!empty($value['url'])) {
-                $url = ($adminid == 'A3' ? 'admin/' . $value['url'] : $value['url']);
-            } else {
-                $url = $value['url'];
-            }
-
             $result[] = [
                 'label' => $value['name'],
-                'url'   => [$url],
+                'url'   => $this->setMenuModel($value, $adminid),
                 'items' => $this->recursionUrlMenu($value, $adminid),
             ];
         }
@@ -458,6 +421,53 @@ class Menu extends \yii\db\ActiveRecord
         return $result;
     }
 
+    /**
+     * 根据菜单模型来订制链接
+     *
+     * @param $data
+     * @param null $adminid
+     * @return array|null|string
+     */
+    public function setMenuModel($data, $adminid = null)
+    {
+
+        // 初始化
+        $urls = null;
+
+        switch ($data['menuModel']['url_key']) {
+
+            // 采购页面
+            case 'Purchase':
+                $urls = [$data['url']];
+                break;
+
+            // 自定义页面
+            case 'pages':
+                $urls = ['/pages/' . $data['pages']['is_type'], 'id' => $data['pages']['page_id']];
+                break;
+
+            // 超链接
+            case 'urls':
+
+                if (!empty($data['url'])) {
+                    $urls = [$adminid == 'A3' ? 'admin/' . $data['url'] : $data['url']];
+                } else {
+                    $urls = [$data['url']];
+                }
+
+                break;
+        }
+
+        return $urls;
+    }
+
+    /**
+     * 菜单选择
+     *
+     * @param $data
+     * @param int $num
+     * @return array|void
+     */
     public function recursionMenuSelect($data, $num = 1)
     {
 

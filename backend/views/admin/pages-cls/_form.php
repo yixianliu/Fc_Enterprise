@@ -21,8 +21,6 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'parent_id')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['classify'],
@@ -33,9 +31,9 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [

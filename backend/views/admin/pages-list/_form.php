@@ -7,6 +7,7 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $this yii\web\View */
 /* @var $model common\models\PagesList */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <style type="text/css">

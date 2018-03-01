@@ -99,10 +99,9 @@ class MenuController extends BaseController
 
             if ($data['Menu']['model_key'] == 'UC1') {
 
-                $parentPage_id = Pages::findOne(['m_key' => $model->parent_id]);
-
+                // 生成自定义页面
                 $Cls = new Pages();
-                $Cls->saveData($model->m_key, self::getRandomString(), $data['is_type'], $parentPage_id->page_id);
+                $Cls->saveData($model->m_key, self::getRandomString(), $data['is_type']);
             }
         }
 

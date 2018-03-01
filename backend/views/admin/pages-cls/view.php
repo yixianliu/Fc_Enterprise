@@ -7,16 +7,16 @@ use yii\widgets\DetailView;
 /* @var $model common\models\PagesClassify */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Pages Classifies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '单页面分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -36,10 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'c_key',
                         'sort_id',
                         'name',
-                        'description:ntext',
                         'keywords',
                         'json_data',
                         'parent_id',
@@ -66,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
+                        'description:html',
                     ],
                 ])
                 ?>

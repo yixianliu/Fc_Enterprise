@@ -142,7 +142,7 @@ class PagesController extends BaseController
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'menu'     => $this->getMenu(),
+                    'menu' => $this->getMenu(),
                 ],
             ]);
         }
@@ -170,8 +170,7 @@ class PagesController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'menu'     => $this->getMenu(),
-                    'classify' => $this->getCls(),
+                    'menu' => $this->getMenu(),
                 ],
             ]);
         }

@@ -118,13 +118,13 @@ class Pages extends \yii\db\ActiveRecord
     /**
      * 针对菜单的保存功能
      *
-     * @param $mkey
-     * @param $page_id
+     * @param $mkey 菜单关键KEY
+     * @param $page_id 页面PAGE ID
      * @param $type
      * @param $parent_id
      * @return bool
      */
-    public function saveData($mkey, $page_id, $type, $parent_id)
+    public function saveData($mkey, $page_id, $type)
     {
 
         if (empty($mkey) || empty($page_id) || empty($type))
@@ -133,7 +133,6 @@ class Pages extends \yii\db\ActiveRecord
         $this->page_id = $page_id;
         $this->m_key = $mkey;
         $this->p_key = $mkey;
-        $this->parent_id = $parent_id;
         $this->is_type = $type;
         $this->is_using = 'On';
 

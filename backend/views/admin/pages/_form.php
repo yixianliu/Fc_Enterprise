@@ -121,7 +121,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= Html::submitButton($model->isNewRecord ? '创建自定义页面' : '更新自定义页面', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['admin/menu/index'], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 

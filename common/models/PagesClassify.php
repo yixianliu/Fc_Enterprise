@@ -49,14 +49,13 @@ class PagesClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
+            [['sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'parent_id'], 'string', 'max' => 55],
+            [['parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
-            [['c_key'], 'unique'],
         ];
     }
 
@@ -66,11 +65,10 @@ class PagesClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key'       => '页面关键KEY',
-            'sort_id'     => '页面排序',
-            'name'        => '单页面名称',
-            'description' => '单页面描述',
-            'keywords'    => '单页面关键词',
+            'sort_id'     => '分类排序',
+            'name'        => '分类页面名称',
+            'description' => '分类页面描述',
+            'keywords'    => '分类页面关键词',
             'json_data'   => 'Json 数据',
             'parent_id'   => '父类KEY',
             'is_using'    => '是否启用',

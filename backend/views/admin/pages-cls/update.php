@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\PagesClassify */
 
 $this->title = '更新单页面分类: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Pages Classifies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '单页面分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '更新';
 ?>
@@ -16,4 +16,3 @@ $this->params['breadcrumbs'][] = '更新';
     'model'  => $model,
     'result' => $result,
 ]) ?>
-

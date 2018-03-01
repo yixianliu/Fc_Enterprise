@@ -77,6 +77,8 @@ class PagesClsController extends BaseController
 
         $model->parent_id = Yii::$app->request->get('id', 'C0');
 
+        $model->c_key = self::getRandomString();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
         } else {

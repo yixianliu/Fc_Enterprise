@@ -2,11 +2,10 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Pages;
+use common\models\Menu;
 use Yii;
 use common\models\PagesList;
 use common\models\PagesListSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -86,7 +85,9 @@ class PagesListController extends BaseController
 
         return $this->render('create', [
             'model'  => $model,
-            'result' => $this->getPage(),
+            'result' => [
+                'page' => $this->getPage(),
+            ]
         ]);
     }
 
@@ -151,12 +152,17 @@ class PagesListController extends BaseController
         // 初始化
         $result = array();
 
-        $dataPage = Pages::findAll(['is_using' => 'On', 'is_type' => 'list']);
+        $dataPage = Menu::findByAll();
 
-        $result['page'] = null;
+        if (empty($dataPage))
+            return;
 
         foreach ($dataPage as $value) {
-            $result['page'][ $value['page_id'] ] = $value['name'];
+
+            if ($value['menuModel']['model_key'] != 'UC1' || $value['pages']['is_type'] != 'list')
+                continue;
+
+            $result[ $value['m_key'] ] = $value['name'];
         }
 
         return $result;
