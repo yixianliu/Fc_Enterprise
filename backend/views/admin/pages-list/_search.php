@@ -17,8 +17,6 @@ use yii\widgets\ActiveForm;
     <tbody>
     <tr>
 
-        <td><?= $form->field($model, 'page_id') ?></td>
-
         <td><?= $form->field($model, 'title') ?></td>
 
         <td><?= $form->field($model, 'content') ?></td>
@@ -32,8 +30,8 @@ use yii\widgets\ActiveForm;
 </table>
 
 <div class="form-group">
-    <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-    <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+    <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
 </div>
 
 <?php ActiveForm::end(); ?>

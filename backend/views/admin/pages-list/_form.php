@@ -39,6 +39,16 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
+                <?=
+                $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
+                    'data'          => $result['classify'],
+                    'options'       => ['placeholder' => '选择...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
+
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                 <?=

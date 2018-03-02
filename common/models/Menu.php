@@ -112,8 +112,10 @@ class Menu extends \yii\db\ActiveRecord
             return false;
         }
 
-        return static::find()->where(['m_key' => $id])
+        return static::find()->where([self::tableName() . '.m_key' => $id])
             ->joinWith('itemRp')
+            ->joinWith('menuModel')
+            ->joinWith('pages')
             ->asArray()
             ->one();
     }
@@ -391,37 +393,6 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 菜单 (选项框使用)
-     *
-     * @return static[]
-     */
-    public function getSelectMenu()
-    {
-
-        // 产品分类
-        $dataClassify = self::findByAll(static::$parent_id);
-
-        // 初始化
-        $result = array();
-
-        $result[ $this->parent_id ] = '顶级分类 !!';
-
-        foreach ($dataClassify as $key => $value) {
-
-            $result[ $value['m_key'] ] = $value['name'];
-
-            $child = $this->recursionMenuSelect($value);
-
-            if (empty($child))
-                continue;
-
-            $result = array_merge($result, $child);
-        }
-
-        return $result;
-    }
-
-    /**
      * 根据菜单模型来订制链接
      *
      * @param $data
@@ -459,6 +430,39 @@ class Menu extends \yii\db\ActiveRecord
         }
 
         return $urls;
+    }
+
+    /**
+     * 菜单 (选项框使用)
+     *
+     * @return static[]
+     */
+    public function getSelectMenu($parent_id = null)
+    {
+
+        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+
+        // 产品分类
+        $dataClassify = self::findByAll($parent_id);
+
+        // 初始化
+        $result = array();
+
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['m_key'] ] = $value['name'];
+
+            $child = $this->recursionMenuSelect($value);
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
+        }
+
+        return $result;
     }
 
     /**

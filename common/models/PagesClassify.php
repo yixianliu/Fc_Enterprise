@@ -66,11 +66,11 @@ class PagesClassify extends \yii\db\ActiveRecord
     {
         return [
             'sort_id'     => '分类排序',
-            'name'        => '分类页面名称',
-            'description' => '分类页面描述',
-            'keywords'    => '分类页面关键词',
+            'name'        => '分类名称',
+            'description' => '分类描述',
+            'keywords'    => '分类关键词',
             'json_data'   => 'Json 数据',
-            'parent_id'   => '父类KEY',
+            'parent_id'   => '父类',
             'is_using'    => '是否启用',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',

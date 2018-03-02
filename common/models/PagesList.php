@@ -43,7 +43,7 @@ class PagesList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'title', 'is_using'], 'required'],
+            [['page_id', 'title', 'is_using', 'c_key'], 'required'],
             [['content', 'is_using'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['page_id'], 'string', 'max' => 55],
@@ -59,9 +59,10 @@ class PagesList extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'page_id'    => '单页面 ID',
+            'page_id'    => '单页面名称',
             'title'      => '单页面标题',
             'content'    => '单页面内容',
+            'c_key'      => '单页面分类',
             'path'       => '单页面路径',
             'is_using'   => '是否审核通过',
             'created_at' => '添加数据时间',

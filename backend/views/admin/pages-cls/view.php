@@ -36,11 +36,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'sort_id',
                         'name',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        'sort_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+
+                                if ($model->parent_id == 'C0')
+                                    return '顶级分类';
+
+                                $data = \common\models\PagesClassify::findOne(['c_key' => $model->parent_id]);
+
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

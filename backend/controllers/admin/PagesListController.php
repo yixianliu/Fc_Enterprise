@@ -3,6 +3,8 @@
 namespace backend\controllers\admin;
 
 use common\models\Menu;
+use common\models\Pages;
+use common\models\PagesClassify;
 use Yii;
 use common\models\PagesList;
 use common\models\PagesListSearch;
@@ -86,7 +88,8 @@ class PagesListController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'page' => $this->getPage(),
+                'page'     => $this->getPage(),
+                'classify' => $this->getCls(),
             ]
         ]);
     }
@@ -108,7 +111,10 @@ class PagesListController extends BaseController
 
         return $this->render('update', [
             'model'  => $model,
-            'result' => $this->getPage(),
+            'result' => [
+                'page'     => $this->getPage(),
+                'classify' => $this->getCls(),
+            ]
         ]);
     }
 
@@ -149,20 +155,51 @@ class PagesListController extends BaseController
      */
     public function getPage()
     {
+
+        // 初始化
+        $resultMenu = array();
+
+        $Cls = new Menu();
+
+        $result = $Cls->getSelectMenu('E1');
+
+        if (empty($result))
+            return;
+
+        foreach ($result as $key => $value) {
+
+            $data = Menu::findByOne($key);
+
+            if (empty($data))
+                continue;
+
+            if ($data['menuModel']['model_key'] != 'UC1' || $data['pages']['is_type'] != 'list')
+                unset($result[ $key ]);
+
+            $resultMenu[$data['pages']['page_id']] = $data['name'];
+        }
+
+        return $resultMenu;
+    }
+
+    /**
+     * 获取分类
+     *
+     * @return array
+     */
+    public function getCls()
+    {
+
         // 初始化
         $result = array();
 
-        $dataPage = Menu::findByAll();
+        $data = PagesClassify::findByAll();
 
-        if (empty($dataPage))
-            return;
+        if (empty($data))
+            return $result;
 
-        foreach ($dataPage as $value) {
-
-            if ($value['menuModel']['model_key'] != 'UC1' || $value['pages']['is_type'] != 'list')
-                continue;
-
-            $result[ $value['m_key'] ] = $value['name'];
+        foreach ($data as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
         }
 
         return $result;

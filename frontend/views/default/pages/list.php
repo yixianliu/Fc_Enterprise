@@ -37,9 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div>
                     <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
-                        <?= Html::encode($model->title) ?>
+                        <?= Html::encode($value->title) ?>
                     </a>
-                    <span><?= date('Y - m - d', $model->updated_at) ?></span>
+                    <span><?= date('Y - m - d', $value->updated_at) ?></span>
                 </div>
 
             <?php endforeach; ?>

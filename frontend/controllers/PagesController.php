@@ -95,7 +95,7 @@ class PagesController extends BaseController
 
         $result['classify'] = PagesClassify::findByAll($id);
 
-        $result['data'] = PagesList::findByAll();
+        $result['data'] = PagesList::findByAll($id);
 
         return $this->render('list', [
             'model'  => $model,
@@ -118,7 +118,7 @@ class PagesController extends BaseController
         $result['parent'] = Pages::findOne(['is_using' => 'On', 'page_id' => $model->page_id]);
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $result['parent']['c_key']]);
+        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $result['parent']['m_key']]);
 
         return $this->render('details', [
             'model'  => $model,

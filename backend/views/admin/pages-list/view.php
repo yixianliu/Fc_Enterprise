@@ -36,10 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'id',
                         'page_id',
                         'title',
-                        'content:ntext',
                         'path',
                         [
                             'attribute' => 'is_using',
@@ -64,6 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , H:i:s', $model->updated_at);
                             },
                         ],
+                        'content:html',
                     ],
                 ]) ?>
 
