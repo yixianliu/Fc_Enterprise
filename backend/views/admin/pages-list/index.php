@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
+                <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
                 <hr/>
 
@@ -34,6 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'title',
+                        [
+                            'attribute' => 'page_id',
+                            'value'     => function ($model) {
+                                $data = \common\models\Pages::findByOne($model->page_id);
+                                return $data['menu']['name'];
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

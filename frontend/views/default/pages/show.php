@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'id' => $model['page_id']]); ?>
+    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['parent_id']]); ?>
 
     <!-- 右边 -->
     <div class="right">

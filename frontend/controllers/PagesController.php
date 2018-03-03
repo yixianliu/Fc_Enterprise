@@ -138,6 +138,10 @@ class PagesController extends BaseController
 
         $result['data'] = PagesList::findByAll($model['page_id']);
 
-        return $this->render('show', ['model' => $model, 'result' => $result]);
+        return $this->render('show', [
+                'model'  => $model,
+                'result' => $result
+            ]
+        );
     }
 }

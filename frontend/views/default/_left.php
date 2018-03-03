@@ -15,6 +15,7 @@ if (empty($type))
 use yii\helpers\Url;
 use yii\helpers\Html;
 use common\widgets\iConf\ConfList;
+use common\models\Menu;
 
 $id = Yii::$app->request->get('id', 'C0');
 
@@ -43,23 +44,33 @@ switch ($type) {
     // 单页面
     case 'pages':
 
-        if (empty($id))
-            return false;
+        if (empty($m_key))
+            break;
 
-        $pages = \common\models\Pages::findOne(['page_id' => $id]);
+        $data = Menu::findByOne($m_key);
 
-        $menuData = \common\models\Menu::findOne(['m_key' => $pages['m_key']]);
+        if (empty($data))
+            break;
 
-        $classifyName = $menuData['name'];
-
-        $classify = \common\models\Pages::findByAll($pages['parent_id']);
+        $classify = Menu::findByAll($m_key);
 
         foreach ($classify as $key => $value) {
-            $classify[ $key ]['url'] = Url::to(['/pages/' . $value['is_type'], 'id' => $value['page_id']]);
+
+            if (empty($value['pages']['page_id'])) {
+                unset($classify[ $key ]);
+                continue;
+            }
+
+            $classify[ $key ]['url'] = Url::to(['/pages/' . $value['pages']['is_type'], 'id' => $value['pages']['page_id']]);
         }
+
+        $classifyName = $data['name'];
 
         break;
 }
+
+if (empty($classify))
+    exit(0);
 
 ?>
 
@@ -74,7 +85,9 @@ switch ($type) {
             <?php if ($type == 'pages'): ?>
 
                 <?php foreach ($classify as $value): ?>
-                    <div <?php if ($value['page_id'] == $id): ?> class="cur" <?php endif; ?> ><a href="<?= $value['url'] ?>"><?= $value['menu']['name'] ?></a></div>
+                    <div <?php if ($value['pages']['page_id'] == $id): ?> class="cur" <?php endif; ?> >
+                        <a href="<?= $value['url'] ?>"><?= $value['name'] ?></a>
+                    </div>
                 <?php endforeach; ?>
 
             <?php else: ?>

@@ -5,7 +5,6 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\Rules;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

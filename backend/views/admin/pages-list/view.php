@@ -36,7 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'page_id',
+                        [
+                            'attribute' => 'page_id',
+                            'value'     => function ($model) {
+                                $data = \common\models\Pages::findByOne($model->page_id);
+                                return $data['menu']['name'];
+                            },
+                        ],
                         'title',
                         'path',
                         [

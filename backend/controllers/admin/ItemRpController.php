@@ -77,6 +77,7 @@ class ItemRpController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new ItemRp();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -93,20 +94,22 @@ class ItemRpController extends BaseController
             $role->data = $model->data;
             $role->type = $model->type;
 
-            $rzt = $auth->add($role);
-
-            if (!$rzt) {
+            if (!$auth->add($role)) {
                 Yii::$app->session->setFlash('error', '无法保存数据');
             }
 
             return $this->redirect(['view', 'id' => $model->name]);
+
         } else {
+
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
                     'rules' => $this->getRules(),
+                    'power' => $this->getPower(),
                 ]
             ]);
+
         }
     }
 
@@ -127,6 +130,7 @@ class ItemRpController extends BaseController
                 'model'  => $model,
                 'result' => [
                     'rules' => $this->getRules(),
+                    'power' => $this->getPower(),
                 ]
             ]);
         }
@@ -176,6 +180,20 @@ class ItemRpController extends BaseController
 
         foreach ($data as $value) {
             $result[ $value['name'] ] = $value['description'];
+        }
+
+        return $result;
+    }
+
+    public function getPower()
+    {
+        // 初始化
+        $result = array();
+
+        $data = ItemRp::findByAll('permission');
+
+        foreach ($data as $value) {
+            $result[$value['name']] = $value['description'];
         }
 
         return $result;

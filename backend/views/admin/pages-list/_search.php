@@ -16,15 +16,30 @@ use yii\widgets\ActiveForm;
 <table class="table table-hover">
     <tbody>
     <tr>
-
         <td><?= $form->field($model, 'title') ?></td>
-
         <td><?= $form->field($model, 'content') ?></td>
-
-        <td><?= $form->field($model, 'path') ?></td>
-
-        <td><?= $form->field($model, 'is_using') ?></td>
-
+        <td>
+            <?=
+            $form->field($model, 'page_id')->widget(kartik\select2\Select2::classname(), [
+                'data'          => $result['page'],
+                'options'       => ['placeholder' => '是否启用...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
+        <td>
+            <?=
+            $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
+                'data'          => ['On' => '启用', 'Off' => '未启用'],
+                'options'       => ['placeholder' => '是否启用...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
     </tr>
     </tbody>
 </table>

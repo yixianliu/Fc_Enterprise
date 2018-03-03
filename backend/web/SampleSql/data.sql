@@ -189,19 +189,17 @@ VALUES
 (NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加招标', 'tender/create', 'On', #TIME#, #TIME#),
 (NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '相关分类列表', 'psb-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加分类', 'psb-cls/create', 'On', #TIME#, #TIME#),
-(NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看用户提交价格', 'sp-offer/index', 'On', #TIME#, #TIME#),
+(NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看提交价格', 'sp-offer/index', 'On', #TIME#, #TIME#),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD3', 3, 'AD1', 'admin', 'UU1', NULL, '下载中心分类', 'download-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD4', 4, 'AD1', 'admin', 'UU1', NULL, '添加下载中心分类', 'download-cls/create', 'On', #TIME#, #TIME#),
 
-(NULL, 'ASSS1', 1, 'AS1', 'admin', 'UU1', NULL, '所有单页面', 'pages/index', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS2', 2, 'AS1', 'admin', 'UU1', NULL, '添加单页面', 'pages/create', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', 'On', #TIME#, #TIME#),
 (NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', 'On', #TIME#, #TIME#),

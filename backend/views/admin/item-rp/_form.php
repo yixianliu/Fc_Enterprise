@@ -45,6 +45,12 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 
+                <div id="pkey" style='display:none;'>
+                    <hr/>
+                    <?= $form->field($model, 'p_key')->CheckBoxList($result['power'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
+                    <hr/>
+                </div>
+
                 <div class="form-group">
 
                     <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -62,3 +68,18 @@ use kartik\select2\Select2;
 
     </section>
 </div>
+
+<script type="text/javascript">
+
+    $('#itemrp-type').on('change', function () {
+
+        if ($(this).val() == 1) {
+            $('#pkey').show();
+        } else {
+            $('#pkey').hide();
+        }
+
+        return true;
+    });
+
+</script>

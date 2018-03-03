@@ -143,4 +143,81 @@ class PagesClassify extends \yii\db\ActiveRecord
 
         return $result;
     }
+
+    /**
+     * 获取分类 (选项卡)
+     *
+     * @param null $parent_id
+     * @return array
+     */
+    public function getClsSelect($parent_id = null)
+    {
+        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+
+        // 产品分类
+        $dataClassify = self::findByAll($parent_id);
+
+        // 初始化
+        $result = array();
+
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['c_key'] ] = $value['name'];
+
+            $child = $this->recursionPagesSelect($value);
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 分类递归选择 (选项卡)
+     *
+     * @param $data
+     * @param int $num
+     * @return array|void
+     */
+    public function recursionPagesSelect($data, $num = 1)
+    {
+
+        if (empty($data))
+            return;
+
+        // 初始化
+        $result = array();
+        $symbol = null;
+
+        $child = self::findByAll($data['c_key']);
+
+        if (empty($child))
+            return;
+
+        if ($num != 0) {
+            for ($i = 0; $i <= $num; $i++) {
+                $symbol .= '――――';
+            }
+        }
+
+        foreach ($child as $key => $value) {
+
+            $result[ $value['c_key'] ] = $symbol . $value['name'];
+
+            $childData = $this->recursionPagesSelect($value, ($num + 1));
+
+            if (empty($childData))
+                continue;
+
+            $result = array_merge($result, $childData);
+
+        }
+
+        return $result;
+    }
 }

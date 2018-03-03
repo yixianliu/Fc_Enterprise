@@ -55,6 +55,10 @@ class PagesListController extends BaseController
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'result'       => [
+                'page'     => $this->getPage(),
+                'classify' => $this->getCls(),
+            ]
         ]);
     }
 
@@ -176,7 +180,7 @@ class PagesListController extends BaseController
             if ($data['menuModel']['model_key'] != 'UC1' || $data['pages']['is_type'] != 'list')
                 unset($result[ $key ]);
 
-            $resultMenu[$data['pages']['page_id']] = $data['name'];
+            $resultMenu[ $data['pages']['page_id'] ] = $data['name'];
         }
 
         return $resultMenu;
@@ -190,17 +194,9 @@ class PagesListController extends BaseController
     public function getCls()
     {
 
-        // 初始化
-        $result = array();
+        $Cls = new PagesClassify();
 
-        $data = PagesClassify::findByAll();
-
-        if (empty($data))
-            return $result;
-
-        foreach ($data as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
-        }
+        $result = $Cls->getClsSelect();
 
         return $result;
     }

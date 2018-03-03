@@ -25,6 +25,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class ItemRp extends \yii\db\ActiveRecord
 {
+
+    public $p_key;
+
     /**
      * @inheritdoc
      */
@@ -72,12 +75,26 @@ class ItemRp extends \yii\db\ActiveRecord
             'description' => '描述',
             'created_at'  => '添加时间',
             'updated_at'  => '修改时间',
+
+            // 添加角色时候,需要关键KEY
+            'p_key'       => '权限',
         ];
     }
 
-    static public function findByAll($parent_id)
+
+    static public function findByAll($type = 'role', $page = 'On', $parent_id = null)
     {
 
+        switch ($type) {
+            case 'role':
+                $type = 1;
+                break;
+            default:
+                $type = 2;
+                break;
+        }
+
+        return static::find()->where(['type' => $type])->all();
     }
 
     /**

@@ -629,6 +629,8 @@ CREATE TABLE `#DB_PREFIX#SP_Offer` (
     `offer_id` VARCHAR(85) NOT NULL COMMENT '对应的类目 ID',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `price` VARCHAR(85) NOT NULL COMMENT '提交价格',
+    `content` TEXT NOT NULL COMMENT '内容',
+    `path` VARCHAR(125) NULL COMMENT '上传文件',
     `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
