@@ -547,11 +547,6 @@ a:active {
     margin-right: 20px;
 }
 
-.content .right {
-    float: left;
-    width: 880px;
-}
-
 .content .left .box {
     width: 230px;
     height: 90px;
@@ -609,10 +604,14 @@ a:active {
     background: #dc0616;
 }
 
+.content .right {
+    float: right;
+    width: 920px;
+}
+
 .content .right .location {
     width: 100%;
-    height: 22px;
-    text-align:right;
+    display: inline-block;
 }
 
 .content .right .location font {
@@ -632,6 +631,11 @@ a:active {
     color: #000;
 }
 
+.content .right hr {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 /* 产品 */
 .content_product_list {
     width: 100%;
@@ -639,6 +643,7 @@ a:active {
 }
 
 .content .right .content_product_list ul {
+    width: 960px;
     list-style: none;
 }
 
@@ -647,7 +652,7 @@ a:active {
     list-style: none;
     float: left;
     line-height: 40px;
-    margin-right: 5px;
+    margin-right: 21px;
     margin-bottom: 10px;
     text-align: center;
 }

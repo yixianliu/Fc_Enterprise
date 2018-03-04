@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- 左右框架 -->
 <div class="container content">
 
-    <<?= $this->render('../_left', ['type' => 'pages', 'm_key' => $result['menu']['parent_id']]); ?>
+    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $result['menu']['parent_id']]); ?>
 
     <!-- 右边 -->
     <div class="right">
