@@ -722,7 +722,6 @@ a:active {
     font-size: 14px;
     line-height: 30px;
     margin: 20px 0;
-    padding: 0 30px;
 }
 
 .conY .conY_text img {
@@ -734,7 +733,6 @@ a:active {
 }
 
 .conY .conY_fanye {
-    padding: 0 20px;
     font-size: 14px;
     overflow: hidden;
     line-height: 30px;
