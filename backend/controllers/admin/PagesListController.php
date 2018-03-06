@@ -84,9 +84,17 @@ class PagesListController extends BaseController
     {
 
         $model = new PagesList();
+        $data = array();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        $id = Yii::$app->request->get('id', null);
+
+        if (!empty($id)) {
+            $data = Menu::findByOne($id);
+            $model->page_id = $data['pages']['page_id'];
         }
 
         return $this->render('create', [
@@ -94,6 +102,7 @@ class PagesListController extends BaseController
             'result' => [
                 'page'     => $this->getPage(),
                 'classify' => $this->getCls(),
+                'data'     => $data,
             ]
         ]);
     }

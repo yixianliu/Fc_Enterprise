@@ -46,7 +46,7 @@ $this->registerCssFile('@web/themes/qijian/css/member.css');
                     <?=
                     $form->field($model, 'is_type')
                         ->widget(Select2::classname(), [
-                            'data'    => ['user' => '用户', 'enterprise' => '企业用户', 'supplier' => '供应商用户'],
+                            'data'    => ['user' => '普通用户', 'supplier' => '供应商用户'],
                             'options' => ['placeholder' => '用户类型...'],
                         ])
                         ->label(false);

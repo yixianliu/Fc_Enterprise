@@ -23,10 +23,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'r_key')->widget(Select2::classname(), [
                     'data'          => $result['role'],
@@ -39,7 +35,7 @@ use kartik\select2\Select2;
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
-                    'data'          => ['user' => '普通用户', 'enterprise' => '企业用户', 'supplier' => '供应商用户'],
+                    'data'          => ['user' => '普通用户', 'supplier' => '供应商用户'],
                     'options'       => ['placeholder' => '用户类型...'],
                     'pluginOptions' => [
                         'allowClear' => true

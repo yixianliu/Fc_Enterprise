@@ -2,12 +2,12 @@
 
 namespace backend\controllers\admin;
 
-use common\models\ProductClassify;
 use Yii;
 use common\models\NavClassify;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\PsbClassify;
 
 /**
  * NavClsController implements the CRUD actions for NavClassify model.
@@ -93,7 +93,7 @@ class NavClsController extends BaseController
         $data = Yii::$app->request->post();
 
         if (!empty($data)) {
-            $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
+            $data['NavClassify']['p_key'] = $this->setCls($data['NavClassify']['p_key']);
         }
 
         $model->c_key = self::getRandomString();
@@ -105,7 +105,7 @@ class NavClsController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'classify' => $this->getProductCls(),
+                'classify' => $this->getCls(),
             ]
         ]);
     }
@@ -125,7 +125,7 @@ class NavClsController extends BaseController
         $data = Yii::$app->request->post();
 
         if (!empty($data)) {
-            $data['NavClassify']['p_key'] = $this->setProductCls($data['NavClassify']['p_key']);
+            $data['NavClassify']['p_key'] = $this->setCls($data['NavClassify']['p_key']);
         }
 
         if ($model->load($data) && $model->save()) {
@@ -135,7 +135,7 @@ class NavClsController extends BaseController
         // 初始化
         $result = array();
 
-        $result['classify'] = $this->getProductCls();
+        $result['classify'] = $this->getCls();
 
         if (empty($model->p_key)) {
 
@@ -196,10 +196,10 @@ class NavClsController extends BaseController
      *
      * @return array
      */
-    public function getProductCls()
+    public function getCls()
     {
 
-        $dataCls = ProductClassify::findByAll();
+        $dataCls = PsbClassify::findByAll('P0', 'Purchase');
 
         if (empty($dataCls))
             return false;
@@ -220,7 +220,7 @@ class NavClsController extends BaseController
      * @param $array
      * @return null|string
      */
-    public function setProductCls($array)
+    public function setCls($array)
     {
 
         // 初始化

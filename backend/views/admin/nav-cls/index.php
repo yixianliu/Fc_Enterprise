@@ -75,7 +75,7 @@ function recursionCls($data)
 
                 <p>
                     <?= Html::a('发布导航分类', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('发布产品分类', ['/admin/product-cls/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布采购分类', ['/admin/psb-cls/create', 'type' => 'Purchase', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <hr/>

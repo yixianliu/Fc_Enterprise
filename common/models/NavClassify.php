@@ -67,7 +67,7 @@ class NavClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'p_key'       => '产品分类KEY',
+            'p_key'       => '相关采购分类',
             'sort_id'     => '排序',
             'name'        => '分类名称',
             'description' => '分类描述',

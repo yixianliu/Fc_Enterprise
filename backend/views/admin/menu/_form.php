@@ -60,6 +60,7 @@ use kartik\select2\Select2;
                 <div id="isType" class="form-group required">
                     <label class="control-label" for="pages-is_type">自定义页面类型</label>
                     <select id="is_type" class="form-control" name="is_type">
+                        <option>请选择页面类型....</option>
                         <option value="list">列表内容类型</option>
                         <option value="view">内容详情类型</option>
                         <option value="show">展示详情类型</option>
@@ -139,6 +140,10 @@ use kartik\select2\Select2;
             $('.field-menu-url').hide();
             $('#menu-url').val('');
         }
+
+        <?php if (!empty($result['data']['pages']['is_type'])): ?>
+        $("#is_type").find("option[value='<?= $result['data']['pages']['is_type'] ?>']").attr("selected",true);
+        <?php endif; ?>
 
         return true;
     });

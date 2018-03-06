@@ -225,8 +225,6 @@ CREATE TABLE `#DB_PREFIX#User` (
     `credit` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
     `exp` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '经验值',
     `nickname` VARCHAR(55) NULL DEFAULT NULL COMMENT '昵称',
-    `enterprise` VARCHAR(55) NULL DEFAULT NULL COMMENT '企业名称',
-    `job` VARCHAR(55) NULL DEFAULT NULL COMMENT '所在企业的职位名称',
     `head` VARCHAR(55) NULL DEFAULT NULL COMMENT '用户头像',
     `signature` VARCHAR(80) NULL DEFAULT NULL COMMENT '个性签名',
     `birthday` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '出生年月日',
@@ -252,6 +250,22 @@ CREATE TABLE `#DB_PREFIX#User` (
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
+ * 供应商资料
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Supply`;
+CREATE TABLE `#DB_PREFIX#User_Supply` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
+    `name` VARCHAR(125) NOT NULL COMMENT '企业名称',
+    `content` TEXT NULL DEFAULT NULL COMMENT '企业简介',
+    `path` VARCHAR(125) NULL COMMENT '公司图片',
+    `created_at` INT(11) UNSIGNED NOT NULL,
+    `updated_at` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
  * 用户安全问题
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Problems`;
@@ -259,6 +273,7 @@ CREATE TABLE `#DB_PREFIX#User_Problems` (
     `security_id` INT(11) NULL AUTO_INCREMENT,
     `skey` VARCHAR(55) NOT NULL COMMENT '安全问题KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '问题',
+    `job` VARCHAR(55) NULL DEFAULT NULL COMMENT '所在企业的职位名称',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY
@@ -629,7 +644,7 @@ CREATE TABLE `#DB_PREFIX#SP_Offer` (
     `offer_id` VARCHAR(85) NOT NULL COMMENT '对应的类目 ID',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `price` VARCHAR(85) NOT NULL COMMENT '提交价格',
-    `content` TEXT NOT NULL COMMENT '内容',
+    `content` TEXT NOT NULL COMMENT '提交内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
     `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',

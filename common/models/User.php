@@ -58,17 +58,21 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'user_id'    => '用户编号',
-            'username'   => '帐号',
-            'nickname'   => '昵称',
-            'is_using'   => '是否启用',
-            'login_ip'   => '登录 IP',
-            'r_key'      => '角色',
-            'sex'        => '性别',
-            'password'   => '密码',
-            'signature'  => '个性签名',
-            'created_at' => '添加数据时间',
-            'updated_at' => '更新数据时间',
+            'user_id'       => '用户编号',
+            'username'      => '帐号',
+            'nickname'      => '昵称',
+            'is_using'      => '是否启用',
+            'login_ip'      => '登录 IP',
+            'r_key'         => '角色',
+            'sex'           => '性别',
+            'birthday'      => '出生年月日',
+            'consecutively' => '连续登录天数',
+            'password'      => '密码',
+            'signature'     => '个性签名',
+            'is_display'    => '是否显示资料',
+            'is_head'       => '是否上传头像',
+            'created_at'    => '添加数据时间',
+            'updated_at'    => '更新数据时间',
 
             'enterprise'  => '企业名称',
             'repassword'  => '二次密码',
@@ -86,7 +90,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 
             // 后台
-            [['username', 'password', 'nickname', 'sex', 'r_key'], 'required', 'on' => 'backend'],
+            [['username', 'sex', 'r_key', 'is_using'], 'required', 'on' => 'backend'],
 
             // 注册
             [['username', 'is_type', 'password', 'repassword'], 'required', 'on' => 'reg'],

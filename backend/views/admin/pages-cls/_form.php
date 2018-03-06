@@ -65,7 +65,7 @@ use kartik\select2\Select2;
 
                     <?= Html::submitButton($model->isNewRecord ? '发布单页面分类' : '更新单页面分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['admin/menu/index'], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 

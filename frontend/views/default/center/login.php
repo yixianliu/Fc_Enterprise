@@ -14,7 +14,6 @@ $this->title = '用户登录';
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 
 $this->params['breadcrumbs'][] = ['label' => '用户中心', 'url' => ['/center/index']];
 $this->params['breadcrumbs'][] = '登录';

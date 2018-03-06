@@ -56,12 +56,8 @@ class MenuController extends BaseController
 
         $dataProvider = Menu::findByAll(Yii::$app->request->get('id', 'E1'));
 
-        // 选项卡
-        $parent = Menu::findByAll($this->parent_id);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'parent'       => $parent,
         ]);
     }
 
@@ -84,6 +80,7 @@ class MenuController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new Menu();
 
         $parent_id = Menu::findByOne(Yii::$app->request->get('id', null));
@@ -110,7 +107,7 @@ class MenuController extends BaseController
         } else {
 
             $result = [
-                'parent'     => $model->getSelectMenu(),
+                'parent'     => Menu::getSelectMenu(),
                 'menu_model' => $this->getModel(),
                 'role'       => $this->getRole(),
             ];
@@ -133,9 +130,10 @@ class MenuController extends BaseController
         $model = $this->findModel($id);
 
         $result = [
-            'parent'     => $model->getSelectMenu(),
+            'parent'     => Menu::getSelectMenu(),
             'menu_model' => $this->getModel(),
             'role'       => $this->getRole(),
+            'data'       => Menu::findByOne($id),
         ];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

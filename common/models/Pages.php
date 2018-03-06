@@ -105,7 +105,7 @@ class Pages extends \yii\db\ActiveRecord
         if ($type == 'page_id') {
             $where = [static::tableName() . '.is_using' => 'On', static::tableName() . '.page_id' => $id];
         } else {
-            $where = [static::tableName() . '.is_using' => 'On', static::tableName() . '.m_key' => $id];
+            $where = [static::tableName() . '.is_using' => 'On', static::tableName() . '.' . $type => $id];
         }
 
         return static::find()->where($where)
@@ -116,7 +116,7 @@ class Pages extends \yii\db\ActiveRecord
     }
 
     /**
-     * 针对菜单的保存功能
+     * 针对菜单的保存功能(菜单控制器)
      *
      * @param $mkey 菜单关键KEY
      * @param $page_id 页面PAGE ID
@@ -137,6 +137,24 @@ class Pages extends \yii\db\ActiveRecord
         $this->is_using = 'On';
 
         return $this->save() ? true : false;
+    }
+
+    /**
+     * 更新单页面(菜单控制器)
+     *
+     * @param $id
+     * @param $type
+     * @return bool
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function updateData($id, $type)
+    {
+
+        $this->is_type = $type;
+
+        return $this->update($id, 'page_id') ? true : false;
     }
 
     /**

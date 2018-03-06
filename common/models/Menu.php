@@ -108,9 +108,8 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function findByOne($id)
     {
-        if (empty($id)) {
+        if (empty($id))
             return false;
-        }
 
         return static::find()->where([self::tableName() . '.m_key' => $id])
             ->joinWith('itemRp')
@@ -169,6 +168,7 @@ class Menu extends \yii\db\ActiveRecord
                             'label' => $values['name'],
                             'url'   => ['/product/index', 'id' => $values['c_key']],
                             'items' => $this->recursionMenu($values),
+                            'options' => ['class' => 'sub-menu'],
                         ];
                     }
                     break;
@@ -195,7 +195,7 @@ class Menu extends \yii\db\ActiveRecord
                 // 投标模型
                 case 'bid':
 
-                    $product = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+                    $product = PsbClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
 
                     foreach ($product as $values) {
                         $array[] = [
@@ -437,24 +437,24 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @return static[]
      */
-    public function getSelectMenu($parent_id = null)
+    public static function getSelectMenu($parent_id = null)
     {
 
         $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
 
         // 产品分类
-        $dataClassify = self::findByAll($parent_id);
+        $dataClassify = static::findByAll($parent_id);
 
         // 初始化
         $result = array();
 
-        $result[ $this->parent_id ] = '顶级分类 !!';
+        $result[ static::$parent_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
             $result[ $value['m_key'] ] = $value['name'];
 
-            $child = $this->recursionMenuSelect($value);
+            $child = static::recursionMenuSelect($value);
 
             if (empty($child))
                 continue;
@@ -472,7 +472,7 @@ class Menu extends \yii\db\ActiveRecord
      * @param int $num
      * @return array|void
      */
-    public function recursionMenuSelect($data, $num = 1)
+    public static function recursionMenuSelect($data, $num = 1)
     {
 
         if (empty($data))
@@ -482,7 +482,7 @@ class Menu extends \yii\db\ActiveRecord
         $result = array();
         $symbol = null;
 
-        $child = self::findByAll($data['m_key']);
+        $child = static::findByAll($data['m_key']);
 
         if (empty($child))
             return;
@@ -497,7 +497,7 @@ class Menu extends \yii\db\ActiveRecord
 
             $result[ $value['m_key'] ] = $symbol . $value['name'];
 
-            $childData = $this->recursionMenuSelect($value, ($num + 1));
+            $childData = static::recursionMenuSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;

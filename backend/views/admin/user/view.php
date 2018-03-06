@@ -47,14 +47,41 @@ $this->params['breadcrumbs'][] = $this->title;
                         'nickname',
                         'signature',
                         'birthday',
-                        'answer',
-                        's_key',
                         'login_ip',
                         'consecutively',
-                        'sex',
-                        'is_display',
-                        'is_head',
-                        'is_security',
+                        [
+                            'attribute' => 'sex',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'Male'   => '男性',
+                                    'Female' => '女性',
+                                ];
+
+                                return $state[ $model->sex ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_display',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已显示',
+                                    'Off' => '未显示',
+                                ];
+
+                                return $state[ $model->is_display ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_head',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_head ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -97,7 +124,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'title',
-                        'content:ntext',
                         'keywords',
                         'is_audit',
                         ['class' => 'yii\grid\ActionColumn'],
@@ -118,12 +144,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'title',
-                        'content:ntext',
                         // 'path',
                         'price',
                         'num',
                         'unit',
-                        'type',
+                        'is_type',
                         'is_status',
                         // 'start_at',
                         // 'end_at',

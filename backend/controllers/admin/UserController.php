@@ -139,10 +139,6 @@ class UserController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        if (!empty($data)) {
-            $data['User']['password'] = Yii::$app->security->generatePasswordHash($data['User']['password']);
-        }
-
         if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

@@ -2272,7 +2272,7 @@ ul.states li {
     color: #ffffff
 }
 .uk-nestable-item {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 .uk-nestable-item [data-nestable-action="toggle"] {
     padding: 0 5px;

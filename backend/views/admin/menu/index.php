@@ -6,7 +6,6 @@ use common\models\Menu;
 use common\models\ProductClassify;
 use common\models\NewsClassify;
 use common\models\Pages;
-use common\models\PagesClassify;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\MenuSearch */
@@ -24,19 +23,24 @@ if (!empty($dataProvider)) {
     foreach ($dataProvider as $value) {
 
         $array = [
-            'create' => null,
-            'update' => Html::a('编辑菜单', ['update', 'id' => $value['m_key']], ['class' => 'btn btn-primary']),
-            'del'    => Html::a('删除菜单', ['delete', 'id' => $value['m_key']], ['class' => 'btn btn-primary']),
+            'create'   => null,
+            'update'   => Html::a('编辑菜单', ['update', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
+            'del'      => Html::a('删除菜单', ['delete', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
+            'entering' => null,
         ];
 
         // 新闻和产品没有子菜单
         if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1') {
-            $array['create'] = Html::a('添加子菜单', ['create', 'id' => $value['m_key']], ['class' => 'btn btn-primary']);
+            $array['create'] = Html::a('添加子菜单', ['create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
+        }
+
+        if ($value['menuModel']['model_key'] == 'UC1' && $value['pages']['is_type'] == 'list') {
+            $array['entering'] = Html::a('录入内容', ['admin/pages-list/create', 'id' => $value['m_key']],['class' => "collapsed"]) . ' / ';
         }
 
         $html .= '<li class="">';
         $html .= '    <div class="uk-nestable-item" style="padding: 5px;">&nbsp;&nbsp;▸';
-        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'];
+        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'] . '&nbsp;' . $array['entering'];
         $html .= '    </div>';
         $html .= '    <ul class="">';
 
@@ -241,6 +245,7 @@ function menuHtml($data, $type)
         return;
 
     $array = ['create' => null, 'update' => null, 'del' => null, 'content' => null];
+    $enteringHtml = null;
 
     // 根据类别递归
     switch ($type) {
@@ -252,9 +257,9 @@ function menuHtml($data, $type)
                 break;
 
             $array = [
-                'create'  => Html::a('添加分类', ['admin/news-cls/create'], ['class' => "btn btn-primary"]),
-                'update'  => Html::a('编辑分类', ['admin/news-cls/update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']),
-                'del'     => Html::a('删除分类', ['admin/news-cls/delete', 'id' => $data['c_key']], ['class' => 'btn btn-primary']),
+                'create'  => Html::a('添加分类', ['admin/news-cls/create'], ['class' => "collapsed"]) . ' / ',
+                'update'  => Html::a('编辑分类', ['admin/news-cls/update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ',
+                'del'     => Html::a('删除分类', ['admin/news-cls/delete', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ',
                 'content' => null
             ];
             break;
@@ -266,9 +271,9 @@ function menuHtml($data, $type)
                 break;
 
             $array = [
-                'create'  => Html::a('添加分类', ['admin/product-cls/create'], ['class' => "btn btn-primary"]),
-                'update'  => Html::a('编辑分类', ['admin/product-cls/update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']),
-                'del'     => Html::a('删除分类', ['admin/product-cls/delete', 'id' => $data['c_key']], ['class' => 'btn btn-primary']),
+                'create'  => Html::a('添加分类', ['admin/product-cls/create'], ['class' => "collapsed"]) . ' / ',
+                'update'  => Html::a('编辑分类', ['admin/product-cls/update', 'id' => $data['c_key']], ['class' => 'collapsed']) . ' / ',
+                'del'     => Html::a('删除分类', ['admin/product-cls/delete', 'id' => $data['c_key']], ['class' => 'collapsed']) . ' / ',
                 'content' => null
             ];
             break;
@@ -276,29 +281,35 @@ function menuHtml($data, $type)
         // 自定义页面
         case 'pages':
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "btn btn-primary"]),
-                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
-                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
-                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => 'btn btn-primary']),
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => "collapsed"]) . ' / ',
             ];
+
+            $entering = Pages::findByOne($data['pages']['page_id']);
+
+            if ($entering['menu']['model_key'] == 'UC1' && $entering['is_type'] == 'list')
+                $enteringHtml = Html::a('录入内容', ['admin/pages-list/create', 'id' => $entering['m_key']], ['class' => "collapsed"]) . ' / ';
+
             break;
 
         // 链接
         case 'urls':
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "btn btn-primary"]),
-                'update'  => Html::a('编辑单页面分类', ['update', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
-                'del'     => Html::a('删除单页面分类', ['delete', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'update'  => Html::a('编辑单页面分类', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'del'     => Html::a('删除单页面分类', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
                 'content' => null
             ];
             break;
 
         case 'purchase':
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "btn btn-primary"]),
-                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
-                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => 'btn btn-primary']),
-                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => 'btn btn-primary']),
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => "collapsed"]) . ' / ',
             ];
             break;
     }
@@ -307,6 +318,10 @@ function menuHtml($data, $type)
     $html .= '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">&nbsp;&nbsp;▸';
     $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'] . '&nbsp;' . $array['content'];
+
+    // 根据单页面是列表的,增加录入内容链接
+    $html .= '&nbsp;' . $enteringHtml;
+
     $html .= '    </div>';
     $html .= '    <ul class="">';
 
@@ -356,14 +371,6 @@ function menuHtml($data, $type)
                     <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
                 </p>
-
-                <hr/>
-
-                <ul class="portfolio-filter list-inline">
-                    <?php foreach ($parent as $value): ?>
-                        <li><a class="btn btn-primary" href="<?= Url::to(['admin/menu/index', 'id' => $value['m_key']]) ?>"><?= $value['name'] ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
 
                 <hr/>
 

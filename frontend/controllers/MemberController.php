@@ -10,7 +10,6 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
-use yii\web\Controller;
 use common\models\User;
 
 class MemberController extends BaseController
