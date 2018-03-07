@@ -183,6 +183,7 @@ a:active {
 }
 
 .navbar-default .nav-pills li.dropdown ul li a {
+    font-size: 14px;
     color: #fff;
     width: 100%;
     white-space: nowrap;
