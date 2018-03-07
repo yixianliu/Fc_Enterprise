@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
+                <hr />
+
                 <?=
                 DetailView::widget([
                     'model'      => $model,

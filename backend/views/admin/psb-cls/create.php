@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\PsbClassify */
 
 $this->title = '添加分类';
-$this->params['breadcrumbs'][] = ['label' => '分类列表', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '相关分类中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

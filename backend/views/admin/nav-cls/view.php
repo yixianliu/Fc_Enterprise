@@ -37,13 +37,46 @@ $this->params['breadcrumbs'][] = $this->title;
                     'model'      => $model,
                     'attributes' => [
                         'c_key',
-                        'p_key',
+                        [
+                            'attribute' => 'p_key',
+                            'value'     => function ($model) {
+
+                                if (empty($model->p_key))
+                                    return '没有内容';
+
+                                $data = explode(',', $model->p_key);
+
+                                $name = null;
+
+                                foreach ($data as $value) {
+
+                                    $dataPkey = \common\models\PsbClassify::findOne(['c_key' => $value]);
+
+                                    if (empty($dataPkey))
+                                        continue;
+
+                                    $name .= $dataPkey->name . ', ';
+                                }
+
+                                return $name;
+                            },
+                        ],
                         'sort_id',
                         'name',
-                        'description:ntext',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+
+                                if ($model->parent_id == '')
+                                    return '顶级分类';
+
+                                $data = \common\models\NavClassify::findOne(['c_key' => $model->parent_id]);
+
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -67,6 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
+                        'description:ntext',
                     ],
                 ]) ?>
 

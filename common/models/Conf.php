@@ -37,25 +37,6 @@ class Conf extends \yii\db\ActiveRecord
     }
 
     /**
-     * 网站配置数据
-     *
-     * @param null $status
-     * @param string $language
-     * @return array|\yii\db\ActiveRecord[]
-     */
-    public static function findByData($status = null, $language = 'cn')
-    {
-
-        $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
-
-        return static::find()
-            ->where($array)
-            ->andWhere(['is_language' => $language])
-            ->asArray()
-            ->all();
-    }
-
-    /**
      * @inheritdoc
      */
     public function rules()
@@ -66,7 +47,6 @@ class Conf extends \yii\db\ActiveRecord
             [['c_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['parameter'], 'string', 'max' => 255],
-            [['c_key'], 'unique'],
         ];
     }
 
@@ -85,5 +65,24 @@ class Conf extends \yii\db\ActiveRecord
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
+    }
+
+    /**
+     * 网站配置数据
+     *
+     * @param null $status
+     * @param string $language
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function findByData($status = null, $language = 'cn')
+    {
+
+        $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
+
+        return static::find()
+            ->where($array)
+            ->andWhere(['is_language' => $language])
+            ->asArray()
+            ->all();
     }
 }

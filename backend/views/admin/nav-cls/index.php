@@ -14,8 +14,8 @@ if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
-        $createHtml = Html::a('添加导航分类', ['admin/nav-cls/create'], ['class' => "btn btn-primary"]);
-        $updateHtml = Html::a('编辑导航分类', ['admin/nav-cls/update', 'id' => $value['c_key']], ['class' => 'btn btn-primary']);
+        $createHtml = Html::a('添加导航分类', ['admin/nav-cls/create'], ['class' => "collapsed"]) . ' / ';
+        $updateHtml = Html::a('编辑导航分类', ['admin/nav-cls/update', 'id' => $value['c_key']], ['class' => "collapsed"]) . ' / ';
 
         $html .= '<li class="">';
         $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
@@ -28,7 +28,7 @@ if (!empty($dataProvider)) {
 
             foreach ($value['child'] as $valueCls) {
 
-                $updateHtml = Html::a('编辑分类', ['admin/product-cls/update', 'id' => $valueCls['c_key']], ['class' => 'btn btn-primary']);
+                $updateHtml = Html::a('编辑分类', ['admin/product-cls/update', 'id' => $valueCls['c_key']], ['class' => "collapsed"]) . ' / ';
 
                 $html .= '<li class="">';
                 $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
@@ -74,8 +74,8 @@ function recursionCls($data)
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布导航分类', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('发布采购分类', ['/admin/psb-cls/create', 'type' => 'Purchase', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布导航分类', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('发布采购分类', ['/admin/psb-cls/create', 'type' => 'Purchase', 'id' => 'P0'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
                 <hr/>

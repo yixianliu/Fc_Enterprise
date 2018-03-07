@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('发布单页面相关数据', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布单页面相关数据', ['create'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
                 <?= GridView::widget([

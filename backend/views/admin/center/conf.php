@@ -28,15 +28,17 @@ $this->title = '网站配置';
 
                 <p>
 
-                    <?= Html::a('添加网站配置', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('添加网站配置', ['create'], ['class' => "collapsed"]) . ' / ' ?>
 
-                    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "collapsed"]) . ' / ' ?>
 
-                    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => "collapsed"]) . ' / ' ?>
 
-                    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => "collapsed"]) . ' / ' ?>
 
                 </p>
+
+                <hr/>
 
                 <?=
                 GridView::widget([

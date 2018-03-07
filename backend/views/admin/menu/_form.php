@@ -141,8 +141,8 @@ use kartik\select2\Select2;
             $('#menu-url').val('');
         }
 
-        <?php if (!empty($result['data']['pages']['is_type'])): ?>
-        $("#is_type").find("option[value='<?= $result['data']['pages']['is_type'] ?>']").attr("selected",true);
+        <?php if (!empty($model->pages->is_type)): ?>
+        $('#is_type').val("<?= $model->pages->is_type ?>");
         <?php endif; ?>
 
         return true;

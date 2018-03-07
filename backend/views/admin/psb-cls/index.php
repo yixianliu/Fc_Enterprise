@@ -10,15 +10,15 @@ switch ($type) {
 
     default:
     case 'Supply':
-        $this->title = '供应分类列表';
+        $this->title = '供应分类';
         break;
 
     case 'Purchase':
-        $this->title = '采购分类列表';
+        $this->title = '采购分类';
         break;
 
     case 'Bid':
-        $this->title = '投标分类列表';
+        $this->title = '投标分类';
         break;
 }
 
@@ -54,7 +54,7 @@ function recursionCls($data, $type, $id)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ' . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type], ['class' => "collapsed"]) . ' / ';
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
@@ -84,10 +84,10 @@ function recursionCls($data, $type, $id)
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布分类', ['create', 'type' => $type,'id' => $id], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布分类 - ' . $this->title, ['create', 'type' => $type,'id' => $id], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
                 <hr/>

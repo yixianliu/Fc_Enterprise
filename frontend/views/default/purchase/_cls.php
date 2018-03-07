@@ -35,10 +35,12 @@ $this->registerJsFile('@web/themes/qijian/js/scroll.js');
     <div class="input-group">
 
         <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">产品<span class="caret"></span></button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                产品<span class="caret"></span>
+            </button>
         </div>
 
-        <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字">
+        <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字"/>
         <span class="input-group-btn"><a class="btn btn-red" title="" href="purchasing.html">搜索</a></span>
 
     </div>
@@ -152,8 +154,4 @@ $this->registerJsFile('@web/themes/qijian/js/scroll.js');
         </div>
 
     </div>
-    <!-- #采购列表 -->
-
-</div>
-
 </div>

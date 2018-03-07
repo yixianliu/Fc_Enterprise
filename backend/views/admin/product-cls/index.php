@@ -33,7 +33,7 @@ function recursion($data)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ' . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ';
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
@@ -72,9 +72,9 @@ function recursion($data)
 
                 <p>
 
-                    <?= Html::a('添加产品分类', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('添加分类', ['create'], ['class' => "collapsed"]) . ' / ' ?>
 
-                    <?= Html::a('添加产品', ['admin/product/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('添加产品', ['admin/product/create'], ['class' => "collapsed"]) . ' / ' ?>
 
                 </p>
 

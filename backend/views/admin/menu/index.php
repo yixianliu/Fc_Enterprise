@@ -27,20 +27,24 @@ if (!empty($dataProvider)) {
             'update'   => Html::a('编辑菜单', ['update', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
             'del'      => Html::a('删除菜单', ['delete', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
             'entering' => null,
+            'content'  => null,
         ];
 
         // 新闻和产品没有子菜单
-        if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1') {
+        if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1')
             $array['create'] = Html::a('添加子菜单', ['create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
-        }
 
-        if ($value['menuModel']['model_key'] == 'UC1' && $value['pages']['is_type'] == 'list') {
-            $array['entering'] = Html::a('录入内容', ['admin/pages-list/create', 'id' => $value['m_key']],['class' => "collapsed"]) . ' / ';
-        }
+        if ($value['menuModel']['model_key'] == 'UC1') {}
+            $array['content'] = Html::a('编辑内容', ['admin/pages/update', 'id' => $value['pages']['page_id']], ['class' => "collapsed"]) . ' / ';
+
+        // 录入自定义页面的内容
+        if ($value['menuModel']['model_key'] == 'UC1' && $value['pages']['is_type'] == 'list')
+            $array['entering'] = Html::a('录入内容', ['admin/pages-list/create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
+
 
         $html .= '<li class="">';
         $html .= '    <div class="uk-nestable-item" style="padding: 5px;">&nbsp;&nbsp;▸';
-        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'] . '&nbsp;' . $array['entering'];
+        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'] . '&nbsp;' . $array['content'] . '&nbsp;' . $array['entering'];
         $html .= '    </div>';
         $html .= '    <ul class="">';
 
@@ -250,6 +254,11 @@ function menuHtml($data, $type)
     // 根据类别递归
     switch ($type) {
 
+        // 招聘
+        case 'job':
+
+            break;
+
         // 新闻
         case 'news':
 
@@ -367,9 +376,9 @@ function menuHtml($data, $type)
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建菜单', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建菜单', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
                 <hr/>

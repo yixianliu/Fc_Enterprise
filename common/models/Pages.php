@@ -140,24 +140,6 @@ class Pages extends \yii\db\ActiveRecord
     }
 
     /**
-     * 更新单页面(菜单控制器)
-     *
-     * @param $id
-     * @param $type
-     * @return bool
-     * @throws \Exception
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
-     */
-    public function updateData($id, $type)
-    {
-
-        $this->is_type = $type;
-
-        return $this->update($id, 'page_id') ? true : false;
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getMenu()

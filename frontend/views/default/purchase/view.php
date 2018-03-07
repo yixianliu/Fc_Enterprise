@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
@@ -44,6 +45,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                 <div class="tendcont">
 
                     <div class="tend-left">
+
                         <!-- 大图 -->
                         <div id="preview" class="spec-preview">
 
@@ -83,16 +85,18 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
                     <!-- 产品参数 -->
                     <div class="tend-right">
+
                         <p class="t-money"><span class="right-color">价格 : </span><font><?= $model->price ?></font></p>
+
                         <p>
                         <hr>
                         </p>
 
                         <?php
                         $form = ActiveForm::begin([
-                            'action'      => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
-                            'method'      => 'post',
-                            'id'          => $modelOffer->formName(),
+                            'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
+                            'method' => 'post',
+                            'id'     => $modelOffer->formName(),
                         ]);
                         ?>
 
@@ -100,6 +104,61 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                             <span class="right-color">提交价格 : </span>
                             <?= $form->field($modelOffer, 'price')->textarea(['cols' => 50, 'rows' => 5])->label(false) ?>
                         </p>
+
+                        <p>
+
+                        <hr/>
+
+                        <?=
+                        FileUploadUI::widget([
+                            'model'         => $model,
+                            'attribute'     => 'path',
+                            'url'           => ['admin/upload/image-upload', 'id' => $model->path, 'type' => 'sp_offer', 'attribute' => 'path'],
+                            'gallery'       => false,
+                            'fieldOptions'  => [
+                                'accept' => 'file/*'
+                            ],
+                            'clientOptions' => [
+                                'maxFileSize'      => 2000000,
+                                'dataType'         => 'json',
+                                'maxNumberOfFiles' => 5,
+                            ],
+
+                            // ...
+                            'clientEvents'  => [
+
+                                'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                                
+                                var html = "";
+                                
+                                var ImagesContent = $("#ImagesContent");
+                                
+                                $.each(data.result.files, function (index, file) {
+                                    html += file.name + \',\';
+                                });
+                                
+                                html += ImagesContent.val();
+                                
+                                ImagesContent.val(html);
+                                
+                                return true;
+                            }',
+                                'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+                            ],
+                        ]);
+                        ?>
+
+                        <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
+
+                        <hr/>
+
+                        </p>
+
                         <p>
                             <?= Html::submitButton('提交价格', ['class' => 'btn btn-red']) ?>
                         </p>
@@ -148,6 +207,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                         </div>
                     </div>
                     <!-- #图文介绍 -->
+
                 </div>
                 <!-- #内容,评论 -->
 

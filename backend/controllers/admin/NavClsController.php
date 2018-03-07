@@ -57,7 +57,7 @@ class NavClsController extends BaseController
                 if (empty($valuePkey))
                     continue;
 
-                $dataProvider[ $key ]['child'][] = ProductClassify::findOne(['c_key' => $valuePkey]);
+                $dataProvider[ $key ]['child'][] = PsbClassify::findOne(['c_key' => $valuePkey]);
             }
 
         }

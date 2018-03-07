@@ -6,8 +6,24 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\PsbClassify */
 
+switch ($model->is_type) {
+
+    default:
+    case 'Supply':
+        $id = 'S0';
+        break;
+
+    case 'Purchase':
+        $id = 'P0';
+        break;
+
+    case 'Bid':
+        $id = 'B0';
+        break;
+}
+
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Psb Classifies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '相关分类中心', 'url' => ['index', 'type' => $model->is_type, 'id' => $id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -28,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'method'  => 'post',
                         ],
                     ]) ?>
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['index', 'type' => $model->is_type, 'id' => $id], ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?=
@@ -41,7 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'description:ntext',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+
+                                if ($model->parent_id == 'P0')
+                                    return '顶级分类';
+
+                                $data = \common\models\PsbClassify::findOne(['c_key' => $model->parent_id]);
+
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {

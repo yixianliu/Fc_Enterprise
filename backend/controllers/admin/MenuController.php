@@ -2,13 +2,12 @@
 
 namespace backend\controllers\admin;
 
-use common\models\ItemRp;
-use common\models\Pages;
 use Yii;
 use common\models\Menu;
 use common\models\MenuSearch;
 use common\models\MenuModel;
-use common\models\PagesClassify;
+use common\models\ItemRp;
+use common\models\Pages;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -106,15 +105,13 @@ class MenuController extends BaseController
             return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
 
-            $result = [
-                'parent'     => Menu::getSelectMenu(),
-                'menu_model' => $this->getModel(),
-                'role'       => $this->getRole(),
-            ];
-
             return $this->render('create', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => [
+                    'parent'     => Menu::getSelectMenu(),
+                    'menu_model' => $this->getModel(),
+                    'role'       => $this->getRole(),
+                ],
             ]);
         }
     }
@@ -129,19 +126,32 @@ class MenuController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $result = [
-            'parent'     => Menu::getSelectMenu(),
-            'menu_model' => $this->getModel(),
-            'role'       => $this->getRole(),
-            'data'       => Menu::findByOne($id),
-        ];
+        // 更改单页面
+        if (!empty(Yii::$app->request->post())) {
+
+            $data = Yii::$app->request->post();
+
+            if ($data['Menu']['model_key'] == 'UC1') {
+
+                // 生成自定义页面
+                $Cls = Pages::findOne(['m_key' => $id]);
+                $Cls->is_type = $data['is_type'];
+                $Cls->save();
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
+
             return $this->render('update', [
                 'model'  => $model,
-                'result' => $result,
+                'result' => [
+                    'parent'     => Menu::getSelectMenu(),
+                    'menu_model' => $this->getModel(),
+                    'role'       => $this->getRole(),
+                    'data'       => Menu::findByOne($id),
+                ],
             ]);
         }
     }

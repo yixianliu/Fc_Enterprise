@@ -11,7 +11,7 @@
 
 namespace frontend\controllers;
 
-
+use common\models\SpOffer;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -102,6 +102,11 @@ class UploadController extends BaseController
             // 采购中心
             case 'purchase':
                 $model = new Purchase();
+                break;
+
+                // 提交价格
+            case 'sp_offer':
+                $model = new SpOffer();
                 break;
 
             // 单页面
