@@ -12,6 +12,7 @@
 namespace backend\controllers\admin;
 
 
+use common\models\Pages;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -20,7 +21,6 @@ use yii\helpers\Url;
 use common\models\Product;
 use common\models\Slide;
 use common\models\Job;
-use common\models\PagesTplFile;
 use common\models\Purchase;
 use common\models\Resume;
 use yii\filters\VerbFilter;
@@ -50,7 +50,7 @@ class UploadController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -106,8 +106,7 @@ class UploadController extends BaseController
 
             // 单页面
             case 'pages':
-                $model = new PagesTplFile();
-                $ext = ['php', 'html', 'txt'];
+                $model = new Pages();
                 break;
 
             default:
@@ -118,6 +117,7 @@ class UploadController extends BaseController
         // 上传组件对应model
         $imageFile = UploadedFile::getInstance($model, $attribute);
 
+        // 判断上传格式
         if (!empty($ext)) {
             if (!in_array($imageFile->extension, $ext)) {
                 return Json::encode(['status' => false, 'message' => '上传格式有问题 !!']);

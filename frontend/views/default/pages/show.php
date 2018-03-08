@@ -9,6 +9,9 @@
  * Time: 16:54
  */
 
+use yii\helpers\Url;
+use yii\helpers\Html;
+
 $this->title = $model['menu']['name'];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -27,23 +30,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <hr/>
 
+        <br />
+
         <!-- 可变化内容 -->
         <div class="content_product_list">
 
-            <?php if (!empty($result['data'])): ?>
-            <ul>
+            <?php if (!empty($result)): ?>
+                <ul>
 
-                <?php foreach ($result['data'] as $value): ?>
-                <li>
-                    <a href="ucasedetailed.html"><img alt="" src="images/about-left.jpg"></a>
-                    <a href=""><span><?= $value['title'] ?></span></a>
-                </li>
-                <?php endforeach; ?>
+                    <?php foreach ($result as $value): ?>
 
-            </ul>
+                        <?php if (!empty($value)): ?>
+                            <li>
+                                <a href="#">
+                                    <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '', 'class' => $model['menu']['name']]); ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+
+                </ul>
             <?php else: ?>
 
-            <h1>暂无数据 !!</h1>
+                <h1>暂无数据 !!</h1>
 
             <?php endif; ?>
 

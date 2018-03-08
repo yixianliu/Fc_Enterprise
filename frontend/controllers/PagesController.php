@@ -86,15 +86,13 @@ class PagesController extends BaseController
         // 初始化
         $result = array();
 
-        $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
+        $model = Pages::findByOne($id);
 
         $result['content'] = PagesList::find()->where(['is_using' => 'On', 'page_id' => $id])->all();
 
-        // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
-
         $result['classify'] = PagesClassify::findByAll($id);
 
+        // 列表
         $result['data'] = PagesList::findByAll($id);
 
         return $this->render('list', [
@@ -136,7 +134,7 @@ class PagesController extends BaseController
 
         $model = Pages::findByOne(Yii::$app->request->get('id', null));
 
-        $result['data'] = PagesList::findByAll($model['page_id']);
+        $result = explode(',', $model['path']);
 
         return $this->render('show', [
                 'model'  => $model,

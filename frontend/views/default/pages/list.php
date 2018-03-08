@@ -11,18 +11,18 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = $result['menu']['name'];
-$this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->page_id]];
+$this->title = $model['menu']['name'];
+$this->params['breadcrumbs'][] = ['label' => $model['menu']['name'], 'url' => ['index', 'id' => $model['page_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
+<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
 
 <!-- 左右框架 -->
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $result['menu']['parent_id']]); ?>
+    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['parent_id']]); ?>
 
     <!-- 右边 -->
     <div class="right">

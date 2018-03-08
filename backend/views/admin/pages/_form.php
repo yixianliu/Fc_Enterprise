@@ -51,12 +51,12 @@ use dosamigos\fileupload\FileUploadUI;
                     'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
-                        'accept' => 'file/*',
+                        'accept' => 'image/*',
                     ],
                     'clientOptions' => [
                         'maxFileSize'      => 5000000,
                         'dataType'         => 'json',
-                        'maxNumberOfFiles' => 1,
+                        'maxNumberOfFiles' => 5,
                     ],
 
                     // ...
@@ -130,7 +130,10 @@ use dosamigos\fileupload\FileUploadUI;
             </div>
         </div>
 
-        <?= $this->render('../../formMsg'); ?>
+        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'pages']); ?>
 
     </section>
+
+    <?= $this->render('../../formMsg'); ?>
+
 </div>
