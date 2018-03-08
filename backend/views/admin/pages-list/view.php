@@ -9,6 +9,11 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '单页面列表数据', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
+print_r($model->toArray());
+exit();
+
 ?>
 
 <div class="col-lg-12">

@@ -169,9 +169,6 @@ class PagesListController extends BaseController
     public function getPage()
     {
 
-        // 初始化
-        $resultMenu = array();
-
         $Cls = new Menu();
 
         $result = $Cls->getSelectMenu('E1');
@@ -189,10 +186,9 @@ class PagesListController extends BaseController
             if ($data['menuModel']['model_key'] != 'UC1' || $data['pages']['is_type'] != 'list')
                 unset($result[ $key ]);
 
-            $resultMenu[ $data['pages']['page_id'] ] = $data['name'];
         }
 
-        return $resultMenu;
+        return $result;
     }
 
     /**

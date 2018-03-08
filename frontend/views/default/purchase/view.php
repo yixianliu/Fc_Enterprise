@@ -46,88 +46,91 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
                     <div class="tend-left">
 
-                        <!-- 大图 -->
                         <div id="preview" class="spec-preview">
 
                             <span class="jqzoom">
-                                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'jqimg' => Url::to('@web/themes/qijian/images/ser-left-1.jpg')]); ?>
+
+                                <?php if (!empty($result)): ?>
+
+                                    <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'jqimg' => Url::to('@web/themes/qijian/images/ser-left-1.jpg')]); ?>
+
+                                <?php else: ?>
+
+                                    <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title]); ?>
+
+                                <?php endif; ?>
+
                             </span>
 
                         </div>
-                        <!-- #大图 -->
 
-                        <!--缩图开始-->
-                        <div class="spec-scroll">
-                            <a class="prev"></a>
-                            <a class="next"></a>
-                            <div class="items">
-                                <ul>
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
+                        <?php if (!empty($result)): ?>
+                            <div class="spec-scroll">
+                                <a class="prev"></a>
+                                <a class="next"></a>
+                                <div class="items">
+                                    <ul>
 
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
+                                        <?php foreach ($result as $value): ?>
+                                            <li>
+                                                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
+                                            </li>
+                                        <?php endforeach; ?>
 
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $this->title, 'bimg' => Url::to('@web/themes/qijian/images/pro-1.jpg'), 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <!--缩图结束-->
+                        <?php endif; ?>
+
                     </div>
 
                     <!-- 产品参数 -->
                     <div class="tend-right">
 
-                        <p class="t-money"><span class="right-color">价格 : </span><font><?= $model->price ?></font></p>
-
+                        <p class="t-money">
+                            <span class="right-color">价格 : </span><font><?= $model->price ?></font></p>
                         <p>
+
                         <hr>
-                        </p>
 
-                        <?php
-                        $form = ActiveForm::begin([
-                            'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
-                            'method' => 'post',
-                            'id'     => $modelOffer->formName(),
-                        ]);
-                        ?>
+                        <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
 
-                        <p class="right-tar">
-                            <span class="right-color">提交价格 : </span>
-                            <?= $form->field($modelOffer, 'price')->textarea(['cols' => 50, 'rows' => 5])->label(false) ?>
-                        </p>
+                            <?php
+                            $form = ActiveForm::begin([
+                                'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
+                                'method' => 'post',
+                                'id'     => $modelOffer->formName(),
+                            ]);
+                            ?>
 
-                        <p>
+                            <p class="right-tar">
+                                <span class="right-color">提交价格 : </span>
+                                <?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
+                            </p>
 
-                        <hr/>
+                            <p>
 
-                        <?=
-                        FileUploadUI::widget([
-                            'model'         => $model,
-                            'attribute'     => 'path',
-                            'url'           => ['admin/upload/image-upload', 'id' => $model->path, 'type' => 'sp_offer', 'attribute' => 'path'],
-                            'gallery'       => false,
-                            'fieldOptions'  => [
-                                'accept' => 'file/*'
-                            ],
-                            'clientOptions' => [
-                                'maxFileSize'      => 2000000,
-                                'dataType'         => 'json',
-                                'maxNumberOfFiles' => 5,
-                            ],
+                            <hr/>
 
-                            // ...
-                            'clientEvents'  => [
+                            <?=
+                            FileUploadUI::widget([
+                                'model'         => $modelOffer,
+                                'attribute'     => 'path',
+                                'url'           => ['upload/image-upload', 'id' => $modelOffer->path, 'type' => 'sp_offer', 'attribute' => 'path'],
+                                'gallery'       => false,
+                                'fieldOptions'  => [
+                                    'accept' => 'image/*'
+                                ],
+                                'clientOptions' => [
+                                    'maxFileSize'      => 2000000,
+                                    'dataType'         => 'json',
+                                    'maxNumberOfFiles' => 5,
+                                ],
 
-                                'fileuploaddone' => 'function(e, data) {
+                                // ...
+                                'clientEvents'  => [
+
+                                    'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
@@ -145,25 +148,35 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                                 
                                 return true;
                             }',
-                                'fileuploadfail' => 'function(e, data) {
+                                    'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                             }',
-                            ],
-                        ]);
-                        ?>
+                                ],
+                            ]);
+                            ?>
 
-                        <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
+                            <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                        <hr/>
+                            <hr/>
 
-                        </p>
+                            </p>
 
-                        <p>
-                            <?= Html::submitButton('提交价格', ['class' => 'btn btn-red']) ?>
-                        </p>
+                            <p>
+                                <?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?>
+                            </p>
 
-                        <?php ActiveForm::end(); ?>
+                            <?php ActiveForm::end(); ?>
+
+                        <?php else: ?>
+
+                            <h3>请登录后提交内容 !! </h3>
+
+                            <br/>
+
+                            点这里, <a href="<?= Url::to(['member/login']) ?>" title="<?= $model->title ?>">用户登录</a>
+
+                        <?php endif; ?>
 
                     </div>
                     <!-- #产品参数 -->

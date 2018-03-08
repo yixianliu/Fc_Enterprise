@@ -29,6 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('发布单页面相关数据', ['create'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
+                <hr/>
+
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [

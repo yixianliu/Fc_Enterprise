@@ -52,7 +52,7 @@ use dosamigos\fileupload\FileUploadUI;
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
+                    'url'           => ['upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
                         'accept' => 'file/*'

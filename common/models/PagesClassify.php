@@ -155,12 +155,12 @@ class PagesClassify extends \yii\db\ActiveRecord
         $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
 
         // 产品分类
-        $dataClassify = self::findByAll($parent_id);
+        $dataClassify = static::findByAll($parent_id);
 
         // 初始化
         $result = array();
 
-        $result[ $this->parent_id ] = '顶级分类 !!';
+        $result[ static::$parent_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 

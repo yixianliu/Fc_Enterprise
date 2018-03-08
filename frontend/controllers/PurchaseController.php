@@ -104,6 +104,8 @@ class PurchaseController extends BaseController
     public function actionView($id)
     {
 
+        $result = array();
+
         $model = Purchase::findOne(['purchase_id' => $id, 'is_using' => 'On']);
 
         if (empty($model))
@@ -111,9 +113,19 @@ class PurchaseController extends BaseController
 
         $modelOffer = new SpOffer();
 
+        if (!empty($model->path)) {
+
+            $imgArray = explode(',', $model->path);
+
+            foreach ($imgArray as $value) {
+                $result[] = $value;
+            }
+        }
+
         return $this->render('view', [
             'model'      => $model,
             'modelOffer' => $modelOffer,
+            'result'     => $result,
         ]);
     }
 

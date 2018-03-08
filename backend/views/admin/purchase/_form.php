@@ -10,8 +10,6 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $model common\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
 
-$result['classify'] = empty($result['classify']) ? null : $result['classify'];
-
 ?>
 
 <style type="text/css">

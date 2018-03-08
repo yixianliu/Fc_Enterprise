@@ -12,7 +12,7 @@ use dosamigos\fileupload\FileUploadUI;
 
 <style type="text/css">
     .preview img {
-        width: 120px;
+        width: 180px;
         height: 100px;
     }
 </style>
