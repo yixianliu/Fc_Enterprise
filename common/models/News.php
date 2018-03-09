@@ -105,6 +105,11 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function findByAll($page = 'On')
+    {
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

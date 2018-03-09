@@ -31,10 +31,6 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'job_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
-                <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                 <?=

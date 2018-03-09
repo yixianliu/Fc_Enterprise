@@ -163,117 +163,42 @@ $this->title = '首页';
     </div>
 </div>
 
-<div class="container-fluid home-case-list" style="background-image: url(<?= Yii::getAlias('@web') ?>/themes/qijian/images/pro-bg.jpg)">
+<?php if (!empty($result['data'])): ?>
+    <div class="container-fluid home-case-list" style="background-image: url(<?= Yii::getAlias('@web') ?>/themes/qijian/images/pro-bg.jpg)">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="acttabbox">
+            <div class="acttabbox">
 
-            <ul class="tabcon">
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                <ul class="tabcon">
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                    <?php foreach ($result['data'] as $value): ?>
+                        <li>
+                            <a href="" target="_blank">
+                                <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value['img']), ['alt' => $value['title']]); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                </ul>
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                <ul class="tabnav">
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                    <?php foreach ($result['data'] as $value): ?>
+                        <li class="cur">
+                            <a href="" target="_blank" title="<?= $value['title'] ?>">
+                                <span class="pro-icon"></span><?= $value['title'] ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
+                </ul>
+            </div>
 
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <?= Html::img(Url::to('@web/themes/qijian/images/T1XXb8XjtXXXak1cjj-702-300.jpg'), ['alt' => '']); ?>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="tabnav">
-
-                <li class="cur">
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" target="_blank">
-                        <span class="pro-icon"></span>第七建筑工程项目
-                    </a>
-                </li>
-            </ul>
         </div>
 
     </div>
-
-</div>
+<?php endif; ?>
 
 <!-- 新闻 -->
 <div class="container h-news">
@@ -322,7 +247,7 @@ $this->title = '首页';
 
             <?php else: ?>
 
-            <h1>暂无新闻 !!</h1>
+                <h1>暂无新闻 !!</h1>
 
             <?php endif; ?>
 

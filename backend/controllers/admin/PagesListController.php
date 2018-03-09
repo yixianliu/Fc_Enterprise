@@ -94,7 +94,7 @@ class PagesListController extends BaseController
 
         if (!empty($id)) {
             $data = Menu::findByOne($id);
-            $model->page_id = $data['pages']['page_id'];
+            $model->page_id = $id;
         }
 
         return $this->render('create', [
