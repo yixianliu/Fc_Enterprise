@@ -85,11 +85,22 @@ function myScrolls() {
     });
 }
 
-// 导航移动固定头部
-$(window).scroll(function(){
-    if($(this).scrollTop() > 150){
-        $('.navbar-default').addClass('navbar-fixed-top');
-    } else {
-        $('.navbar-default').removeClass('navbar-fixed-top');
-    }
-});
+// 返回头部和导航菜单固定头部
+function goTop() {
+    // 滚动到知道高度 头部显示导航菜单 和 显示返回头部
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 150){
+            $('.navbar-default').addClass('navbar-fixed-top');
+            $('.go-top').addClass('show');
+        } else {
+            $('.navbar-default').removeClass('navbar-fixed-top');
+            $('.go-top').removeClass('show');
+        }
+    });
+
+    // 点击返回头部
+    $('.go-top').on('click', function() {
+        $("html, body").animate({ scrollTop: 0 }, 1000 );
+        return false;
+    });
+};
