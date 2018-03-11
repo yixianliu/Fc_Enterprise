@@ -28,10 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $this->render('../nav'); ?>
 
-        <hr/>
-
-        <br />
-
         <!-- 可变化内容 -->
         <div class="content_product_list">
 

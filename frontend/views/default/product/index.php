@@ -33,8 +33,6 @@ $this->registerCssFile('@web/themes/qijian/css/product.css');
     <?= $this->render('../cls', ['result' => $result, 'type' => 'product']); ?>
     <!-- #相关分类 -->
 
-    <hr/>
-
     <!-- 可变化内容 -->
     <div class="content_product_list">
         <ul>

@@ -85,9 +85,11 @@ if (empty($classify))
             <?php if ($type == 'pages'): ?>
 
                 <?php foreach ($classify as $value): ?>
-                    <div <?php if ($value['pages']['page_id'] == $id): ?> class="cur" <?php endif; ?> >
-                        <a href="<?= $value['url'] ?>"><?= $value['name'] ?></a>
-                    </div>
+                    <a href="<?= $value['url'] ?>">
+                        <div <?php if ($value['pages']['page_id'] == $id): ?> class="cur" <?php endif; ?> >
+                            <?= $value['name'] ?>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
 
             <?php else: ?>

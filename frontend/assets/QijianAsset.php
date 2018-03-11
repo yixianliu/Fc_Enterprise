@@ -26,7 +26,6 @@ class QijianAsset extends AssetBundle
         'themes/qijian/css/bootstrap.css',
         'themes/qijian/css/bootstrap-theme.css',
         'themes/qijian/css/style.css',
-        'themes/qijian/css/nav.css',
     ];
 
     // js
@@ -40,10 +39,8 @@ class QijianAsset extends AssetBundle
     // Js在顶部加载
     // $this->registerJsFile('xxx.js',['positon' => $this::POS_HEAD]); 加载单个Js文件
     public $jsOptions = [
-        'position' => \yii\web\View::POS_HEAD
+        'position' => \yii\web\View::POS_END
     ];
-
-
 
     public $depends = [
 //        'yii\web\YiiAsset',

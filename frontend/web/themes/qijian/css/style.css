@@ -617,6 +617,9 @@ a:active {
 .content .right .location {
     width: 100%;
     display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
 
 .content .right .location font {
@@ -1159,7 +1162,7 @@ a:active {
     background: none;
 }
 
-    /* 下载中心 */
+/* 下载中心 */
 .content_down_list {
     width: 100%;
     display: inline-block;

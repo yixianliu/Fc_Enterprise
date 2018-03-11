@@ -11,8 +11,8 @@ use yii\helpers\Html;
 
 $this->title = '采购平台';
 
-$this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
-$this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
+// $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
+// $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
 
 ?>
 

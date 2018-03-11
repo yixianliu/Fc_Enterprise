@@ -29,26 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $this->render('../nav'); ?>
 
-        <hr/>
+        <div class="content_news_list">
 
-        <?php if (!empty($result['data'])): ?>
+            <?php if (!empty($result['data'])): ?>
 
-            <?php foreach ($result['data'] as $value): ?>
+                <?php foreach ($result['data'] as $value): ?>
 
-                <div>
-                    <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
-                        <?= Html::encode($value->title) ?>
-                    </a>
-                    <span><?= date('Y - m - d', $value->updated_at) ?></span>
-                </div>
+                    <div>
+                        <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
+                            <?= Html::encode($value->title) ?>
+                        </a>
+                        <span><?= date('Y - m - d', $value->updated_at) ?></span>
+                    </div>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        <?php else: ?>
+            <?php else: ?>
 
         <h1>暂无数据 !!</h1>
 
         <?php endif; ?>
+
+        </div>
 
     </div>
     <!-- 右边 -->

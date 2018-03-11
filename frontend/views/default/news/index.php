@@ -28,8 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $this->render('../nav'); ?>
 
-        <hr/>
-
         <div class="content_news_list">
 
             <?=

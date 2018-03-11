@@ -24,8 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $this->render('../nav'); ?>
 
-        <hr/>
-
         <!-- 可变化内容 -->
         <div class="conY">
             <div class="conY_text">

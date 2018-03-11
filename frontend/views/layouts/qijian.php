@@ -24,13 +24,6 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
-    <script type="text/javascript">
-        $(function () {
-            funs();
-            shows();
-        });
-    </script>
-
 </head>
 
 <body>
@@ -80,7 +73,23 @@ $this->beginPage();
     </div>
 </div>
 
+<!-- 返回顶部 -->
+<div class="button-go-top">
+    <a href="#" title="" class="go-top">
+        <i class="glyphicon glyphicon-chevron-up"></i>
+    </a>
+</div>
+<!-- #返回顶部 -->
+
 <?php $this->endBody(); ?>
+
+<script type="text/javascript">
+    $(function () {
+        funs();
+        goTop();
+        shows();
+    });
+</script>
 
 </body>
 </html>

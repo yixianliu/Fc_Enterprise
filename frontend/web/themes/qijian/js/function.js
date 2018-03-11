@@ -77,6 +77,17 @@ function slides(){
     });
 }
 
+function navHover() {
+    $('#nav').hover(
+        function (){
+            $('#nav').find('ul.tit').css('display','block');
+        },
+        function(){
+            $('#nav').find('ul.tit').css('display','none');
+        }
+    );
+}
+
 // 文字上下滚动
 function myScrolls() {
     $('.myscroll').myScroll({
