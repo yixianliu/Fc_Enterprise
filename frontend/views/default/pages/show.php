@@ -17,6 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+<?=Html::cssFile('@web/themes/qijian/css/clearbox.css')?>
+
+<?=Html::jsFile('@web/themes/qijian/js/clearbox.js')?>
+
 <?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
 
 <div class="container content">
@@ -32,8 +36,32 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content_product_list">
 
             <?php if (!empty($result)): ?>
+
                 <ul>
 
+                    <?php foreach ($result as $value): ?>
+
+                        <?php if (!empty($value)): ?>
+
+                            <li>
+                                <a class="articleid" title="" href="@web/../../backend/web/temp/pages/' . $value" rel="clearbox[test1]" >
+                                    <div class="pro-img">
+                                        <img alt="" src="@web/../../backend/web/temp/pages/' . $value">
+                                    </div>
+
+                                    <div class="pro-txt">图片名称</div>
+                                </a>
+                            </li>
+
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+
+                </ul>
+
+
+                <!--
+                <ul>
                     <?php foreach ($result as $value): ?>
 
                         <?php if (!empty($value)): ?>
@@ -45,13 +73,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php endif; ?>
 
                     <?php endforeach; ?>
-
                 </ul>
+                -->
+
             <?php else: ?>
 
                 <h1>暂无数据 !!</h1>
 
             <?php endif; ?>
+
 
         </div>
         <!-- 可变化内容 -->

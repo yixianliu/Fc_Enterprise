@@ -16,6 +16,15 @@ $this->title = '首页';
 
 ?>
 
+<!-- 首页上下图片滚动插件 -->
+<?=Html::jsFile('@web/themes/qijian/js/popup.js')?>
+
+<script type="text/javascript">
+    $(function(){
+        shows();
+    });
+</script>
+
 <?= $this->render('../slide', ['pagekey' => 'index']); ?>
 
 <!-- 数据 -->
@@ -199,6 +208,7 @@ $this->title = '首页';
 
     </div>
 <?php endif; ?>
+<!-- #项目介绍 -->
 
 <!-- 新闻 -->
 <div class="container h-news">

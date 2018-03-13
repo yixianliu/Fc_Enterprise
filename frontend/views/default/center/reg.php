@@ -19,9 +19,9 @@ $this->title = '用户注册';
 $this->params['breadcrumbs'][] = ['label' => '用户中心', 'url' => ['/center/index']];
 $this->params['breadcrumbs'][] = '注册';
 
-$this->registerCssFile('@web/themes/qijian/css/member.css');
-
 ?>
+
+<?=Html::cssFile('@web/themes/qijian/css/member.css')?>
 
 <div class="member-user-reg">
     <div class="user-reg-cont">

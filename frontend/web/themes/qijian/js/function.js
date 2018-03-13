@@ -110,7 +110,7 @@ function goTop() {
     });
 
     // 点击返回头部
-    $('.go-top').on('click', function() {
+    $('.go-top').bind('click', function() {
         $("html, body").animate({ scrollTop: 0 }, 1000 );
         return false;
     });

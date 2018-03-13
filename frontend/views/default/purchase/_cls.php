@@ -13,8 +13,6 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-// 滚动
-$this->registerJsFile('@web/themes/qijian/js/scroll.js');
 
 ?>
 

@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 $this->params['breadcrumbs'][] = ['label' => '用户中心', 'url' => ['/center/index']];
 $this->params['breadcrumbs'][] = '登录';
 
-$this->registerCssFile('@web/themes/qijian/css/member.css');
-
 ?>
+
+<?=Html::cssFile('@web/themes/qijian/css/member.css')?>
 
 <div class="member-user-reg">
 

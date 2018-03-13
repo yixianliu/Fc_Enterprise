@@ -24,6 +24,13 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
+    <script type="text/javascript">
+        $(function () {
+            funs();
+            goTop();
+        });
+    </script>
+
 </head>
 
 <body>
@@ -82,14 +89,6 @@ $this->beginPage();
 <!-- #返回顶部 -->
 
 <?php $this->endBody(); ?>
-
-<script type="text/javascript">
-    $(function () {
-        funs();
-        goTop();
-        shows();
-    });
-</script>
 
 </body>
 </html>
