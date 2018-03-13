@@ -51,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tend-left">
                         <!-- 大图 -->
                         <div id="preview" class="spec-preview">
-                                        <span class="jqzoom">
-                                            <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title]); ?>
-                                        </span>
+                            <span class="jqzoom">
+                                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title]); ?>
+                            </span>
                         </div>
                         <!-- #大图 -->
 

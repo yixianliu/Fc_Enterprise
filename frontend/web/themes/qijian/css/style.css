@@ -121,7 +121,7 @@ a:active {
 .navbar-default .nav-pills li > a {
     color: #000;
     /*width: 110px;*/
-    text-align: center;
+    /*text-align: center;*/
     font-size: 16px;
     border-radius: 0;
 }
@@ -188,7 +188,7 @@ a:active {
     width: 100%;
     white-space: nowrap;
     border-radius: 0;
-    padding: 10px 5px;
+    padding: 10px 15px;
 }
 
 .navbar-default .nav-pills li.dropdown ul li a:hover {
