@@ -351,22 +351,16 @@ use yii\helpers\Html;
                     </ul>
                 </li>
 
-                <li class="chat-toggle-wrapper">
-                    <a href="#" data-toggle="chatbar" class="toggle_chat">
-                        <i class="fa fa-comments"></i>
-                        <span class="badge badge-warning">1</span>
-                    </a>
-                </li>
-
-                <li class="chat-toggle-wrapper">
-                    <a href="#" data-toggle="chatbar" class="toggle_chat">
-                        <i class="fa fa-comments"></i>
-                        <span class="badge badge-warning">1</span>
-                    </a>
+                <li>
+                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'cn']) ?>">中文版</a> /
                 </li>
 
                 <li>
-                    <a href="<?= Yii::$app->request->hostInfo . '/FcCalendar/frontend/web/index.php' ?>" target="_blank"><span class="badge badge-warning">站点首页</span></a>
+                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'en']) ?>">英文版</a> /
+                </li>
+
+                <li>
+                    <a href="<?= Yii::$app->request->hostInfo . '/FcCalendar/frontend/web/index.php' ?>" target="_blank">站点首页</a>
                 </li>
 
             </ul>

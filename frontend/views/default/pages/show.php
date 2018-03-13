@@ -44,12 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php if (!empty($value)): ?>
 
                             <li>
-                                <a class="articleid" title="" href="#" rel="clearbox[test1]" >
+                                <a class="articleid" title="" href=" <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '']); ?>" rel="clearbox[test1]" >
                                     <div class="pro-img">
                                         <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '']); ?>
                                     </div>
 
-                                    <div class="pro-txt">图片名称</div>
+                                    <div class="pro-txt"><?= $value ?></div>
                                 </a>
                             </li>
 

@@ -186,7 +186,7 @@ class CenterController extends BaseController
         $session = Yii::$app->session;
 
         // 检查session是否开启
-        if ($session->isActive) {
+        if (!$session->isActive) {
             throw new NotFoundHttpException('请联系网站管理员, Session 功能有误 !!');
         }
 
@@ -197,6 +197,6 @@ class CenterController extends BaseController
         $session->set('language', $type);
         $session->set('language_name', $result);
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }
