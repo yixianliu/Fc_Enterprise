@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php if (!empty($value)): ?>
 
                             <li>
-                                <a class="articleid" title="" href="@web/../../backend/web/temp/pages/' . $value" rel="clearbox[test1]" >
+                                <a class="articleid" title="" href="#" rel="clearbox[test1]" >
                                     <div class="pro-img">
-                                        <img alt="" src="@web/../../backend/web/temp/pages/' . $value">
+                                        <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '']); ?>
                                     </div>
 
                                     <div class="pro-txt">图片名称</div>
