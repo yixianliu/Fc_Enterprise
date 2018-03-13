@@ -83,10 +83,11 @@ class Menu extends \yii\db\ActiveRecord
     /**
      * 所有
      *
-     * @param $parent
-     * @return bool
+     * @param null $parent
+     * @param null $type
+     * @return array|\yii\db\ActiveRecord[]
      */
-    public static function findByAll($parent = null)
+    public static function findByAll($parent = null, $type = null)
     {
 
         $parent = empty($parent) ? 'E1' : $parent;

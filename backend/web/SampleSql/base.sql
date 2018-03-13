@@ -795,7 +795,6 @@ CREATE TABLE `#DB_PREFIX#Pages_Classify` (
     `keywords` VARCHAR(155) NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NULL COMMENT '父类ID',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
