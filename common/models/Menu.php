@@ -143,15 +143,16 @@ class Menu extends \yii\db\ActiveRecord
      * 获取菜单数据 (Yii 版本)
      *
      * @param $pid
-     * @return array
+     * @param null $type
+     * @return array|void
      */
-    public function findMenuNav($pid)
+    public function findMenuNav($pid, $type = null)
     {
         // 初始化
         $dataMenu = array();
         $array = array();
 
-        $data = static::findByAll($pid);
+        $data = static::findByAll($pid, $type);
 
         if (empty($data))
             return;

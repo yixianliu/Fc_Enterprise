@@ -11,7 +11,7 @@ QijianAsset::register($this);
 
 $ClsMenu = new Menu();
 
-$footMenu = Menu::findByAll('E1');
+$footMenu = Menu::findByAll('E1', 'cn');
 
 $this->beginPage();
 ?>
@@ -51,7 +51,7 @@ $this->beginPage();
                 <?=
                 Nav::widget([
                     'options' => ['class' => 'nav nav-pills'],
-                    'items'   => $ClsMenu->findMenuNav('E1'),
+                    'items'   => $ClsMenu->findMenuNav('E1', 'cn'),
                 ]);
                 ?>
 

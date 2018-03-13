@@ -99,7 +99,7 @@ $this->registerJsFile('@web/themes/qijian/js/jquery.js');
                             <?=
                             Nav::widget([
                                 'options' => ['class' => 'navbar-nav navbar-right'],
-                                'items'   => $ClsMenu->findMenuNav('E1'),
+                                'items'   => $ClsMenu->findMenuNav('E1', 'cn'),
                             ]);
                             ?>
 
