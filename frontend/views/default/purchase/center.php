@@ -29,8 +29,8 @@ $this->title = '采购平台';
 
 <script type="text/javascript">
     $(function(){
-        slides(0);
-        myScrolls(0);
+        slides();
+        myScrolls();
     });
 </script>
 
