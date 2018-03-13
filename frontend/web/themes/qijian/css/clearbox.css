@@ -180,10 +180,10 @@
 	LEFT: 0px; FLOAT: right
 }
 #CB_Prev:hover {
-	BACKGROUND: url(../images/pic/prev.gif) no-repeat left 50%
+	BACKGROUND: url(../images/pic/prev.gif) no-repeat left 50%;
 }
 #CB_Next:hover {
-	BACKGROUND: url(../images/pic/next.gif) no-repeat right 50%
+	BACKGROUND: url(../images/pic/next.gif) no-repeat right 50%;
 }
 #CB_CloseWindow {
 	Z-INDEX: 1104; RIGHT: -1px; CURSOR: pointer; POSITION: absolute; TOP: 0px

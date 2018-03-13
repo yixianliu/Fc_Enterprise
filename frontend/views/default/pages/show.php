@@ -21,6 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?=Html::jsFile('@web/themes/qijian/js/clearbox.js')?>
 
+<!-- 隐藏显示大图上的缩略图 -->
+<script type="text/javascript">
+    $(function(){
+        $('#CB_Thumbs').remove();
+        $('#CB_ImgHide').remove();
+    });
+</script>
+
 <?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
 
 <div class="container content">
@@ -49,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '']); ?>
                                     </div>
 
-                                    <div class="pro-txt"><?= $value ?></div>
+                                    <div class="pro-txt"></div>
                                 </a>
                             </li>
 

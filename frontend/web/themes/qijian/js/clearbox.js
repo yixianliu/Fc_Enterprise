@@ -28,7 +28,7 @@
 		var CB_FontWeigth='normal';
 		var CB_CheckDuplicates='ki';
 		var CB_LoadingText='加载中...';
-		var CB_PicDir='../qijian/images/pic';						// 图片路径
+		var CB_PicDir='../../themes/qijian/images/pic';						// 图片路径
 		var CB_BodyMarginLeft=0;
 		var CB_BodyMarginRight=0;
 		var CB_BodyMarginTop=0;
