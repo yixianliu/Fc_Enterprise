@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data->name;
                             },
                         ],
-                        's_key',
+//                        's_key',
                         'title',
                         'price',
                         'discount',
@@ -60,11 +60,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         'keywords',
                         'path',
                         'images',
-                        'praise',
-                        'forward',
-                        'collection',
-                        'share',
-                        'attention',
+//                        'praise',
+//                        'forward',
+//                        'collection',
+//                        'share',
+//                        'attention',
+                        [
+                            'attribute' => 'is_language',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'cn' => '中文',
+                                    'en' => '英文',
+                                ];
+
+                                return $state[ $model->is_language ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_promote',
                             'value'     => function ($model) {
@@ -175,8 +186,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->is_thumb ];
                             },
                         ],
-                        'grade',
-                        'user_grade',
+//                        'grade',
+//                        'user_grade',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {

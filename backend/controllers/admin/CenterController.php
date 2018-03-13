@@ -164,4 +164,39 @@ class CenterController extends BaseController
     {
         return $this->render('seo');
     }
+
+
+    public function actionLanguage()
+    {
+
+        $type = Yii::$app->request->get('type', 'cn');
+
+        switch ($type) {
+
+            default:
+            case 'cn':
+                $result = '中文版';
+                break;
+
+            case 'en':
+                $result = '英文版';
+                break;
+        }
+
+        $session = Yii::$app->session;
+
+        // 检查session是否开启
+        if ($session->isActive) {
+            throw new NotFoundHttpException('请联系网站管理员, Session 功能有误 !!');
+        }
+
+        // 开启session
+        $session->open();
+
+        // 设置一个session变量，以下用法是相同的：
+        $session->set('language', $type);
+        $session->set('language_name', $result);
+
+        return $this->redirect(['index']);
+    }
 }

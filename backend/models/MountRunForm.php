@@ -40,6 +40,7 @@ class MountRunForm extends Model
             'phone'       => '联系电话',
             'keywords'    => '网站关键词',
             'description' => '网站描述',
+            'developers'  => '网站开发团队',
             'mysql_data'  => '数据库包',
         ];
     }

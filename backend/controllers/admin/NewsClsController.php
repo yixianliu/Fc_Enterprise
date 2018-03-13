@@ -80,6 +80,9 @@ class NewsClsController extends BaseController
 
         $model->c_key = self::getRandomString();
 
+        // 所属语言类别
+        $model->is_language =  Yii::$app->session['language'];
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);
         } else {

@@ -42,10 +42,9 @@ class ProductSearch extends Product
     public function search($params)
     {
 
-        $query = Product::find();
+        $query = Product::find()->where(['is_language' => Yii::$app->session['language']]);
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

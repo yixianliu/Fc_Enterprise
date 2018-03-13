@@ -84,6 +84,9 @@ class NewsController extends BaseController
 
         $model = new News();
 
+        // 所属语言类别
+        $model->is_language =  Yii::$app->session['language'];
+
         if ($model->load(Yii::$app->request->post())) {
 
             if (!$model->save()) {

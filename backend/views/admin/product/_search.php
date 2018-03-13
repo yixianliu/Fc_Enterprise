@@ -19,9 +19,7 @@ use kartik\select2\Select2;
     <table class="table table-hover">
         <tbody>
         <tr>
-            <td><?= $form->field($model, 'product_id') ?></td>
             <td>
-
                 <?=
                 $form->field($model, 'c_key')->widget(Select2::classname(), [
                     'data'          => $result['classify'],
@@ -31,7 +29,6 @@ use kartik\select2\Select2;
                     ],
                 ]);
                 ?>
-
             </td>
             <td><?= $form->field($model, 'title') ?></td>
             <td><?= $form->field($model, 'content') ?></td>

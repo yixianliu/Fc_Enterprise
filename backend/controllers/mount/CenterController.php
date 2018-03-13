@@ -46,6 +46,7 @@ class CenterController extends BaseController
                 $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm')['name'], $Sql_Data);
                 $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm')['title'], $Sql_Data);
                 $Sql_Data = str_ireplace('#DESCRIPTION#', $request->post('MountRunForm')['description'], $Sql_Data);
+                $Sql_Data = str_ireplace('#DEVELOPERS#', $request->post('MountRunForm')['developers'], $Sql_Data);
                 $Sql_Data = str_ireplace('#KEYWORDS#', $request->post('MountRunForm')['keywords'], $Sql_Data);
                 $Sql_Data = str_ireplace('#ADDRESS#', $request->post('MountRunForm')['address'], $Sql_Data);
                 $Sql_Data = str_ireplace('#PERSON#', $request->post('MountRunForm')['person'], $Sql_Data);
