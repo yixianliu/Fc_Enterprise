@@ -92,6 +92,7 @@ class News extends \yii\db\ActiveRecord
             'collection'   => 'Collection',
             'share'        => '分享次数',
             'attention'    => 'Attention',
+            'is_language'  => '语言类别',
             'is_promote'   => '推广状态',
             'is_hot'       => '热门状态',
             'is_winnow'    => '精选状态',

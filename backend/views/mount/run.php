@@ -31,6 +31,8 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'description')->textarea(['value' => Yii::$app->params['DESCRIPTION']]); ?>
 
+                <?= $form->field($model, 'developers')->textarea(['value' => Yii::$app->params['DEVELOPERS']]); ?>
+
                 <?= $form->field($model, 'keywords')->textarea(['value' => Yii::$app->params['KEYWORDS']]); ?>
 
                 <?= $form->field($model, 'phone')->textarea(['value' => Yii::$app->params['PHONE']]); ?>

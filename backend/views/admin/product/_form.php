@@ -227,10 +227,6 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?= $form->field($model, 'grade')->textInput(['maxlength' => true]) ?>
-
-                    <?= $form->field($model, 'user_grade')->textInput(['maxlength' => true]) ?>
-
                     <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
 
                     <div class="form-group">

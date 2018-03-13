@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'sort_id',
                         'name',
                         'keywords',
-                        'json_data',
+                        //                        'json_data',
                         [
                             'attribute' => 'parent_id',
                             'value'     => function ($model) {
@@ -53,7 +53,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
 
                                 $data = \common\models\ProductClassify::findOne(['c_key' => $model->parent_id]);
+
                                 return $data->name;
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_language',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'cn' => '中文',
+                                    'en' => '英文',
+                                ];
+
+                                return $state[ $model->is_language ];
                             },
                         ],
                         [

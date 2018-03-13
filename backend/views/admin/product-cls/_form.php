@@ -34,8 +34,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
                     'clientOptions' => [
@@ -48,10 +46,6 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
                     'data'          => ['On' => '开启', 'Off' => '关闭'],
@@ -61,6 +55,12 @@ use kartik\select2\Select2;
                     ],
                 ]);
                 ?>
+
+                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
 
                 <div class="form-group">
 

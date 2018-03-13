@@ -106,6 +106,7 @@ class Product extends \yii\db\ActiveRecord
             'collection'   => 'Collection',
             'share'        => '分享次数',
             'attention'    => 'Attention',
+            'is_language'  => '语言类别',
             'is_promote'   => '是否设为推广',
             'is_hot'       => '是否设为热门',
             'is_classic'   => '是否设为经典',

@@ -26,6 +26,15 @@ class BaseController extends Controller
             return $this->redirect(['/admin/member/login']);
         }
 
+        $session = Yii::$app->session;
+
+        if (!$session->has('language')) {
+
+            // 设置一个session变量，以下用法是相同的：
+            $session->set('language', 'cn');
+            $session->set('language_name', '中文版');
+        }
+
         return true;
     }
 

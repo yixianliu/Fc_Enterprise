@@ -4,7 +4,6 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\ProductClassify;
-use common\models\ProductClassifySearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -75,11 +74,15 @@ class ProductClsController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new ProductClassify();
 
         $model->c_key = self::getRandomString();
 
         $model->parent_id = Yii::$app->request->get('id', 'C0');
+
+        // 所属语言类别
+        $model->is_language =  Yii::$app->session['language'];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->c_key]);

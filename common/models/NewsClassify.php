@@ -73,6 +73,7 @@ class NewsClassify extends \yii\db\ActiveRecord
             'json_data'   => '分类 Json 参数',
             'parent_id'   => '分类父类',
             'is_using'    => '是否启用',
+            'is_language' => '语言类别',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];

@@ -47,13 +47,15 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'parent_id', 'is_using'], 'required'],
+            [['c_key', 'name', 'parent_id', 'is_using'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'keywords', 'json_data', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['c_key'], 'unique'],
             [['name'], 'unique'],
+
+            [['sort_id',], 'default', 'value' => 1],
         ];
     }
 
@@ -70,6 +72,7 @@ class ProductClassify extends \yii\db\ActiveRecord
             'keywords'    => '分类关键词',
             'json_data'   => 'Json 内容',
             'parent_id'   => '父类名称',
+            'is_language' => '语言类别',
             'is_using'    => '是否启用',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
