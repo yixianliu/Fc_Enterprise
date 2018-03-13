@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?=Html::cssFile('@web/themes/qijian/css/product.css')?>
 
-<?= $this->render('../slide', ['pagekey' => 'product']); ?>
-
 <style type="text/css">
     .summary {
         display: none;
     }
 </style>
+
+<?= $this->render('../slide', ['pagekey' => 'product']); ?>
 
 <div class="container content">
 

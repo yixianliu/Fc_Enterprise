@@ -10,14 +10,22 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/themes/qijian/css/product.css');
-$this->registerCssFile('@web/themes/qijian/css/prozoom.css');
-$this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
-$this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
-$this->registerJsFile('@web/themes/qijian/js/jquery.jqzoom.js');
-$this->registerJsFile('@web/themes/qijian/js/base.js');
+// $this->registerCssFile('@web/themes/qijian/css/product.css');
+// $this->registerCssFile('@web/themes/qijian/css/prozoom.css');
+// $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
+// $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
+// $this->registerJsFile('@web/themes/qijian/js/jquery.jqzoom.js');
+// $this->registerJsFile('@web/themes/qijian/js/base.js');
 
 ?>
+
+<?=Html::cssFile('@web/themes/qijian/css/product.css')?>
+
+<?=Html::cssFile('@web/themes/qijian/css/prozoom.css')?>
+
+<?=Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js')?>
+
+<?=Html::jsFile('@web/themes/qijian/js/jqzoom/base.js')?>
 
 <?= $this->render('../slide', ['pagekey' => 'product']); ?>
 
