@@ -21,10 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建幻灯片', ['create'], ['class' => 'btn btn-success']) ?>
-
-                    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建幻灯片', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
+
+                <hr/>
 
                 <?=
                 GridView::widget([

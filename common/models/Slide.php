@@ -44,7 +44,7 @@ class Slide extends \yii\db\ActiveRecord
             [['description', 'is_using'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
-            [['c_key', 'path'], 'unique'],
+            [['path'], 'unique'],
         ];
     }
 

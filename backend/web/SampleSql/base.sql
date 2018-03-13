@@ -720,7 +720,7 @@ CREATE TABLE `#DB_PREFIX#Slide` (
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `c_key` (`c_key`)
+    KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**

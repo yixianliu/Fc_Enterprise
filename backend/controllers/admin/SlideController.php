@@ -51,7 +51,7 @@ class SlideController extends BaseController
     {
         // add conditions that should always apply here
 
-        $query = Slide::find();
+        $query = Slide::find()->where(['is_language' => Yii::$app->session['language']]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -85,7 +85,10 @@ class SlideController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new Slide();
+
+        $model->is_language = Yii::$app->session['language'];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

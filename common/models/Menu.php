@@ -93,6 +93,7 @@ class Menu extends \yii\db\ActiveRecord
         $parent = empty($parent) ? 'E1' : $parent;
 
         return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
+            ->andWhere([self::tableName() . '.is_language' => $type])
             ->orderBy('sort_id', 'ASC')
             ->joinWith('itemRp')
             ->joinWith('menuModel')

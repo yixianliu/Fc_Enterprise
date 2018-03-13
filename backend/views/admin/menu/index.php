@@ -34,8 +34,9 @@ if (!empty($dataProvider)) {
         if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1')
             $array['create'] = Html::a('添加子菜单', ['create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
 
-        if ($value['menuModel']['model_key'] == 'UC1') {}
-            $array['content'] = Html::a('编辑内容', ['admin/pages/update', 'id' => $value['pages']['page_id']], ['class' => "collapsed"]) . ' / ';
+        if ($value['menuModel']['model_key'] == 'UC1') {
+        }
+        $array['content'] = Html::a('编辑内容', ['admin/pages/update', 'id' => $value['pages']['page_id']], ['class' => "collapsed"]) . ' / ';
 
         // 录入自定义页面的内容
         if ($value['menuModel']['model_key'] == 'UC1' && $value['pages']['is_type'] == 'list')
@@ -367,11 +368,11 @@ function menuHtml($data, $type)
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -383,9 +384,17 @@ function menuHtml($data, $type)
 
                 <hr/>
 
-                <ul class="uk-nestable" style="font-size: 13px;">
-                    <?= $html ?>
-                </ul>
+                <?php if (!empty($dataProvider)): ?>
+
+                    <ul class="uk-nestable" style="font-size: 13px;">
+                        <?= $html ?>
+                    </ul>
+
+                <?php else: ?>
+
+                    <h3>没有菜单 !!</h3>
+
+                <?php endif; ?>
 
             </div>
         </div>
