@@ -36,7 +36,7 @@ function recursionCls($data)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ' . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ';
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
@@ -68,18 +68,20 @@ function recursionCls($data)
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建新闻分类', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('发布新闻', ['admin/news/create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建新闻分类', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('发布新闻', ['admin/news/create'], ['class' => "collapsed"]) . ' / ' ?>
                 </p>
 
                 <hr/>
 
                 <ul class="uk-nestable" style="font-size: 13px;">
+
                     <?php if (!empty($result)): ?>
                         <?= $result ?>
                     <?php else: ?>
                         <h3>暂无分类 !!</h3>
                     <?php endif; ?>
+
                 </ul>
 
             </div>

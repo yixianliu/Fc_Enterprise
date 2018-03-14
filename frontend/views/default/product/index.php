@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/product.css')?>
+<?= Html::cssFile('@web/themes/qijian/css/product.css') ?>
 
 <style type="text/css">
     .summary {

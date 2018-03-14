@@ -67,10 +67,20 @@ switch ($type) {
         $classifyName = $data['name'];
 
         break;
-}
 
-if (empty($classify))
-    exit(0);
+    // 采购
+    case 'purchase':
+
+        $classify = \common\models\PsbClassify::findByAll('P0', 'purchase');
+
+        foreach ($classify as $key => $value) {
+            $classify[ $key ]['url'] = Url::to(['/purchase/index', 'id' => $value['c_key']]);
+        }
+
+        $classifyName = '采购中心';
+
+        break;
+}
 
 ?>
 
@@ -99,6 +109,10 @@ if (empty($classify))
                 <?php endforeach; ?>
 
             <?php endif; ?>
+
+        <?php else: ?>
+
+            <a href="#" title="暂无栏目 !!"><div class="cur" >暂无栏目 !!</div></a>
 
         <?php endif; ?>
 

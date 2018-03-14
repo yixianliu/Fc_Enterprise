@@ -25,11 +25,18 @@ class BaseController extends Controller
     public function init()
     {
 
-        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
-            return false;
+        parent::init();
+
+        $session = Yii::$app->session;
+
+        if (!$session->has('language')) {
+
+            // 设置一个session变量，以下用法是相同的：
+            $session->set('language', 'cn');
+            $session->set('language_name', '中文版');
         }
 
-        return;
+        return true;
     }
 
     /**

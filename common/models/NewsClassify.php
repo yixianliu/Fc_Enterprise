@@ -47,15 +47,17 @@ class NewsClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
+            [['name', 'parent_id', 'is_using'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
             [['json_data'], 'string', 'max' => 1000],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
-            [['c_key'], 'unique'],
             [['name'], 'unique'],
+
+            [['sort_id', ], 'default', 'value' => 1],
+            [['keywords', ], 'default', 'value' => null],
         ];
     }
 

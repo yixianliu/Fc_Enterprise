@@ -16,7 +16,7 @@ use yii\helpers\Html;
 
 <ul class="contact_us">
     <li><a>公司名称：<?= $result['Conf']['NAME'] ?></a></li>
-    <li><a>联系人：李xx 总经理</a></li>
+    <li><a>联系人：<?= $result['Conf']['PERSON'] ?></a></li>
     <li><a>联系电话：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
-    <li><a>公司地址：<span>广东省吴川市区塘尾街道325国道北面羽绒产业基地内</span></a></li>
+    <li><a>公司地址：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
 </ul>

@@ -25,35 +25,7 @@ $this->registerCssFile('@web/themes/qijian/css/purchasing.css');
 <!-- 左右框架 -->
 <div class="container content">
 
-    <!-- 左边 -->
-    <div class="left">
-
-        <div class="box">热门采购</div>
-
-        <!-- 相关分类
-        <?= $this->render('../cls', ['result' => $result, 'type' => 'purchase']); ?>
-        相关分类 -->
-
-        <div class="cat_list">
-            <a href="#"><div>金属</div></a>
-            <a href="#"><div>木材</div></a>
-            <a href="#"><div>竹</div></a>
-        </div>
-
-        <div class="contact">
-
-            <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => '']); ?>
-
-            <ul class="contact_us">
-                <li>公司名称：广东省湛江市XXXXXX</li>
-                <li>联系人：XXX</li>
-                <li>联系电话：XXXXXXXXXXX</li>
-                <li>公司地址：湛江七建</li>
-            </ul>
-        </div>
-
-    </div>
-    <!-- #左边 -->
+    <?= $this->render('../_left', ['type' => 'purchase', 'id' => $id]); ?>
 
     <!-- 右边 -->
     <div class="right">

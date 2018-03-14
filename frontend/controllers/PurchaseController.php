@@ -76,10 +76,10 @@ class PurchaseController extends BaseController
      * Lists all Purchase models.
      * @return mixed
      */
-    public function actionIndex($type = null)
+    public function actionIndex($id = null)
     {
 
-        $model = empty($type) ? Purchase::find()->where(['is_using' => 'On']) : Purchase::find()->where(['c_key' => $type, 'is_using' => 'On']);
+        $model = empty($id) ? Purchase::find()->where(['is_using' => 'On']) : Purchase::find()->where(['c_key' => $id, 'is_using' => 'On']);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $model,
@@ -93,6 +93,7 @@ class PurchaseController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'result'       => $result,
+            'id'           => $id,
         ]);
     }
 

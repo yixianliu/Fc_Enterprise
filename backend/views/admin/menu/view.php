@@ -48,6 +48,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 $data = \common\models\Menu::findOne(['m_key' => $model->parent_id]);
 
+                                if (empty($data))
+                                    return '一级菜单';
+
                                 return $data->name;
                             },
                         ],

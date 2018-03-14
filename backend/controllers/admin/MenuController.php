@@ -108,7 +108,7 @@ class MenuController extends BaseController
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'parent'     => Menu::getSelectMenu(),
+                    'parent'     => Menu::getSelectMenu('E1'),
                     'menu_model' => $this->getModel(),
                     'role'       => $this->getRole(),
                 ],
@@ -147,7 +147,7 @@ class MenuController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'parent'     => Menu::getSelectMenu(),
+                    'parent'     => Menu::getSelectMenu('E1'),
                     'menu_model' => $this->getModel(),
                     'role'       => $this->getRole(),
                     'data'       => Menu::findByOne($id),

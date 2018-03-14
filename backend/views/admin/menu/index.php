@@ -19,70 +19,39 @@ $html = null;
 
 if (!empty($dataProvider)) {
 
-    // 循环一级目录
     foreach ($dataProvider as $value) {
-
-        $array = [
-            'create'   => null,
-            'update'   => Html::a('编辑菜单', ['update', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
-            'del'      => Html::a('删除菜单', ['delete', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ',
-            'entering' => null,
-            'content'  => null,
-        ];
-
-        // 新闻和产品没有子菜单
-        if ($value['menuModel']['model_key'] == 'UC1' || $value['menuModel']['model_key'] == 'UU1')
-            $array['create'] = Html::a('添加子菜单', ['create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
-
-        if ($value['menuModel']['model_key'] == 'UC1') {
-        }
-        $array['content'] = Html::a('编辑内容', ['admin/pages/update', 'id' => $value['pages']['page_id']], ['class' => "collapsed"]) . ' / ';
-
-        // 录入自定义页面的内容
-        if ($value['menuModel']['model_key'] == 'UC1' && $value['pages']['is_type'] == 'list')
-            $array['entering'] = Html::a('录入内容', ['admin/pages-list/create', 'id' => $value['m_key']], ['class' => "collapsed"]) . ' / ';
-
-
-        $html .= '<li class="">';
-        $html .= '    <div class="uk-nestable-item" style="padding: 5px;">&nbsp;&nbsp;▸';
-        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $array['update'] . '&nbsp;' . $array['create'] . '&nbsp;' . $array['del'] . '&nbsp;' . $array['content'] . '&nbsp;' . $array['entering'];
-        $html .= '    </div>';
-        $html .= '    <ul class="">';
 
         // 选择模型
         switch ($value['menuModel']['url_key']) {
 
             // 产品
             case 'product':
-                $html .= recursionProductData($value);
+                $html .= menuHtml($value, 'product');
                 break;
 
             // 新闻
             case 'news':
-                $html .= recursionNewsData($value);
+                $html .= menuHtml($value, 'news');
                 break;
 
             // 单页面
             case 'pages':
-                $html .= recursionPagesData($value);
+                $html .= menuHtml($value, 'pages');
                 break;
 
             // 超链接
             case 'urls':
-                $html .= recursionUrlData($value);
+                $html .= menuHtml($value, 'urls');
                 break;
 
             // 采购
             case 'purchase':
-                $html .= recursionPurchaseData($value);
+                $html .= menuHtml($value, 'purchase');
                 break;
 
             default:
                 break;
         }
-
-        $html .= '    </ul>';
-        $html .= '</li>';
     }
 }
 
@@ -189,7 +158,7 @@ function recursionPagesData($data)
         return;
 
     // 查找相对应的菜单
-    $child = Menu::findByAll($data['m_key']);
+    $child = Menu::findByAll($data['m_key'], Yii::$app->session['language']);
 
     if (empty($child))
         return;
@@ -222,7 +191,7 @@ function recursionUrlData($data)
     // 初始化
     $html = null;
 
-    $child = Menu::findByAll($data['m_key']);
+    $child = Menu::findByAll($data['m_key'], Yii::$app->session['language']);
 
     if (empty($child))
         return;
@@ -263,63 +232,73 @@ function menuHtml($data, $type)
         // 新闻
         case 'news':
 
-            if (empty($data['c_key']))
+            if (empty($data['c_key'])) {
+                $array['update'] = Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ';
+                $array['create'] = Html::a('添加分类', ['admin/news-cls/create']) . ' / ';
+                $array['del'] = Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ';
                 break;
+            }
 
             $array = [
-                'create'  => Html::a('添加分类', ['admin/news-cls/create'], ['class' => "collapsed"]) . ' / ',
-                'update'  => Html::a('编辑分类', ['admin/news-cls/update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ',
-                'del'     => Html::a('删除分类', ['admin/news-cls/delete', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ',
+                'create'  => Html::a('添加分类', ['admin/news-cls/create']) . ' / ',
+                'update'  => Html::a('编辑分类', ['admin/news-cls/update', 'id' => $data['c_key']]) . ' / ',
+                'del'     => Html::a('删除分类', ['admin/news-cls/delete', 'id' => $data['c_key']]) . ' / ',
                 'content' => null
             ];
+
             break;
 
         // 产品
         case 'product':
 
-            if (empty($data['c_key']))
+            if (empty($data['c_key'])) {
+                $array['update'] = Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ';
+                $array['create'] = Html::a('添加分类', ['admin/product-cls/create']) . ' / ';
+                $array['del'] = Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ';
                 break;
+            }
 
             $array = [
-                'create'  => Html::a('添加分类', ['admin/product-cls/create'], ['class' => "collapsed"]) . ' / ',
-                'update'  => Html::a('编辑分类', ['admin/product-cls/update', 'id' => $data['c_key']], ['class' => 'collapsed']) . ' / ',
-                'del'     => Html::a('删除分类', ['admin/product-cls/delete', 'id' => $data['c_key']], ['class' => 'collapsed']) . ' / ',
+                'create'  => Html::a('添加分类', ['admin/product-cls/create']) . ' / ',
+                'update'  => Html::a('编辑分类', ['admin/product-cls/update', 'id' => $data['c_key']]) . ' / ',
+                'del'     => Html::a('删除分类', ['admin/product-cls/delete', 'id' => $data['c_key']]) . ' / ',
                 'content' => null
             ];
             break;
 
         // 自定义页面
         case 'pages':
+
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => "collapsed"]) . ' / ',
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
+                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']]) . ' / ',
             ];
 
             $entering = Pages::findByOne($data['pages']['page_id']);
 
             if ($entering['menu']['model_key'] == 'UC1' && $entering['is_type'] == 'list')
-                $enteringHtml = Html::a('录入内容', ['admin/pages-list/create', 'id' => $entering['m_key']], ['class' => "collapsed"]) . ' / ';
+                $enteringHtml = Html::a('录入内容', ['admin/pages-list/create', 'id' => $entering['m_key']]) . ' / ';
 
             break;
 
         // 链接
         case 'urls':
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'update'  => Html::a('编辑单页面分类', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'del'     => Html::a('删除单页面分类', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
+                'update'  => Html::a('编辑单页面分类', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除单页面分类', ['delete', 'id' => $data['m_key']]) . ' / ',
                 'content' => null
             ];
             break;
 
         case 'purchase':
             $array = [
-                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']], ['class' => "collapsed"]) . ' / ',
-                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']], ['class' => "collapsed"]) . ' / ',
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
+                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']]) . ' / ',
             ];
             break;
     }
@@ -377,9 +356,9 @@ function menuHtml($data, $type)
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建菜单', ['create'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('创建菜单', ['create']) . ' / ' ?>
+                    <?= Html::a('创建单页面', ['admin/pages/create']) . ' / ' ?>
+                    <?= Html::a('创建单页面分类', ['admin/pages-cls/create']) . ' / ' ?>
                 </p>
 
                 <hr/>

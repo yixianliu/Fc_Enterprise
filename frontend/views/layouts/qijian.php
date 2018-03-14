@@ -13,6 +13,8 @@ $ClsMenu = new Menu();
 
 $footMenu = Menu::findByAll('E1', 'cn');
 
+$session = Yii::$app->session;
+
 $this->beginPage();
 ?>
 
@@ -51,7 +53,7 @@ $this->beginPage();
                 <?=
                 Nav::widget([
                     'options' => ['class' => 'nav nav-pills'],
-                    'items'   => $ClsMenu->findMenuNav('E1', 'cn'),
+                    'items'   => $ClsMenu->findMenuNav('E1', Yii::$app->session['language']),
                 ]);
                 ?>
 
