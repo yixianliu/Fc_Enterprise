@@ -48,7 +48,7 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['m_key', 'name', 'is_using', 'model_key'], 'required'],
+            [['m_key', 'name', 'is_using', 'parent_id', 'model_key'], 'required'],
             [['is_using'], 'string'],
             [['m_key', 'parent_id'], 'string', 'max' => 55],
             [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
@@ -461,7 +461,7 @@ class Menu extends \yii\db\ActiveRecord
         // 初始化
         $result = array();
 
-        $result[ static::$parent_id ] = '一级菜单';
+        $result['E1'] = '一级菜单';
 
         foreach ($dataClassify as $key => $value) {
 

@@ -86,10 +86,18 @@ class PagesListController extends BaseController
         $model = new PagesList();
         $data = array();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $dataPost = Yii::$app->request->post();
+
+        // 调整
+        if (!empty($dataPost)) {
+            $dataPost = $this->setPageId($dataPost);
+        }
+
+        if ($model->load($dataPost) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        // 获取菜单ID
         $id = Yii::$app->request->get('id', null);
 
         if (!empty($id)) {
@@ -116,9 +124,17 @@ class PagesListController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $dataPost = Yii::$app->request->post();
+
+        // 调整
+        if (!empty($dataPost)) {
+            $dataPost = $this->setPageId($dataPost);
+        }
+
+        if ($model->load($dataPost) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -204,5 +220,27 @@ class PagesListController extends BaseController
         $result = $Cls->getClsSelect();
 
         return $result;
+    }
+
+    /**
+     * 设置对应的PAGE_ID
+     *
+     * @param $data
+     * @return bool
+     */
+    public function setPageId($data)
+    {
+        if (empty($data))
+            return false;
+
+        // 设置对应的单页面 ID
+        $result = Pages::findByOne($data['PagesList']['page_id'], 'm_key');
+
+        if (empty($result))
+            return false;
+
+        $data['PagesList']['page_id'] = $result['page_id'];
+
+        return $data;
     }
 }

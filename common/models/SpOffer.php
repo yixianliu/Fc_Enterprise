@@ -43,12 +43,12 @@ class SpOffer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['offer_id', 'user_id', 'price', 'is_type', 'is_using'], 'required'],
+            [['offer_id', 'price',], 'required'],
             [['is_type', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['offer_id', 'user_id', 'price'], 'string', 'max' => 85],
-            [['user_id'], 'unique'],
-            [['offer_id'], 'unique'],
+
+            [['is_using'], 'default', 'value' => 'Off'],
+            [['path'], 'default', 'value' => null],
         ];
     }
 
@@ -61,10 +61,42 @@ class SpOffer extends \yii\db\ActiveRecord
             'offer_id'   => '相关采购供应对应编号',
             'user_id'    => '用户 ID',
             'price'      => '价格',
+            'path'       => '图片',
             'is_type'    => '类型',
             'is_using'   => '是否启用',
             'created_at' => '添加数据时间',
             'updated_at' => '更新数据时间',
         ];
+    }
+
+    /**
+     * 列表
+     *
+     * @param null $offerid
+     * @param null $user_id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    static public function findByAll($offerid = null, $user_id = null)
+    {
+
+        // 初始化
+        $where = array();
+
+        if (!empty($offerid))
+            $where = ['offer_id' => $offerid];
+
+        if (!empty($user_id))
+            $where = ['user_id' => $user_id];
+
+        return static::find()->where($where)
+            ->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
 }

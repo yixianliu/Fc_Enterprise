@@ -74,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at'    => '添加数据时间',
             'updated_at'    => '更新数据时间',
 
-            'enterprise'  => '企业名称',
+            'job'         => '所属职位',
             'repassword'  => '二次密码',
             'newpassword' => '新密码',
             'is_type'     => '用户类型',

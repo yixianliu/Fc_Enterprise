@@ -79,7 +79,7 @@ switch ($model->is_type) {
 
                     <?= Html::submitButton($model->isNewRecord ? '创建分类' : '更新分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['index', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['index', 'id' => $id], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 

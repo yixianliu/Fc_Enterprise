@@ -36,7 +36,7 @@ use kartik\select2\Select2;
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
-                    'data'    => ['On' => '启用', 'Off' => '未启用'],
+                    'data'    => ['On' => '采纳', 'Off' => '未采纳'],
                     'options' => ['placeholder' => '审核...'],
                 ]);
                 ?>
@@ -54,7 +54,10 @@ use kartik\select2\Select2;
             </div>
         </div>
 
-        <?= $this->render('../../formMsg'); ?>
+        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'sp-offer', 'user_id' => $model->user_id]); ?>
 
     </section>
+
+    <?= $this->render('../../formMsg'); ?>
+
 </div>

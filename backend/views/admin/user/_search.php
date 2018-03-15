@@ -19,8 +19,18 @@ $form = ActiveForm::begin([
     <tbody>
     <tr>
         <td><?= $form->field($model, 'username') ?></td>
-        <td><?= $form->field($model, 'nickname') ?></td>
-        <td><?= $form->field($model, 'enterprise') ?></td>
+        <td><?= $form->field($model, 'job') ?></td>
+        <td>
+            <?=
+            $form->field($model, 'is_type')->widget(kartik\select2\Select2::classname(), [
+                'data'          => ['user' => '普通用户', 'supplier' => '供应商'],
+                'options'       => ['placeholder' => '是否启用...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </td>
         <td>
             <?=
             $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [

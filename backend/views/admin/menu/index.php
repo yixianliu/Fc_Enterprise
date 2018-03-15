@@ -226,7 +226,12 @@ function menuHtml($data, $type)
 
         // 招聘
         case 'job':
-
+            $array = [
+                'create'  => Html::a('添加菜单', ['create']) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['c_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['c_key']]) . ' / ',
+                'content' => null
+            ];
             break;
 
         // 新闻
@@ -234,14 +239,14 @@ function menuHtml($data, $type)
 
             if (empty($data['c_key'])) {
                 $array['update'] = Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ';
-                $array['create'] = Html::a('添加分类', ['admin/news-cls/create']) . ' / ';
+                $array['create'] = Html::a('添加新闻分类', ['admin/news-cls/create']) . ' / ';
                 $array['del'] = Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ';
                 break;
             }
 
             $array = [
                 'create'  => Html::a('添加分类', ['admin/news-cls/create']) . ' / ',
-                'update'  => Html::a('编辑分类', ['admin/news-cls/update', 'id' => $data['c_key']]) . ' / ',
+                'update'  => Html::a('编辑新闻分类', ['admin/news-cls/update', 'id' => $data['c_key']]) . ' / ',
                 'del'     => Html::a('删除分类', ['admin/news-cls/delete', 'id' => $data['c_key']]) . ' / ',
                 'content' => null
             ];
@@ -253,7 +258,7 @@ function menuHtml($data, $type)
 
             if (empty($data['c_key'])) {
                 $array['update'] = Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ';
-                $array['create'] = Html::a('添加分类', ['admin/product-cls/create']) . ' / ';
+                $array['create'] = Html::a('添加产品分类', ['admin/product-cls/create']) . ' / ';
                 $array['del'] = Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ';
                 break;
             }
@@ -287,12 +292,13 @@ function menuHtml($data, $type)
         case 'urls':
             $array = [
                 'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
-                'update'  => Html::a('编辑单页面分类', ['update', 'id' => $data['m_key']]) . ' / ',
-                'del'     => Html::a('删除单页面分类', ['delete', 'id' => $data['m_key']]) . ' / ',
-                'content' => null
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除 Url 菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
+                'content' => null,
             ];
             break;
 
+        // 采购平台
         case 'purchase':
             $array = [
                 'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',

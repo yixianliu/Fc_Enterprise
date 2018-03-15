@@ -49,14 +49,16 @@ class PsbClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using', 'is_type'], 'required'],
+            [['name', 'parent_id', 'is_using', 'is_type'], 'required'],
             [['sort_id',], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
-            [['c_key'], 'unique'],
+
+            [['sort_id',], 'default', 'value' => 1],
+            [['keywords',], 'default', 'value' => '暂无!!'],
         ];
     }
 
@@ -129,35 +131,63 @@ class PsbClassify extends \yii\db\ActiveRecord
                 break;
         }
 
-        $parent = static::findByAll($parent_id, $type);
+        // 产品分类
+        $dataClassify = static::findByAll($parent_id, $type);
 
-        foreach ($parent as $key => $value) {
-//            $result[ $key ] = $this->recursionCls($value);
-            $result[ $value['c_key']] = $value['name'];
+        $result[ $this->parent_id ] = '顶级分类 !!';
+
+        foreach ($dataClassify as $key => $value) {
+
+            $result[ $value['c_key'] ] = $value['name'];
+
+            $child = $this->recursionClsSelect($value);
+
+            if (empty($child))
+                continue;
+
+            $result = array_merge($result, $child);
         }
 
         return $result;
     }
 
     /**
-     * 无限分类
+     * 无限分类(选项框)
      *
      * @param $data
+     * @param int $num
      */
-    public function recursionCls($data)
+    public function recursionClsSelect($data, $num = 1)
     {
+
         if (empty($data))
             return;
 
-        $result = $data;
+        // 初始化
+        $result = array();
+        $symbol = null;
 
         $child = static::findByAll($data['c_key']);
 
         if (empty($child))
-            return $result;
+            return;
 
-        foreach ($child as $value) {
-            $result['child'][] = $this->recursionCls($value);
+        if ($num != 0) {
+            for ($i = 0; $i <= $num; $i++) {
+                $symbol .= '――';
+            }
+        }
+
+        foreach ($child as $key => $value) {
+
+            $result[ $value['c_key'] ] = $symbol . $value['name'];
+
+            $childData = $this->recursionClsSelect($value, ($num + 1));
+
+            if (empty($childData))
+                continue;
+
+            $result = array_merge($result, $childData);
         }
 
         return $result;

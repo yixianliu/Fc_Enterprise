@@ -4,8 +4,8 @@ namespace frontend\controllers;
 
 
 use common\models\NavClassify;
-use common\models\News;
 use common\models\SpOffer;
+use common\models\News;
 use Yii;
 use common\models\Purchase;
 use common\models\PsbClassify;
@@ -123,10 +123,15 @@ class PurchaseController extends BaseController
             }
         }
 
+        $dataResult = SpOffer::findByAll($model->purchase_id);
+
+        $offer = empty($dataResult) ? true : false ;
+
         return $this->render('view', [
             'model'      => $model,
             'modelOffer' => $modelOffer,
             'result'     => $result,
+            'offer'      => $offer,
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
@@ -116,6 +117,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
+
+        <div class="content-body">
+            <div class="row">
+
+                <h3>采购信息下的价格</h3>
+
+                <?= GridView::widget([
+                    'dataProvider' => $result['offer'],
+                    'columns'      => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'price',
+                        'path',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已采纳',
+                                    'Off' => '未采纳',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
+
+            </div>
+        </div>
+
     </section>
 </div>
 

@@ -25,9 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('发布采购信息', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布采购信息', ['create']) ?> /
+                    <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0']) ?> /
                 </p>
+
+                <hr/>
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,

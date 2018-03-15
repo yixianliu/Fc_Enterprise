@@ -29,8 +29,11 @@ class SpOfferController extends BaseController
      * @param $type
      * @return \yii\web\Response
      */
-    public function actionCreate($id, $type)
+    public function actionCreate()
     {
+
+        $id = Yii::$app->request->get('id', null);
+        $type = Yii::$app->request->get('type', null);
 
         if (Yii::$app->user->isGuest)
             return $this->redirect(['/member/reg']);
@@ -41,14 +44,16 @@ class SpOfferController extends BaseController
         $model = new SpOffer();
 
         $model->is_type = $type;
-        $model->offer_id = $id;
         $model->user_id = Yii::$app->user->identity->user_id;
-        $model->is_using = 'Off';
 
-        if (!$model->load(Yii::$app->request->post()) || !$model->save()) {
-            return $this->redirect(['/user/index']);
+        if (!empty($model->getErrors())) {
+            Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
-        return $this->redirect(['/sp-offer/index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/sp-offer/index']);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

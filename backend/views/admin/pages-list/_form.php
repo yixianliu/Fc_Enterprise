@@ -69,10 +69,10 @@ use dosamigos\fileupload\FileUploadUI;
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages', 'attribute' => 'path'],
+                    'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages-list', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
-                        'accept' => 'file/*',
+                        'accept' => 'image/*',
                     ],
                     'clientOptions' => [
                         'maxFileSize'      => 5000000,
@@ -142,4 +142,7 @@ use dosamigos\fileupload\FileUploadUI;
         <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'pages-list']); ?>
 
     </section>
+
+    <?= $this->render('../../formMsg'); ?>
+
 </div>

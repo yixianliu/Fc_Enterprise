@@ -13,6 +13,7 @@ namespace backend\controllers\admin;
 
 
 use common\models\Pages;
+use common\models\PagesList;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -107,6 +108,10 @@ class UploadController extends BaseController
             // 单页面
             case 'pages':
                 $model = new Pages();
+                break;
+
+            case 'pages-list':
+                $model = new PagesList();
                 break;
 
             default:

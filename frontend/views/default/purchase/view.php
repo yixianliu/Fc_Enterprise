@@ -93,44 +93,45 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
                         <hr>
 
-                        <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
+                        <?php if ($offer == true): ?>
+                            <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
 
-                            <?php
-                            $form = ActiveForm::begin([
-                                'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
-                                'method' => 'post',
-                                'id'     => $modelOffer->formName(),
-                            ]);
-                            ?>
+                                <?php
+                                $form = ActiveForm::begin([
+                                    'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
+                                    'method' => 'post',
+                                    'id'     => $modelOffer->formName(),
+                                ]);
+                                ?>
 
-                            <p class="right-tar">
-                                <span class="right-color">提交价格 : </span>
-                                <?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
-                            </p>
+                                <p class="right-tar">
+                                    <span class="right-color">提交价格 : </span>
+                                    <?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
+                                </p>
 
-                            <p>
+                                <p>
 
-                            <hr/>
+                                <hr/>
 
-                            <?=
-                            FileUploadUI::widget([
-                                'model'         => $modelOffer,
-                                'attribute'     => 'path',
-                                'url'           => ['upload/image-upload', 'id' => $modelOffer->path, 'type' => 'sp_offer', 'attribute' => 'path'],
-                                'gallery'       => false,
-                                'fieldOptions'  => [
-                                    'accept' => 'image/*'
-                                ],
-                                'clientOptions' => [
-                                    'maxFileSize'      => 2000000,
-                                    'dataType'         => 'json',
-                                    'maxNumberOfFiles' => 5,
-                                ],
+                                <?=
+                                FileUploadUI::widget([
+                                    'model'         => $modelOffer,
+                                    'attribute'     => 'path',
+                                    'url'           => ['upload/image-upload', 'id' => $modelOffer->path, 'type' => 'sp_offer', 'attribute' => 'path'],
+                                    'gallery'       => false,
+                                    'fieldOptions'  => [
+                                        'accept' => 'image/*'
+                                    ],
+                                    'clientOptions' => [
+                                        'maxFileSize'      => 2000000,
+                                        'dataType'         => 'json',
+                                        'maxNumberOfFiles' => 5,
+                                    ],
 
-                                // ...
-                                'clientEvents'  => [
+                                    // ...
+                                    'clientEvents'  => [
 
-                                    'fileuploaddone' => 'function(e, data) {
+                                        'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
@@ -148,33 +149,47 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                                 
                                 return true;
                             }',
-                                    'fileuploadfail' => 'function(e, data) {
+                                        'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                             }',
-                                ],
-                            ]);
-                            ?>
+                                    ],
+                                ]);
+                                ?>
 
-                            <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
+                                <?= $form->field($modelOffer, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                            <hr/>
+                                <?= $form->field($modelOffer, 'offer_id')->hiddenInput(['value' => $model->purchase_id])->label(false) ?>
 
-                            </p>
+                                <hr/>
 
-                            <p>
-                                <?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?>
-                            </p>
+                                </p>
 
-                            <?php ActiveForm::end(); ?>
+                                <p>
+                                    <?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?>
+                                </p>
+
+                                <br/>
+
+                                <p>
+                                    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+                                </p>
+
+                                <?php ActiveForm::end(); ?>
+
+                            <?php else: ?>
+
+                                <h3>请登录后提交内容 !! </h3>
+
+                                <br/>
+
+                                点这里, <a href="<?= Url::to(['member/login']) ?>" title="<?= $model->title ?>">用户登录</a>
+
+                            <?php endif; ?>
 
                         <?php else: ?>
 
-                            <h3>请登录后提交内容 !! </h3>
-
-                            <br/>
-
-                            点这里, <a href="<?= Url::to(['member/login']) ?>" title="<?= $model->title ?>">用户登录</a>
+                            <h2>此采购已被采纳 !!</h2>
 
                         <?php endif; ?>
 

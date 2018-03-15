@@ -79,16 +79,6 @@ class UploadController extends BaseController
 
         switch ($type) {
 
-            // 产品
-            case 'product':
-                $model = new Product();
-                break;
-
-            // 幻灯片
-            case 'slide':
-                $model = new Slide();
-                break;
-
             // 简历中心
             case 'resume':
                 $model = new Resume();
@@ -107,12 +97,6 @@ class UploadController extends BaseController
                 // 提交价格
             case 'sp_offer':
                 $model = new SpOffer();
-                break;
-
-            // 单页面
-            case 'pages':
-                $model = new PagesTplFile();
-                $ext = ['php', 'html', 'txt'];
                 break;
 
             default:

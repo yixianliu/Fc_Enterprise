@@ -38,9 +38,13 @@ if (!empty($img)) {
                 <?php foreach ($images as $value): ?>
                     <div class="col-md-2 col-sm-6 col-xs-12">
 
-                        <?php if ($type != 'pages' && $type != 'purchase'): ?>
+                        <?php if ($type != 'pages' && $type != 'purchase' && $type != 'sp-offer'): ?>
 
                             <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+
+                        <?php elseif ($type == 'sp-offer'): ?>
+
+                            <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
 
                         <?php else: ?>
 
@@ -52,10 +56,13 @@ if (!empty($img)) {
 
                             <h5 class="deleteH5" style="word-wrap: break-word;"><?= $value ?></h5><br/>
 
-                            <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
-                                <i class="glyphicon glyphicon-trash"></i>
-                                <span>删除</span>
-                            </button>
+                            <?php if ($type != 'sp-offer'): ?>
+                                <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    <span>删除</span>
+                                </button>
+                            <?php endif; ?>
+
                         </div>
 
                     </div>

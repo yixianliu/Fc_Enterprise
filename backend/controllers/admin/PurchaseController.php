@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\SpOffer;
 use Yii;
 use common\models\Purchase;
 use common\models\PurchaseSearch;
@@ -10,6 +11,7 @@ use common\models\User;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 
 /**
  * PurchaseController implements the CRUD actions for Purchase model.
@@ -64,8 +66,20 @@ class PurchaseController extends BaseController
      */
     public function actionView($id)
     {
+
+        $model = $this->findModel($id);
+
+        // 价格
+        $result['offer'] = new ActiveDataProvider([
+            'query'      => SpOffer::find(['offer_id' => $model->purchase_id]),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model'  => $model,
+            'result' => $result,
         ]);
     }
 

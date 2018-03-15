@@ -12,15 +12,15 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = '首页';
+$this->title = '网站首页';
 
 ?>
 
 <!-- 首页上下图片滚动插件 -->
-<?=Html::jsFile('@web/themes/qijian/js/popup.js')?>
+<?= Html::jsFile('@web/themes/qijian/js/popup.js') ?>
 
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         shows();
     });
 </script>
@@ -183,9 +183,19 @@ $this->title = '首页';
 
                     <?php foreach ($result['data'] as $value): ?>
                         <li>
+
                             <a href="" target="_blank">
-                                <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value['img']), ['alt' => $value['title']]); ?>
+                                <?php if (!empty($value['img'])): ?>
+
+                                    <?= Html::img(Url::to('@web/../../backend/web/temp/pages-list/' . $value['img']), ['alt' => $value['title']]); ?>
+
+                                <?php else: ?>
+
+                                    <?= $value['title'] ?>
+
+                                <?php endif; ?>
                             </a>
+
                         </li>
                     <?php endforeach; ?>
 

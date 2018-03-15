@@ -656,8 +656,8 @@ CREATE TABLE `#DB_PREFIX#SP_Offer` (
     `created_at` INT(11) UNSIGNED NOT NULL,
     `updated_at` INT(11) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `user_id` (`user_id`),
-    UNIQUE KEY `offer_id` (`offer_id`)
+    KEY `user_id` (`user_id`),
+    KEY `offer_id` (`offer_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**

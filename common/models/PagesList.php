@@ -78,6 +78,8 @@ class PagesList extends \yii\db\ActiveRecord
      */
     public static function findByAll($id)
     {
-        return static::find()->where(['page_id' => $id])->all();
+        return static::find()->where(['page_id' => $id])
+            ->asArray()
+            ->all();
     }
 }

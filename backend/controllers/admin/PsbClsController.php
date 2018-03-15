@@ -117,11 +117,14 @@ class PsbClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
-        $id = Yii::$app->request->get('id', 'S0');
+        $id = Yii::$app->request->get('pid', 'S0');
 
         return $this->render('update', [
-            'model' => $model,
-            'id'    => $id,
+            'model'  => $model,
+            'id'     => $id,
+            'result' => [
+                'classify' => $this->getCls($id, $model->is_type),
+            ]
         ]);
     }
 

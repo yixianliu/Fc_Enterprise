@@ -54,7 +54,10 @@ function recursionCls($data, $type, $id)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => "collapsed"]) . ' / ' . '&nbsp;' . Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type], ['class' => "collapsed"]) . ' / ';
+
+    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key'], 'pid' => $id]) . ' / ' . '&nbsp;' .
+        Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type]) . ' / ';
+
     $html .= '    </div>';
 
     if (!empty($data['child'])) {
