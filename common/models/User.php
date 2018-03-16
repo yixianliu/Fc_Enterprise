@@ -113,6 +113,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg', 'backend']],
             ['rememberMe', 'boolean',],
             ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
+            [['username'], 'unique', 'on' => 'reg'],
 
             // 默认
             [['enterprise', 'signature'], 'default', 'value' => null],

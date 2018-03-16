@@ -13,7 +13,6 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
 ?>
 
 <div class="search">
@@ -32,14 +31,18 @@ use yii\widgets\ActiveForm;
 
     <div class="input-group">
 
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                产品<span class="caret"></span>
-            </button>
-        </div>
+        <form name="search" action="<?= Url::to(['/search/product']) ?>" method="get">
 
-        <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字"/>
-        <span class="input-group-btn"><a class="btn btn-red" title="" href="purchasing.html">搜索</a></span>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    产品<span class="caret"></span>
+                </button>
+            </div>
+
+            <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字" name="title"/>
+            <span class="input-group-btn"><a class="btn btn-red" title="" href="purchasing.html">搜索</a></span>
+
+        </form>
 
     </div>
 
@@ -86,41 +89,51 @@ use yii\widgets\ActiveForm;
 <div class="nav-cont" style="float: right;">
     <div class="pur-user-login">
 
-        <div class="nav-cont-title">
-            会员登录
-        </div>
+        <?php if (Yii::$app->user->isGuest): ?>
 
-        <?php
-        $form = ActiveForm::begin([
-            'action'      => ['member/login'],
-            'method'      => 'post',
-            'fieldConfig' => [
-                'template'     => '<div>{input}</div>',
-                'inputOptions' => ['class' => 'form-control'],
-            ],
-            'options'     => ['class' => 'form-horizontal']
-        ]);
-        ?>
+            <div class="nav-cont-title">
+                会员登录
+            </div>
 
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input type="text" class="form-control" placeholder="帐号" aria-describedby="帐号">
-        </div>
+            <?php
+            $form = ActiveForm::begin([
+                'action'      => ['member/login'],
+                'method'      => 'post',
+                'fieldConfig' => [
+                    'template'     => '<div>{input}</div>',
+                    'inputOptions' => ['class' => 'form-control'],
+                ],
+                'options'     => ['class' => 'form-horizontal']
+            ]);
+            ?>
 
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
-            <input type="text" class="form-control" placeholder="密码" aria-describedby="密码">
-        </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" class="form-control" placeholder="帐号" aria-describedby="帐号">
+            </div>
 
-        <div class="input-group">
-            <?= Html::submitButton('登录', ['class' => 'btn btn-red']) ?>
-        </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
+                <input type="text" class="form-control" placeholder="密码" aria-describedby="密码">
+            </div>
 
-        <div class="input-group">
-            <a class="reg" title="" href="<?= Url::to(['/member/reg']); ?>">免费注册</a>
-        </div>
+            <div class="input-group">
+                <?= Html::submitButton('登录', ['class' => 'btn btn-red']) ?>
+            </div>
 
-        <?php ActiveForm::end(); ?>
+            <div class="input-group">
+                <a class="reg" title="" href="<?= Url::to(['/member/reg']); ?>">免费注册</a>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+        <?php else: ?>
+
+            <div class="nav-cont-title">
+                会员登录
+            </div>
+
+        <?php endif; ?>
 
     </div>
     <!-- #用户登录,注册 -->

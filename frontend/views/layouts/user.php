@@ -61,7 +61,9 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav nav-pills">
                         <li><a title="" href="<?= Url::to(['/']) ?>">网站首页</a></li>
+                        <li><a title="" href="<?= Url::to(['/purchase/center']) ?>">采购中心</a></li>
                         <li class="dropdown">
+
                             <a title="" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" href="">
                                 用户设置
                                 <span class="caret"></span>
@@ -72,6 +74,7 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
                                 <li><a title="" href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></li>
                                 <li><a title="" href="<?= Url::to(['member/logout']) ?>">退出账户</a></li>
                             </ul>
+
                         </li>
 
                     </ul>
@@ -83,25 +86,19 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
             <!-- 搜索 -->
             <div class="col-xs-5 search">
 
-                <form name="search" action="">
-
+                <form name="search" action="<?= Url::to(['/search/product']) ?>" method="get">
                     <div class="input-group">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">产品 <span
-                                        class="caret"></span>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                产品 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a title="" href="">金属</a></li>
-                                <li><a title="" href="">木材</a></li>
-                                <li><a title="" href="">竹</a></li>
+                                <li><a title="" href="">采购</a></li>
                             </ul>
                         </div>
-                        <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字">
-                        <span class="input-group-btn">
-                                <a class="btn btn-red" title="" href="product.html">搜索</a>
-                            </span>
+                        <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字" name="title"/>
+                        <span class="input-group-btn"><input type="submit" class="btn btn-red" value="搜索" /></span>
                     </div>
-
                 </form>
 
             </div>

@@ -22,7 +22,6 @@ use yii\helpers\Html;
     </div>
 
     <dvi class="list-cont">
-        <p class="list-cont-money"><span>￥</span> <?= Html::encode($model->price) ?></p>
         <p class="list-cont-txt">
             <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id], ['title' => $model->title]) ?>
         </p>

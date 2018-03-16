@@ -2,7 +2,6 @@
 
 namespace frontend\controllers;
 
-
 use common\models\NavClassify;
 use common\models\SpOffer;
 use common\models\News;
