@@ -57,19 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="form-group">
-                    <label for="enterprise" class="col-sm-2 control-label">企业名称:</label>
-                    <div class="col-sm-10">
-
-                        <?=
-                        $form->field($model, 'enterprise')
-                            ->textInput(['maxlength' => true, 'aria-describedby' => '企业名称', 'placeholder' => '企业名称'])
-                            ->label(false)
-                        ?>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="nickname" class="col-sm-2 control-label">性别:</label>
                     <div class="col-sm-10">
                         <?=

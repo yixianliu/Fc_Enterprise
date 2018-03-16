@@ -82,7 +82,7 @@ class MemberController extends BaseController
                 } else {
 
                     // 验证手机验证码
-                    if ($model->msg != $session->get('RegPhoneCode')) {
+                    if ($model->msg == $session->get('RegPhoneCode')) {
 
                         Yii::$app->getSession()->setFlash('error', '与验证手机的验证码不一致 !!');
 
