@@ -1412,6 +1412,15 @@ a:active {
     margin-left: 0;
 }
 
+/* 发布留言 */
+.release-message a.btn-red {
+    width: 150px;
+    color: #fff;
+    margin-top: 11px;
+    margin-left: 75px;
+    background: #dc0616;
+}
+
 /* ----------------------------------------------------------------
         分页.page
 -----------------------------------------------------------------*/

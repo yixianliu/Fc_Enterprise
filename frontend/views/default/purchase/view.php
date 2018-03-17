@@ -239,6 +239,20 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                 </div>
                 <!-- #内容,评论 -->
 
+                <div class="release-message">
+                    <ul class="tab clearfix">
+                        <li onclick="tabs('#comment',0)" class="curr">
+                            发布留言<strong></strong>
+                        </li>
+                    </ul>
+
+                    <div class="message-cont">
+                        <textarea></textarea>
+                    </div>
+
+                    <a class="btn btn-red" title="" href="">发送</a>
+                </div>
+
             </div>
             <!-- #产品结束 -->
 
