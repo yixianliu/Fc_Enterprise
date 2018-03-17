@@ -57,7 +57,7 @@ function shows(){
     });
 
     $('.acttabbox').hover(function(){
-        clearTimeout();
+        clearTimeout(timer);
     },function(){
         // auto();
         return true;
