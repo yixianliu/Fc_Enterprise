@@ -19,12 +19,12 @@ use yii\helpers\Html;
     </div>
 
     <dvi class="list-cont">
-        <p><span>￥</span> <?= Html::encode($model->price) ?></p>
-        <p>
+        <p class="list-cont-money"><span>￥</span> <?= Html::encode($model->price) ?></p>
+        <p class="list-cont-txt">
             <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->purchase_id]) ?>
         </p>
         <p><?= Html::encode($model->user_id) ?></p>
-        <p>
+        <p class="list-cont-txt-right">
             <?php if ($model->is_type == 'Long'): ?>
                 长期采购
             <?php else: ?>

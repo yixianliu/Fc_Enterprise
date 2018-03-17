@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= Html::cssFile('@web/themes/qijian/css/product.css') ?>
-
 <style type="text/css">
     .summary {
         display: none;
@@ -36,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- 可变化内容 -->
     <div class="content_product_list">
         <ul>
-
             <?=
             ListView::widget([
                 'dataProvider' => $dataProvider,
@@ -47,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]);
             ?>
-
         </ul>
     </div>
 
