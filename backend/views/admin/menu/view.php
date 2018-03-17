@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <hr />
+                <hr/>
 
                 <?=
                 DetailView::widget([
@@ -54,11 +54,32 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data->name;
                             },
                         ],
+
+                        [
+                            'attribute' => 'is_type',
+                            'value'     => function ($model) {
+
+                                if (empty($model->is_type))
+                                    return '没有设置';
+
+                                $state = [
+                                    'list'   => '列表内容类型',
+                                    'view'   => '内容详情类型',
+                                    'show'   => '展示详情类型',
+                                    'index'  => '首页类型',
+                                    'center' => '中心类型',
+                                ];
+
+                                return $state[ $model->is_type ];
+                            },
+                        ],
+
                         'rp_key',
                         [
                             'attribute' => 'model_key',
                             'value'     => function ($model) {
-                                $data = \common\models\MenuModel::findOne(['model_key'  => $model->model_key]);
+                                $data = \common\models\MenuModel::findOne(['model_key' => $model->model_key]);
+
                                 return $data->name;
                             },
                         ],

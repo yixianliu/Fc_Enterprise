@@ -27,8 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('发布招聘', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('发布招聘', ['create']) ?>
                 </p>
+
+                <hr/>
 
                 <?=
                 GridView::widget([

@@ -45,8 +45,8 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'm_key', 'is_type', 'is_using'], 'required'],
-            [['content', 'is_type', 'is_using', 'parent_id',], 'string'],
+            [['page_id', 'm_key', 'is_using'], 'required'],
+            [['content', 'is_using', 'parent_id',], 'string'],
             [['page_id', 'm_key', 'parent_id',], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
             [['page_id', 'm_key',], 'unique'],
@@ -67,7 +67,6 @@ class Pages extends \yii\db\ActiveRecord
             'content'    => '单页面内容',
             'path'       => '单页面路径',
             'parent_id'  => '父类',
-            'is_type'    => '类型',
             'is_using'   => '是否启用',
             'created_at' => '添加数据时间',
             'updated_at' => '更新数据时间',
@@ -124,16 +123,15 @@ class Pages extends \yii\db\ActiveRecord
      * @param $parent_id
      * @return bool
      */
-    public function saveData($mkey, $page_id, $type)
+    public function saveData($mkey, $page_id)
     {
 
-        if (empty($mkey) || empty($page_id) || empty($type))
+        if (empty($mkey) || empty($page_id))
             return false;
 
         $this->page_id = $page_id;
         $this->m_key = $mkey;
         $this->p_key = $mkey;
-        $this->is_type = $type;
         $this->is_using = 'On';
 
         return $this->save() ? true : false;

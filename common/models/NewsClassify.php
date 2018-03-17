@@ -56,8 +56,8 @@ class NewsClassify extends \yii\db\ActiveRecord
             [['keywords'], 'string', 'max' => 155],
             [['name'], 'unique'],
 
-            [['sort_id', ], 'default', 'value' => 1],
-            [['keywords', ], 'default', 'value' => null],
+            [['sort_id',], 'default', 'value' => 1],
+            [['keywords',], 'default', 'value' => null],
         ];
     }
 
@@ -98,16 +98,20 @@ class NewsClassify extends \yii\db\ActiveRecord
      *
      * @return mixed
      */
-    public function getClsSelect()
+    public function getClsSelect($one = 'Off')
     {
 
         // 产品分类
         $dataClassify = static::findByAll(static::$parent_id);
 
+        // 初始化
+        $result = array();
+
         // 产品分类
         $Cls = new NewsClassify();
 
-        $result[ $this->parent_id ] = '顶级分类 !!';
+        if ($one == 'On')
+            $result[ static::$parent_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 

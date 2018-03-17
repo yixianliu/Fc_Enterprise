@@ -35,8 +35,6 @@ if (empty($result['classify'])) {
 
                     <?php $form = ActiveForm::begin(); ?>
 
-                    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
                     <?=
                     $form->field($model, 'c_key')->widget(Select2::classname(), [
                         'data'          => $result['classify'],
@@ -56,6 +54,8 @@ if (empty($result['classify'])) {
                         ],
                     ]);
                     ?>
+
+                    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 

@@ -86,11 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <!-- 产品参数 -->
                     <div class="tend-right">
-                        <p>产品参数: 12cm * 12cm</p>
-                        <p>产品参数: 12cm * 12cm</p>
-                        <p>产品参数: 12cm * 12cm</p>
-                        <p>产品参数: 12cm * 12cm</p>
-                        <p>产品参数: 12cm * 12cm</p>
+                        <p>产品价格: <?= $model->price ?></p>
+                        <p>产品折扣价: <?= $model->discount ?></p>
+                        <p><?= $model->introduction ?></p>
                     </div>
                     <!-- #产品参数 -->
                 </div>

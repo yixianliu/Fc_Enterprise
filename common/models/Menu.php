@@ -48,14 +48,14 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['m_key', 'name', 'is_using', 'parent_id', 'model_key'], 'required'],
-            [['is_using'], 'string'],
+            [['m_key', 'name', 'is_using', 'parent_id', 'model_key', 'rp_key'], 'required'],
+            [['is_using', 'rp_key'], 'string'],
             [['m_key', 'parent_id'], 'string', 'max' => 55],
             [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
             [['m_key'], 'unique'],
 
             // 默认
-            [['custom_key', 'url', 'rp_key',], 'default', 'value' => null],
+            [['custom_key', 'url', 'rp_key', 'is_type'], 'default', 'value' => null],
             [['sort_id',], 'default', 'value' => 1],
         ];
     }
@@ -67,6 +67,7 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'm_key'      => '菜单关键KEY',
+            'is_type'    => '菜单类型',
             'sort_id'    => '菜单排序',
             'parent_id'  => '父类菜单',
             'rp_key'     => '角色关键KEY',
@@ -81,16 +82,20 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 所有
+     * 列表
      *
      * @param null $parent
      * @param null $type
+     * @param string $relevance
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function findByAll($parent = null, $type = null)
+    public static function findByAll($parent = null, $type = null, $relevance = 'Off')
     {
 
         $parent = empty($parent) ? 'E1' : $parent;
+
+        if ($relevance == 'On')
+            return static::find()->where(['is_using' => 'On', 'parent_id' => $parent])->asArray()->all();
 
         return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
             ->andWhere([self::tableName() . '.is_language' => $type])
@@ -108,10 +113,13 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @param $id
      */
-    public static function findByOne($id)
+    public static function findByOne($id, $relevance = 'Off')
     {
         if (empty($id))
             return false;
+
+        if ($relevance == 'On')
+            return static::find()->where(['is_using' => 'On', 'm_key' => $id])->asArray()->one();
 
         return static::find()->where([self::tableName() . '.m_key' => $id])
             ->joinWith('itemRp')
@@ -247,7 +255,7 @@ class Menu extends \yii\db\ActiveRecord
                     break;
 
                 default:
-                    $urls = $value['menuModel']['url_key'] . '/index';
+                    $urls = $value['menuModel']['url_key'] . '/' . $value['is_type'];
                     break;
 
             }
@@ -415,13 +423,14 @@ class Menu extends \yii\db\ActiveRecord
         switch ($data['menuModel']['url_key']) {
 
             // 采购页面
-            case 'Purchase':
-                $urls = [$data['url']];
+            case 'purchase':
+//                $urls = [$data['url']];
+                $urls = ['/purchase/' . $data['is_type']];
                 break;
 
             // 自定义页面
             case 'pages':
-                $urls = ['/pages/' . $data['pages']['is_type'], 'id' => $data['pages']['page_id']];
+                $urls = ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']];
                 break;
 
             // 超链接

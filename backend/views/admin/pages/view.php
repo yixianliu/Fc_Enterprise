@@ -41,18 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'page_id',
                         [
-                            'attribute' => 'is_type',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'list' => '列表内容类型',
-                                    'view' => '内容详情类型',
-                                    'show' => '展示详情类型',
-                                ];
-
-                                return $state[ $model->is_type ];
-                            },
-                        ],
-                        [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [

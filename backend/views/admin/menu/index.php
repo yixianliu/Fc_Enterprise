@@ -29,6 +29,11 @@ if (!empty($dataProvider)) {
                 $html .= menuHtml($value, 'product');
                 break;
 
+            // 招聘
+            case 'job':
+                $html .= menuHtml($value, 'job');
+                break;
+
             // 新闻
             case 'news':
                 $html .= menuHtml($value, 'news');
@@ -66,7 +71,7 @@ function recursionPurchaseData($data)
     if (empty($data))
         return;
 
-    $child = Menu::findByAll($data['m_key']);
+    $child = Menu::findByAll($data['m_key'], Yii::$app->session['language'], 'Off');
 
     if (empty($child))
         return;
@@ -75,10 +80,7 @@ function recursionPurchaseData($data)
     $html = null;
 
     foreach ($child as $value) {
-
-        // Html 内容
         $html .= menuHtml($value, 'purchase');
-
     }
 
     return $html;
@@ -206,6 +208,37 @@ function recursionUrlData($data)
 }
 
 /**
+ * 招聘模型
+ *
+ * @param $data
+ * @return null|string|void
+ */
+function recursionJobData($data)
+{
+    if (empty($data))
+        return;
+
+    // 查找相对应的菜单
+    $child = Menu::findByAll($data['m_key'], Yii::$app->session['language']);
+
+    if (empty($child))
+        return;
+
+    $html = null;
+
+    foreach ($child as $value) {
+
+        if (empty($value['pages']['page_id']))
+            continue;
+
+        // Html 内容
+        $html .= menuHtml($value, 'pages');
+    }
+
+    return $html;
+}
+
+/**
  * Html 和 样式文件
  *
  * @param $data
@@ -228,8 +261,8 @@ function menuHtml($data, $type)
         case 'job':
             $array = [
                 'create'  => Html::a('添加菜单', ['create']) . ' / ',
-                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['c_key']]) . ' / ',
-                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['c_key']]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
                 'content' => null
             ];
             break;
@@ -283,7 +316,7 @@ function menuHtml($data, $type)
 
             $entering = Pages::findByOne($data['pages']['page_id']);
 
-            if ($entering['menu']['model_key'] == 'UC1' && $entering['is_type'] == 'list')
+            if ($entering['menu']['model_key'] == 'UC1' && $data['is_type'] == 'list')
                 $enteringHtml = Html::a('录入内容', ['admin/pages-list/create', 'id' => $entering['m_key']]) . ' / ';
 
             break;
@@ -304,7 +337,7 @@ function menuHtml($data, $type)
                 'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
                 'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
                 'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
-                'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']]) . ' / ',
+                'content' => null,
             ];
             break;
     }
@@ -337,6 +370,14 @@ function menuHtml($data, $type)
 
         case 'product':
             $html .= recursionProductData($data);
+            break;
+
+        case 'job':
+            $html .= recursionJobData($data);
+            break;
+
+        case 'purchase':
+            $html .= recursionPurchaseData($data);
             break;
     }
 

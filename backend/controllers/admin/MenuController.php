@@ -97,7 +97,7 @@ class MenuController extends BaseController
 
                 // 生成自定义页面
                 $Cls = new Pages();
-                $Cls->saveData($model->m_key, self::getRandomString(), $data['is_type']);
+                $Cls->saveData($model->m_key, self::getRandomString());
             }
         }
 
@@ -125,20 +125,6 @@ class MenuController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        // 更改单页面
-        if (!empty(Yii::$app->request->post())) {
-
-            $data = Yii::$app->request->post();
-
-            if ($data['Menu']['model_key'] == 'UC1') {
-
-                // 生成自定义页面
-                $Cls = Pages::findOne(['m_key' => $id]);
-                $Cls->is_type = $data['is_type'];
-                $Cls->save();
-            }
-        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);

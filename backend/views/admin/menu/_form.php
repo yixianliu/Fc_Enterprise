@@ -58,15 +58,15 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-                <div id="isType" class="form-group required">
-                    <label class="control-label" for="pages-is_type">自定义页面类型</label>
-                    <select id="is_type" class="form-control" name="is_type">
-                        <option>请选择页面类型....</option>
-                        <option value="list">列表内容类型</option>
-                        <option value="view">内容详情类型</option>
-                        <option value="show">展示详情类型</option>
-                    </select>
-                </div>
+                <?=
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
+                    'data'          => ['list' => '列表内容类型', 'view' => '内容详情类型', 'show' => '展示详情类型', 'index' => '首页类型', 'center' => '中心类型'],
+                    'options'       => ['placeholder' => '选择内容类型...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -101,23 +101,26 @@ use kartik\select2\Select2;
     var ModelKey = $('#menu-model_key').val();
 
     $('.field-menu-url').hide();
-    $('#isType').hide();
+    $('.field-menu-is_type').hide();
 
+    // 超链接
     if (ModelKey == 'UU1') {
         $('.field-menu-url').show();
     }
 
-    if (ModelKey == 'UC1') {
-        $('#isType').show();
+    // 显示类型
+    if (ModelKey != 'UU1') {
+        $('.field-menu-is_type').show();
     }
 
     $('#menu-model_key').on('change', function () {
 
         var selectVal = $(this).val();
 
-        if (selectVal == 'UC1') {
+        // 栏目类型
+        if (selectVal != 'UU1') {
 
-            $('#isType').show();
+            $('.field-menu-is_type').show();
 
             // 链接
             $('.field-menu-url').hide();
@@ -126,9 +129,7 @@ use kartik\select2\Select2;
 
         if (selectVal == 'UU1') {
             $('.field-menu-url').show();
-
-            // 单页面
-            $('#isType').hide();
+            $('.field-menu-is_type').hide();
         }
 
         if (selectVal != 'UC1' && selectVal != 'UU1') {
@@ -141,10 +142,6 @@ use kartik\select2\Select2;
             $('.field-menu-url').hide();
             $('#menu-url').val('');
         }
-
-        <?php if (!empty($model->pages->is_type)): ?>
-        $('#is_type').val("<?= $model->pages->is_type ?>");
-        <?php endif; ?>
 
         return true;
     });

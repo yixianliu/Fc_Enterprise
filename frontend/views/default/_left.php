@@ -47,12 +47,12 @@ switch ($type) {
         if (empty($m_key))
             break;
 
-        $data = Menu::findByOne($m_key);
+        $data = Menu::findByOne($m_key, 'On');
 
         if (empty($data))
             break;
 
-        $classify = Menu::findByAll($m_key);
+        $classify = Menu::findByAll($m_key,  Yii::$app->session['language']);
 
         foreach ($classify as $key => $value) {
 
@@ -61,7 +61,7 @@ switch ($type) {
                 continue;
             }
 
-            $classify[ $key ]['url'] = Url::to(['/pages/' . $value['pages']['is_type'], 'id' => $value['pages']['page_id']]);
+            $classify[ $key ]['url'] = Url::to(['/pages/' . $value['is_type'], 'id' => $value['pages']['page_id']]);
         }
 
         $classifyName = $data['name'];

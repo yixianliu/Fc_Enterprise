@@ -101,7 +101,7 @@ class NewsController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'classify' => $modelCls->getClsSelect(),
+                'classify' => $modelCls->getClsSelect('Off'),
             ]
         ]);
     }
@@ -126,7 +126,7 @@ class NewsController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $modelCls->getClsSelect(),
+                    'classify' => $modelCls->getClsSelect('Off'),
                 ]
             ]);
         }
