@@ -11,7 +11,7 @@ use yii\widgets\ListView;
 $this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/themes/qijian/css/purchasing.css');
+$this->registerCssFile('@web/themes/qijian/css/purzoom.css');
 ?>
 
 <?= $this->render('../slide', ['pagekey' => 'purchase']); ?>

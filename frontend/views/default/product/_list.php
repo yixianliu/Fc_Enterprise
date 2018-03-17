@@ -26,7 +26,7 @@ use yii\helpers\Html;
             <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->product_id], ['title' => $model->title]) ?>
         </p>
         <p></p>
-        <p class="list-cont-publisher"><?= Html::encode($model->user_id) ?></p>
+        <p class="list-cont-txt-right"><?= Html::encode($model->user_id) ?></p>
     </dvi>
 
 </li>
