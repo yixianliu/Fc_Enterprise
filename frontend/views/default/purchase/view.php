@@ -250,7 +250,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                         <textarea></textarea>
                     </div>
 
-                    <a class="btn btn-red" title="" href="">发送</a>
+                    <a class="btn btn-red" title="" href="">提交</a>
                 </div>
 
             </div>

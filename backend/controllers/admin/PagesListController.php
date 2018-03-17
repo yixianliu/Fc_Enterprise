@@ -199,7 +199,7 @@ class PagesListController extends BaseController
             if (empty($data))
                 continue;
 
-            if ($data['menuModel']['model_key'] != 'UC1' || $data['pages']['is_type'] != 'list')
+            if ($data['menuModel']['model_key'] != 'UC1' || $data['is_type'] != 'list')
                 unset($result[ $key ]);
 
         }
