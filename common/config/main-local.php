@@ -3,7 +3,7 @@ return [
     'components' => [
 
         // 数据库
-        'db'     => [
+        'db' => [
             'class'       => 'yii\db\Connection',
             'dsn'         => 'mysql:host=localhost;dbname=fc_calendar',
             'username'    => 'root',

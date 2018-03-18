@@ -57,13 +57,23 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName'  => true,
-            'rules'           => [
-                // 默认
-                '' => 'center/index',
-            ],
+        'urlManager'   => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName'  => true,
+//            'rules'           => [
+//                // 默认
+//                '' => 'center/index',
+//            ],
+
+'enablePrettyUrl' => true,
+'showScriptName'  => false,
+//路由管理
+'rules'           => [
+    "<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>" => "<module>/<controller>/<action>",
+    "<controller:\w+>/<action:\w+>/<id:\d+>"              => "<controller>/<action>",
+    "<controller:\w+>/<action:\w+>"                       => "<controller>/<action>",
+],
+
         ],
 
         // 管理样式文件
