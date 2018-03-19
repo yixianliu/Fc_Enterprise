@@ -32,7 +32,7 @@ class JobController extends BaseController
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['index', 'view',],
+                        'actions' => ['index', 'view', 'list'],
                         'allow' => true,
                     ],
                 ],
@@ -66,6 +66,16 @@ class JobController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * 列表
+     *
+     * @return string
+     */
+    public function actionList()
+    {
+        return $this->render('list');
     }
 
     /**

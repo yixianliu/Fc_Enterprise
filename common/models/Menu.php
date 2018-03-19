@@ -169,6 +169,11 @@ class Menu extends \yii\db\ActiveRecord
 
             switch ($value['menuModel']['url_key']) {
 
+                // 招聘
+                case 'job':
+                    $array = $this->recursionJobMenu($value, $type);
+                    break;
+
                 // 产品模型
                 case 'product':
 
@@ -281,6 +286,37 @@ class Menu extends \yii\db\ActiveRecord
      * @return array|void
      */
     public function recursionPurchaseMenu($data, $type = null)
+    {
+        if (empty($data) || empty($data['m_key']))
+            return;
+
+        $child = static::findByAll($data['m_key'], $type);
+
+        if (empty($child))
+            return;
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => $this->setMenuModel($value),
+                'items' => $this->recursionPurchaseMenu($value, $type),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 采购平台
+     *
+     * @param $data
+     * @param null $type
+     * @return array|void
+     */
+    public function recursionJobMenu($data, $type = null)
     {
         if (empty($data) || empty($data['m_key']))
             return;
@@ -431,6 +467,11 @@ class Menu extends \yii\db\ActiveRecord
             // 自定义页面
             case 'pages':
                 $urls = ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']];
+                break;
+
+            // 招聘
+            case 'job':
+                $urls = ['/job/' . $data['is_type']];
                 break;
 
             // 超链接
