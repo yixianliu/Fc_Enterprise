@@ -62,6 +62,7 @@ class SpOffer extends \yii\db\ActiveRecord
             'user_id'    => '用户 ID',
             'price'      => '价格',
             'path'       => '图片',
+            'content'       => '相关内容',
             'is_type'    => '类型',
             'is_using'   => '是否启用',
             'created_at' => '添加数据时间',
