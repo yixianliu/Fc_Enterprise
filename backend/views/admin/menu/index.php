@@ -227,11 +227,6 @@ function recursionJobData($data)
     $html = null;
 
     foreach ($child as $value) {
-
-        if (empty($value['pages']['page_id']))
-            continue;
-
-        // Html 内容
         $html .= menuHtml($value, 'pages');
     }
 
@@ -260,7 +255,7 @@ function menuHtml($data, $type)
         // 招聘
         case 'job':
             $array = [
-                'create'  => Html::a('添加菜单', ['create']) . ' / ',
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
                 'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
                 'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
                 'content' => null
