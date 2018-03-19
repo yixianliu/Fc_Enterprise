@@ -521,13 +521,20 @@ ul.tit {
     float: left;
 }
 
+.tend-right .tend-up {
+    width: 100%;
+    padding: 10px 0;
+    background: #f7f7f7;
+}
+
 .tend-right p {
     font-size: 14px;
 }
 
 .tend-right .t-money font {
     color: red;
-    font-size: 21px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .tend-right .right-color {
@@ -545,6 +552,13 @@ ul.tit {
     float: left;
 }
 
+/* 新增样式 */
+.tend-down .tend-down-left {
+    width: 400px;
+    float: left;
+}
+/* 新增样式 */
+
 .tend-right .right-tar textarea {
     border: 1px solid #ccc;
 }
@@ -558,7 +572,7 @@ ul.tit {
 }
 
 .tend-right-right {
-    width: 210px;
+    width: 300px;
     float: right;
 }
 
@@ -593,7 +607,7 @@ ul.tit {
 }
 
 .tend-right-right .tend-border .right-color {
-    width: 50px;
+    width: 80px;
     color: #999;
     font-size: 14px;
     text-align: right;

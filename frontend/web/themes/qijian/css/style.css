@@ -1420,7 +1420,7 @@ a:active {
 
 /* 发布留言 */
 .release-message {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .release-message .message-cont textarea {
@@ -1432,7 +1432,7 @@ a:active {
     border: 1px solid #ccc;
 }
 
-.release-message a.btn-red {
+.release-message .btn-red {
     /*width: 150px;*/
     color: #fff;
     margin-top: 15px;

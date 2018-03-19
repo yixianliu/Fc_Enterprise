@@ -13,7 +13,6 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '采购中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/themes/qijian/css/purchasing.css');
 $this->registerCssFile('@web/themes/qijian/css/purzoom.css');
 
 $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
@@ -42,9 +41,10 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
             <!-- 产品开始 -->
             <div class="right-extra">
 
-                <!--产品参数开始-->
+                <!-- 产品参数开始 -->
                 <div class="tendcont">
 
+                    <!-- #左边.产品图片 -->
                     <div class="tend-left">
 
                         <div id="preview" class="spec-preview">
@@ -84,41 +84,57 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                         <?php endif; ?>
 
                     </div>
+                    <!-- #左边.产品图片 -->
 
-                    <!-- 产品参数 -->
+                    <!-- 右边.产品参数 -->
                     <div class="tend-right">
 
-                        <p class="t-money">
-                            <span class="right-color">价格 : </span><font><?= $model->price ?></font></p>
-                        <p>
+                        <!-- 产品参数.上 -->
+                        <div class="tend-up">
+
+                            <!-- 产品价格 -->
+                            <div class="t-money">
+                                <span class="right-color">价格 : </span><font><?= $model->price ?></font>
+                            </div>
+                            <!-- #产品价格 -->
+
+                        </div>
+                        <!-- #产品参数.上 -->
 
                         <hr>
 
-                        <p>
-                            <?= $model->is_type ?>
-                            <?= $model->is_status ?>
-                            <?= $model->num ?>
-                            <?= $model->is_using ?>
-                        </p>
+                        <!-- 产品参数.下 -->
+                        <div class="tend-down">
 
+                            <!-- 参数详细信息 -->
+                            <div class="tend-down-left">
+                                <p>
+                                    <?= $model->is_type ?>
+                                    <?= $model->is_status ?>
+                                    <?= $model->num ?>
+                                    <?= $model->is_using ?>
+                                </p>
+                            </div>
+                            <!-- #参数详细信息 -->
+
+                            <!-- 商家信息 -->
+                            <div class="tend-right-right">
+
+                                <div class="tend-border">
+                                    <?= ConfList::widget(['config' => [$this->title, 'view']]); ?>
+                                </div>
+
+                            </div>
+                            <!-- #商家信息 -->
+
+                        </div>
+                        <!-- #产品参数.下 -->
 
                     </div>
                     <!-- #产品参数 -->
 
-                    <!-- 商家信息 -->
-                    <div class="tend-right-right">
-
-                        <div class="tend-border">
-
-                            <?= ConfList::widget(['config' => [$this->title, 'view']]); ?>
-
-                        </div>
-
-                    </div>
-                    <!-- #商家信息 -->
-
                 </div>
-                <!--产品参数结束-->
+                <!-- #产品参数结束 -->
 
                 <div style="clear:both;height:10px;"></div>
 
