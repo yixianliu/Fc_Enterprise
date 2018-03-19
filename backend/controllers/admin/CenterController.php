@@ -160,12 +160,27 @@ class CenterController extends BaseController
         return $this->render('info');
     }
 
+    /**
+     * SEO设置
+     *
+     * @return string
+     */
     public function actionSeo()
     {
         return $this->render('seo');
     }
 
+    public function actionBackup()
+    {
+        return $this->render('backup');
+    }
 
+    /**
+     * 语言设置
+     *
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionLanguage()
     {
 
