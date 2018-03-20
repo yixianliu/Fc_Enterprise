@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('采购价格', ['index', 'type' => 'Supply']) ?> /
-                    <?= Html::a('供应价格', ['index', 'type' => 'Purchase']) ?>
+                    <?= Html::a('采购价格', ['index', 'type' => 'Purchase']) ?> /
+                    <?= Html::a('供应价格', ['index', 'type' => 'Supply']) ?>
                 </p>
 
                 <br/>
@@ -30,8 +30,39 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'offer_id',
-                        'user_id',
+                        [
+                            'attribute' => 'offer_id',
+                            'value'     => function ($model) {
+
+                                switch ($model->is_type) {
+
+                                    case 'Supply':
+                                        $data = \common\models\Supply::findOne(['supply_id' => $model->offer_id]);
+                                        break;
+
+                                    case 'Purchase':
+                                        $data = \common\models\Purchase::findOne(['purchase_id' => $model->offer_id]);
+                                        break;
+
+                                    default:
+                                        return;
+                                        break;
+                                }
+
+                                return $data->title;
+                            },
+                        ],
+
+                        [
+                            'attribute' => 'user_id',
+                            'value'     => function ($model) {
+
+                               $data = \common\models\User::findOne(['user_id' => $model->user_id]);
+
+                                return $data->username;
+                            },
+                        ],
+
                         'price',
                         [
                             'attribute' => 'is_type',

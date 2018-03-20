@@ -32,7 +32,7 @@ class SpOfferController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -47,8 +47,10 @@ class SpOfferController extends BaseController
     public function actionIndex()
     {
 
+        $type = Yii::$app->request->get('type', 'Supply');
+
         $dataProvider = new ActiveDataProvider([
-            'query' => SpOffer::find(['is_type' => Yii::$app->request->get('type', 'Supply')]),
+            'query' => SpOffer::find()->where(['is_type' => $type]),
         ]);
 
         return $this->render('index', [
