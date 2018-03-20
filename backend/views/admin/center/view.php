@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Conf */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Confs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['center/conf']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">

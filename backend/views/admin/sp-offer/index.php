@@ -20,10 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布价格', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('采购价格', ['index', 'type' => 'Supply'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('供应价格', ['index', 'type' => 'Purchase'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('采购价格', ['index', 'type' => 'Supply']) ?> /
+                    <?= Html::a('供应价格', ['index', 'type' => 'Purchase']) ?>
                 </p>
+
+                <br/>
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,

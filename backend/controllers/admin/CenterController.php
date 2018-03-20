@@ -136,7 +136,7 @@ class CenterController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/admin/center/conf']);
     }
 
     /**
