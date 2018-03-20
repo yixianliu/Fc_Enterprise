@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = '注册';
                         ->textInput(['maxlength' => 5, 'placeholder' => '请输入验证码', 'aria-describedby' => '请输入验证码'])
                         ->label(false)
                     ?>
-                    <a id="SendMsg" class="input-group-addon code-red" href="#">获取验证码</a>
+                    <a id="SendMsg" class="input-group-addon code-red codeBtn" href="#">获取验证码</a>
                 </div>
             </div>
         </div>
@@ -184,9 +184,12 @@ $this->params['breadcrumbs'][] = '注册';
         if (username == '') {
             alert('请填写手机号码?');
             return false;
+        } else {
+            // 运行验证码倒计时
+            settime();
         }
 
-        $(this).text('已发送,1个小时内有效.').attr('disabled', 'disabled');
+        // $(this).text('已发送,1个小时内有效.').attr('disabled', 'disabled');
 
         $.ajax({
             url: '<?= Url::to(['member/send']) ?>',
@@ -212,4 +215,26 @@ $this->params['breadcrumbs'][] = '注册';
         });
 
     });
+
+    // 设置等待验证码时间
+    var countdown=10;
+    // 验证码倒计时
+    function settime(obj){
+        if (countdown == 0) {
+            $('.codeBtn').removeAttr("disabled");
+            $('.codeBtn').css("cursor", "pointer");
+            $('.codeBtn').html("获取验证码");
+            countdown = 10;
+            return;
+        } else {
+            $('.codeBtn').attr("disabled",true);
+            $('.codeBtn').css("cursor", "default");
+            $('.codeBtn').html("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        // 倒数效果
+        setTimeout(function() {
+            settime(obj);
+        },1000)
+    }
 </script>
