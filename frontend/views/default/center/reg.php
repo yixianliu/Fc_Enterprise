@@ -219,7 +219,7 @@ $this->params['breadcrumbs'][] = '注册';
     // 设置等待验证码时间
     var countdown=10;
     // 验证码倒计时
-    function settime(obj){
+    function settime(){
         if (countdown == 0) {
             $('.codeBtn').removeAttr("disabled");
             $('.codeBtn').css("cursor", "pointer");
@@ -234,7 +234,7 @@ $this->params['breadcrumbs'][] = '注册';
         }
         // 倒数效果
         setTimeout(function() {
-            settime(obj);
+            settime();
         },1000)
     }
 </script>
