@@ -26,22 +26,20 @@ use common\widgets\iConf\ConfList;
 
     </div>
 
-    <?php if (Yii::$app->user->identity->is_auth == 'On'): ?>
-
-        <div class="cat_list">
-            <h3>企业用户</h3>
-            <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
-        </div>
-
-    <?php endif ?>
-
     <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
 
         <div class="cat_list">
             <h3>商户中心</h3>
+            <p><a href="<?= Url::to(['user/supplier']) ?>">商户资料</a></p>
             <p><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></p>
-            <p><a href="<?= Url::to(['purchase/create']) ?>">发布采购</a></p>
             <p><a href="<?= Url::to(['sp-offer/index']) ?>">提交价格的产品</a></p>
+        </div>
+
+    <?php else: ?>
+
+        <div class="cat_list">
+            <h3>普通用户</h3>
+            <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
         </div>
 
     <?php endif ?>

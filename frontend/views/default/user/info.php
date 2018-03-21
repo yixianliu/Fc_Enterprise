@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col_full userdata-cont">
 
         <div class="cont-title">
-            <span>修改个人资料</span>
+            <span><?= $this->title ?></span>
         </div>
 
         <div class="row">

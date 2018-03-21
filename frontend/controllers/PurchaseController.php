@@ -220,6 +220,7 @@ class PurchaseController extends BaseController
 
     public function getCls()
     {
+
         // 初始化
         $result = array();
 

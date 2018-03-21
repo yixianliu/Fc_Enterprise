@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\Product;
+use common\models\UserSupply;
 use Yii;
 use common\models\Job;
 use common\models\User;
@@ -47,6 +48,14 @@ class UserController extends BaseController
     public function actionCheck()
     {
         return $this->render('check');
+    }
+
+    public function actionSupplier()
+    {
+
+        $model = UserSupply::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+
+        return $this->render('supplier', ['model' => $model]);
     }
 
     /**
