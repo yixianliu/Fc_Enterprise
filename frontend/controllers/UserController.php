@@ -50,10 +50,25 @@ class UserController extends BaseController
         return $this->render('check');
     }
 
+    /**
+     * 商户资料
+     *
+     * @return string
+     */
     public function actionSupplier()
     {
 
         $model = UserSupply::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+
+        if (empty($model))
+            $model = new UserSupply();
+
+        $model->user_id = Yii::$app->user->identity->user_id;
+
+        // 是否存在
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['user/index']);
+        }
 
         return $this->render('supplier', ['model' => $model]);
     }

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%user_supply}}".
@@ -23,6 +24,16 @@ class UserSupply extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%user_supply}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**

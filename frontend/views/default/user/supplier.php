@@ -9,7 +9,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
+use dosamigos\fileupload\FileUploadUI;
 
 $this->title = '企业用户资料';
 $this->params['breadcrumbs'][] = $this->title;
@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 FileUploadUI::widget([
                     'model'         => $model,
                     'attribute'     => 'path',
-                    'url'           => ['upload/image-upload', 'id' => $model->purchase_id, 'type' => 'purchase', 'attribute' => 'path'],
+                    'url'           => ['upload/image-upload', 'id' => $model->user_id, 'type' => 'user_supply', 'attribute' => 'path'],
                     'gallery'       => false,
                     'fieldOptions'  => [
                         'accept' => 'file/*'

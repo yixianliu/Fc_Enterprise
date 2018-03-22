@@ -21,7 +21,7 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'offer_id')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'offer_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
 
                 <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
 
@@ -30,7 +30,7 @@ use kartik\select2\Select2;
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [
                     'data'    => ['Supply' => '供应', 'Purchase' => '采购', 'Bid' => '投标'],
-                    'options' => ['placeholder' => '审核...'],
+                    'options' => ['placeholder' => '审核', 'disabled' => 'disabled'],
                 ]);
                 ?>
 

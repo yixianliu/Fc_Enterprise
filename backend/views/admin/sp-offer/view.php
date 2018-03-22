@@ -36,8 +36,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'offer_id',
-                        'user_id',
+                        [
+                            'attribute' => 'offer_id',
+                            'value'     => function ($model) {
+
+                                switch ($model->is_type) {
+
+                                    case 'Supply':
+                                        $data = \common\models\Supply::findOne(['supply_id' => $model->offer_id]);
+                                        break;
+
+                                    case 'Purchase':
+                                        $data = \common\models\Purchase::findOne(['purchase_id' => $model->offer_id]);
+                                        break;
+
+                                    default:
+                                        return;
+                                        break;
+                                }
+
+                                return $data->title;
+                            },
+                        ],
+
+                        [
+                            'attribute' => 'user_id',
+                            'value'     => function ($model) {
+
+                                $data = \common\models\User::findOne(['user_id' => $model->user_id]);
+
+                                return $data->username;
+                            },
+                        ],
                         'price',
                         [
                             'attribute' => 'is_type',
@@ -80,5 +110,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </section>
+
+    <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'user_supply']); ?>
+
 </div>
 
