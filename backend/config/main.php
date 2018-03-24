@@ -58,9 +58,6 @@ return [
 
                 // 默认
                 '' => 'admin/center/index',
-
-                "<controller:\w+>/<id:\d+>"     => "<controller>/view",
-                "<controller:\w+>/<action:\w+>" => "<controller>/<action>"
             ],
         ],
 
