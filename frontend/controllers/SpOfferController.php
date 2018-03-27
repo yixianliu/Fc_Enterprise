@@ -9,6 +9,9 @@ use Yii;
 class SpOfferController extends BaseController
 {
 
+    // 布局
+    public $layout = 'user';
+
     public function actionIndex()
     {
 
@@ -17,7 +20,7 @@ class SpOfferController extends BaseController
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider(['query' => $query]);
 
-        return $this->render('index', [
+        return $this->render('../user/sp-offer', [
             'dataProvider' => $dataProvider
         ]);
     }

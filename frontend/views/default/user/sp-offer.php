@@ -13,25 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
+<div class="right">
 
-<?= $this->render('../nav'); ?>
+    <div class="col_full userdata-cont">
 
-<style type="text/css">
-    .summary {
-        display: none;
-    }
-</style>
+        <div class="cont-title">
+            <span><?= $this->title ?></span>
+        </div>
 
-<section class="section-wrap blog-standard" style="padding: 60px 0">
-    <div class="container relative">
         <div class="row">
-
-            <div class="col-sm-3 sidebar blog-sidebar">
-                <?= $this->render('../user/_left'); ?>
-            </div>
-
-            <div class="col-sm-9 sidebar blog-sidebar">
+            <div class="col-xs-12" style="font-size: 12px;margin: 0;padding: 20px 0px;">
 
                 <?=
                 GridView::widget([
@@ -66,12 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ]);
                 ?>
+
             </div>
-
-        </div> <!-- end col -->
-
-        <!-- sidebar -->
-
-    </div> <!-- end row -->
-    </div> <!-- end container -->
-</section> <!-- end blog standard -->
+        </div>
+    </div>
+</div>
