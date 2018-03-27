@@ -27,6 +27,10 @@ class BaseController extends Controller
 
         parent::init();
 
+        $web = Yii::getAlias('@web');
+
+        Yii::setAlias('@web', $web . '/frontend/web');
+
         $session = Yii::$app->session;
 
         if (!$session->has('language')) {

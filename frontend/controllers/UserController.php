@@ -25,6 +25,10 @@ class UserController extends BaseController
         // 判断用户
         $this->isUser();
 
+        $web = Yii::getAlias('@web');
+
+        Yii::setAlias('@web', $web . '/frontend/web');
+
         return true;
     }
 
