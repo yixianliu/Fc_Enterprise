@@ -3,16 +3,16 @@
 namespace backend\controllers\admin;
 
 use Yii;
-use common\models\SpOffer;
-use yii\data\ActiveDataProvider;
+use common\models\Bid;
+use common\models\BidSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * SpOfferController implements the CRUD actions for SpOffer model.
+ * BidController implements the CRUD actions for Bid model.
  */
-class SpOfferController extends BaseController
+class BidController extends BaseController
 {
     /**
      * @inheritdoc
@@ -20,17 +20,6 @@ class SpOfferController extends BaseController
     public function behaviors()
     {
         return [
-
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
@@ -41,25 +30,22 @@ class SpOfferController extends BaseController
     }
 
     /**
-     * Lists all SpOffer models.
+     * Lists all Bid models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $type = Yii::$app->request->get('type', 'Purchase');
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => SpOffer::find()->where(['is_type' => $type]),
-        ]);
+        $searchModel = new BidSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single SpOffer model.
+     * Displays a single Bid model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -72,15 +58,13 @@ class SpOfferController extends BaseController
     }
 
     /**
-     * Creates a new SpOffer model.
+     * Creates a new Bid model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SpOffer();
-
-        $model->user_id = '网站管理员';
+        $model = new Bid();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,7 +76,7 @@ class SpOfferController extends BaseController
     }
 
     /**
-     * Updates an existing SpOffer model.
+     * Updates an existing Bid model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,7 +84,6 @@ class SpOfferController extends BaseController
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -113,7 +96,7 @@ class SpOfferController extends BaseController
     }
 
     /**
-     * Deletes an existing SpOffer model.
+     * Deletes an existing Bid model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -127,15 +110,15 @@ class SpOfferController extends BaseController
     }
 
     /**
-     * Finds the SpOffer model based on its primary key value.
+     * Finds the Bid model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SpOffer the loaded model
+     * @return Bid the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SpOffer::findOne($id)) !== null) {
+        if (($model = Bid::findOne($id)) !== null) {
             return $model;
         }
 

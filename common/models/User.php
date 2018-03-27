@@ -70,6 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password'      => '密码',
             'signature'     => '个性签名',
             'is_display'    => '是否显示资料',
+            'is_auth'       => '是否验证',
             'is_head'       => '是否上传头像',
             'created_at'    => '添加数据时间',
             'updated_at'    => '更新数据时间',
@@ -90,7 +91,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 
             // 后台
-            [['username', 'sex', 'r_key', 'is_using'], 'required', 'on' => 'backend'],
+            [['username', 'sex', 'r_key', 'is_using', 'is_auth'], 'required', 'on' => 'backend'],
 
             // 注册
             [['username', 'is_type', 'password', 'repassword'], 'required', 'on' => 'reg'],

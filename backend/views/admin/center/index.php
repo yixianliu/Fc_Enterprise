@@ -63,7 +63,8 @@ function quick_dev_insights_phpinfo()
     return $data;
 }
 
-$data = quick_dev_insights_phpinfo();
+//$data = quick_dev_insights_phpinfo();
+$data = null;
 
 ?>
 
@@ -76,7 +77,9 @@ $data = quick_dev_insights_phpinfo();
             <div class="row" style="word-break : break-all;">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <?= $data ?>
+                    <?php if (!empty($data)): ?>
+                        <?= $data ?>
+                    <?php endif; ?>
 
                 </div>
             </div>

@@ -71,7 +71,7 @@ class PurchaseController extends BaseController
 
         // 价格
         $result['offer'] = new ActiveDataProvider([
-            'query'      => SpOffer::find(['offer_id' => $model->purchase_id]),
+            'query'      => SpOffer::find()->where(['offer_id' => $model->purchase_id]),
             'pagination' => [
                 'pageSize' => 20,
             ],

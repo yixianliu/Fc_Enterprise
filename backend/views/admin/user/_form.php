@@ -56,9 +56,22 @@ use kartik\select2\Select2;
                 <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
                 <?=
+                $form->field($model, 'is_auth')->widget(Select2::classname(), [
+                    'data'    => ['On' => '已验证', 'Off' => '未验证'],
+                    'options' => ['placeholder' => '是否启用...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
+
+                <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
                     'data'    => ['On' => '启用', 'Off' => '不启用', 'Not' => '未审核'],
                     'options' => ['placeholder' => '是否启用...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
                 ]);
                 ?>
 

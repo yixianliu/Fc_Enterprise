@@ -109,10 +109,12 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                             <!-- 参数详细信息 -->
                             <div class="tend-down-left">
                                 <p>
-                                    <?= $model->is_type ?>
-                                    <?= $model->is_status ?>
-                                    <?= $model->num ?>
-                                    <?= $model->is_using ?>
+
+                                    采购类型 : <?php if ($model->is_type == 'Long'): ?> 长期采购 <?php else: ?> 短期采购 <?php endif; ?><br />
+                                    采购状态 : <?php if ($model->is_status == 'On'): ?> 采购中 <?php else: ?> 不采购 <?php endif; ?><br />
+                                    采购数量 : <?= $model->num ?><br />
+                                    采购单位 : <?= $model->unit ?><br />
+                                    是否还需要采购 : <?php if ($model->is_using == 'On'): ?> 没有采纳对象 <?php else: ?> 已有采纳对象 <?php endif; ?>
                                 </p>
                             </div>
                             <!-- #参数详细信息 -->
@@ -164,44 +166,47 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                 <div class="release-message">
 
                     <?php if ($offer == true): ?>
+
                         <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
 
-                            <?php
-                            $form = ActiveForm::begin([
-                                'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
-                                'method' => 'post',
-                                'id'     => $modelOffer->formName(),
-                            ]);
-                            ?>
+                            <?php if (Yii::$app->user->identity->is_auth == 'On'): ?>
 
-                            <p class="right-tar">
-                                <span class="right-color">提交价格 : </span>
-                                <?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
-                            </p>
+                                <?php
+                                $form = ActiveForm::begin([
+                                    'action' => ['sp-offer/create', 'id' => 'P0', 'type' => 'Purchase'],
+                                    'method' => 'post',
+                                    'id'     => $modelOffer->formName(),
+                                ]);
+                                ?>
 
-                            <p>
+                                <p class="right-tar">
+                                    <span class="right-color">提交价格 : </span>
+                                    <?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
+                                </p>
 
-                            <hr/>
+                                <p>
 
-                            <?=
-                            FileUploadUI::widget([
-                                'model'         => $modelOffer,
-                                'attribute'     => 'path',
-                                'url'           => ['upload/image-upload', 'id' => $modelOffer->path, 'type' => 'sp_offer', 'attribute' => 'path'],
-                                'gallery'       => false,
-                                'fieldOptions'  => [
-                                    'accept' => 'image/*'
-                                ],
-                                'clientOptions' => [
-                                    'maxFileSize'      => 2000000,
-                                    'dataType'         => 'json',
-                                    'maxNumberOfFiles' => 5,
-                                ],
+                                <hr/>
 
-                                // ...
-                                'clientEvents'  => [
+                                <?=
+                                FileUploadUI::widget([
+                                    'model'         => $modelOffer,
+                                    'attribute'     => 'path',
+                                    'url'           => ['upload/image-upload', 'id' => $modelOffer->path, 'type' => 'sp_offer', 'attribute' => 'path'],
+                                    'gallery'       => false,
+                                    'fieldOptions'  => [
+                                        'accept' => 'image/*'
+                                    ],
+                                    'clientOptions' => [
+                                        'maxFileSize'      => 2000000,
+                                        'dataType'         => 'json',
+                                        'maxNumberOfFiles' => 5,
+                                    ],
 
-                                    'fileuploaddone' => 'function(e, data) {
+                                    // ...
+                                    'clientEvents'  => [
+
+                                        'fileuploaddone' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                                 
@@ -219,50 +224,56 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                                 
                                 return true;
                             }',
-                                    'fileuploadfail' => 'function(e, data) {
+                                        'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
                             }',
-                                ],
-                            ]);
-                            ?>
-
-                            <?= $form->field($modelOffer, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                            <?= $form->field($modelOffer, 'offer_id')->hiddenInput(['value' => $model->purchase_id])->label(false) ?>
-
-                            <hr/>
-
-                            </p>
-
-                            <p>
-
-                                <?=
-                                $form->field($modelOffer, 'content')
-                                    ->widget('kucha\ueditor\UEditor', [
-                                        'clientOptions' => [
-                                            //设置语言
-                                            'lang'               => 'zh-cn',
-                                            'initialFrameHeight' => '400',
-                                            'elementPathEnabled' => false,
-                                            'wordCount'          => false,
-                                        ]
-                                    ]);
+                                    ],
+                                ]);
                                 ?>
 
-                            </p>
+                                <?= $form->field($modelOffer, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
-                            <p>
-                                <?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?>
-                            </p>
+                                <?= $form->field($modelOffer, 'offer_id')->hiddenInput(['value' => $model->purchase_id])->label(false) ?>
 
-                            <br/>
+                                <hr/>
 
-                            <p>
-                                <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-                            </p>
+                                </p>
 
-                            <?php ActiveForm::end(); ?>
+                                <p>
+
+                                    <?=
+                                    $form->field($modelOffer, 'content')
+                                        ->widget('kucha\ueditor\UEditor', [
+                                            'clientOptions' => [
+                                                //设置语言
+                                                'lang'               => 'zh-cn',
+                                                'initialFrameHeight' => '400',
+                                                'elementPathEnabled' => false,
+                                                'wordCount'          => false,
+                                            ]
+                                        ]);
+                                    ?>
+
+                                </p>
+
+                                <p>
+                                    <?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?>
+                                </p>
+
+                                <br/>
+
+                                <p>
+                                    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+                                </p>
+
+                                <?php ActiveForm::end(); ?>
+
+                            <?php else: ?>
+
+                                <h3>用户还未被审核验证通过,请等待验证后,提交价格 !!</h3>
+
+                            <?php endif; ?>
 
                         <?php else: ?>
 
