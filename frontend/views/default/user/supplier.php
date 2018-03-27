@@ -113,8 +113,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <hr/>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                <div class="form-group" style="margin-left: 0px;margin-right: 0px;">
+                    <div class="col-sm-12">
                         <?= Html::submitButton('修改企业用户资料', ['class' => 'btn btn-red']) ?>
                     </div>
                 </div>
