@@ -68,6 +68,9 @@ class PagesController extends BaseController
         // 所属菜单
         $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
 
+        // 父类
+        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
+
         return $this->render('view', [
             'model'  => $model,
             'result' => $result,
@@ -91,6 +94,12 @@ class PagesController extends BaseController
         $result['content'] = PagesList::find()->where(['is_using' => 'On', 'page_id' => $id])->all();
 
         $result['classify'] = PagesClassify::findByAll($id);
+
+        // 所属菜单
+        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model['m_key']]);
+
+        // 父类菜单
+        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
 
         // 列表
         $result['data'] = PagesList::findByAll($id);
@@ -134,7 +143,13 @@ class PagesController extends BaseController
 
         $model = Pages::findByOne(Yii::$app->request->get('id', null));
 
-        $result = explode(',', $model['path']);
+        // 所属菜单
+        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model['m_key']]);
+
+        // 父类菜单
+        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
+
+        $result['img'] = explode(',', $model['path']);
 
         return $this->render('show', [
                 'model'  => $model,

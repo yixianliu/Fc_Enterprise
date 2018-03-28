@@ -12,7 +12,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = $model['menu']['name'];
-$this->params['breadcrumbs'][] = ['label' => $model['menu']['name'], 'url' => ['index', 'id' => $model['page_id']]];
+$this->params['breadcrumbs'][] = ['label' => $result['parent']['name']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

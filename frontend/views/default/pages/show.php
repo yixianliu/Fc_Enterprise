@@ -13,17 +13,18 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = $model['menu']['name'];
+$this->params['breadcrumbs'][] = ['label' => $result['parent']['name']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/clearbox.css')?>
+<?= Html::cssFile('@web/themes/qijian/css/clearbox.css') ?>
 
-<?=Html::jsFile('@web/themes/qijian/js/clearbox.js')?>
+<?= Html::jsFile('@web/themes/qijian/js/clearbox.js') ?>
 
 <!-- 隐藏显示大图上的缩略图 -->
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $('#CB_Thumbs').remove();
         $('#CB_ImgHide').remove();
     });
@@ -43,16 +44,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- 可变化内容 -->
         <div class="content_product_list">
 
-            <?php if (!empty($result)): ?>
+            <?php if (!empty($result['img'])): ?>
 
                 <ul>
 
-                    <?php foreach ($result as $value): ?>
+                    <?php foreach ($result['img'] as $value): ?>
 
                         <?php if (!empty($value)): ?>
 
                             <li>
-                                <a class="articleid" title="" href="<?= Url::to('@web/../../backend/web/temp/pages/' . $value); ?>" rel="clearbox[test1]" >
+                                <a class="articleid" title="" href="<?= Url::to('@web/../../backend/web/temp/pages/' . $value); ?>" rel="clearbox[test1]">
                                     <div class="pro-img">
                                         <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '']); ?>
                                     </div>
@@ -66,23 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php endforeach; ?>
 
                 </ul>
-
-
-                <!--
-                <ul>
-                    <?php foreach ($result as $value): ?>
-
-                        <?php if (!empty($value)): ?>
-                            <li>
-                                <a href="#">
-                                    <?= Html::img(Url::to('@web/../../backend/web/temp/pages/' . $value), ['alt' => '', 'class' => $model['menu']['name']]); ?>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-
-                    <?php endforeach; ?>
-                </ul>
-                -->
 
             <?php else: ?>
 

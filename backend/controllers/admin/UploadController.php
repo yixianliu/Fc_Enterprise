@@ -11,7 +11,6 @@
 
 namespace backend\controllers\admin;
 
-
 use common\models\Pages;
 use common\models\PagesList;
 use Yii;
