@@ -45,6 +45,10 @@ class BaseController extends Controller
             return $this->redirect(['/mount/member/login']);
         }
 
+        if (Yii::$app->user->isGuest) {
+            return;
+        }
+
         $action = Yii::$app->controller->action->id;
 
         $controllerID = Yii::$app->controller->id;

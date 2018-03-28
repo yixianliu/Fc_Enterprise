@@ -68,10 +68,10 @@ return [
             'defaultRoles'    => ['guest'],
 
             // Mysql 表
-            'itemTable'       => 'Fc_ItemRp', // 角色 + 权限
-            'assignmentTable' => 'Fc_Assignment', // 用户
-            'itemChildTable'  => 'Fc_Item_related', // 关联
-            'ruleTable'       => 'Fc_Rules', // 规则
+            'itemTable'       => 'fc_itemrp', // 角色 + 权限
+            'assignmentTable' => 'fc_assignment', // 用户
+            'itemChildTable'  => 'fc_item_related', // 关联
+            'ruleTable'       => 'fc_rules', // 规则
         ],
     ],
 

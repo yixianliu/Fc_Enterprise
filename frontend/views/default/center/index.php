@@ -204,7 +204,7 @@ $this->title = '网站首页';
                 <ul class="tabnav">
 
                     <?php foreach ($result['data'] as $value): ?>
-                        <li class="cur">
+                        <li>
                             <a href="" target="_blank" title="<?= $value['title'] ?>">
                                 <span class="pro-icon"></span><?= $value['title'] ?>
                             </a>

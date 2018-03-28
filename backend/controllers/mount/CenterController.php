@@ -110,36 +110,44 @@ class CenterController extends BaseController
             if ($model->load($request->post()) && $model->validate()) {
 
                 $power = [
+
                     'indexCenter', 'confCenter', // 管理中心
-                    'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', // 幻灯片
-                    'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', // 菜单
-                    'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', // 用户
-                    'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp', // 角色 + 权限
+                    'updateCenter', 'createCenter', 'viewCenter', 'deleteCenter', // 网站配置
+
+                    'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', 'deleteSlide',  // 幻灯片
+                    'createSlide-cls', 'updateSlide-cls', 'indexSlide-cls', 'viewSlide-cls', 'deleteSlide-cls',  // 幻灯片模型
+                    'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', 'deleteMenu',  // 菜单
+                    'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', 'deleteUser', // 用户
+                    'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp',  'deleteItem-rp', // 角色 + 权限
 
                     // 新闻
-                    'createNews', 'updateNews', 'indexNews', 'viewNews',
-                    'createNews-cls', 'updateNews-cls', 'indexNews-cls', 'viewNews-cls', // 新闻分类
+                    'createNews', 'updateNews', 'indexNews', 'viewNews', 'deleteNews',
+                    'createNews-cls', 'updateNews-cls', 'indexNews-cls', 'viewNews-cls', 'deleteNews-cls', // 新闻分类
 
                     // 产品
-                    'createProduct', 'updateProduct', 'indexProduct', 'viewProduct',
-                    'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', // 产品分类
+                    'createProduct', 'updateProduct', 'indexProduct', 'viewProduct', 'deleteProduct',
+                    'createProduct-cls', 'updateProduct-cls', 'indexProduct-cls', 'viewProduct-cls', 'deleteProduct-cls', // 产品分类
 
                     // 招聘
-                    'createJob', 'updateJob', 'indexJob', 'viewJob',
-                    'createResume', 'updateResume', 'indexResume', 'viewResume',// 简历
+                    'createJob', 'updateJob', 'indexJob', 'viewJob', 'deleteJob',
+                    'createResume', 'updateResume', 'indexResume', 'viewResume', 'deleteResume', // 简历
 
                     // 单页面
-                    'createPages', 'updatePages', 'indexPages', 'viewPages', 'relatedPages', // 最后的是关联单页面
-                    'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls',
-                    'createPages-tpl-file', 'updatePages-tpl-file', 'indexPages-tpl-file', 'viewPages-tpl-file',
-                    'createPages-list', 'updatePages-list', 'indexPages-list', 'viewPages-list',
+                    'createPages', 'updatePages', 'indexPages', 'viewPages', 'deletePages',
+                    'createPages-cls', 'updatePages-cls', 'indexPages-cls', 'viewPages-cls', 'deletePages-cls',
+                    'createPages-list', 'updatePages-list', 'indexPages-list', 'viewPages-list', 'deletePages-list',
 
-                    'createDownload', 'updateDownload', 'indexDownload', 'viewDownload', // 下载中心
-                    'createDownload-cls', 'updateDownload-cls', 'indexDownload-cls', 'viewDownload-cls', // 下载中心分类
-                    'createPurchase', 'updatePurchase', 'indexPurchase', 'viewPurchase', // 采购
-                    'createSupply', 'updateSupply', 'indexSupply', 'viewSupply', // 供应
-                    'createBid', 'updateBid', 'indexBid', 'viewBid', // 投标
-                    'createRules', 'updateRules', 'indexRules', 'viewRules', // 规则
+                    'createDownload', 'updateDownload', 'indexDownload', 'viewDownload', 'deleteDownload', // 下载中心
+                    'createDownload-cls', 'updateDownload-cls', 'indexDownload-cls', 'viewDownload-cls', 'deleteDownload-cls', // 下载中心分类
+
+                    'createPurchase', 'updatePurchase', 'indexPurchase', 'viewPurchase', 'deletePurchase', // 采购
+                    'createNav-cls', 'updateNav-cls', 'indexNav-cls', 'viewNav-cls', 'deleteNav-cls', // 导航分类
+                    'createSupply', 'updateSupply', 'indexSupply', 'viewSupply', 'deleteSupply', // 供应
+                    'createBid', 'updateBid', 'indexBid', 'viewBid', 'deleteBid', // 投标
+                    'createSp-offer', 'updateSp-offer', 'indexSp-offer', 'viewSp-offer', 'deleteSp-offer',// 提交价格
+                    'createPsb-cls', 'updatePsb-cls', 'indexPsb-cls', 'viewPsb-cls', 'deletePsb-cls',// 相关分类
+
+                    'createRules', 'updateRules', 'indexRules', 'viewRules', 'deleteRules', // 规则
                 ];
 
                 $this->createRole('guest');
