@@ -11,6 +11,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Conf;
 use common\models\Pages;
 use common\models\PagesList;
 use Yii;
@@ -78,6 +79,11 @@ class UploadController extends BaseController
         $ext = array();
 
         switch ($type) {
+
+            // 配置
+            case 'conf':
+                $model = new Conf();
+                break;
 
             // 产品
             case 'product':

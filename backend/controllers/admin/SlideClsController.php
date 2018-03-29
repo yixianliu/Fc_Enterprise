@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Menu;
 use Yii;
 use common\models\SlideClassify;
 use yii\web\NotFoundHttpException;
@@ -32,7 +33,7 @@ class SlideClsController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -50,7 +51,6 @@ class SlideClsController extends BaseController
         $query = SlideClassify::find();
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -80,14 +80,31 @@ class SlideClsController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new SlideClassify();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        // 初始化
+        $result = array();
+
+        $type = Yii::$app->request->get('type', 'default');
+
+        if ($type == 'pages') {
+
+            $classify = Menu::findByAll();
+
+            foreach ($classify as $value) {
+                $result['classify'][$value->pages->page_id] = $value['name'];
+            }
+        }
+
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
+            'type'   => $type,
+            'result' => $result,
         ]);
     }
 

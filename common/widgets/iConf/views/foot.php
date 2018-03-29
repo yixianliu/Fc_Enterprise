@@ -12,6 +12,8 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+$img = empty($result['code']['parameter']) ? 'themes/qijian/images/code.jpg' : '/../../../backend/web/temp/conf/' . explode(',', $result['code']['parameter'])[0];
+
 ?>
 
 <div class="col-xs-12 foot-cont">
@@ -23,7 +25,7 @@ use yii\helpers\Html;
     </div>
 
     <div class="col-xs-2">
-        <?= Html::img(Url::to('@web/themes/qijian/images/code.jpg'), ['alt' => '']); ?>
+        <?= Html::img(Url::to('@web/' . $img), ['alt' => '']); ?>
     </div>
 
 </div>

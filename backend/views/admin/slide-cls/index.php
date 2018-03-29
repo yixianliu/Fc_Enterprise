@@ -19,8 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('创建幻灯片分类', ['create'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('创建幻灯片', ['admin/slide/create'], ['class' => "collapsed"]) . ' / ' ?>
+                    
+                    <?= Html::a('创建单页面幻灯片分类', ['create', 'type' => 'pages']) ?> /
+                    
+                    <?= Html::a('创建幻灯片分类', ['create']) ?> /
+
+                    <?= Html::a('创建幻灯片', ['admin/slide/create']) ?> /
+                    
                 </p>
 
                 <hr/>

@@ -19,11 +19,27 @@ use kartik\select2\Select2;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?php if (!empty($model->is_language)): ?>
+
+                    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+
+                <?php else: ?>
+
+                    <?= $form->field($model, 'c_key')->hiddenInput()->label(false); ?>
+
+                <?php endif; ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'parameter')->textarea(['rows' => 6]) ?>
+                <?php if ($model->c_key != 'CODE_IMG'): ?>
+
+                    <?= $form->field($model, 'parameter')->textarea(['rows' => 6]) ?>
+
+                <?php else: ?>
+
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'parameter', 'type' => 'conf', 'num' => 1]); ?>
+
+                <?php endif; ?>
 
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
@@ -37,21 +53,24 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?=
-                $form->field($model, 'is_language')->widget(Select2::classname(), [
-                    'data'          => ['cn' => '中文', 'en' => '英文'],
-                    'options'       => ['placeholder' => '多语言...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
+                <?php if (!empty($model->is_language)): ?>
+                    <?=
+                    $form->field($model, 'is_language')->widget(Select2::classname(), [
+                        'data'          => ['cn' => '中文', 'en' => '英文'],
+                        'options'       => ['placeholder' => '多语言...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+
+                <?php endif; ?>
 
                 <div class="form-group">
 
                     <?= Html::submitButton($model->isNewRecord ? '添加网站配置' : '更新网站配置', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['conf'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['conf', 'type' => (empty($model->is_language) ? 'system' : $model->is_language)], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 

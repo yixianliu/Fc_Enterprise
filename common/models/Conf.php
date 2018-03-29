@@ -42,11 +42,13 @@ class Conf extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'name', 'parameter', 'is_using', 'is_language'], 'required'],
+            [['c_key', 'name', 'parameter', 'is_using'], 'required'],
             [['description', 'is_using', 'is_language'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['parameter'], 'string', 'max' => 255],
+
+            [['is_language'], 'default', 'value' => null],
         ];
     }
 

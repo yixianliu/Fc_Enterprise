@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]);
                         ?>
-                        <?= Html::a('返回列表', ['conf'], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('返回列表', ['conf', 'type' => (empty($model->is_language) ? 'system' : $model->is_language)], ['class' => 'btn btn-primary']) ?>
                     </p>
 
                     <?=
@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $state = [
                                         'cn' => '中文',
                                         'en' => '英文',
+                                        ''   => '系统配置',
                                     ];
 
                                     return $state[ $model->is_language ];

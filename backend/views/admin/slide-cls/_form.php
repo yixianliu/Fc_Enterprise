@@ -20,7 +20,11 @@ use yii\widgets\ActiveForm;
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?php if ($type == 'pages'): ?>
+
+                <?php else: ?>
+                    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?php endif; ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -35,6 +39,8 @@ use yii\widgets\ActiveForm;
                     ],
                 ]);
                 ?>
+
+                <hr/>
 
                 <div class="form-group">
 

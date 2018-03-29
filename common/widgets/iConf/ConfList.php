@@ -46,8 +46,12 @@ class ConfList extends InputWidget
             }
         }
 
+        $result['code'] = Conf::findOne(['c_key' => 'CODE_IMG'])->toArray();
+
         $this->config[1] = empty($this->config[1]) ? 'head' : $this->config[1];
 
-        return $this->render($this->config[1], ['result' => $result]);
+        return $this->render($this->config[1], [
+            'result' => $result
+        ]);
     }
 }

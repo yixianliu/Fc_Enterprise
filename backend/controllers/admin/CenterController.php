@@ -48,6 +48,7 @@ class CenterController extends BaseController
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -80,6 +81,7 @@ class CenterController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -134,7 +136,12 @@ class CenterController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if ($model->is_language == '')
+            return $this->redirect(['/admin/center/conf', 'type' => 'system']);
+
+        $model->delete();
 
         return $this->redirect(['/admin/center/conf']);
     }
