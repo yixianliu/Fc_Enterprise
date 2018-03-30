@@ -22,8 +22,20 @@ use yii\widgets\ActiveForm;
 
                 <?php if ($type == 'pages'): ?>
 
+                    <?=
+                    $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
+                        'data'          => $result['classify'],
+                        'options'       => ['placeholder' => '选择对应页面...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+
                 <?php else: ?>
+
                     <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+
                 <?php endif; ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>

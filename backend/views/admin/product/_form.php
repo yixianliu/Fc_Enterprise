@@ -71,55 +71,7 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <hr/>
-
-                    <?=
-                    FileUploadUI::widget([
-                        'model'         => $model,
-                        'attribute'     => 'images',
-                        'url'           => ['admin/upload/image-upload', 'id' => $model->product_id, 'type' => 'product'],
-                        'gallery'       => false,
-                        'fieldOptions'  => [
-                            'accept' => 'image/*'
-                        ],
-                        'clientOptions' => [
-                            'maxFileSize'      => 2000000,
-                            'dataType'         => 'json',
-                            'maxNumberOfFiles' => 5,
-                        ],
-
-                        // ...
-                        'clientEvents'  => [
-
-                            'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                                
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                            'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                        ],
-                    ]);
-                    ?>
-
-                    <?= $form->field($model, 'images')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                    <hr/>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -207,26 +159,6 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?=
-                    $form->field($model, 'is_img')->widget(Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '选择...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
-                    <?=
-                    $form->field($model, 'is_thumb')->widget(Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '选择...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
                     <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
 
                     <div class="form-group">
@@ -247,9 +179,6 @@ if (empty($result['classify'])) {
 
             </div>
         </div>
-
-        <?= $this->render('../result_img', ['img' => $model->images, 'type' => 'product']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

@@ -57,11 +57,21 @@ $num = empty($num) ? 5 : $num;
                                 
                                 var ImagesContent = $("#ImagesContent");
                                 
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
+                                var num = ' . $num . ';
                                 
-                                html += ImagesContent.val();
+                                if (num > 1) {
+                                
+                                    $.each(data.result.files, function (index, file) {
+                                        html += file.name + \',\';
+                                    });
+                                    
+                                    html += ImagesContent.val();
+                                    
+                                } else {
+                                    
+                                    html = data.result.files[0].name;
+                                    
+                                }
                                 
                                 ImagesContent.val(html);
                                 
@@ -82,7 +92,7 @@ $num = empty($num) ? 5 : $num;
 <hr/>
 
 <div class="form-group">
-    <?= $this->render('result_img', ['img' => $model->$attribute, 'type' => 'conf']); ?>
+    <?= $this->render('result_img', ['img' => $model->$attribute, 'type' => $type]); ?>
 </div>
 
 <hr/>

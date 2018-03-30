@@ -87,24 +87,10 @@ class SlideClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        // 初始化
-        $result = array();
-
-        $type = Yii::$app->request->get('type', 'default');
-
-        if ($type == 'pages') {
-
-            $classify = Menu::findByAll();
-
-            foreach ($classify as $value) {
-                $result['classify'][$value->pages->page_id] = $value['name'];
-            }
-        }
-
         return $this->render('create', [
             'model'  => $model,
-            'type'   => $type,
-            'result' => $result,
+            'type'   => Yii::$app->request->get('type', 'default'),
+            'result' => $this->setType(),
         ]);
     }
 
@@ -156,5 +142,25 @@ class SlideClsController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function setType()
+    {
+
+        // 初始化
+        $result = array();
+
+        $type = Yii::$app->request->get('type', 'default');
+
+        if ($type == 'pages') {
+
+            $classify = Menu::findAll(['model_key' => 'UC1']);
+
+            foreach ($classify as $value) {
+                $result['classify'][$value->pages->page_id] = $value->name;
+            }
+        }
+
+        return $result;
     }
 }

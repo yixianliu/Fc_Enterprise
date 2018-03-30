@@ -116,6 +116,45 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
+                <h3>该用户的供应商资料</h3>
+
+                <?php if (!empty($dataSupplyProvider)): ?>
+                    <?=
+                    DetailView::widget([
+                        'model'      => $dataSupplyProvider,
+                        'attributes' => [
+                            'user_id',
+                            'name',
+                            'content',
+                            'path',
+                            [
+                                'attribute' => 'created_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , H:i:s', $model->created_at);
+                                },
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , H:i:s', $model->updated_at);
+                                },
+                            ],
+                        ],
+                    ]);
+                    ?>
+
+                <?php else: ?>
+
+                    <h5>没有填写任何商户资料 !!</h5>
+
+                <?php endif; ?>
+
+            </div>
+        </div>
+
+        <div class="content-body">
+            <div class="row">
+
                 <h3>该用户发布的简历</h3>
 
                 <?=

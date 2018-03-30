@@ -63,6 +63,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->is_using ];
                             },
                         ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->updated_at);
+                            },
+                        ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);

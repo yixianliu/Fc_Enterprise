@@ -12,7 +12,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$img = empty($result['code']['parameter']) ? 'themes/qijian/images/code.jpg' : '/../../../backend/web/temp/conf/' . explode(',', $result['code']['parameter'])[0];
+$img = empty($result['code']['parameter']) ? 'themes/qijian/images/code.jpg' : '/../../../backend/web/temp/conf/' . $result['code']['parameter'];
 
 ?>
 

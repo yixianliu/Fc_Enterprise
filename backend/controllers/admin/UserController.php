@@ -5,6 +5,7 @@ namespace backend\controllers\admin;
 use common\models\ItemRp;
 use common\models\Job;
 use common\models\Purchase;
+use common\models\UserSupply;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
@@ -67,6 +68,9 @@ class UserController extends BaseController
     public function actionView($id)
     {
 
+        // 供应商
+        $dataSupplyProvider = UserSupply::findOne(['user_id' => $id]);
+
         // 招聘
         $dataJobProvider = new ActiveDataProvider([
             'query'      => Job::find()->where(['user_id' => $id]),
@@ -87,6 +91,7 @@ class UserController extends BaseController
             'model'                => $this->findModel($id),
             'dataJobProvider'      => $dataJobProvider,
             'dataPurchaseProvider' => $dataPurchaseProvider,
+            'dataSupplyProvider' => $dataSupplyProvider,
         ]);
     }
 

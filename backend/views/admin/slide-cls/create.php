@@ -11,7 +11,11 @@ $this->params['breadcrumbs'][] = ['label' => '幻灯片分类管理', 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('_form', [
-    'model' => $model,
-]) ?>
+<?=
+$this->render('_form', [
+    'model'  => $model,
+    'type'   => $type,
+    'result' => $result,
+]);
+?>
 
