@@ -64,23 +64,7 @@ $this->beginPage();
 
 <?= $content ?>
 
-<div class="container-fluid foot">
-    <div class="container">
-
-        <div class="col-xs-12">
-            <ul>
-
-                <?php foreach ($footMenu as $value): ?>
-                    <li><a title="<?= $value['name'] ?>" href="#"><?= $value['name'] ?></a></li>
-                <?php endforeach; ?>
-
-            </ul>
-        </div>
-
-        <?= ConfList::widget(['config' => [$this->title, 'foot']]); ?>
-
-    </div>
-</div>
+<?= ConfList::widget(['config' => [$this->title, 'foot']]); ?>
 
 <!-- 返回顶部 -->
 <div class="button-go-top">

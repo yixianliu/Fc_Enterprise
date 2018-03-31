@@ -50,8 +50,19 @@ class ConfList extends InputWidget
 
         $this->config[1] = empty($this->config[1]) ? 'head' : $this->config[1];
 
+        // 底部菜单链接
+        if ($this->config[1] == 'foot')
+        {
+
+        }
+
         return $this->render($this->config[1], [
             'result' => $result
         ]);
+    }
+
+    public function footArray()
+    {
+
     }
 }
