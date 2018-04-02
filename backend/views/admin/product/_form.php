@@ -73,6 +73,8 @@ if (empty($result['classify'])) {
 
                     <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id]); ?>
 
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
+
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'discount')->textInput(['maxlength' => true]) ?>

@@ -11,6 +11,7 @@
 
 namespace common\widgets\iConf;
 
+use common\models\Menu;
 use Yii;
 use yii\widgets\InputWidget;
 use common\models\Conf;
@@ -53,7 +54,7 @@ class ConfList extends InputWidget
         // 底部菜单链接
         if ($this->config[1] == 'foot')
         {
-
+            $result['footArray'] = Menu::findByAll('E1', 'cn');
         }
 
         return $this->render($this->config[1], [

@@ -14,6 +14,95 @@ use yii\helpers\Html;
 
 $img = empty($result['code']['parameter']) ? 'themes/qijian/images/code.jpg' : '/../../../backend/web/temp/conf/' . $result['code']['parameter'];
 
+$footHtml = null;
+
+if (!empty($result['footArray'])) {
+
+    // 循环
+    foreach ($result['footArray'] as $value) {
+
+        switch ($value['menuModel']['url_key']) {
+
+            // 招聘
+            case 'job':
+                $footHtml .= ' <li><a title="<?= $value[\'name\'] ?>" href="#"><?= $value[\'name\'] ?></a></li>';
+                break;
+
+            // 产品模型
+            case 'product':
+
+                $product = ProductClassify::findByAll('C0');
+
+                foreach ($product as $values) {
+                    $array[] = [
+                        'label'   => $values['name'],
+                        'url'     => ['/product/index', 'id' => $values['c_key']],
+                        'items'   => $this->recursionMenu($values, $type),
+                        'options' => ['class' => 'sub-menu'],
+                    ];
+                }
+                break;
+
+            // 采购模型
+            case 'purchase':
+                $array = $this->recursionPurchaseMenu($value, $type);
+                break;
+
+            // 供应模型
+            case 'supply':
+
+                $product = PsbClassify::findAll(['is_using' => 'On', 'is_type' => 'Supply']);
+
+                foreach ($product as $values) {
+                    $array[] = [
+                        'label' => $values['name'],
+                        'url'   => ['/supply/index', 'id' => $values['c_key']],
+                        'items' => $this->recursionMenu($values, $type),
+                    ];
+                }
+                break;
+
+            // 投标模型
+            case 'bid':
+
+                $product = PsbClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+
+                foreach ($product as $values) {
+                    $array[] = [
+                        'label' => $values['name'],
+                        'url'   => ['/bid/index', 'id' => $values['c_key']],
+                        'items' => $this->recursionMenu($values),
+                    ];
+                }
+                break;
+
+            // 新闻模型
+            case 'news':
+
+                $news = NewsClassify::findByAll('C0');
+
+                foreach ($news as $values) {
+                    $array[] = [
+                        'label' => $values['name'],
+                        'url'   => ['/news/index', 'id' => $values['c_key']],
+                        'items' => $this->recursionMenu($values),
+                    ];
+                }
+                break;
+
+            // 自定义
+            case 'pages':
+                $array = $this->recursionPagesMenu($value, $type);
+                break;
+
+            // 超链接
+            case 'urls':
+                $array = $this->recursionUrlMenu($value, $value['parent_id'], $type);
+                break;
+        }
+    }
+}
+
 ?>
 
 <div class="container-fluid foot">
