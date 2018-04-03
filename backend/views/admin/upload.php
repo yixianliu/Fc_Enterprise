@@ -31,6 +31,8 @@ $num = empty($num) ? 5 : $num;
 
 <div class="form-group">
 
+    <?= $form->field($model, $attribute)->textarea(['id' => 'ImagesContent', 'style' => 'display:none;']) ?>
+
     <?=
     FileUploadUI::widget([
         'model'         => $model,
@@ -84,8 +86,6 @@ $num = empty($num) ? 5 : $num;
         ],
     ]);
     ?>
-
-    <?= $form->field($model, $attribute)->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
 
 </div>
 

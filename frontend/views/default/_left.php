@@ -19,6 +19,8 @@ use common\models\Menu;
 
 $id = Yii::$app->request->get('id', 'C0');
 
+$classifyName = null;
+
 switch ($type) {
 
     // 新闻
@@ -52,7 +54,7 @@ switch ($type) {
         if (empty($data))
             break;
 
-        $classify = Menu::findByAll($m_key,  Yii::$app->session['language']);
+        $classify = Menu::findByAll($m_key, Yii::$app->session['language']);
 
         foreach ($classify as $key => $value) {
 
@@ -112,7 +114,9 @@ switch ($type) {
 
         <?php else: ?>
 
-            <a href="#" title="暂无栏目 !!"><div class="cur" >暂无栏目 !!</div></a>
+            <a href="#" title="暂无栏目 !!">
+                <div class="cur">暂无栏目 !!</div>
+            </a>
 
         <?php endif; ?>
 

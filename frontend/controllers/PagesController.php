@@ -32,12 +32,16 @@ class PagesController extends BaseController
 
     /**
      * Lists all Pages models.
-     * @return mixed
+     *
+     * @param $id
+     * @return string|\yii\web\Response
      */
-    public function actionIndex($id)
+    public function actionIndex()
     {
 
-        $model = Pages::findOne(['is_using' => 'On', 'c_key' => $id]);
+        $id = Yii::$app->request->get('id', null);
+
+        $model = Pages::findByOne($id);
 
         if (empty($model))
             return $this->redirect(['/']);

@@ -4,53 +4,54 @@
 /* @var $searchModel common\models\PagesClassifySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $result['menu']['name'];
-$this->params['breadcrumbs'][] = ['label' => $result['menu']['name'], 'url' => ['index', 'id' => $model->c_key]];
+$this->title = $model['menu']['name'];
+$this->params['breadcrumbs'][] = ['label' => $model['menu']['name'], 'url' => ['index', 'id' => $model['page_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => $model->page_id]); ?>
 
-<?= $this->render('../nav'); ?>
+<style type="text/css">
+    .summary {
+        display: none;
+    }
+</style>
 
-<section class="section-wrap-mp pb-50">
-    <div class="container">
+<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
 
-        <!-- filter -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="portfolio-filter">
-                    <a href="#" class="filter active" data-filter="*">所有</a>
-                    <a href="#" class="filter" data-filter=".web-design">Web Design</a>
-                    <a href="#" class="filter" data-filter=".print">Print</a>
-                    <a href="#" class="filter" data-filter=".branding">Branding</a>
-                    <a href="#" class="filter" data-filter=".mockups">Mockups</a>
+<div class="container content">
+
+    <!-- 左边 -->
+    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['m_key']]); ?>
+    <!-- #左边 -->
+
+    <!-- 右边 -->
+    <div class="right">
+
+        <?= $this->render('../nav'); ?>
+
+        <!-- 可变化内容 -->
+        <div class="conY">
+            <div class="conY_tit"><?= $result['menu']['name'] ?></div>
+            <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：<?= date('Y - m - d', $model['updated_at']) ?></div>
+
+            <div class="conY_text">
+                <?= $model['content'] ?>
+            </div>
+
+
+            <div class="conY_fanye">
+                <div class="conY_fanyel">
+                    上一篇：<a href="#" title="">上一篇</a>
+                </div>
+                <div class="conY_fanyer">
+                    下一篇：<a href="#" title="">下一篇</a>
                 </div>
             </div>
-        </div> <!-- end filter -->
-
-        <div class="row">
-
-
-
         </div>
+        <!-- #可变化内容 -->
+
     </div>
-</section>
+    <!-- 右边 -->
 
-<section class="call-to-action bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9 col-xs-12">
-                <h2>Are you ready to work with us? Let's grow your business.</h2>
-            </div>
-
-            <div class="col-md-3 col-xs-12 cta-button">
-                <a href="#" class="btn btn-lg btn-color">Contact Us</a>
-            </div>
-
-        </div>
-    </div>
-</section> <!-- end call to action -->
-
+</div>
