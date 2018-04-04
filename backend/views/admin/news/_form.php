@@ -51,6 +51,10 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>
 
+                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->news_id, 'num' => 1]); ?>
+
+                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->news_id]); ?>
+
                 <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true, 'placeholder' => '数值越大,越靠前...']) ?>
 
                 <?=

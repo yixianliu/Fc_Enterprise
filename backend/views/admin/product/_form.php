@@ -71,9 +71,9 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

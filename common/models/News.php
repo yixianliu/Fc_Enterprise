@@ -87,6 +87,8 @@ class News extends \yii\db\ActiveRecord
             'content'      => '新闻内容',
             'introduction' => '新闻导读',
             'keywords'     => '新闻关键词',
+            'path'         => '新闻图片',
+            'images'       => '新闻缩略图',
             'praise'       => 'Praise',
             'forward'      => '转发',
             'collection'   => 'Collection',

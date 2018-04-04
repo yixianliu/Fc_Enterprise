@@ -31,7 +31,7 @@ $num = empty($num) ? 5 : $num;
 
 <div class="form-group">
 
-    <?= $form->field($model, $attribute)->textarea(['id' => 'ImagesContent', 'style' => 'display:none;']) ?>
+    <?= $form->field($model, $attribute)->textInput(['style' => 'display:none;']) ?>
 
     <?=
     FileUploadUI::widget([
@@ -52,14 +52,15 @@ $num = empty($num) ? 5 : $num;
         'clientEvents'  => [
 
             'fileuploaddone' => 'function(e, data) {
+            
                                 console.log(e);
                                 console.log(data);
                                 
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
+                                var ImagesContent = $("#ImagesContent_' . $attribute . '");
                                 
                                 var num = ' . $num . ';
+                                
+                                var html = "";
                                 
                                 if (num > 1) {
                                 
@@ -70,13 +71,11 @@ $num = empty($num) ? 5 : $num;
                                     html += ImagesContent.val();
                                     
                                 } else {
-                                    
                                     html = data.result.files[0].name;
-                                    
                                 }
                                 
-                                ImagesContent.val(html);
-                                
+                                ImagesContent.attr("value", html);
+                      
                                 return true;
                             }',
             'fileuploadfail' => 'function(e, data) {
@@ -86,6 +85,8 @@ $num = empty($num) ? 5 : $num;
         ],
     ]);
     ?>
+
+    <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
 
 </div>
 

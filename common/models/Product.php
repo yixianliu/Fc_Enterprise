@@ -66,10 +66,10 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['c_key', 's_key', 'title', 'content', 'user_id',], 'required'],
-            [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments'], 'string'],
+            [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'images'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
-            [['product_id'], 'string', 'max' => 85],
-            [['c_key', 's_key', 'path'], 'string', 'max' => 55],
+            [['product_id', 'images'], 'string', 'max' => 85],
+            [['c_key', 's_key', 'path'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 120],
