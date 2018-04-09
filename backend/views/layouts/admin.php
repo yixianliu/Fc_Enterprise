@@ -35,13 +35,8 @@ $this->beginPage();
 <?= Yii::$app->view->renderFile('@app/views/notifications.php'); ?>
 
 <div class="page-container row-fluid">
-
     <div class="page-sidebar ">
-
-        <!-- MAIN MENU - START -->
         <div class="page-sidebar-wrapper" id="main-menu-wrapper">
-
-            <!-- USER INFO - START -->
             <div class="profile-info row">
 
                 <div class="profile-image col-md-4 col-sm-4 col-xs-4">
@@ -84,7 +79,13 @@ $this->beginPage();
 </div>
 
 <script type="text/javascript">
+
     $('.wraplist').children('li').children('ul').removeClass('dropdown-menu').addClass('sub-menu');
+
+    $('.active').parent().parent().addClass('open');
+
+    $('.active').children('a').addClass('active');
+
 </script>
 
 <?php $this->endBody(); ?>

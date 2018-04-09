@@ -6,7 +6,6 @@ use common\models\DownloadCls;
 use Yii;
 use common\models\Download;
 use common\models\DownloadSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
