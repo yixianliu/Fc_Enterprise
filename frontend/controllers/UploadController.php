@@ -130,13 +130,16 @@ class UploadController extends BaseController
             return Json::encode(['status' => false, 'message' => '上传文件异常 !!']);
         }
 
+
+
         $uid = time() . '_' . $type . '_' . rand(10000, 99999);
         $fileName = $uid . '.' . $imageFile->extension;
         $filePath = $directory . $fileName;
 
         if ($imageFile->saveAs($filePath)) {
 
-            $path = $directory . $fileName;
+//            $path = $directory . $fileName;
+            $path = Yii::getAlias('@web') . '/temp/' . DIRECTORY_SEPARATOR . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $fileName;
 
             return Json::encode([
                 'files' => [

@@ -117,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'unique', 'on' => 'reg'],
 
             // 默认
-            [['enterprise', 'signature'], 'default', 'value' => null],
+            [['signature'], 'default', 'value' => null],
             [['exp', 'credit', 'birthday'], 'default', 'value' => 0],
         ];
     }

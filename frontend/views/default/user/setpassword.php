@@ -78,10 +78,12 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['view', 'id
 
             </div>
 
-            <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
         </div>
 
     </div>
+
+    <br/>
+
+    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
 
 </div>
