@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
             </div>
 
             <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字" name="title"/>
-            <span class="input-group-btn"><a class="btn btn-red" title="" href="purchasing.html">搜索</a></span>
+            <span class="input-group-btn"><input type="submit" class="btn btn-red" value="搜索" /></span>
 
         </form>
 
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 
 </div>
 <!-- #搜索 -->
-
+                           f
 <!-- 分类导航 -->
 <div id="nav">
 
@@ -160,7 +160,6 @@ use yii\widgets\ActiveForm;
                 暂无信息 !!
 
             <?php endif; ?>
-
 
         </div>
 

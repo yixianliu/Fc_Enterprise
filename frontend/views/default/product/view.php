@@ -10,22 +10,22 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-// $this->registerCssFile('@web/themes/qijian/css/product.css');
-// $this->registerCssFile('@web/themes/qijian/css/prozoom.css');
-// $this->registerJsFile('@web/themes/qijian/js/jquery1.42.min.js');
-// $this->registerJsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js');
-// $this->registerJsFile('@web/themes/qijian/js/jquery.jqzoom.js');
-// $this->registerJsFile('@web/themes/qijian/js/base.js');
+$imgArray = explode(',', $model->path);
+
+foreach ($imgArray as $key => $value) {
+    if (empty($imgArray[$key]))
+        unset($imgArray[$key]);
+}
 
 ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/product.css')?>
+<?= Html::cssFile('@web/themes/qijian/css/product.css') ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/prozoom.css')?>
+<?= Html::cssFile('@web/themes/qijian/css/prozoom.css') ?>
 
-<?=Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js')?>
+<?= Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js') ?>
 
-<?=Html::jsFile('@web/themes/qijian/js/jqzoom/base.js')?>
+<?= Html::jsFile('@web/themes/qijian/js/jqzoom/base.js') ?>
 
 <?= $this->render('../slide', ['pagekey' => 'product']); ?>
 
@@ -49,39 +49,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 <!--产品参数开始-->
                 <div class="tendcont">
                     <div class="tend-left">
-                        <!-- 大图 -->
-                        <div id="preview" class="spec-preview">
+
+                        <?php if (!empty($imgArray)): ?>
+                            <!-- 大图 -->
+                            <div id="preview" class="spec-preview">
                             <span class="jqzoom">
-                                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title]); ?>
+                                <?= Html::img(Url::to('@web/../../backend/web/temp/product/' . $imgArray[0]), ['alt' => $model->title]); ?>
                             </span>
-                        </div>
-                        <!-- #大图 -->
-
-                        <!--缩图开始-->
-                        <div class="spec-scroll">
-                            <a class="prev"></a>
-                            <a class="next"></a>
-                            <div class="items">
-                                <ul>
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-2.jpg'), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-1.jpg'), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-
-                                    <li>
-                                        <?= Html::img(Url::to('@web/themes/qijian/images/ser-right-2.jpg'), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
-                                    </li>
-                                </ul>
                             </div>
-                        </div>
-                        <!--缩图结束-->
+                            <!-- #大图 -->
+
+                            <!--缩图开始-->
+                            <div class="spec-scroll">
+                                <a class="prev"></a>
+                                <a class="next"></a>
+                                <div class="items">
+                                    <ul>
+
+                                        <?php foreach ($imgArray as $value): ?>
+
+                                            <li>
+                                                <?= Html::img(Url::to('@web/../../backend/web/temp/product/' . $value), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
+                                            </li>
+
+                                        <?php endforeach; ?>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--缩图结束-->
+                        <?php else: ?>
+
+                            <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title, 'width' => 400, 'height' => 280]); ?>
+
+                        <?php endif; ?>
+
                     </div>
 
                     <!-- 产品参数 -->
