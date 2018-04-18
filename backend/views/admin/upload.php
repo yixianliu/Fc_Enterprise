@@ -93,7 +93,7 @@ $num = empty($num) ? 5 : $num;
 <hr/>
 
 <div class="form-group">
-    <?= $this->render('result_img', ['img' => $model->$attribute, 'type' => $type]); ?>
+    <?= $this->render('result_img', ['img' => $model->$attribute, 'type' => $type, 'attribute' => $attribute]); ?>
 </div>
 
 <hr/>

@@ -54,10 +54,9 @@ if (!empty($img)) {
                     <h5 class="deleteH5" style="word-wrap: break-word;"><?= $value ?></h5><br/>
 
                     <?php if ($type != 'sp-offer'): ?>
-                        <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span>删除</span>
-                        </button>
+                        <a class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
+                            <i class="glyphicon glyphicon-trash"></i><span>删除</span>
+                        </a>
                     <?php endif; ?>
 
                 </div>
@@ -77,9 +76,9 @@ if (!empty($img)) {
             var h5 = $(this).find('.deleteH5').text();
 
             // 获取 ID
-            var ImageId = $('#ImagesContent');
+            var ImageId = $('#ImagesContent_<?= $attribute ?>');
 
-            var imgArray = ImageId.html().split(',');
+            var imgArray = ImageId.val().split(',');
 
             // 重新处理
             var NewImageContent = '';
@@ -91,7 +90,7 @@ if (!empty($img)) {
                 NewImageContent += imgArray[i] + ',';
             }
 
-            ImageId.empty().html(NewImageContent);
+            ImageId.empty().attr('value', NewImageContent);
 
             $(this).parent('div').hide();
 

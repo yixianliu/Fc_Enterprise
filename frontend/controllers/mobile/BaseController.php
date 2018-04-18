@@ -9,7 +9,7 @@
  * Time: 15:57
  */
 
-namespace frontend\controllers;
+namespace frontend\controllers\mobile;
 
 use Yii;
 use yii\helpers\Url;

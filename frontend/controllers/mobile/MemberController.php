@@ -9,7 +9,7 @@
  * Time: 11:12
  */
 
-namespace frontend\controllers;
+namespace frontend\controllers\mobile;
 
 use Yii;
 use yii\helpers\FileHelper;
@@ -20,7 +20,7 @@ use common\models\User;
 class MemberController extends Controller
 {
 
-    public $layout = 'default';
+    public $layout = 'mobile';
 
     // 构造
     public function init()
@@ -118,6 +118,12 @@ class MemberController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * 发送短信接口
+     *
+     * @return string
+     * @throws \yii\base\Exception
+     */
     public function actionSend()
     {
 
