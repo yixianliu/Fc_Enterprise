@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 
 </div>
 <!-- #搜索 -->
-                           f
+
 <!-- 分类导航 -->
 <div id="nav">
 
@@ -148,6 +148,7 @@ use yii\widgets\ActiveForm;
         <div class="purchase-cont-list myscroll">
 
             <?php if (!empty($result['result'])): ?>
+
                 <ul>
 
                     <?php foreach ($result['result'] as $value): ?>
@@ -155,6 +156,7 @@ use yii\widgets\ActiveForm;
                     <?php endforeach; ?>
 
                 </ul>
+
             <?php else: ?>
 
                 暂无信息 !!
