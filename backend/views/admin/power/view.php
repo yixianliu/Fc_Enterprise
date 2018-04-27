@@ -7,10 +7,9 @@ use yii\widgets\DetailView;
 /* @var $model common\models\ItemRp */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => '角色权限', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '权限管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -24,20 +23,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <p>
                         <?= Html::a('更新', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-                        <?=
-                        Html::a('删除', ['delete', 'id' => $model->name], [
+                        <?= Html::a('删除', ['delete', 'id' => $model->name], [
                             'class' => 'btn btn-danger',
                             'data'  => [
-                                'confirm' => '是否真的需要删除这条数据?',
+                                'confirm' => '删除这条权限记录?',
                                 'method'  => 'post',
                             ],
-                        ]);
-                        ?>
+                        ]) ?>
                         <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                     </p>
 
-                    <?=
-                    DetailView::widget([
+                    <?= DetailView::widget([
                         'model'      => $model,
                         'attributes' => [
                             'name',
@@ -45,24 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'rule_name',
                             'data:ntext',
                             'description',
-                            [
-                                'attribute' => 'created_at',
-                                'value'     => function ($model) {
-                                    return date('Y - m -d , h:i', $model->created_at);
-                                },
-                            ],
-                            [
-                                'attribute' => 'updated_at',
-                                'value'     => function ($model) {
-                                    return date('Y - m -d , h:i', $model->updated_at);
-                                },
-                            ],
+                            'created_at',
+                            'updated_at',
                         ],
-                    ])
-                    ?>
+                    ]) ?>
 
                 </div>
             </div>
         </div>
     </section>
 </div>
+

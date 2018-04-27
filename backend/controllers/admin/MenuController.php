@@ -84,24 +84,24 @@ class MenuController extends BaseController
 
         $parent_id = Menu::findByOne(Yii::$app->request->get('id', null));
 
+        // 获取父类
         $model->parent_id = empty($parent_id['parent_id']) ? null : $parent_id['m_key'];
 
         $model->m_key = self::getRandomString();
 
+        $data = Yii::$app->request->post();
+
         // 创建单页面
-        if (!empty(Yii::$app->request->post())) {
+        if (!empty($data)) {
 
-            $data = Yii::$app->request->post();
-
+            // 生成自定义页面
             if ($data['Menu']['model_key'] == 'UC1') {
-
-                // 生成自定义页面
                 $Cls = new Pages();
                 $Cls->saveData($model->m_key, self::getRandomString());
             }
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);
         } else {
 
@@ -143,10 +143,37 @@ class MenuController extends BaseController
     }
 
     /**
-     * Deletes an existing Menu model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * 调整路径
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionAdjustment($id){
+
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->m_key]);
+        } else {
+
+            return $this->render('adjustment', [
+                'model'  => $model,
+                'result' => [
+                    ''
+                ],
+            ]);
+        }
+    }
+
+    /**
+     * 删除内容
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -171,6 +198,11 @@ class MenuController extends BaseController
         }
     }
 
+    /**
+     * 获取菜单模型
+     *
+     * @return array
+     */
     public function getModel()
     {
 
@@ -186,6 +218,11 @@ class MenuController extends BaseController
         return $data;
     }
 
+    /**
+     * 获取角色
+     *
+     * @return array
+     */
     public function getRole()
     {
         // 初始化

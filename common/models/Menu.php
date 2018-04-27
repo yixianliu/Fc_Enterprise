@@ -108,10 +108,11 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     *
      * 查找指定菜单
      *
      * @param $id
+     * @param string $relevance
+     * @return array|bool|Menu|null|\yii\db\ActiveRecord
      */
     public static function findByOne($id, $relevance = 'Off')
     {
@@ -158,7 +159,6 @@ class Menu extends \yii\db\ActiveRecord
     {
         // 初始化
         $dataMenu = array();
-        $array = array();
 
         $data = static::findByAll($pid, $type);
 
@@ -166,6 +166,8 @@ class Menu extends \yii\db\ActiveRecord
             return;
 
         foreach ($data as $value) {
+
+            $array = array();
 
             switch ($value['menuModel']['url_key']) {
 
@@ -270,8 +272,6 @@ class Menu extends \yii\db\ActiveRecord
                 'url'   => [$urls],
                 'items' => $array,
             ];
-
-            $array = array();
 
         }
 

@@ -51,7 +51,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->c_key ];
                             },
                         ],
-                        'path',
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/slide/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

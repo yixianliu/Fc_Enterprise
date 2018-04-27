@@ -2,19 +2,18 @@
 
 namespace backend\controllers\admin;
 
-
 use Yii;
 use common\models\ItemRp;
-use common\models\Rules;
-use common\models\ItemRpSearch;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * ItemRpController implements the CRUD actions for ItemRp model.
+ * PowerController implements the CRUD actions for ItemRp model.
  */
-class ItemRpController extends BaseController
+class PowerController extends BaseController
 {
     /**
      * @inheritdoc
@@ -48,12 +47,11 @@ class ItemRpController extends BaseController
      */
     public function actionIndex()
     {
-
-        $searchModel = new ItemRpSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'role');
+        $dataProvider = new ActiveDataProvider([
+            'query' => ItemRp::find()->where(['type' => 2]),
+        ]);
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -62,6 +60,7 @@ class ItemRpController extends BaseController
      * Displays a single ItemRp model.
      * @param string $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -80,11 +79,12 @@ class ItemRpController extends BaseController
 
         $model = new ItemRp();
 
+        // 添加权限
         if ($model->load(Yii::$app->request->post())) {
 
             $auth = Yii::$app->authManager;
 
-            $role = $auth->createRole($model->name);
+            $role = $auth->createPermission($model->name);
 
             $role->description = $model->description;
             $role->data = $model->data;
@@ -95,18 +95,11 @@ class ItemRpController extends BaseController
             }
 
             return $this->redirect(['view', 'id' => $model->name]);
-
-        } else {
-
-            return $this->render('create', [
-                'model'  => $model,
-                'result' => [
-                    'rules' => $this->getRules(),
-                    'power' => $this->getPower(),
-                ]
-            ]);
-
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -114,23 +107,44 @@ class ItemRpController extends BaseController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $auth = Yii::$app->authManager;
+
+            $role = $auth->getPermission($model->name);
+
+            $role->description = $model->description;
+            $role->data = $model->data;
+            $role->type = $model->type;
+
+            if ($model->name == $data['ItemRp']['name']) {
+
+                if (!$auth->update($model->name, $role)) {
+                    Yii::$app->session->setFlash('error', '无法保存数据');
+                }
+
+            } else {
+
+                if (!$auth->add($role)) {
+                    Yii::$app->session->setFlash('error', '无法保存数据');
+                }
+
+            }
+
             return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('update', [
-            'model'  => $model,
-            'result' => [
-                'rules' => $this->getRules(),
-                'power' => $this->getPower(),
-            ]
+            'model' => $model,
         ]);
-
     }
 
     /**
@@ -138,11 +152,11 @@ class ItemRpController extends BaseController
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -157,47 +171,8 @@ class ItemRpController extends BaseController
     {
         if (($model = ItemRp::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    /**
-     * 获取规则
-     *
-     * @return array
-     */
-    public function getRules()
-    {
-
-        // 初始化
-        $result = array();
-
-        $data = Rules::findByAll();
-
-        foreach ($data as $value) {
-            $result[ $value['name'] ] = $value['description'];
         }
 
-        return $result;
-    }
-
-    /**
-     * 获取权限
-     *
-     * @return array
-     */
-    public function getPower()
-    {
-        // 初始化
-        $result = array();
-
-        $data = ItemRp::findByAll('permission');
-
-        foreach ($data as $value) {
-            $result[ $value['name'] ] = $value['description'];
-        }
-
-        return $result;
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -24,7 +24,7 @@ use kartik\select2\Select2;
                 <?=
                 $form->field($model, 'type')->widget(Select2::classname(), [
                     'data'          => ['1' => '角色', '2' => '权限'],
-                    'options'       => ['placeholder' => '选择角色权限...'],
+                    'options'       => ['placeholder' => '选择角色权限...', 'disabled' => 'disabled'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -70,6 +70,10 @@ use kartik\select2\Select2;
 </div>
 
 <script type="text/javascript">
+
+    <?php if ($model->type == 1): ?>
+    $('#pkey').show();
+    <?php endif; ?>
 
     $('#itemrp-type').on('change', function () {
 

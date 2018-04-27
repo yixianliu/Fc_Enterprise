@@ -4,10 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ItemRpSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '角色权限';
+$this->title = '权限管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -19,34 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
+                <h1><?= Html::encode($this->title) ?></h1>
 
                 <p>
-                    <?= Html::a('创建角色权限', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('角色', ['index', 'type' => 'role'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('权限', ['index', 'type' => 'permission'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('添加权限', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?=
-                GridView::widget([
+                <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'name',
-                        [
-                            'label'     => '类型',
-                            'attribute' => 'type',
-                            'value'     => function ($model) {
-                                $state = [
-                                    '1' => '角色',
-                                    '2' => '权限',
-                                ];
 
-                                return $state[ $model->type ];
-                            },
-                        ],
+                        'name',
+                        'rule_name',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
@@ -59,12 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
+
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]);
-                ?>
+                ]); ?>
 
             </div>
         </div>
     </section>
 </div>
+

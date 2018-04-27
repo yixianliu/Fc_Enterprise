@@ -17,7 +17,6 @@ use yii\behaviors\TimestampBehavior;
  * @property string $updated_at
  *
  * @property ItemRelated[] $itemRelateds
- * @property ItemRelated[] $itemRelateds0
  * @property ItemRp[] $children
  * @property ItemRp[] $parents
  * @property Rules $ruleName
@@ -81,14 +80,23 @@ class ItemRp extends \yii\db\ActiveRecord
         ];
     }
 
-
+    /**
+     * 查找所有
+     *
+     * @param string $type
+     * @param string $page
+     * @param null $parent_id
+     * @return array|ItemRp[]|\yii\db\ActiveRecord[]
+     */
     static public function findByAll($type = 'role', $page = 'On', $parent_id = null)
     {
 
         switch ($type) {
+
             case 'role':
                 $type = 1;
                 break;
+
             default:
                 $type = 2;
                 break;

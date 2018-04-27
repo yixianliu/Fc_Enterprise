@@ -116,7 +116,7 @@ class CenterController extends BaseController
 
                     'createSlide', 'updateSlide', 'indexSlide', 'viewSlide', 'deleteSlide',  // 幻灯片
                     'createSlide-cls', 'updateSlide-cls', 'indexSlide-cls', 'viewSlide-cls', 'deleteSlide-cls',  // 幻灯片模型
-                    'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', 'deleteMenu',  // 菜单
+                    'createMenu', 'updateMenu', 'indexMenu', 'viewMenu', 'relatedMenu', 'deleteMenu', 'adjustmentMenu',  // 菜单
                     'createUser', 'userUser', 'updateUser', 'indexUser', 'viewUser', 'deleteUser', // 用户
                     'createItem-rp', 'updateItem-rp', 'indexItem-rp', 'viewItem-rp', 'relatedItem-rp',  'deleteItem-rp', // 角色 + 权限
 
