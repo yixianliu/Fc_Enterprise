@@ -22,7 +22,7 @@ use yii\behaviors\TimestampBehavior;
  * @property Rules $ruleName
  * @property User[] $users
  */
-class ItemRp extends \yii\db\ActiveRecord
+class Role extends \yii\db\ActiveRecord
 {
 
     public $p_key;
@@ -32,7 +32,7 @@ class ItemRp extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%itemrp}}';
+        return '{{%role}}';
     }
 
     /**

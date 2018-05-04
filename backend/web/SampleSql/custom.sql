@@ -70,10 +70,10 @@ CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
     KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
-  /**
-   * 用户设置
-   */
-  DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
+/**
+* 用户设置
+*/
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
 CREATE TABLE `#DB_PREFIX#User_Config` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['class' => 'yii\grid\SerialColumn'],
 
                         'name',
-                        'rule_name',
+                        'description',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {

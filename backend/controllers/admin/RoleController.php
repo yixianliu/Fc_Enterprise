@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 /**
  * ItemRpController implements the CRUD actions for ItemRp model.
  */
-class ItemRpController extends BaseController
+class RoleController extends BaseController
 {
     /**
      * @inheritdoc
