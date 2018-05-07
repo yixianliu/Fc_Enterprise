@@ -36,14 +36,10 @@ class CenterController extends BaseController
 
             if ($model->load($request->post())) {
 
-                $post = $request->post('mysql_data', 'On');
-
-                $mysql_data = ($post == 'Off') ? null : file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/data.sql');
-
                 // 批量SQL语句
                 $Sql_Data = file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/base.sql')
                     . file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/power.sql')
-                    . $mysql_data;
+                    . file_get_contents(Yii::getAlias('@webroot') . '/SampleSql/data.sql');
 
                 $Sql_Data = str_ireplace('#NAME#', $request->post('MountRunForm')['name'], $Sql_Data);
                 $Sql_Data = str_ireplace('#TITLE#', $request->post('MountRunForm')['title'], $Sql_Data);
