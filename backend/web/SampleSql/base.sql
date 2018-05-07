@@ -176,8 +176,7 @@ CREATE TABLE `#DB_PREFIX#User` (
     UNIQUE KEY (`user_id`),
     KEY `r_key` (`r_key`),
     UNIQUE `nickname` (`nickname`),
-    UNIQUE KEY `username` (`username`),
-    foreign key (`r_key`) references `#DB_PREFIX#ItemRp` (`name`) on delete cascade on update cascade
+    UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**

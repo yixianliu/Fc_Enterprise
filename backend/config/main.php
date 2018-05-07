@@ -69,7 +69,7 @@ return [
 
             // Mysql 表
             'itemTable'       => 'fc_role', // 角色 + 权限
-            'assignmentTable' => 'fc_assignment', // 用户
+            'assignmentTable' => 'fc_user', // 用户
             'itemChildTable'  => 'fc_role_permisson', // 关联
             'ruleTable'       => 'fc_rules', // 规则
         ],
