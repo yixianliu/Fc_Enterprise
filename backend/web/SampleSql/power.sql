@@ -15,8 +15,8 @@ CREATE TABLE `#DB_PREFIX#aut_role` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
 
-DROP TABLE IF EXISTS `#DB_PREFIX#user_role`;
-CREATE TABLE `#DB_PREFIX#user_role` (
+DROP TABLE IF EXISTS `#DB_PREFIX#auth_user_role`;
+CREATE TABLE `#DB_PREFIX#auth_user_role` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
     `role_id` int(11) NOT NULL DEFAULT '0' COMMENT '角色ID',
@@ -47,6 +47,38 @@ CREATE TABLE `#DB_PREFIX#auth_rule` (
 /**
  * 插入数据
  */
+
+INSERT INTO `#DB_PREFIX#auth_user_role` VALUES (NULL, '#USERNAME#', 'admin', '#TIME#');
+
+INSERT INTO `#DB_PREFIX#auth_role_permisson`
+VALUES
+(NULL, 'admin', 'indexCenter', '#TIME#'),
+(NULL, 'admin', 'confCenter', '#TIME#'),
+
+(NULL, 'admin', 'updateCenter', '#TIME#'),
+(NULL, 'admin', 'createCenter', '#TIME#'),
+(NULL, 'admin', 'viewCenter', '#TIME#'),
+(NULL, 'admin', 'confCenter', '#TIME#'),
+(NULL, 'admin', 'deleteCenter', '#TIME#'),
+
+(NULL, 'admin', 'createSlide', '#TIME#'),
+(NULL, 'admin', 'updateSlide', '#TIME#'),
+(NULL, 'admin', 'indexSlide', '#TIME#'),
+(NULL, 'admin', 'viewSlide', '#TIME#'),
+(NULL, 'admin', 'deleteSlide', '#TIME#'),
+
+(NULL, 'admin', 'createSlide-cls', '#TIME#'),
+(NULL, 'admin', 'updateSlide-cls', '#TIME#'),
+(NULL, 'admin', 'indexSlide-cls', '#TIME#'),
+(NULL, 'admin', 'viewSlide-cls', '#TIME#'),
+(NULL, 'admin', 'deleteSlide-cls', '#TIME#'),
+
+(NULL, 'admin', 'createMenu', '#TIME#'),
+(NULL, 'admin', 'updateMenu', '#TIME#'),
+(NULL, 'admin', 'indexMenu', '#TIME#'),
+(NULL, 'admin', 'viewMenu', '#TIME#'),
+(NULL, 'admin', 'deleteMenu', '#TIME#'),
+(NULL, 'admin', 'adjustmentMenu', '#TIME#');
 
 INSERT INTO `#DB_PREFIX#aut_role`
 VALUES

@@ -1,5 +1,8 @@
 <?php
 /**
+ *
+ * 表单返回信息
+ *
  * Created by Yxl.
  * User: <zccem@163.com>.
  * Date: 2017/10/25

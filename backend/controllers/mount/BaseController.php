@@ -31,7 +31,6 @@ class BaseController extends Controller
 
         // 检查session是否开启
         if (!$session->isActive) {
-//            Yii::$app->getSession()->setFlash('error', 'Session 失败,请检查 !!');
             exit('Session 失败,请检查 !!');
         }
 

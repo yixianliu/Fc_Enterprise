@@ -61,17 +61,17 @@ return [
             ],
         ],
 
-        //components数组中加入authManager组件,有PhpManager和DbManager两种方式,
-        //PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
+        // components数组中加入authManager组件,有PhpManager和DbManager两种方式,
+        // PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
         'authManager' => [
             'class'           => 'yii\rbac\DbManager',
             'defaultRoles'    => ['guest'],
 
             // Mysql 表
-            'itemTable'       => 'fc_role', // 角色 + 权限
+            'itemTable'       => 'fc_aut_role', // 角色 + 权限
             'assignmentTable' => 'fc_user', // 用户
-            'itemChildTable'  => 'fc_role_permisson', // 关联
-            'ruleTable'       => 'fc_rules', // 规则
+            'itemChildTable'  => 'fc_aut_role_permisson', // 关联
+            'ruleTable'       => 'fc_auth_rule', // 规则
         ],
     ],
 

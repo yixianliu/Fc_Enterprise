@@ -30,14 +30,14 @@
  */
 return [
     'Development' => [
-        'path' => 'dev',
-        'setWritable' => [
+        'path'                   => 'dev',
+        'setWritable'            => [
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
-        'setExecutable' => [
+        'setExecutable'          => [
             'yii',
             'yii_test',
         ],
@@ -46,15 +46,15 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
-    'Production' => [
-        'path' => 'prod',
-        'setWritable' => [
+    'Production'  => [
+        'path'                   => 'prod',
+        'setWritable'            => [
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
-        'setExecutable' => [
+        'setExecutable'          => [
             'yii',
         ],
         'setCookieValidationKey' => [
