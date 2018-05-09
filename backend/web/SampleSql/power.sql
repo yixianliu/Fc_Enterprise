@@ -8,6 +8,7 @@ CREATE TABLE `#DB_PREFIX#aut_role` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL DEFAULT '' COMMENT '角色名称',
     `description` varchar(50) NOT NULL DEFAULT '' COMMENT '权限描述',
+    `rule_name` varchar(50) NOT NULL DEFAULT '' COMMENT '规则',
     `type` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：角色 2：权限',
     `status` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：有效 0：无效',
     `updated_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
@@ -18,11 +19,13 @@ CREATE TABLE `#DB_PREFIX#aut_role` (
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_user_role`;
 CREATE TABLE `#DB_PREFIX#auth_user_role` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
-    `role_id` int(11) NOT NULL DEFAULT '0' COMMENT '角色ID',
+    `user_id` varchar(55) NOT NULL COMMENT '用户id',
+    `role_id` varchar(55) NOT NULL COMMENT '角色ID',
     `created_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '插入时间',
+    `updated_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
     PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`)
+    KEY `user_id` (`user_id`),
+    KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_role_permisson`;
@@ -48,7 +51,7 @@ CREATE TABLE `#DB_PREFIX#auth_rule` (
  * 插入数据
  */
 
-INSERT INTO `#DB_PREFIX#auth_user_role` VALUES (NULL, '#USERNAME#', 'admin', '#TIME#');
+INSERT INTO `#DB_PREFIX#auth_user_role` VALUES (NULL, '#USERNAME#', 'admin', '#TIME#', '#TIME#');
 
 INSERT INTO `#DB_PREFIX#auth_role_permisson`
 VALUES

@@ -64,7 +64,7 @@ class CenterController extends BaseController
                 $Sql_Data = str_ireplace('#PASSWORD#', Yii::$app->getSecurity()->generatePasswordHash(Yii::$app->params['Password']), $Sql_Data);
 
                 // Time
-                $Sql_Data = str_ireplace('#TIME#', date('Y-m-d H:i:s', time()) , $Sql_Data);
+                $Sql_Data = str_ireplace('#TIME#', date('Y-m-d H:i:s', time()), $Sql_Data);
 
                 // 执行 SQL
                 $arraySql = explode(';', $Sql_Data);
@@ -97,26 +97,18 @@ class CenterController extends BaseController
     public function actionSetpower()
     {
 
-        $model = new MountForm();
-
         $request = Yii::$app->request;
+
+        $model = new MountRunForm();
 
         if ($request->isPost) {
 
-            $model->scenario = 'power';
+            // 生成安装文件
+            file_put_contents(
+                Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'], date('Y年m月d日 H时i分s秒') . "\n\r" . Yii::$app->params['NAME'] . "\n\r" . Yii::$app->params['TITLE']
+            );
 
-            if ($model->load($request->post()) && $model->validate()) {
-
-                // 生成安装文件
-                file_put_contents(
-                    Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'], date('Y年m月d日 H时i分s秒') . "\n\r" . Yii::$app->params['NAME'] . "\n\r" . Yii::$app->params['TITLE']
-                );
-
-                Yii::$app->getSession()->setFlash('success', '添加数据包成功 !!');
-
-            } else {
-                Yii::$app->getSession()->setFlash('error', $model->getErrors());
-            }
+            Yii::$app->getSession()->setFlash('success', '挂载完毕 !!');
         }
 
         return $this->render('../setpower', ['model' => $model]);
