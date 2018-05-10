@@ -28,7 +28,7 @@ CREATE TABLE `#DB_PREFIX#auth_user_role` (
     `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
-    UNIQUE KEY `role_id` (`role_id`)
+    KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_role_permisson`;
@@ -54,7 +54,10 @@ CREATE TABLE `#DB_PREFIX#auth_rule` (
  * 插入数据
  */
 
-INSERT INTO `#DB_PREFIX#auth_user_role` VALUES (NULL, '#USERNAME#', 'admin', '#TIME#', '#TIME#');
+INSERT INTO `#DB_PREFIX#auth_user_role`
+VALUES
+(NULL, 1, 'admin', '#TIME#', '#TIME#'),
+(NULL, 2, 'admin', '#TIME#', '#TIME#');
 
 INSERT INTO `#DB_PREFIX#auth_role`
 VALUES

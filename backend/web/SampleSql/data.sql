@@ -67,8 +67,8 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Management`
 VALUES
-(NULL, '#USERNAME#', '#PASSWORD#', 'R1', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#' ),
-(NULL, '#USERNAME#Zcc', '#PASSWORD#', 'R2', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#');
+(NULL, '#USERNAME#', '#PASSWORD#', 'admin', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#' ),
+(NULL, '#USERNAME#Zcc', '#PASSWORD#', 'admin', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#');
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

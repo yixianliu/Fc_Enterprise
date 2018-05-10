@@ -69,7 +69,7 @@ return [
 
             // Mysql 表
             'itemTable'       => 'fc_auth_role', // 角色 + 权限
-            'assignmentTable' => 'fc_auth_user_role', // 用户
+            'assignmentTable' => 'fc_management', // 用户
             'itemChildTable'  => 'fc_auth_role_permisson', // 关联
             'ruleTable'       => 'fc_auth_rule', // 规则
         ],

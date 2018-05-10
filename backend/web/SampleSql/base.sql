@@ -66,7 +66,7 @@ CREATE TABLE `#DB_PREFIX#Management` (
     `user_id` INT(11) NULL AUTO_INCREMENT,
     `username` VARCHAR(85) NOT NULL COMMENT '账号',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
-    `r_key` VARCHAR(55) NOT NULL COMMENT '角色关键KEY',
+    `item_name` VARCHAR(80) NOT NULL COMMENT '角色关键KEY',
     `area` VARCHAR(125) NULL COMMENT '当前登录地区',
     `login_ip` VARCHAR(55) COMMENT '登陆IP',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',

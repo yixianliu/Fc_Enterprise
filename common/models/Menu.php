@@ -139,7 +139,7 @@ class Menu extends \yii\db\ActiveRecord
     // 角色
     public function getItemRp()
     {
-        return $this->hasOne(ItemRp::className(), ['name' => 'rp_key']);
+        return $this->hasOne(Role::className(), ['name' => 'rp_key']);
     }
 
     // 角色

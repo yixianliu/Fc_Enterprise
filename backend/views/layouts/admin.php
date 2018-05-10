@@ -49,7 +49,7 @@ $this->beginPage();
 
                     <h3>
                         <a href="#"><?= Yii::$app->user->identity->username; ?></a>
-                        <span class="profile-status online"><?= Yii::$app->user->identity->r_key; ?></span>
+                        <span class="profile-status online"><?= Yii::$app->user->identity->item_name; ?></span>
                     </h3>
 
                     <p class="profile-title"><?= Yii::$app->request->userIP; ?></p>
