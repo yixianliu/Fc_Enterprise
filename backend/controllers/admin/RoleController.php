@@ -6,7 +6,7 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\ItemRp;
 use common\models\Rules;
-use common\models\ItemRpSearch;
+use common\models\RoleSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -49,7 +49,7 @@ class RoleController extends BaseController
     public function actionIndex()
     {
 
-        $searchModel = new ItemRpSearch();
+        $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'role');
 
         return $this->render('index', [

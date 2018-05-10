@@ -7,6 +7,7 @@
 
 namespace backend\controllers\mount;
 
+use common\models\Role;
 use Yii;
 use yii\web\Controller;
 use backend\models\MountForm;
@@ -103,6 +104,17 @@ class CenterController extends BaseController
 
         if ($request->isPost) {
 
+            $auth = Yii::$app->authManager;
+
+            $role = $auth->getRole('admin');
+
+            $power = Role::findByAll('power', 'Off');
+
+            foreach ($power as $value) {
+                $child = $auth->getPermission($value);
+                $auth->addChild($role, $child);
+            }
+
             // 生成安装文件
             file_put_contents(
                 Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'], date('Y年m月d日 H时i分s秒') . "\n\r" . Yii::$app->params['NAME'] . "\n\r" . Yii::$app->params['TITLE']
@@ -112,6 +124,22 @@ class CenterController extends BaseController
         }
 
         return $this->render('../setpower', ['model' => $model]);
+    }
+
+    /**
+     * 角色权限关联
+     *
+     * @param $items
+     * @throws \yii\base\Exception
+     */
+    static public function createEmpowerment($items)
+    {
+        $auth = Yii::$app->authManager;
+        $parent = $auth->createRole($items['name']);
+        $child = $auth->createPermission($items['description']);
+        $auth->addChild($parent, $child);
+
+        return true;
     }
 
 }

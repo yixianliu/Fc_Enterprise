@@ -32,7 +32,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%role}}';
+        return '{{%auth_role}}';
     }
 
     /**
@@ -102,13 +102,23 @@ class Role extends \yii\db\ActiveRecord
                 break;
         }
 
-        return static::find()->where(['type' => $type])->all();
+        if ($page == 'On') {
+
+            return static::find()->where(['type' => $type])
+                ->asArray()
+                ->all();
+
+        } else {
+            return static::find()->where(['type' => $type])
+                ->asArray()
+                ->all();
+        }
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getItemRelateds()
+    public function getItemRelatedsParent()
     {
         return $this->hasMany(ItemRelated::className(), ['parent' => 'name']);
     }
@@ -116,7 +126,7 @@ class Role extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getItemRelateds0()
+    public function getItemRelatedsChild()
     {
         return $this->hasMany(ItemRelated::className(), ['child' => 'name']);
     }
@@ -126,7 +136,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getChildren()
     {
-        return $this->hasMany(ItemRp::className(), ['name' => 'child'])->viaTable('{{%item_related}}', ['parent' => 'name']);
+        return $this->hasMany(ItemRp::className(), ['name' => 'child'])->viaTable('{{%auth_role_permisson}}', ['parent' => 'name']);
     }
 
     /**
@@ -134,7 +144,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getParents()
     {
-        return $this->hasMany(ItemRp::className(), ['name' => 'parent'])->viaTable('{{%item_related}}', ['child' => 'name']);
+        return $this->hasMany(ItemRp::className(), ['name' => 'parent'])->viaTable('{{%auth_role_permisson}}', ['child' => 'name']);
     }
 
     /**

@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ItemRpSearch */
+/* @var $model common\models\RoleSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
