@@ -19,13 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    
+
                     <?= Html::a('创建单页面幻灯片分类', ['create', 'type' => 'pages']) ?> /
-                    
+
                     <?= Html::a('创建幻灯片分类', ['create']) ?> /
 
                     <?= Html::a('创建幻灯片', ['admin/slide/create']) ?> /
-                    
+
                 </p>
 
                 <hr/>
@@ -51,13 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
+                                return $model->created_at;
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->updated_at);
+                                return $model->updated_at;
                             },
                         ],
                         ['class' => 'yii\grid\ActionColumn'],

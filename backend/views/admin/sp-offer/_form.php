@@ -54,7 +54,7 @@ use kartik\select2\Select2;
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'sp-offer', 'user_id' => $model->user_id]); ?>
+        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'sp-offer', 'user_id' => $model->user_id]); ?>
 
     </section>
 

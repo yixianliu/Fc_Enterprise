@@ -13,9 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
@@ -85,13 +83,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
+                                return $model->created_at;
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->updated_at);
+                                return $model->updated_at;
                             },
                         ],
                         ['class' => 'yii\grid\ActionColumn'],

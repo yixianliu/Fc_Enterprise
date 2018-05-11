@@ -58,6 +58,8 @@ class Slide extends \yii\db\ActiveRecord
             'path'        => '路径',
             'description' => '描述',
             'is_using'    => '是否启用',
+            'created_at'  => '创建时间',
+            'updated_at'  => '修改时间',
         ];
     }
 

@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </section>
 
-    <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'user_supply']); ?>
+    <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'user_supply']); ?>
 
 </div>
 

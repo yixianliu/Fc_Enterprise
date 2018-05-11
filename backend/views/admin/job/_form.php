@@ -121,7 +121,7 @@ use dosamigos\fileupload\FileUploadUI;
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['img' => $model->images, 'type' => 'job']); ?>
+        <?= $this->render('resultImg', ['img' => $model->images, 'type' => 'job']); ?>
 
     </section>
 

@@ -120,7 +120,7 @@ use dosamigos\fileupload\FileUploadUI;
             </div>
         </div>
 
-        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'pages']); ?>
+        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'pages']); ?>
 
     </section>
 
