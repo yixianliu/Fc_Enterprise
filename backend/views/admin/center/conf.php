@@ -28,7 +28,7 @@ $this->title = '网站配置';
 
                 <p>
 
-                    <?= Html::a('添加网站配置', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "collapsed"]) . ' / ' ?>
 
                     <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "collapsed"]) . ' / ' ?>
 
@@ -61,6 +61,18 @@ $this->title = '网站配置';
                                 ];
 
                                 return $state[ $model->is_language ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
                         ['class' => 'yii\grid\ActionColumn'],

@@ -12,8 +12,8 @@ CREATE TABLE `#DB_PREFIX#auth_role` (
     `data` varchar(80) NULL DEFAULT '' COMMENT '数据',
     `type` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：角色 2：权限',
     `status` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：有效 0：无效',
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
-    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '插入时间',
+    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
+    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`),
     UNIQUE KEY `description` (`description`)
@@ -24,8 +24,8 @@ CREATE TABLE `#DB_PREFIX#auth_user_role` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
     `user_id` varchar(80) NOT NULL COMMENT '用户id',
     `role_id` varchar(80) NOT NULL COMMENT '角色ID',
-    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '插入时间',
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
+    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
+    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
     KEY `role_id` (`role_id`)
@@ -45,8 +45,8 @@ DROP TABLE IF EXISTS `#DB_PREFIX#auth_rule`;
 CREATE TABLE `#DB_PREFIX#auth_rule` (
     `name` varchar(80) NOT NULL,
     `data` blob,
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次更新时间',
-    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '插入时间',
+    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
+    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
     primary key (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规则表';
 

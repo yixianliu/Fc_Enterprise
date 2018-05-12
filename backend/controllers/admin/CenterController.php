@@ -69,6 +69,7 @@ class CenterController extends BaseController
 
         return $this->render('create', [
             'model' => $model,
+            'type'  => Yii::$app->request->get('type', 'cn'),
         ]);
     }
 
@@ -90,6 +91,7 @@ class CenterController extends BaseController
 
         return $this->render('update', [
             'model' => $model,
+            'type'  => Yii::$app->request->get('type', 'cn'),
         ]);
     }
 
@@ -114,7 +116,10 @@ class CenterController extends BaseController
         $searchModel = new ConfSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->request->get('type', 'cn'));
 
-        return $this->render('conf', ['dataProvider' => $dataProvider]);
+        return $this->render('conf', [
+            'dataProvider' => $dataProvider,
+            'type'         => Yii::$app->request->get('type', 'cn'),
+        ]);
     }
 
     /**

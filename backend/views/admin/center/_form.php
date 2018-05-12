@@ -11,21 +11,21 @@ use kartik\select2\Select2;
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?php if (!empty($model->is_language)): ?>
+                <?php if ($type != 'system'): ?>
 
                     <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
                 <?php else: ?>
 
-                    <?= $form->field($model, 'c_key')->hiddenInput()->label(false); ?>
+                    <?= $form->field($model, 'c_key')->hiddenInput(['value' => 'Custom_' . time() . '_' . rand(100, 999)])->label(false); ?>
 
                 <?php endif; ?>
 

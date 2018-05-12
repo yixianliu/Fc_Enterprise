@@ -65,7 +65,7 @@ class CenterController extends BaseController
                 $Sql_Data = str_ireplace('#PASSWORD#', Yii::$app->getSecurity()->generatePasswordHash(Yii::$app->params['Password']), $Sql_Data);
 
                 // Time
-                $Sql_Data = str_ireplace('#TIME#', date('Y-m-d H:i:s', time()), $Sql_Data);
+                $Sql_Data = str_ireplace('#TIME#', time(), $Sql_Data);
 
                 // 执行 SQL
                 $arraySql = explode(';', $Sql_Data);

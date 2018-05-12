@@ -14,8 +14,8 @@ CREATE TABLE `#DB_PREFIX#WeChat` (
   `title` VARCHAR(125) NOT NULL COMMENT '招聘ID',
   `content` TEXT NOT NULL COMMENT '内容',
   `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-  `created_at` INT(11) UNSIGNED NOT NULL,
-  `updated_at` INT(11) UNSIGNED NOT NULL,
+  `created_at` integer NOT NULL DEFAULT '0',
+  `updated_at` integer NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

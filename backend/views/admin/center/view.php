@@ -9,14 +9,14 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['center/conf']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -41,7 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attributes' => [
                             'c_key',
                             'name',
-                            'parameter:ntext',
+                            [
+                                'attribute' => 'parameter',
+                                'format'    => 'html',
+                                'value'     => function ($model) {
+
+                                    if ($model->c_key == 'CODE_IMG') {
+                                        return '<img width=300 height=300 src="' . Yii::getAlias('@web') . '/temp/conf/' . $model->parameter . '" /><br /><br />';
+                                    }
+
+                                    return $model->parameter;
+                                },
+                            ],
                             'description:ntext',
                             [
                                 'attribute' => 'is_language',
