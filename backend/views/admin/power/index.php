@@ -20,8 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <h1><?= Html::encode($this->title) ?></h1>
 
+                <?= $this->render('../role/_search', ['model' => $searchModel]); ?>
+
+                <hr/>
+
                 <p>
-                    <?= Html::a('添加权限', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建权限', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('权限', ['index'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('角色', ['admin/role/index'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?= GridView::widget([

@@ -23,9 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h1><?= Html::encode($this->title) ?></h1>
 
                     <p>
-                        <?= Html::a('更新', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                         <?=
-                        Html::a('删除', ['delete', 'id' => $model->name], [
+                        Html::a('删除', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data'  => [
                                 'confirm' => '是否真的需要删除这条数据?',

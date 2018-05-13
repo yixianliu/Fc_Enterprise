@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
-                    <?= Html::a('创建角色权限', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('角色', ['index', 'type' => 'role'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('权限', ['index', 'type' => 'permission'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('创建角色', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('角色', ['index'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('权限', ['admin/power/index'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?=

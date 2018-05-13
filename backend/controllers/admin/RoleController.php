@@ -3,8 +3,9 @@
 namespace backend\controllers\admin;
 
 
+use common\models\AuthRolePermisson;
 use Yii;
-use common\models\ItemRp;
+use common\models\Role;
 use common\models\Rules;
 use common\models\RoleSearch;
 use yii\web\NotFoundHttpException;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * ItemRpController implements the CRUD actions for ItemRp model.
+ * RoleController implements the CRUD actions for Role model.
  */
 class RoleController extends BaseController
 {
@@ -43,7 +44,7 @@ class RoleController extends BaseController
     }
 
     /**
-     * Lists all ItemRp models.
+     * Lists all Role models.
      * @return mixed
      */
     public function actionIndex()
@@ -59,7 +60,7 @@ class RoleController extends BaseController
     }
 
     /**
-     * Displays a single ItemRp model.
+     * Displays a single Role model.
      * @param string $id
      * @return mixed
      */
@@ -71,14 +72,14 @@ class RoleController extends BaseController
     }
 
     /**
-     * Creates a new ItemRp model.
+     * Creates a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
 
-        $model = new ItemRp();
+        $model = new Role();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -94,7 +95,19 @@ class RoleController extends BaseController
                 Yii::$app->session->setFlash('error', '无法保存数据');
             }
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            // 改关联数据
+            $data = Yii::$app->request->post();
+
+            if (!empty($data['Role']['name'])) {
+
+                $data = AuthRolePermisson::findByAll();
+
+                foreach ($data as $value) {
+
+                }
+            }
+
+            return $this->redirect(['view', 'id' => $model->id]);
 
         } else {
 
@@ -110,7 +123,7 @@ class RoleController extends BaseController
     }
 
     /**
-     * Updates an existing ItemRp model.
+     * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -120,7 +133,7 @@ class RoleController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -134,7 +147,7 @@ class RoleController extends BaseController
     }
 
     /**
-     * Deletes an existing ItemRp model.
+     * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -147,15 +160,15 @@ class RoleController extends BaseController
     }
 
     /**
-     * Finds the ItemRp model based on its primary key value.
+     * Finds the Role model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return ItemRp the loaded model
+     * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ItemRp::findOne($id)) !== null) {
+        if (($model = Role::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -192,7 +205,7 @@ class RoleController extends BaseController
         // 初始化
         $result = array();
 
-        $data = ItemRp::findByAll('permission');
+        $data = Role::findByAll('permission');
 
         foreach ($data as $value) {
             $result[ $value['name'] ] = $value['description'];

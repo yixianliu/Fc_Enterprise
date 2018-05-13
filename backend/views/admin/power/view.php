@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemRp */
 
-$this->title = $model->name;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => '权限管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -37,12 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model'      => $model,
                         'attributes' => [
                             'name',
-                            'type',
+                            [
+                                'attribute' => 'type',
+                                'value'     => function ($model) {
+                                    $array = [1 => '角色', 2 => '权限'];
+                                    return $array[ $model->type ];
+                                },
+                            ],
                             'rule_name',
                             'data:ntext',
                             'description',
-                            'created_at',
-                            'updated_at',
+                            [
+                                'attribute' => 'created_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->created_at);
+                                },
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value'     => function ($model) {
+                                    return date('Y - m -d , h:i', $model->updated_at);
+                                },
+                            ],
                         ],
                     ]) ?>
 

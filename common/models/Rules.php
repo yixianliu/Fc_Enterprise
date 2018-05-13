@@ -24,7 +24,7 @@ class Rules extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%rules}}';
+        return '{{%auth_rule}}';
     }
 
     /**

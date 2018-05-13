@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use common\models\Role;
 
 /**
- * ItemRpSearch represents the model behind the search form about `common\models\ItemRp`.
+ * RoleSearch represents the model behind the search form about `common\models\Role`.
  */
 class RoleSearch extends Role
 {
@@ -36,21 +36,20 @@ class RoleSearch extends Role
      * Creates data provider instance with search query applied
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
     public function search($params, $type = null)
     {
 
         $array = [
-            'role'       => 1,
-            'permission' => 2,
+            'role'  => 1,
+            'power' => 2,
         ];
 
-        if (empty($type)) {
-            $query = ItemRp::find();
+        if (empty($array[$type])) {
+            $query = Role::find();
         } else {
-            $query = ItemRp::find()->where(['type' => $array[ $type ]]);
+            $query = Role::find()->where(['type' => $array[ $type ]]);
         }
 
         // add conditions that should always apply here
