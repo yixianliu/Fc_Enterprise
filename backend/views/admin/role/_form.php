@@ -46,9 +46,11 @@ use kartik\select2\Select2;
                 <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 
                 <div id="pkey" style='display:none;'>
+
                     <hr/>
                     <?= $form->field($model, 'p_key')->CheckBoxList($result['power'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
                     <hr/>
+
                 </div>
 
                 <div class="form-group">

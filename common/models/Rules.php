@@ -43,8 +43,7 @@ class Rules extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'is_using'], 'required'],
-            [['description', 'is_using'], 'string'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 85],
             [['data'], 'string', 'max' => 255],
             [['data'], 'unique'],
@@ -57,19 +56,16 @@ class Rules extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name'        => '规则名称',
-            'data'        => '规则 Json 内容',
-            'description' => '规则描述',
-            'is_using'    => '是否启用',
-            'created_at'  => '添加数据时间',
-            'updated_at'  => '更新数据时间',
+            'name'       => '规则名称',
+            'data'       => '规则 Json 内容',
+            'created_at' => '添加数据时间',
+            'updated_at' => '更新数据时间',
         ];
     }
 
     public static function findByAll()
     {
-        return static::find()->where(['is_using' => 'On'])
-            ->orderBy('name', SORT_DESC)
+        return static::find()->orderBy('name', SORT_DESC)
             ->asArray()
             ->all();
     }

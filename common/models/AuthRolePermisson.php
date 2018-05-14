@@ -53,4 +53,6 @@ class AuthRolePermisson extends \yii\db\ActiveRecord
     {
         return static::find()->where(['parent' => $parent])->all();
     }
+
+
 }

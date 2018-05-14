@@ -6,7 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "{{%itemrp}}".
+ * This is the model class for table "{{%Role}}".
  *
  * @property string $name
  * @property string $type
@@ -17,8 +17,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $updated_at
  *
  * @property ItemRelated[] $itemRelateds
- * @property ItemRp[] $children
- * @property ItemRp[] $parents
+ * @property Role[] $children
+ * @property Role[] $parents
  * @property Rules $ruleName
  * @property User[] $users
  */
@@ -86,7 +86,7 @@ class Role extends \yii\db\ActiveRecord
      * @param string $type
      * @param string $page
      * @param null $parent_id
-     * @return array|ItemRp[]|\yii\db\ActiveRecord[]
+     * @return array|Role[]|\yii\db\ActiveRecord[]
      */
     static public function findByAll($type = 'role', $page = 'On', $parent_id = null)
     {
@@ -120,7 +120,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getItemRelatedsParent()
     {
-        return $this->hasMany(ItemRelated::className(), ['parent' => 'name']);
+        return $this->hasMany(AuthRolePermisson::className(), ['parent' => 'name']);
     }
 
     /**
@@ -128,7 +128,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getItemRelatedsChild()
     {
-        return $this->hasMany(ItemRelated::className(), ['child' => 'name']);
+        return $this->hasMany(AuthRolePermisson::className(), ['child' => 'name']);
     }
 
     /**
@@ -136,7 +136,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getChildren()
     {
-        return $this->hasMany(ItemRp::className(), ['name' => 'child'])->viaTable('{{%auth_role_permisson}}', ['parent' => 'name']);
+        return $this->hasMany(Role::className(), ['name' => 'child'])->viaTable('{{%auth_role_permisson}}', ['parent' => 'name']);
     }
 
     /**
@@ -144,7 +144,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public function getParents()
     {
-        return $this->hasMany(ItemRp::className(), ['name' => 'parent'])->viaTable('{{%auth_role_permisson}}', ['child' => 'name']);
+        return $this->hasMany(Role::className(), ['name' => 'parent'])->viaTable('{{%auth_role_permisson}}', ['child' => 'name']);
     }
 
     /**

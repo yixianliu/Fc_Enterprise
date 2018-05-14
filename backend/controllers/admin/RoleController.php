@@ -95,18 +95,6 @@ class RoleController extends BaseController
                 Yii::$app->session->setFlash('error', '无法保存数据');
             }
 
-            // 改关联数据
-            $data = Yii::$app->request->post();
-
-            if (!empty($data['Role']['name'])) {
-
-                $data = AuthRolePermisson::findByAll();
-
-                foreach ($data as $value) {
-
-                }
-            }
-
             return $this->redirect(['view', 'id' => $model->id]);
 
         } else {
@@ -132,15 +120,54 @@ class RoleController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = Yii::app()->db->beginTransaction();
+
+            // 改关联数据
+            $data = Yii::$app->request->post();
+
+
+            $dataRolePer = AuthRolePermisson::findByAll();
+
+            foreach ($dataRolePer as $value) {
+
+                $AuthRolePerCls = AuthRolePermisson::findOne($value->id);
+
+                $AuthRolePerCls->parent = $data['Role']['name'];
+                $AuthRolePerCls->child = $value['child'];
+
+                if ($AuthRolePerCls->save())
+                    continue;
+
+            }
+
+            $auth = Yii::$app->authManager;
+
+            // 权限关联
+            $query = new AuthRolePermisson();
+            $query->delete(['parent' => $model->name]);
+
+            foreach ($data['Role']['p_key'] as $row) {
+                $permission = $auth->getPermission($row);
+                $auth->addChild($data['Role']['name'], $permission);
+            }
+
+            // 保存数据
+            if ($model->save()) {
+                $transaction->commit();
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            $transaction->rollback(); // 如果操作失败, 数据回滚
         }
 
         return $this->render('update', [
             'model'  => $model,
             'result' => [
                 'rules' => $this->getRules(),
-                'power' => $this->getPower(),
+                'power' => $this->getPower($model->name),
             ]
         ]);
 
@@ -198,14 +225,18 @@ class RoleController extends BaseController
     /**
      * 获取权限
      *
+     * @param null $name
      * @return array
      */
-    public function getPower()
+    public function getPower($name = null)
     {
         // 初始化
         $result = array();
 
-        $data = Role::findByAll('permission');
+        $auth = Yii::$app->authManager;
+
+        // 获取角色对应权限列表
+        $data = (empty($name)) ? $auth->getPermissions() : $auth->getPermissionsByRole($name);
 
         foreach ($data as $value) {
             $result[ $value['name'] ] = $value['description'];
