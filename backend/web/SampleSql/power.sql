@@ -38,7 +38,7 @@ CREATE TABLE `#DB_PREFIX#auth_role_permisson` (
     `child` varchar(80) NOT NULL DEFAULT '' COMMENT '权限名称',
     PRIMARY KEY (`id`),
     KEY `parent` (`parent`),
-    UNIQUE KEY `child` (`child`)
+    KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_rule`;

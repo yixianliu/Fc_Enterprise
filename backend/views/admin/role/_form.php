@@ -7,13 +7,16 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemRp */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
             <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -45,10 +48,10 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'rows' => 6]) ?>
 
-                <div id="pkey" style='display:none;'>
+                <div id="p_key">
 
                     <hr/>
-                    <?= $form->field($model, 'p_key')->CheckBoxList($result['power'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map($result['power'], 'name', 'description')) ?>
                     <hr/>
 
                 </div>
@@ -72,10 +75,6 @@ use kartik\select2\Select2;
 </div>
 
 <script type="text/javascript">
-
-    <?php if ($model->type == 1): ?>
-    $('#pkey').show();
-    <?php endif; ?>
 
     $('#itemrp-type').on('change', function () {
 

@@ -81,9 +81,9 @@ class RoleController extends BaseController
 
         $model = new Role();
 
-        if ($model->load(Yii::$app->request->post())) {
+        $auth = Yii::$app->authManager;
 
-            $auth = Yii::$app->authManager;
+        if ($model->load(Yii::$app->request->post())) {
 
             $role = $auth->createRole($model->name);
 
@@ -103,7 +103,7 @@ class RoleController extends BaseController
                 'model'  => $model,
                 'result' => [
                     'rules' => $this->getRules(),
-                    'power' => $this->getPower(),
+                    'power' => $auth->getPermissions(),
                 ]
             ]);
 
@@ -120,54 +120,64 @@ class RoleController extends BaseController
     {
         $model = $this->findModel($id);
 
+        $auth = Yii::$app->authManager;
+
+        // 初始角色名称
+        $defaultRoleName = $model->name;
+
         if ($model->load(Yii::$app->request->post())) {
 
-            $transaction = Yii::app()->db->beginTransaction();
+            $transaction = Yii::$app->db->beginTransaction();
 
             // 改关联数据
             $data = Yii::$app->request->post();
 
+            // 重设角色内容
+            if ($data['Role']['name'] != $defaultRoleName) {
 
-            $dataRolePer = AuthRolePermisson::findByAll();
+                $Cls = Role::findOne(['name' => $defaultRoleName]);
 
-            foreach ($dataRolePer as $value) {
-
-                $AuthRolePerCls = AuthRolePermisson::findOne($value->id);
-
-                $AuthRolePerCls->parent = $data['Role']['name'];
-                $AuthRolePerCls->child = $value['child'];
-
-                if ($AuthRolePerCls->save())
-                    continue;
-
+                $Cls->name = $data['Role']['name'];
+                $Cls->save();
             }
 
-            $auth = Yii::$app->authManager;
+            // 删除所有权限
+            $dataRolePower = $auth->getPermissionsByRole($model->name);
 
-            // 权限关联
-            $query = new AuthRolePermisson();
-            $query->delete(['parent' => $model->name]);
+            if (AuthRolePermisson::deleteAll(['parent' => $model->name]) || empty($dataRolePower)) {
 
-            foreach ($data['Role']['p_key'] as $row) {
-                $permission = $auth->getPermission($row);
-                $auth->addChild($data['Role']['name'], $permission);
-            }
+                foreach ($data['Role']['p_key'] as $value) {
+                    $role = $auth->getRole($data['Role']['name']);
+                    $permission = $auth->getPermission($value);
+                    $auth->addChild($role, $permission);
+                }
 
-            // 保存数据
-            if ($model->save()) {
-                $transaction->commit();
+                // 保存数据
+                if ($model->save()) {
+                    $transaction->commit();
 
-                return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
 
             $transaction->rollback(); // 如果操作失败, 数据回滚
+
+            Yii::$app->getSession()->setFlash('error', '角色更新失败 !!');
+        }
+
+        $dataPower = $auth->getPermissionsByRole($model->name);
+
+        $model->p_key = array();
+
+        foreach ($dataPower as $value) {
+            array_push($model->p_key, $value->name);
         }
 
         return $this->render('update', [
             'model'  => $model,
             'result' => [
                 'rules' => $this->getRules(),
-                'power' => $this->getPower($model->name),
+                'power' => $auth->getPermissions(),
             ]
         ]);
 
@@ -222,26 +232,4 @@ class RoleController extends BaseController
         return $result;
     }
 
-    /**
-     * 获取权限
-     *
-     * @param null $name
-     * @return array
-     */
-    public function getPower($name = null)
-    {
-        // 初始化
-        $result = array();
-
-        $auth = Yii::$app->authManager;
-
-        // 获取角色对应权限列表
-        $data = (empty($name)) ? $auth->getPermissions() : $auth->getPermissionsByRole($name);
-
-        foreach ($data as $value) {
-            $result[ $value['name'] ] = $value['description'];
-        }
-
-        return $result;
-    }
 }

@@ -76,6 +76,7 @@ class MenuModelController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new MenuModel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

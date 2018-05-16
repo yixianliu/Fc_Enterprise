@@ -6,7 +6,7 @@ use Yii;
 use common\models\Menu;
 use common\models\MenuSearch;
 use common\models\MenuModel;
-use common\models\ItemRp;
+use common\models\Role;
 use common\models\Pages;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -149,7 +149,8 @@ class MenuController extends BaseController
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
-    public function actionAdjustment($id){
+    public function actionAdjustment($id)
+    {
 
         $model = $this->findModel($id);
 
@@ -160,7 +161,7 @@ class MenuController extends BaseController
             return $this->render('adjustment', [
                 'model'  => $model,
                 'result' => [
-                    ''
+                    '' => '',
                 ],
             ]);
         }
@@ -228,7 +229,7 @@ class MenuController extends BaseController
         // 初始化
         $data = array();
 
-        $result = ItemRp::findAll(['type' => 1]);
+        $result = Role::findAll(['type' => 1]);
 
         foreach ($result as $value) {
             $data[ $value['name'] ] = $value['description'];
