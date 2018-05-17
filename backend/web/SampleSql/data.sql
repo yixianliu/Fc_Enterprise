@@ -67,8 +67,8 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Management`
 VALUES
-(NULL, 'admin', '#PASSWORD#', 'admin', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#' ),
-(NULL, 'admin_Zcc', '#PASSWORD#', 'admin', NULL, NULL, 'On', NULL, '#TIME#', '#TIME#');
+(NULL, 'admin', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL),
+(NULL, 'admin_Zcc', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL);
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

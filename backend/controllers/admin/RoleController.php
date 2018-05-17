@@ -85,17 +85,34 @@ class RoleController extends BaseController
 
         if ($model->load(Yii::$app->request->post())) {
 
+            $data = Yii::$app->request->post();
+
+            // 事务回滚
+            $transaction = Yii::$app->db->beginTransaction();
+
             $role = $auth->createRole($model->name);
 
             $role->description = $model->description;
             $role->data = $model->data;
-            $role->type = $model->type;
+            $role->type = 1;
 
             if (!$auth->add($role)) {
+
+                // 如果操作失败, 数据回滚
+                $transaction->rollback();
+
                 Yii::$app->session->setFlash('error', '无法保存数据');
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            foreach ($data['Role']['p_key'] as $value) {
+                $role = $auth->getRole($data['Role']['name']);
+                $permission = $auth->getPermission($value);
+                $auth->addChild($role, $permission);
+            }
+
+            $transaction->commit();
+
+            return $this->redirect(['index']);
 
         } else {
 

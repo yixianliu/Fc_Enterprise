@@ -16,6 +16,7 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+
     public $layout = 'admin';
 
     public function init()
@@ -38,6 +39,13 @@ class BaseController extends Controller
         return true;
     }
 
+    /**
+     * 前置函数
+     *
+     * @param $action
+     * @return bool|void|\yii\web\Response
+     * @throws \yii\web\UnauthorizedHttpException
+     */
     public function beforeAction($action)
     {
 

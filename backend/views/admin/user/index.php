@@ -25,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr/>
 
                 <p>
+
                     <?= Html::a('创建用户', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('查看普通用户', ['index'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('查看管理员', ['admin/admin/index'], ['class' => 'btn btn-success']) ?>
+
                 </p>
 
                 <?=
@@ -36,13 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['class' => 'yii\grid\SerialColumn'],
                         'username',
                         'r_key',
-                        // 'exp',
-                        // 'credit',
-                        // 'nickname',
-                        // 'signature',
-                        // 'birthday',
-                        // 'answer',
-                        // 's_key',
+                        'nickname',
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -67,9 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->sex ];
                             },
                         ],
-                        // 'is_display',
-                        // 'is_head',
-                        // 'is_security',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

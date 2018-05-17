@@ -49,7 +49,7 @@ class RoleSearch extends Role
         if (empty($array[$type])) {
             $query = Role::find();
         } else {
-            $query = Role::find()->where(['type' => $array[ $type ]]);
+            $query = Role::find()->where(['type' => $array[ $type ]])->orderBy('id DESC');
         }
 
         // add conditions that should always apply here

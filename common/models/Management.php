@@ -33,6 +33,18 @@ class Management extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'user_id'  => '用户编号',
+            'username' => '帐号',
+            'is_using' => '审核状态'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [

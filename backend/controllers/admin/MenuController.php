@@ -160,9 +160,6 @@ class MenuController extends BaseController
 
             return $this->render('adjustment', [
                 'model'  => $model,
-                'result' => [
-                    '' => '',
-                ],
             ]);
         }
     }

@@ -84,17 +84,17 @@ class PowerController extends BaseController
 
             $auth = Yii::$app->authManager;
 
-            $role = $auth->createPermission($model->name);
+            $power = $auth->createPermission($model->name);
 
-            $role->description = $model->description;
-            $role->data = $model->data;
-            $role->type = $model->type;
+            $power->description = $model->description;
+            $power->data = $model->data;
+            $power->type = 2;
 
-            if (!$auth->add($role)) {
+            if (!$auth->add($power)) {
                 Yii::$app->session->setFlash('error', '无法保存数据');
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -113,25 +113,26 @@ class PowerController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $data = Yii::$app->request->post();
+        $auth = Yii::$app->authManager;
+
+        // 原始名称
+        $defaultPower = $model->name;
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if (empty($data['Role']))
+            $power = $auth->getPermission($defaultPower);
 
-            $auth = Yii::$app->authManager;
+            $power->name = $model->name;
+            $power->description = $model->description;
+            $power->data = $model->data;
+            $power->type = 2;
 
-            $role = $auth->getPermission($model->name);
-
-            $role->description = $model->description;
-            $role->data = $model->data;
-            $role->type = $model->type;
-
-            if (!$auth->update($model->name, $role)) {
+            if (!$auth->update($defaultPower, $power)) {
                 Yii::$app->session->setFlash('error', '无法保存数据');
+            } else {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -149,6 +150,7 @@ class PowerController extends BaseController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 

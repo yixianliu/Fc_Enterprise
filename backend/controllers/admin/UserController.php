@@ -4,6 +4,7 @@ namespace backend\controllers\admin;
 
 use common\models\ItemRp;
 use common\models\Job;
+use common\models\Management;
 use common\models\Purchase;
 use common\models\UserSupply;
 use Yii;
@@ -51,6 +52,7 @@ class UserController extends BaseController
      */
     public function actionIndex()
     {
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -91,7 +93,7 @@ class UserController extends BaseController
             'model'                => $this->findModel($id),
             'dataJobProvider'      => $dataJobProvider,
             'dataPurchaseProvider' => $dataPurchaseProvider,
-            'dataSupplyProvider' => $dataSupplyProvider,
+            'dataSupplyProvider'   => $dataSupplyProvider,
         ]);
     }
 

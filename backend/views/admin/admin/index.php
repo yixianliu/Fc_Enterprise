@@ -4,10 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\DownloadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '下载中心';
+$this->title = '管理员列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -17,25 +16,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
-                    <?= Html::a('发布文件', ['create']) ?>
-                    <?= Html::a('发布下载分类', ['admin/download-cls/create']) ?>
+                    <?= Html::a('添加管理员', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
-
-                <hr/>
 
                 <?=
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'c_key',
-                        'title',
-                        'path',
+                        'username',
+                        'item_name',
+                        'area',
+                        'login_ip',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -69,3 +62,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </section>
 </div>
+
