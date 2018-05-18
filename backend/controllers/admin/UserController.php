@@ -2,7 +2,7 @@
 
 namespace backend\controllers\admin;
 
-use common\models\ItemRp;
+use common\models\Role;
 use common\models\Job;
 use common\models\Management;
 use common\models\Purchase;
@@ -119,7 +119,7 @@ class UserController extends BaseController
             // 初始化
             $result = array();
 
-            $dataRole = ItemRp::findAll(['type' => 1]);
+            $dataRole = Role::findAll(['type' => 1]);
 
             foreach ($dataRole as $value) {
                 $result['role'][ $value['name'] ] = $value['name'];
@@ -196,7 +196,7 @@ class UserController extends BaseController
         // 初始化
         $result = array();
 
-        $dataRole = ItemRp::findAll(['type' => 1]);
+        $dataRole = Role::findAll(['type' => 1]);
 
         foreach ($dataRole as $value) {
             $result[ $value['name'] ] = $value['name'];

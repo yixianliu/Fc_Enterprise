@@ -168,7 +168,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      * @param string $parent_id
      * @return array|bool
      */
-    public function getCls()
+    static public function getCls()
     {
 
         // 初始化
@@ -177,7 +177,7 @@ class DownloadCls extends \yii\db\ActiveRecord
         $parent = static::findByAll();
 
         foreach ($parent as $key => $value) {
-            $result[ $key ] = $this->recursionCls($value);
+            $result[ $key ] = static::recursionCls($value);
         }
 
         return $result;
@@ -188,7 +188,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      *
      * @param $data
      */
-    public function recursionCls($data)
+    static public function recursionCls($data)
     {
         if (empty($data))
             return;
@@ -201,7 +201,7 @@ class DownloadCls extends \yii\db\ActiveRecord
             return $result;
 
         foreach ($child as $value) {
-            $result['child'][] = $this->recursionCls($value);
+            $result['child'][] = static::recursionCls($value);
         }
 
         return $result;

@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Role;
 use Yii;
 use common\models\Management;
 use yii\data\ActiveDataProvider;
@@ -20,7 +21,7 @@ class AdminController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -65,12 +66,27 @@ class AdminController extends BaseController
     {
         $model = new Management();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->user_id]);
+        $auth = Yii::$app->authManager;
+
+        $model->scenario = 'create';
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->password = Yii::$app->security->generatePasswordHash($model->password);
+
+            if (!$model->save()) {
+                Yii::$app->getSession()->setFlash('error', '内容无法保存 !!');
+            } else {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'role' => $auth->getRoles(),
+            ],
         ]);
     }
 
@@ -85,12 +101,24 @@ class AdminController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->user_id]);
+        $auth = Yii::$app->authManager;
+
+        $model->scenario = 'update';
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            Yii::$app->getSession()->setFlash('error', '更新用户 !!');
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'role' => $auth->getRoles(),
+            ],
         ]);
     }
 
@@ -117,6 +145,7 @@ class AdminController extends BaseController
      */
     protected function findModel($id)
     {
+
         if (($model = Management::findOne($id)) !== null) {
             return $model;
         }

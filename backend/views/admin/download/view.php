@@ -10,7 +10,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Downloads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="download-view">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -59,5 +59,3 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
-
-</div>

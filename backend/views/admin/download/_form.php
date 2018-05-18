@@ -102,6 +102,8 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?php ActiveForm::end(); ?>
 
+                    <?= $this->render('../resultImg', ['img' => $model->path, 'type' => 'dowload']); ?>
+
                 <?php else: ?>
 
                     <h3>暂无分类 !! 点 <a href="<?= Url::to(['admin/download-cls/create']) ?>">这里</a> 添加</h3>
@@ -110,9 +112,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'job']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>
