@@ -40,6 +40,8 @@ if (!empty($model->$attribute)) {
     }
 }
 
+$text = empty($text) ? '没有描述' : $text;
+
 ?>
 
 <style type="text/css">
@@ -52,6 +54,8 @@ if (!empty($model->$attribute)) {
 <hr/>
 
 <div class="form-group">
+
+    <label><?= $text ?></label>
 
     <?=
     FileUploadUI::widget([
@@ -136,11 +140,13 @@ if (!empty($model->$attribute)) {
                     <?php endif; ?>
 
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
+
                         <?php if ($type != 'sp-offer'): ?>
                             <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
                                 <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
                             </a>
                         <?php endif; ?>
+
                     </div>
 
                 </div>

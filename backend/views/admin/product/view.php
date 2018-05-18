@@ -41,14 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'product_id',
                         'user_id',
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
-
                                 $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
-
                                 return $data->name;
                             },
                         ],

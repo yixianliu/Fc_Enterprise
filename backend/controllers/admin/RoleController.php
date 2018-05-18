@@ -182,6 +182,7 @@ class RoleController extends BaseController
             Yii::$app->getSession()->setFlash('error', '角色更新失败 !!');
         }
 
+        // 该角色的权限
         $dataPower = $auth->getPermissionsByRole($model->name);
 
         $model->p_key = array();

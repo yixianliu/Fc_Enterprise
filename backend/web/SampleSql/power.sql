@@ -34,8 +34,8 @@ CREATE TABLE `#DB_PREFIX#auth_user_role` (
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_role_permisson`;
 CREATE TABLE `#DB_PREFIX#auth_role_permisson` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `parent` varchar(80) NOT NULL DEFAULT NULL COMMENT '角色名称',
-    `child` varchar(80) NOT NULL DEFAULT NULL COMMENT '权限名称',
+    `parent` varchar(80) NOT NULL COMMENT '角色名称',
+    `child` varchar(80) NOT NULL COMMENT '权限名称',
     PRIMARY KEY (`id`),
     KEY `parent` (`parent`),
     KEY `child` (`child`)
@@ -74,6 +74,8 @@ VALUES
 (NULL, 'createCenter', '创建网站配置', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'viewCenter', '查看网站配置', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'deleteCenter', '删除网站配置', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'image-uploadUpload', '上传文件', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'backupCenter', '备份数据库', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 
 (NULL, 'createSlide', '发布幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'updateSlide', '更新幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
@@ -105,6 +107,12 @@ VALUES
 (NULL, 'indexRole', '角色列表', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'viewRole', '查看角色', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'deleteRole', '删除角色', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+
+(NULL, 'createPower', '添加权限', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'updatePower', '更新权限', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'indexPower', '权限列表', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'viewPower', '查看权限', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'deletePower', '删除权限', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 
 (NULL, 'createNews', '添加新闻', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'updateNews', '更新新闻', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),

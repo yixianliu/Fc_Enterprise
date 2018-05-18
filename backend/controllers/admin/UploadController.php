@@ -11,9 +11,6 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Conf;
-use common\models\Pages;
-use common\models\PagesList;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -24,6 +21,9 @@ use common\models\Slide;
 use common\models\Job;
 use common\models\Purchase;
 use common\models\Resume;
+use common\models\Conf;
+use common\models\Pages;
+use common\models\PagesList;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 

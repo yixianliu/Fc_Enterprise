@@ -57,7 +57,9 @@ class Role extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 85],
             [['rule_name'], 'string', 'max' => 65],
             [['description'], 'string', 'max' => 255],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => Rules::className(), 'targetAttribute' => ['rule_name' => 'name']],
+
+            [['rule_name', 'data'], 'default', 'value' => null],
+//            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => Rules::className(), 'targetAttribute' => ['rule_name' => 'name']],
         ];
     }
 
