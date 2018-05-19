@@ -304,7 +304,7 @@ function menuHtml($data, $type)
                 'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
                 'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
                 'content' => Html::a('编辑内容', ['admin/pages/update', 'id' => $data['pages']['page_id']]) . ' / ',
-                'url'     => Html::a('调整路径', ['admin/menu/adjustment', 'id' => $data['pages']['page_id']]),
+                'url'     => Html::a('调整路径', ['admin/menu/adjustment', 'id' => $data['m_key']]),
             ];
 
             $entering = Pages::findByOne($data['pages']['page_id']);

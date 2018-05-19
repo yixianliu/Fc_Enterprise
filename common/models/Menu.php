@@ -100,7 +100,7 @@ class Menu extends \yii\db\ActiveRecord
         return static::find()->where([self::tableName() . '.is_using' => 'On', self::tableName() . '.parent_id' => $parent])
             ->andWhere([self::tableName() . '.is_language' => $type])
             ->orderBy('sort_id', 'ASC')
-            ->joinWith('itemRp')
+            ->joinWith('role')
             ->joinWith('menuModel')
             ->joinWith('pages')
             ->asArray()
@@ -123,7 +123,7 @@ class Menu extends \yii\db\ActiveRecord
             return static::find()->where(['is_using' => 'On', 'm_key' => $id])->asArray()->one();
 
         return static::find()->where([self::tableName() . '.m_key' => $id])
-            ->joinWith('itemRp')
+            ->joinWith('role')
             ->joinWith('menuModel')
             ->joinWith('pages')
             ->asArray()
@@ -137,7 +137,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     // 角色
-    public function getItemRp()
+    public function getRole()
     {
         return $this->hasOne(Role::className(), ['name' => 'rp_key']);
     }
@@ -347,7 +347,7 @@ class Menu extends \yii\db\ActiveRecord
      * @param $type
      * @return array|void
      */
-    public function recursionMenu($data, $type = null)
+    static public function recursionMenu($data, $type = null)
     {
 
         if (empty($data) || empty($data['m_key']))
@@ -365,7 +365,7 @@ class Menu extends \yii\db\ActiveRecord
             $result[] = [
                 'label' => $value['name'],
                 'url'   => [$value['menuModel']['url_key']],
-                'items' => $this->recursionMenu($value, $type),
+                'items' => static::recursionMenu($value, $type),
             ];
         }
 
@@ -379,35 +379,35 @@ class Menu extends \yii\db\ActiveRecord
      * @param null $type
      * @return array|void
      */
-    public function recursionPagesMenu($data, $type = null)
-    {
+staticpublic function recursionPagesMenu($data, $type = null)
+{
 
-        if (empty($data))
-            return;
+    if (empty($data))
+        return;
 
-        // 子分类
-        $childCls = static::findByAll($data['m_key'], $type);
+    // 子分类
+    $childCls = static::findByAll($data['m_key'], $type);
 
-        if (empty($childCls))
-            return;
+    if (empty($childCls))
+        return;
 
-        // 初始化
-        $result = array();
+    // 初始化
+    $result = array();
 
-        foreach ($childCls as $value) {
+    foreach ($childCls as $value) {
 
-            if (empty($value['pages']['page_id']))
-                continue;
+        if (empty($value['pages']['page_id']))
+            continue;
 
-            $result[] = [
-                'label' => $value['name'],
-                'url'   => $this->setMenuModel($value),
-                'items' => $this->recursionPagesMenu($value, $type),
-            ];
-        }
-
-        return $result;
+        $result[] = [
+            'label' => $value['name'],
+            'url'   => $this->setMenuModel($value),
+            'items' => $this->recursionPagesMenu($value, $type),
+        ];
     }
+
+    return $result;
+}
 
     /**
      * 递归 Url 菜单
@@ -417,7 +417,7 @@ class Menu extends \yii\db\ActiveRecord
      * @param null $type
      * @return array|void
      */
-    public function recursionUrlMenu($data, $adminid = null, $type = null)
+    static public function recursionUrlMenu($data, $adminid = null, $type = null)
     {
 
         if (empty($data) || empty($data['m_key'])) {
@@ -435,8 +435,8 @@ class Menu extends \yii\db\ActiveRecord
         foreach ($child as $value) {
             $result[] = [
                 'label' => $value['name'],
-                'url'   => $this->setMenuModel($value, $adminid),
-                'items' => $this->recursionUrlMenu($value, $adminid, $type),
+                'url'   => static::setMenuModel($value, $adminid),
+                'items' => static::recursionUrlMenu($value, $adminid, $type),
             ];
         }
 
@@ -450,7 +450,7 @@ class Menu extends \yii\db\ActiveRecord
      * @param null $adminid
      * @return array|null|string
      */
-    public function setMenuModel($data, $adminid = null)
+    static public function setMenuModel($data, $adminid = null)
     {
 
         // 初始化
@@ -529,7 +529,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 菜单选择
+     * 菜单选择(针对选项框)
      *
      * @param $data
      * @param int $num

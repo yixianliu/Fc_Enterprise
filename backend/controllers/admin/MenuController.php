@@ -152,7 +152,7 @@ class MenuController extends BaseController
     public function actionAdjustment($id)
     {
 
-        $model = $this->findModel($id);
+        $model = Menu::find()->where(['m_key' => $id])->one();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->m_key]);
@@ -160,6 +160,9 @@ class MenuController extends BaseController
 
             return $this->render('adjustment', [
                 'model'  => $model,
+                'result' => [
+                    'data' => Menu::recursionMenu($model),
+                ]
             ]);
         }
     }
