@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%menu}}".
@@ -254,7 +255,7 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 单页面
                 case 'pages':
-                    $urls = null;
+                    $urls = !empty($value['url']) ? $value['url'] : null;
                     break;
 
                 case 'urls':
@@ -332,8 +333,8 @@ class Menu extends \yii\db\ActiveRecord
         foreach ($child as $value) {
             $result[] = [
                 'label' => $value['name'],
-                'url'   => $this->setMenuModel($value),
-                'items' => $this->recursionPurchaseMenu($value, $type),
+                'url'   => static::setMenuModel($value),
+                'items' => static::recursionPurchaseMenu($value, $type),
             ];
         }
 
@@ -379,35 +380,32 @@ class Menu extends \yii\db\ActiveRecord
      * @param null $type
      * @return array|void
      */
-staticpublic function recursionPagesMenu($data, $type = null)
-{
+    static public function recursionPagesMenu($data, $type = null)
+    {
 
-    if (empty($data))
-        return;
+        if (empty($data))
+            return;
 
-    // 子分类
-    $childCls = static::findByAll($data['m_key'], $type);
+        // 子分类
+        $childCls = static::findByAll($data['m_key'], $type);
 
-    if (empty($childCls))
-        return;
+        if (empty($childCls))
+            return;
 
-    // 初始化
-    $result = array();
+        // 初始化
+        $result = array();
 
-    foreach ($childCls as $value) {
+        foreach ($childCls as $value) {
 
-        if (empty($value['pages']['page_id']))
-            continue;
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => static::setMenuModel($value),
+                'items' => static::recursionPagesMenu($value, $type),
+            ];
+        }
 
-        $result[] = [
-            'label' => $value['name'],
-            'url'   => $this->setMenuModel($value),
-            'items' => $this->recursionPagesMenu($value, $type),
-        ];
+        return $result;
     }
-
-    return $result;
-}
 
     /**
      * 递归 Url 菜单
@@ -466,7 +464,9 @@ staticpublic function recursionPagesMenu($data, $type = null)
 
             // 自定义页面
             case 'pages':
-                $urls = ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']];
+
+                $urls = empty($data['url']) ? ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']] : $data['url'];
+
                 break;
 
             // 招聘

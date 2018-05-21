@@ -8,6 +8,7 @@ use common\models\MenuSearch;
 use common\models\MenuModel;
 use common\models\Role;
 use common\models\Pages;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -154,14 +155,22 @@ class MenuController extends BaseController
 
         $model = Menu::find()->where(['m_key' => $id])->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->m_key]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $data = Menu::findByOne($model->m_key);
+
+            $model->url = $data['menuModel']['url_key'] . '/' . $data['is_type'] . '/?id=' . $data['m_key'];
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->m_key]);
+            }
+
         } else {
 
             return $this->render('adjustment', [
                 'model'  => $model,
                 'result' => [
-                    'data' => Menu::recursionMenu($model),
+                    'data' => Menu::getSelectMenu('E1'),
                 ]
             ]);
         }

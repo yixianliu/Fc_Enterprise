@@ -169,11 +169,8 @@ function recursionPagesData($data)
 
     foreach ($child as $value) {
 
-        if (empty($value['pages']['page_id']))
-            continue;
-
         // Html 内容
-        $html .= menuHtml($value, 'pages');
+        $html .= menuHtml($value, $value['menuModel']['url_key']);
     }
 
     return $html;
@@ -201,7 +198,7 @@ function recursionUrlData($data)
     foreach ($child as $value) {
 
         // Html 内容
-        $html .= menuHtml($value, 'urls');
+        $html .= menuHtml($value, $value['menuModel']['url_key']);
     }
 
     return $html;
