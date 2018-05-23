@@ -7,7 +7,7 @@ return [
             'class'       => 'yii\db\Connection',
             'dsn'         => 'mysql:host=localhost;dbname=fc_calendar',
             'username'    => 'root',
-            'password'    => '',
+            'password'    => 'root',
             'charset'     => 'utf8',
             'tablePrefix' => 'fc_',   //加入前缀名称fc_
         ],
