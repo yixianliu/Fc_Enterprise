@@ -47,7 +47,7 @@ class NewsClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id', 'is_using'], 'required'],
+            [['name', 'parent_id',], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
@@ -57,7 +57,8 @@ class NewsClassify extends \yii\db\ActiveRecord
             [['name'], 'unique'],
 
             [['sort_id',], 'default', 'value' => 1],
-            [['keywords',], 'default', 'value' => null],
+            [['keywords',], 'default', 'value' => '暂无 !!'],
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 

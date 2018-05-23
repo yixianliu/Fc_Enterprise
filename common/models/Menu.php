@@ -234,7 +234,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/news/index', 'id' => $values['c_key']],
-                            'items' => static::recursionMenu($values),
+                            'items' => static::recursionNewsMenu($values),
                         ];
                     }
                     break;
@@ -284,6 +284,7 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @param $data
      * @param null $type
+     * @return array|void
      */
     public static function recursionProductMenu($data, $type = null)
     {
@@ -304,6 +305,38 @@ class Menu extends \yii\db\ActiveRecord
                 'label' => $value['name'],
                 'url'   => ['product/index', 'id' => $value['c_key']],
                 'items' => static::recursionProductMenu($value, $type),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 新闻分类
+     *
+     * @param $data
+     * @param null $type
+     * @return array|void
+     */
+    public static function recursionNewsMenu($data, $type = null)
+    {
+
+        if (empty($data) || empty($data['c_key']))
+            return;
+
+        $child = NewsClassify::findByAll($data['c_key']);
+
+        if (empty($child))
+            return;
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => ['news/index', 'id' => $value['c_key']],
+                'items' => static::recursionNewsMenu($value, $type),
             ];
         }
 

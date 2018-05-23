@@ -99,19 +99,10 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-
                 <?=
                 $form->field($model, 'is_img')->widget(Select2::classname(), [
                     'data'    => ['On' => '启用', 'Off' => '未启用'],
                     'options' => ['placeholder' => '是否有上传图片...'],
-                ]);
-                ?>
-
-
-                <?=
-                $form->field($model, 'is_thumb')->widget(Select2::classname(), [
-                    'data'    => ['On' => '启用', 'Off' => '未启用'],
-                    'options' => ['placeholder' => '是否有生成缩略图...'],
                 ]);
                 ?>
 

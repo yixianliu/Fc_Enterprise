@@ -60,6 +60,8 @@ function recursionCls($data, $type, $id)
 
     $html .= '    </div>';
 
+    $data['child'] = \common\models\PsbClassify::findByAll($data['c_key'], $type);
+
     if (!empty($data['child'])) {
         foreach ($data['child'] as $value) {
             $html .= '    <ul class="">';
@@ -87,7 +89,7 @@ function recursionCls($data, $type, $id)
             <div class="row">
 
                 <p>
-                    <?= Html::a('发布分类 - ' . $this->title, ['create', 'type' => $type,'id' => $id], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('发布分类 - ' . $this->title, ['create', 'type' => $type, 'id' => $id], ['class' => "collapsed"]) . ' / ' ?>
                     <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => "collapsed"]) . ' / ' ?>
                     <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => "collapsed"]) . ' / ' ?>
                     <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => "collapsed"]) . ' / ' ?>

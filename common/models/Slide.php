@@ -40,11 +40,13 @@ class Slide extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'path', 'is_using'], 'required'],
+            [['c_key', 'path'], 'required'],
             [['description', 'is_using'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
             [['path'], 'unique'],
+
+            [['is_using'], 'default', 'value' => 'On'],
         ];
     }
 

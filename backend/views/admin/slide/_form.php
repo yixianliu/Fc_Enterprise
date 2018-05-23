@@ -63,7 +63,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
     </section>
 
     <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>

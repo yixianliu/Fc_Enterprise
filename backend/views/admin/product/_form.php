@@ -45,16 +45,6 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?=
-                    $form->field($model, 's_key')->widget(Select2::classname(), [
-                        'data'          => $result['section'],
-                        'options'       => ['placeholder' => '选择版块...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
@@ -133,16 +123,6 @@ if (empty($result['classify'])) {
 
                     <?=
                     $form->field($model, 'is_audit')->widget(Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '选择...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
-                    <?=
-                    $form->field($model, 'is_field')->widget(Select2::classname(), [
                         'data'          => ['On' => '开启', 'Off' => '关闭'],
                         'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [

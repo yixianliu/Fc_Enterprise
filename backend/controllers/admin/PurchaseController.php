@@ -131,6 +131,7 @@ class PurchaseController extends BaseController
      */
     public function actionUpdate($id)
     {
+        
         $model = $this->findModel($id);
 
         $model->start_at = date('Y-m-d H:i', $model->start_at);

@@ -25,6 +25,7 @@ switch ($model->is_type) {
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => '相关分类中心', 'url' => ['index', 'type' => $model->is_type, 'id' => $id]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="col-lg-12">
@@ -56,7 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'name',
                         'description:ntext',
                         'keywords',
-                        'json_data',
                         [
                             'attribute' => 'parent_id',
                             'value'     => function ($model) {

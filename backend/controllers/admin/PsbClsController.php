@@ -50,7 +50,7 @@ class PsbClsController extends BaseController
 
         $type = Yii::$app->request->get('type', 'Supply');
 
-        $dataProvider = PsbClassify::findAll(['parent_id' => $id]);
+        $dataProvider = PsbClassify::findByAll($id, $type);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -97,7 +97,7 @@ class PsbClsController extends BaseController
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => $this->getCls($id, $model->is_type),
+                'classify' => PsbClassify::getClsSelect($id, $model->is_type),
             ]
         ]);
     }
@@ -123,7 +123,7 @@ class PsbClsController extends BaseController
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => $this->getCls($id, $model->is_type),
+                'classify' => PsbClassify::getClsSelect($id, $model->is_type),
             ]
         ]);
     }
@@ -156,22 +156,5 @@ class PsbClsController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * 获取分类
-     *
-     * @param $id
-     * @param $type
-     * @return array
-     */
-    public function getCls($id, $type)
-    {
-
-        $Cls = new PsbClassify();
-
-        $result = $Cls->getCls($id, $type);
-
-        return $result;
     }
 }
