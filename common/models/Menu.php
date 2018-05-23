@@ -177,16 +177,16 @@ class Menu extends \yii\db\ActiveRecord
                     $array = $this->recursionJobMenu($value, $type);
                     break;
 
-                // 产品模型
+                // 产品分类模型
                 case 'product':
 
-                    $product = ProductClassify::findByAll('C0');
+                    $product = ProductClassify::findByAll(ProductClassify::$parent_cly_id);
 
                     foreach ($product as $values) {
                         $array[] = [
                             'label'   => $values['name'],
                             'url'     => ['/product/index', 'id' => $values['c_key']],
-                            'items'   => $this->recursionMenu($values, $type),
+                            'items'   => static::recursionProductMenu($values, $type),
                             'options' => ['class' => 'sub-menu'],
                         ];
                     }
@@ -206,7 +206,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/supply/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionMenu($values, $type),
+                            'items' => static::recursionMenu($values, $type),
                         ];
                     }
                     break;
@@ -220,7 +220,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/bid/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionMenu($values),
+                            'items' => static::recursionMenu($values),
                         ];
                     }
                     break;
@@ -234,7 +234,7 @@ class Menu extends \yii\db\ActiveRecord
                         $array[] = [
                             'label' => $values['name'],
                             'url'   => ['/news/index', 'id' => $values['c_key']],
-                            'items' => $this->recursionMenu($values),
+                            'items' => static::recursionMenu($values),
                         ];
                     }
                     break;
@@ -280,6 +280,37 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
+     * 产品分类
+     *
+     * @param $data
+     * @param null $type
+     */
+    public static function recursionProductMenu($data, $type = null)
+    {
+
+        if (empty($data) || empty($data['c_key']))
+            return;
+
+        $child = ProductClassify::findByAll($data['c_key']);
+
+        if (empty($child))
+            return;
+
+        // 初始化
+        $result = array();
+
+        foreach ($child as $value) {
+            $result[] = [
+                'label' => $value['name'],
+                'url'   => ['product/index', 'id' => $value['c_key']],
+                'items' => static::recursionProductMenu($value, $type),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
      * 采购平台
      *
      * @param $data
@@ -302,8 +333,8 @@ class Menu extends \yii\db\ActiveRecord
         foreach ($child as $value) {
             $result[] = [
                 'label' => $value['name'],
-                'url'   => $this->setMenuModel($value),
-                'items' => $this->recursionPurchaseMenu($value, $type),
+                'url'   => static::setMenuModel($value),
+                'items' => static::recursionPurchaseMenu($value, $type),
             ];
         }
 
@@ -453,6 +484,9 @@ class Menu extends \yii\db\ActiveRecord
 
         // 初始化
         $urls = null;
+
+        if (empty($data['menuModel']['url_key']))
+            return;
 
         switch ($data['menuModel']['url_key']) {
 

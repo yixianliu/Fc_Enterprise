@@ -60,7 +60,7 @@ class ProductController extends BaseController
             ],
         ]);
 
-        $result['classify'] = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+        $result['classify'] = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => ProductClassify::$parent_cly_id]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,

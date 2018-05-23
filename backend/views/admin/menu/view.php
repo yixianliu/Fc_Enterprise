@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data->name;
                             },
                         ],
-
+                        'url',
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {

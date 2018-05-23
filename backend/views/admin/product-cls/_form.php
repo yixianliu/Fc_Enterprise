@@ -60,8 +60,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'json_data')->textarea(['rows' => 6, 'maxlength' => true]) ?>
-
                 <div class="form-group">
 
                     <?= Html::submitButton($model->isNewRecord ? '创建产品分类' : '更新产品分类', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

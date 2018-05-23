@@ -125,6 +125,7 @@ class MenuController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -157,9 +158,11 @@ class MenuController extends BaseController
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $data = Menu::findByOne($model->m_key);
+            $dataPost = Yii::$app->request->post();
 
-            $model->url = $data['menuModel']['url_key'] . '/' . $data['is_type'] . '/?id=' . $data['m_key'];
+            $data = Menu::findByOne($dataPost['Menu']['url']);
+
+            $model->url = $data['menuModel']['url_key'] . '/' . $data['is_type'] . '?id=' . $data['pages']['page_id'];
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->m_key]);

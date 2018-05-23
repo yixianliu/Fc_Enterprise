@@ -65,18 +65,18 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 's_key', 'title', 'content', 'user_id',], 'required'],
+            [['c_key', 'title', 'content', 'user_id',], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'images'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
             [['product_id', 'images'], 'string', 'max' => 85],
-            [['c_key', 's_key', 'path'], 'string', 'max' => 255],
+            [['c_key', 's_key', 'path'], 'string', 'max' => 85],
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
-            [['keywords'], 'string', 'max' => 120],
+            [['keywords'], 'string', 'max' => 150],
             [['title', 'product_id'], 'unique'],
 
             // 默认值
-            [['images'], 'default', 'value' => ''],
+            [['images', 's_key',], 'default', 'value' => ''],
             [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend', 'is_field',], 'default', 'value' => 'Off'],
             [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
