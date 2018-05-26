@@ -10,6 +10,9 @@ use yii\grid\GridView;
 $this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= $this->render('_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -20,10 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
                     <?= Html::a('发布采购信息', ['create']) ?> /
                     <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0']) ?> /
@@ -31,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <hr/>
 
-                <?= GridView::widget([
+                <?=
+                GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
@@ -83,7 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]); ?>
+                ]);
+                ?>
 
             </div>
         </div>

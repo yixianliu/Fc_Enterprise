@@ -9,7 +9,10 @@ use yii\grid\GridView;
 
 $this->title = '下载中心';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
+<?= $this->render('_search', ['model' => $searchModel]); ?>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -17,12 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
-                    <?= Html::a('发布文件', ['create']) ?>
+                    <?= Html::a('发布文件', ['create']) ?> /
                     <?= Html::a('发布下载分类', ['admin/download-cls/create']) ?>
                 </p>
 
@@ -33,7 +32,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'c_key',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+
+                                $data = \common\models\DownloadCls::findOne(['c_key' => $model->c_key]);
+
+                                if (empty($data)) {
+                                    return '没有分类';
+                                }
+
+                                return $data->name;
+                            },
+                        ],
                         'title',
                         'path',
                         [

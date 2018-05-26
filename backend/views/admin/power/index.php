@@ -10,6 +10,8 @@ $this->title = '权限管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('../role/_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -19,10 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <h1><?= Html::encode($this->title) ?></h1>
-
-                <?= $this->render('../role/_search', ['model' => $searchModel]); ?>
-
-                <hr/>
 
                 <p>
                     <?= Html::a('创建权限', ['create'], ['class' => 'btn btn-success']) ?>

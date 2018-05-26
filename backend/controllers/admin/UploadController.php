@@ -11,6 +11,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\Download;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -98,6 +99,11 @@ class UploadController extends BaseController
             // 简历中心
             case 'resume':
                 $model = new Resume();
+                break;
+
+            // 简历中心
+            case 'download':
+                $model = new Download();
                 break;
 
             // 招聘中心

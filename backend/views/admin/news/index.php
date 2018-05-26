@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+<?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
 
@@ -23,10 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <?php if (!empty($result['classify'])): ?>
-
-                    <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
-
-                    <hr/>
 
                     <p>
                         <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>

@@ -42,20 +42,25 @@ class DownloadCls extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
         ];
     }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['c_key', 'sort_id', 'name', 'keywords', 'parent_id', 'is_using'], 'required'],
+            [['name', 'parent_id'], 'required'],
             [['sort_id',], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'parent_id'], 'string', 'max' => 55],
+            [['parent_id'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
             [['c_key'], 'unique'],
+
+            [['sort_id',], 'default', 'value' => 1],
+            [['is_using',], 'default', 'value' => 'On'],
+            [['keywords', 'json_data'], 'default', 'value' => '暂无 !!'],
         ];
     }
 
@@ -64,6 +69,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
+
         return [
             'c_key'       => '下载分类关键KEY',
             'sort_id'     => '分类排序',
@@ -94,10 +100,10 @@ class DownloadCls extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public function getClsSelect()
+    public static function getClsSelect()
     {
         // 产品分类
-        $dataClassify = self::findByAll(static::$parent_id);
+        $dataClassify = static::findByAll(static::$parent_id);
 
         // 产品分类
         $Cls = new DownloadCls();
@@ -108,7 +114,7 @@ class DownloadCls extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = $Cls->recursionClsSelect($value);
+            $child = static::recursionClsSelect($value);
 
             if (empty($child))
                 continue;
@@ -125,7 +131,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      * @param $data
      * @param int $num
      */
-    public function recursionClsSelect($data, $num = 1)
+    public static function recursionClsSelect($data, $num = 1)
     {
 
         if (empty($data))
@@ -150,7 +156,7 @@ class DownloadCls extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = $this->recursionClsSelect($value, ($num + 1));
+            $childData = static::recursionClsSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;

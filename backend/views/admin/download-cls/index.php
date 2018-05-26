@@ -36,7 +36,7 @@ function recursionCls($data)
 
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']], ['class' => 'btn btn-primary']) . '&nbsp;' . Html::a('添加此类目下的菜单', ['create', 'id' => $data['c_key']], ['class' => "btn btn-primary"]);
+    $html .= $data['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key']]) . '&nbsp;/&nbsp;' . Html::a('添加子类', ['create', 'id' => $data['c_key']]);
     $html .= '    </div>';
 
     if (!empty($data['child'])) {

@@ -43,11 +43,13 @@ class Download extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'title', 'path', 'content', 'is_using'], 'required'],
+            [['c_key', 'title', 'path', 'content'], 'required'],
             [['content', 'is_using'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['title', 'path'], 'string', 'max' => 85],
             [['title'], 'unique'],
+
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 

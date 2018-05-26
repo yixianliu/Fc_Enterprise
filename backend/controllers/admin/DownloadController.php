@@ -2,9 +2,10 @@
 
 namespace backend\controllers\admin;
 
-use common\models\DownloadCls;
+
 use Yii;
 use common\models\Download;
+use common\models\DownloadCls;
 use common\models\DownloadSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,7 +34,7 @@ class DownloadController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -51,7 +52,7 @@ class DownloadController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -83,9 +84,9 @@ class DownloadController extends BaseController
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
             'result' => [
-                'classify' => DownloadCls::getCls(),
+                'classify' => DownloadCls::getClsSelect(),
             ]
         ]);
     }
@@ -106,7 +107,10 @@ class DownloadController extends BaseController
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'classify' => DownloadCls::getClsSelect(),
+            ]
         ]);
     }
 

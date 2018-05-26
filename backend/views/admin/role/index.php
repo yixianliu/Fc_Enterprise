@@ -11,6 +11,8 @@ $this->title = '角色权限';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -18,10 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </header>
         <div class="content-body">
             <div class="row">
-
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
 
                 <p>
                     <?= Html::a('创建角色', ['create'], ['class' => 'btn btn-success']) ?>

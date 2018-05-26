@@ -11,19 +11,17 @@ $this->title = '产品中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
-
-                <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
-
-                <hr/>
 
                 <p>
 

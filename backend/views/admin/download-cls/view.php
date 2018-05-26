@@ -12,11 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -38,10 +38,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         'c_key',
                         'sort_id',
                         'name',
-                        'description:ntext',
                         'keywords',
                         'json_data',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value'     => function ($model) {
+
+                                if ($model->parent_id == 'C0') {
+                                    return ($data['name'] = '顶级分类 !!');
+                                }
+
+                                $data = \common\models\DownloadClassify::findOne(['c_key' => $model->parent_id]);
+
+                                return $data->name;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -65,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
                         ],
+                        'description:html',
                     ],
                 ]) ?>
 

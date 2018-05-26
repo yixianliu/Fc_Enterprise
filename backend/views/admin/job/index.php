@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+<?= $this->render('_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
 
@@ -21,10 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="content-body">
             <div class="row">
-
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
 
                 <p>
                     <?= Html::a('发布招聘', ['create']) ?>
