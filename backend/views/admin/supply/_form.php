@@ -30,8 +30,6 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'supply_id')->textInput(['maxlength' => true, 'readonly' => '']) ?>
-
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                 <?=
@@ -47,55 +45,7 @@ use dosamigos\fileupload\FileUploadUI;
                     ]);
                 ?>
 
-                <hr/>
-
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->supply_id, 'type' => 'supply', 'attribute' => 'path'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'file/*'
-                    ],
-                    'clientOptions' => [
-                        'maxFileSize'      => 2000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 5,
-                    ],
-
-                    // ...
-                    'clientEvents'  => [
-
-                        'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                                
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                    ],
-                ]);
-                ?>
-
-                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                <hr/>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'type' => 'supply', 'id' => $model->supply_id]); ?>
 
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -161,9 +111,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'supply']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

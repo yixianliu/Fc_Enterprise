@@ -34,8 +34,6 @@ $result['classify'] = empty($result['classify']) ? array() : $result['classify']
 
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'json_data')->textarea(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
                     'data'          => ['On' => '开启', 'Off' => '关闭'],
@@ -48,7 +46,7 @@ $result['classify'] = empty($result['classify']) ? array() : $result['classify']
 
                 <hr/>
 
-                <?= $form->field($model, 'p_key')->CheckBoxList($result['classify'], ['value' => (empty($result['check']) ? null : $result['check'])]) ?>
+                <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map($result['classify'], 'c_key', 'name')) ?>
 
                 <hr/>
 

@@ -14,12 +14,12 @@ if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
-        $createHtml = Html::a('添加导航分类', ['admin/nav-cls/create'], ['class' => "collapsed"]) . ' / ';
+        $delHtml = Html::a('删除导航分类', ['admin/nav-cls/create'], ['class' => "collapsed"]) . ' / ';
         $updateHtml = Html::a('编辑导航分类', ['admin/nav-cls/update', 'id' => $value['c_key']], ['class' => "collapsed"]) . ' / ';
 
         $html .= '<li class="">';
         $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml . '&nbsp;' . $createHtml;
+        $html .= $value['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml . '&nbsp;' . $delHtml;
         $html .= '    </div>';
 
         if (!empty($value['child'])) {
@@ -32,7 +32,7 @@ if (!empty($dataProvider)) {
 
                 $html .= '<li class="">';
                 $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
-                $html .= $valueCls['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml . '&nbsp;' . $createHtml;
+                $html .= $valueCls['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $updateHtml;
                 $html .= '    </div>';
                 $html .= '</li>';
             }
