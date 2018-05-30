@@ -27,7 +27,7 @@ class Bid extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%bid}}';
+        return '{{%Bid}}';
     }
 
     /**

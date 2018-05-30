@@ -28,7 +28,7 @@ class ProductClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%product_classify}}';
+        return '{{%Product_Classify}}';
     }
 
     /**

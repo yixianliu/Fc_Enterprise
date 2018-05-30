@@ -29,13 +29,13 @@ class BaseController extends Controller
 
         $session = Yii::$app->session;
 
+        // 开启session
+        $session->open();
+
         // 检查session是否开启
         if (!$session->isActive) {
             exit('Session 失败,请检查 !!');
         }
-
-        // 开启session
-        $session->open();
 
         $data = $session->get('MountSession');
 

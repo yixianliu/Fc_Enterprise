@@ -31,7 +31,7 @@ class NavClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%nav_classify}}';
+        return '{{%Nav_Classify}}';
     }
 
     /**

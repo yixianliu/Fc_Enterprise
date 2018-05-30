@@ -70,7 +70,7 @@ use yii\helpers\Html;
                 </li>
 
                 <li>
-                    <a href="<?= Yii::$app->request->hostInfo . '/FcCalendar/index.php' ?>" target="_blank">站点首页</a>
+                    <a href="<?= Yii::$app->request->hostInfo ?>" target="_blank">站点首页</a>
                 </li>
 
             </ul>

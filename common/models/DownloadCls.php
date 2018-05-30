@@ -30,7 +30,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%download_classify}}';
+        return '{{%Download_Classify}}';
     }
 
     /**

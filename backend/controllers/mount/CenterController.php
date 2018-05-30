@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @abstract 挂载中心
  * @author   Yxl <zccem@163.com>
@@ -7,21 +6,18 @@
 
 namespace backend\controllers\mount;
 
-use common\models\Role;
 use Yii;
-use yii\web\Controller;
-use backend\models\MountForm;
+use common\models\Role;
 use backend\models\MountRunForm;
 
 class CenterController extends BaseController
 {
-
     /**
      * @abstract 首页
      */
     public function actionView()
     {
-        return $this->render('../view');
+        return $this->render('/mount/view');
     }
 
     /**
@@ -29,12 +25,12 @@ class CenterController extends BaseController
      */
     public function actionRun()
     {
+
         $model = new MountRunForm();
 
         $request = Yii::$app->request;
 
         if ($request->isPost) {
-
             if ($model->load($request->post())) {
 
                 // 批量SQL语句
@@ -71,11 +67,9 @@ class CenterController extends BaseController
                 $arraySql = explode(';', $Sql_Data);
 
                 foreach ($arraySql as $value) {
-
                     if (!isset($value) || empty($value)) {
                         continue;
                     }
-
                     // 执行 Sql
                     Yii::$app->db->createCommand($value)->execute();
                 }
@@ -83,11 +77,13 @@ class CenterController extends BaseController
                 Yii::$app->getSession()->setFlash('success', '挂载成功 !!');
 
             } else {
+
                 Yii::$app->getSession()->setFlash('error', '无法挂载 !!');
+
             }
         }
 
-        return $this->render('../run', ['model' => $model]);
+        return $this->render('/mount/run', ['model' => $model]);
     }
 
     /**
@@ -105,9 +101,7 @@ class CenterController extends BaseController
         if ($request->isPost) {
 
             $auth = Yii::$app->authManager;
-
             $role = $auth->getRole('admin');
-
             $power = Role::findByAll('power', 'Off');
 
             foreach ($power as $value) {
@@ -123,7 +117,7 @@ class CenterController extends BaseController
             Yii::$app->getSession()->setFlash('success', '挂载完毕 !!');
         }
 
-        return $this->render('../setpower', ['model' => $model]);
+        return $this->render('/mount/setpower', ['model' => $model]);
     }
 
     /**
@@ -134,6 +128,7 @@ class CenterController extends BaseController
      */
     static public function createEmpowerment($items)
     {
+
         $auth = Yii::$app->authManager;
         $parent = $auth->createRole($items['name']);
         $child = $auth->createPermission($items['description']);
@@ -141,5 +136,4 @@ class CenterController extends BaseController
 
         return true;
     }
-
 }

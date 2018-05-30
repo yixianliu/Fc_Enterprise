@@ -23,7 +23,7 @@ class MenuModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%menu_model}}';
+        return '{{%Menu_Model}}';
     }
 
     /**

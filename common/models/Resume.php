@@ -24,7 +24,7 @@ class Resume extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%resume}}';
+        return '{{%Resume}}';
     }
 
     /**

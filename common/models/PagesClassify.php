@@ -30,7 +30,7 @@ class PagesClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%pages_classify}}';
+        return '{{%Pages_Classify}}';
     }
 
     /**

@@ -23,7 +23,7 @@ class UserSupply extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%user_supply}}';
+        return '{{%User_Supply}}';
     }
 
     /**

@@ -27,7 +27,7 @@ class Job extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%job}}';
+        return '{{%Job}}';
     }
 
     /**

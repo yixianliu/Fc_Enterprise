@@ -56,13 +56,6 @@ VALUES
 (NULL, 'PERSON', '公司负责人', 'On', NULL, 'On', 'en', '#TIME#', '#TIME#');
 
 /**
- * 友情链接
- */
-INSERT INTO `#DB_PREFIX#Friend_link`
-VALUES
-(NULL, '#DEVELOPERS#', '#TITLE#', '#USERNAME#', NULL, '#SITE_URL#', 'On', 'On', '#TIME#', '#TIME#');
-
-/**
  * 管理员
  */
 INSERT INTO `#DB_PREFIX#Management`

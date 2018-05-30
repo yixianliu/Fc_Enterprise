@@ -34,7 +34,7 @@ class Supply extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%supply}}';
+        return '{{%Supply}}';
     }
 
     /**

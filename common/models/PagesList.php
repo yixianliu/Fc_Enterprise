@@ -24,7 +24,7 @@ class PagesList extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%pages_list}}';
+        return '{{%Pages_List}}';
     }
 
     /**

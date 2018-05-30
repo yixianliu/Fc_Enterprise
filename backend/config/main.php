@@ -73,6 +73,21 @@ return [
             'itemChildTable'  => 'fc_auth_role_permisson', // 关联
             'ruleTable'       => 'fc_auth_rule', // 规则
         ],
+
+        // 管理样式文件
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset'       => [
+                    'css'        => [],  // 去除 bootstrap.css
+                    'sourcePath' => null, // 防止在 frontend/web/asset 下生产文件
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'         => [],  // 去除 bootstrap.js
+                    'sourcePath' => null,  // 防止在 frontend/web/asset 下生产文件
+                ],
+            ],
+        ],
+
     ],
 
     'params' => $params,

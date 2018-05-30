@@ -23,7 +23,7 @@ class Conf extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%conf}}';
+        return '{{%Conf}}';
     }
 
     /**

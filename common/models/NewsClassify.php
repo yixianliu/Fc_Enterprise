@@ -28,7 +28,7 @@ class NewsClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%news_classify}}';
+        return '{{%News_Classify}}';
     }
 
     /**

@@ -34,7 +34,7 @@ class PsbClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%psb_classify}}';
+        return '{{%PSB_Classify}}';
     }
 
     /**
