@@ -56,8 +56,9 @@ class News extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
-            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'is_audit', 'is_comments'], 'required'],
+            [['news_id', 'user_id', 'c_key', 'title', 'content'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
             [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
@@ -70,6 +71,8 @@ class News extends \yii\db\ActiveRecord
 
             // 若 "level" 为空，则设其为 1
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend',], 'default', 'value' => 'Off'],
+            [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
+            [['introduction'], 'default', 'value' => null],
         ];
     }
 

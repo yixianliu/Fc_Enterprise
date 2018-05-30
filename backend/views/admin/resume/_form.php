@@ -10,13 +10,6 @@ use dosamigos\fileupload\FileUploadUI;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<style type="text/css">
-    .preview img {
-        width: 180px;
-        height: 100px;
-    }
-</style>
-
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -43,56 +36,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <hr/>
-
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'resume', 'attribute' => 'path'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'file/*'
-                    ],
-
-                    'clientOptions' => [
-                        'maxFileSize'      => 2000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 5,
-                    ],
-
-                    // ...
-                    'clientEvents'  => [
-
-                        'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                                
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                    ],
-                ]);
-                ?>
-
-                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                <hr/>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '简历图片', 'form' => $form, 'attribute' => 'path', 'type' => 'resume', 'id' => $model->id]); ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -113,9 +57,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'resume']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

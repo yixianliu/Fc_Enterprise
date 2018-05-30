@@ -53,13 +53,21 @@ class Supply extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'supply_id', 'user_id', 'title', 'content', 'price', 'num', 'unit', 'is_type', 'is_status', 'start_at', 'end_at', 'is_send_msg', 'is_using'], 'required'],
+            [['c_key', 'supply_id', 'user_id', 'title', 'content', 'price', 'start_at', 'end_at'], 'required'],
             [['content', 'is_type', 'is_status', 'is_send_msg', 'is_using'], 'string'],
             [['num'], 'integer'],
             [['c_key', 'unit'], 'string', 'max' => 55],
             [['supply_id', 'user_id', 'price'], 'string', 'max' => 85],
             [['title', 'path'], 'string', 'max' => 125],
             [['supply_id'], 'unique'],
+
+            // 默认
+            [['is_send_msg',], 'default', 'value' => 'Off'],
+            [['path'], 'default', 'value' => null],
+            [['unit',], 'default', 'value' => '个'],
+            [['num',], 'default', 'value' => 1],
+            [['is_type',], 'default', 'value' => 'Long'],
+            [['is_status', 'is_using',], 'default', 'value' => 'On'],
         ];
     }
 

@@ -37,9 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'job_id',
                         'user_id',
                         'title',
-                        'content:ntext',
+                        'content:html',
                         'keywords',
-                        'images',
+                        [
+                            'attribute' => 'images',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->images);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/job/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_audit',
                             'value'     => function ($model) {

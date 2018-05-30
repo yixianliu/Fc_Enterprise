@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'parent_id',
                             'value'     => function ($model) {
 
-                                if ($model->parent_id == 'P0')
+                                if ($model->parent_id == 'P0' || $model->parent_id == 'S0' || $model->parent_id == 'B0')
                                     return '顶级分类';
 
                                 $data = \common\models\PsbClassify::findOne(['c_key' => $model->parent_id]);

@@ -46,7 +46,7 @@ class Job extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['job_id', 'user_id', 'title', 'content', 'is_audit'], 'required'],
+            [['job_id', 'user_id', 'title', 'content'], 'required'],
             [['content', 'is_audit'], 'string'],
             [['job_id'], 'string', 'max' => 85],
             [['user_id'], 'string', 'max' => 55],
