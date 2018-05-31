@@ -43,13 +43,15 @@ class PagesList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'title', 'is_using', 'c_key'], 'required'],
+            [['page_id', 'title', 'c_key'], 'required'],
             [['content', 'is_using'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['page_id'], 'string', 'max' => 55],
             [['title'], 'string', 'max' => 80],
             [['path'], 'string', 'max' => 255],
             [['title'], 'unique'],
+
+            [['is_using'], 'default', 'value' => 'On'],
         ];
     }
 

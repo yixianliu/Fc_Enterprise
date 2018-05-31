@@ -565,7 +565,8 @@ class Menu extends \yii\db\ActiveRecord
     /**
      * 菜单 (选项框使用)
      *
-     * @return static[]
+     * @param null $parent_id
+     * @return array
      */
     public static function getSelectMenu($parent_id = null)
     {

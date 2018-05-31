@@ -32,59 +32,6 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <hr/>
-
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages', 'attribute' => 'path'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'image/*',
-                    ],
-                    'clientOptions' => [
-                        'maxFileSize'      => 5000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 5,
-                    ],
-
-                    // ...
-                    'clientEvents'  => [
-
-                        'fileuploaddone' => 'function(e, data) {
-
-                                if (data.result.status == false) {
-                                    alert(data.result.message);
-                                    return true;
-                                }
-                              
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                    ],
-                ]);
-                ?>
-
-                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                <hr/>
-
                 <?=
                 $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
                     'clientOptions' => [
@@ -96,6 +43,8 @@ use dosamigos\fileupload\FileUploadUI;
                     ]
                 ]);
                 ?>
+
+                <?= $this->render('../upload', ['model' => $model, 'text' => '自定义页面图片', 'form' => $form, 'attribute' => 'path', 'type' => 'pages', 'id' => 1]); ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -119,9 +68,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'pages']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

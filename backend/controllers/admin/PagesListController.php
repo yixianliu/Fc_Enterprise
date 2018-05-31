@@ -2,12 +2,12 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Menu;
-use common\models\Pages;
-use common\models\PagesClassify;
 use Yii;
 use common\models\PagesList;
 use common\models\PagesListSearch;
+use common\models\Menu;
+use common\models\Pages;
+use common\models\PagesClassify;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -184,10 +184,8 @@ class PagesListController extends BaseController
      */
     public function getPage()
     {
-
-        $Cls = new Menu();
-
-        $result = $Cls->getSelectMenu('E1');
+        
+        $result = Menu::getSelectMenu('E1');
 
         if (empty($result))
             return;

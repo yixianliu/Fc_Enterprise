@@ -34,19 +34,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- 可变化内容 -->
         <div class="conY">
             <div class="conY_tit"><?= $model->title ?></div>
+
             <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：<?= date('Y - m - d', $model->updated_at) ?></div>
+
             <div class="conY_text">
                 <?= $model->content ?>
             </div>
 
-
             <div class="conY_fanye">
+
                 <div class="conY_fanyel">
                     上一篇：<a href="#" title="">上一篇</a>
                 </div>
+
                 <div class="conY_fanyer">
                     下一篇：<a href="#" title="">下一篇</a>
                 </div>
+
             </div>
         </div>
         <!-- #可变化内容 -->

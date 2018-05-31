@@ -37,18 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div>
                         <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
-                            <?= Html::encode($value->title) ?>
+                            <?= Html::encode($value['title']) ?>
                         </a>
-                        <span><?= date('Y - m - d', $value->updated_at) ?></span>
+                        <span><?= date('Y - m - d', $value['updated_at']) ?></span>
                     </div>
 
                 <?php endforeach; ?>
 
             <?php else: ?>
 
-        <h1>暂无数据 !!</h1>
+                <h1>暂无内容 !!</h1>
 
-        <?php endif; ?>
+            <?php endif; ?>
 
         </div>
 
