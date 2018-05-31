@@ -24,7 +24,7 @@ class SpOffer extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%Sp_Offer}}';
+        return '{{%SP_Offer}}';
     }
 
     /**
