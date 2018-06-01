@@ -211,6 +211,7 @@ VALUES
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACCC8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色', 'role/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色', 'role/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),

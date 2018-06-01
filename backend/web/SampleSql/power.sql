@@ -78,6 +78,8 @@ VALUES
 (NULL, 'backupCenter', '备份数据库', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'infoCenter', '网站档案', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'seoCenter', '网站SEO', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'indexTpl', '模板管理', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'editTpl', '编辑模板', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 
 (NULL, 'createSlide', '发布幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'updateSlide', '更新幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),

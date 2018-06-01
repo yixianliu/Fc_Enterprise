@@ -40,7 +40,7 @@ CREATE TABLE `#DB_PREFIX#Friend_Link` (
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY
     KEY (`link_id`),
-    UNIQUE KEY `url` (`url`)
+
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
