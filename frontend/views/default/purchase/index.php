@@ -25,13 +25,13 @@ $this->registerCssFile('@web/themes/qijian/css/purzoom.css');
 <!-- 左右框架 -->
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'purchase', 'id' => $id]); ?>
+    <?= $this->render('../_left', ['id' => $id, 'm_key' => '', 'type' => '']); ?>
 
     <!-- 右边 -->
     <div class="right">
 
         <!-- 当前位置 -->
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('_nav'); ?>
         <!-- #当前位置 -->
 
         <!-- 多项选择 -->

@@ -20,11 +20,8 @@ foreach ($imgArray as $key => $value) {
 ?>
 
 <?= Html::cssFile('@web/themes/qijian/css/product.css') ?>
-
 <?= Html::cssFile('@web/themes/qijian/css/prozoom.css') ?>
-
 <?= Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js') ?>
-
 <?= Html::jsFile('@web/themes/qijian/js/jqzoom/base.js') ?>
 
 <?= $this->render('../slide', ['pagekey' => 'product']); ?>
@@ -33,7 +30,7 @@ foreach ($imgArray as $key => $value) {
 <div class="container content">
 
     <!-- 当前位置 -->
-    <?= $this->render('../nav'); ?>
+    <?= $this->render('../_nav'); ?>
     <!-- #当前位置 -->
 
     <!-- 可变化内容 -->

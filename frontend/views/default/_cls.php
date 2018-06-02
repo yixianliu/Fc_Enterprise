@@ -12,8 +12,6 @@ use yii\helpers\Url;
 
 $result['classify'] = empty($result['classify']) ? array() : $result['classify'];
 
-$type = empty($type) ? 'supply' : $type;
-
 ?>
 
 <div class="corre-classify">
@@ -21,7 +19,7 @@ $type = empty($type) ? 'supply' : $type;
     <span>相关分类：</span>
 
     <?php foreach ($result['classify'] as $value): ?>
-        <a href="<?= Url::to([$type . '/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a> /
+        <a href="<?= Url::to([Yii::$app->controller->action->id . '/index', 'id' => $value['c_key']]) ?>"><?= $value['name'] ?></a> /
     <?php endforeach; ?>
 
 </div>

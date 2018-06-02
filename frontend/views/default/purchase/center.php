@@ -18,11 +18,9 @@ $this->title = '采购平台';
 
 <?=Html::cssFile('@web/themes/qijian/css/nav.css')?>
 
-<!-- 商城分类插件
+<!-- 商城分类插件 -->
 <?=Html::jsFile('@web/themes/qijian/js/jquery1.42.min.js')?>
-
 <?=Html::jsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js')?>
- -->
 
 <!-- 文字上下滚动 -->
 <?=Html::jsFile('@web/themes/qijian/js/scroll.js')?>

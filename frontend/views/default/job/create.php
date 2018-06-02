@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../slide', ['pagekey' => 'job']); ?>
 
-<?= $this->render('../nav'); ?>
+<?= $this->render('_nav'); ?>
 
 <?= $this->render('_form', [
     'model' => $model,

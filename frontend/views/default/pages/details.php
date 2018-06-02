@@ -22,14 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <!-- 左边 -->
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $result['menu']['parent_id']]); ?>
-    <!-- #左边 -->
+    <?= $this->render('../_left'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">

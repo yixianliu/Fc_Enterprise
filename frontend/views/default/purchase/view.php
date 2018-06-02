@@ -28,7 +28,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 <div class="container content">
 
     <!-- 当前位置 -->
-    <?= $this->render('../nav'); ?>
+    <?= $this->render('_nav'); ?>
     <!-- #当前位置 -->
 
     <!-- 可变化内容 -->
@@ -109,7 +109,6 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                             <!-- 参数详细信息 -->
                             <div class="tend-down-left">
                                 <p>
-
                                     采购类型 : <?php if ($model->is_type == 'Long'): ?> 长期采购 <?php else: ?> 短期采购 <?php endif; ?><br />
                                     采购状态 : <?php if ($model->is_status == 'On'): ?> 采购中 <?php else: ?> 不采购 <?php endif; ?><br />
                                     采购数量 : <?= $model->num ?><br />

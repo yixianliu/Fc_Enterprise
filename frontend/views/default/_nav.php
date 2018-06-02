@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <div class="location">
 
     <font><?= $this->title ?></font>

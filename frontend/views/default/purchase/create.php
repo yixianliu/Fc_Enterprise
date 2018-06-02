@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-<?= $this->render('../nav'); ?>
+<?= $this->render('_nav'); ?>
 
 <?=
 $this->render('_form', [

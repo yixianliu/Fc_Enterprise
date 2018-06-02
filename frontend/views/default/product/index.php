@@ -23,12 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <!-- 当前位置 -->
-    <?= $this->render('../nav'); ?>
-    <!-- #当前位置 -->
+    <?= $this->render('../_nav'); ?>
 
     <!-- 相关分类 -->
-    <?= $this->render('../cls', ['result' => $result, 'type' => 'product']); ?>
+    <?= $this->render('../_cls', ['result' => $result, 'type' => 'product']); ?>
     <!-- #相关分类 -->
 
     <!-- 可变化内容 -->

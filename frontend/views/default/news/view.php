@@ -29,16 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">
             <div class="conY_tit"><?= $model->title ?></div>
             <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：<?= date('Y - m - d', $model->updated_at) ?></div>
+
             <div class="conY_text">
                 <?= $model->content ?>
             </div>
-
 
             <div class="conY_fanye">
                 <div class="conY_fanyel">

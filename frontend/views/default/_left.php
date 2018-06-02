@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * 左边内容
+ * 网站左边内容模板
  *
  * Created by Yxl.
  * User: <zccem@163.com>.
@@ -9,19 +9,17 @@
  * Time: 15:38
  */
 
-if (empty($type))
-    return false;
-
 use yii\helpers\Url;
 use yii\helpers\Html;
-use common\widgets\iConf\ConfList;
+use common\models\Pages;
 use common\models\Menu;
 
 $id = Yii::$app->request->get('id', 'C0');
 
 $classifyName = null;
+$classify = array();
 
-switch ($type) {
+switch (Yii::$app->controller->id) {
 
     // 新闻
     case 'news':
@@ -46,15 +44,18 @@ switch ($type) {
     // 单页面
     case 'pages':
 
-        if (empty($m_key))
-            break;
+        $currentPagesData = (Yii::$app->controller->action->id == 'details') ? Pages::findByOne(Yii::$app->request->get('pid', null)) : Pages::findByOne(Yii::$app->request->get('id', null));
 
-        $data = Menu::findByOne($m_key, 'On');
+        // 父类菜单
+        $parentMenuData = Menu::findByOne($currentPagesData['menu']['parent_id']);
+
+        // 查找菜单
+        $data = Menu::findByOne($currentPagesData['menu']['m_key'], 'On');
 
         if (empty($data))
             break;
 
-        $classify = Menu::findByAll($m_key, Yii::$app->session['language']);
+        $classify = Menu::findByAll($currentPagesData['menu']['parent_id'], Yii::$app->session['language']);
 
         foreach ($classify as $key => $value) {
 
@@ -66,7 +67,7 @@ switch ($type) {
             $classify[ $key ]['url'] = Url::to(['/pages/' . $value['is_type'], 'id' => $value['pages']['page_id']]);
         }
 
-        $classifyName = $data['name'];
+        $classifyName = $parentMenuData['name'];
 
         break;
 
@@ -82,7 +83,14 @@ switch ($type) {
         $classifyName = '采购中心';
 
         break;
+
+    default:
+
+        break;
 }
+
+// 侧边栏内容
+$result['Conf'] = \frontend\controllers\BaseController::leftConf();
 
 ?>
 
@@ -92,31 +100,25 @@ switch ($type) {
 
     <div class="cat_list">
 
-        <?php if (!empty($classify)): ?>
+        <?php if (Yii::$app->controller->id == 'pages'): ?>
 
-            <?php if ($type == 'pages'): ?>
-
-                <?php foreach ($classify as $value): ?>
-                    <a href="<?= $value['url'] ?>">
-                        <div <?php if ($value['pages']['page_id'] == $id): ?> class="cur" <?php endif; ?> >
-                            <?= $value['name'] ?>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-
-            <?php else: ?>
-
-                <?php foreach ($classify as $value): ?>
-                    <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> ><a href="<?= $value['url'] ?>"><?= $value['name'] ?></a></div>
-                <?php endforeach; ?>
-
-            <?php endif; ?>
+            <?php foreach ($classify as $value): ?>
+                <a href="<?= $value['url'] ?>" title="<?= $value['name'] ?>">
+                    <div <?php if ($value['pages']['page_id'] == $currentPagesData['page_id']): ?> class="cur" <?php endif; ?> title="<?= $value['name'] ?>">
+                        <?= $value['name'] ?>
+                    </div>
+                </a>
+            <?php endforeach; ?>
 
         <?php else: ?>
 
-            <a href="#" title="暂无栏目 !!">
-                <div class="cur">暂无栏目 !!</div>
-            </a>
+            <?php foreach ($classify as $value): ?>
+                <a href="<?= $value['url'] ?>" title="<?= $value['name'] ?>">
+                    <div <?php if ($value['c_key'] == $id): ?> class="cur" <?php endif; ?> title="<?= $value['name'] ?>">
+                        <?= $value['name'] ?>
+                    </div>
+                </a>
+            <?php endforeach; ?>
 
         <?php endif; ?>
 
@@ -126,7 +128,12 @@ switch ($type) {
 
         <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
 
-        <?= ConfList::widget(['config' => [$this->title, 'left']]); ?>
+        <ul class="contact_us">
+            <li><a>公司名称：<?= $result['Conf']['NAME'] ?></a></li>
+            <li><a>联系人：<?= $result['Conf']['PERSON'] ?></a></li>
+            <li><a>联系电话：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
+            <li><a>公司地址：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
+        </ul>
 
     </div>
 

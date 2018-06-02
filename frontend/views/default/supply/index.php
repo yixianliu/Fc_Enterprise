@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('../slide', ['pagekey' => 'supply']); ?>
 
-<?= $this->render('../nav'); ?>
+<?= $this->render('_nav'); ?>
 
 <style type="text/css">
     .summary {
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="section-wrap-mp pb-50">
     <div class="container">
 
-        <?= $this->render('../cls', ['result' => $result, 'type' => 'supply']); ?>
+        <?= $this->render('_cls', ['result' => $result, 'type' => 'supply']); ?>
 
         <div class="row">
 

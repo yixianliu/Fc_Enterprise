@@ -17,12 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- 左右框架 -->
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $result['menu']['parent_id']]); ?>
+    <?= $this->render('../_left'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     下一篇：<a href="#" title="">下一篇</a>
                 </div>
             </div>
+
         </div>
         <!-- #可变化内容 -->
 

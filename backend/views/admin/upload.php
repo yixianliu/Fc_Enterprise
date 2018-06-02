@@ -18,7 +18,7 @@ $attribute = empty($attribute) ? 'path' : $attribute;
 $id = empty($id) ? 1 : $id;
 
 // 上传类型
-$uploadType = empty($type) ? 'image' : $type;
+$uploadType = empty(Yii::$app->controller->id) ? 'image' : Yii::$app->controller->id;
 
 // 数量
 $num = empty($num) ? 5 : $num;
@@ -61,7 +61,7 @@ $text = empty($text) ? '没有描述' : $text;
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => $type, 'attribute' => $attribute],
+        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => Yii::$app->controller->id, 'attribute' => $attribute],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*'
@@ -125,11 +125,11 @@ $text = empty($text) ? '没有描述' : $text;
 
                 <div class="col-md-3">
 
-                    <?php if ($type != 'pages' && $type != 'purchase' && $type != 'sp-offer'): ?>
+                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
-                    <?php elseif ($type == 'sp-offer'): ?>
+                    <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 
                         <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
 
@@ -141,7 +141,7 @@ $text = empty($text) ? '没有描述' : $text;
 
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 
-                        <?php if ($type != 'sp-offer'): ?>
+                        <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
                             <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
                                 <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
                             </a>
@@ -179,7 +179,7 @@ $text = empty($text) ? '没有描述' : $text;
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "<?= Url::to(['admin/upload/image-delete', 'type' => $type]); ?>&name=" + DeleteImgText,
+                    url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
                     success: function (data) {
 
                     },

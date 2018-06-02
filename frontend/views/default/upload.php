@@ -15,7 +15,7 @@ $attribute = empty($attribute) ? 'path' : $attribute;
 $id = empty($id) ? 1 : $id;
 
 // 上传类型
-$uploadType = empty($type) ? 'image' : $type;
+$uploadType = empty(Yii::$app->controller->id) ? 'image' : Yii::$app->controller->id;
 
 // 数量
 $num = empty($num) ? 5 : $num;
@@ -55,7 +55,7 @@ if (!empty($model->$attribute)) {
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['upload/image-upload', 'id' => $id, 'type' => $type, 'attribute' => $attribute],
+        'url'           => ['upload/image-upload', 'id' => $id, 'type' => Yii::$app->controller->id, 'attribute' => $attribute],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*'
@@ -119,15 +119,15 @@ if (!empty($model->$attribute)) {
             <?php foreach ($images as $value): ?>
                 <div class="col-md-4 col-sm-6 col-xs-12">
 
-                    <?php if ($type != 'pages' && $type != 'purchase' && $type != 'sp-offer' && $type != 'user_supply'): ?>
+                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer' && Yii::$app->controller->id != 'user_supply'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . Yii::$app->controller->id . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
 
-                    <?php elseif ($type == 'user_supply'): ?>
+                    <?php elseif (Yii::$app->controller->id == 'user_supply'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . $id . '/' . $type . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . $id . '/' . Yii::$app->controller->id . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
 
-                    <?php elseif ($type == 'sp-offer'): ?>
+                    <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 
                         <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
 
@@ -141,9 +141,9 @@ if (!empty($model->$attribute)) {
 
                         <h5 class="deleteH5" style="word-wrap: break-word;"><?= $value ?></h5><br/>
 
-                        <?php if ($type != 'sp-offer'): ?>
+                        <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
 
-                            <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => $type]); ?>">
+                            <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => Yii::$app->controller->id]); ?>">
                                 <i class="glyphicon glyphicon-trash"></i>
                                 <span>删除</span>
                             </button>

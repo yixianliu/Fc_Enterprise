@@ -25,6 +25,8 @@ class Menu extends \yii\db\ActiveRecord
 
     static public $parent_id = 'M0';
 
+    static public $frontend_parent_id = 'E1';
+
     /**
      * @inheritdoc
      */

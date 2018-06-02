@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'job']); ?>
+    <?= $this->render('../_left', ['id' => $id, 'm_key' => '', 'type' => '']); ?>
 
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('_nav'); ?>
 
         <div class="content_news_list">
 

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">
