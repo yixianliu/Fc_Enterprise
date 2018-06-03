@@ -28,7 +28,7 @@ CREATE TABLE `#DB_PREFIX#Ad` (
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#Friend_Link`;
 CREATE TABLE `#DB_PREFIX#Friend_Link` (
-    `link_id` INT(11) NULL AUTO_INCREMENT,
+    `id` INT(11) NULL AUTO_INCREMENT,
     `title` VARCHAR(80) NULL COMMENT '标题',
     `content` VARCHAR(255) NULL COMMENT '介绍',
     `author` VARCHAR(55) NULL COMMENT '联系人',
@@ -38,9 +38,7 @@ CREATE TABLE `#DB_PREFIX#Friend_Link` (
     `is_audit` SET('On', 'Off') NOT NULL COMMENT '审核',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
-    PRIMARY
-    KEY (`link_id`),
-
+    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
