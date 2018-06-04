@@ -60,7 +60,7 @@ class BaseController extends Controller
         $power =  Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);
 
         if (!Yii::$app->user->can($power) && Yii::$app->getErrorHandler()->exception === null) {
-            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
+//            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
         }
 
         return true;

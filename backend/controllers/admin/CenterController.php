@@ -169,7 +169,19 @@ class CenterController extends BaseController
 
     public function actionInfo()
     {
-        return $this->render('info');
+
+        // 初始化
+        $result = array();
+
+        $confData = Conf::findByData(null, Yii::$app->session['language']);
+
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                $result[ $value['c_key'] ] = $value['parameter'];
+            }
+        }
+
+        return $this->render('info', ['result' => $result]);
     }
 
     /**

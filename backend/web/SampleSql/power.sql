@@ -81,6 +81,12 @@ VALUES
 (NULL, 'indexTpl', '模板管理', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'editTpl', '编辑模板', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 
+(NULL, 'createMsg', '发布留言', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'updateMsg', '更新留言', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'indexMsg', '留言列表', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'viewMsg', '查看留言', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+(NULL, 'deleteMsg', '删除留言', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
+
 (NULL, 'createSlide', '发布幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'updateSlide', '更新幻灯片', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),
 (NULL, 'indexSlide', '幻灯片列表', NULL, NULL, 2, 1, '#TIME#', '#TIME#'),

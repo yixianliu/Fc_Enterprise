@@ -161,7 +161,7 @@ VALUES
 (NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
-(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'commont/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 (NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),

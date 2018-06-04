@@ -3,21 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Job */
+/* @var $model common\models\OnlineMsg */
 /* @var $form yii\widgets\ActiveForm */
-
-
 ?>
-
-<style type="text/css">
-    .preview img {
-        width: 180px;
-        height: 100px;
-    }
-</style>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -33,22 +23,13 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                <?=
-                $form->field($model, 'content')
-                    ->widget('kucha\ueditor\UEditor', [
-                        'clientOptions' => [
-                            //设置语言
-                            'lang'               => 'zh-cn',
-                            'initialFrameHeight' => '600',
-                            'elementPathEnabled' => false,
-                            'wordCount'          => false,
-                        ]
-                    ]);
-                ?>
+                <?= $form->field($model, 'content')->textarea(['rows' => 15]) ?>
 
-                <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'text' => '招聘图片', 'form' => $form, 'attribute' => 'images', 'id' => $model->job_id]); ?>
+                <?= $form->field($model, 'telephone')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
                 <?=
                 $form->field($model, 'is_audit')->widget(Select2::classname(), [
@@ -62,7 +43,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <div class="form-group">
 
-                    <?= Html::submitButton($model->isNewRecord ? '发布招聘' : '更新招聘', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '发布留言' : '更新留言', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 
