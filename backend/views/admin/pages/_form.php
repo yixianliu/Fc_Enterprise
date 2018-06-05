@@ -44,7 +44,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'text' => '自定义页面图片', 'form' => $form, 'attribute' => 'path', 'type' => 'pages', 'id' => 1]); ?>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '自定义页面图片', 'form' => $form, 'attribute' => 'path', 'id' => 1]); ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [

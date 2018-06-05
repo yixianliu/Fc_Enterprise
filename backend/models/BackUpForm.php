@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
 class BackUpForm extends ActiveRecord
 {
 
-    protected $DbData_Path = "Db_Backup_Data";
+    public static $DbData_Path = "Db_Backup_Data";
 
     public function init()
     {
@@ -35,7 +35,7 @@ class BackUpForm extends ActiveRecord
     protected function getBackUpPath()
     {
 
-        $path = dirname(dirname(__FILE__)) . '/' . $this->DbData_Path;
+        $path = Yii::getAlias('@webroot') . '/' . static::$DbData_Path;
 
         if (!file_exists($path)) {
             @mkdir($path, 0777);
@@ -134,12 +134,16 @@ class BackUpForm extends ActiveRecord
     */
     public function getSqlFiles()
     {
-        $path = dirname(dirname(__FILE__)) . '/' . $this->DbData_Path;
+        $path = Yii::getAlias('@webroot') . '/' . static::$DbData_Path;
+
         $sqls = [];
+
         if (file_exists($path)) {
             $dir_handle = @opendir($path);
             while ($file = @readdir($dir_handle)) {
+
                 $file_info = pathinfo($file);
+
                 if ($file_info['extension'] == 'sql') {
                     $sql['name'] = $file;
                     $sql['create_time'] = date('Y-m-d', filectime($path . '/' . $file));
@@ -159,7 +163,7 @@ class BackUpForm extends ActiveRecord
      */
     public function recoverSqlFile($sqlFileName)
     {
-        $path = dirname(dirname(__FILE__)) . '/' . $this->DbData_Path;
+        $path = Yii::getAlias('@webroot') . '/' . static::$DbData_Path;
 
         $sqlFile = $path . '/' . $sqlFileName;
 
@@ -176,8 +180,10 @@ class BackUpForm extends ActiveRecord
     */
     public function deleteSqlFile($sqlFileName)
     {
-        $path = dirname(dirname(__FILE__)) . '/' . $this->DbData_Path;
+        $path = Yii::getAlias('@webroot') . '/' . static::$DbData_Path;
+
         $sqlFile = $path . '/' . $sqlFileName;
+
         if (file_exists($sqlFile)) {
             @unlink($sqlFile);
         }

@@ -47,13 +47,22 @@ $this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['index']]
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>名称</th>
+                            <th>创建时间</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <?php foreach ($dataProvider as $value): ?>
                             <tr>
-                                <td><?= $value ?></td>
+                                <td></td>
+                                <td><?= $value['name'] ?></td>
+                                <td><?= $value['create_time'] ?></td>
+                                <td>
+                                    <a href="<?= \yii\helpers\Url::to(['admin/backup/view', 'id' => $value['name']]) ?>">查看</a> /
+                                    <a href="<?= \yii\helpers\Url::to(['admin/backup/delete', 'id' => $value['name']]) ?>">删除</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -72,29 +81,33 @@ $this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['index']]
 
     <script type="text/javascript">
 
-        var AjaxMsg = $('#AjaxMsg');
+        $(function () {
 
-        $('#BackUpForm1').on('submit', function () {
+            var AjaxMsg = $('#AjaxMsg');
 
-            $.ajax({
-                url: '<?= \yii\helpers\Url::to(['admin/backup/backup-sql']) ?>',
-                method: 'post',
-                dataType: 'json',
-                success: function (data) {
+            jQuery('#BackUpForm').on('beforeSubmit', function (e) {
 
-                    console.log(data.msg);
+                var $form = $(this);
 
-                    return true;
-                },
-                error: function () {
-                    AjaxMsg.text('操作失败了!!');
-                    return false;
-                }
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'post',
+                    data: $form.serialize(),
+                    success: function (data) {
+                        AjaxMsg.text(data.msg);
+                        window.location.href = data.url;
+                        return true;
+                    },
+                    error: function () {
+                        AjaxMsg.text('操作失败了!!');
+                        return false;
+                    }
+                });
+            }).on('submit', function (e) {
+                e.preventDefault();
             });
 
-            return true;
         });
-
     </script>
 
 </div>

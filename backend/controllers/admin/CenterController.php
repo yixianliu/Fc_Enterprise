@@ -5,7 +5,6 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\Conf;
 use common\models\ConfSearch;
-use backend\models\BackUpForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -193,34 +192,6 @@ class CenterController extends BaseController
     public function actionSeo()
     {
         return $this->render('seo');
-    }
-
-    /**
-     * 备份数据库
-     *
-     * @return array|string
-     * @throws \yii\base\NotSupportedException
-     */
-    public function actionBackup()
-    {
-
-        $model = new BackUpForm();
-
-        $dataProvider = $model->getSqlFiles();
-
-        if (Yii::$app->request->isPost) {
-
-            Yii::$app->response->format = yii\web\Response::FORMAT_JSON;
-
-            $model->backUp();
-
-            return Yii::$app->response->data = [
-                'status' => true,
-                'msg'    => '备份数据库成功'
-            ];
-        }
-
-        return $this->render('backup', ['dataProvider' => $dataProvider]);
     }
 
     /**

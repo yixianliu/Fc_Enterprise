@@ -9,9 +9,9 @@
  * Time: 10:33
  */
 
-$this->title = '网站档案';
-
 use yii\helpers\Html;
+
+$this->title = '网站档案';
 
 ?>
 

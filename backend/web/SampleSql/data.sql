@@ -161,7 +161,7 @@ VALUES
 (NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
-(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'commont/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 (NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
@@ -206,7 +206,7 @@ VALUES
 
 (NULL, 'ACCC1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'center/conf', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'center/backup', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACCC3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
