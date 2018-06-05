@@ -238,6 +238,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

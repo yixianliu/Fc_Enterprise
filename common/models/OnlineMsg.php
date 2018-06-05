@@ -50,6 +50,7 @@ class OnlineMsg extends \yii\db\ActiveRecord
             [['user_id', 'email', 'telephone'], 'string', 'max' => 85],
             [['address'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 155],
+            ['email', 'email'],
 
             [['address', 'title', 'email'], 'default', 'value' => null],
             [['is_audit',], 'default', 'value' => 'On'],

@@ -34,33 +34,45 @@ $this->params['breadcrumbs'][] = $this->title;
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'user_id',
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 50]
+                        ],
+                        [
+                            'attribute' => 'user_id',
+                            'options'   => ['width' => 120]
+                        ],
                         'title',
                         [
                             'attribute' => 'is_audit',
                             'value'     => function ($model) {
                                 $state = [
-                                    'On'  => '审核通过',
-                                    'Off' => '审核未通过',
+                                    'On'  => '已通过',
+                                    'Off' => '未通过',
                                 ];
 
                                 return $state[ $model->is_audit ];
                             },
+                            'options'   => ['width' => 120]
                         ],
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->created_at);
                             },
+                            'options'   => ['width' => 180]
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
+                            'options'   => ['width' => 180]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
+                        ],
                     ],
                 ]);
                 ?>

@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'id',
                         'job_id',
                         'user_id',
                         'title',
@@ -84,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]) ?>
 
             </div>
