@@ -129,10 +129,10 @@ $result['Conf'] = \frontend\controllers\BaseController::leftConf();
         <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
 
         <ul class="contact_us">
-            <li><a>公司名称：<?= $result['Conf']['NAME'] ?></a></li>
-            <li><a>联系人：<?= $result['Conf']['PERSON'] ?></a></li>
-            <li><a>联系电话：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
-            <li><a>公司地址：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
+            <li><a><?= Yii::t('app','company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
+            <li><a><?= Yii::t('app','contacts') ?> ：<?= $result['Conf']['PERSON'] ?></a></li>
+            <li><a><?= Yii::t('app','phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
+            <li><a><?= Yii::t('app','address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
         </ul>
 
     </div>

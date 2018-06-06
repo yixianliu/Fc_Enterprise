@@ -36,7 +36,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'text' => '简历图片', 'form' => $form, 'attribute' => 'path', 'type' => 'resume', 'id' => $model->id]); ?>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '简历图片', 'form' => $form, 'id' => $model->id]); ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(Select2::classname(), [

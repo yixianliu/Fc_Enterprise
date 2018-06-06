@@ -5,10 +5,10 @@ use yii\helpers\Url;
 
 $this->title = '模板管理';
 
-$html = recursionDir($result);
+$html = recursionDir($result['default']);
 
 // 递归
-function recursionDir($data)
+function recursionDir($data, $dir = null)
 {
 
     if (empty($data) || !is_array($data))
@@ -21,16 +21,17 @@ function recursionDir($data)
         $html .= '<li style="padding: 5px;">';
 
         if (!is_numeric($key)) {
+            $dir = $key;
             $html .= '    <div class="uk-nestable-item">&nbsp;&nbsp;▸&nbsp;<font color="red">' . tplName($key, 'paths') . '</font> [目录 / <font color="#00008b">' . $key . '</font> ]</div>';
         } else {
             $html .= '    <div class="uk-nestable-item">&nbsp;&nbsp;▸&nbsp;<font color="red">' . tplName($value, 'files') . '</font> [模板文件 / <font color="#00008b">' . $value . '</font> / ';
-            $html .= '      <a href="' . Url::to(['edit']) . '">编辑</a> / ';
+            $html .= '      <a href="' . Url::to(['edit', 'id' => $value, 'path' => $dir]) . '">编辑</a> / ';
             $html .= '    ]</div>';
         }
 
         if (!empty($value)) {
             $html .= '<ul class="">';
-            $html .= recursionDir($value);
+            $html .= recursionDir($value, $dir);
             $html .= '</ul>';
         }
 
@@ -53,7 +54,7 @@ function tplName($name, $type)
 
     foreach ($xml->$type as $value) {
 
-        if ($value->$array[$type] == $name) {
+        if ($value->$array[ $type ] == $name) {
             return $value->name;
         }
 
@@ -73,15 +74,19 @@ function tplName($name, $type)
             <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
+
+            <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
             <div class="row" style="word-break : break-all;">
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <ul class="uk-nestable" 0>
+                    <ul class="uk-nestable">
                         <?= $html ?>
                     </ul>
 
                 </div>
             </div>
+
         </div>
     </section>
 </div>

@@ -9,9 +9,9 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
+use yii\base\Model;
 
-class BackUpForm extends ActiveRecord
+class BackUpForm extends Model
 {
 
     public static $DbData_Path = "Db_Backup_Data";

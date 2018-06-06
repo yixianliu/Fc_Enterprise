@@ -42,6 +42,8 @@ class BaseController extends Controller
             $session->set('language_name', '中文版');
         }
 
+        Yii::$app->language = 'zh-CN';
+
         return true;
     }
 

@@ -25,6 +25,9 @@ $this->beginPage();
 // 滚动
 $this->registerJsFile('@web/themes/qijian/js/jquery.js');
 
+// 多语言 XML
+$LangXml = simplexml_load_file(Yii::getAlias('@webroot') . '/language-en.xml');
+
 ?>
 
 <!DOCTYPE html>

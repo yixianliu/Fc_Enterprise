@@ -11,6 +11,7 @@
 
 namespace backend\controllers\admin;
 
+use backend\models\TplForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -57,6 +58,45 @@ class TplController extends BaseController
         $result = $this->getFiles($dir, true);
 
         return $this->render('/admin/center/tpl', ['result' => $result]);
+    }
+
+    /**
+     * 编辑模板文件
+     *
+     * @return string
+     */
+    public function actionEdit()
+    {
+
+        $model = new TplForm();
+
+        $model->fileName = Yii::$app->request->get('id', null);
+
+        $model->path = Yii::$app->request->get('path', null);
+
+        // 保存
+        if ($model->load(Yii::$app->request->post())) {
+
+            $file = Yii::$app->basePath . '/../frontend/views/default/' . $model->path . '/' . $model->fileName;
+
+            if (!file_put_contents($file, $model->content)) {
+                Yii::$app->getSession()->setFlash('error', '保存内容失败 !!');
+            }
+
+            Yii::$app->getSession()->setFlash('success', '保存内容成功 !!');
+
+            return $this->redirect(['/admin/tpl/index']);
+        }
+
+        $file = Yii::$app->basePath . '/../frontend/views/default/' . $model->path . '/' . $model->fileName;
+
+        if (!is_file($file)) {
+            Yii::$app->getSession()->setFlash('error', '此文件不存在 !!');
+        } else {
+            $model->content = file_get_contents($file);
+        }
+
+        return $this->render('/admin/center/editTpl', ['model' => $model]);
     }
 
     /**
