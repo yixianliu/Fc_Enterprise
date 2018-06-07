@@ -122,7 +122,8 @@ VALUES
 (NULL, 'UU1', 5, 'urls', '外部链接', 'On', '#TIME#', '#TIME#'),
 (NULL, 'UP2', 6, 'purchase', '采购中心', 'On', '#TIME#', '#TIME#'),
 (NULL, 'US1', 7, 'supply', '供应中心', 'On', '#TIME#', '#TIME#'),
-(NULL, 'UB1', 8, 'bid', '投标中心', 'On', '#TIME#', '#TIME#');
+(NULL, 'UB1', 8, 'bid', '投标中心', 'On', '#TIME#', '#TIME#'),
+(NULL, 'UC2', 9, 'comment', '留言页面', 'On', '#TIME#', '#TIME#');
 
 /**
  * 菜单

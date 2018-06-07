@@ -39,10 +39,20 @@ class BaseController extends Controller
 
             // 设置一个session变量，以下用法是相同的：
             $session->set('language', 'cn');
-            $session->set('language_name', '中文版');
         }
 
-        Yii::$app->language = 'zh-CN';
+        switch ($session->get('language')) {
+
+            default:
+            case 'cn':
+                Yii::$app->language = 'zh-CN';
+                break;
+
+            case 'en':
+                Yii::$app->language = 'en-US';
+                break;
+
+        }
 
         return true;
     }
