@@ -60,8 +60,8 @@ VALUES
  */
 INSERT INTO `#DB_PREFIX#Management`
 VALUES
-(NULL, 'admin', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL),
-(NULL, 'admin_Zcc', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL);
+(NULL, 'admin', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL, 'Off'),
+(NULL, 'admin_yxl', '#PASSWORD#', 'admin', NULL, NULL, 'On', '#TIME#', '#TIME#', NULL, 'On');
 
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -123,7 +123,8 @@ VALUES
 (NULL, 'UP2', 6, 'purchase', '采购中心', 'On', '#TIME#', '#TIME#'),
 (NULL, 'US1', 7, 'supply', '供应中心', 'On', '#TIME#', '#TIME#'),
 (NULL, 'UB1', 8, 'bid', '投标中心', 'On', '#TIME#', '#TIME#'),
-(NULL, 'UC2', 9, 'comment', '留言页面', 'On', '#TIME#', '#TIME#');
+(NULL, 'UM1', 9, 'maps', '地图页面', 'On', '#TIME#', '#TIME#'),
+(NULL, 'UC2', 10, 'comment', '留言页面', 'On', '#TIME#', '#TIME#');
 
 /**
  * 菜单

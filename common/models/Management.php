@@ -36,16 +36,17 @@ class Management extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'user_id'    => '用户编号',
-            'username'   => '帐号',
-            'is_using'   => '审核状态',
-            'login_ip'   => '登录IP',
-            'area'       => '所在区域',
-            'is_using'   => '审核状态',
-            'created_at' => '创建时间',
-            'updated_at' => '更改时间',
-            'item_name'  => '节点',
-            'password'   => '密码',
+            'user_id'      => '用户编号',
+            'username'     => '帐号',
+            'is_using'     => '审核状态',
+            'login_ip'     => '登录IP',
+            'area'         => '所在区域',
+            'is_using'     => '审核状态',
+            'created_at'   => '创建时间',
+            'updated_at'   => '更改时间',
+            'item_name'    => '节点',
+            'password'     => '密码',
+            'access_token' => '超级管理员',
         ];
     }
 

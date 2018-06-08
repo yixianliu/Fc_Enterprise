@@ -331,3 +331,29 @@ VALUES
 (NULL, 'HNC1', 1, 'HN6', 'admin', NULL, NULL, '最强人气', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'HNC2', 2, 'HN6', 'admin', NULL, NULL, '精选资源', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'HNC3', 3, 'HN6', 'admin', NULL, NULL, '土豪的世界', NULL, 'On', #TIME#, #TIME#);
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 超级管理员
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
+ * 网站功能板块
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Web_Parts`;
+CREATE TABLE `#DB_PREFIX#Web_Parts` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `name` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` VARCHAR(255) NOT NULL COMMENT '描述',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    PRIMARY KEY (`id`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
+    UNIQUE `name` (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;

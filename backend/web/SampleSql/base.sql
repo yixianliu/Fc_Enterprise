@@ -71,6 +71,7 @@ CREATE TABLE `#DB_PREFIX#Management` (
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     `remember_token` VARCHAR(55) NULL COMMENT '保存密码TOKEN',
+    `access_token` SET('On', 'Off')NULL COMMENT '是否开启为超级管理员',
     PRIMARY KEY (`user_id`),
     UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
