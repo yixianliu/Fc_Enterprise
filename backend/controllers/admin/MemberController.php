@@ -61,7 +61,7 @@ class MemberController extends Controller
             Yii::$app->getSession()->setFlash('error', '帐号密码有误 !!');
         }
 
-        return $this->render('../center/login', ['model' => $model]);
+        return $this->render('/admin/center/login', ['model' => $model]);
     }
 
     /**

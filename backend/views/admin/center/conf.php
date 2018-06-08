@@ -44,9 +44,14 @@ $this->title = '网站配置';
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'c_key',
-                        'name',
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 50]
+                        ],
+                        [
+                            'attribute' => 'name',
+                            'options'   => ['width' => 110]
+                        ],
                         'parameter',
                         [
                             'attribute' => 'is_language',
@@ -62,20 +67,19 @@ $this->title = '网站配置';
 
                                 return $state[ $model->is_language ];
                             },
-                        ],
-                        [
-                            'attribute' => 'created_at',
-                            'value'     => function ($model) {
-                                return date('Y - m -d , h:i', $model->created_at);
-                            },
+                            'options'   => ['width' => 100]
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
+                            'options'   => ['width' => 160]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 80]
+                        ],
                     ],
                 ]);
                 ?>
