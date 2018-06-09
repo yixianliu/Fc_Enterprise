@@ -57,7 +57,7 @@ class NewsClassify extends \yii\db\ActiveRecord
             [['name'], 'unique'],
 
             [['sort_id',], 'default', 'value' => 1],
-            [['keywords',], 'default', 'value' => '暂无 !!'],
+            [['keywords', 'description'], 'default', 'value' => '暂无 !!'],
             [['is_using',], 'default', 'value' => 'On'],
         ];
     }

@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?= DetailView::widget([
@@ -41,11 +42,31 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'page_id',
                             'value'     => function ($model) {
                                 $data = \common\models\Pages::findByOne($model->page_id);
+
                                 return $data['menu']['name'];
                             },
                         ],
                         'title',
-                        'path',
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/pages-list/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -71,7 +92,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
-                ]) ?>
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                ])
+                ?>
 
             </div>
         </div>

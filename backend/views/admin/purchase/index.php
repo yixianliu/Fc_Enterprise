@@ -34,9 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100]
+                        ],
                         'title',
-                        'price',
+                        [
+                            'attribute' => 'price',
+                            'options'   => ['width' => 150]
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -47,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_type ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
                             'attribute' => 'is_status',
@@ -58,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_status ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
                             'attribute' => 'is_using',
@@ -69,19 +77,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_using ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
-                            'attribute' => 'is_send_msg',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '已启用',
-                                    'Off' => '未启用',
-                                ];
-
-                                return $state[ $model->is_using ];
-                            },
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]);
                 ?>

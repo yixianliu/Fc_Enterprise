@@ -51,14 +51,17 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['m_key', 'name', 'is_using', 'parent_id', 'model_key', 'rp_key'], 'required'],
+            [['m_key', 'name', 'parent_id', 'model_key'], 'required'],
             [['is_using', 'rp_key'], 'string'],
+            [['sort_id',], 'integer'],
             [['m_key', 'parent_id'], 'string', 'max' => 55],
             [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
             [['m_key'], 'unique'],
 
             // 默认
-            [['custom_key', 'url', 'rp_key', 'is_type'], 'default', 'value' => null],
+            [['custom_key', 'url', 'rp_key', 'is_type',], 'default', 'value' => null],
+            [['is_using',], 'default', 'value' => 'On'],
+            [['rp_key',], 'default', 'value' => 'guest'],
             [['sort_id',], 'default', 'value' => 1],
         ];
     }

@@ -41,9 +41,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'news_id',
-                        'user_id',
-                        'c_key',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+                                $data = \common\models\NewsClassify::findOne(['c_key' => $model->c_key]);
+                                return $data->name;
+                            },
+                        ],
                         'sort_id',
                         'title',
                         'introduction',
@@ -68,7 +72,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->is_audit ];
                             },
                         ],
-                        'is_comments',
+                        [
+                            'attribute' => 'is_comments',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已启用',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
                         'is_img',
                         'is_thumb',
                         [
@@ -85,6 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 
