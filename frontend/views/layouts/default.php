@@ -102,7 +102,7 @@ $LangXml = simplexml_load_file(Yii::getAlias('@webroot') . '/language-en.xml');
                             <?=
                             Nav::widget([
                                 'options' => ['class' => 'navbar-nav navbar-right'],
-                                'items'   => $ClsMenu->findMenuNav('E1', 'cn'),
+                                'items'   => $ClsMenu->findMenuNav('E1', Yii::$app->session['language']),
                             ]);
                             ?>
 

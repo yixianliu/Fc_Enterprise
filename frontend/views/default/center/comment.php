@@ -20,14 +20,19 @@ $this->title = '网站留言';
 
     <?= $this->render('../_left'); ?>
 
-    <!-- 右边 -->
     <div class="right">
 
         <?= $this->render('../_nav'); ?>
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['action' => ['comment/index'], 'method' => 'post',]); ?>
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'content')->textarea(['maxlength' => true, 'rows' => 10]) ?>
+
+        <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
             <?= Html::submitButton('发布留言', ['class' => 'btn btn-primary']) ?>
@@ -37,6 +42,6 @@ $this->title = '网站留言';
 
     </div>
 
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
-
 </div>
+
+<?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>

@@ -50,7 +50,6 @@ class SlideController extends BaseController
     public function actionIndex()
     {
         // add conditions that should always apply here
-
         $query = Slide::find()->where(['is_language' => Yii::$app->session['language']]);
 
         $dataProvider = new ActiveDataProvider([

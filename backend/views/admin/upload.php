@@ -61,7 +61,7 @@ $text = empty($text) ? '没有描述' : $text;
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => Yii::$app->controller->id, 'attribute' => $attribute],
+        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*'

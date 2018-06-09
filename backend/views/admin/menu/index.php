@@ -249,6 +249,24 @@ function menuHtml($data, $type)
     // 根据类别递归
     switch ($type) {
 
+        // 在线联系
+        case 'comment':
+            $array = [
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
+            ];
+            break;
+
+        // 在线地图
+        case 'map':
+            $array = [
+                'create'  => Html::a('添加子菜单', ['create', 'id' => $data['m_key']]) . ' / ',
+                'update'  => Html::a('编辑菜单', ['update', 'id' => $data['m_key']]) . ' / ',
+                'del'     => Html::a('删除菜单', ['delete', 'id' => $data['m_key']]) . ' / ',
+            ];
+            break;
+
         // 招聘
         case 'job':
             $array = [

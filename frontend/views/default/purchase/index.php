@@ -31,7 +31,7 @@ $this->registerCssFile('@web/themes/qijian/css/purzoom.css');
     <div class="right">
 
         <!-- 当前位置 -->
-        <?= $this->render('_nav'); ?>
+        <?= $this->render('../_nav'); ?>
         <!-- #当前位置 -->
 
         <!-- 多项选择 -->

@@ -538,6 +538,16 @@ class Menu extends \yii\db\ActiveRecord
 
                 break;
 
+            // 在线留言
+            case 'comment':
+                $urls = ['/comment/index'];
+                break;
+
+            // 在线地图
+            case 'map':
+                $urls = ['/map/index'];
+                break;
+
             // 招聘
             case 'job':
                 $urls = ['/job/' . $data['is_type']];

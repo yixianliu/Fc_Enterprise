@@ -45,14 +45,14 @@ class OnlineMsg extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'content'], 'required'],
+            [['user_id', 'title', 'content', 'email'], 'required'],
             [['content', 'is_audit'], 'string'],
             [['user_id', 'email', 'telephone'], 'string', 'max' => 85],
             [['address'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 155],
             ['email', 'email'],
 
-            [['address', 'title', 'email'], 'default', 'value' => null],
+            [['address'], 'default', 'value' => null],
             [['is_audit',], 'default', 'value' => 'On'],
         ];
     }
