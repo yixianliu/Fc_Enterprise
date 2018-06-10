@@ -21,7 +21,7 @@ use yii\behaviors\TimestampBehavior;
 class NewsClassify extends \yii\db\ActiveRecord
 {
 
-    public static $parent_id = 'C0';
+    public static $parent_cly_id = 'C0';
 
     /**
      * @inheritdoc
