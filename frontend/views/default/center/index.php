@@ -25,7 +25,7 @@ $this->title = '网站首页';
     });
 </script>
 
-<?= $this->render('../slide', ['pagekey' => 'index']); ?>
+<?= $this->render('../_slide', ['PageId' => 'index']); ?>
 
 <!-- 数据 -->
 <div class="container-fluid advantage">
