@@ -30,7 +30,7 @@ function recursionHtmlMenu($data)
 
         $html .= '<li class="">';
 
-        if ($value['url'] != Yii::$app->controller->id) {
+        if (empty($value['active']) || $value['active'] != 'On') {
             $html .= '    <a title="' . $value['name'] . '" href="' . Url::to($value['url']) . '">' . $value['name'];
         } else {
             $html .= '    <a class="active" title="' . $value['name'] . '" title="' . $value['name'] . '">' . $value['name'];
@@ -64,7 +64,7 @@ function recursionHtmlMenu($data)
 
         <?php if (!empty($value['name'])): ?>
 
-            <li class='<?php if ($value['open'] == 'On'): ?>open<?php endif; ?>' title='<?= $value['name'] ?>'>
+            <li class='<?php if (!empty($value['open']) && $value['open'] == 'On'): ?>open<?php endif; ?>' title='<?= $value['name'] ?>'>
 
                 <a title='<?= $value['name'] ?>' href='<?= Url::to($value['url']) ?>' class='dropdown-toggle' data-toggle='dropdown'>
 

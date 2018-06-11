@@ -45,16 +45,8 @@ class MenuAdmin extends InputWidget
 
         $result['menu'] = Menu::findMenuNav($pid);
 
-        $controller = explode('/', Yii::$app->controller->id)[1] . '/' . Yii::$app->controller->action->id;
-
-        $menuActive = Menu::findOne(['url' => $controller]);
-
-        $open = static::recursionUp($menuActive['parent_id']);
-
-        foreach ($result['menu'] as $key => $value) {
-            if ($value['m_key'] == $open)
-                $result['menu'][ $key ]['open'] = 'On';
-        }
+        print_r($result['menu']);
+        exit();
 
         $confData = Conf::findByData('On');
 
@@ -63,19 +55,6 @@ class MenuAdmin extends InputWidget
         }
 
         return $result;
-    }
-
-    public static function recursionUp($pid)
-    {
-
-        $parent = Menu::findOne(['parent_id' => $pid]);
-
-        if (empty($parent))
-            return $parent;
-
-        static::recursionUp($parent['m_key']);
-
-        return;
     }
 
 }

@@ -230,24 +230,6 @@ class Menu extends \yii\db\ActiveRecord
                     break;
             }
 
-            // 菜单超链接
-            switch ($value['menuModel']['url_key']) {
-
-                // 单页面
-                case 'pages':
-                    $urls = !empty($value['url']) ? $value['url'] : null;
-                    break;
-
-                case 'urls':
-                    $urls = $value['url'];
-                    break;
-
-                default:
-                    $urls = $value['menuModel']['url_key'] . '/' . $value['is_type'];
-                    break;
-
-            }
-
             if (empty($array))
                 continue;
 
@@ -438,13 +420,21 @@ class Menu extends \yii\db\ActiveRecord
             return;
         }
 
+        $urlActive = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
+
         $child = static::findByAll($data['m_key'], $type);
 
         if (empty($child))
             return;
 
         foreach ($child as $key => $value) {
+
             $child[ $key ]['url'] = static::setMenuModel($value, $adminid);
+
+            // 针对后台
+            if ($child[ $key ]['url'] == $urlActive)
+                $child[ $key ]['active'] = 'On';
+
             $child[ $key ]['child'] = static::recursionUrlMenu($value, $adminid, $type);
         }
 
@@ -477,9 +467,7 @@ class Menu extends \yii\db\ActiveRecord
 
             // 自定义页面
             case 'pages':
-
                 $urls = empty($data['url']) ? ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']] : $data['url'];
-
                 break;
 
             // 在线留言
@@ -494,7 +482,7 @@ class Menu extends \yii\db\ActiveRecord
 
             // 招聘
             case 'job':
-                $urls = ['/job/' . $data['is_type']];
+                $urls = '/job/' . $data['is_type'];
                 break;
 
             // 超链接
@@ -506,10 +494,10 @@ class Menu extends \yii\db\ActiveRecord
                         return $data['url'];
                     }
 
-                    $urls = [$adminid == 'A3' ? 'admin/' . $data['url'] : $data['url']];
+                    $urls = $adminid == 'A3' ? 'admin/' . $data['url'] : $data['url'];
 
                 } else {
-                    $urls = [$data['url']];
+                    $urls = $data['url'];
                 }
 
                 break;
