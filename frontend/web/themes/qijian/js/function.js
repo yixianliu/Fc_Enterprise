@@ -29,6 +29,9 @@ function funs() {
         $('.carousel-inner .item').eq(0).addClass('active');
         $('a.carousel-control').remove();
     }
+
+    // 需要无限级菜单打开 , 只需要二级菜单隐藏
+    $('.dropdown-menu').find('.dropdown').attr('class','dropdown-submenu');
 }
 
 // 首页上下图片滚动
