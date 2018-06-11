@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
+<?= $this->render('../_slide', ['pagekey' => 'purchase']); ?>
 
 <div class="container content">
 
-<?= $this->render('_nav'); ?>
+<?= $this->render('../_nav'); ?>
 
 <?=
 $this->render('_form', [

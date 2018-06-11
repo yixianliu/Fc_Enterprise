@@ -19,14 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'product']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 
     <?= $this->render('../_nav'); ?>
 
     <!-- 相关分类 -->
-    <?= $this->render('../_cls', ['result' => $result, 'type' => 'product']); ?>
+    <?= $this->render('../_cls', ['result' => $result]); ?>
     <!-- #相关分类 -->
 
     <!-- 可变化内容 -->

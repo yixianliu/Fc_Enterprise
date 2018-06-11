@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => $result['parent']['page_id']]); ?>
+<?= $this->render('../slide', ['PageId' => $result['parent']['page_id']]); ?>
 
 <div class="container content">
 
@@ -51,9 +51,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
-        <!-- #可变化内容 -->
-
     </div>
-    <!-- 右边 -->
-
 </div>

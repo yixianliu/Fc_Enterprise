@@ -84,7 +84,7 @@ class Slide extends \yii\db\ActiveRecord
      * @param $pagekey
      * @return array|bool
      */
-    public function getData($pagekey)
+    public static function getData($pagekey)
     {
 
         if (empty($pagekey))

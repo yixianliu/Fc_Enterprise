@@ -13,12 +13,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use common\models\Slide;
 
-$ClsSlide = new Slide();
+$PageController = empty($PageId) ? Yii::$app->controller->id : $PageId;
 
-if (empty($pagekey))
-    return false;
-
-$dataSlide = $ClsSlide->getData($pagekey);
+$dataSlide = Slide::getData($PageController);
 
 if (empty($dataSlide))
     return false;

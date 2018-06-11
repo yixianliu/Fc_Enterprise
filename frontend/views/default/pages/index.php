@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <div class="container content">
 

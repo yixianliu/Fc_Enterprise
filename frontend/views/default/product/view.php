@@ -24,7 +24,7 @@ foreach ($imgArray as $key => $value) {
 <?= Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js') ?>
 <?= Html::jsFile('@web/themes/qijian/js/jqzoom/base.js') ?>
 
-<?= $this->render('../slide', ['pagekey' => 'product']); ?>
+<?= $this->render('../_slide'); ?>
 
 <!-- 内容中心 -->
 <div class="container content">

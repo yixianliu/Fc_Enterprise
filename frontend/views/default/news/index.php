@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'news']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 

@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => '供应中心', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
 <section class="section-wrap-mp portfolio-single">
     <div class="container">
         <div class="row">
@@ -74,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <br/>
         <br/>
 
-        <?= $this->render('../file', ['img' => $model->path, 'type' => 'purchase']); ?>
+        <?= $this->render('../_file', ['img' => $model->path, 'type' => 'purchase']); ?>
 
     </div>
 </section>

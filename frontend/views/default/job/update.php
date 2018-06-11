@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = '更新';
     .summary {display: none;}
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'job']); ?>
+<?= $this->render('_slide', ['pagekey' => 'job']); ?>
 
 <?= $this->render('_nav'); ?>
 

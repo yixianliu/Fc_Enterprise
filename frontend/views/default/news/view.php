@@ -18,18 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'news']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 
     <!-- 左边 -->
-    <?= $this->render('../_left', ['type' => 'news']); ?>
+    <?= $this->render('../_left'); ?>
     <!-- #左边 -->
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('_nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">

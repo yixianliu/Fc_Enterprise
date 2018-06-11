@@ -12,20 +12,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => 'supply']); ?>
-
-<?= $this->render('_nav'); ?>
-
 <style type="text/css">
     .summary {
         display: none;
     }
 </style>
 
+<?= $this->render('../_slide'); ?>
+
+<?= $this->render('../_nav'); ?>
+
 <section class="section-wrap-mp pb-50">
     <div class="container">
 
-        <?= $this->render('_cls', ['result' => $result, 'type' => 'supply']); ?>
+        <?= $this->render('../_cls', ['result' => $result]); ?>
 
         <div class="row">
 
