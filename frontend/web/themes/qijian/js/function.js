@@ -35,7 +35,7 @@ function funs() {
 
     // 导航菜单子类少于父类自动适配宽度
     $('.dropdown .dropdown-menu').each(function(){
-        // 获取导航菜单子类宽度
+        // 获取导航菜单子类宽度.
         var navWdith = $(this).parent('.dropdown').width();
         // 获取导航菜单夫类宽度
         var narpWdith = $(this).width();
