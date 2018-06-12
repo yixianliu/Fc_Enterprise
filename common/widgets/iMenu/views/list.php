@@ -27,8 +27,17 @@ function recursionHtmlMenu($data)
         if (empty($value['name']))
             continue;
 
-        $html .= '<li class="dropdown">';
-        $html .= '    <a title="' . $value['name'] . '" href="' . Url::to($value['url']) . '">' . $value['name'];
+        if (!empty($value['active']) && $value['active'] == 'On') {
+            $html .= '<li class="dropdown">';
+        } else {
+            $html .= '<li class="dropdown action">';
+        }
+
+        if (!empty($value['active']) && $value['active'] == 'On') {
+            $html .= '    <a title="' . $value['name'] . '">' . $value['name'];
+        } else {
+            $html .= '    <a title="' . $value['name'] . '" href="' . Url::to($value['url']) . '">' . $value['name'];
+        }
 
         if (!empty($value['child'])) {
             $html .= '<span class="caret"></span>';
@@ -57,9 +66,9 @@ function recursionHtmlMenu($data)
 
             <?php if (!empty($value['name'])): ?>
 
-                <li class='dropdown' title='<?= $value['name'] ?>'>
+                <li class='<?php if (!empty($value['child'])): ?>dropdown<?php endif; ?> <?php if (!empty($value['open']) && $value['open'] == 'On'): ?>action<?php endif; ?>' title='<?= $value['name'] ?>'>
 
-                    <a title='<?= $value['name'] ?>' href='<?= Url::to($value['url']) ?>' class='dropdown-toggle' data-toggle='dropdown'>
+                    <a title='<?= $value['name'] ?>' href='<?= Url::to([$value['url']]) ?>'>
 
                         <?= $value['name'] ?>
 

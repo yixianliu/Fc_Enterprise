@@ -18,6 +18,14 @@ class MenuList extends InputWidget
 
     public $config = array();
 
+    // 当前选项
+    static public $activeId = null;
+
+    // 当前选项的一级分类
+    static public $openId = null;
+
+    static public $Admin_Parent = 'E1';
+
     public function init()
     {
         return;
@@ -38,6 +46,21 @@ class MenuList extends InputWidget
 
         $result['menu'] = Menu::findMenuNav($pid, $language);
 
+        static::MenuFindActive($result['menu']);
+
+        static::MenuFindParent();
+
+        if (!empty(static::$openId)) {
+
+            foreach ($result['menu'] as $key => $value) {
+
+                if ($value['m_key'] == static::$openId)
+                    $result['menu'][ $key ]['open'] = 'On';
+
+            }
+
+        }
+
         $confData = Conf::findByData('On', $language);
 
         foreach ($confData as $key => $value) {
@@ -45,5 +68,60 @@ class MenuList extends InputWidget
         }
 
         return $result;
+    }
+
+    /**
+     * 查找当前选项的一级栏目
+     *
+     * @param null $parent_id
+     * @return Menu|null|void
+     */
+    public static function MenuFindParent($parent_id = null)
+    {
+
+        if (empty(static::$activeId))
+            return;
+
+        $parent_id = empty($parent_id) ? static::$activeId : $parent_id;
+
+        $result = Menu::findOne(['m_key' => $parent_id]);
+
+        if (empty($result))
+            return;
+
+        if ($result['parent_id'] == static::$Admin_Parent) {
+            static::$openId = $result['m_key'];
+        }
+
+        static::MenuFindParent($result['parent_id']);
+    }
+
+    /**
+     * 查找当前选项
+     *
+     * @param $array
+     */
+    public static function MenuFindActive($array)
+    {
+
+        if (empty($array) || !is_array($array))
+            return;
+
+        foreach ($array as $value) {
+
+            if (!empty($value['active']) && $value['active'] == 'On') {
+
+                // 返回父类ID,减少一层循环
+                static::$activeId = $value['parent_id'];
+                break;
+            }
+
+            if (!empty($value['child'])) {
+                static::MenuFindActive($value['child']);
+            }
+
+        }
+
+        return;
     }
 }

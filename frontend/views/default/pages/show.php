@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     });
 </script>
 
-<?= $this->render('../slide', ['PageId' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <div class="container content">
 

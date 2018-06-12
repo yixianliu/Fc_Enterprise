@@ -391,14 +391,23 @@ class Menu extends \yii\db\ActiveRecord
         if (empty($data))
             return;
 
+        $urlActive = '/' . Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
+
         // 子分类
         $child = static::findByAll($data['m_key'], $type);
 
         if (empty($child))
             return;
 
+        $id = Yii::$app->request->get('id', null);
+
         foreach ($child as $key => $value) {
+
             $child[ $key ]['url'] = static::setMenuModel($value);
+
+            if (!empty($child[ $key ]['url'][0]) && $urlActive == $child[ $key ]['url'][0] && $child[ $key ]['url']['id'] == $id)
+                $child[ $key ]['active'] = 'On';
+
             $child[ $key ]['child'] = static::recursionPagesMenu($value, $type);
         }
 

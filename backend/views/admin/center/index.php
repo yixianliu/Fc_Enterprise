@@ -11,6 +11,7 @@
 
 $this->title = '管理中心';
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 
 function quick_dev_insights_phpinfo()
@@ -78,7 +79,17 @@ $data = null;
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
                     <?php if (!empty($data)): ?>
+
                         <?= $data ?>
+
+                    <?php else: ?>
+
+                        <h1>欢迎使用企业网站后台!!</h1>
+
+                        <h3><?= Html::a('发布产品', Url::to(['admin/product/create'])) ?></h3>
+                        <h3><?= Html::a('发布新闻', Url::to(['admin/news/create'])) ?></h3>
+                        <h3><?= Html::a('发布采购', Url::to(['admin/purchase/create'])) ?></h3>
+
                     <?php endif; ?>
 
                 </div>
