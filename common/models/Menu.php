@@ -184,6 +184,10 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 产品分类模型
                 case 'product':
+
+                    if (Yii::$app->controller->id == 'product')
+                        $array['open'] = 'On';
+
                     $array['child'] = static::recursionProductMenu(null, ProductClassify::$parent_cly_id, $type);
                     break;
 

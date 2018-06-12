@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['PageId' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <!-- 左右框架 -->
 <div class="container content">
