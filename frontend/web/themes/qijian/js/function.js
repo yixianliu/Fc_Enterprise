@@ -32,6 +32,20 @@ function funs() {
 
     // 需要无限级菜单打开 , 只需要二级菜单隐藏
     $('.dropdown-menu').find('.dropdown').attr('class','dropdown-submenu');
+
+    // 导航菜单子类少于父类自动适配宽度
+    $('.dropdown .dropdown-menu').each(function(){
+        // 获取导航菜单子类宽度
+        var navWdith = $(this).parent('.dropdown').width();
+        // 获取导航菜单夫类宽度
+        var narpWdith = $(this).width();
+        // 如果子类宽度少于父类宽度,自动适配父类宽度
+        if( navWdith > narpWdith ) {
+            $(this).css('min-width',navWdith);
+        } else {
+            return true;
+        }
+    });
 }
 
 // 首页上下图片滚动
