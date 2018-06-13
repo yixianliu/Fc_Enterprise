@@ -59,8 +59,10 @@ return [
 
         'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName'  => true,
+            'showScriptName'  => false,
+            'suffix'          => '.html',
             'rules'           => [
+
                 // 默认
                 '' => 'center/index',
             ],
