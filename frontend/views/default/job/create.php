@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     .summary {display: none;}
 </style>
 
-<?= $this->render('_slide', ['pagekey' => 'job']); ?>
+<?= $this->render('../_slide'); ?>
 
-<?= $this->render('_nav'); ?>
+<?= $this->render('../_nav'); ?>
 
 <?= $this->render('_form', [
     'model' => $model,

@@ -70,12 +70,6 @@ $this->beginPage();
 
 </div>
 
-<script type="text/javascript">
-    $('.wraplist').children('li').children('ul').removeClass('dropdown-menu').addClass('sub-menu');
-    $('.active').parent().parent().addClass('open');
-    $('.active').children('a').addClass('active');
-</script>
-
 <?php $this->endBody(); ?>
 
 </body>

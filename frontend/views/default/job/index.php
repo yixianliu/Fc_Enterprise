@@ -18,15 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('_slide', ['pagekey' => 'job']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['id' => $id, 'm_key' => '', 'type' => '']); ?>
+    <?= $this->render('../_left'); ?>
 
     <div class="right">
 
-        <?= $this->render('_nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <div class="content_news_list">
 

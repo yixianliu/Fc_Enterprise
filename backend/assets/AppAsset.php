@@ -34,8 +34,6 @@ class AppAsset extends AssetBundle
         'themes/assets/plugins/viewport/viewportchecker.js',
         'themes/assets/plugins/icheck/icheck.min.js',
         'themes/assets/js/scripts.js',
-        'themes/assets/plugins/sparkline-chart/jquery.sparkline.min.js',
-        'themes/assets/js/chart-sparkline.js',
     ];
 
     // Js在顶部加载
