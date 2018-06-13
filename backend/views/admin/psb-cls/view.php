@@ -105,6 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

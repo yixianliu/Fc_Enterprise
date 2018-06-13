@@ -173,7 +173,7 @@ $this->title = '采购平台';
     </div>
 </div>
 
-<?= $this->render('../slide', ['pagekey' => 'purchase']); ?>
+<?= $this->render('../_slide'); ?>
 
 <!-- 数据 -->
 <div class='container-fluid pur-data'>

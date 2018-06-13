@@ -78,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'description:html',
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]) ?>
 
             </div>
