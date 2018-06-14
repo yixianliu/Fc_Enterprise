@@ -36,9 +36,22 @@ switch (Yii::$app->controller->id) {
 
     // 招聘
     case 'job':
-
         $classifyName = '招聘中心';
+        break;
 
+    // 产品中心
+    case 'product':
+        $classifyName = '产品中心';
+        break;
+
+    // 公司地图
+    case 'map':
+        $classifyName = '公司地图';
+        break;
+
+    // 在线留言
+    case 'comment':
+        $classifyName = '在线留言';
         break;
 
     // 单页面
@@ -89,9 +102,13 @@ switch (Yii::$app->controller->id) {
         break;
 }
 
-// 侧边栏内容
+// 侧边栏的官方内容
 $result['Conf'] = \frontend\controllers\BaseController::leftConf();
 
+function menuHandel()
+{
+
+}
 ?>
 
 <div class="left">

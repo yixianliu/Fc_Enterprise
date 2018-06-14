@@ -10,6 +10,7 @@ use yii\widgets\ListView;
 
 $this->title = '招聘中心';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <style type="text/css">

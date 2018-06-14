@@ -56,7 +56,6 @@ class MenuList extends InputWidget
 
                 if ($value['m_key'] == static::$openId)
                     $result['menu'][ $key ]['open'] = 'On';
-
             }
 
         }

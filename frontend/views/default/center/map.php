@@ -6,11 +6,12 @@
  * Time: 10:11
  */
 
-$this->title = '网站地图';
+$this->title = '公司地图';
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => 'comment']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 

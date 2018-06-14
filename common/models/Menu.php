@@ -179,6 +179,10 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 招聘
                 case 'job':
+
+                    if (Yii::$app->controller->id == 'product')
+                        $array['open'] = 'On';
+
                     $array['child'] = static::recursionJobMenu($value, $type);
                     break;
 
@@ -225,6 +229,12 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 自定义
                 case 'pages':
+
+                    if (!empty($array['url'])) {
+                        $array['url'] = static::setMenuModel($value);
+                    }
+
+                    $array['url'] = static::setMenuModel($value);
                     $array['child'] = static::recursionPagesMenu($value, $type);
                     break;
 
@@ -233,9 +243,6 @@ class Menu extends \yii\db\ActiveRecord
                     $array['child'] = static::recursionUrlMenu($value, $value['parent_id'], $type);
                     break;
             }
-
-            if (empty($array))
-                continue;
 
             $dataMenu[] = $array;
         }
@@ -340,6 +347,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function recursionJobMenu($data, $type = null)
     {
+
         if (empty($data) || empty($data['m_key']))
             return;
 
@@ -409,7 +417,7 @@ class Menu extends \yii\db\ActiveRecord
 
             $child[ $key ]['url'] = static::setMenuModel($value);
 
-            if (!empty($child[ $key ]['url'][0]) && $urlActive == $child[ $key ]['url'][0] && $child[ $key ]['url']['id'] == $id)
+            if (!empty($child[ $key ]['url'][0]) && $urlActive == $child[ $key ]['url'][0] && !empty($child[ $key ]['url']['id']) && $child[ $key ]['url']['id'] == $id)
                 $child[ $key ]['active'] = 'On';
 
             $child[ $key ]['child'] = static::recursionPagesMenu($value, $type);
@@ -474,13 +482,21 @@ class Menu extends \yii\db\ActiveRecord
 
             // 采购页面
             case 'purchase':
-//                $urls = [$data['url']];
                 $urls = ['/purchase/' . $data['is_type']];
                 break;
 
             // 自定义页面
             case 'pages':
-                $urls = empty($data['url']) ? ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']] : $data['url'];
+
+                // 输出调整路径
+                if (strpos($data['url'], ',') !== false) {
+                    $urlData = explode(',', $data['url']);
+                    $urls = [$urlData[0], 'id' => $urlData[1]];
+                    break;
+                }
+
+                $urls = empty($data['url']) ? ['/pages/' . $data['is_type'], 'id' => $data['pages']['page_id']] : [$data['url']];
+
                 break;
 
             // 在线留言
@@ -495,7 +511,7 @@ class Menu extends \yii\db\ActiveRecord
 
             // 招聘
             case 'job':
-                $urls = '/job/' . $data['is_type'];
+                $urls = ['/job/' . $data['is_type']];
                 break;
 
             // 超链接

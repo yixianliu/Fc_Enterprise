@@ -56,7 +56,8 @@ class Job extends \yii\db\ActiveRecord
             [['job_id', 'title'], 'unique'],
 
             // 审核
-            [['is_audit', ], 'default', 'value' => 'Off'],
+            [['is_audit', ], 'default', 'value' => 'On'],
+            [['images', ], 'default', 'value' => null],
         ];
     }
 final
@@ -66,7 +67,7 @@ final
     public function attributeLabels()
     {
         return [
-            'job_id'     => '招聘 ID',
+            'job_id'     => '招聘编号',
             'user_id'    => '发布者 ID',
             'title'      => '招聘标题',
             'content'    => '招聘内容',

@@ -161,7 +161,7 @@ class MenuController extends BaseController
 
             $data = Menu::findByOne($dataPost['Menu']['url']);
 
-            $model->url = $data['menuModel']['url_key'] . '/' . $data['is_type'] . '?id=' . $data['pages']['page_id'];
+            $model->url = $data['menuModel']['url_key'] . '/' . $data['is_type'] . ',' . $data['pages']['page_id'];
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->m_key]);

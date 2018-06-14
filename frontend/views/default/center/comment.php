@@ -10,11 +10,12 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = '网站留言';
+$this->title = '在线留言';
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => 'comment']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 

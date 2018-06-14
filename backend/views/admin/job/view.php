@@ -10,6 +10,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '招聘中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
 

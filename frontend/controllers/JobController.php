@@ -63,19 +63,7 @@ class JobController extends BaseController
             ],
         ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * 列表
-     *
-     * @return string
-     */
-    public function actionList()
-    {
-        return $this->render('list');
+        return $this->render('index', ['dataProvider' => $dataProvider,]);
     }
 
     /**
