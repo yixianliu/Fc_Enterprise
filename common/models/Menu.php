@@ -224,6 +224,10 @@ class Menu extends \yii\db\ActiveRecord
 
                 // 新闻模型
                 case 'news':
+
+                    if (Yii::$app->controller->id == 'news')
+                        $array['open'] = 'On';
+
                     $array['child'] = static::recursionNewsMenu(null, NewsClassify::$parent_cly_id, $type);
                     break;
 

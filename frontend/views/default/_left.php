@@ -68,7 +68,19 @@ switch (Yii::$app->controller->id) {
         if (empty($data))
             break;
 
-        $classify = Menu::findByAll($currentPagesData['menu']['parent_id'], Yii::$app->session['language']);
+        // 为一级目录
+        if ($currentPagesData['menu']['parent_id'] == Menu::$frontend_parent_id) {
+
+            $classifyName = $currentPagesData['menu']['name'];
+
+            $classify = Menu::findByAll($currentPagesData['menu']['m_key'], Yii::$app->session['language']);
+
+        } else {
+
+            $classify = Menu::findByAll($currentPagesData['menu']['parent_id'], Yii::$app->session['language']);
+
+            $classifyName = $parentMenuData['name'];
+        }
 
         foreach ($classify as $key => $value) {
 
@@ -79,8 +91,6 @@ switch (Yii::$app->controller->id) {
 
             $classify[ $key ]['url'] = Url::to(['/pages/' . $value['is_type'], 'id' => $value['pages']['page_id']]);
         }
-
-        $classifyName = $parentMenuData['name'];
 
         break;
 
@@ -109,6 +119,7 @@ function menuHandel()
 {
 
 }
+
 ?>
 
 <div class="left">
@@ -146,10 +157,10 @@ function menuHandel()
         <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
 
         <ul class="contact_us">
-            <li><a><?= Yii::t('app','company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
-            <li><a><?= Yii::t('app','contacts') ?> ：<?= $result['Conf']['PERSON'] ?></a></li>
-            <li><a><?= Yii::t('app','phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
-            <li><a><?= Yii::t('app','address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
+            <li><a><?= Yii::t('app', 'company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
+            <li><a><?= Yii::t('app', 'contacts') ?> ：<?= $result['Conf']['PERSON'] ?></a></li>
+            <li><a><?= Yii::t('app', 'phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
+            <li><a><?= Yii::t('app', 'address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
         </ul>
 
     </div>
