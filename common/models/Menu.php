@@ -180,7 +180,7 @@ class Menu extends \yii\db\ActiveRecord
                 // 招聘
                 case 'job':
 
-                    if (Yii::$app->controller->id == 'product')
+                    if (Yii::$app->controller->id == 'job')
                         $array['open'] = 'On';
 
                     $array['child'] = static::recursionJobMenu($value, $type);
@@ -234,16 +234,24 @@ class Menu extends \yii\db\ActiveRecord
                 // 自定义
                 case 'pages':
 
-                    if (!empty($array['url'])) {
-                        $array['url'] = static::setMenuModel($value);
-                    }
+                    $id = Yii::$app->request->get('id', null);
 
                     $array['url'] = static::setMenuModel($value);
+
+                    if (!empty($array['url']['id']) && $array['url']['id'] == $id)
+                        $array['open'] = 'On';
+
                     $array['child'] = static::recursionPagesMenu($value, $type);
                     break;
 
                 // 超链接
                 case 'urls':
+
+                    $urlActive = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
+
+                    if (!empty($array['url']) && $array['url'] == $urlActive)
+                        $array['open'] = 'On';
+
                     $array['child'] = static::recursionUrlMenu($value, $value['parent_id'], $type);
                     break;
             }
