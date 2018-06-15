@@ -44,6 +44,19 @@ switch (Yii::$app->controller->id) {
         $classifyName = '产品中心';
         break;
 
+    // 下载中心
+    case 'download':
+
+        $classifyName = '下载中心';
+
+        $classify = \common\models\DownloadCls::findByAll();
+
+        foreach ($classify as $key => $value) {
+            $classify[ $key ]['url'] = Url::to(['/download/index', 'id' => $value['c_key']]);
+        }
+
+        break;
+
     // 公司地图
     case 'map':
         $classifyName = '公司地图';

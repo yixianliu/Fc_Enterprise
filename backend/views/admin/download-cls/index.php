@@ -9,10 +9,9 @@ use yii\grid\GridView;
 $this->title = '下载分类';
 $this->params['breadcrumbs'][] = $this->title;
 
-if (!empty($dataProvider)) {
+$result = null;
 
-    // 初始化
-    $result = null;
+if (!empty($dataProvider)) {
 
     foreach ($dataProvider as $value) {
 
@@ -59,9 +58,9 @@ function recursionCls($data)
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -72,9 +71,17 @@ function recursionCls($data)
 
                 <hr/>
 
-                <ul class="uk-nestable" style="font-size: 13px;">
-                    <?= $result ?>
-                </ul>
+                <?php if (!empty($result)): ?>
+
+                    <ul class="uk-nestable" style="font-size: 13px;">
+                        <?= $result ?>
+                    </ul>
+
+                <?php else: ?>
+
+                    <h3>暂无任何分类 !!</h3>
+
+                <?php endif; ?>
 
             </div>
         </div>

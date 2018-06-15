@@ -33,9 +33,20 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '文件', 'form' => $form, 'attribute' => 'path', 'type' => 'download', 'id' => $model->id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件', 'form' => $form, 'attribute' => 'path', 'id' => $model->id]); ?>
 
-                    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                    <?=
+                    $form->field($model, 'content')
+                        ->widget('kucha\ueditor\UEditor', [
+                            'clientOptions' => [
+                                //设置语言
+                                'lang'               => 'zh-cn',
+                                'initialFrameHeight' => '600',
+                                'elementPathEnabled' => false,
+                                'wordCount'          => false,
+                            ]
+                        ]);
+                    ?>
 
                     <?=
                     $form->field($model, 'is_using')->widget(Select2::classname(), [

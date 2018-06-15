@@ -4,8 +4,7 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\MenuModel;
-use common\models\MenuModelSearch;
-use yii\web\Controller;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -13,7 +12,7 @@ use yii\filters\AccessControl;
 /**
  * MenuModelController implements the CRUD actions for MenuModel model.
  */
-class MenuModelController extends Controller
+class MenuModelController extends BaseController
 {
     /**
      * @inheritdoc
@@ -47,11 +46,15 @@ class MenuModelController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MenuModelSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider = new ActiveDataProvider([
+            'query'      => MenuModel::find(),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

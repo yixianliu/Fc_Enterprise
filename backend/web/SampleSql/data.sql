@@ -124,7 +124,8 @@ VALUES
 (NULL, 'US1', 7, 'supply', '供应中心', 'On', '#TIME#', '#TIME#'),
 (NULL, 'UB1', 8, 'bid', '投标中心', 'On', '#TIME#', '#TIME#'),
 (NULL, 'UM1', 9, 'maps', '地图页面', 'On', '#TIME#', '#TIME#'),
-(NULL, 'UC2', 10, 'comment', '留言页面', 'On', '#TIME#', '#TIME#');
+(NULL, 'UC2', 10, 'comment', '留言页面', 'On', '#TIME#', '#TIME#'),
+(NULL, 'UD2', 11, 'download', '下载中心', 'On', '#TIME#', '#TIME#');
 
 /**
  * 菜单

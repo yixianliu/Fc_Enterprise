@@ -23,7 +23,7 @@ use yii\behaviors\TimestampBehavior;
 class DownloadCls extends \yii\db\ActiveRecord
 {
 
-    static public $parent_id = 'C0';
+    static public $parent_cly_id = 'C0';
 
     /**
      * @inheritdoc
@@ -87,7 +87,7 @@ class DownloadCls extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id : $parent_id;
 
         return static::find()->where(['is_using' => 'On', 'parent_id' => $parent_id])
             ->orderBy('sort_id', SORT_DESC)
@@ -98,17 +98,17 @@ class DownloadCls extends \yii\db\ActiveRecord
     /**
      * 获取分类( 针对选项框)
      *
+     * @param string $one
      * @return array
      */
-    public static function getClsSelect()
+    public static function getClsSelect($one = 'On')
     {
-        // 产品分类
-        $dataClassify = static::findByAll(static::$parent_id);
 
         // 产品分类
-        $Cls = new DownloadCls();
+        $dataClassify = static::findByAll(static::$parent_cly_id);
 
-        $result[ static::$parent_id ] = '顶级分类 !!';
+        if ($one == 'On')
+            $result[ static::$parent_cly_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
@@ -196,6 +196,7 @@ class DownloadCls extends \yii\db\ActiveRecord
      */
     static public function recursionCls($data)
     {
+
         if (empty($data))
             return;
 

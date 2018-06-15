@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Job */

@@ -177,12 +177,23 @@ class Menu extends \yii\db\ActiveRecord
 
             switch ($value['menuModel']['url_key']) {
 
+                // 下载中心
+                case 'download':
+
+                    if (Yii::$app->controller->id == 'job')
+                        $array['open'] = 'On';
+
+                    $array['url'] = ['/download/index'];
+                    $array['child'] = static::recursionJobMenu($value, $type);
+                    break;
+
                 // 招聘
                 case 'job':
 
                     if (Yii::$app->controller->id == 'job')
                         $array['open'] = 'On';
 
+                    $array['url'] = ['/job/index'];
                     $array['child'] = static::recursionJobMenu($value, $type);
                     break;
 

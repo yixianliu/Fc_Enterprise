@@ -85,7 +85,7 @@ class DownloadController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'classify' => DownloadCls::getClsSelect(),
+                'classify' => DownloadCls::getClsSelect('Off'),
             ]
         ]);
     }
@@ -108,7 +108,7 @@ class DownloadController extends BaseController
         return $this->render('update', [
             'model'  => $model,
             'result' => [
-                'classify' => DownloadCls::getClsSelect(),
+                'classify' => DownloadCls::getClsSelect('Off'),
             ]
         ]);
     }

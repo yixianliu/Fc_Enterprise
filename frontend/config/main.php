@@ -18,15 +18,24 @@ return [
 
         // 视图文件
         'view' => [
+
             'theme' => [
-                'basePath' => '@app/frontend/views',
+                'basePath' => '@app/frontend/web/themes',
                 'baseUrl'  => '@web/frontend/views/themes',
                 'pathMap'  => [
+
                     '@app/views' => [
-                        '@app/views/default'
+
+                        // 默认
+                        '@app/views/default',
+
+                        // red
+                        '@app/views/red',
                     ],
+
                 ],
             ],
+
         ],
 
         'request' => [
@@ -53,6 +62,7 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

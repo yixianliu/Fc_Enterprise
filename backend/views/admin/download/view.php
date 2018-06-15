@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
 
                 <p>
-                    <?= Html::a('Update', ['更新', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('Delete', ['删除', 'id' => $model->id], [
+                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => '确定是否删除这条记录?',
@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
-                <?= DetailView::widget([
+                <?=
+                DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
                         'title',
@@ -67,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/download/' . $value . '" /><br /><br />';
+                                    $data .= Yii::getAlias('@web') . '/temp/download/' . $value . '<br /><br />';
                                 }
 
                                 return $data;

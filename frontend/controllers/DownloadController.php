@@ -1,38 +1,26 @@
 <?php
 
-namespace backend\controllers\admin;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\DownloadCls;
+use common\models\Download;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * DownloadClsController implements the CRUD actions for DownloadCls model.
+ * DownloadController implements the CRUD actions for Download model.
  */
-class DownloadClsController extends BaseController
+class DownloadController extends BaseController
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
-
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -41,57 +29,74 @@ class DownloadClsController extends BaseController
     }
 
     /**
-     * Lists all DownloadCls models.
+     * Lists all Download models.
      * @return mixed
      */
     public function actionIndex()
     {
 
-        $dataProvider = DownloadCls::getCls();
+        $dataProvider = new ActiveDataProvider([
+            'query' => Download::find(),
+        ]);
 
-        return $this->render('index', ['dataProvider' => $dataProvider,]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
-     * Displays a single DownloadCls model.
+     * Displays a single Download model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+
+        $model = $this->findModel($id);
+
+        if (!empty($model->path)) {
+
+            $array = array();
+
+            $pathData = explode(',', $model->path);
+
+            foreach ($pathData as $value) {
+
+                if (empty($value))
+                    continue;
+
+                $array[] = $value;
+            }
+
+            $model->path = $array;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
     /**
-     * Creates a new DownloadCls model.
+     * Creates a new Download model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DownloadCls();
-
-        $model->c_key = self::getRandomString();
-
-        $model->parent_id = Yii::$app->request->get('id', 'C0');
+        $model = new Download();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model'  => $model,
-            'result' => [
-                'classify' => $model->getClsSelect(),
-            ]
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing DownloadCls model.
+     * Updates an existing Download model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +111,12 @@ class DownloadClsController extends BaseController
         }
 
         return $this->render('update', [
-            'model'  => $model,
-            'result' => [
-                'classify' => $model->getClsSelect(),
-            ]
+            'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing DownloadCls model.
+     * Deletes an existing Download model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,22 +124,21 @@ class DownloadClsController extends BaseController
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the DownloadCls model based on its primary key value.
+     * Finds the Download model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DownloadCls the loaded model
+     * @return Download the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DownloadCls::findOne($id)) !== null) {
+        if (($model = Download::findOne($id)) !== null) {
             return $model;
         }
 
