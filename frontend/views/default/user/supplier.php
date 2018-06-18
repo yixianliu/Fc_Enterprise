@@ -9,7 +9,6 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dosamigos\fileupload\FileUploadUI;
 
 $this->title = '企业用户资料';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,9 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="col_full userdata-cont">
 
-        <div class="cont-title">
-            <span><?= $this->title ?></span>
-        </div>
+        <div class="cont-title"><span><?= $this->title ?></span></div>
 
         <div class="row">
             <div class="col-xs-12" style="font-size: 12px;margin: 0;padding: 20px 0px;">
@@ -62,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
 
-                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'type' => 'user_supply', 'id' => $model->user_id, 'num' => 5]); ?>
+                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->user_id]); ?>
 
                 <div class="form-group" style="margin-left: 0px;margin-right: 0px;">
                     <div class="col-sm-12">

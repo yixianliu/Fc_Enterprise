@@ -57,9 +57,9 @@ class UserSupply extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name'       => 'Name',
-            'content'    => 'Content',
-            'path'       => 'Path',
+            'name'       => '名称',
+            'content'    => '内容',
+            'path'       => '路径',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

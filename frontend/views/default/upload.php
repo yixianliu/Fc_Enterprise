@@ -15,11 +15,12 @@ $attribute = empty($attribute) ? 'path' : $attribute;
 $id = empty($id) ? 1 : $id;
 
 // 上传类型
-$uploadType = empty(Yii::$app->controller->id) ? 'image' : Yii::$app->controller->id;
+$uploadType = empty($uploadType) ? 'image' : $uploadType;
 
 // 数量
 $num = empty($num) ? 5 : $num;
 
+// 初始化
 $images = array();
 
 // 取出图片
@@ -36,6 +37,8 @@ if (!empty($model->$attribute)) {
     }
 }
 
+$text = empty($text) ? '没有描述' : $text;
+
 ?>
 
 <style type="text/css">
@@ -47,7 +50,7 @@ if (!empty($model->$attribute)) {
 
 <hr/>
 
-<div class="form-group">
+<div class="form-group" title="">
 
     <?= $form->field($model, $attribute)->textInput(['style' => 'display:none;']) ?>
 
@@ -96,6 +99,7 @@ if (!empty($model->$attribute)) {
                       
                                 return true;
                             }',
+
             'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
@@ -114,45 +118,34 @@ if (!empty($model->$attribute)) {
 
     <?php if (!empty($images) && is_array($images)): ?>
 
-        <div class="col-md-12 col-sm-12 col-xs-12 ">
-
+        <div class="row">
             <?php foreach ($images as $value): ?>
-                <div class="col-md-4 col-sm-6 col-xs-12">
 
-                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer' && Yii::$app->controller->id != 'user_supply'): ?>
+                <div class="col-md-12">
 
-                        <?= Html::img(Url::to('@web/temp/') . Yii::$app->controller->id . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
 
-                    <?php elseif (Yii::$app->controller->id == 'user_supply'): ?>
-
-                        <?= Html::img(Url::to('@web/temp/') . $id . '/' . Yii::$app->controller->id . '/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . $model->user_id . '/' . $model->user_id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php else: ?>
 
-                        <?= Html::img(Url::to('@web/themes/not.jpg'), ['class' => 'img-responsive', 'width' => 280, 'height' => 200]); ?>
+                        <?= Html::img(Url::to('@web/themes/not.jpg'), ['width' => 350, 'height' => 150]); ?>
 
                     <?php endif; ?>
 
-                    <div class="portfolio-info">
-
-                        <h5 class="deleteH5" style="word-wrap: break-word;"><?= $value ?></h5><br/>
+                    <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 
                         <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
-
-                            <button class="btn btn-danger delete" data-type="GET" data-url="<?= Url::to(['admin/upload/image-delete', 'name' => $value, 'type' => Yii::$app->controller->id]); ?>">
-                                <i class="glyphicon glyphicon-trash"></i>
-                                <span>删除</span>
-                            </button>
-
+                            <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
+                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
+                            </a>
                         <?php endif; ?>
 
                     </div>
-
-                    <hr/>
 
                 </div>
 
@@ -162,28 +155,43 @@ if (!empty($model->$attribute)) {
 
         <script type="text/javascript">
 
-            $('.portfolio-info').on('click', function () {
+            $('.DeleteImg').on('click', function () {
 
-                var h5 = $(this).find('.deleteH5').text();
+                var DeleteImgText = $(this).find('.DeleteImgHidden').val();
 
                 // 获取 ID
-                var ImageId = $('#ImagesContent');
+                var ImageId = $('#ImagesContent_<?= $attribute ?>');
 
-                var imgArray = ImageId.html().split(',');
+                var imgArray = ImageId.val().split(',');
 
                 // 重新处理
                 var NewImageContent = '';
 
                 for (var i = 0; i < imgArray.length; i++) {
-                    if (imgArray[i] == h5 || imgArray[i] == '') {
+                    if (imgArray[i] == DeleteImgText || imgArray[i] == '') {
                         continue;
                     }
                     NewImageContent += imgArray[i] + ',';
                 }
 
-                ImageId.empty().html(NewImageContent);
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
+                    success: function (data) {
 
-                $(this).parent('div').hide();
+                    },
+                    error: function (XMLHttpRequest, textStatus) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                        return false;
+                    }
+                });
+
+                ImageId.empty().attr('value', NewImageContent);
+
+                $(this).parent('div').parent('div').hide();
 
                 return true;
             });
@@ -192,7 +200,9 @@ if (!empty($model->$attribute)) {
 
     <?php else: ?>
 
-        <h3>暂无相关内容 !!</h3>
+        <div class="col-sm-12">
+            <h3>暂无相关内容 !!</h3>
+        </div>
 
     <?php endif ?>
 

@@ -144,8 +144,10 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
                                 <p class="right-tar">
                                     <span class="right-color">提交价格 : </span><?= $form->field($modelOffer, 'price')->textInput()->label(false) ?>
                                 </p>
-                                <p><?= $this->render('../upload', ['model' => $model, 'text' => '提供相关图片', 'form' => $form, 'attribute' => 'path', 'id' => 1]); ?></p>
+
                                 <p><?= $form->field($modelOffer, 'content')->textarea(['rows' => 6]); ?></p>
+
+                                <p><?= $this->render('../upload', ['model' => $modelOffer, 'text' => '提供相关图片', 'form' => $form, 'attribute' => 'path', 'id' => 1]); ?></p>
 
                                 <p><?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?></p>
 

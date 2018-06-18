@@ -91,7 +91,7 @@ class UploadController extends BaseController
                 break;
 
             // 商户资料
-            case 'user_supply':
+            case 'user':
                 $model = new UserSupply();
                 break;
 
@@ -120,7 +120,7 @@ class UploadController extends BaseController
         }
 
         // 上传路径
-        $directory = Yii::getAlias('@frontend/web/temp/') . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
+        $directory = Yii::getAlias('@frontend/web/temp/') . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
 
         if (!is_dir($directory)) {
             FileHelper::createDirectory($directory);
@@ -130,8 +130,6 @@ class UploadController extends BaseController
             return Json::encode(['status' => false, 'message' => '上传文件异常 !!']);
         }
 
-
-
         $uid = time() . '_' . $type . '_' . rand(10000, 99999);
         $fileName = $uid . '.' . $imageFile->extension;
         $filePath = $directory . $fileName;
@@ -139,7 +137,7 @@ class UploadController extends BaseController
         if ($imageFile->saveAs($filePath)) {
 
 //            $path = $directory . $fileName;
-            $path = Yii::getAlias('@web') . '/temp/' . DIRECTORY_SEPARATOR . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $fileName;
+            $path = Yii::getAlias('@web') . '/temp/' . DIRECTORY_SEPARATOR . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $fileName;
 
             return Json::encode([
                 'files' => [
