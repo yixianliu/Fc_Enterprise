@@ -671,11 +671,9 @@ a:active {
 }
 
 .content .left .cat_list div {
-    padding-top: 10px;
-    background-color: #232323;
     margin-bottom: 10px;
-    height: 40px;
-    padding-left: 30px;
+    padding: 10px 0 10px 30px;
+    background-color: #232323;
 }
 
 .content .left .cat_list a {
