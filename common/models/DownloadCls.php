@@ -107,6 +107,9 @@ class DownloadCls extends \yii\db\ActiveRecord
         // 产品分类
         $dataClassify = static::findByAll(static::$parent_cly_id);
 
+        // 初始化
+        $result = array();
+
         if ($one == 'On')
             $result[ static::$parent_cly_id ] = '顶级分类 !!';
 
