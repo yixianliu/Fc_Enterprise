@@ -2,14 +2,14 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Role;
-use common\models\Job;
-use common\models\Management;
-use common\models\Purchase;
-use common\models\UserSupply;
+
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use common\models\Role;
+use common\models\Job;
+use common\models\Purchase;
+use common\models\UserSupply;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -110,9 +110,7 @@ class UserController extends BaseController
 
         $model->user_id = time() . '_' . rand(0000, 9999);
 
-        $data = Yii::$app->request->post();
-
-        if ($model->load($data) && $model->userReg()) {
+        if ($model->load(Yii::$app->request->post()) && $model->userReg()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
@@ -144,13 +142,11 @@ class UserController extends BaseController
 
         $model->scenario = 'backend';
 
-        $data = Yii::$app->request->post();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
 
-            $model->password = null;
+        } else {
 
             return $this->render('update', [
                 'model'  => $model,
@@ -158,6 +154,7 @@ class UserController extends BaseController
                     'role' => $this->getRole()
                 ],
             ]);
+
         }
     }
 
@@ -169,6 +166,7 @@ class UserController extends BaseController
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

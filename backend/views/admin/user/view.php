@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'is_head',
                             'value'     => function ($model) {
                                 $state = [
-                                    'On'  => '开启',
+                                    'On'  => '已开启',
                                     'Off' => '未启用',
                                 ];
 
@@ -83,10 +83,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         [
+                            'attribute' => 'is_auth',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已开启',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_auth ];
+                            },
+                        ],
+                        [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
-                                    'On'  => '开启',
+                                    'On'  => '已开启',
                                     'Off' => '未启用',
                                     'Not' => '未查看',
                                 ];
@@ -107,6 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

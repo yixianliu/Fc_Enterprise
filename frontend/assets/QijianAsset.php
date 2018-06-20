@@ -18,6 +18,7 @@ use yii\web\AssetBundle;
  */
 class QijianAsset extends AssetBundle
 {
+
     public $basePath = '@webroot';
     public $baseUrl = '@web';
 
@@ -45,4 +46,5 @@ class QijianAsset extends AssetBundle
 //        'yii\web\YiiAsset',
 //        'yii\bootstrap\BootstrapAsset',
     ];
+
 }

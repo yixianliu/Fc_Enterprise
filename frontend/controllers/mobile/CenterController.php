@@ -11,6 +11,7 @@
 
 namespace frontend\controllers\mobile;
 
+use common\models\Product;
 use Yii;
 use common\models\News;
 use yii\data\ActiveDataProvider;
@@ -38,9 +39,17 @@ class CenterController extends BaseController
             ],
         ];
     }
-    
+
     public function actionIndex()
     {
 
+        // 初始化
+        $result = array();
+
+        $result['product'] = Product::findByAll();
+
+        $result['news'] = News::findByAll();
+
+        return $this->render('index', ['result' => $result]);
     }
 }

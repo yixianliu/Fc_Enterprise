@@ -60,14 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->created_at);
                             },
-                            'options'   => ['width' => 180]
+                            'options'   => ['width' => 180],
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
-                            'options'   => ['width' => 180]
+                            'options'   => ['width' => 180],
                         ],
                         [
                             'class'   => 'yii\grid\ActionColumn',

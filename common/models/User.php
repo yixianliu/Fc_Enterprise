@@ -95,6 +95,8 @@ class User extends ActiveRecord implements IdentityInterface
 
             // 注册
             [['username', 'is_type', 'password', 'repassword'], 'required', 'on' => 'reg'],
+            [['username'], 'unique', 'on' => 'reg'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg']],
 
             // 资料修改
             [['nickname', 'sex'], 'required', 'on' => 'info'],
@@ -105,16 +107,16 @@ class User extends ActiveRecord implements IdentityInterface
             // 修改密码
             [['password', 'newpassword', 'repassword'], 'required', 'on' => 'setpsw'],
             ['repassword', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'setpsw'],
+            ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
 
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim'],
             [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'message' => '{attribute}必须为1开头的11位纯数字'],
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!'],
-            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg', 'backend']],
             ['rememberMe', 'boolean',],
-            ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
-            [['username'], 'unique', 'on' => 'reg'],
+
+            [['is_using', 'is_auth'], 'string', 'max' => 55],
 
             // 默认
             [['signature'], 'default', 'value' => null],
@@ -131,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'repassword'],
+            'backend' => ['username', 'r_key', 'sex', 'nickname', 'user_id', 'is_using', 'is_auth'],
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
             'setpsw'  => ['password', 'newpassword', 'repassword'],

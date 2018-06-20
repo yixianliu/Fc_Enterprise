@@ -53,7 +53,7 @@ return [
             'name' => 'advanced-frontend',
         ],
 
-        'log'          => [
+        'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
@@ -74,7 +74,9 @@ return [
             'rules'           => [
 
                 // 默认
-                '' => 'center/index',
+                ''       => 'center/index',
+                'mobile' => 'mobile/center/index',
+
             ],
         ],
 

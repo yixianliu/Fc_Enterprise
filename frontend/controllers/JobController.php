@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Resume;
 use Yii;
 use common\models\Job;
 use common\models\JobSearch;
@@ -28,12 +29,12 @@ class JobController extends BaseController
                 'rules' => [
                     [
                         'actions' => ['create', 'update', 'delete',],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                     [
                         'actions' => ['index', 'view', 'list'],
-                        'allow' => true,
+                        'allow'   => true,
                     ],
                 ],
             ],
@@ -76,11 +77,25 @@ class JobController extends BaseController
 
         $model = Job::findOne(['job_id' => $id, 'is_audit' => 'On']);
 
+        $modelResume = new Resume();
+
+        $modelResume->user_id = Yii::$app->user->identity->user_id;
+
+        if ($modelResume->load(Yii::$app->request->post())) {
+
+            if ($modelResume->save()) {
+                return $this->redirect(['index']);
+            }
+
+            Yii::$app->getSession()->setFlash('error', '投递简历失败 !!');
+        }
+
         if (empty($model))
             return $this->redirect(['index']);
 
         return $this->render('view', [
-            'model' => $model,
+            'model'       => $model,
+            'modelResume' => $modelResume,
         ]);
     }
 

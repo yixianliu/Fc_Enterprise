@@ -31,7 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 120]
+                        ],
                         'name',
                         [
                             'label'     => '类型',
@@ -44,20 +47,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->type ];
                             },
+                            'options'   => ['width' => 120]
                         ],
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->created_at);
                             },
+                            'options'   => ['width' => 180]
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
+                            'options'   => ['width' => 180]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
+                        ],
                     ],
                 ]);
                 ?>
