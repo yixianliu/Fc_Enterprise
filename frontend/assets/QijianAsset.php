@@ -20,6 +20,7 @@ class QijianAsset extends AssetBundle
 {
 
     public $basePath = '@webroot';
+
     public $baseUrl = '@web';
 
     // css
