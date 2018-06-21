@@ -41,10 +41,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'user_id',
-                            'options'   => ['width' => 120]
+                            'value'     => function ($model) {
+
+                                $modelCls = \common\models\User::findOne(['user_id' => $model->user_id]);
+
+                                return $modelCls->username;
+
+                            },
+                            'options'   => ['width' => 120],
                         ],
                         [
                             'attribute' => 'job_id',
+                            'value'     => function ($model) {
+
+                                $modelCls = \common\models\Job::findOne(['job_id' => $model->job_id]);
+
+                                return $modelCls->title;
+                            },
                         ],
                         [
                             'attribute' => 'is_using',

@@ -30,6 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'user_id',
+                            'value'     => function ($model) {
+
+                                $modelCls = \common\models\User::findOne(['user_id' => $model->user_id]);
+
+                                return $modelCls->username;
+
+                            },
                             'options'   => ['width' => 120],
                         ],
                         'title',

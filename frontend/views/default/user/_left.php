@@ -40,6 +40,7 @@ use common\widgets\iConf\ConfList;
         <div class="cat_list">
             <h3>普通用户</h3>
             <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
+            <p><a href="<?= Url::to(['job/update', 'id' => Yii::$app->user->identity->user_id]) ?>">我的简历</a></p>
         </div>
 
     <?php endif ?>

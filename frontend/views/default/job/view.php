@@ -44,28 +44,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
 
-                <?php if (Yii::$app->user->identity->is_using == 'On'): ?>
+                <?php if (Yii::$app->user->identity->is_using == 'On' && empty($result)): ?>
 
                     <div class="conY_text">
 
                         <?php $form = ActiveForm::begin(); ?>
 
-                        <?= $form->field($modelResume, 'title')->textInput(['maxlength' => true]) ?>
 
-                        <?=
-                        $form->field($modelResume, 'content')->widget('kucha\ueditor\UEditor', [
-                            'clientOptions' => [
-                                //设置语言
-                                'lang'               => 'zh-cn',
-                                'initialFrameHeight' => '600',
-                                'elementPathEnabled' => false,
-                                'wordCount'          => false,
-                            ]
-                        ]);
-                        ?>
+                        <?php if (empty($modelResume->title)): ?>
+
+                            <?= $form->field($modelResume, 'title')->textInput(['maxlength' => true]) ?>
+
+                            <?=
+                            $form->field($modelResume, 'content')->widget('kucha\ueditor\UEditor', [
+                                'clientOptions' => [
+                                    //设置语言
+                                    'lang'               => 'zh-cn',
+                                    'initialFrameHeight' => '600',
+                                    'elementPathEnabled' => false,
+                                    'wordCount'          => false,
+                                ]
+                            ]);
+                            ?>
+
+                        <?php endif; ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('应聘', ['class' => 'btn btn-primary']) ?>
+                            <?= Html::submitButton('应聘该职位', ['class' => 'btn btn-primary']) ?>
                         </div>
 
                         <?php ActiveForm::end(); ?>
@@ -73,6 +78,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                     <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
+                <?php elseif (!empty($result)): ?>
+
+                    <div class="conY_text">
+
+                        <h3>你已经提交过申请了 !!</h3>
+
+                    </div>
 
                 <?php else: ?>
 

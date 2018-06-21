@@ -80,14 +80,9 @@ class UploadController extends BaseController
 
         switch ($type) {
 
-            // 简历中心
-            case 'resume':
-                $model = new Resume();
-                break;
-
-            // 招聘中心
+            // 招聘中心 (前台的招聘中心对应的就是简历模型)
             case 'job':
-                $model = new Job();
+                $model = new Resume();
                 break;
 
             // 商户资料

@@ -34,6 +34,7 @@ class ProductController extends BaseController
      */
     public function actionIndex()
     {
+
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find(),
         ]);
@@ -41,6 +42,7 @@ class ProductController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+
     }
 
     /**

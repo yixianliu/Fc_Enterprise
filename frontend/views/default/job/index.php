@@ -39,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
 
         </div>
+
+        <div class="content_news_list">
+            <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+        </div>
+
     </div>
 
 </div>

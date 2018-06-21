@@ -48,7 +48,6 @@ class Resume extends \yii\db\ActiveRecord
             [['user_id'], 'string', 'max' => 85],
             [['title'], 'string', 'max' => 125],
             [['path'], 'string', 'max' => 500],
-            [['user_id'], 'unique'],
 
             [['is_using',], 'default', 'value' => 'On'],
         ];

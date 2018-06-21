@@ -124,8 +124,8 @@ class DownloadController extends BaseController
      */
     public function actionDelete($id)
     {
+        throw new NotFoundHttpException('The requested page does not exist.' . $id);
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

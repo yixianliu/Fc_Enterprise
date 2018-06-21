@@ -56,14 +56,15 @@ class Job extends \yii\db\ActiveRecord
             [['job_id', 'title'], 'unique'],
 
             // 审核
-            [['is_audit', ], 'default', 'value' => 'On'],
-            [['images', ], 'default', 'value' => null],
+            [['is_audit',], 'default', 'value' => 'On'],
+            [['images',], 'default', 'value' => null],
         ];
     }
-final
-    /**
-     * @inheritdoc
-     */
+
+    final
+        /**
+         * @inheritdoc
+         */
     public function attributeLabels()
     {
         return [

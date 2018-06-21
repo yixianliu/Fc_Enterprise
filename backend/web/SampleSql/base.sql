@@ -421,7 +421,7 @@ CREATE TABLE `#DB_PREFIX#Job_Apply_For` (
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `user_id` (`user_id`),
+    KEY `user_id` (`user_id`),
     UNIQUE `job_id` (`job_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -12,7 +12,7 @@ use dosamigos\fileupload\FileUploadUI;
 
 $attribute = empty($attribute) ? 'path' : $attribute;
 
-$id = empty($id) ? 1 : $id;
+$id = empty($id) ? $model->user_id : $id;
 
 // 上传类型
 $uploadType = empty($uploadType) ? 'image' : $uploadType;
@@ -125,7 +125,7 @@ $text = empty($text) ? '没有描述' : $text;
 
                     <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . $model->user_id . '/' . $model->user_id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . $model->user_id . '/' . $id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 

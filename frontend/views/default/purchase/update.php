@@ -17,12 +17,16 @@ $this->params['breadcrumbs'][] = '更新';
     }
 </style>
 
-<?= $this->render('../_slide', ['pagekey' => 'purchase']); ?>
+<?= $this->render('../_slide'); ?>
 
-<?= $this->render('../_nav'); ?>
+<div class="container content">
 
-<?= $this->render('_form', [
-    'model'  => $model,
-    'result' => $result,
-]) ?>
+    <?= $this->render('../_nav'); ?>
+
+    <?= $this->render('_form', [
+        'model'  => $model,
+        'result' => $result,
+    ]) ?>
+
+</div>
 

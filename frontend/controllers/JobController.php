@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use common\models\Resume;
 use Yii;
 use common\models\Job;
-use common\models\JobSearch;
+use common\models\JobApplyFor;
+use common\models\Resume;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -77,18 +77,58 @@ class JobController extends BaseController
 
         $model = Job::findOne(['job_id' => $id, 'is_audit' => 'On']);
 
-        $modelResume = new Resume();
+        // 判断该用户是否存在简历
+        $modelResume = !Yii::$app->user->isGuest ? Resume::findOne(['user_id' => Yii::$app->user->identity->user_id]) : null;
 
-        $modelResume->user_id = Yii::$app->user->identity->user_id;
+        if (empty($modelResume))
+            $modelResume = new Resume();
 
-        if ($modelResume->load(Yii::$app->request->post())) {
+        // User Id
+        $modelResume->user_id = !Yii::$app->user->isGuest ? Yii::$app->user->identity->user_id : null;
 
-            if ($modelResume->save()) {
+        if (Yii::$app->request->isPost) {
+
+            //创建事务
+            $tr = Yii::$app->db->beginTransaction();
+
+            // 没有简历的情况下,添加
+            if (empty($modelResume->title)) {
+
+                if ($modelResume->load(Yii::$app->request->post())) {
+
+                    if (!$modelResume->save()) {
+
+                        $tr->rollBack();
+
+                        Yii::$app->getSession()->setFlash('error', '已存在相关简历 !!');
+
+                        return $this->redirect(['view', 'id' => $model->job_id]);
+                    }
+
+                }
+            }
+
+            // 写进关联数据库 (Job)
+            $Cls = new JobApplyFor();
+
+            $Cls->job_id = $model->job_id;
+            $Cls->user_id = $modelResume->user_id;
+
+            // 写入关联数据库
+            if ($Cls->save()) {
+
+                $tr->commit();
+
+                Yii::$app->getSession()->setFlash('success', '投递简历成功 !!');
+
                 return $this->redirect(['index']);
             }
 
             Yii::$app->getSession()->setFlash('error', '投递简历失败 !!');
+
         }
+
+        $result = JobApplyFor::findByOne($modelResume->user_id, $model->job_id);
 
         if (empty($model))
             return $this->redirect(['index']);
@@ -96,6 +136,7 @@ class JobController extends BaseController
         return $this->render('view', [
             'model'       => $model,
             'modelResume' => $modelResume,
+            'result'      => $result,
         ]);
     }
 
@@ -112,41 +153,57 @@ class JobController extends BaseController
 
         $model->user_id = Yii::$app->user->identity->user_id;
 
-        $model->is_audit = 'Off';
-
         if (!empty($model->getErrors())) {
             Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+
+            return $this->redirect(['user/index']);
+
         } else {
+
             return $this->render('create', [
                 'model' => $model,
             ]);
+
         }
     }
 
     /**
-     * Updates an existing Job model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 更改简历
+     *
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = $this->findModel($id);
 
-        if ($model->user_id != Yii::$app->user->identity->user_id) {
-            return $this->redirect(['index']);
+        $id = Yii::$app->request->get('id', null);
+
+        $model = Resume::findOne(['user_id' => $id]);
+
+        if (empty($model)) {
+            return $this->redirect(['job/create']);
+        } // 简历 id 和用户 id无法对应
+        else {
+            if ($model->user_id != Yii::$app->user->identity->user_id) {
+                return $this->redirect(['index']);
+            }
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            Yii::$app->getSession()->setFlash('success', '修改简历成功 !!');
+
+            return $this->redirect(['user/index']);
+
         } else {
+
             return $this->render('update', [
                 'model' => $model,
             ]);
+
         }
     }
 
@@ -158,6 +215,7 @@ class JobController extends BaseController
      */
     public function actionDelete($id)
     {
+        throw new NotFoundHttpException('The requested page does not exist. ' . $id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

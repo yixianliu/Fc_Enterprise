@@ -12,13 +12,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style type="text/css">
-    .summary {display: none;}
+    .summary {
+        display: none;
+    }
 </style>
 
 <?= $this->render('../_slide'); ?>
 
-<?= $this->render('../_nav'); ?>
+<div class="container content">
 
-<?= $this->render('_form', [
-    'model' => $model,
-]) ?>
+    <?= $this->render('../_nav'); ?>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
+</div>
