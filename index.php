@@ -19,8 +19,4 @@ $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/frontend/config/main-local.php')
 );
 
-//(new yii\web\Application($config))->run();
-
-$application = new yii\web\Application($config);
-$application->language = isset(\Yii::$app->session['language']) ? \Yii::$app->session['language'] : 'zh_CN';
-$application->run();
+(new yii\web\Application($config))->run();

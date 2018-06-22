@@ -167,6 +167,11 @@ class CenterController extends BaseController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * 网站内容
+     *
+     * @return string
+     */
     public function actionInfo()
     {
 
@@ -191,6 +196,9 @@ class CenterController extends BaseController
      */
     public function actionSeo()
     {
+
+
+
         return $this->render('seo');
     }
 

@@ -121,6 +121,7 @@ $text = empty($text) ? '没有描述' : $text;
     <?php if (!empty($images) && is_array($images)): ?>
 
         <div class="row">
+
             <?php foreach ($images as $value): ?>
 
                 <div class="col-md-3">
@@ -170,9 +171,11 @@ $text = empty($text) ? '没有描述' : $text;
                 var NewImageContent = '';
 
                 for (var i = 0; i < imgArray.length; i++) {
+
                     if (imgArray[i] == DeleteImgText || imgArray[i] == '') {
                         continue;
                     }
+
                     NewImageContent += imgArray[i] + ',';
                 }
 
@@ -182,8 +185,10 @@ $text = empty($text) ? '没有描述' : $text;
                     url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
                     success: function (data) {
 
+                        return true;
                     },
                     error: function (XMLHttpRequest, textStatus) {
+
                         alert(XMLHttpRequest.status);
                         alert(XMLHttpRequest.readyState);
                         alert(textStatus);

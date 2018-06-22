@@ -46,7 +46,8 @@ class Download extends \yii\db\ActiveRecord
             [['c_key', 'title', 'path', 'content'], 'required'],
             [['content', 'is_using'], 'string'],
             [['c_key'], 'string', 'max' => 55],
-            [['title', 'path'], 'string', 'max' => 85],
+            [['title'], 'string', 'max' => 85],
+            [['path'], 'string', 'max' => 500],
             [['title'], 'unique'],
 
             [['is_using',], 'default', 'value' => 'On'],

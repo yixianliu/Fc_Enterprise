@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data;
                             },
                         ],
-                        'content:ntext',
+                        'content:html',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

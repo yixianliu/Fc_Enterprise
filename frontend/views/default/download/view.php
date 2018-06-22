@@ -55,12 +55,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php foreach ($model->path as $value): ?>
 
-                    <?= Html::a($value, '../backend/web/temp/download/' . $value) ?>
+                    <?= Html::a($value, '../backend/web/temp/download/' . $value, ['target' => '_blank', 'title' => $model->title,]) ?>
 
                 <?php endforeach; ?>
 
             </div>
-
 
             <div class="conY_fanye">
                 <div class="conY_fanyel">
