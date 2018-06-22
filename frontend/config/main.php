@@ -65,6 +65,7 @@ return [
 
         'errorHandler' => [
             'errorAction' => 'center/error',
+            'maxSourceLines' => 20,
         ],
 
         'urlManager'   => [

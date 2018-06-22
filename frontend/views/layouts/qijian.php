@@ -35,7 +35,7 @@ $this->beginPage();
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="pull-left">
-            <a class="navbar-brand" title="" href="<?= Url::to(['/']) ?>">
+            <a class="navbar-brand" title="" href="<?= Url::to(['center/index']) ?>">
                 <?= Html::img(Url::to('@web/themes/qijian/images/logo.jpg'), ['alt' => '']); ?>
             </a>
         </div>

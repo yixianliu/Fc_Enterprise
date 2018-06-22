@@ -9,17 +9,23 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = '页面出错 404';
+$this->title = '页面出错';
 
 ?>
 
 <div class="container-fluid advantage">
     <div class="container">
-        <div class="alert alert-danger">
 
-            <h2><?= $message ?></h2>
+        <div class="row text-center">
+
+            <div style="font-size: 120px;"><font>404</font></div>
+            <h1><?= $message ?></h1>
+
+            <br />
+            <a href="#" onClick="history.go(-1)">返回上一页</a> or <?= Html::a('返回首页', ['center/index']) ?>
 
         </div>
+
     </div>
 </div>
 

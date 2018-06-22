@@ -79,6 +79,13 @@ class BaseController extends Controller
     public function actions()
     {
         return [
+
+            // 错误
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+
+            // 上传
             'upload' => [
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
