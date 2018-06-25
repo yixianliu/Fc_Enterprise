@@ -71,7 +71,7 @@ class Bid extends \yii\db\ActiveRecord
             'bid_id'      => '招标编号',
             'user_id'     => '发布用户',
             'title'       => '标题',
-            'content'     => '内容',
+            'content'     => '招标内容',
             'path'        => '招标相关图片',
             'price'       => '招标价格',
             'is_using'    => '是否启用',

@@ -117,7 +117,7 @@ class PurchaseController extends BaseController
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $this->getCls(),
+                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase'),
                 ],
             ]);
         }
@@ -131,7 +131,7 @@ class PurchaseController extends BaseController
      */
     public function actionUpdate($id)
     {
-        
+
         $model = $this->findModel($id);
 
         $model->start_at = date('Y-m-d H:i', $model->start_at);
@@ -157,7 +157,7 @@ class PurchaseController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $this->getCls(),
+                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase'),
                 ],
             ]);
         }
@@ -188,7 +188,7 @@ class PurchaseController extends BaseController
         if (($model = Purchase::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('无法找到相关网页.');
         }
     }
 
@@ -247,26 +247,6 @@ class PurchaseController extends BaseController
             return false;
 
         return true;
-    }
-
-    /**
-     * 获取分类和版块
-     *
-     * @return array
-     */
-    public function getCls()
-    {
-        // 初始化
-        $result = array();
-
-        // 所有版块
-        $dataCls = PsbClassify::findAll(['is_using' => 'On', 'parent_id' => 'P0', 'is_type' => 'Purchase']);
-
-        foreach ($dataCls as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 
 }

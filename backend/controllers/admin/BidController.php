@@ -2,6 +2,7 @@
 
 namespace backend\controllers\admin;
 
+use common\models\PsbClassify;
 use Yii;
 use common\models\Bid;
 use common\models\BidSearch;
@@ -74,7 +75,10 @@ class BidController extends BaseController
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Bid'], 'Purchase'),
+            ]
         ]);
     }
 
@@ -94,7 +98,10 @@ class BidController extends BaseController
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
+            'result' => [
+                'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Bid'], 'Purchase'),
+            ]
         ]);
     }
 

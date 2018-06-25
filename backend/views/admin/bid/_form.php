@@ -21,14 +21,14 @@ use kartik\select2\Select2;
 
                 <?=
                 $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
-                        'clientOptions' => [
-                            //设置语言
-                            'lang'               => 'zh-cn',
-                            'initialFrameHeight' => '600',
-                            'elementPathEnabled' => false,
-                            'wordCount'          => false,
-                        ]
-                    ]);
+                    'clientOptions' => [
+                        //设置语言
+                        'lang'               => 'zh-cn',
+                        'initialFrameHeight' => '600',
+                        'elementPathEnabled' => false,
+                        'wordCount'          => false,
+                    ]
+                ]);
                 ?>
 
                 <?= $this->render('../upload', ['model' => $model, 'text' => '招标相关图片', 'form' => $form, 'id' => $model->bid_id]); ?>
@@ -56,7 +56,12 @@ use kartik\select2\Select2;
                 ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::submitButton($model->isNewRecord ? '添加招标内容' : '更新招标内容', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+
                 </div>
 
                 <?php ActiveForm::end(); ?>
