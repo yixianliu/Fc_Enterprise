@@ -39,8 +39,7 @@ use dosamigos\fileupload\FileUploadUI;
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                 <?=
-                $form->field($model, 'content')
-                    ->widget('kucha\ueditor\UEditor', [
+                $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
                         'clientOptions' => [
                             //设置语言
                             'lang'               => 'zh-cn',
@@ -51,7 +50,7 @@ use dosamigos\fileupload\FileUploadUI;
                     ]);
                 ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'type' => 'purchase', 'id' => $model->purchase_id]); ?>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '采购相关图片', 'form' => $form, 'id' => $model->purchase_id]); ?>
 
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

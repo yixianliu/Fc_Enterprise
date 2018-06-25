@@ -5,7 +5,6 @@ namespace backend\controllers\admin;
 use Yii;
 use common\models\Bid;
 use common\models\BidSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -65,6 +64,10 @@ class BidController extends BaseController
     public function actionCreate()
     {
         $model = new Bid();
+
+        $model->c_key = self::getRandomString();
+
+        $model->user_id = '网站管理员';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -197,9 +197,18 @@ class CenterController extends BaseController
     public function actionSeo()
     {
 
+        // 初始化
+        $result = array();
 
+        $confData = Conf::findByData(null, Yii::$app->session['language']);
 
-        return $this->render('seo');
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                $result[ $value['c_key'] ] = $value['parameter'];
+            }
+        }
+
+        return $this->render('seo', ['result' => $result]);
     }
 
     /**
