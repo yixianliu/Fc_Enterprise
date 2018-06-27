@@ -100,6 +100,11 @@ ul.tit {
 #nav .mod_cate h2 a,#nav .mod_cate2 h2 a{
     color:#FFFFFF;
     padding-right:5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 #nav .mod_cate a.hot_sub{
