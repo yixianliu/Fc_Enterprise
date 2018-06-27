@@ -8,42 +8,74 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="bid-search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+<?php $form = ActiveForm::begin(['action' => ['index'], 'method' => 'get',]); ?>
 
-    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'c_key') ?>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <section class="box ">
 
-    <?= $form->field($model, 'bid_id') ?>
+            <header class="panel_header">
+                <h2 class="title pull-left">搜索内容</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle fa fa-chevron-down"></i>
+                    <i class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></i>
+                    <i class="box_close fa fa-times"></i>
+                </div>
+            </header>
 
-    <?= $form->field($model, 'user_id') ?>
+            <div class="content-body">
+                <div class="row ui-grids">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
 
-    <?= $form->field($model, 'title') ?>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <?= $form->field($model, 'title') ?>
+                            </div>
 
-    <?php // echo $form->field($model, 'content') ?>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <?= $form->field($model, 'content') ?>
+                            </div>
 
-    <?php // echo $form->field($model, 'path') ?>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <?=
+                                $form->field($model, 'is_send_msg')->widget(kartik\select2\Select2::classname(), [
+                                    'data'          => ['On' => '启用', 'Off' => '未启用'],
+                                    'options'       => ['placeholder' => '是否发送短信...'],
+                                    'pluginOptions' => [
+                                        'allowClear' => true
+                                    ],
+                                ]);
+                                ?>
+                            </div>
 
-    <?php // echo $form->field($model, 'price') ?>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <?=
+                                $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
+                                    'data'          => ['On' => '启用', 'Off' => '未启用'],
+                                    'options'       => ['placeholder' => '审核状态...'],
+                                    'pluginOptions' => [
+                                        'allowClear' => true
+                                    ],
+                                ]);
+                                ?>
+                            </div>
 
-    <?php // echo $form->field($model, 'is_send_msg') ?>
+                        </div>
+                    </div>
 
-    <?php // echo $form->field($model, 'is_using') ?>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+                                <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+                            </div>
+                        </div>
+                    </div>
 
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <?php ActiveForm::end(); ?>
-
-</div>
+<?php ActiveForm::end(); ?>

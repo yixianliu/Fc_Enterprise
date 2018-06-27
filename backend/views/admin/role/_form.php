@@ -8,6 +8,33 @@ use kartik\select2\Select2;
 /* @var $model common\models\ItemRp */
 /* @var $form yii\widgets\ActiveForm */
 
+/**
+ * 返回相关类型
+ *
+ * @param $type
+ * @param $data
+ * @return mixed
+ */
+function roleType($type, $data)
+{
+
+    if (empty($type) || empty($data) || !is_array($data))
+        return false;
+
+    // 初始化
+    $array = array();
+
+    foreach ($data as $value) {
+
+        if (!strpos($value->name, $type))
+            continue;
+
+        $array[] = $value;
+    }
+
+    return $array;
+}
+
 ?>
 
 <div class="col-lg-12">
@@ -50,8 +77,40 @@ use kartik\select2\Select2;
 
                 <div id="p_key">
 
+                    <label class="form-label">控制面板</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Center', $result['power']), 'name', 'description'))->label(false) ?>
                     <hr/>
-                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map($result['power'], 'name', 'description')) ?>
+
+                    <label class="form-label">产品功能</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Product', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">新闻功能</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('News', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">采购功能</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Purchase', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">招聘功能</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Job', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">角色功能</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Role', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">权限管理</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Power', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">菜单管理</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Menu', $result['power']), 'name', 'description'))->label(false) ?>
+                    <hr/>
+
+                    <label class="form-label">下载管理</label>
+                    <?= $form->field($model, 'p_key')->CheckBoxList(\yii\helpers\ArrayHelper::map(roleType('Download', $result['power']), 'name', 'description'))->label(false) ?>
                     <hr/>
 
                 </div>

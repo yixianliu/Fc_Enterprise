@@ -83,6 +83,7 @@ class RoleController extends BaseController
 
         $auth = Yii::$app->authManager;
 
+        // 添加数据
         if ($model->load(Yii::$app->request->post())) {
 
             $data = Yii::$app->request->post();
