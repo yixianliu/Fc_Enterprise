@@ -72,6 +72,8 @@ a:active {
     padding-right: 0;
 }
 
+/* 点击激活链接 */
+
 /*顶部*/
 .navTop {
     width: 100%;
@@ -212,7 +214,7 @@ a:active {
 }
 
 .navbar .dropdown-menu {
-    min-width: 114px;
+    min-width: 109px;
     left: auto;
     top: auto;
 }
@@ -672,7 +674,7 @@ a:active {
 
 .content .left .cat_list div {
     margin-bottom: 10px;
-    padding: 10px 0 10px 30px;
+    padding: 10px 10px 10px 30px;
     background-color: #232323;
 }
 
