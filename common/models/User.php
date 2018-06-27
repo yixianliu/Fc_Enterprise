@@ -39,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%User}}';
     }
 
     /**
@@ -61,7 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
             'user_id'       => '用户编号',
             'username'      => '帐号',
             'nickname'      => '昵称',
-            'is_using'      => '是否启用',
+            'is_using'      => '是否通过审核',
             'login_ip'      => '登录 IP',
             'r_key'         => '角色',
             'sex'           => '性别',
@@ -70,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password'      => '密码',
             'signature'     => '个性签名',
             'is_display'    => '是否显示资料',
-            'is_auth'       => '是否验证',
+            'is_auth'       => '是否通过企业验证',
             'is_head'       => '是否上传头像',
             'created_at'    => '添加数据时间',
             'updated_at'    => '更新数据时间',
@@ -95,6 +95,8 @@ class User extends ActiveRecord implements IdentityInterface
 
             // 注册
             [['username', 'is_type', 'password', 'repassword'], 'required', 'on' => 'reg'],
+            [['username'], 'unique', 'on' => 'reg'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg']],
 
             // 资料修改
             [['nickname', 'sex'], 'required', 'on' => 'info'],
@@ -105,16 +107,16 @@ class User extends ActiveRecord implements IdentityInterface
             // 修改密码
             [['password', 'newpassword', 'repassword'], 'required', 'on' => 'setpsw'],
             ['repassword', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'setpsw'],
+            ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
 
             // 对username的值进行两边去空格过滤
             [['username', 'password', 'nickname',], 'filter', 'filter' => 'trim'],
             [['username'], 'match', 'pattern' => '/^1[0-9]{10}$/', 'message' => '{attribute}必须为1开头的11位纯数字'],
             [['nickname', 'username'], 'unique', 'targetClass' => '\common\models\User'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => '用户名已存在!'],
-            ['repassword', 'compare', 'compareAttribute' => 'password', 'on' => ['reg', 'backend']],
             ['rememberMe', 'boolean',],
-            ['password', 'validatePassword', 'on' => ['login', 'setpsw']],
-            [['username'], 'unique', 'on' => 'reg'],
+
+            [['is_using', 'is_auth'], 'string', 'max' => 55],
 
             // 默认
             [['signature'], 'default', 'value' => null],
@@ -131,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // 在该场景下的属性进行验证，其他场景和没有on的都不会验证
         return [
-            'backend' => ['username', 'password', 'r_key', 'sex', 'nickname', 'user_id', 'repassword'],
+            'backend' => ['username', 'r_key', 'sex', 'nickname', 'user_id', 'is_using', 'is_auth'],
             'login'   => ['username', 'password'],
             'reg'     => ['username', 'password', 'repassword', 'is_type', 'msg'],
             'setpsw'  => ['password', 'newpassword', 'repassword'],

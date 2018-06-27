@@ -59,11 +59,9 @@ switch ($model->is_type) {
 
                 <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'json_data')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [

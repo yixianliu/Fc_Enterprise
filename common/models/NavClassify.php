@@ -31,7 +31,7 @@ class NavClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%nav_classify}}';
+        return '{{%Nav_Classify}}';
     }
 
     /**
@@ -50,14 +50,17 @@ class NavClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['p_key', 'sort_id', 'name', 'is_using'], 'required'],
+            [['p_key', 'name'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['p_key', 'parent_id'], 'string', 'max' => 55],
+            [['parent_id'], 'string', 'max' => 255],
             [['name'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
             [['name'], 'unique'],
+
+            [['is_using'], 'default', 'value' => 'On'],
+            [['sort_id',], 'default', 'value' => '1'],
         ];
     }
 
@@ -67,6 +70,7 @@ class NavClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'c_key'       => '分类编号',
             'p_key'       => '相关采购分类',
             'sort_id'     => '排序',
             'name'        => '分类名称',

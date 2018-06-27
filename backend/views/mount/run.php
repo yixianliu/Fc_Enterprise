@@ -41,16 +41,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'address')->textarea(['value' => Yii::$app->params['ADDRESS']]); ?>
 
-                <?=
-                $form->field($model, 'mysql_data')->widget(Select2::classname(), [
-                    'data'          => ['On' => '启用', 'Off' => '关闭'],
-                    'options'       => ['placeholder' => '请选择 ...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-                ?>
-
                 <p class="submit">
                     <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
                 </p>

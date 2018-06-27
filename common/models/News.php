@@ -38,7 +38,7 @@ class News extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%news}}';
+        return '{{%News}}';
     }
 
     /**
@@ -56,8 +56,9 @@ class News extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
-            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'is_audit', 'is_comments'], 'required'],
+            [['news_id', 'user_id', 'c_key', 'title', 'content'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
             [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
@@ -70,6 +71,9 @@ class News extends \yii\db\ActiveRecord
 
             // 若 "level" 为空，则设其为 1
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend',], 'default', 'value' => 'Off'],
+            [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
+            [['introduction'], 'default', 'value' => null],
+            [['sort_id'], 'default', 'value' => 1],
         ];
     }
 
@@ -89,11 +93,11 @@ class News extends \yii\db\ActiveRecord
             'keywords'     => '新闻关键词',
             'path'         => '新闻图片',
             'images'       => '新闻缩略图',
-            'praise'       => 'Praise',
+            'praise'       => '赞',
             'forward'      => '转发',
-            'collection'   => 'Collection',
+            'collection'   => '收藏',
             'share'        => '分享次数',
-            'attention'    => 'Attention',
+            'attention'    => '关注',
             'is_language'  => '语言类别',
             'is_promote'   => '推广状态',
             'is_hot'       => '热门状态',

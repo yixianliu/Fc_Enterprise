@@ -13,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?=
@@ -43,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'sort_id',
                         'name',
                         'keywords',
-                        //                        'json_data',
                         [
                             'attribute' => 'parent_id',
                             'value'     => function ($model) {
@@ -93,6 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'description:html',
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

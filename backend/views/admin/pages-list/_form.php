@@ -32,7 +32,7 @@ use dosamigos\fileupload\FileUploadUI;
                 <?=
                 $form->field($model, 'page_id')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['page'],
-                    'options'       => ['placeholder' => '选择...'],
+                    'options'       => ['placeholder' => '选择单页面...'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -42,7 +42,7 @@ use dosamigos\fileupload\FileUploadUI;
                 <?=
                 $form->field($model, 'c_key')->widget(kartik\select2\Select2::classname(), [
                     'data'          => $result['classify'],
-                    'options'       => ['placeholder' => '选择...'],
+                    'options'       => ['placeholder' => '选择分类...'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -63,58 +63,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <hr/>
-
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'path',
-                    'url'           => ['admin/upload/image-upload', 'id' => 1, 'type' => 'pages-list', 'attribute' => 'path'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'image/*',
-                    ],
-                    'clientOptions' => [
-                        'maxFileSize'      => 5000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 1,
-                    ],
-
-                    // ...
-                    'clientEvents'  => [
-
-                        'fileuploaddone' => 'function(e, data) {
-
-                                if (data.result.status == false) {
-                                    alert(data.result.message);
-                                    return true;
-                                }
-                              
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                    ],
-                ]);
-                ?>
-
-                <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                <hr/>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '单页面列表图片', 'form' => $form, 'attribute' => 'path', 'type' => 'pages-list', 'id' => 1]); ?>
 
                 <?=
                 $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
@@ -138,9 +87,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'pages-list']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

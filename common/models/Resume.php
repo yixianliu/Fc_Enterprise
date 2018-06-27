@@ -24,7 +24,7 @@ class Resume extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%resume}}';
+        return '{{%Resume}}';
     }
 
     /**
@@ -43,12 +43,13 @@ class Resume extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'content', 'is_using'], 'required'],
+            [['user_id', 'title', 'content'], 'required'],
             [['content', 'is_using', 'path'], 'string'],
             [['user_id'], 'string', 'max' => 85],
             [['title'], 'string', 'max' => 125],
             [['path'], 'string', 'max' => 500],
-            [['user_id'], 'unique'],
+
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 

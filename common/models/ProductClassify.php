@@ -21,14 +21,14 @@ use yii\behaviors\TimestampBehavior;
 class ProductClassify extends \yii\db\ActiveRecord
 {
 
-    public static $parent_id = 'C0';
+    public static $parent_cly_id = 'C0';
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%product_classify}}';
+        return '{{%Product_Classify}}';
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'name', 'parent_id', 'is_using'], 'required'],
+            [['c_key', 'name', 'parent_id'], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'keywords', 'json_data', 'parent_id'], 'string', 'max' => 55],
@@ -56,6 +56,7 @@ class ProductClassify extends \yii\db\ActiveRecord
             [['name'], 'unique'],
 
             [['sort_id',], 'default', 'value' => 1],
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 
@@ -88,7 +89,7 @@ class ProductClassify extends \yii\db\ActiveRecord
     public static function findByAll($parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? self::$parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id : $parent_id;
 
         return static::find()->where(['parent_id' => $parent_id, 'is_using' => 'On'])
             ->orderBy('sort_id', SORT_DESC)
@@ -149,10 +150,13 @@ class ProductClassify extends \yii\db\ActiveRecord
     public function getClsSelect()
     {
 
-        // 产品分类
-        $dataClassify = static::findByAll($this->parent_id);
+        // 初始化
+        $result = array();
 
-        $result[ $this->parent_id ] = '顶级分类 !!';
+        // 产品分类
+        $dataClassify = static::findByAll(static::$parent_cly_id);
+
+        $result[ static::$parent_cly_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
@@ -174,6 +178,7 @@ class ProductClassify extends \yii\db\ActiveRecord
      *
      * @param $data
      * @param int $num
+     * @return array|void
      */
     public function recursionClsSelect($data, $num = 1)
     {

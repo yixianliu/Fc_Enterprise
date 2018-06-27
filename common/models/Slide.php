@@ -21,7 +21,7 @@ class Slide extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%slide}}';
+        return '{{%Slide}}';
     }
 
     /**
@@ -40,11 +40,13 @@ class Slide extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'path', 'is_using'], 'required'],
+            [['c_key', 'path'], 'required'],
             [['description', 'is_using'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['path'], 'string', 'max' => 255],
             [['path'], 'unique'],
+
+            [['is_using'], 'default', 'value' => 'On'],
         ];
     }
 
@@ -58,6 +60,8 @@ class Slide extends \yii\db\ActiveRecord
             'path'        => '路径',
             'description' => '描述',
             'is_using'    => '是否启用',
+            'created_at'  => '创建时间',
+            'updated_at'  => '修改时间',
         ];
     }
 
@@ -80,7 +84,7 @@ class Slide extends \yii\db\ActiveRecord
      * @param $pagekey
      * @return array|bool
      */
-    public function getData($pagekey)
+    public static function getData($pagekey)
     {
 
         if (empty($pagekey))

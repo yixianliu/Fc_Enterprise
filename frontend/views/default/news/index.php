@@ -10,6 +10,7 @@ use yii\widgets\ListView;
 
 $this->title = '新闻中心';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <style type="text/css">
@@ -18,15 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'news']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'news', 'id' => $id]); ?>
+    <?= $this->render('../_left'); ?>
 
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <div class="content_news_list">
 

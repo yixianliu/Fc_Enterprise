@@ -47,13 +47,9 @@ class DownloadClsController extends BaseController
     public function actionIndex()
     {
 
-        $Cls = new DownloadCls();
+        $dataProvider = DownloadCls::getCls();
 
-        $dataProvider = $Cls->getCls();
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider,]);
     }
 
     /**
@@ -78,8 +74,12 @@ class DownloadClsController extends BaseController
     {
         $model = new DownloadCls();
 
+        $model->c_key = self::getRandomString();
+
+        $model->parent_id = Yii::$app->request->get('id', 'C0');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -102,11 +102,11 @@ class DownloadClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
             'result' => [
                 'classify' => $model->getClsSelect(),
             ]
@@ -137,7 +137,7 @@ class DownloadClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = DownloadCls::findOne(['c_key' => $id])) !== null) {
+        if (($model = DownloadCls::findOne($id)) !== null) {
             return $model;
         }
 

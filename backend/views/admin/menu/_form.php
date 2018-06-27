@@ -109,7 +109,7 @@ use kartik\select2\Select2;
     }
 
     // 显示类型
-    if (ModelKey != 'UU1') {
+    if (ModelKey != 'UU1' && ModelKey != '') {
         $('.field-menu-is_type').show();
     }
 
@@ -118,7 +118,7 @@ use kartik\select2\Select2;
         var selectVal = $(this).val();
 
         // 栏目类型
-        if (selectVal != 'UU1') {
+        if (selectVal != 'UU1' && (selectVal == 'UC1' || selectVal == 'UP2')) {
 
             $('.field-menu-is_type').show();
 
@@ -132,14 +132,16 @@ use kartik\select2\Select2;
             $('.field-menu-is_type').hide();
         }
 
-        if (selectVal != 'UC1' && selectVal != 'UU1') {
+        if ((selectVal != 'UC1' && selectVal != 'UP2') && selectVal != 'UU1') {
+
+            $('.field-menu-url').hide();
+            $('.field-menu-is_type').hide();
 
             // 单页面
             $('.field-menu-custom_key').hide();
             $('#menu-custom_key').attr("checked", "");
 
             // 链接
-            $('.field-menu-url').hide();
             $('#menu-url').val('');
         }
 

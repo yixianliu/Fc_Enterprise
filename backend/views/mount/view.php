@@ -59,7 +59,8 @@ function quick_dev_insights_phpinfo()
     return $data;
 }
 
-$data = quick_dev_insights_phpinfo();
+//$data = quick_dev_insights_phpinfo();
+$data = '后台首页';
 
 ?>
 

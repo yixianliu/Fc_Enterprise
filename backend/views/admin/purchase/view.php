@@ -13,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
+
         <div class="content-body">
             <div class="row">
 
@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?= DetailView::widget([
@@ -41,7 +42,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         'purchase_id',
                         'user_id',
                         'title',
-                        'path',
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/purchase/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         'price',
                         'num',
                         'unit',
@@ -113,7 +133,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
-                ]) ?>
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                ])
+                ?>
 
             </div>
         </div>
@@ -126,9 +148,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= GridView::widget([
                     'dataProvider' => $result['offer'],
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'price',
-                        'path',
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100]
+                        ],
+                        [
+                            'attribute' => 'price',
+                            'options'   => ['width' => 150]
+                        ],
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/sp-offer/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -139,8 +186,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_using ];
                             },
+                            'options'   => ['width' => 100]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
+                        ],
                     ],
                 ]); ?>
 

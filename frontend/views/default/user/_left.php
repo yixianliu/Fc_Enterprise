@@ -18,9 +18,9 @@ use common\widgets\iConf\ConfList;
 <div class="left">
 
     <div class="user-cont">
-        <h3>
-            <?= Html::img(Url::to('@web/themes/qijian/images/200x200.gif'), ['alt' => Yii::$app->user->identity->username]); ?>
-        </h3>
+
+        <br/>
+
         <p>用户名 : <?= Yii::$app->user->identity->username ?></p>
         <p>上次登录时间 : <?= date('Y / m / d', Yii::$app->user->identity->updated_at) ?></p>
 
@@ -40,6 +40,7 @@ use common\widgets\iConf\ConfList;
         <div class="cat_list">
             <h3>普通用户</h3>
             <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
+            <p><a href="<?= Url::to(['job/update', 'id' => Yii::$app->user->identity->user_id]) ?>">我的简历</a></p>
         </div>
 
     <?php endif ?>

@@ -141,10 +141,8 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
     </div>
     <!-- #底部 -->
 
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.js"></script>
+    <script type="text/javascript">
 
-    <script>
         $(function () {
 
             // 下栏菜单鼠标移动展开隐藏

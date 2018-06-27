@@ -19,7 +19,7 @@ use yii\helpers\Html;
         <a href="<?= Url::to(['view', 'id' => $model->product_id]) ?>">
 
             <?php if (empty($model->images)): ?>
-                <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title]); ?>
+                <?= Html::img(Url::to('@web/themes/qijian/not.jpg'), ['alt' => $model->title]); ?>
             <?php else: ?>
                 <?= Html::img(Url::to('@web/../../backend/web/temp/product/' . $model->images), ['alt' => $model->title]); ?>
             <?php endif; ?>

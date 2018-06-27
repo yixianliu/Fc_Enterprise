@@ -81,7 +81,7 @@ class NewsClsController extends BaseController
         $model->c_key = self::getRandomString();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
             return $this->render('create', [
@@ -104,7 +104,7 @@ class NewsClsController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
             return $this->render('update', [
@@ -138,7 +138,7 @@ class NewsClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = NewsClassify::findOne(['c_key' => $id])) !== null) {
+        if (($model = NewsClassify::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

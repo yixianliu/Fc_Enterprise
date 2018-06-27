@@ -10,56 +10,66 @@ use kartik\select2\Select2;
 ?>
 
 
-<?php $form = ActiveForm::begin([
+<?php
+$form = ActiveForm::begin([
     'action' => ['index'],
     'method' => 'get',
-]); ?>
+]);
+?>
 
-<table class="table table-hover">
-    <tbody>
-    <tr>
-        <td><?= $form->field($model, 'title') ?></td>
-        <td><?= $form->field($model, 'content') ?></td>
-        <td><?= $form->field($model, 'price') ?></td>
-        <td><?= $form->field($model, 'num') ?></td>
-        <td>
-            <?=
-            $form->field($model, 'is_type')->widget(Select2::classname(), [
-                'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
-                'options' => ['placeholder' => '采购类型...'],
-            ]);
-            ?>
-        </td>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <section class="box ">
 
-        <td>
-            <?=
-            $form->field($model, 'is_status')->widget(Select2::classname(), [
-                'data'    => ['On' => '采购中', 'Off' => '关闭'],
-                'options' => ['placeholder' => '采购状态...'],
-            ]);
-            ?>
-        </td>
+        <header class="panel_header">
+            <h2 class="title pull-left">搜索内容</h2>
+            <div class="actions panel_actions pull-right">
+                <i class="box_toggle fa fa-chevron-down"></i>
+                <i class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></i>
+                <i class="box_close fa fa-times"></i>
+            </div>
+        </header>
 
-        <?php // echo $form->field($model, 'start_at') ?>
+        <div class="content-body">
+            <div class="row ui-grids">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
 
-        <?php // echo $form->field($model, 'end_at') ?>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'title') ?>
+                        </div>
 
-        <td>
-            <?=
-            $form->field($model, 'is_using')->widget(Select2::classname(), [
-                'data'    => ['On' => '审核', 'Off' => '审核不过'],
-                'options' => ['placeholder' => '是否启用...'],
-            ]);
-            ?>
-        </td>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'price') ?>
+                        </div>
 
-    </tr>
-    </tbody>
-</table>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'price') ?>
+                        </div>
 
-<div class="form-group">
-    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
-    <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?=
+                            $form->field($model, 'is_status')->widget(Select2::classname(), [
+                                'data'    => ['On' => '采购中', 'Off' => '关闭'],
+                                'options' => ['placeholder' => '采购状态...'],
+                            ]);
+                            ?>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+                            <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 </div>
 
 <?php ActiveForm::end(); ?>

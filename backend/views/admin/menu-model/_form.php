@@ -2,34 +2,57 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\MenuModel */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="menu-model-form">
+<div class="col-lg-12">
+    <section class="box ">
 
-    <?php $form = ActiveForm::begin(); ?>
+        <header class="panel_header">
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
+        </header>
 
-    <?= $form->field($model, 'model_key')->textInput(['maxlength' => true]) ?>
+        <div class="content-body">
+            <div class="row">
 
-    <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'url_key')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'model_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'url_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'          => ['On' => '审核', 'Off' => '审核不过'],
+                    'options'       => ['placeholder' => '是否启用...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+                <div class="form-group">
 
-    <?php ActiveForm::end(); ?>
+                    <?= Html::submitButton($model->isNewRecord ? '创建菜单模型' : '更新菜单模型', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+
+        <?= $this->render('../../formMsg'); ?>
+
+    </section>
 </div>

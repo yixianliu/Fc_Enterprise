@@ -10,6 +10,9 @@ use yii\grid\GridView;
 $this->title = '采购中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= $this->render('_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
@@ -20,10 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
                     <?= Html::a('发布采购信息', ['create']) ?> /
                     <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0']) ?> /
@@ -31,12 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <hr/>
 
-                <?= GridView::widget([
+                <?=
+                GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100]
+                        ],
                         'title',
-                        'price',
+                        [
+                            'attribute' => 'price',
+                            'options'   => ['width' => 150]
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -47,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_type ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
                             'attribute' => 'is_status',
@@ -58,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_status ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
                             'attribute' => 'is_using',
@@ -69,21 +77,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_using ];
                             },
+                            'options'   => ['width' => 100]
                         ],
                         [
-                            'attribute' => 'is_send_msg',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '已启用',
-                                    'Off' => '未启用',
-                                ];
-
-                                return $state[ $model->is_using ];
-                            },
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
                     ],
-                ]); ?>
+                ]);
+                ?>
 
             </div>
         </div>

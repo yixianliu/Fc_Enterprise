@@ -11,9 +11,11 @@
 
 namespace frontend\controllers;
 
+use common\models\Menu;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
+use common\models\Conf;
 
 class BaseController extends Controller
 {
@@ -37,7 +39,19 @@ class BaseController extends Controller
 
             // 设置一个session变量，以下用法是相同的：
             $session->set('language', 'cn');
-            $session->set('language_name', '中文版');
+        }
+
+        switch ($session->get('language')) {
+
+            default:
+            case 'cn':
+                Yii::$app->language = 'zh-CN';
+                break;
+
+            case 'en':
+                Yii::$app->language = 'en-US';
+                break;
+
         }
 
         return true;
@@ -65,6 +79,13 @@ class BaseController extends Controller
     public function actions()
     {
         return [
+
+            // 错误
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+
+            // 上传
             'upload' => [
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
@@ -75,6 +96,42 @@ class BaseController extends Controller
                 ],
             ]
         ];
+    }
+
+    /**
+     * 左边的侧边栏的内容
+     *
+     * @return bool|string|void
+     */
+    public static function leftConf()
+    {
+
+        // 初始化
+        $result = array();
+
+        $confData = Conf::findByData('On');
+
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                $result[ $value['c_key'] ] = $value['parameter'];
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * 底部菜单链接
+     *
+     * @return string
+     */
+    public static function footConf()
+    {
+
+        // 底部菜单
+        $result = Menu::findByAll(Menu::$frontend_parent_id, Yii::$app->session['language']);
+
+        return $result;
     }
 
 }

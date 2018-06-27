@@ -10,7 +10,11 @@ use yii\grid\GridView;
 $this->title = '用户中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= $this->render('_search', ['model' => $searchModel]); ?>
+
 <div class="col-lg-12">
+
     <section class="box ">
 
         <header class="panel_header">
@@ -20,12 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?= $this->render('_search', ['model' => $searchModel]); ?>
-
-                <hr/>
-
                 <p>
+
                     <?= Html::a('创建用户', ['create'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('查看普通用户', ['index'], ['class' => 'btn btn-success']) ?>
+
+                    <?= Html::a('查看管理员', ['admin/admin/index'], ['class' => 'btn btn-success']) ?>
+
                 </p>
 
                 <?=
@@ -33,16 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'options'      => ['class' => 'table table-hover'],
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100]
+                        ],
                         'username',
-                        'r_key',
-                        // 'exp',
-                        // 'credit',
-                        // 'nickname',
-                        // 'signature',
-                        // 'birthday',
-                        // 'answer',
-                        // 's_key',
+                        [
+                            'attribute' => 'r_key',
+                            'options' => ['width' => 120]
+                        ],
                         [
                             'attribute' => 'is_type',
                             'value'     => function ($model) {
@@ -54,8 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_type ];
                             },
+                            'options' => ['width' => 120]
                         ],
-                        // 'consecutively',
                         [
                             'attribute' => 'sex',
                             'value'     => function ($model) {
@@ -66,10 +71,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->sex ];
                             },
+                            'options'   => ['width' => 120]
                         ],
-                        // 'is_display',
-                        // 'is_head',
-                        // 'is_security',
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {
@@ -81,8 +84,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_using ];
                             },
+                            'options'   => ['width' => 130]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
+                        ],
                     ],
                 ]);
                 ?>

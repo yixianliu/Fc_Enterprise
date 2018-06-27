@@ -11,9 +11,7 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Conf;
-use common\models\Pages;
-use common\models\PagesList;
+use common\models\Download;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -24,6 +22,9 @@ use common\models\Slide;
 use common\models\Job;
 use common\models\Purchase;
 use common\models\Resume;
+use common\models\Conf;
+use common\models\Pages;
+use common\models\PagesList;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -98,6 +99,11 @@ class UploadController extends BaseController
             // 简历中心
             case 'resume':
                 $model = new Resume();
+                break;
+
+            // 简历中心
+            case 'download':
+                $model = new Download();
                 break;
 
             // 招聘中心

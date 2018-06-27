@@ -6,17 +6,38 @@
  * Time: 17:06
  */
 
+use yii\helpers\Url;
+use yii\helpers\Html;
 use dosamigos\fileupload\FileUploadUI;
 
 $attribute = empty($attribute) ? 'path' : $attribute;
 
-$id = empty($id) ? 1 : $id;
+$id = empty($id) ? $model->user_id : $id;
 
 // 上传类型
-$uploadType = empty($type) ? 'image' : $type;
+$uploadType = empty($uploadType) ? 'image' : $uploadType;
 
 // 数量
 $num = empty($num) ? 5 : $num;
+
+// 初始化
+$images = array();
+
+// 取出图片
+if (!empty($model->$attribute)) {
+
+    $imagesArray = explode(',', $model->$attribute);
+
+    foreach ($imagesArray as $value) {
+
+        if (empty($value))
+            break;
+
+        $images[] = $value;
+    }
+}
+
+$text = empty($text) ? '没有描述' : $text;
 
 ?>
 
@@ -29,7 +50,7 @@ $num = empty($num) ? 5 : $num;
 
 <hr/>
 
-<div class="form-group">
+<div class="form-group" title="">
 
     <?= $form->field($model, $attribute)->textInput(['style' => 'display:none;']) ?>
 
@@ -37,7 +58,7 @@ $num = empty($num) ? 5 : $num;
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['upload/image-upload', 'id' => $id, 'type' => $type, 'attribute' => $attribute],
+        'url'           => ['upload/image-upload', 'id' => $id, 'type' => Yii::$app->controller->id, 'attribute' => $attribute],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*'
@@ -78,6 +99,7 @@ $num = empty($num) ? 5 : $num;
                       
                                 return true;
                             }',
+
             'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
                                 console.log(data);
@@ -93,7 +115,97 @@ $num = empty($num) ? 5 : $num;
 <hr/>
 
 <div class="form-group">
-    <?= $this->render('resultImg', ['img' => $model->$attribute, 'type' => $type, 'id' => $model->user_id]); ?>
+
+    <?php if (!empty($images) && is_array($images)): ?>
+
+        <div class="row">
+            <?php foreach ($images as $value): ?>
+
+                <div class="col-md-12">
+
+                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
+
+                        <?= Html::img(Url::to('@web/temp/') . $model->user_id . '/' . $id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+
+                    <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
+
+                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
+
+                    <?php else: ?>
+
+                        <?= Html::img(Url::to('@web/themes/not.jpg'), ['width' => 350, 'height' => 150]); ?>
+
+                    <?php endif; ?>
+
+                    <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
+
+                        <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
+                            <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
+                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
+                            </a>
+                        <?php endif; ?>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach ?>
+
+        </div>
+
+        <script type="text/javascript">
+
+            $('.DeleteImg').on('click', function () {
+
+                var DeleteImgText = $(this).find('.DeleteImgHidden').val();
+
+                // 获取 ID
+                var ImageId = $('#ImagesContent_<?= $attribute ?>');
+
+                var imgArray = ImageId.val().split(',');
+
+                // 重新处理
+                var NewImageContent = '';
+
+                for (var i = 0; i < imgArray.length; i++) {
+                    if (imgArray[i] == DeleteImgText || imgArray[i] == '') {
+                        continue;
+                    }
+                    NewImageContent += imgArray[i] + ',';
+                }
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
+                    success: function (data) {
+
+                    },
+                    error: function (XMLHttpRequest, textStatus) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                        return false;
+                    }
+                });
+
+                ImageId.empty().attr('value', NewImageContent);
+
+                $(this).parent('div').parent('div').hide();
+
+                return true;
+            });
+
+        </script>
+
+    <?php else: ?>
+
+        <div class="col-sm-12">
+            <h3>暂无相关内容 !!</h3>
+        </div>
+
+    <?php endif ?>
+
 </div>
 
 <hr/>

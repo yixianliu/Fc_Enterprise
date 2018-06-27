@@ -28,7 +28,7 @@ $this->title = '网站配置';
 
                 <p>
 
-                    <?= Html::a('添加网站配置', ['create'], ['class' => "collapsed"]) . ' / ' ?>
+                    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "collapsed"]) . ' / ' ?>
 
                     <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "collapsed"]) . ' / ' ?>
 
@@ -44,9 +44,14 @@ $this->title = '网站配置';
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        'c_key',
-                        'name',
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 50]
+                        ],
+                        [
+                            'attribute' => 'name',
+                            'options'   => ['width' => 110]
+                        ],
                         'parameter',
                         [
                             'attribute' => 'is_language',
@@ -62,8 +67,19 @@ $this->title = '网站配置';
 
                                 return $state[ $model->is_language ];
                             },
+                            'options'   => ['width' => 100]
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->updated_at);
+                            },
+                            'options'   => ['width' => 160]
+                        ],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 80]
+                        ],
                     ],
                 ]);
                 ?>

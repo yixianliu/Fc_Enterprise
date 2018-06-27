@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= Html::cssFile('@web/themes/qijian/css/clearbox.css') ?>
-
 <?= Html::jsFile('@web/themes/qijian/js/clearbox.js') ?>
 
 <!-- 隐藏显示大图上的缩略图 -->
@@ -30,16 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
     });
 </script>
 
-<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['parent_id']]); ?>
+    <?= $this->render('../_left'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="content_product_list">

@@ -26,7 +26,8 @@
         "kucha/ueditor": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
         "2amigos/yii2-date-picker-widget": "~1.0",
-        "daixianceng/yii2-smser": "*"
+        "daixianceng/yii2-smser": "*",
+        "maxwen/yii2-easy-wechat": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -2,42 +2,74 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Bid */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="bid-form">
+<div class="col-lg-12">
+    <section class="box ">
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+        <div class="content-body">
+            <div class="row">
 
-    <?php $form = ActiveForm::begin(); ?>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'bid_id')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                    'clientOptions' => [
+                        //设置语言
+                        'lang'               => 'zh-cn',
+                        'initialFrameHeight' => '600',
+                        'elementPathEnabled' => false,
+                        'wordCount'          => false,
+                    ]
+                ]);
+                ?>
 
-    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '招标相关图片', 'form' => $form, 'id' => $model->bid_id]); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                <?=
+                $form->field($model, 'is_send_msg')->widget(Select2::classname(), [
+                    'data'          => ['On' => '启用', 'Off' => '未启用'],
+                    'options'       => ['placeholder' => '选择...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                <?=
+                $form->field($model, 'is_using')->widget(Select2::classname(), [
+                    'data'          => ['On' => '启用', 'Off' => '未启用'],
+                    'options'       => ['placeholder' => '选择...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                <div class="form-group">
 
-    <?= $form->field($model, 'is_send_msg')->textInput(['maxlength' => true]) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '添加招标内容' : '更新招标内容', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-    <?= $form->field($model, 'is_using')->textInput(['maxlength' => true]) ?>
+                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $form->field($model, 'created_at')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true]) ?>
+                </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+                <?php ActiveForm::end(); ?>
 
-    <?php ActiveForm::end(); ?>
+            </div>
+        </div>
+    </section>
+
+    <?= $this->render('../../formMsg'); ?>
 
 </div>

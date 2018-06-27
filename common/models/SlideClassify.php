@@ -23,7 +23,7 @@ class SlideClassify extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%slide_classify}}';
+        return '{{%Slide_Classify}}';
     }
 
     /**

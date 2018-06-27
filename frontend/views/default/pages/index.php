@@ -17,18 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <div class="container content">
 
-    <!-- 左边 -->
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['m_key']]); ?>
-    <!-- #左边 -->
+    <?= $this->render('../_left'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">

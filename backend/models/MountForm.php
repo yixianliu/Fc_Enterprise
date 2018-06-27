@@ -33,9 +33,6 @@ class MountForm extends Model
             // string 字符串，这里我们限定的意思就是username至少包含2个字符，最多255个字符
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['password', 'string', 'min' => 6, 'tooShort' => '密码至少填写6位'],
-
-            // 权限数据包
-            [['admin', 'user'], 'required', 'on' => ['power']],
         ];
     }
 
@@ -48,7 +45,6 @@ class MountForm extends Model
     {
         return [
             'login' => ['username', 'password'],
-            'power' => ['admin', 'user'],
         ];
     }
 
@@ -60,8 +56,6 @@ class MountForm extends Model
         return [
             'username' => '帐号',
             'password' => '密码',
-            'admin'    => '管理员权限包',
-            'user'     => '普通用户权限包',
         ];
     }
 

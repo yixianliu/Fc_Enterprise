@@ -69,6 +69,7 @@ class CenterController extends BaseController
 
         return $this->render('create', [
             'model' => $model,
+            'type'  => Yii::$app->request->get('type', 'cn'),
         ]);
     }
 
@@ -90,6 +91,7 @@ class CenterController extends BaseController
 
         return $this->render('update', [
             'model' => $model,
+            'type'  => Yii::$app->request->get('type', 'cn'),
         ]);
     }
 
@@ -114,7 +116,10 @@ class CenterController extends BaseController
         $searchModel = new ConfSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->request->get('type', 'cn'));
 
-        return $this->render('conf', ['dataProvider' => $dataProvider]);
+        return $this->render('conf', [
+            'dataProvider' => $dataProvider,
+            'type'         => Yii::$app->request->get('type', 'cn'),
+        ]);
     }
 
     /**
@@ -162,9 +167,26 @@ class CenterController extends BaseController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * 网站内容
+     *
+     * @return string
+     */
     public function actionInfo()
     {
-        return $this->render('info');
+
+        // 初始化
+        $result = array();
+
+        $confData = Conf::findByData(null, Yii::$app->session['language']);
+
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                $result[ $value['c_key'] ] = $value['parameter'];
+            }
+        }
+
+        return $this->render('info', ['result' => $result]);
     }
 
     /**
@@ -174,12 +196,19 @@ class CenterController extends BaseController
      */
     public function actionSeo()
     {
-        return $this->render('seo');
-    }
 
-    public function actionBackup()
-    {
-        return $this->render('backup');
+        // 初始化
+        $result = array();
+
+        $confData = Conf::findByData(null, Yii::$app->session['language']);
+
+        if (!empty($confData)) {
+            foreach ($confData as $key => $value) {
+                $result[ $value['c_key'] ] = $value['parameter'];
+            }
+        }
+
+        return $this->render('seo', ['result' => $result]);
     }
 
     /**
@@ -221,4 +250,5 @@ class CenterController extends BaseController
 
         return $this->redirect(Yii::$app->request->referrer);
     }
+
 }

@@ -35,20 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     ])
                     ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?=
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'product_id',
                         'user_id',
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
-
                                 $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
-
                                 return $data->name;
                             },
                         ],
@@ -58,8 +56,46 @@ $this->params['breadcrumbs'][] = $this->title;
                         'discount',
                         'introduction',
                         'keywords',
-                        'path',
-                        'images',
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/product/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
+                        [
+                            'attribute' => 'images',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->images);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/product/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
 //                        'praise',
 //                        'forward',
 //                        'collection',
@@ -202,6 +238,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

@@ -21,34 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-12">
         <div class="col_full">
 
-            <div class="cont-title">
-                <span><?= $this->title ?></span>
-            </div>
+            <div class="cont-title"><span><?= $this->title ?></span></div>
 
             <div class="row shop-cont">
 
-                <?php if (empty($result['product'])): ?>
-
-                    <?php foreach ($result['product'] as $value): ?>
-                        <div class="col-md-4">
-                            <div class="shop-img">
-                                <a title="" href="">
-                                    <?= Html::img(Url::to('@web/themes/qijian/images/200x200.gif'), ['alt' => '', 'class' => '']); ?>
-                                </a>
-                            </div>
-                            <div class="shop-txt">
-                                <a title="" href=""><?= $value['title'] ?></a>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-
-                <?php else: ?>
-
-                <h1>暂无数据 !!</h1>
-
-                <?php endif; ?>
+                <h3>采购平台</h3>
+                <h3>产品中心</h3>
+                <h3>新闻热点</h3>
 
             </div>
         </div>
+
+        <br/>
+
+        <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+
     </div>
 </div>

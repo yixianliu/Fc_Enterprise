@@ -16,6 +16,7 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+
     public $layout = 'admin';
 
     public function init()
@@ -38,6 +39,13 @@ class BaseController extends Controller
         return true;
     }
 
+    /**
+     * 前置函数
+     *
+     * @param $action
+     * @return bool|void|\yii\web\Response
+     * @throws \yii\web\UnauthorizedHttpException
+     */
     public function beforeAction($action)
     {
 
@@ -49,14 +57,10 @@ class BaseController extends Controller
             return;
         }
 
-        $action = Yii::$app->controller->action->id;
+        $power =  Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);
 
-        $controllerID = Yii::$app->controller->id;
-
-        $power = $action . ucfirst(explode('/', $controllerID)[1]);
-
-        if (!Yii::$app->user->can($power)) {
-            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
+        if (!Yii::$app->user->can($power) && Yii::$app->getErrorHandler()->exception === null) {
+//            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
         }
 
         return true;

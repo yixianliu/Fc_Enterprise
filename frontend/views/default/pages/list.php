@@ -17,17 +17,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('../slide', ['pagekey' => $model['page_id']]); ?>
+<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
 
 <!-- 左右框架 -->
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'pages', 'm_key' => $model['menu']['parent_id']]); ?>
+    <?= $this->render('../_left'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <div class="content_news_list">
 
@@ -36,19 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php foreach ($result['data'] as $value): ?>
 
                     <div>
-                        <a href="<?= Url::to(['pages/details', 'id' => $value['id']]) ?>" title="<?= Html::encode($value['title']) ?>">
-                            <?= Html::encode($value->title) ?>
+                        <a href="<?= Url::to(['pages/details', 'id' => $value['id'], 'pid' => $value['page_id']]) ?>" title="<?= Html::encode($value['title']) ?>">
+                            <?= Html::encode($value['title']) ?>
                         </a>
-                        <span><?= date('Y - m - d', $value->updated_at) ?></span>
+                        <span><?= date('Y - m - d', $value['updated_at']) ?></span>
                     </div>
 
                 <?php endforeach; ?>
 
             <?php else: ?>
 
-        <h1>暂无数据 !!</h1>
+                <h1>暂无内容 !!</h1>
 
-        <?php endif; ?>
+            <?php endif; ?>
 
         </div>
 

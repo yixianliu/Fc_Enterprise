@@ -11,7 +11,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 
 ?>
 
@@ -25,32 +24,6 @@ use kartik\select2\Select2;
 
                 <?php
                 $form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]);
-                ?>
-
-                <?=
-
-                // Normal select with ActiveForm & model
-                $form->field($model, 'admin')->widget(Select2::classname(), [
-                    'data'          => ['On' => '启用', 'Off' => '关闭'],
-                    'options'       => ['placeholder' => '是否开启管理员权限包 ...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-
-                ?>
-
-                <?=
-
-                // Normal select with ActiveForm & model
-                $form->field($model, 'user')->widget(Select2::classname(), [
-                    'data'          => ['On' => '启用', 'Off' => '关闭'],
-                    'options'       => ['placeholder' => '是否开启普通用户权限包 ...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
-
                 ?>
 
                 <p class="submit">

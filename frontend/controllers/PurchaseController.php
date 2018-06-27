@@ -66,9 +66,9 @@ class PurchaseController extends BaseController
 
         $result['nav'] = NavClassify::findByAll();
 
-        return $this->render('center', [
-            'result' => $result,
-        ]);
+        $result['conf'] = self::leftConf();
+
+        return $this->render('center', ['result' => $result,]);
     }
 
     /**
@@ -104,6 +104,7 @@ class PurchaseController extends BaseController
     public function actionView($id)
     {
 
+        // 初始化
         $result = array();
 
         $model = Purchase::findOne(['purchase_id' => $id, 'is_using' => 'On']);

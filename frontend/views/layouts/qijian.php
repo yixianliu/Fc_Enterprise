@@ -2,20 +2,13 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use frontend\assets\QijianAsset;
-use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
 QijianAsset::register($this);
 
-$ClsMenu = new Menu();
-
-$footMenu = Menu::findByAll('E1', 'cn');
-
-$session = Yii::$app->session;
-
 $this->beginPage();
+
 ?>
 
 <!DOCTYPE html>
@@ -42,23 +35,17 @@ $this->beginPage();
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="pull-left">
-            <a class="navbar-brand" title="" href="<?= Url::to(['/']) ?>">
+            <a class="navbar-brand" title="" href="<?= Url::to(['center/index']) ?>">
                 <?= Html::img(Url::to('@web/themes/qijian/images/logo.jpg'), ['alt' => '']); ?>
             </a>
         </div>
 
         <div class="pull-right">
-            <div id="navbar" class="navbar-collapse collapse">
 
-                <?=
-                Nav::widget([
-                    'options' => ['class' => 'nav nav-pills'],
-                    'items'   => $ClsMenu->findMenuNav('E1', Yii::$app->session['language']),
-                ]);
-                ?>
+            <?= \common\widgets\iMenu\MenuList::widget(['config' => ['E1', Yii::$app->session['language']]]) ?>
 
-            </div>
         </div>
+
     </div>
 </nav>
 

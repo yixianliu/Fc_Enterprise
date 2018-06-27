@@ -50,7 +50,6 @@ class ProductController extends BaseController
     {
 
         $searchModel = new ProductSearch();
-
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         // 初始化

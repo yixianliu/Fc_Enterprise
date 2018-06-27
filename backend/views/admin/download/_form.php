@@ -4,7 +4,6 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Download */
@@ -13,11 +12,7 @@ use dosamigos\fileupload\FileUploadUI;
 
 <div class="col-lg-12">
     <section class="box ">
-
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
-
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
         <div class="content-body">
             <div class="row">
 
@@ -37,57 +32,20 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <hr/>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件', 'form' => $form, 'attribute' => 'path', 'id' => $model->id]); ?>
 
                     <?=
-                    FileUploadUI::widget([
-                        'model'         => $model,
-                        'attribute'     => 'path',
-                        'url'           => ['admin/upload/image-upload', 'id' => $model->id, 'type' => 'download', 'attribute' => 'path'],
-                        'gallery'       => false,
-                        'fieldOptions'  => [
-                            'accept' => 'file/*'
-                        ],
-                        'clientOptions' => [
-                            'maxFileSize'      => 2000000,
-                            'dataType'         => 'json',
-                            'maxNumberOfFiles' => 5,
-                        ],
-
-                        // ...
-                        'clientEvents'  => [
-
-                            'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                                
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                            'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                        ],
-                    ]);
+                    $form->field($model, 'content')
+                        ->widget('kucha\ueditor\UEditor', [
+                            'clientOptions' => [
+                                //设置语言
+                                'lang'               => 'zh-cn',
+                                'initialFrameHeight' => '600',
+                                'elementPathEnabled' => false,
+                                'wordCount'          => false,
+                            ]
+                        ]);
                     ?>
-
-                    <?= $form->field($model, 'path')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                    <hr/>
-
-                    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
                     <?=
                     $form->field($model, 'is_using')->widget(Select2::classname(), [
@@ -114,9 +72,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('../result_img', ['img' => $model->path, 'type' => 'job']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>

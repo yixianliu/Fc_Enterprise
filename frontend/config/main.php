@@ -18,15 +18,24 @@ return [
 
         // 视图文件
         'view' => [
+
             'theme' => [
-                'basePath' => '@app/frontend/views',
+                'basePath' => '@app/frontend/web/themes',
                 'baseUrl'  => '@web/frontend/views/themes',
                 'pathMap'  => [
+
                     '@app/views' => [
-                        '@app/views/default'
+
+                        // 默认
+                        '@app/views/default',
+
+                        // red
+                        '@app/views/red',
                     ],
+
                 ],
             ],
+
         ],
 
         'request' => [
@@ -44,7 +53,7 @@ return [
             'name' => 'advanced-frontend',
         ],
 
-        'log'          => [
+        'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
@@ -53,16 +62,22 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'center/error',
+            'maxSourceLines' => 20,
         ],
 
         'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName'  => true,
+            'showScriptName'  => false,
+            'suffix'          => '.html',
             'rules'           => [
+
                 // 默认
-                '' => 'center/index',
+                ''       => 'center/index',
+                'mobile' => 'mobile/center/index',
+
             ],
         ],
 
@@ -80,6 +95,18 @@ return [
             ],
         ],
 
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class'    => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'fileMap'  => [
+                        'app'       => 'common.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
     ],
 
     'params' => $params,

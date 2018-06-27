@@ -37,7 +37,7 @@ use dosamigos\fileupload\FileUploadUI;
                 ]);
                 ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'type' => 'slide']); ?>
+                <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'text' => '幻灯片图片上传']); ?>
 
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
@@ -63,7 +63,6 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
     </section>
 
     <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>

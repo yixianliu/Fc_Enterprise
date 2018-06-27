@@ -1,0 +1,63 @@
+﻿/*--------------公共部分------------------------*/
+.navbar .container {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    min-width: 109px;
+    left: auto;
+    top: auto;
+}
+
+.navbar .dropdown-menu > li {
+    display: block;
+}
+
+/*打开这一句代码，可以使当鼠标移动到下拉列表时，就展开子级列表*/
+.navbar .dropdown:hover > .dropdown-menu{
+    display: block;
+}
+
+.navbar .dropdown {
+    position: static;
+}
+
+/*----------------下来菜单-----------------------*/
+.navbar .dropdown-submenu {
+    position: relative;
+}
+
+.navbar .dropdown-submenu > .dropdown-menu {
+    top: 5px;
+    left: 100%;
+    margin-top: -5px;
+    margin-left: 0px;
+}
+
+/* 所有子类显示左边的话,按照这样写法 <ul class="dropdown-menu submenu-left"></ul> */
+.navbar .dropdown-submenu > .dropdown-menu.submenu-left {
+    left: -100%;
+}
+
+.navbar .dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+/*通过这句代码可以设置当鼠标移动到子菜单时让子菜单显示不同的颜色或状态*/
+.navbar .dropdown-menu li a:hover{
+    background-color: red;
+}
+/*----------------全屏菜单-----------------------*/
+.navbar .dropdown.mega-menu-fullwidth .dropdown-menu {
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.dropdown-submenu .caret {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}

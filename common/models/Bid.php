@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%bid}}".
@@ -27,7 +28,7 @@ class Bid extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%bid}}';
+        return '{{%Bid}}';
     }
 
     /**
@@ -36,13 +37,27 @@ class Bid extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'bid_id', 'user_id', 'title', 'content', 'price', 'is_send_msg', 'is_using', 'created_at', 'updated_at'], 'required'],
+            [['c_key', 'title', 'content'], 'required'],
             [['content', 'is_send_msg', 'is_using'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['price'], 'integer'],
             [['c_key'], 'string', 'max' => 55],
             [['bid_id', 'user_id', 'price'], 'string', 'max' => 85],
             [['title', 'path'], 'string', 'max' => 125],
             [['bid_id'], 'unique'],
+
+            [['price'], 'default', 'value' => 0],
+            [['is_send_msg',], 'default', 'value' => 'Off'],
+            [['is_using',], 'default', 'value' => 'On'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 
@@ -52,18 +67,17 @@ class Bid extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'c_key' => 'C Key',
-            'bid_id' => 'Bid ID',
-            'user_id' => 'User ID',
-            'title' => 'Title',
-            'content' => 'Content',
-            'path' => 'Path',
-            'price' => 'Price',
-            'is_send_msg' => 'Is Send Msg',
-            'is_using' => 'Is Using',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'c_key'       => '招标分类',
+            'bid_id'      => '招标编号',
+            'user_id'     => '发布用户',
+            'title'       => '标题',
+            'content'     => '招标内容',
+            'path'        => '招标相关图片',
+            'price'       => '招标价格',
+            'is_using'    => '是否启用',
+            'is_send_msg' => '群发短信',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 }

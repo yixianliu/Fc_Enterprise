@@ -25,6 +25,7 @@ switch ($model->is_type) {
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => '相关分类中心', 'url' => ['index', 'type' => $model->is_type, 'id' => $id]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="col-lg-12">
@@ -45,6 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index', 'type' => $model->is_type, 'id' => $id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create', 'type' => $model->is_type, 'id' => $id], ['class' => 'btn btn-primary']) ?>
+
                 </p>
 
                 <?=
@@ -56,12 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'name',
                         'description:ntext',
                         'keywords',
-                        'json_data',
                         [
                             'attribute' => 'parent_id',
                             'value'     => function ($model) {
 
-                                if ($model->parent_id == 'P0')
+                                if ($model->parent_id == 'P0' || $model->parent_id == 'S0' || $model->parent_id == 'B0')
                                     return '顶级分类';
 
                                 $data = \common\models\PsbClassify::findOne(['c_key' => $model->parent_id]);
@@ -103,6 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

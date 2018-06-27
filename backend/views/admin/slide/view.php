@@ -39,11 +39,69 @@ $this->params['breadcrumbs'][] = $this->title;
                 DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'id',
-                        'c_key',
-                        'path',
+                        [
+                            'attribute' => 'c_key',
+                            'value'     => function ($model) {
+
+                                $data = \common\models\SlideClassify::findAll(['is_using' => 'On']);
+
+                                foreach ($data as $value) {
+                                    $state[ $value['c_key'] ] = $value['name'];
+                                }
+
+                                $data = \common\models\Pages::findByAll(['is_using' => 'On']);
+
+                                foreach ($data as $value) {
+                                    $state[ $value['page_id'] ] = $value['menu']['name'];
+                                }
+
+                                return $state[ $model->c_key ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/slide/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         'description:ntext',
-                        'is_using',
+                        [
+                            'attribute' => 'is_using',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '开启',
+                                    'Off' => '未启用',
+                                ];
+
+                                return $state[ $model->is_using ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->created_at);
+                            },
+                        ],
+                        [
+                            'attribute' => 'updated_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->updated_at);
+                            },
+                        ],
                     ],
                 ]);
                 ?>

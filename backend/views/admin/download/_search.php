@@ -10,36 +10,64 @@ use kartik\select2\Select2;
 ?>
 
 
-<?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
-]); ?>
+<?php $form = ActiveForm::begin(['action' => ['index'], 'method' => 'get',]); ?>
 
-<table class="table">
-    <tbody>
-    <tr>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <section class="box ">
 
-        <td><?= $form->field($model, 'c_key') ?></td>
+        <header class="panel_header">
+            <h2 class="title pull-left">搜索内容</h2>
+            <div class="actions panel_actions pull-right">
+                <i class="box_toggle fa fa-chevron-down"></i>
+                <i class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></i>
+                <i class="box_close fa fa-times"></i>
+            </div>
+        </header>
 
-        <td><?= $form->field($model, 'title') ?></td>
+        <div class="content-body">
+            <div class="row ui-grids">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
 
-        <td><?= $form->field($model, 'path') ?></td>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'title') ?>
+                        </div>
 
-        <td><?= $form->field($model, 'content') ?></td>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'content') ?>
+                        </div>
 
-        <td>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?= $form->field($model, 'path') ?>
+                        </div>
 
-            <?= $form->field($model, 'is_using') ?>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <?=
+                            $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
+                                'data'          => ['On' => '启用', 'Off' => '未启用'],
+                                'options'       => ['placeholder' => '审核状态...'],
+                                'pluginOptions' => [
+                                    'allowClear' => true
+                                ],
+                            ]);
+                            ?>
+                        </div>
 
-        </td>
+                    </div>
+                </div>
 
-    </tr>
-    </tbody>
-</table>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+                            <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+                        </div>
+                    </div>
+                </div>
 
-<div class="form-group">
-    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
-    <?= Html::resetButton('重设', ['class' => 'btn btn-default']) ?>
+            </div>
+        </div>
+    </section>
 </div>
 
 <?php ActiveForm::end(); ?>

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Job */
@@ -48,55 +47,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-                <hr/>
-
-                <?=
-                FileUploadUI::widget([
-                    'model'         => $model,
-                    'attribute'     => 'images',
-                    'url'           => ['admin/upload/image-upload', 'id' => $model->job_id, 'type' => 'job'],
-                    'gallery'       => false,
-                    'fieldOptions'  => [
-                        'accept' => 'image/*'
-                    ],
-                    'clientOptions' => [
-                        'maxFileSize'      => 2000000,
-                        'dataType'         => 'json',
-                        'maxNumberOfFiles' => 5,
-                    ],
-
-                    // ...
-                    'clientEvents'  => [
-
-                        'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                                
-                                var html = "";
-                                
-                                var ImagesContent = $("#ImagesContent");
-                                
-                                $.each(data.result.files, function (index, file) {
-                                    html += file.name + \',\';
-                                });
-                                
-                                html += ImagesContent.val();
-                                
-                                ImagesContent.val(html);
-                                
-                                return true;
-                            }',
-                        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-                    ],
-                ]);
-                ?>
-
-                <?= $form->field($model, 'images')->textarea(['id' => 'ImagesContent', 'style' => 'display:none;'])->label(false) ?>
-
-                <hr/>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '招聘图片', 'form' => $form, 'attribute' => 'images', 'id' => $model->job_id]); ?>
 
                 <?=
                 $form->field($model, 'is_audit')->widget(Select2::classname(), [
@@ -120,12 +71,8 @@ use dosamigos\fileupload\FileUploadUI;
 
             </div>
         </div>
-
-        <?= $this->render('../result_img', ['img' => $model->images, 'type' => 'job']); ?>
-
     </section>
 
     <?= $this->render('../../formMsg'); ?>
 
 </div>
-

@@ -23,14 +23,18 @@ use yii\behaviors\TimestampBehavior;
 class PsbClassify extends \yii\db\ActiveRecord
 {
 
-    static public $parent_id = 'S0';
+    static public $parent_cly_id = array(
+        'Supply'   => 'S0',
+        'Purchase' => 'P0',
+        'Bid'      => 'B0',
+    );
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%psb_classify}}';
+        return '{{%PSB_Classify}}';
     }
 
     /**
@@ -49,7 +53,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id', 'is_using', 'is_type'], 'required'],
+            [['name', 'parent_id', 'is_type'], 'required'],
             [['sort_id',], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
@@ -59,6 +63,7 @@ class PsbClassify extends \yii\db\ActiveRecord
 
             [['sort_id',], 'default', 'value' => 1],
             [['keywords',], 'default', 'value' => '暂无!!'],
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 
@@ -92,7 +97,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null, $type = 'Supply')
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         return static::find()->where(['parent_id' => $parent_id, 'is_type' => $type])
             ->orderBy('sort_id', SORT_DESC)
@@ -101,46 +106,30 @@ class PsbClassify extends \yii\db\ActiveRecord
     }
 
     /**
-     * 获取分类
+     * 获取分类 (选项卡)
      *
      * @param null $parent_id
      * @param null $type
      * @return array
      */
-    public function getCls($parent_id = null, $type = 'Supply')
+    public static function getClsSelect($parent_id = null, $type = 'Supply')
     {
 
-        $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         // 初始化
         $result = array();
 
-        switch ($type) {
-
-            default:
-            case 'Supply':
-                $result['S0'] = '顶级父类 !!';
-                break;
-
-            case 'Purchase':
-                $result['P0'] = '顶级父类 !!';
-                break;
-
-            case 'Bid':
-                $result['B0'] = '顶级父类 !!';
-                break;
-        }
-
-        // 产品分类
+        // 所有分类
         $dataClassify = static::findByAll($parent_id, $type);
 
-        $result[ $this->parent_id ] = '顶级分类 !!';
+        $result[ static::$parent_cly_id[ $type ] ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = $this->recursionClsSelect($value);
+            $child = static::recursionClsSelect($value);
 
             if (empty($child))
                 continue;
@@ -157,7 +146,7 @@ class PsbClassify extends \yii\db\ActiveRecord
      * @param $data
      * @param int $num
      */
-    public function recursionClsSelect($data, $num = 1)
+    public static function recursionClsSelect($data, $num = 1)
     {
 
         if (empty($data))
@@ -182,7 +171,7 @@ class PsbClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = $this->recursionClsSelect($value, ($num + 1));
+            $childData = static::recursionClsSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;

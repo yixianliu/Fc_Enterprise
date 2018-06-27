@@ -27,7 +27,7 @@ class Job extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%job}}';
+        return '{{%Job}}';
     }
 
     /**
@@ -46,7 +46,7 @@ class Job extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['job_id', 'user_id', 'title', 'content', 'is_audit'], 'required'],
+            [['job_id', 'user_id', 'title', 'content'], 'required'],
             [['content', 'is_audit'], 'string'],
             [['job_id'], 'string', 'max' => 85],
             [['user_id'], 'string', 'max' => 55],
@@ -56,17 +56,19 @@ class Job extends \yii\db\ActiveRecord
             [['job_id', 'title'], 'unique'],
 
             // 审核
-            [['is_audit', ], 'default', 'value' => 'Off'],
+            [['is_audit',], 'default', 'value' => 'On'],
+            [['images',], 'default', 'value' => null],
         ];
     }
-final
-    /**
-     * @inheritdoc
-     */
+
+    final
+        /**
+         * @inheritdoc
+         */
     public function attributeLabels()
     {
         return [
-            'job_id'     => '招聘 ID',
+            'job_id'     => '招聘编号',
             'user_id'    => '发布者 ID',
             'title'      => '招聘标题',
             'content'    => '招聘内容',

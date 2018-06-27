@@ -35,8 +35,10 @@ class NewsController extends BaseController
      * @param null $id
      * @return string
      */
-    public function actionIndex($id = null)
+    public function actionIndex()
     {
+
+        $id = Yii::$app->request->get('id', null);
 
         $model = empty($id) ? News::find() : News::find()->where(['c_key' => $id]);
 

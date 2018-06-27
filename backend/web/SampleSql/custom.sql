@@ -14,8 +14,8 @@ CREATE TABLE `#DB_PREFIX#WeChat` (
   `title` VARCHAR(125) NOT NULL COMMENT '招聘ID',
   `content` TEXT NOT NULL COMMENT '内容',
   `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
-  `created_at` INT(11) UNSIGNED NOT NULL,
-  `updated_at` INT(11) UNSIGNED NOT NULL,
+  `created_at` integer NOT NULL DEFAULT '0',
+  `updated_at` integer NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -70,10 +70,10 @@ CREATE TABLE `#DB_PREFIX#User_Calendar_Year` (
     KEY `user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
-  /**
-   * 用户设置
-   */
-  DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
+/**
+* 用户设置
+*/
+DROP TABLE IF EXISTS `#DB_PREFIX#User_Config`;
 CREATE TABLE `#DB_PREFIX#User_Config` (
     `conf_id` INT(11) NULL AUTO_INCREMENT,
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
@@ -331,3 +331,29 @@ VALUES
 (NULL, 'HNC1', 1, 'HN6', 'admin', NULL, NULL, '最强人气', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'HNC2', 2, 'HN6', 'admin', NULL, NULL, '精选资源', NULL, 'On', #TIME#, #TIME#),
 (NULL, 'HNC3', 3, 'HN6', 'admin', NULL, NULL, '土豪的世界', NULL, 'On', #TIME#, #TIME#);
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 超级管理员
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+
+/**
+ * 网站功能板块
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Web_Parts`;
+CREATE TABLE `#DB_PREFIX#Web_Parts` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `name` VARCHAR(55) NOT NULL COMMENT '分类关键KEY',
+    `sort_id` INT(11) UNSIGNED NOT NULL COMMENT '排序ID',
+    `r_key` VARCHAR(55) NOT NULL COMMENT '分类角色关键KEY',
+    `name` VARCHAR(85) NOT NULL COMMENT '名称',
+    `description` VARCHAR(255) NOT NULL COMMENT '描述',
+    `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
+    PRIMARY KEY (`id`),
+    KEY `r_key` (`r_key`),
+    UNIQUE KEY `c_key` (`c_key`),
+    UNIQUE `name` (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;

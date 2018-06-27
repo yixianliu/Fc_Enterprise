@@ -45,16 +45,6 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?=
-                    $form->field($model, 's_key')->widget(Select2::classname(), [
-                        'data'          => $result['section'],
-                        'options'       => ['placeholder' => '选择版块...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
@@ -71,9 +61,9 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '缩略图', 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -133,16 +123,6 @@ if (empty($result['classify'])) {
 
                     <?=
                     $form->field($model, 'is_audit')->widget(Select2::classname(), [
-                        'data'          => ['On' => '开启', 'Off' => '关闭'],
-                        'options'       => ['placeholder' => '选择...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
-                    <?=
-                    $form->field($model, 'is_field')->widget(Select2::classname(), [
                         'data'          => ['On' => '开启', 'Off' => '关闭'],
                         'options'       => ['placeholder' => '选择...'],
                         'pluginOptions' => [

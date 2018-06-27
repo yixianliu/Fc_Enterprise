@@ -64,7 +64,7 @@ class MemberController extends Controller
             }
         }
 
-        return $this->render('../login', ['model' => $model]);
+        return $this->render('/mount/login', ['model' => $model]);
     }
 
     /**

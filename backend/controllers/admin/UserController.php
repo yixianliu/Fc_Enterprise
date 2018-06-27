@@ -2,13 +2,14 @@
 
 namespace backend\controllers\admin;
 
-use common\models\ItemRp;
-use common\models\Job;
-use common\models\Purchase;
-use common\models\UserSupply;
+
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use common\models\Role;
+use common\models\Job;
+use common\models\Purchase;
+use common\models\UserSupply;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -51,6 +52,7 @@ class UserController extends BaseController
      */
     public function actionIndex()
     {
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -91,7 +93,7 @@ class UserController extends BaseController
             'model'                => $this->findModel($id),
             'dataJobProvider'      => $dataJobProvider,
             'dataPurchaseProvider' => $dataPurchaseProvider,
-            'dataSupplyProvider' => $dataSupplyProvider,
+            'dataSupplyProvider'   => $dataSupplyProvider,
         ]);
     }
 
@@ -108,16 +110,14 @@ class UserController extends BaseController
 
         $model->user_id = time() . '_' . rand(0000, 9999);
 
-        $data = Yii::$app->request->post();
-
-        if ($model->load($data) && $model->userReg()) {
+        if ($model->load(Yii::$app->request->post()) && $model->userReg()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
             // 初始化
             $result = array();
 
-            $dataRole = ItemRp::findAll(['type' => 1]);
+            $dataRole = Role::findAll(['type' => 1]);
 
             foreach ($dataRole as $value) {
                 $result['role'][ $value['name'] ] = $value['name'];
@@ -142,13 +142,11 @@ class UserController extends BaseController
 
         $model->scenario = 'backend';
 
-        $data = Yii::$app->request->post();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
 
-            $model->password = null;
+        } else {
 
             return $this->render('update', [
                 'model'  => $model,
@@ -156,6 +154,7 @@ class UserController extends BaseController
                     'role' => $this->getRole()
                 ],
             ]);
+
         }
     }
 
@@ -167,6 +166,7 @@ class UserController extends BaseController
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -194,7 +194,7 @@ class UserController extends BaseController
         // 初始化
         $result = array();
 
-        $dataRole = ItemRp::findAll(['type' => 1]);
+        $dataRole = Role::findAll(['type' => 1]);
 
         foreach ($dataRole as $value) {
             $result[ $value['name'] ] = $value['name'];

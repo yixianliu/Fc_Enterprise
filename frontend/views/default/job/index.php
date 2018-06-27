@@ -10,6 +10,7 @@ use yii\widgets\ListView;
 
 $this->title = '招聘中心';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <style type="text/css">
@@ -18,15 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../slide', ['pagekey' => 'job']); ?>
+<?= $this->render('../_slide'); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_left', ['type' => 'job']); ?>
+    <?= $this->render('../_left'); ?>
 
     <div class="right">
 
-        <?= $this->render('../nav'); ?>
+        <?= $this->render('../_nav'); ?>
 
         <div class="content_news_list">
 
@@ -38,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
 
         </div>
+
+        <div class="content_news_list">
+            <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+        </div>
+
     </div>
 
 </div>

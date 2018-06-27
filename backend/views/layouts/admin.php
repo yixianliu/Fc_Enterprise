@@ -2,14 +2,11 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use backend\assets\AppAsset;
-use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
-AppAsset::register($this); // $this 代表视图对象
-
-$ClsMenu = new Menu();
+// $this 代表视图对象
+AppAsset::register($this);
 
 if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE']) || Yii::$app->user->isGuest) {
     return false;
@@ -49,7 +46,7 @@ $this->beginPage();
 
                     <h3>
                         <a href="#"><?= Yii::$app->user->identity->username; ?></a>
-                        <span class="profile-status online"><?= Yii::$app->user->identity->r_key; ?></span>
+                        <span class="profile-status online"><?= Yii::$app->user->identity->item_name; ?></span>
                     </h3>
 
                     <p class="profile-title"><?= Yii::$app->request->userIP; ?></p>
@@ -58,12 +55,7 @@ $this->beginPage();
 
             </div>
 
-            <?=
-            Nav::widget([
-                'options' => ['class' => 'wraplist'],
-                'items'   => $ClsMenu->findMenuNav('A3'),
-            ]);
-            ?>
+            <?= \common\widgets\iMenu\MenuAdmin::widget(['config' => ['A3']]) ?>
 
         </div>
     </div>
@@ -77,16 +69,6 @@ $this->beginPage();
     </section>
 
 </div>
-
-<script type="text/javascript">
-
-    $('.wraplist').children('li').children('ul').removeClass('dropdown-menu').addClass('sub-menu');
-
-    $('.active').parent().parent().addClass('open');
-
-    $('.active').children('a').addClass('active');
-
-</script>
 
 <?php $this->endBody(); ?>
 

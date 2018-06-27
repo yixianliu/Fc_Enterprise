@@ -7,25 +7,45 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\Conf */
 /* @var $form yii\widgets\ActiveForm */
+
+switch ($type) {
+
+    case 'cn':
+        $typeName = '中文';
+        break;
+
+    case 'en':
+        $typeName = '英文';
+        break;
+
+    case 'system':
+        $typeName = '系统配置';
+        break;
+
+    default:
+        $typeName = '???';
+        break;
+}
+
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?> - <?= $typeName ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?php if (!empty($model->is_language)): ?>
+                <?php if ($type != 'system'): ?>
 
                     <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
                 <?php else: ?>
 
-                    <?= $form->field($model, 'c_key')->hiddenInput()->label(false); ?>
+                    <?= $form->field($model, 'c_key')->hiddenInput(['value' => 'Custom_' . time() . '_' . rand(100, 999)])->label(false); ?>
 
                 <?php endif; ?>
 
@@ -53,7 +73,8 @@ use kartik\select2\Select2;
                 ]);
                 ?>
 
-                <?php if (!empty($model->is_language)): ?>
+                <?php if (!empty($model->is_language) && empty($model->id)): ?>
+
                     <?=
                     $form->field($model, 'is_language')->widget(Select2::classname(), [
                         'data'          => ['cn' => '中文', 'en' => '英文'],
@@ -70,7 +91,7 @@ use kartik\select2\Select2;
 
                     <?= Html::submitButton($model->isNewRecord ? '添加网站配置' : '更新网站配置', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['conf', 'type' => (empty($model->is_language) ? 'system' : $model->is_language)], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['conf', 'type' => (empty($type) ? 'system' : $type)], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 

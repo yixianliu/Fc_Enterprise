@@ -21,14 +21,14 @@ use yii\behaviors\TimestampBehavior;
 class NewsClassify extends \yii\db\ActiveRecord
 {
 
-    public static $parent_id = 'C0';
+    public static $parent_cly_id = 'C0';
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%news_classify}}';
+        return '{{%News_Classify}}';
     }
 
     /**
@@ -47,7 +47,7 @@ class NewsClassify extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id', 'is_using'], 'required'],
+            [['name', 'parent_id',], 'required'],
             [['sort_id'], 'integer'],
             [['description', 'is_using'], 'string'],
             [['c_key', 'parent_id'], 'string', 'max' => 55],
@@ -57,7 +57,8 @@ class NewsClassify extends \yii\db\ActiveRecord
             [['name'], 'unique'],
 
             [['sort_id',], 'default', 'value' => 1],
-            [['keywords',], 'default', 'value' => null],
+            [['keywords', 'description'], 'default', 'value' => '暂无 !!'],
+            [['is_using',], 'default', 'value' => 'On'],
         ];
     }
 
@@ -84,7 +85,7 @@ class NewsClassify extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id : $parent_id;
 
         return static::find()
             ->where(['parent_id' => $parent_id])
@@ -96,13 +97,14 @@ class NewsClassify extends \yii\db\ActiveRecord
     /**
      * 获取分类(选项框)
      *
-     * @return mixed
+     * @param string $one
+     * @return array
      */
     public function getClsSelect($one = 'Off')
     {
 
         // 产品分类
-        $dataClassify = static::findByAll(static::$parent_id);
+        $dataClassify = static::findByAll(static::$parent_cly_id);
 
         // 初始化
         $result = array();
@@ -111,7 +113,7 @@ class NewsClassify extends \yii\db\ActiveRecord
         $Cls = new NewsClassify();
 
         if ($one == 'On')
-            $result[ static::$parent_id ] = '顶级分类 !!';
+            $result[ static::$parent_cly_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
@@ -137,7 +139,7 @@ class NewsClassify extends \yii\db\ActiveRecord
     public function getCls($parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? $this->parent_id : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id : $parent_id;
 
         // 初始化
         $result = array();

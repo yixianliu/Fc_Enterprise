@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<default>
+
+    <!-- 目录 -->
+    <paths><path>center</path><name>首页</name></paths>
+    <paths><path>pages</path><name>自定义页面</name></paths>
+    <paths><path>product</path><name>产品中心</name></paths>
+    <paths><path>purchase</path><name>采购中心</name></paths>
+    <paths><path>news</path><name>新闻中心</name></paths>
+    <paths><path>job</path><name>招聘中心</name></paths>
+    <paths><path>mobile</path><name>手机模板</name></paths>
+    <paths><path>supply</path><name>供应中心</name></paths>
+    <paths><path>layouts</path><name>全局文件夹</name></paths>
+
+    <!-- 文件 -->
+    <files><file>index.php</file><name>首页文件</name></files>
+    <files><file>login.php</file><name>登录文件</name></files>
+    <files><file>reg.php</file><name>注册文件</name></files>
+    <files><file>view.php</file><name>查看数据文件</name></files>
+    <files><file>details.php</file><name>详情页面文件</name></files>
+    <files><file>update.php</file><name>更新内容文件</name></files>
+    <files><file>slide.php</file><name>幻灯片文件</name></files>
+    <files><file>center.php</file><name>中心内容文件</name></files>
+    <files><file>list.php</file><name>单页面列表内容文件</name></files>
+    <files><file>_form.php</file><name>表单文件</name></files>
+    <files><file>_list.php</file><name>列表内容文件</name></files>
+    <files><file>create.php</file><name>发布内容文件</name></files>
+
+</default>
+

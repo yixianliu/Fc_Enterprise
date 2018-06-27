@@ -13,9 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-lg-12">
     <section class="box ">
         <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
+            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
@@ -51,7 +49,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->c_key ];
                             },
                         ],
-                        'path',
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/slide/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_using',
                             'value'     => function ($model) {

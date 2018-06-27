@@ -2,10 +2,11 @@
 
 namespace backend\controllers\admin;
 
-use common\models\JobApplyFor;
+
 use Yii;
 use common\models\Job;
 use common\models\JobSearch;
+use common\models\JobApplyFor;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,7 @@ class JobController extends BaseController
      */
     public function behaviors()
     {
+
         return [
 
             'access' => [

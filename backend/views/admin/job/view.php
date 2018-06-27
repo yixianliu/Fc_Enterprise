@@ -10,12 +10,11 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '招聘中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="col-lg-12">
     <section class="box ">
 
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
 
         <div class="content-body">
             <div class="row">
@@ -30,18 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?= DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
-                        'id',
                         'job_id',
                         'user_id',
                         'title',
-                        'content:ntext',
+                        'content:html',
                         'keywords',
-                        'images',
+                        [
+                            'attribute' => 'images',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->images);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/job/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
                         [
                             'attribute' => 'is_audit',
                             'value'     => function ($model) {
@@ -66,6 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]) ?>
 
             </div>

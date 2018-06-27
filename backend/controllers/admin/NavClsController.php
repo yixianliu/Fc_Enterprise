@@ -105,7 +105,7 @@ class NavClsController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'classify' => $this->getCls(),
+                'classify' => PsbClassify::findByAll('P0', 'Purchase'),
             ]
         ]);
     }
@@ -132,32 +132,18 @@ class NavClsController extends BaseController
             return $this->redirect(['view', 'id' => $model->c_key]);
         }
 
-        // 初始化
-        $result = array();
-
-        $result['classify'] = $this->getCls();
-
-        if (empty($model->p_key)) {
+        // 整合
+        if (!empty($model->p_key)) {
 
             // 分解
-            $checkedData = explode(',', $model->p_key);
-
-            foreach ($result['classify'] as $values) {
-                foreach ($checkedData as $value) {
-
-                    if (empty($value['p_key']))
-                        continue;
-
-                    if ($values['p_key'] == $value['p_key']) {
-                        array_push($result['check'], $value['p_key']);
-                    }
-                }
-            }
+            $model->p_key = explode(',', $model->p_key);
         }
 
         return $this->render('update', [
             'model'  => $model,
-            'result' => $result,
+            'result' => [
+                'classify' => PsbClassify::findByAll('P0', 'Purchase'),
+            ],
         ]);
     }
 
@@ -189,29 +175,6 @@ class NavClsController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * 获取产品分类
-     *
-     * @return array
-     */
-    public function getCls()
-    {
-
-        $dataCls = PsbClassify::findByAll('P0', 'Purchase');
-
-        if (empty($dataCls))
-            return false;
-
-        // 初始化
-        $result = array();
-
-        foreach ($dataCls as $value) {
-            $result[ $value['c_key'] ] = $value['name'];
-        }
-
-        return $result;
     }
 
     /**
