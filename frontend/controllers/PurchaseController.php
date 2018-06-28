@@ -66,7 +66,7 @@ class PurchaseController extends BaseController
 
         $result['nav'] = NavClassify::findByAll();
 
-        $result['conf'] = self::leftConf();
+        $result['conf'] = self::WebConf();
 
         return $this->render('center', ['result' => $result,]);
     }
