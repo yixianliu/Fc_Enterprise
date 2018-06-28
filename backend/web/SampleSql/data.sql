@@ -173,8 +173,6 @@ VALUES
 (NULL, 'APPP4', 4, 'AP3', 'admin', 'UU1', NULL, '添加供求', 'supply/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP5', 5, 'AP3', 'admin', 'UU1', NULL, '投标管理', 'bid/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP6', 6, 'AP3', 'admin', 'UU1', NULL, '添加投标', 'bid/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'APPP7', 7, 'AP3', 'admin', 'UU1', NULL, '招标管理', 'tender/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'APPP8', 8, 'AP3', 'admin', 'UU1', NULL, '添加招标', 'tender/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '采供分类', 'psb-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加采供分类', 'psb-cls/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看提交价格', 'sp-offer/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),

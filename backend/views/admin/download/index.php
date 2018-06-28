@@ -74,8 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options'   => ['width' => 180]
                         ],
                         [
-                                'class' => 'yii\grid\ActionColumn',
-                                'options' => ['width' => 100]
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
                         ],
                     ],
                 ]);

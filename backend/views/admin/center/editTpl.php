@@ -13,6 +13,13 @@ $this->title = '编辑模板';
 
 ?>
 
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+<?= Html::cssFile('@web/themes/assets/plugins/bootstrap3-wysihtml5/css/bootstrap3-wysihtml5.min.css') ?>
+<?= Html::cssFile('@web/themes/assets/plugins/uikit/css/uikit.min.css') ?>
+<?= Html::cssFile('@web/themes/assets/plugins/uikit/vendor/codemirror/codemirror.css') ?>
+<?= Html::cssFile('@web/themes/assets/plugins/uikit/css/components/htmleditor.css') ?>
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+
 <div class="col-lg-12">
     <section class="box ">
 
@@ -27,7 +34,7 @@ $this->title = '编辑模板';
 
                 <?= $form->field($model, 'fileName')->textInput(['maxlength' => true, 'disabled' => 'disabled']) ?>
 
-                <?= $form->field($model, 'content')->textarea(['rows' => 32]) ?>
+                <?= $form->field($model, 'content')->textarea(['rows' => 32, 'data-uk-htmleditor' => "{mode:'tab', markdown:true}"]) ?>
 
                 <div class="form-group">
 
@@ -46,3 +53,16 @@ $this->title = '编辑模板';
 
     </section>
 </div>
+
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+<?= Html::jsFile('@web/themes/assets/plugins/bootstrap3-wysihtml5/js/bootstrap3-wysihtml5.all.min.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/ckeditor/ckeditor.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/js/uikit.min.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/codemirror/codemirror.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/codemirror/mode/markdown/markdown.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/codemirror/addon/mode/overlay.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/codemirror/mode/xml/xml.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/codemirror/mode/gfm/gfm.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/vendor/marked/marked.min.js') ?>
+<?= Html::jsFile('@web/themes/assets/plugins/uikit/js/components/htmleditor.js') ?>
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
