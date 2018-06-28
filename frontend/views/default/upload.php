@@ -1,5 +1,8 @@
 <?php
 /**
+ *
+ * 前端上传插件整合
+ *
  * Created by Yxl.
  * User: <zccem@163.com>.
  * Date: 2018/3/28
@@ -10,11 +13,13 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use dosamigos\fileupload\FileUploadUI;
 
+// 对应模型字段
 $attribute = empty($attribute) ? 'path' : $attribute;
 
-$id = empty($id) ? $model->user_id : $id;
+// Id为空的话,默认为用户Id
+$id = empty($id) ? Yii::$app->user->identity->user_id : $id;
 
-// 上传类型
+// 上传类型 (image, file)
 $uploadType = empty($uploadType) ? 'image' : $uploadType;
 
 // 数量
@@ -37,7 +42,7 @@ if (!empty($model->$attribute)) {
     }
 }
 
-$text = empty($text) ? '没有描述' : $text;
+$text = empty($text) ? '提供相关图片' : $text;
 
 ?>
 
@@ -50,7 +55,7 @@ $text = empty($text) ? '没有描述' : $text;
 
 <hr/>
 
-<div class="form-group" title="">
+<div class="form-group">
 
     <?= $form->field($model, $attribute)->textInput(['style' => 'display:none;']) ?>
 
@@ -96,19 +101,33 @@ $text = empty($text) ? '没有描述' : $text;
                                 }
                                 
                                 ImagesContent.attr("value", html);
-                      
+                                
+                                if (data.result.error != "") {
+                                    $("#UploadMessage").show().append(data.result.message);
+                                }
                                 return true;
                             }',
 
             'fileuploadfail' => 'function(e, data) {
+            
                                 console.log(e);
                                 console.log(data);
+                                
+                                return false;
                             }',
         ],
     ]);
     ?>
 
     <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>
+                <div id='UploadMessage' style='display: none;'><span class="label label-danger">错误</span>&nbsp;&nbsp;</div>
+            </h5>
+        </div>
+    </div>
 
 </div>
 
@@ -125,11 +144,11 @@ $text = empty($text) ? '没有描述' : $text;
 
                     <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . $model->user_id . '/' . $id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                        <?= Html::img(Url::to('@web/temp/') . Yii::$app->user->identity->user_id . '/' . $id . '/' . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
+                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . Yii::$app->user->identity->user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php else: ?>
 
@@ -155,6 +174,7 @@ $text = empty($text) ? '没有描述' : $text;
 
         <script type="text/javascript">
 
+            // 删除图片(并删除文件)
             $('.DeleteImg').on('click', function () {
 
                 var DeleteImgText = $(this).find('.DeleteImgHidden').val();
@@ -182,9 +202,9 @@ $text = empty($text) ? '没有描述' : $text;
 
                     },
                     error: function (XMLHttpRequest, textStatus) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
+                        console.log(XMLHttpRequest.status);
+                        console.log(XMLHttpRequest.readyState);
+                        console.log(textStatus);
                         return false;
                     }
                 });
@@ -200,8 +220,10 @@ $text = empty($text) ? '没有描述' : $text;
 
     <?php else: ?>
 
-        <div class="col-sm-12">
-            <h3>暂无相关内容 !!</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>暂无相关内容 !!</h3>
+            </div>
         </div>
 
     <?php endif ?>

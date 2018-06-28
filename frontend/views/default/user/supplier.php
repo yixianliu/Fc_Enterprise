@@ -10,7 +10,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = '企业用户资料';
+$this->title = '企业商户档案';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="cont-title"><span><?= $this->title ?></span></div>
 
         <div class="row">
-            <div class="col-xs-12" style="font-size: 12px;margin: 0;padding: 20px 0px;">
+            <div class="col-md-12">
+
+                <br/>
+                <br/>
 
                 <?php
                 $form = ActiveForm::begin([
@@ -38,31 +41,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
 
                 <div class="form-group">
-                    <label for="nickname" class="col-sm-2 control-label">企业名称:</label>
-                    <div class="col-sm-10">
-
-                        <?=
-                        $form->field($model, 'name')
-                            ->textInput(['maxlength' => true, 'aria-describedby' => '昵称', 'placeholder' => '昵称'])
-                            ->label(false)
-                        ?>
-
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => '请输入商户名称...'])->label(false) ?>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="person" class="col-sm-2 control-label">企业介绍:</label>
-                    <div class="col-sm-10">
-
-                        <?= $form->field($model, 'content')->textarea(['rows' => 10])->label(false) ?>
-
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'content')->textarea(['rows' => 10, 'placeholder' => '请输入商户介绍...']) ?>
                     </div>
                 </div>
 
                 <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->user_id]); ?>
 
-                <div class="form-group" style="margin-left: 0px;margin-right: 0px;">
-                    <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-12">
                         <?= Html::submitButton('修改企业用户资料', ['class' => 'btn btn-red']) ?>
                     </div>
                 </div>

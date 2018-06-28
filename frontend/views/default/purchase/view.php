@@ -147,7 +147,7 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
                                 <p><?= $form->field($modelOffer, 'content')->textarea(['rows' => 6]); ?></p>
 
-                                <p><?= $this->render('../upload', ['model' => $modelOffer, 'text' => '提供相关图片', 'form' => $form, 'attribute' => 'path', 'id' => 1]); ?></p>
+                                <p><?= $this->render('../upload', ['model' => $modelOffer, 'form' => $form, 'id' => $model->purchase_id]); ?></p>
 
                                 <p><?= Html::submitButton('提交内容', ['class' => 'btn btn-red']) ?></p>
 

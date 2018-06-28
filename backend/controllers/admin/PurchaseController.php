@@ -230,7 +230,7 @@ class PurchaseController extends BaseController
             return false;
         }
 
-        $user = User::findAll(['is_type' => 'supplier']);
+        $user = User::findAll(['is_type' => 'purchase']);
 
         if (empty($user)) {
             return false;

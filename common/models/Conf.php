@@ -81,8 +81,7 @@ class Conf extends \yii\db\ActiveRecord
 
         $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
 
-        return static::find()
-            ->where($array)
+        return static::find()->where($array)
             ->andWhere(['is_language' => $language])
             ->asArray()
             ->all();

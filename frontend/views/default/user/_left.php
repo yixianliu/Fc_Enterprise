@@ -11,7 +11,10 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\widgets\iConf\ConfList;
+
+
+// 侧边栏的官方内容
+$result['Conf'] = \frontend\controllers\BaseController::WebConf();
 
 ?>
 
@@ -57,7 +60,12 @@ use common\widgets\iConf\ConfList;
 
         <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
 
-        <?= ConfList::widget(['config' => [$this->title, 'left']]); ?>
+        <ul class="contact_us">
+            <li><a><?= Yii::t('app', 'company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
+            <li><a><?= Yii::t('app', 'contacts') ?> ：<?= $result['Conf']['PERSON'] ?></a></li>
+            <li><a><?= Yii::t('app', 'phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
+            <li><a><?= Yii::t('app', 'address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
+        </ul>
 
     </div>
 

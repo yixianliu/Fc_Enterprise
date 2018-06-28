@@ -60,7 +60,7 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
 
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav nav-pills">
-                        <li><a title="" href="<?= Url::to(['/']) ?>">网站首页</a></li>
+                        <li><a title="" href="<?= Url::to(['/center/index']) ?>">网站首页</a></li>
                         <li><a title="" href="<?= Url::to(['/purchase/center']) ?>">采购中心</a></li>
                         <li class="dropdown">
 

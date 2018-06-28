@@ -57,11 +57,11 @@ class UserSupply extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name'       => '名称',
-            'content'    => '内容',
+            'name'       => '商户名称',
+            'content'    => '商户内容',
             'path'       => '路径',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => '添加数据时间',
+            'updated_at' => '更新数据时间',
         ];
     }
 }

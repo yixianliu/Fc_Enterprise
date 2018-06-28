@@ -12,6 +12,7 @@
 namespace frontend\controllers;
 
 use common\models\Menu;
+use function GuzzleHttp\Promise\all;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -81,7 +82,7 @@ class BaseController extends Controller
         return [
 
             // 错误
-            'error' => [
+            'error'  => [
                 'class' => 'yii\web\ErrorAction',
             ],
 
@@ -101,20 +102,27 @@ class BaseController extends Controller
     /**
      * 左边的侧边栏的内容
      *
-     * @return bool|string|void
+     * @param null $system
+     * @return array
      */
-    public static function leftConf()
+    public static function WebConf($system = null)
     {
 
         // 初始化
         $result = array();
 
-        $confData = Conf::findByData('On');
+        if (empty($system)) {
+            $confData = Conf::findByData('On', Yii::$app->session['language']);
+        } else {
+            $confData = Conf::find()->where(['is_using' => 'On', 'is_language' => ''])->asArray()->all();
+        }
 
         if (!empty($confData)) {
+
             foreach ($confData as $key => $value) {
                 $result[ $value['c_key'] ] = $value['parameter'];
             }
+
         }
 
         return $result;
