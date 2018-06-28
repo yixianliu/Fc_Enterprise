@@ -90,8 +90,8 @@ function myScrolls() {
 }
 
 // 商城分类插件
-function slidesd(){
-    $("#nav .tit").slides({
+function silmenu(){
+    $("#nav .tit").slide({
         type:"menu",
         titCell:".mod_cate",
         targetCell:".mod_subcate",

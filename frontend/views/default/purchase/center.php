@@ -25,8 +25,8 @@ $this->title = '采购平台';
 
 <script type='text/javascript'>
     $(function () {
-        slidesd();
         myScrolls();
+        silmenu();
     });
 </script>
 
