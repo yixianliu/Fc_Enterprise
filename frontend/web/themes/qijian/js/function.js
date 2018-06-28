@@ -81,9 +81,17 @@ function shows(){
     });
 }
 
+// 文字上下滚动
+function myScrolls() {
+    $('.myscroll').myScroll({
+        speed: 40,          // 数值越大，速度越慢
+        rowHeight: 30       // li的高度
+    });
+}
+
 // 商城分类插件
-function slides(){
-    $("#nav .tit").slide({
+function slidesd(){
+    $("#nav .tit").slides({
         type:"menu",
         titCell:".mod_cate",
         targetCell:".mod_subcate",
@@ -103,14 +111,6 @@ function navHover() {
             $('#nav').find('ul.tit').css('display','none');
         }
     );
-}
-
-// 文字上下滚动
-function myScrolls() {
-    $('.myscroll').myScroll({
-        speed: 40,          // 数值越大，速度越慢
-        rowHeight: 30       // li的高度
-    });
 }
 
 // 返回头部和导航菜单固定头部
