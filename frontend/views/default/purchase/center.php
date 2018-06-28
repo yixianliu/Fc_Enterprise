@@ -8,7 +8,6 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 $this->title = '采购平台';
 
@@ -35,8 +34,6 @@ $this->title = '采购平台';
 
         <div class='search'>
 
-            <?php $form = ActiveForm::begin(['action' => ['search/purchase'], 'method' => 'post', 'fieldConfig' => ['template' => '<div>{input}</div>', 'inputOptions' => ['class' => 'form-control'],], 'options' => ['class' => 'form-horizontal']]); ?>
-
             <div class='input-group'>
 
                 <form name='search' action='<?= Url::to(['/search/product']) ?>' method='get'>
@@ -53,8 +50,6 @@ $this->title = '采购平台';
                 </form>
 
             </div>
-
-            <?php ActiveForm::end() ?>
 
         </div>
         <!-- #搜索 -->
@@ -101,8 +96,6 @@ $this->title = '采购平台';
 
                     <div class='nav-cont-title'>会员登录</div>
 
-                    <?php $form = ActiveForm::begin(['action' => ['member/login'], 'method' => 'post', 'fieldConfig' => ['template' => '<div>{input}</div>', 'inputOptions' => ['class' => 'form-control'],], 'options' => ['class' => 'form-horizontal']]); ?>
-
                     <div class='input-group'>
                         <span class='input-group-addon'><i class='glyphicon glyphicon-user'></i></span>
                         <input type='text' class='form-control' placeholder='帐号' aria-describedby='帐号'/>
@@ -120,8 +113,6 @@ $this->title = '采购平台';
                     <div class='input-group'>
                         <a class='reg' title='' href='<?= Url::to(['/member/reg']); ?>'>免费注册</a>
                     </div>
-
-                    <?php ActiveForm::end(); ?>
 
                 <?php else: ?>
 
