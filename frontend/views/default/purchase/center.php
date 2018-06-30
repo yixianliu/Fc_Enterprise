@@ -34,9 +34,9 @@ $this->title = '采购平台';
 
         <div class='search'>
 
-            <div class='input-group'>
+            <form name='search' action='<?= Url::to(['/search/product']) ?>' method='get'>
 
-                <form name='search' action='<?= Url::to(['/search/product']) ?>' method='get'>
+                <div class='input-group'>
 
                     <div class='input-group-btn'>
                         <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -47,9 +47,9 @@ $this->title = '采购平台';
                     <input type='text' class='form-control' aria-label='请输入您要查询的关键字' placeholder='请输入您要查询的关键字' name='title'/>
                     <span class='input-group-btn'><input type='submit' class='btn btn-red' value='搜索'/></span>
 
-                </form>
+                </div>
 
-            </div>
+            </form>
 
         </div>
         <!-- #搜索 -->
