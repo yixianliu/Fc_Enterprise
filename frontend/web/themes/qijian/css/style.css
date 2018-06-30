@@ -1217,10 +1217,11 @@ a:active {
     float:left;
     position:relative;
     margin: 5px 0 0 0;
+    padding-right: 10px;
     border:1px solid #000;
     overflow:hidden;
     background: #393937;
-    text-align: center;
+    text-indent: 15px;
 }
 
 .acttabbox .tabnav li:last-child {
@@ -1229,6 +1230,10 @@ a:active {
 
 .acttabbox .tabnav li a {
     color: #fff;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .acttabbox .tabnav li a .pro-icon {
@@ -1237,7 +1242,7 @@ a:active {
     float: left;
     position: relative;
     top: 19px;
-    left: 30px;
+    left: 10px;
     background: url(../images/pro-icon.png) no-repeat center 0;
 }
 
