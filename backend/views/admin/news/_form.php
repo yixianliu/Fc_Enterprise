@@ -38,6 +38,8 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'introduction')->textarea(['rows' => 6, 'maxlength' => true, 'placeholder' => '新闻导读,内容也是十分重要的...']) ?>
 
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'text' => '缩略图', 'attribute' => 'images', 'id' => $model->news_id, 'num' => 1]); ?>
+
                     <?=
                     $form->field($model, 'content')
                         ->widget('kucha\ueditor\UEditor', [
@@ -53,57 +55,55 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->news_id, 'num' => 1]); ?>
-
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->news_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'text' => '多图上传', 'attribute' => 'path', 'id' => $model->news_id]); ?>
 
                     <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true, 'placeholder' => '数值越大,越靠前...']) ?>
 
                     <?=
                     $form->field($model, 'is_promote')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '推广...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_hot')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '热门...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_winnow')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '精选...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_recommend')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '推荐...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_audit')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '审核...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_comments')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '评论...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_img')->widget(Select2::classname(), [
-                        'data'    => ['On' => '启用', 'Off' => '未启用'],
+                        'data'    => ['On' => '已启用', 'Off' => '未启用'],
                         'options' => ['placeholder' => '是否有上传图片...'],
                     ]);
                     ?>

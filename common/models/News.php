@@ -118,6 +118,36 @@ class News extends \yii\db\ActiveRecord
     }
 
     /**
+     * 查询推荐新闻
+     *
+     * @param int $num
+     * @return \yii\db\BatchQueryResult
+     */
+    public static function findByRecommend($num = 5)
+    {
+        return static::find()->where(['is_audit' => 'On', 'is_recommend' => 'On'])
+            ->orderBy('news_id', SORT_DESC)
+            ->asArray()
+            ->count($num);
+    }
+
+    /**
+     * 查询热门新闻
+     *
+     * @param int $num
+     * @return int|string
+     */
+    public static function findByHot($num = 1)
+    {
+        return static::find()->where(['is_audit' => 'On', 'is_hot' => 'On'])
+            ->orderBy('news_id', SORT_DESC)
+            ->joinWith('user')
+            ->joinWith('admin')
+            ->asArray()
+            ->count($num);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getUser()

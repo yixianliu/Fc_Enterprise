@@ -1,5 +1,8 @@
 <?php
 /**
+ *
+ * 采购平台
+ *
  * Created by Yxl.
  * User: <zccem@163.com>.
  * Date: 2018/2/6
@@ -14,12 +17,8 @@ $this->title = '采购平台';
 ?>
 
 <?= Html::cssFile('@web/themes/qijian/css/nav.css') ?>
-
-<!-- 商城分类插件 -->
 <?= Html::jsFile('@web/themes/qijian/js/jquery1.42.min.js') ?>
 <?= Html::jsFile('@web/themes/qijian/js/jquery.SuperSlide.2.1.1.js') ?>
-
-<!-- 文字上下滚动 -->
 <?= Html::jsFile('@web/themes/qijian/js/scroll.js') ?>
 
 <script type='text/javascript'>
@@ -64,24 +63,24 @@ $this->title = '采购平台';
 
                 <?php foreach ($result['nav'] as $value): ?>
                     <li class='mod_cate'>
-                        <h2>
-                            <i class='arrow_dot fr'></i>
-                            <a title='' href=''> <?= $value['name'] ?></a>
-                        </h2>
+
+                        <h2><i class='arrow_dot fr'></i><a title='' href=''> <?= $value['name'] ?></a></h2>
 
                         <div class='mod_subcate'>
 
                             <div class='mod_subcate_main'>
                                 <dl>
-                                    <dt>商家产品</dt>
-                                    <dd>
-                                        <a title='' href=''>金属 /</a>
-                                        <a title='' href=''>木材 /</a>
-                                        <a title='' href=''>竹</a>
-                                    </dd>
+                                    <dt>导航分类 :</dt>
+                                    <dd><?= $value['name'] ?></dd>
                                 </dl>
                             </div>
+
+                            <?php foreach ($value['child'] as $valueChild): ?>
+                                <h4><?= $valueChild->name ?></h4>
+                            <?php endforeach; ?>
+
                         </div>
+
                     </li>
                 <?php endforeach; ?>
 
@@ -107,7 +106,7 @@ $this->title = '采购平台';
                     </div>
 
                     <div class='input-group'>
-                        <?= Html::submitButton('登录', ['class' => 'btn btn-red']) ?>
+                        <a class='btn btn-red' title='立即登录' href='<?= Url::to(['/member/reg']); ?>'>立即登录</a>
                     </div>
 
                     <div class='input-group'>
@@ -261,18 +260,22 @@ $this->title = '采购平台';
     <div class='h-news-cont'>
 
         <div class='left'>
-            <a title='' href=''>
-                <?= Html::img(Url::to('@web/themes/qijian/images/news_big.jpg'), ['alt' => $this->title]); ?>
-            </a>
+
+            <?php if (!empty($result['news']['hot'])): ?>
+                <a title='<?= $result['news']['hot']['title'] ?>' href='<?= Url::to(['/news/view', 'id' => $result['news']['hot']['new_id']]) ?>'>
+                    <?= Html::img(Url::to('@web/themes/qijian/images/news_big.jpg'), ['alt' => $result['news']['hot']['title']]); ?>
+                </a>
+            <?php endif; ?>
+
         </div>
 
         <div class='right'>
 
-            <?php if (!empty($result['news'])): ?>
+            <?php if (!empty($result['news']['recommend'])): ?>
 
                 <ul>
 
-                    <?php foreach ($result['news'] as $value): ?>
+                    <?php foreach ($result['news']['recommend'] as $value): ?>
                         <li>
                             <div class='news-left'>
                                 <a title='<?= $value['title'] ?>' href='<?= Url::to(['/news/view', 'id' => $value['id']]) ?>'>

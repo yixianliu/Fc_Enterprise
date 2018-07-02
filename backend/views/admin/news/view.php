@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-lg-12">
     <section class="box ">
 
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
 
         <div class="content-body">
             <div class="row">
@@ -52,15 +50,95 @@ $this->params['breadcrumbs'][] = $this->title;
                         'title',
                         'introduction',
                         'keywords',
-                        'praise',
-                        'forward',
-                        'collection',
-                        'share',
-                        'attention',
-                        'is_promote',
-                        'is_hot',
-                        'is_winnow',
-                        'is_recommend',
+                        [
+                            'attribute' => 'images',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->images);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/news/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
+                        [
+                            'attribute' => 'path',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode(',', $model->path);
+
+                                $data = null;
+
+                                foreach ($imgArray as $value) {
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/news/' . $value . '" /><br /><br />';
+                                }
+
+                                return $data;
+                            },
+                        ],
+//                        'praise',
+//                        'forward',
+//                        'collection',
+//                        'share',
+//                        'attention',
+                        [
+                            'attribute' => 'is_promote',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已开启推广状态',
+                                    'Off' => '未开启推广状态',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_hot',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已开启热门状态',
+                                    'Off' => '未开启热门状态',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_winnow',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已开启精选状态',
+                                    'Off' => '未开启精选状态',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
+                        [
+                            'attribute' => 'is_recommend',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'On'  => '已开启推荐状态',
+                                    'Off' => '未开启推荐状态',
+                                ];
+
+                                return $state[ $model->is_audit ];
+                            },
+                        ],
                         [
                             'attribute' => 'is_audit',
                             'value'     => function ($model) {
@@ -83,8 +161,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $state[ $model->is_audit ];
                             },
                         ],
-                        'is_img',
-                        'is_thumb',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {

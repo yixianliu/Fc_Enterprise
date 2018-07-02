@@ -13,12 +13,18 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use dosamigos\fileupload\FileUploadUI;
 
+if (empty($model) || empty($form))
+    exit(false);
+
 $attribute = empty($attribute) ? 'path' : $attribute;
 
 $id = empty($id) ? 1 : $id;
 
-// 上传类型
-$uploadType = empty(Yii::$app->controller->id) ? 'image' : Yii::$app->controller->id;
+// 用户 Id
+$user_id = empty($user_id) ? Yii::$app->user->identity->user_id : $user_id;
+
+// 上传文件后缀名
+$uploadType = empty($uploadType) ? 'image' : $uploadType;
 
 // 数量
 $num = empty($num) ? 5 : $num;
@@ -61,11 +67,9 @@ $text = empty($text) ? '没有描述' : $text;
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute],
+        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
         'gallery'       => false,
-        'fieldOptions'  => [
-            'accept' => $uploadType . '/*'
-        ],
+        'options'       => ['accept' => $uploadType . '/*'],
         'clientOptions' => [
             'maxFileSize'      => 2000000,
             'dataType'         => 'json',
@@ -85,7 +89,7 @@ $text = empty($text) ? '没有描述' : $text;
                                 var num = ' . $num . ';
                                 
                                 var html = "";
-                                
+                                 
                                 if (num > 1) {
                                 
                                     $.each(data.result.files, function (index, file) {
@@ -99,18 +103,38 @@ $text = empty($text) ? '没有描述' : $text;
                                 }
                                 
                                 ImagesContent.attr("value", html);
-                      
+                                
+                                if (data.result.error != "") {
+                                    $("#UploadMessage").show().append(data.result.message);
+                                }
+                                
                                 return true;
                             }',
+
             'fileuploadfail' => 'function(e, data) {
+            
                                 console.log(e);
                                 console.log(data);
+                                
+                                 if (data.result.error != "") {
+                                    $("#UploadMessage").show().append(data.result.message);
+                                 }
+                                
+                                return false;
                             }',
         ],
     ]);
     ?>
 
     <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>
+                <div id='UploadMessage' style='display: none;'><span class="label label-danger">错误</span>&nbsp;&nbsp;</div>
+            </h5>
+        </div>
+    </div>
 
 </div>
 
@@ -184,11 +208,9 @@ $text = empty($text) ? '没有描述' : $text;
                     dataType: "json",
                     url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
                     success: function (data) {
-
                         return true;
                     },
                     error: function (XMLHttpRequest, textStatus) {
-
                         alert(XMLHttpRequest.status);
                         alert(XMLHttpRequest.readyState);
                         alert(textStatus);
@@ -207,7 +229,11 @@ $text = empty($text) ? '没有描述' : $text;
 
     <?php else: ?>
 
-        <h3>暂无相关内容 !!</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>暂无相关内容 !!</h3>
+            </div>
+        </div>
 
     <?php endif ?>
 

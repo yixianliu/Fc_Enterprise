@@ -51,7 +51,7 @@ return [
             'errorAction' => 'admin/center/error',
         ],
 
-        'urlManager'  => [
+        'urlManager'   => [
             'enablePrettyUrl' => true,
             'showScriptName'  => true,
             "rules"           => [
@@ -63,7 +63,7 @@ return [
 
         // components数组中加入authManager组件,有PhpManager和DbManager两种方式,
         // PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
-        'authManager' => [
+        'authManager'  => [
             'class'           => 'yii\rbac\DbManager',
             'defaultRoles'    => ['guest'],
 
@@ -77,14 +77,18 @@ return [
         // 管理样式文件
         'assetManager' => [
             'bundles' => [
-                'yii\bootstrap\BootstrapAsset'       => [
+
+                'yii\bootstrap\BootstrapAsset' => [
                     'css'        => [],  // 去除 bootstrap.css
                     'sourcePath' => null, // 防止在 frontend/web/asset 下生产文件
                 ],
+
                 'yii\bootstrap\BootstrapPluginAsset' => [
                     'js'         => [],  // 去除 bootstrap.js
                     'sourcePath' => null,  // 防止在 frontend/web/asset 下生产文件
                 ],
+
+
             ],
         ],
 

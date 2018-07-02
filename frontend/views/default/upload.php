@@ -105,6 +105,7 @@ $text = empty($text) ? '提供相关图片' : $text;
                                 if (data.result.error != "") {
                                     $("#UploadMessage").show().append(data.result.message);
                                 }
+                                
                                 return true;
                             }',
 

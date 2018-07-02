@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use common\models\NavClassify;
-use common\models\SpOffer;
-use common\models\News;
 use Yii;
 use common\models\Purchase;
 use common\models\PsbClassify;
+use common\models\NavClassify;
+use common\models\SpOffer;
+use common\models\News;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,9 +62,12 @@ class PurchaseController extends BaseController
 
         $result['result'] = Purchase::findAll(['is_using' => 'On']);
 
-        $result['news'] = News::findAll(['is_audit' => 'On']);
+        // 新闻
+        $result['news']['recommend'] = News::findByRecommend(5);
+        $result['news']['hot'] = News::findByHot(1);
 
-        $result['nav'] = NavClassify::findByAll();
+        // 导航分类
+        $result['nav'] = NavClassify::findByData();
 
         $result['conf'] = self::WebConf();
 

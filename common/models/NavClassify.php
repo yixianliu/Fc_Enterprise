@@ -98,6 +98,35 @@ class NavClassify extends \yii\db\ActiveRecord
     }
 
     /**
+     * 查询导航分类,整合相关分类
+     *
+     * @return array|NavClassify[]|\yii\db\ActiveRecord[]
+     */
+    public static function findByData()
+    {
+
+        $result = static::find()->where(['is_using' => 'On'])
+            ->orderBy('sort_id', SORT_DESC)
+            ->asArray()
+            ->all();
+
+        foreach ($result as $key => $value) {
+
+            $child = explode(',', $value['p_key']);
+
+            foreach ($child as $valueChild) {
+
+                if (empty($valueChild))
+                    continue;
+
+                $result[$key]['child'][] = PsbClassify::findOne(['c_key' => $valueChild]);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getProduct()

@@ -11,20 +11,12 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Download;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use common\models\Product;
-use common\models\Slide;
-use common\models\Job;
-use common\models\Purchase;
-use common\models\Resume;
 use common\models\Conf;
-use common\models\Pages;
-use common\models\PagesList;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -61,23 +53,20 @@ class UploadController extends BaseController
     }
 
     /**
-     * 上传
+     * 上传文件
      *
-     * @param $id
+     * @param int $id
      * @param $type
+     * @param $ext
      * @param string $attribute
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id = 1, $type, $attribute = 'images')
+    public function actionImageUpload($id, $type, $ext, $attribute = 'images')
     {
 
-        if (empty($type)) {
-            return Json::encode(['message' => '参数有误 !!']);
-        }
-
-        // 初始化
-        $ext = array();
+        if (empty($type) || empty($ext))
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '参数错误 !!']);
 
         switch ($type) {
 
@@ -86,73 +75,75 @@ class UploadController extends BaseController
                 $model = new Conf();
                 break;
 
+            // 新闻
+            case 'news':
+                $model = new \common\models\News();
+                break;
+
             // 产品
             case 'product':
-                $model = new Product();
+                $model = new \common\models\Product();
                 break;
 
             // 幻灯片
             case 'slide':
-                $model = new Slide();
+                $model = new \common\models\Slide();
                 break;
 
             // 简历中心
             case 'resume':
-                $model = new Resume();
+                $model = new \common\models\Resume();
                 break;
 
             // 简历中心
             case 'download':
-                $model = new Download();
+                $model = new \common\models\Download();
                 break;
 
             // 招聘中心
             case 'job':
-                $model = new Job();
+                $model = new \common\models\Job();
                 break;
 
             // 采购中心
             case 'purchase':
-                $model = new Purchase();
+                $model = new \common\models\Purchase();
                 break;
 
             // 单页面
             case 'pages':
-                $model = new Pages();
+                $model = new \common\models\Pages();
                 break;
 
             case 'pages-list':
-                $model = new PagesList();
+                $model = new \common\models\PagesList();
                 break;
 
             default:
-                return Json::encode(['message' => '没有此模型 !!']);
+                return Json::encode([
+                    'error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!'
+                ]);
                 break;
         }
 
         // 上传组件对应model
         $imageFile = UploadedFile::getInstance($model, $attribute);
 
-        // 判断上传格式
-        if (!empty($ext)) {
-            if (!in_array($imageFile->extension, $ext)) {
-                return Json::encode(['status' => false, 'message' => '上传格式有问题 !!']);
-            }
-        }
+        if (!$imageFile)
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传文件异常 !!']);
+
+        // 验证后缀名
+        if (!static::UploadExt($ext, $imageFile->extension))
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传格式有问题 !!']);
 
         // 上传路径
-        $directory = Yii::getAlias('@backend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
+        $directory = Yii::getAlias('@backend/../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
 
-        if (!is_dir($directory)) {
+        if (!is_dir($directory))
             FileHelper::createDirectory($directory);
-        }
 
-        if (!$imageFile) {
-            return Json::encode(['status' => false, 'message' => '上传文件异常 !!']);
-        }
+        $fileName = time() . '_' . $type . '_' . rand(10000, 99999) . '.' . $imageFile->extension;
 
-        $uid = time() . '_' . $type . '_' . rand(10000, 99999);
-        $fileName = $uid . '.' . $imageFile->extension;
         $filePath = $directory . $fileName;
 
         if ($imageFile->saveAs($filePath)) {
@@ -173,7 +164,7 @@ class UploadController extends BaseController
             ]);
         }
 
-        return Json::encode(['status' => false, 'message' => '上传失败 !!']);
+        return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传失败 !!']);
     }
 
     /**
@@ -216,6 +207,53 @@ class UploadController extends BaseController
         }
 
         return Json::encode($output);
+    }
+
+    /**
+     * 获取网站配置来判断后缀
+     *
+     * @param $ext
+     * @param $fileExt
+     * @return array
+     */
+    public static function UploadExt($ext, $fileExt)
+    {
+
+        if (empty($ext) || empty($fileExt))
+            return false;
+
+        // 初始化
+        $result = array();
+
+        $confData = Conf::find()->where(['is_using' => 'On', 'is_language' => null])->asArray()->all();
+
+        if (empty($confData))
+            return false;
+
+        foreach ($confData as $value) {
+            $result[ $value['c_key'] ] = $value['parameter'];
+        }
+
+        switch ($ext) {
+
+            case 'image':
+
+                // 格式
+                if (empty($result['IMAGE_UPLOAD_TYPE']) || !strpos($result['IMAGE_UPLOAD_TYPE'], $fileExt)) {
+                    return false;
+                }
+                break;
+
+            case 'file':
+
+                // 格式
+                if (empty($result['FILE_UPLOAD_TYPE']) || !strpos($result['FILE_UPLOAD_TYPE'], $fileExt)) {
+                    return false;
+                }
+                break;
+        }
+
+        return true;
     }
 
 }

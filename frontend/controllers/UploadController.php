@@ -11,6 +11,7 @@
 
 namespace frontend\controllers;
 
+
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
@@ -19,6 +20,7 @@ use yii\helpers\Url;
 use common\models\Resume;
 use common\models\SpOffer;
 use common\models\UserSupply;
+use common\models\Conf;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -97,16 +99,11 @@ class UploadController extends BaseController
         $imageFile = UploadedFile::getInstance($model, $attribute);
 
         // 初始化
-        $ConfExt = self::WebConf('On');
+        $ConfExt = static::WebConf('On');
 
         // 格式
         if (empty($ConfExt['IMAGE_UPLOAD_TYPE']) || !strpos($ConfExt['IMAGE_UPLOAD_TYPE'], $imageFile->extension)) {
-            return Json::encode([
-                'error'   => 8003,
-                'success' => false,
-                'status'  => false,
-                'message' => '上传格式有问题 !!'
-            ]);
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传格式有问题 !!']);
         }
 
         // 上传路径 (物理路径)
@@ -143,10 +140,7 @@ class UploadController extends BaseController
         }
 
         return Json::encode([
-            'error'   => 8003,
-            'success' => false,
-            'status'  => false,
-            'message' => '上传失败 !!'
+            'error' => 8003, 'success' => false, 'status' => false, 'message' => '上传失败 !!'
         ]);
     }
 
@@ -191,5 +185,6 @@ class UploadController extends BaseController
 
         return Json::encode($output);
     }
+
 
 }
