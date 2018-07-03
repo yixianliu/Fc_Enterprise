@@ -62,7 +62,7 @@ class UploadController extends BaseController
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id, $type, $ext, $attribute = 'images')
+    public function actionImageUpload($id = 1, $type, $ext, $attribute = 'images')
     {
 
         if (empty($type) || empty($ext))
@@ -127,10 +127,8 @@ class UploadController extends BaseController
         }
 
         // 上传组件对应model
-        $imageFile = UploadedFile::getInstance($model, $attribute);
-
-        if (!$imageFile)
-            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传文件异常 !!']);
+        if (!($imageFile = UploadedFile::getInstance($model, $attribute)))
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传组件文件异常 !!']);
 
         // 验证后缀名
         if (!static::UploadExt($ext, $imageFile->extension))
@@ -148,7 +146,7 @@ class UploadController extends BaseController
 
         if ($imageFile->saveAs($filePath)) {
 
-            $path = Yii::getAlias('@web') . '/temp/' . $type . DIRECTORY_SEPARATOR . $fileName;
+            $path = Yii::getAlias('@web/../../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $fileName;
 
             return Json::encode([
                 'files' => [
@@ -238,18 +236,20 @@ class UploadController extends BaseController
 
             case 'image':
 
-                // 格式
-                if (empty($result['IMAGE_UPLOAD_TYPE']) || !strpos($result['IMAGE_UPLOAD_TYPE'], $fileExt)) {
+                if (empty($result['IMAGE_UPLOAD_TYPE']) || strpos($result['IMAGE_UPLOAD_TYPE'], $fileExt) === false) {
                     return false;
                 }
                 break;
 
             case 'file':
 
-                // 格式
-                if (empty($result['FILE_UPLOAD_TYPE']) || !strpos($result['FILE_UPLOAD_TYPE'], $fileExt)) {
+                if (empty($result['FILE_UPLOAD_TYPE']) || strpos($result['FILE_UPLOAD_TYPE'], $fileExt) === false) {
                     return false;
                 }
+                break;
+
+            default:
+
                 break;
         }
 

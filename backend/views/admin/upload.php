@@ -104,7 +104,7 @@ $text = empty($text) ? '没有描述' : $text;
                                 
                                 ImagesContent.attr("value", html);
                                 
-                                if (data.result.error != "") {
+                                if (data.result.error != "" && data.result.files == "") {
                                     $("#UploadMessage").show().append(data.result.message);
                                 }
                                 
@@ -128,14 +128,16 @@ $text = empty($text) ? '没有描述' : $text;
 
     <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h5>
-                <div id='UploadMessage' style='display: none;'><span class="label label-danger">错误</span>&nbsp;&nbsp;</div>
-            </h5>
-        </div>
-    </div>
+</div>
 
+<hr/>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>
+            <div id='UploadMessage' style='display: none;'><span class="label label-danger">错误</span>&nbsp;&nbsp;</div>
+        </h5>
+    </div>
 </div>
 
 <hr/>
