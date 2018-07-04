@@ -12,11 +12,9 @@ use kartik\select2\Select2;
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -38,7 +36,7 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'introduction')->textarea(['rows' => 6, 'maxlength' => true, 'placeholder' => '新闻导读,内容也是十分重要的...']) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'text' => '缩略图', 'attribute' => 'images', 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->news_id, 'text' => '缩略图', 'attribute' => 'images', 'num' => 1]); ?>
 
                     <?=
                     $form->field($model, 'content')
@@ -55,7 +53,7 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'text' => '多图上传', 'attribute' => 'path']); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->news_id, 'text' => '多图上传', 'attribute' => 'path']); ?>
 
                     <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true, 'placeholder' => '数值越大,越靠前...']) ?>
 
@@ -107,10 +105,6 @@ use kartik\select2\Select2;
                         'options' => ['placeholder' => '是否有上传图片...'],
                     ]);
                     ?>
-
-                    <?= $form->field($model, 'news_id')->hiddenInput(['value' => time() . '_' . rand(0000, 9999)])->label(false); ?>
-
-                    <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->user_id])->label(false); ?>
 
                     <div class="form-group">
 

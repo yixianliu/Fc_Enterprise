@@ -91,7 +91,7 @@ class BaseController extends Controller
      * @param null $chars
      * @return string
      */
-    public static function getRandomString($len = 1, $chars = null)
+    public static function getRandomString($len = 4, $chars = null)
     {
 
         if (is_null($chars)) {
@@ -104,7 +104,7 @@ class BaseController extends Controller
             $str .= $chars[ mt_rand(0, $lc) ];
         }
 
-        $str = $str . time() . rand(0000, 9999);
+        $str = $str . '_' . time() . '_' . rand(0000, 9999);
 
         return $str;
     }

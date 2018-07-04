@@ -90,7 +90,7 @@ class ProductController extends BaseController
 
         $model = new Product();
 
-        $model->product_id = time() . '_' . rand(000, 999);
+        $model->product_id = self::getRandomString();
 
         // 所属语言类别
         $model->is_language =  Yii::$app->session['language'];

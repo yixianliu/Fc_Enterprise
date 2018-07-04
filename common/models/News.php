@@ -58,13 +58,13 @@ class News extends \yii\db\ActiveRecord
     {
 
         return [
-            [['news_id', 'user_id', 'c_key', 'title', 'content'], 'required'],
+            [['c_key', 'title', 'content'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
             [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
-            [['user_id', 'c_key'], 'string', 'max' => 55],
+            [['c_key'], 'string', 'max' => 55],
             [['title'], 'string', 'max' => 125],
-            [['introduction'], 'string', 'max' => 255],
+            [['introduction', 'images', 'path'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 120],
             [['news_id'], 'unique'],
             [['title'], 'unique'],

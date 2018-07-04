@@ -13,9 +13,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use common\models\Slide;
 
-$PageController = empty($PageId) ? Yii::$app->controller->id : $PageId;
+$PageId = empty($PageId) ? Yii::$app->controller->id : $PageId;
 
-$dataSlide = Slide::getData($PageController);
+$dataSlide = Slide::getData($PageId);
 
 if (empty($dataSlide))
     return false;
@@ -66,5 +66,11 @@ $alt = empty($alt) ? null : $alt;
         <?php endif; ?>
 
     </div>
+
+<?php else: ?>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+</div>
 
 <?php endif; ?>

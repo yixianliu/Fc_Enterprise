@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
-                <?= DetailView::widget([
+                <?=
+                DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
                         'purchase_id',
@@ -56,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/purchase/' . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/purchase/') . $value . '" /><br /><br />';
                                 }
 
                                 return $data;

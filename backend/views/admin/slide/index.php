@@ -29,10 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100]
+                        ],
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
+
+                                $state = array();
 
                                 $data = \common\models\SlideClassify::findAll(['is_using' => 'On']);
 
@@ -48,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->c_key ];
                             },
+                            'options' => ['width' => 150]
                         ],
                         [
                             'attribute' => 'path',
@@ -63,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/slide/' . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/slide/') . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -79,20 +85,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 return $state[ $model->is_using ];
                             },
+                            'options'   => ['width' => 120],
                         ],
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->created_at);
                             },
+                            'options'   => ['width' => 180],
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
+                            'options'   => ['width' => 180],
                         ],
-                        ['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100]
+                        ],
                     ],
                 ]);
                 ?>

@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $imgArray = explode(',', $model->path);
 
 foreach ($imgArray as $key => $value) {
+
     if (empty($imgArray[$key]))
         unset($imgArray[$key]);
 }
@@ -75,6 +76,7 @@ foreach ($imgArray as $key => $value) {
                                 </div>
                             </div>
                             <!--缩图结束-->
+
                         <?php else: ?>
 
                             <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title, 'width' => 400, 'height' => 280]); ?>
@@ -90,6 +92,7 @@ foreach ($imgArray as $key => $value) {
                         <p><?= $model->introduction ?></p>
                     </div>
                     <!-- #产品参数 -->
+
                 </div>
                 <!--产品参数结束-->
 
@@ -123,7 +126,5 @@ foreach ($imgArray as $key => $value) {
         </div>
 
     </div>
-    <!-- #可变化内容 -->
 
 </div>
-<!-- #内容中心 -->

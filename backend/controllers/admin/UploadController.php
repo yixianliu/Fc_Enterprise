@@ -55,14 +55,14 @@ class UploadController extends BaseController
     /**
      * 上传文件
      *
-     * @param int $id
+     * @param string $id
      * @param $type
      * @param $ext
      * @param string $attribute
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id = 1, $type, $ext, $attribute = 'images')
+    public function actionImageUpload($id = 'noId', $type, $ext, $attribute = 'images')
     {
 
         if (empty($type) || empty($ext))
@@ -135,18 +135,18 @@ class UploadController extends BaseController
             return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传格式有问题 !!']);
 
         // 上传路径
-        $directory = Yii::getAlias('@backend/../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
+        $directory = Yii::getAlias('@backend/../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR;
 
         if (!is_dir($directory))
             FileHelper::createDirectory($directory);
 
-        $fileName = time() . '_' . $type . '_' . rand(10000, 99999) . '.' . $imageFile->extension;
+        $fileName = self::getRandomString() . '.' . $imageFile->extension;
 
         $filePath = $directory . $fileName;
 
         if ($imageFile->saveAs($filePath)) {
 
-            $path = Yii::getAlias('@web/../../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $fileName;
+            $path = Yii::getAlias('@web/../../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $fileName;
 
             return Json::encode([
                 'files' => [
@@ -166,7 +166,7 @@ class UploadController extends BaseController
     }
 
     /**
-     * 删除
+     * 删除图片文件
      *
      * @param $name
      * @param $type

@@ -2,6 +2,7 @@
 /**
  *
  * 上传整合组件
+ * Js部分不可以加 return:false 这样会影响功能实现
  *
  * Created by Yxl.
  * User: <zccem@163.com>.
@@ -18,7 +19,7 @@ if (empty($model) || empty($form))
 
 $attribute = empty($attribute) ? 'path' : $attribute;
 
-$id = empty($id) ? 1 : $id;
+$id = empty($id) ? 'noId' : $id;
 
 // 用户 Id
 $user_id = empty($user_id) ? Yii::$app->user->identity->user_id : $user_id;
@@ -69,7 +70,9 @@ $text = empty($text) ? '没有描述' : $text;
         'attribute'     => $attribute,
         'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
         'gallery'       => false,
-        'options'       => ['accept' => $uploadType . '/*'],
+        'fieldOptions'  => [
+            'accept' => $uploadType . '/*'
+        ],
         'clientOptions' => [
             'maxFileSize'      => 2000000,
             'dataType'         => 'json',
@@ -108,19 +111,13 @@ $text = empty($text) ? '没有描述' : $text;
                                     $("#UploadMessage").show().append(data.result.message);
                                 }
                                 
-                                return true;
                             }',
 
             'fileuploadfail' => 'function(e, data) {
             
                                 console.log(e);
                                 console.log(data);
-                                
-                                 if (data.result.error != "") {
-                                    $("#UploadMessage").show().append(data.result.message);
-                                 }
-                                
-                                return false;
+                      
                             }',
         ],
     ]);
@@ -154,7 +151,7 @@ $text = empty($text) ? '没有描述' : $text;
 
                     <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
 
-                        <?= Html::img(Url::to('@web/temp/') . Yii::$app->controller->id . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
 
@@ -210,6 +207,7 @@ $text = empty($text) ? '没有描述' : $text;
                     dataType: "json",
                     url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
                     success: function (data) {
+                        console.log(data);
                         return true;
                     },
                     error: function (XMLHttpRequest, textStatus) {

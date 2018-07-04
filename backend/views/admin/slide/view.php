@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/slide/' . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/slide/') . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -103,6 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

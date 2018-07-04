@@ -34,7 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     GridView::widget([
                         'dataProvider' => $dataProvider,
                         'columns'      => [
-                            ['class' => 'yii\grid\SerialColumn'],
+                            [
+                                    'class' => 'yii\grid\SerialColumn',
+                                    'options' => ['width' => 100]
+                            ],
                             'user_id',
                             [
                                 'attribute' => 'c_key',
