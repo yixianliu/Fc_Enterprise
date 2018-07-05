@@ -64,7 +64,7 @@ return [
         ],
 
         'errorHandler' => [
-            'errorAction' => 'center/error',
+            'errorAction'    => 'center/error',
             'maxSourceLines' => 20,
         ],
 
