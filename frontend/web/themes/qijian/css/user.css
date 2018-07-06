@@ -32,7 +32,7 @@
 }
 
 .search .input-group {
-    width: 550px;
+    width: 457px;
     margin-top: 6px;
     border: 2px solid #dc0616;
 }
@@ -68,67 +68,115 @@
         内容中心
 -----------------------------------------------------------------*/
 .dropdown-menu {
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .navbar-default .nav-pills li.dropdown ul li a {
-    color: #000;
+    color: #fff;
 }
 
-/* 左边 */
+.user-config {
+    background: #f0f1f2;
+}
+
+/* 左边框架 */
 .user-config .left {
-    background: #e7e7e7;
     display: inline-block;
 }
 
-.user-config .left .user-cont h3 {
+/* 左边头像 */
+.user-config .user-left-cont {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    background: #fff;
+}
+
+.user-config .user-left-cont h3 {
     padding: 15px 0px 10px 0px;
     text-align: center;
     margin: 0 auto;
 }
 
-.user-config .left .user-cont h3 img {
+.user-config .user-left-cont h3 img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     opacity: 1;
 }
 
-.user-config .left .user-cont p {
+.user-config .user-left-cont p {
     text-align: center;
     color: #000;
     padding: 5px 10px;
     margin: 0;
 }
 
-.user-config .left .cat_list {
-    padding-top: 15px;
-    text-align: center;
+/* 左边菜单栏目 */
+.user-left-list {
 }
 
-.user-config .left .cat_list h3 {
-    font-size: 14px;
-    margin: 0;
-    padding: 10px 0px;color: #fff;
+.user-left-list .navbar-nav {
+    width: 100%;
+}
+
+.user-left-list .navbar-nav li {
+    width: 100%;
+}
+
+.user-left-list .navbar-nav li a {
+    color: #fff;
+}
+
+.user-left-list .navbar-nav .dropdown-toggle {
     background: #dc0616;
 }
 
-.user-config .left .cat_list p {
-    padding: 20px 0px 5px 0px;
-    margin: 0;
+.user-left-list .navbar-nav .dropdown-menu {
+    position: relative;
+    background: #fff;
 }
 
-.user-config .left .cat_list p a {
+.user-left-list .navbar-nav .dropdown-menu li.active a {
+    background: #fff;
+    border-left: 3px solid #dc0616;
+}
+
+.user-left-list .navbar-nav .dropdown-menu li.active a:hover {
+    background: #e8e8e8;
+}
+
+.user-left-list .navbar-nav .dropdown-menu a {
     color: #000;
+    padding: 10px 15px;
+    margin: 10px 0;
 }
 
-.user-config .left .cat_list p a:hover {
-    color: #dc0616;
+.user-left-list .nav .open > a, .user-left-list .nav .open > a:hover, .user-left-list .nav .open > a:focus {
+    background: #dc0616;
 }
 
-.content .left .contact_us {
-    margin-top: 0;
-    padding: 15px 10px;
+.user-left-list .dropdown a .caret {
+    position: absolute;
+    top: 22px;
+    right: 18px;
+}
+
+/* 左边信息栏目 */
+.user-left-contact {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.user-left-contact .user-left-contactUs {
+    list-style: none;
+    background-color: #fafafa;
+    line-height: 30px;
+    padding: 10px;
+}
+
+.user-left-contact .user-left-contactUs li {
+    font-size: 12px;
+    border-bottom: 1px solid #ffffff;
 }
 
 /* 右边 */
@@ -136,57 +184,62 @@
     width: 920px;
 }
 
-.content .right .col_full {
-    padding-bottom: 30px;
-    border: 1px solid #ccc;
+.content .right .user-box {
+    width: 100%;
+    background: #fff;
+    margin-bottom: 30px;
+    display: inline-block;
 }
 
-.content .right .col_full .cont-title {
+.content .right .user-box .cont-title {
     font-size: 14px;
-    padding: 12px 0px 10px 0px;
+    padding: 10px 10px 10px 30px;
     color: #fff;
     background: #dc0616;
     margin: 0;
 }
 
-.content .right .col_full .cont-title span:nth-child(1){
-    margin-left: 10px;
-}
-
-.content .right .col_full .cont-title span:nth-child(2){
+.content .right .user-box .cont-title .more {
+    color: #fff;
     float: right;
-    margin-right: 10px;
 }
 
-.content .right .col_full .cont-title span:nth-child(2) a {
+.content .right .user-box .cont-title .more a {
     color: #fff;
 }
 
-.content .right .col_full .shop-cont {
+.content .right .user-box .user-box-cont {
     margin: 0;
-    padding: 0;
+    padding: 30px 20px 0 20px;
+    display: inline-block;
 }
 
-.content .right .col_full .shop-cont .col-md-4 {
-    margin-top: 30px;
+.content .right .user-box .user-box-cont .user-box-item {
+    width: 189px;
+    float: left;
+    margin: 0 30px 30px 0;
 }
 
-.content .right .col_full .shop-cont .shop-img {
+.content .right .user-box .user-box-cont .user-box-item:nth-child(4),.content .right .user-box .user-box-cont .user-box-item:nth-child(8) {
+    margin-right: 0;
+}
+
+.content .right .user-box .user-box-cont .shop-img {
     margin: 0;
 }
 
-.content .right .col_full .shop-cont .shop-img img {
-    width: 163px;
-    height: 163px;
+.content .right .user-box .user-box-cont .shop-img img {
+    width: 189px;
+    height: 189px;
 }
 
-.content .right .col_full .shop-cont .shop-txt {
+.content .right .user-box .user-box-cont .shop-txt {
     font-size: 12px;
     padding: 5px 0px;
     border: 1px solid #ccc;
 }
 
-.content .right .col_full .shop-cont .shop-txt a {
+.content .right .user-box .user-box-cont .shop-txt a {
     margin: 0;
     padding: 0 10px;
     overflow: hidden;
@@ -196,47 +249,75 @@
     -webkit-line-clamp: 1;
 }
 
-.content .right .col_full .shop-cont .shop-txt a:hover {
+.content .right .user-box .user-box-cont .shop-txt a:hover {
     color: #dc0616;
 }
 
-/* 右边 - 右边 */
-.content .right .col_full .re-cont {
-    margin: 0;
-    padding: 0;
+/* ----------------------------------------------------------------
+        发布,编辑
+-----------------------------------------------------------------*/
+.right .user-title {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px 10px 15px 10px;
+    background: #fff;
 }
 
-.content .right .col_full .re-cont .col-md-6 {
-    margin-top: 30px;
+.right .user-title .tle-txt {
+    height: 37px;
+    line-height: 37px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+    padding: 0 15px;
+    background: #ff534d;
 }
 
-.content .right .col_full .re-cont .re-img {
-    margin: 0;
+.right .user-title .tle-img {
+    width: 39px;
+    height: 37px;
+    float: left;
+    background: url(../images/jtr.gif) no-repeat;
 }
 
-.content .right .col_full .re-cont .re-img img {
-    width: 107px;
-    height: 107px;
+.right .attention-information {
+    margin-left: 16px;
+    margin-top: 20px;
 }
 
-.content .right .col_full .re-cont .re-txt {
+.right .attention-information font {
+    color: #02a2aa;
+    font-weight: bold;
+}
+
+.edit-cont {
     font-size: 12px;
-    padding: 5px 0px;
-    border: 1px solid #ccc;
+    margin-top: 10px;
+    padding: 20px 10px;
 }
 
-.content .right .col_full .re-cont .re-txt p {
-    margin: 0;
-    padding: 0 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+.edit-cont .sm-form-control {
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 3px !important;
 }
 
-.content .right .col_full .re-cont .re-txt p a:hover {
-    color: #dc0616;
+.edit-cont .textarea-font {
+    color: #aaa;
+}
+
+.edit-cont .input-code {
+    width: 200px;
+}
+
+.edit-cont .form-horizontal .control-label {
+    text-align: left;
+}
+
+.edit-cont .form-horizontal .form-control {
+    border-radius: 0;
 }
 
 /* ----------------------------------------------------------------
@@ -290,24 +371,6 @@
 .userdata-cont .row {
     margin: 0;
     padding: 0;
-}
-
-.userdata-cont .userdata-title {
-    margin: 0;
-    padding: 20px 0px;
-    border-bottom: 1px solid #e3e3e3;
-}
-
-.userdata-cont .userdata-title .col-md-2 a {
-    font-size: 16px;
-    font-weight: bold;
-    color: #bababa;
-}
-
-.userdata-cont .userdata-title .cur {
-    font-size: 16px;
-    font-weight: bold;
-    color: #dc0616;
 }
 
 .userdata-cont form.form-horizontal {
@@ -402,7 +465,9 @@
     color: #dc0616;
 }
 
-/**/
+/* ----------------------------------------------------------------
+        产品列表
+-----------------------------------------------------------------*/
 .proview-cont .navbar-default {
     background-color: #fff;
     margin: 0;
@@ -412,3 +477,29 @@
     box-shadow: none;
 }
 
+.proview-cont .search-box {
+    font-size: 12px;
+    margin: 0;
+    padding: 20px 20px;
+}
+
+.search-box .navbar-form {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.search-box .navbar-form .form-group {
+    float: left;
+    margin-right: 10px;
+}
+
+.search-box .navbar-form .form-group input.form-control {
+    width: 400px;
+}
+
+/* ----------------------------------------------------------------
+        表格样式
+-----------------------------------------------------------------*/
+.table-style tbody tr td {
+    line-height: 34px;
+}
