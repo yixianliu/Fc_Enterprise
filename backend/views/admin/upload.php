@@ -33,7 +33,7 @@ $num = empty($num) ? 5 : $num;
 // 初始化
 $images = array();
 
-// 取出图片
+// 取出图片,存储为数组
 if (!empty($model->$attribute)) {
 
     $imagesArray = explode(',', $model->$attribute);
@@ -127,14 +127,14 @@ $text = empty($text) ? '没有描述' : $text;
 
 </div>
 
-<hr/>
-
 <div class="row">
+
     <div class="col-md-12">
         <h5>
             <div id='UploadMessage' style='display: none;'><span class="label label-danger">错误</span>&nbsp;&nbsp;</div>
         </h5>
     </div>
+
 </div>
 
 <hr/>
@@ -231,11 +231,12 @@ $text = empty($text) ? '没有描述' : $text;
 
         <div class="row">
             <div class="col-md-12">
-                <h3>暂无相关内容 !!</h3>
+                <h3>暂无任何上传的内容 !!</h3>
             </div>
         </div>
 
     <?php endif ?>
 
+    <hr/>
+
 </div>
-<hr/>

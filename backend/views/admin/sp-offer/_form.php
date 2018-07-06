@@ -54,7 +54,23 @@ use kartik\select2\Select2;
             </div>
         </div>
 
-        <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'sp-offer', 'user_id' => $model->user_id]); ?>
+        <div class="content-body">
+            <div class="row">
+
+                <?php if (!empty($model->path)): ?>
+
+                    <?php foreach ($model->path as $value): ?>
+                        <?= Html::img(Url::to('@web/../../frontend/web/temp/purchase/') . DIRECTORY_SEPARATOR . $model->user_id . DIRECTORY_SEPARATOR . $value, ['width' => 350, 'height' => 150]); ?>
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+
+                    <h4>没有上传对应的图片 !!</h4>
+
+                <?php endif; ?>
+
+            </div>
+        </div>
 
     </section>
 

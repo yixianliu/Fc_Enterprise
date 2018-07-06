@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use dosamigos\datepicker\DatePicker;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Supply */
@@ -45,7 +44,7 @@ use dosamigos\fileupload\FileUploadUI;
                     ]);
                 ?>
 
-                <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'type' => 'supply', 'id' => $model->supply_id]); ?>
+                <?= $this->render('../upload', ['model' => $model, 'text' => '供应图片', 'form' => $form, 'attribute' => 'path', 'id' => $model->supply_id]); ?>
 
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

@@ -6,18 +6,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\SpOffer */
 
-$this->title = $model->id;
+$this->title = '采购价格';
 $this->params['breadcrumbs'][] = ['label' => '价格中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -33,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
-                <?= DetailView::widget([
+                <?=
+                DetailView::widget([
                     'model'      => $model,
                     'attributes' => [
                         [
@@ -105,13 +104,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
-                ]) ?>
+                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                ])
+                ?>
 
             </div>
         </div>
     </section>
-
-    <?= $this->render('resultImg', ['img' => $model->path, 'type' => 'user_supply']); ?>
 
 </div>
 

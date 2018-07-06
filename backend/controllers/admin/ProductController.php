@@ -55,7 +55,7 @@ class ProductController extends BaseController
         // 初始化
         $result = array();
 
-        $dataCls = ProductClassify::findAll(['is_using' => 'On']);
+        $dataCls = ProductClassify::findByAll();
 
         foreach ($dataCls as $value) {
             $result['classify'][ $value['c_key'] ] = $value['name'];

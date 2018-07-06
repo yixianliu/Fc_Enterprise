@@ -85,6 +85,7 @@ class Role extends \yii\db\ActiveRecord
     /**
      * 查找所有
      *
+     * @param string $type
      * @param string $page
      * @param null $parent_id
      * @return array|Role[]|\yii\db\ActiveRecord[]
@@ -110,6 +111,7 @@ class Role extends \yii\db\ActiveRecord
                 ->all();
 
         } else {
+
             return static::find()->where(['type' => $type])
                 ->asArray()
                 ->all();

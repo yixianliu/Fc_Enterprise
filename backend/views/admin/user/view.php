@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ])
                     ?>
                     <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('添加用户', ['create'], ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?=
@@ -131,11 +132,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3>该用户的供应商资料</h3>
 
                 <?php if (!empty($dataSupplyProvider)): ?>
+
                     <?=
                     DetailView::widget([
                         'model'      => $dataSupplyProvider,
                         'attributes' => [
-                            'user_id',
                             'name',
                             'content',
                             'path',
@@ -152,6 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                         ],
+                        'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                     ]);
                     ?>
 

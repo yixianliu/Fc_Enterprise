@@ -66,6 +66,9 @@ class SpOfferController extends BaseController
      */
     public function actionView($id)
     {
+
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -105,6 +108,22 @@ class SpOfferController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        // 整合图片
+        if (!empty($model->path)) {
+
+            $pathArray =  explode(',', $model->path);
+
+            foreach ($pathArray as $key => $value) {
+
+                if (empty($value))
+                    unset($pathArray[$key]);
+
+            }
+
+            $model->path = $pathArray;
+
         }
 
         return $this->render('update', [
