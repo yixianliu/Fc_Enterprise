@@ -61,9 +61,9 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '缩略图', 'form' => $form, 'attribute' => 'images', 'type' => 'product', 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '缩略图', 'form' => $form, 'attribute' => 'images', 'id' => $model->product_id, 'num' => 1]); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'type' => 'product', 'id' => $model->product_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
@@ -142,6 +142,8 @@ if (empty($result['classify'])) {
                     ?>
 
                     <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
+
+                    <?= $form->field($model, 'product_id')->hiddenInput(['value' => $model->product_id])->label(false); ?>
 
                     <div class="form-group">
 

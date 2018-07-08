@@ -27,14 +27,14 @@ class ProductController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow'   => true,
-                        'roles'   => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
 
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -58,19 +58,21 @@ class ProductController extends BaseController
         $dataCls = ProductClassify::findByAll();
 
         foreach ($dataCls as $value) {
-            $result['classify'][ $value['c_key'] ] = $value['name'];
+            $result['classify'][$value['c_key']] = $value['name'];
         }
 
         return $this->render('index', [
-            'searchModel'  => $searchModel,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'result'       => $result,
+            'result' => $result,
         ]);
     }
 
     /**
      * Displays a single Product model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -90,16 +92,19 @@ class ProductController extends BaseController
 
         $model = new Product();
 
-        $model->product_id = self::getRandomString();
+        $model->user_id = Yii::$app->user->identity->username;
 
         // 所属语言类别
-        $model->is_language =  Yii::$app->session['language'];
+        $model->is_language = Yii::$app->session['language'];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $model->product_id = self::getRandomString();
+
             return $this->render('create', [
-                'model'  => $model,
+                'model' => $model,
                 'result' => $this->getData(),
             ]);
         }
@@ -108,7 +113,9 @@ class ProductController extends BaseController
     /**
      * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -120,7 +127,7 @@ class ProductController extends BaseController
         } else {
 
             return $this->render('update', [
-                'model'  => $model,
+                'model' => $model,
                 'result' => $this->getData(),
             ]);
         }
@@ -129,7 +136,9 @@ class ProductController extends BaseController
     /**
      * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -142,7 +151,9 @@ class ProductController extends BaseController
     /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -171,7 +182,7 @@ class ProductController extends BaseController
         $result['section']['S0'] = '暂无';
 
         foreach ($dataSection as $value) {
-            $result['section'][ $value['s_key'] ] = $value['name'];
+            $result['section'][$value['s_key']] = $value['name'];
         }
 
         // 产品分类
@@ -182,7 +193,7 @@ class ProductController extends BaseController
 
         foreach ($dataClassify as $key => $value) {
 
-            $result['classify'][ $value['c_key'] ] = $value['name'];
+            $result['classify'][$value['c_key']] = $value['name'];
 
             $child = $Cls->recursionClsSelect($value);
 

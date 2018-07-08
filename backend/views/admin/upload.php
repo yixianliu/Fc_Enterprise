@@ -49,6 +49,27 @@ if (!empty($model->$attribute)) {
 
 $text = empty($text) ? '没有描述' : $text;
 
+// 图片路径
+$imgPathArray = explode('/', Yii::$app->controller->id);
+
+
+switch ($imgPathArray[1]) {
+
+    case 'download':
+    case 'slide':
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/noId';
+        break;
+
+    case 'sp-offer':
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/';
+        break;
+
+    case 'product':
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $id;
+        break;
+
+}
+
 ?>
 
 <style type="text/css">
@@ -66,21 +87,21 @@ $text = empty($text) ? '没有描述' : $text;
 
     <?=
     FileUploadUI::widget([
-        'model'         => $model,
-        'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
-        'gallery'       => false,
-        'fieldOptions'  => [
+        'model' => $model,
+        'attribute' => $attribute,
+        'url' => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
+        'gallery' => false,
+        'fieldOptions' => [
             'accept' => $uploadType . '/*'
         ],
         'clientOptions' => [
-            'maxFileSize'      => 2000000,
-            'dataType'         => 'json',
+            'maxFileSize' => 2000000,
+            'dataType' => 'json',
             'maxNumberOfFiles' => $num,
         ],
 
         // ...
-        'clientEvents'  => [
+        'clientEvents' => [
 
             'fileuploaddone' => 'function(e, data) {
             
@@ -149,25 +170,14 @@ $text = empty($text) ? '没有描述' : $text;
 
                 <div class="col-md-3">
 
-                    <?php if (Yii::$app->controller->id != 'pages' && Yii::$app->controller->id != 'purchase' && Yii::$app->controller->id != 'sp-offer'): ?>
-
-                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $value, ['width' => 350, 'height' => 150]); ?>
-
-                    <?php elseif (Yii::$app->controller->id == 'sp-offer'): ?>
-
-                        <?= Html::img(Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/' . $value, ['width' => 350, 'height' => 150]); ?>
-
-                    <?php else: ?>
-
-                        <?= Html::img(Url::to('@web/themes/not.jpg'), ['width' => 350, 'height' => 150]); ?>
-
-                    <?php endif; ?>
+                    <?= Html::img($imgPath . '/' . $value, ['width' => 350, 'height' => 150]); ?>
 
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 
                         <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
                             <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
-                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
+                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i
+                                        class="glyphicon glyphicon-trash"></i> <font>删除</font>
                             </a>
                         <?php endif; ?>
 

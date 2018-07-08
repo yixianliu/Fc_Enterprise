@@ -90,9 +90,8 @@ class PurchaseController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new Purchase();
 
-        $model->purchase_id = self::getRandomString();
+        $model = new Purchase();
 
         $model->user_id = '网站管理员';
 
@@ -114,10 +113,12 @@ class PurchaseController extends BaseController
                 Yii::$app->getSession()->setFlash('error', $model->getErrors());
             }
 
+            $model->purchase_id = self::getRandomString();
+
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase'),
+                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase', 'Off'),
                 ],
             ]);
         }
@@ -157,7 +158,7 @@ class PurchaseController extends BaseController
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase'),
+                    'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase', 'Off'),
                 ],
             ]);
         }

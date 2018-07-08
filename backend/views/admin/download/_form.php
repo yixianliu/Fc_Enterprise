@@ -32,7 +32,7 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件', 'form' => $form, 'attribute' => 'path', 'id' => $model->id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件', 'form' => $form]); ?>
 
                     <?=
                     $form->field($model, 'content')

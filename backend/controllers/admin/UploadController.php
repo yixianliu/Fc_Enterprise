@@ -95,7 +95,7 @@ class UploadController extends BaseController
                 $model = new \common\models\Resume();
                 break;
 
-            // 简历中心
+            // 下载中心
             case 'download':
                 $model = new \common\models\Download();
                 break;

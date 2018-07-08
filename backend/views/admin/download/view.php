@@ -63,12 +63,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 $data = null;
 
-                                foreach ($imgArray as $value) {
+                                foreach ($imgArray as $key => $value) {
 
                                     if (empty($value))
                                         continue;
 
-                                    $data .= Yii::getAlias('@web') . '/temp/download/' . $value . '<br /><br />';
+                                    $data .= Html::a('文件 ' . ($key + 1), Yii::getAlias('@web/../../frontend/web/temp/download/noId/') . $value) . ', ';
                                 }
 
                                 return $data;
