@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= Html::a('文件 ' . ($key + 1), Yii::getAlias('@web/../../frontend/web/temp/download/noId/') . $value) . ', ';
+                                    $data .= Html::a('文件 ' . ($key + 1), Yii::getAlias('@web/../../frontend/web/temp/download/') . $value, ['target' => '_blank']) . ', ';
                                 }
 
                                 return $data;
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[ $model->is_using ];
+                                return $state[$model->is_using];
                             },
                         ],
                         [
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                     ],
-                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]) ?>
 
             </div>

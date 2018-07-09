@@ -235,9 +235,22 @@ $this->title = '网站首页';
     <div class="h-news-cont">
 
         <div class="left">
-            <a title="" href="">
-                <?= Html::img(Url::to('@web/themes/qijian/images/news_big.jpg'), ['alt' => '']); ?>
-            </a>
+
+            <?php if (!empty($result['newsTop'])): ?>
+
+                <a title="<?= $result['newsTop']['title'] ?>" href="<?= Url::to(['news/view', 'id' => $result['newsTop']['id']]) ?>">
+                    <?= Html::img(Url::to('@web/temp/news/' . $result['newsTop']['images']), ['alt' => $result['newsTop']['title']]); ?>
+                </a>
+
+            <?php else: ?>
+
+                <a title="" href="">
+                    <?= Html::img(Url::to('@web/themes/qijian/images/news_big.jpg'), ['alt' => '']); ?>
+                </a>
+
+            <?php endif; ?>
+
+
         </div>
 
         <div class="right">
@@ -250,7 +263,7 @@ $this->title = '网站首页';
                         <li>
                             <div class="news-left">
                                 <a title="<?= $value['title'] ?>" href="<?= Url::to(['/news/view', 'id' => $value['news_id']]) ?>">
-                                    <?= Html::img(Url::to('@web/themes/qijian/images/news-1.jpg'), ['alt' => $value['title']]); ?>
+                                    <?= Html::img(Url::to('@web/temp/news/' . $value['news_id'] . '/' . $value['images']), ['alt' => $value['title']]); ?>
                                 </a>
                             </div>
 
@@ -267,7 +280,7 @@ $this->title = '网站首页';
 
             <?php else: ?>
 
-                <h1>暂无新闻 !!</h1>
+                <h1>暂无推广新闻 !!</h1>
 
             <?php endif; ?>
 

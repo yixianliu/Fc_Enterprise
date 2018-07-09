@@ -11,12 +11,11 @@
 
 namespace frontend\controllers;
 
-use common\models\Menu;
-use function GuzzleHttp\Promise\all;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 use common\models\Conf;
+use common\models\Menu;
 
 class BaseController extends Controller
 {
@@ -61,7 +60,7 @@ class BaseController extends Controller
     /**
      * 判断用户
      *
-     * @return void|\yii\web\Response
+     * @return bool
      */
     public function isUser()
     {

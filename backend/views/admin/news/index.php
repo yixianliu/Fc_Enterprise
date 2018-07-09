@@ -35,10 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'dataProvider' => $dataProvider,
                         'columns'      => [
                             [
-                                    'class' => 'yii\grid\SerialColumn',
-                                    'options' => ['width' => 100]
+                                'class'   => 'yii\grid\SerialColumn',
+                                'options' => ['width' => 100],
                             ],
-                            'user_id',
                             [
                                 'attribute' => 'c_key',
                                 'value'     => function ($model) {
@@ -48,7 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return $data['name'];
                                 },
                             ],
-                            'sort_id',
+                            [
+                                'attribute' => 'sort_id',
+                                'options'   => ['width' => 100],
+
+                            ],
                             'title',
                             [
                                 'attribute' => 'is_audit',
@@ -60,16 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'Not' => '未审核',
                                     ];
 
-                                    return $state[ $model->is_audit ];
+                                    return $state[$model->is_audit];
                                 },
-                                'options'   => ['width' => 150],
-                            ],
-                            [
-                                'attribute' => 'created_at',
-                                'value'     => function ($model) {
-                                    return date('Y - m -d , h:i', $model->created_at);
-                                },
-                                'options'   => ['width' => 180],
+                                'options'   => ['width' => 110],
                             ],
                             [
                                 'attribute' => 'updated_at',
@@ -80,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'class'   => 'yii\grid\ActionColumn',
-                                'options' => ['width' => 100]
+                                'options' => ['width' => 100],
                             ],
                         ],
                     ]);

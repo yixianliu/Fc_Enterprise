@@ -8,26 +8,26 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "{{%psb_classify}}".
  *
- * @property int $id
- * @property string $c_key 分类KEY
- * @property string $sort_id 排序
- * @property string $name 名称
+ * @property int    $id
+ * @property string $c_key       分类KEY
+ * @property string $sort_id     排序
+ * @property string $name        名称
  * @property string $description 描述
- * @property string $keywords 关键字
- * @property string $json_data Json数据
- * @property string $parent_id 父类ID
- * @property string $is_using 是否启用
+ * @property string $keywords    关键字
+ * @property string $json_data   Json数据
+ * @property string $parent_id   父类ID
+ * @property string $is_using    是否启用
  * @property string $created_at
  * @property string $updated_at
  */
 class PsbClassify extends \yii\db\ActiveRecord
 {
 
-    static public $parent_cly_id = array(
-        'Supply' => 'S0',
+    static public $parent_cly_id = [
+        'Supply'   => 'S0',
         'Purchase' => 'P0',
-        'Bid' => 'B0',
-    );
+        'Bid'      => 'B0',
+    ];
 
     /**
      * @inheritdoc
@@ -73,24 +73,24 @@ class PsbClassify extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_key' => '分类关键KEY',
-            'sort_id' => '分类排序',
-            'name' => '分类名称',
+            'c_key'       => '分类关键KEY',
+            'sort_id'     => '分类排序',
+            'name'        => '分类名称',
             'description' => '分类描述',
-            'keywords' => '分类关键词',
-            'json_data' => 'Json 数据',
-            'parent_id' => '父类分类',
-            'is_using' => '是否启用',
-            'is_type' => '分类类型',
-            'created_at' => '添加数据时间',
-            'updated_at' => '更新数据时间',
+            'keywords'    => '分类关键词',
+            'json_data'   => 'Json 数据',
+            'parent_id'   => '父类分类',
+            'is_using'    => '是否启用',
+            'is_type'     => '分类类型',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 
     /**
      * 列表
      *
-     * @param null $parent_id
+     * @param null   $parent_id
      * @param string $type
      *
      * @return array|PsbClassify[]|\yii\db\ActiveRecord[]
@@ -109,7 +109,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     /**
      * 获取分类 (选项卡)
      *
-     * @param null $parent_id
+     * @param null   $parent_id
      * @param string $type
      * @param string $one
      *
@@ -121,7 +121,7 @@ class PsbClassify extends \yii\db\ActiveRecord
         $parent_id = empty($parent_id) ? static::$parent_cly_id[$type] : $parent_id;
 
         // 初始化
-        $result = array();
+        $result = [];
 
         // 所有分类
         $dataClassify = static::findByAll($parent_id, $type);
@@ -147,7 +147,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     /**
      * 无限分类(选项框)
      *
-     * @param $data
+     * @param     $data
      * @param int $num
      */
     public static function recursionClsSelect($data, $num = 1)
@@ -157,7 +157,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             return;
 
         // 初始化
-        $result = array();
+        $result = [];
         $symbol = null;
 
         $child = static::findByAll($data['c_key']);
@@ -184,5 +184,43 @@ class PsbClassify extends \yii\db\ActiveRecord
         }
 
         return $result;
+    }
+
+
+    /**
+     * 群发 sms 信息
+     *
+     * @param        $data
+     * @param string $type
+     *
+     * @return bool
+     */
+    public static function smsSend($data, $type = 'purchase')
+    {
+
+        // 初始化
+        $mobile = null;
+
+        if (empty($data['Purchase']['is_send_msg']) || $data['Purchase']['is_send_msg'] != 'On') {
+            return false;
+        }
+
+        $user = User::findAll(['is_type' => 'purchase']);
+
+        if (empty($user)) {
+            return false;
+        }
+
+        $content = '【湛江沃噻网络】我司发布了一条新的采购信息 : "' . $data['title'] . '"。如果符合你公司的供应货品,请致电联系我司客服进行沟通.';
+
+        // 接收的手机号,多个手机号用英文逗号隔开
+        foreach ($user as $value) {
+            $mobile .= $value . ',';
+        }
+
+        if (!Yii::$app->smser->send($mobile, $content))
+            return false;
+
+        return true;
     }
 }

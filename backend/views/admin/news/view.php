@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . DIRECTORY_SEPARATOR . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if (empty($value))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . DIRECTORY_SEPARATOR . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启热门状态',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_hot ];
                             },
                         ],
                         [
@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启精选状态',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_winnow ];
                             },
                         ],
                         [
@@ -136,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启推荐状态',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_recommend ];
                             },
                         ],
                         [
@@ -158,7 +158,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_comments ];
                             },
                         ],
                         [

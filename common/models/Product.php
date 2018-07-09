@@ -9,35 +9,35 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%product}}".
  *
  * @property integer $id
- * @property string $product_id
- * @property string $user_id
- * @property string $c_key
- * @property string $s_key
- * @property string $title
- * @property string $content
- * @property string $price
- * @property string $discount
- * @property string $introduction
- * @property string $keywords
- * @property string $path
- * @property string $praise
- * @property string $forward
- * @property string $collection
- * @property string $share
- * @property string $attention
- * @property string $is_promote
- * @property string $is_hot
- * @property string $is_classic
- * @property string $is_winnow
- * @property string $is_recommend
- * @property string $is_audit
- * @property string $is_field
- * @property string $is_comments
- * @property string $is_img
- * @property string $is_thumb
- * @property string $grade
- * @property string $user_grade
- * @property string $published
+ * @property string  $product_id
+ * @property string  $user_id
+ * @property string  $c_key
+ * @property string  $s_key
+ * @property string  $title
+ * @property string  $content
+ * @property string  $price
+ * @property string  $discount
+ * @property string  $introduction
+ * @property string  $keywords
+ * @property string  $path
+ * @property string  $praise
+ * @property string  $forward
+ * @property string  $collection
+ * @property string  $share
+ * @property string  $attention
+ * @property string  $is_promote
+ * @property string  $is_hot
+ * @property string  $is_classic
+ * @property string  $is_winnow
+ * @property string  $is_recommend
+ * @property string  $is_audit
+ * @property string  $is_field
+ * @property string  $is_comments
+ * @property string  $is_img
+ * @property string  $is_thumb
+ * @property string  $grade
+ * @property string  $user_grade
+ * @property string  $published
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -68,15 +68,15 @@ class Product extends \yii\db\ActiveRecord
             [['c_key', 'title', 'content', 'user_id',], 'required'],
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'images'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
-            [['product_id', 'images'], 'string', 'max' => 85],
-            [['c_key', 's_key', 'path'], 'string', 'max' => 85],
+            [['images', 'path'], 'string', 'max' => 255],
+            [['c_key', 's_key', 'product_id', ], 'string', 'max' => 85],
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 150],
             [['title', 'product_id'], 'unique'],
 
             // 默认值
-            [['images', 's_key',], 'default', 'value' => ''],
+            [['images', 's_key', 'path'], 'default', 'value' => null],
             [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend', 'is_field',], 'default', 'value' => 'Off'],
             [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
@@ -126,6 +126,6 @@ class Product extends \yii\db\ActiveRecord
 
     public static function findByAll()
     {
-        return ;
+        return;
     }
 }

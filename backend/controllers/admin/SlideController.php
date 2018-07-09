@@ -89,8 +89,15 @@ class SlideController extends BaseController
 
         $model->is_language = Yii::$app->session['language'];
 
+        // 旧路径
+        $oldFile = $model->path;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            self::ImageDelete($model->path, $oldFile);
+
             return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
 
             return $this->render('create', [

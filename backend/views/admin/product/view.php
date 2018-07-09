@@ -13,11 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -29,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::a('删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data'  => [
-                            'confirm' => 'Are you sure you want to delete this item?',
+                            'confirm' => '是否删除这条记录?',
                             'method'  => 'post',
                         ],
                     ])
@@ -109,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'en' => '英文',
                                 ];
 
-                                return $state[ $model->is_language ];
+                                return $state[$model->is_language];
                             },
                         ],
                         [
@@ -120,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_promote ];
+                                return $state[$model->is_promote];
                             },
                         ],
                         [
@@ -131,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_hot ];
+                                return $state[$model->is_hot];
                             },
                         ],
                         [
@@ -142,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_classic ];
+                                return $state[$model->is_classic];
                             },
                         ],
                         [
@@ -153,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_winnow ];
+                                return $state[$model->is_winnow];
                             },
                         ],
                         [
@@ -164,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_recommend ];
+                                return $state[$model->is_recommend];
                             },
                         ],
                         [
@@ -175,7 +173,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未通过审核',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[$model->is_audit];
                             },
                         ],
                         [
@@ -186,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未生成',
                                 ];
 
-                                return $state[ $model->is_field ];
+                                return $state[$model->is_field];
                             },
                         ],
                         [
@@ -197,7 +195,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[ $model->is_comments ];
+                                return $state[$model->is_comments];
                             },
                         ],
                         [
@@ -208,7 +206,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未上传图片',
                                 ];
 
-                                return $state[ $model->is_img ];
+                                return $state[$model->is_img];
                             },
                         ],
                         [
@@ -219,7 +217,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未生成',
                                 ];
 
-                                return $state[ $model->is_thumb ];
+                                return $state[$model->is_thumb];
                             },
                         ],
 //                        'grade',
@@ -238,7 +236,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
-                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

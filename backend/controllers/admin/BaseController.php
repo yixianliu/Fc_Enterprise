@@ -43,6 +43,7 @@ class BaseController extends Controller
      * 前置函数
      *
      * @param $action
+     *
      * @return bool|void|\yii\web\Response
      * @throws \yii\web\UnauthorizedHttpException
      */
@@ -57,7 +58,7 @@ class BaseController extends Controller
             return;
         }
 
-        $power =  Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);
+        $power = Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);
 
         if (!Yii::$app->user->can($power) && Yii::$app->getErrorHandler()->exception === null) {
 //            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
@@ -80,15 +81,16 @@ class BaseController extends Controller
                     "imageRoot"            => Yii::getAlias("@webroot"),
                     "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
                 ],
-            ]
+            ],
         ];
     }
 
     /**
      * 随机生成关键KEY
      *
-     * @param $len
+     * @param      $len
      * @param null $chars
+     *
      * @return string
      */
     public static function getRandomString($len = 4, $chars = null)
@@ -101,12 +103,55 @@ class BaseController extends Controller
         mt_srand(10000000 * (double)microtime());
 
         for ($i = 0, $str = '', $lc = strlen($chars) - 1; $i < $len; $i++) {
-            $str .= $chars[ mt_rand(0, $lc) ];
+            $str .= $chars[mt_rand(0, $lc)];
         }
 
         $str = $str . '_' . time() . '_' . rand(0000, 9999);
 
         return $str;
+    }
+
+    /**
+     * 删除图片文件
+     *
+     * @param      $newFile
+     * @param      $oldFile
+     * @param null $id
+     *
+     * @return bool
+     */
+    public static function ImageDelete($newFile, $oldFile, $id = null)
+    {
+
+        if (empty($newFile) || empty($oldFile) || $newFile == $oldFile)
+            return false;
+
+        // 旧文件
+        $oldFileArray = explode(',', $oldFile);
+
+        $tempArray = array();
+
+        // 对比文件
+        foreach ($oldFileArray as $value) {
+
+            // 判断数组
+            if (!empty($value) && strpos($newFile, $value) === false)
+                $tempArray[] = $value;
+
+        }
+
+        foreach ($tempArray as $value) {
+
+            $fileName = Yii::getAlias('@backend/../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $value;
+
+            if (!is_file($fileName))
+                continue;
+
+            @unlink($fileName);
+
+        }
+
+        return true;
     }
 
 }

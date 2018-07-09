@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-
-
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 
@@ -14,4 +11,5 @@ echo $this->render('_form', [
     'model'  => $model,
     'result' => $result,
 ]);
+
 ?>

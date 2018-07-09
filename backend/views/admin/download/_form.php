@@ -12,7 +12,9 @@ use kartik\select2\Select2;
 
 <div class="col-lg-12">
     <section class="box ">
+
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -32,7 +34,7 @@ use kartik\select2\Select2;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件', 'form' => $form]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传文件或者图片', 'form' => $form]); ?>
 
                     <?=
                     $form->field($model, 'content')

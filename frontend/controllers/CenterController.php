@@ -36,7 +36,9 @@ class CenterController extends BaseController
 
         $result['product-cls'] = ProductClassify::findByAll();
 
-        $result['news'] = News::findAll(['is_audit' => 'On']);
+        $result['news'] = News::findByAll(5);
+
+        $result['newsTop'] = News::findByHot();
 
         // 工程案例
         $result['data'] = PagesList::findByAll('1519630269_1502');

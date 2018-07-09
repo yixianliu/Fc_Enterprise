@@ -97,17 +97,23 @@ class ProductController extends BaseController
         // 所属语言类别
         $model->is_language = Yii::$app->session['language'];
 
+        // 旧路径
+        $oldFile = $model->path;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            self::ImageDelete($model->path, $oldFile, $model->product_id);
+
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
 
-            $model->product_id = self::getRandomString();
-
-            return $this->render('create', [
-                'model' => $model,
-                'result' => $this->getData(),
-            ]);
         }
+
+        $model->product_id = self::getRandomString();
+
+        return $this->render('create', [
+            'model' => $model,
+            'result' => $this->getData(),
+        ]);
     }
 
     /**
@@ -122,15 +128,20 @@ class ProductController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        // 旧路径
+        $oldFile = $model->path;
 
-            return $this->render('update', [
-                'model' => $model,
-                'result' => $this->getData(),
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            self::ImageDelete($model->path, $oldFile, $model->product_id);
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'result' => $this->getData(),
+        ]);
     }
 
     /**

@@ -61,9 +61,9 @@ if (empty($result['classify'])) {
                     ]);
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '缩略图', 'form' => $form, 'attribute' => 'images', 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传缩略图', 'form' => $form, 'attribute' => 'images', 'id' => $model->product_id, 'num' => 1]); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '产品图片', 'form' => $form, 'attribute' => 'path', 'id' => $model->product_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品图片', 'form' => $form, 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

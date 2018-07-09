@@ -15,10 +15,9 @@ use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
-use yii\helpers\Url;
-use common\models\Conf;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Conf;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -56,13 +55,14 @@ class UploadController extends BaseController
      * 上传文件
      *
      * @param string $id
-     * @param $type
-     * @param $ext
+     * @param        $type
+     * @param        $ext
      * @param string $attribute
+     *
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionImageUpload($id = 'noId', $type, $ext, $attribute = 'images')
+    public function actionImageUpload($id = null, $type, $ext, $attribute = 'images')
     {
 
         if (empty($type) || empty($ext))
@@ -121,7 +121,7 @@ class UploadController extends BaseController
 
             default:
                 return Json::encode([
-                    'error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!'
+                    'error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!',
                 ]);
                 break;
         }
@@ -149,14 +149,13 @@ class UploadController extends BaseController
             $path = Yii::getAlias('@web/../../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $fileName;
 
             return Json::encode([
+
                 'files' => [
                     [
                         'name'         => $fileName,
                         'size'         => $imageFile->size,
                         'url'          => $path,
                         'thumbnailUrl' => $path,
-                        'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName, 'type' => $type]),
-                        'deleteType'   => 'GET',
                     ],
                 ],
             ]);
@@ -166,52 +165,11 @@ class UploadController extends BaseController
     }
 
     /**
-     * 删除图片文件
-     *
-     * @param $name
-     * @param $type
-     * @return string
-     */
-    public function actionImageDelete($name, $type)
-    {
-
-        if (empty($name) || empty($type)) {
-            return Json::encode(['message' => '参数有误 !!']);
-        }
-
-        $directory = Yii::getAlias('@backend/web/temp/') . $type;
-
-        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
-            unlink($directory . DIRECTORY_SEPARATOR . $name);
-        }
-
-        $files = FileHelper::findFiles($directory);
-
-        $output = [];
-
-        foreach ($files as $file) {
-
-            $fileName = basename($file);
-            $path = '/img/temp/' . $type . DIRECTORY_SEPARATOR . $fileName;
-
-            $output['files'][] = [
-                'name'         => $fileName,
-                'size'         => filesize($file),
-                'url'          => $path,
-                'thumbnailUrl' => $path,
-                'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName, 'type' => $type]),
-                'deleteType'   => 'GET',
-            ];
-        }
-
-        return Json::encode($output);
-    }
-
-    /**
      * 获取网站配置来判断后缀
      *
      * @param $ext
      * @param $fileExt
+     *
      * @return array
      */
     public static function UploadExt($ext, $fileExt)
@@ -221,7 +179,7 @@ class UploadController extends BaseController
             return false;
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $confData = Conf::find()->where(['is_using' => 'On', 'is_language' => null])->asArray()->all();
 
@@ -229,7 +187,7 @@ class UploadController extends BaseController
             return false;
 
         foreach ($confData as $value) {
-            $result[ $value['c_key'] ] = $value['parameter'];
+            $result[$value['c_key']] = $value['parameter'];
         }
 
         switch ($ext) {

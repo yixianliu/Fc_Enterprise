@@ -27,7 +27,7 @@ use kartik\select2\Select2;
                         'data'          => $result['classify'],
                         'options'       => ['placeholder' => '新闻分类...'],
                         'pluginOptions' => [
-                            'allowClear' => true
+                            'allowClear' => true,
                         ],
                     ]);
                     ?>
@@ -47,13 +47,13 @@ use kartik\select2\Select2;
                                 'initialFrameHeight' => '600',
                                 'elementPathEnabled' => false,
                                 'wordCount'          => false,
-                            ]
+                            ],
                         ]);
                     ?>
 
                     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'placeholder' => '可以为空,但最好填写,搜索引擎优化必须填写的...']) ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->news_id, 'text' => '多图上传', 'attribute' => 'path']); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'id' => $model->news_id, 'text' => '多图上传']); ?>
 
                     <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true, 'placeholder' => '数值越大,越靠前...']) ?>
 
@@ -105,6 +105,10 @@ use kartik\select2\Select2;
                         'options' => ['placeholder' => '是否有上传图片...'],
                     ]);
                     ?>
+
+                    <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
+
+                    <?= $form->field($model, 'product_id')->hiddenInput(['value' => $model->news_id])->label(false); ?>
 
                     <div class="form-group">
 

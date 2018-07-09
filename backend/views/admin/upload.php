@@ -19,7 +19,7 @@ if (empty($model) || empty($form))
 
 $attribute = empty($attribute) ? 'path' : $attribute;
 
-$id = empty($id) ? 'noId' : $id;
+$id = empty($id) ? null : $id;
 
 // 用户 Id
 $user_id = empty($user_id) ? Yii::$app->user->identity->user_id : $user_id;
@@ -31,7 +31,7 @@ $uploadType = empty($uploadType) ? 'image' : $uploadType;
 $num = empty($num) ? 5 : $num;
 
 // 初始化
-$images = array();
+$images = [];
 
 // 取出图片,存储为数组
 if (!empty($model->$attribute)) {
@@ -57,13 +57,14 @@ switch ($imgPathArray[1]) {
 
     case 'download':
     case 'slide':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/noId';
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1];
         break;
 
     case 'sp-offer':
         $imgPath = Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/';
         break;
 
+    default:
     case 'product':
         $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $id;
         break;
@@ -87,21 +88,21 @@ switch ($imgPathArray[1]) {
 
     <?=
     FileUploadUI::widget([
-        'model' => $model,
-        'attribute' => $attribute,
-        'url' => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
-        'gallery' => false,
-        'fieldOptions' => [
-            'accept' => $uploadType . '/*'
+        'model'         => $model,
+        'attribute'     => $attribute,
+        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
+        'gallery'       => false,
+        'fieldOptions'  => [
+            'accept' => $uploadType . '/*',
         ],
         'clientOptions' => [
-            'maxFileSize' => 2000000,
-            'dataType' => 'json',
+            'maxFileSize'      => 2000000,
+            'dataType'         => 'json',
             'maxNumberOfFiles' => $num,
         ],
 
         // ...
-        'clientEvents' => [
+        'clientEvents'  => [
 
             'fileuploaddone' => 'function(e, data) {
             
@@ -175,9 +176,8 @@ switch ($imgPathArray[1]) {
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 
                         <?php if (Yii::$app->controller->id != 'sp-offer'): ?>
-                            <a class="btn btn-danger DeleteImg" data-type="GET" data-url="">
-                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i
-                                        class="glyphicon glyphicon-trash"></i> <font>删除</font>
+                            <a class="btn btn-danger DeleteImg" data-type="GET" title="删除这个文件 : <?= $value ?>">
+                                <input class="DeleteImgHidden" type="hidden" value="<?= $value ?>"/><i class="glyphicon glyphicon-trash"></i> <font>删除</font>
                             </a>
                         <?php endif; ?>
 
@@ -211,22 +211,6 @@ switch ($imgPathArray[1]) {
 
                     NewImageContent += imgArray[i] + ',';
                 }
-
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: "<?= Url::to(['admin/upload/image-delete', 'type' => Yii::$app->controller->id]); ?>&name=" + DeleteImgText,
-                    success: function (data) {
-                        console.log(data);
-                        return true;
-                    },
-                    error: function (XMLHttpRequest, textStatus) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                        return false;
-                    }
-                });
 
                 ImageId.empty().attr('value', NewImageContent);
 

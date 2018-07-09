@@ -9,14 +9,14 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%news_classify}}".
  *
  * @property integer $id
- * @property string $c_key
- * @property string $sort_id
- * @property string $name
- * @property string $description
- * @property string $keywords
- * @property string $json_data
- * @property string $parent_id
- * @property string $is_using
+ * @property string  $c_key
+ * @property string  $sort_id
+ * @property string  $name
+ * @property string  $description
+ * @property string  $keywords
+ * @property string  $json_data
+ * @property string  $parent_id
+ * @property string  $is_using
  */
 class NewsClassify extends \yii\db\ActiveRecord
 {
@@ -98,28 +98,26 @@ class NewsClassify extends \yii\db\ActiveRecord
      * 获取分类(选项框)
      *
      * @param string $one
+     *
      * @return array
      */
-    public function getClsSelect($one = 'Off')
+    public static function getClsSelect($one = 'Off')
     {
 
         // 产品分类
         $dataClassify = static::findByAll(static::$parent_cly_id);
 
         // 初始化
-        $result = array();
-
-        // 产品分类
-        $Cls = new NewsClassify();
+        $result = [];
 
         if ($one == 'On')
-            $result[ static::$parent_cly_id ] = '顶级分类 !!';
+            $result[static::$parent_cly_id] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
-            $result[ $value['c_key'] ] = $value['name'];
+            $result[$value['c_key']] = $value['name'];
 
-            $child = $Cls->recursionClsSelect($value);
+            $child = static::recursionClsSelect($value);
 
             if (empty($child))
                 continue;
@@ -134,6 +132,7 @@ class NewsClassify extends \yii\db\ActiveRecord
      * 获取分类
      *
      * @param string $parent_id
+     *
      * @return array|bool
      */
     public function getCls($parent_id = null)
@@ -142,12 +141,12 @@ class NewsClassify extends \yii\db\ActiveRecord
         $parent_id = empty($parent_id) ? static::$parent_cly_id : $parent_id;
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $parent = static::findByAll($parent_id);
 
         foreach ($parent as $key => $value) {
-            $result[ $key ] = $this->recursionCls($value);
+            $result[$key] = $this->recursionCls($value);
         }
 
         return $result;
@@ -180,17 +179,17 @@ class NewsClassify extends \yii\db\ActiveRecord
     /**
      * 无限分类(选项框)
      *
-     * @param $data
+     * @param     $data
      * @param int $num
      */
-    public function recursionClsSelect($data, $num = 1)
+    public static function recursionClsSelect($data, $num = 1)
     {
 
         if (empty($data))
             return;
 
         // 初始化
-        $result = array();
+        $result = [];
         $symbol = null;
 
         $child = static::findByAll($data['c_key']);
@@ -206,9 +205,9 @@ class NewsClassify extends \yii\db\ActiveRecord
 
         foreach ($child as $key => $value) {
 
-            $result[ $value['c_key'] ] = $symbol . $value['name'];
+            $result[$value['c_key']] = $symbol . $value['name'];
 
-            $childData = $this->recursionClsSelect($value, ($num + 1));
+            $childData = static::recursionClsSelect($value, ($num + 1));
 
             if (empty($childData))
                 continue;
