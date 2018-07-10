@@ -14,6 +14,8 @@ use yii\helpers\Html;
 
 $this->title = '采购平台';
 
+$result['Conf'] = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
+
 ?>
 
 <?= Html::cssFile('@web/themes/qijian/css/nav.css') ?>
@@ -28,7 +30,7 @@ $this->title = '采购平台';
     });
 </script>
 
-<div class='container-fluid classfi-bg' title="<?= $result['conf']['KEYWORDS'] ?>">
+<div class='container-fluid classfi-bg' title="<?= $result['Conf']['KEYWORDS'] ?>">
     <div class='container shop-classfiy'>
 
         <div class='search'>
@@ -173,7 +175,7 @@ $this->title = '采购平台';
         <div class='data-list'>
 
             <div class='left'>
-                <?= Html::img(Url::to('@web/themes/qijian/images/tender-1.jpg'), ['alt' => $result['conf']['KEYWORDS']]); ?>
+                <?= Html::img(Url::to('@web/themes/qijian/images/tender-1.jpg'), ['alt' => $result['Conf']['KEYWORDS']]); ?>
             </div>
 
             <div class='right'>
@@ -196,7 +198,7 @@ $this->title = '采购平台';
                             <div>
                                 <ul>
                                     <li>【采购】</li>
-                                    <li><?= $value['title'] ?></li>
+                                    <li><?= Html::a($value['title'], ['/purchase/view', 'id' => $value['purchase_id']], ['title' => $value['title']]) ?></li>
                                     <li>
 
                                         <?php if ($value['is_type'] == 'Long'): ?>
@@ -206,7 +208,7 @@ $this->title = '采购平台';
                                         <?php endif; ?>
 
                                     </li>
-                                    <li><a title='' href='<?= Url::to(['/purchase/view', 'id' => $value['purchase_id']]) ?>'>查看详情</a></li>
+                                    <li><a title='<?= $value['title'] ?>' href='<?= Url::to(['/purchase/view', 'id' => $value['purchase_id']]) ?>'>查看详情</a></li>
                                 </ul>
                             </div>
                         <?php endforeach; ?>

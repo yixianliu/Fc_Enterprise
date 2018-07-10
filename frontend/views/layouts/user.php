@@ -11,16 +11,15 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use frontend\assets\QijianAsset;
 use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
 QijianAsset::register($this);
 
-$ClsMenu = new Menu();
-
 $footMenu = Menu::findByAll('E1');
+
+$ConfArray = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
 
 $this->beginPage();
 
@@ -50,7 +49,7 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
             <!-- LOGO -->
             <div class="col-xs-2">
                 <a class="navbar-brand" title="" href="<?= Url::to(['/']) ?>">
-                    <?= Html::img(Url::to('@web/themes/qijian/images/logo.jpg'), ['alt' => '']); ?>
+                    <?= Html::img(Url::to('@web/themes/qijian/images/logo.jpg'), ['alt' => $ConfArray['NAME']]); ?>
                 </a>
             </div>
             <!-- #LOGO -->
@@ -90,14 +89,11 @@ $this->registerCssFile('@web/themes/qijian/css/user.css');
                     <div class="input-group">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                产品 <span class="caret"></span>
+                                采购信息 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a title="" href="">采购</a></li>
-                            </ul>
                         </div>
                         <input type="text" class="form-control" aria-label="请输入您要查询的关键字" placeholder="请输入您要查询的关键字" name="title"/>
-                        <span class="input-group-btn"><input type="submit" class="btn btn-red" value="搜索" /></span>
+                        <span class="input-group-btn"><input type="submit" class="btn btn-red" value="搜索"/></span>
                     </div>
                 </form>
 

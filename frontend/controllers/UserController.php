@@ -10,7 +10,6 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Product;
 use common\models\UserSupply;
-use common\models\Job;
 use common\models\User;
 
 class UserController extends BaseController

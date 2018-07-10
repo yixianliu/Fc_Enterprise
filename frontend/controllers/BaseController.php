@@ -106,25 +106,7 @@ class BaseController extends Controller
      */
     public static function WebConf($system = null)
     {
-
-        // 初始化
-        $result = array();
-
-        if (empty($system)) {
-            $confData = Conf::findByData('On', Yii::$app->session['language']);
-        } else {
-            $confData = Conf::find()->where(['is_using' => 'On', 'is_language' => ''])->asArray()->all();
-        }
-
-        if (!empty($confData)) {
-
-            foreach ($confData as $key => $value) {
-                $result[ $value['c_key'] ] = $value['parameter'];
-            }
-
-        }
-
-        return $result;
+        return (empty($system)) ? Conf::findByData('On', Yii::$app->session['language']) : Conf::findByConfArray(Yii::$app->session['language']);
     }
 
     /**

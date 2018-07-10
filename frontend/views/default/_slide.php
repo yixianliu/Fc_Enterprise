@@ -20,17 +20,9 @@ $dataSlide = Slide::getData($PageId);
 if (empty($dataSlide))
     return false;
 
-if (is_array($dataSlide)) {
+$Conf = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
 
-    foreach ($dataSlide as $key => $value) {
-
-        if (empty($value))
-            unset($dataSlide[ $key ]);
-
-    }
-}
-
-$alt = empty($alt) ? null : $alt;
+$alt = empty($alt) ? $Conf['KEYWORDS'] : $alt;
 
 ?>
 
@@ -53,7 +45,7 @@ $alt = empty($alt) ? null : $alt;
             <?php foreach ($dataSlide as $key => $value): ?>
 
                 <div class="item <?php if ($key == 0): ?>active<?php endif; ?>">
-                    <?= Html::img(Url::to('@web/../../backend/web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
+                    <?= Html::img(Url::to('@web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
                 </div>
 
             <?php endforeach; ?>
@@ -61,16 +53,20 @@ $alt = empty($alt) ? null : $alt;
         </div>
 
         <?php if (count($dataSlide) > 1): ?>
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev" title="<?= $Conf['NAME'] ?>">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next" title="<?= $Conf['NAME'] ?>">&rsaquo;</a>
         <?php endif; ?>
 
     </div>
 
 <?php else: ?>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-</div>
+        <div class="item active">
+            <?= Html::img(Url::to('@web/temp/slide/') . $dataSlide, ['class' => '', 'alt' => $alt]); ?>
+        </div>
+
+    </div>
 
 <?php endif; ?>

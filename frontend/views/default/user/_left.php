@@ -9,20 +9,22 @@
  * Time: 10:14
  */
 
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 // 侧边栏的官方内容
-$result['Conf'] = \frontend\controllers\BaseController::WebConf();
+$result['Conf'] = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
 
 ?>
 
 <div class="left">
 
     <div class="user-left-cont">
-        <h3><a title="" href="user-confhead.html"><img alt="" class="image_fade" src="../images/200x200.gif"></a></h3>
+        <h3><a title="<?= Yii::$app->user->identity->username ?>" href="<?= Url::to(['/']) ?>"><?= Html::img(Url::to('@web/themes/qijian/images/200x200.gif'), ['class' => '', 'alt' => $result['Conf']['NAME']]); ?></a></h3>
+
         <p><?= Yii::$app->user->identity->username ?></p>
-        <p>上次登录时间 : <?= date('Y / m / d', Yii::$app->user->identity->updated_at) ?></p>
+        <p>上次登录时间 : <?= date('Y.m.d', Yii::$app->user->identity->updated_at) ?></p>
+
     </div>
 
     <div class="user-left-list">
@@ -30,40 +32,42 @@ $result['Conf'] = \frontend\controllers\BaseController::WebConf();
 
             <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
 
-            <li class="dropdown open">
+                <li class="dropdown open">
 
-                <a href="#" class="dropdown-toggle">采购管理 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle">采购管理 <span class="caret"></span></a>
 
-                <ul class="dropdown-menu">
-                    <li><a href="user-purchase-eidt.html">发布采购</a></li>
-                    <li><a href="user-purchase-view.html">采购中心</a></li>
-                </ul>
+                    <ul class="dropdown-menu">
+                        <li><?= Html::a('提交价格', ['/sp-offer/index'], ['title' => $result['Conf']['NAME']]) ?></li>
+                        <li><?= Html::a('采购中心', ['/purchase/index'], ['title' => $result['Conf']['NAME']]) ?></li>
+                        <li><?= Html::a('商户资料', ['/user/supplier'], ['title' => $result['Conf']['NAME']]) ?></li>
+                    </ul>
 
-            </li>
+                </li>
 
             <?php else: ?>
 
-            <li class="dropdown open">
-                <a href="#" class="dropdown-toggle">
-                    产品管理 <span class="caret"></span>
-                </a>
+                <li class="dropdown open">
 
-                <ul class="dropdown-menu">
-                    <li><a href="user-product-edit.html">发布产品</a></li>
-                    <li><a href="user-product-view.html">产品中心</a></li>
-                </ul>
-            </li>
+                    <a href="#" class="dropdown-toggle">产品管理 <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu">
+                        <li><?= Html::a('提交价格', ['user/index'], ['title' => $result['Conf']['NAME']]) ?></li>
+                        <li><?= Html::a('招聘中心', ['job/index'], ['title' => $result['Conf']['NAME']]) ?></li>
+                        <li><?= Html::a('招聘中心', ['job/update', 'id' => Yii::$app->user->identity->user_id], ['title' => $result['Conf']['NAME']]) ?></li>
+                    </ul>
+                </li>
 
             <?php endif ?>
 
             <li class="dropdown open">
-                <a href="#" class="dropdown-toggle">
-                    招聘管理 <span class="caret"></span>
-                </a>
+                <a href="#" class="dropdown-toggle">用户中心 <span class="caret"></span></a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="user-job-view.html">招聘中心</a></li>
-                    <li><a href="user-resume-view.html">我的简历</a></li>
+                    <li><?= Html::a('用户中心', ['user/index'], ['title' => $result['Conf']['NAME']]) ?></li>
+                    <li><?= Html::a('用户资料', ['user/info'], ['title' => $result['Conf']['NAME']]) ?></li>
+                    <li><?= Html::a('修改密码', ['user/setpassword'], ['title' => $result['Conf']['NAME']]) ?></li>
+                    <li><?= Html::a('退出账户', ['member/logout'], ['title' => $result['Conf']['NAME']]) ?></li>
+
                 </ul>
             </li>
 
@@ -72,7 +76,7 @@ $result['Conf'] = \frontend\controllers\BaseController::WebConf();
 
     <div class="user-left-contact">
 
-        <img alt="" src="../images/contact.jpg"/>
+        <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
 
         <ul class="user-left-contactUs">
             <li><a><?= Yii::t('app', 'company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
@@ -80,59 +84,6 @@ $result['Conf'] = \frontend\controllers\BaseController::WebConf();
             <li><a><?= Yii::t('app', 'phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
             <li><a><?= Yii::t('app', 'address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
         </ul>
-    </div>
-
-</div>
-
-<div class="left">
-
-    <div class="user-cont">
-
-        <br/>
-
-        <p>用户名 : <?= Yii::$app->user->identity->username ?></p>
-        <p>上次登录时间 : <?= date('Y / m / d', Yii::$app->user->identity->updated_at) ?></p>
-
-    </div>
-
-    <?php if (Yii::$app->user->identity->is_type == 'supplier'): ?>
-
-        <div class="cat_list">
-            <h3>商户中心</h3>
-            <p><a href="<?= Url::to(['user/supplier']) ?>">商户资料</a></p>
-            <p><a href="<?= Url::to(['purchase/index']) ?>">采购中心</a></p>
-            <p><a href="<?= Url::to(['sp-offer/index']) ?>">提交价格的产品</a></p>
-        </div>
-
-    <?php else: ?>
-
-        <div class="cat_list">
-            <h3>普通用户</h3>
-            <p><a href="<?= Url::to(['job/index']) ?>">招聘中心</a></p>
-            <p><a href="<?= Url::to(['job/update', 'id' => Yii::$app->user->identity->user_id]) ?>">我的简历</a></p>
-        </div>
-
-    <?php endif ?>
-
-    <div class="cat_list">
-        <h3>用户中心</h3>
-        <p><a href="<?= Url::to(['user/index']) ?>">用户中心</a></p>
-        <p><a href="<?= Url::to(['user/info']) ?>">用户资料</a></p>
-        <p><a href="<?= Url::to(['user/setpassword']) ?>">修改密码</a></p>
-        <p><a href="<?= Url::to(['member/logout']) ?>">退出账户</a></p>
-    </div>
-
-    <div class="contact">
-
-        <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), ['alt' => $this->title]); ?>
-
-        <ul class="contact_us">
-            <li><a><?= Yii::t('app', 'company') ?> ：<?= $result['Conf']['NAME'] ?></a></li>
-            <li><a><?= Yii::t('app', 'contacts') ?> ：<?= $result['Conf']['PERSON'] ?></a></li>
-            <li><a><?= Yii::t('app', 'phone') ?> ：<span><?= $result['Conf']['PHONE'] ?></span></a></li>
-            <li><a><?= Yii::t('app', 'address') ?> ：<span><?= $result['Conf']['ADDRESS'] ?></span></a></li>
-        </ul>
-
     </div>
 
 </div>

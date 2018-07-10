@@ -126,7 +126,7 @@ switch (Yii::$app->controller->id) {
 }
 
 // 侧边栏的官方内容
-$result['Conf'] = \frontend\controllers\BaseController::WebConf();
+$result['Conf'] = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
 
 function menuHandel()
 {

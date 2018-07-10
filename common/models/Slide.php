@@ -9,10 +9,10 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%slide}}".
  *
  * @property integer $slide_id
- * @property string $c_key
- * @property string $path
- * @property string $description
- * @property string $is_using
+ * @property string  $c_key
+ * @property string  $path
+ * @property string  $description
+ * @property string  $is_using
  */
 class Slide extends \yii\db\ActiveRecord
 {
@@ -69,6 +69,7 @@ class Slide extends \yii\db\ActiveRecord
      * 查单条记录
      *
      * @param $id
+     *
      * @return Slide
      */
     public static function findByOne($id)
@@ -81,21 +82,33 @@ class Slide extends \yii\db\ActiveRecord
     /**
      * 获取幻灯片数据
      *
-     * @param $pagekey
+     * @param $pageKey
+     *
      * @return array|bool
      */
-    public static function getData($pagekey)
+    public static function getData($pageKey = null)
     {
 
-        if (empty($pagekey))
+        if (empty($pageKey))
             return false;
 
-        $result = static::findOne(['is_using' => 'On', 'c_key' => $pagekey]);
+        $result = static::findOne(['is_using' => 'On', 'c_key' => $pageKey]);
 
         if (empty($result))
             return false;
 
         $dataSlide = explode(',', $result->path);
+
+        foreach ($dataSlide as $key => $value) {
+
+            if (empty($value))
+                unset($dataSlide[$key]);
+
+        }
+
+        // 只有一张大图的时候,赋值
+        if (sizeof($dataSlide) == 1)
+            $dataSlide = $dataSlide[0];
 
         return $dataSlide;
     }

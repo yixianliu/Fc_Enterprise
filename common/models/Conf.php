@@ -86,4 +86,28 @@ class Conf extends \yii\db\ActiveRecord
             ->asArray()
             ->all();
     }
+
+    /**
+     * 整合后的配置数组
+     *
+     * @param null   $status
+     * @param string $language
+     *
+     * @return array
+     */
+    public static function findByConfArray($language = 'cn')
+    {
+
+        $data = static::findByData('On', $language);
+
+        // 初始化
+        $confArray = array();
+
+        foreach ($data as $value) {
+            $confArray[ $value['c_key'] ] = $value['parameter'];
+        }
+
+        return $confArray;
+    }
+
 }
