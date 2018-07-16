@@ -100,15 +100,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'start_at',
                             'value' => function ($model) {
-                                return date('Y-m-d H:i', $model->start_at);
+                                return $model->start_at;
                             },
                         ],
-                        [
-                            'attribute' => 'end_at',
-                            'value' => function ($model) {
-                                return date('Y-m-d H:i', $model->end_at);
-                            },
-                        ],
+//                        [
+//                            'attribute' => 'end_at',
+//                            'value' => function ($model) {
+//                                return date('Y-m-d H:i', $model->end_at);
+//                            },
+//                        ],
                         [
                             'attribute' => 'is_using',
                             'value' => function ($model) {

@@ -10,13 +10,16 @@ use dosamigos\datepicker\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
+<?php $this->registerCssFile('@web/themes/assets/plugins/daterangepicker/css/daterangepicker-bs3.css'); ?>
+<?php $this->registerJsFile('@web/themes/assets/plugins/daterangepicker/js/moment.min.js'); ?>
+<?php $this->registerJsFile('@web/themes/assets/plugins/daterangepicker/js/daterangepicker.js'); ?>
+
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -52,23 +55,7 @@ use dosamigos\datepicker\DatePicker;
 
                 <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'start_at')->widget(
-                    DatePicker::className(), [
-                    'template'      => '{addon}{input}',
-                    'clientOptions' => [
-                        'autoclose' => true,
-                        'format'    => 'dd-M-yyyy'
-                    ]
-                ]); ?>
-
-                <?= $form->field($model, 'end_at')->widget(
-                    DatePicker::className(), [
-                    'template'      => '{addon}{input}',
-                    'clientOptions' => [
-                        'autoclose' => true,
-                        'format'    => 'dd-M-yyyy'
-                    ]
-                ]); ?>
+                <?= $form->field($model, 'start_at')->textInput(['class' => 'form-control daterange', 'data-format' => 'YYYY/MM/DD hh:mm A', 'data-time-picker-increment' => 5, 'data-time-picker' => 'true']) ?>
 
                 <?=
                 $form->field($model, 'is_type')->widget(Select2::classname(), [

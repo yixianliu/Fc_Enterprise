@@ -3,13 +3,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
+
+<?php $this->registerCssFile('@web/themes/assets/plugins/daterangepicker/css/daterangepicker-bs3.css'); ?>
+<?php $this->registerJsFile('@web/themes/assets/plugins/daterangepicker/js/moment.min.js'); ?>
+<?php $this->registerJsFile('@web/themes/assets/plugins/daterangepicker/js/daterangepicker.js'); ?>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -25,7 +28,7 @@ use dosamigos\datepicker\DatePicker;
 
                     <?=
                     $form->field($model, 'c_key')->widget(Select2::classname(), [
-                        'data' => $result['classify'],
+                        'data'    => $result['classify'],
                         'options' => ['placeholder' => '采购分类...'],
                     ]);
                     ?>
@@ -36,11 +39,11 @@ use dosamigos\datepicker\DatePicker;
                     $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
                         'clientOptions' => [
                             //设置语言
-                            'lang' => 'zh-cn',
+                            'lang'               => 'zh-cn',
                             'initialFrameHeight' => '600',
                             'elementPathEnabled' => false,
-                            'wordCount' => false,
-                        ]
+                            'wordCount'          => false,
+                        ],
                     ]);
                     ?>
 
@@ -52,48 +55,32 @@ use dosamigos\datepicker\DatePicker;
 
                     <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'start_at')->widget(
-                        DatePicker::className(), [
-                        'template' => '{addon}{input}',
-                        'clientOptions' => [
-                            'autoclose' => true,
-                            'format' => 'dd-M-yyyy'
-                        ]
-                    ]); ?>
-
-                    <?= $form->field($model, 'end_at')->widget(
-                        DatePicker::className(), [
-                        'template' => '{addon}{input}',
-                        'clientOptions' => [
-                            'autoclose' => true,
-                            'format' => 'dd-M-yyyy'
-                        ]
-                    ]); ?>
+                    <?= $form->field($model, 'start_at')->textInput(['class' => 'form-control daterange', 'data-format' => 'YYYY/MM/DD hh:mm A', 'data-time-picker-increment' => 5, 'data-time-picker' => 'true']) ?>
 
                     <?=
                     $form->field($model, 'is_type')->widget(Select2::classname(), [
-                        'data' => ['Long' => '长期采购', 'Short' => '短期采购'],
+                        'data'    => ['Long' => '长期采购', 'Short' => '短期采购'],
                         'options' => ['placeholder' => '采购类型...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_status')->widget(Select2::classname(), [
-                        'data' => ['On' => '采购中', 'Off' => '关闭'],
+                        'data'    => ['On' => '采购中', 'Off' => '关闭'],
                         'options' => ['placeholder' => '采购状态...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_using')->widget(Select2::classname(), [
-                        'data' => ['On' => '启用', 'Off' => '不启用'],
+                        'data'    => ['On' => '启用', 'Off' => '不启用'],
                         'options' => ['placeholder' => '是否启用...'],
                     ]);
                     ?>
 
                     <?=
                     $form->field($model, 'is_send_msg')->widget(Select2::classname(), [
-                        'data' => ['On' => '群发供应商', 'Off' => '不群发'],
+                        'data'    => ['On' => '群发供应商', 'Off' => '不群发'],
                         'options' => ['placeholder' => '是否群发...'],
                     ]);
                     ?>

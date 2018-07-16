@@ -169,8 +169,8 @@ class PurchaseController extends BaseController
             Yii::$app->getSession()->setFlash('error', $model->getErrors());
         }
 
-        $model->start_at = date('Y-m-d H:i', $model->start_at);
-        $model->end_at = date('Y-m-d H:i', $model->end_at);
+//        $model->start_at = date('Y-m-d H:i', $model->start_at);
+//        $model->end_at = date('Y-m-d H:i', $model->end_at);
 
         return $this->render('update', [
             'model'  => $model,
@@ -226,12 +226,8 @@ class PurchaseController extends BaseController
         if (empty($data['Purchase']))
             return false;
 
-        $data['Purchase']['start_at'] = strtotime($data['Purchase']['start_at']);
-        $data['Purchase']['end_at'] = strtotime($data['Purchase']['end_at']);
-
-        if ($data['Purchase']['start_at'] > $data['Purchase']['end_at']) {
-            return false;
-        }
+//        $data['Purchase']['start_at'] = strtotime($data['Purchase']['start_at']);
+//        $data['Purchase']['end_at'] = strtotime($data['Purchase']['end_at']);
 
         return $data;
     }

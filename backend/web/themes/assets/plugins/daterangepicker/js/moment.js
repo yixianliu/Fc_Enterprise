@@ -108,7 +108,7 @@
             s : 'second',
             m : 'minute',
             h : 'hour',
-            d : 'day',
+            d : '天',
             D : 'date',
             w : 'week',
             W : 'isoWeek',
@@ -800,7 +800,7 @@
             return this._months[m.month()];
         },
 
-        _monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+        _monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_七月_Aug_Sep_Oct_Nov_Dec'.split('_'),
         monthsShort : function (m) {
             return this._monthsShort[m.month()];
         },
@@ -826,7 +826,7 @@
             }
         },
 
-        _weekdays : 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+        _weekdays : '礼拜一_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
         weekdays : function (m) {
             return this._weekdays[m.day()];
         },

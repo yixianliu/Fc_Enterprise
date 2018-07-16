@@ -27,9 +27,9 @@ switch ($model->is_type) {
 
 <div class="col-lg-12">
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= $title . ' - ' . Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= $title . ' - ' . Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
 

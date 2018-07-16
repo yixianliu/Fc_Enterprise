@@ -54,7 +54,7 @@ class Purchase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['purchase_id', 'c_key', 'user_id', 'title', 'content', 'price', 'start_at', 'end_at'], 'required'],
+            [['purchase_id', 'c_key', 'user_id', 'title', 'content', 'price', 'start_at'], 'required'],
             [['content', 'is_type', 'is_status', 'is_using', 'unit', 'path', 'is_send_msg',], 'string'],
             [['num'], 'integer'],
             [['purchase_id', 'user_id', 'price', 'is_using', 'is_type', 'is_status', 'unit',], 'string', 'max' => 85],
@@ -63,7 +63,7 @@ class Purchase extends \yii\db\ActiveRecord
             [['purchase_id'], 'unique'],
 
             // 默认
-            [['is_send_msg',], 'default', 'value' => 'Off'],
+            [['is_send_msg', 'end_at'], 'default', 'value' => 'Off'],
             [['path'], 'default', 'value' => null],
             [['unit',], 'default', 'value' => '个'],
             [['num',], 'default', 'value' => 1],
