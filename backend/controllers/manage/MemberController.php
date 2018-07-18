@@ -3,10 +3,11 @@
 namespace backend\controllers\manage;
 
 use Yii;
+use yii\web\Controller;
 use backend\models\LoginForm;
 use common\models\Conf;
 
-class MemberController extends BaseController
+class MemberController extends Controller
 {
 
     public $layout = false;
@@ -23,7 +24,7 @@ class MemberController extends BaseController
 
         if (!empty($confData)) {
             foreach ($confData as $key => $value) {
-                Yii::$app->params['Conf'][ $value['c_key'] ] = $value['parameter'];
+                Yii::$app->params['Conf'][$value['c_key']] = $value['parameter'];
             }
         }
 
@@ -36,8 +37,10 @@ class MemberController extends BaseController
                 if ($model->login()) {
 
                     if (Yii::$app->user->access_token != 'manage') {
+
                         Yii::$app->getSession()->setFlash('error', '并不是超级管理员 !!');
                         return $this->redirect(['/manage/member/login']);
+
                     }
 
                     return $this->redirect(['/manage/center/index']);

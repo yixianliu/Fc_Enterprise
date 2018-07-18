@@ -8,13 +8,13 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "{{%conf}}".
  *
- * @property int $conf_id
- * @property string $c_key 配置关键字KEY
- * @property string $name 名称
- * @property string $parameter 值 / 参数
+ * @property int    $conf_id
+ * @property string $c_key       配置关键字KEY
+ * @property string $name        名称
+ * @property string $parameter   值 / 参数
  * @property string $description 描述
- * @property string $is_using 是否可用
- * @property string $published 发布时间
+ * @property string $is_using    是否可用
+ * @property string $published   发布时间
  */
 class Conf extends \yii\db\ActiveRecord
 {
@@ -72,8 +72,9 @@ class Conf extends \yii\db\ActiveRecord
     /**
      * 网站配置数据
      *
-     * @param null $status
+     * @param null   $status
      * @param string $language
+     *
      * @return array|\yii\db\ActiveRecord[]
      */
     public static function findByData($status = null, $language = 'cn')
@@ -90,21 +91,21 @@ class Conf extends \yii\db\ActiveRecord
     /**
      * 整合后的配置数组
      *
-     * @param null   $status
      * @param string $language
+     * @param string $status
      *
      * @return array
      */
-    public static function findByConfArray($language = 'cn')
+    public static function findByConfArray($language = 'cn', $status = 'On')
     {
 
-        $data = static::findByData('On', $language);
+        $data = static::findByData($status, $language);
 
         // 初始化
-        $confArray = array();
+        $confArray = [];
 
         foreach ($data as $value) {
-            $confArray[ $value['c_key'] ] = $value['parameter'];
+            $confArray[$value['c_key']] = $value['parameter'];
         }
 
         return $confArray;

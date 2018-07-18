@@ -56,13 +56,17 @@ class BaseController extends Controller
         }
 
         if (Yii::$app->user->isGuest) {
-            return;
+            return false;
         }
 
         $power = Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);
 
+        if (!empty(Yii::$app->request->get('action'))) {
+            return true;
+        }
+
         if (!Yii::$app->user->can($power) && Yii::$app->getErrorHandler()->exception === null) {
-//            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
+            throw new \yii\web\UnauthorizedHttpException('对不起，您现在还没获此操作的权限 !!');
         }
 
         return true;
@@ -77,10 +81,10 @@ class BaseController extends Controller
             'upload' => [
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"       => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat"      => "/UEditor/temp/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
-                    "imageRoot"            => Yii::getAlias("@webroot"),
-                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
+                    "imageUrlPrefix"       => Yii::$app->request->hostInfo, // 图片访问路径前缀
+                    "imagePathFormat"      => "/../../temp/UEditor/{yyyy}_{mm}_{dd}/{time}_{rand:6}", // 上传保存路径
+                    "imageRoot"            => Yii::getAlias('@webroot/../../frontend/web/'),
+                    "imageManagerListPath" => Yii::getAlias('@web/../../frontend/web/') . 'temp/UEditor',
                 ],
             ],
         ];
