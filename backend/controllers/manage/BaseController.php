@@ -7,7 +7,7 @@ use Yii;
 class BaseController extends \yii\web\Controller
 {
 
-    public $layout = 'admin';
+    public $layout = 'manage';
 
     public function init()
     {

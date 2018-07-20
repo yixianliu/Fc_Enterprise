@@ -13,6 +13,7 @@ use yii\helpers\Url;
  * 递归菜单
  *
  * @param $data
+ *
  * @return null|string|void
  */
 function recursionHtmlMenu($data)
@@ -64,7 +65,8 @@ function recursionHtmlMenu($data)
 
         <?php if (!empty($value['name'])): ?>
 
-            <li class='<?php if (!empty($value['open']) && $value['open'] == 'On'): ?>open<?php endif; ?>' title='<?= $value['name'] ?>'>
+            <li class='<?php if (!empty($value['open']) && $value['open'] == 'On'): ?>open<?php endif; ?>'
+                title='<?= $value['name'] ?>'>
 
                 <a title='<?= $value['name'] ?>' href='<?= Url::to([$value['url']]) ?>' class='dropdown-toggle' data-toggle='dropdown'>
 

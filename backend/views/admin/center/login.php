@@ -41,17 +41,11 @@ $this->beginPage();
         <?php $form = ActiveForm::begin(['action' => ['admin/member/login'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
         <p>
-            <?=
-            $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号...'])
-                ->label('帐号');
-            ?>
+            <?= $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号...'])->label('帐号'); ?>
         </p>
 
         <p>
-            <?=
-            $form->field($model, 'password')->passwordInput(['class' => 'input', 'placeholder' => '密码...'])
-                ->label('密码');
-            ?>
+            <?= $form->field($model, 'password')->passwordInput(['class' => 'input', 'placeholder' => '密码...'])->label('密码'); ?>
         </p>
 
         <p class="submit">

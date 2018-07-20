@@ -212,4 +212,46 @@ class UploadController extends BaseController
         return true;
     }
 
+    /**
+     * 删除
+     *
+     * @param $name
+     * @param $type
+     * @return string
+     */
+    public function actionImageDelete($name, $type)
+    {
+
+        if (empty($name) || empty($type)) {
+            return Json::encode(['message' => '参数有误 !!']);
+        }
+
+        $directory = Yii::getAlias('@frontend/web/temp/') . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $type;
+
+        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
+            unlink($directory . DIRECTORY_SEPARATOR . $name);
+        }
+
+        $files = FileHelper::findFiles($directory);
+
+        $output = [];
+
+        foreach ($files as $file) {
+
+            $fileName = basename($file);
+            $path = '/img/temp/' . $type . DIRECTORY_SEPARATOR . $fileName;
+
+            $output['files'][] = [
+                'name'         => $fileName,
+                'size'         => filesize($file),
+                'url'          => $path,
+                'thumbnailUrl' => $path,
+                'deleteUrl'    => Url::to(['admin/upload/image-delete', 'name' => $fileName, 'type' => $type]),
+                'deleteType'   => 'GET',
+            ];
+        }
+
+        return Json::encode($output);
+    }
+
 }

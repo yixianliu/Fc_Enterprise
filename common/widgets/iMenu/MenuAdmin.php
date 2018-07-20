@@ -16,7 +16,7 @@ use common\models\Conf;
 class MenuAdmin extends InputWidget
 {
 
-    public $config = array();
+    public $config = [];
 
     // 当前选项
     static public $activeId = null;
@@ -46,9 +46,10 @@ class MenuAdmin extends InputWidget
      * 菜单导航
      *
      * @param $pid
+     *
      * @return mixed
      */
-    public static function MenuNavList($pid)
+    public static function MenuNavList($pid = null)
     {
 
         $result['menu'] = Menu::findMenuNav($pid);
@@ -62,7 +63,7 @@ class MenuAdmin extends InputWidget
             foreach ($result['menu'] as $key => $value) {
 
                 if ($value['m_key'] == static::$openId)
-                    $result['menu'][ $key ]['open'] = 'On';
+                    $result['menu'][$key]['open'] = 'On';
 
             }
 
@@ -71,7 +72,7 @@ class MenuAdmin extends InputWidget
         $confData = Conf::findByData('On');
 
         foreach ($confData as $key => $value) {
-            $result['conf'][ $value['c_key'] ] = $value['parameter'];
+            $result['conf'][$value['c_key']] = $value['parameter'];
         }
 
         return $result;
@@ -81,6 +82,7 @@ class MenuAdmin extends InputWidget
      * 查找当前选项的一级栏目
      *
      * @param null $parent_id
+     *
      * @return Menu|null|void
      */
     public static function MenuFindParent($parent_id = null)
