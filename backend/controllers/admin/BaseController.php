@@ -56,7 +56,7 @@ class BaseController extends Controller
         }
 
         if (Yii::$app->user->isGuest) {
-            return false;
+            return $this->redirect(['/member/login']);
         }
 
         $power = Yii::$app->controller->action->id . ucfirst(explode('/', Yii::$app->controller->id)[1]);

@@ -72,7 +72,7 @@ class UploadController extends BaseController
 
             // 配置
             case 'conf':
-                $model = new Conf();
+                $model = new \common\models\Conf();
                 break;
 
             // 新闻
@@ -120,9 +120,7 @@ class UploadController extends BaseController
                 break;
 
             default:
-                return Json::encode([
-                    'error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!',
-                ]);
+                return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!',]);
                 break;
         }
 

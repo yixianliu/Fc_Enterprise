@@ -10,6 +10,7 @@
  */
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $this->title = '网站 SEO 配置';
 $this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['index']];
@@ -42,6 +43,25 @@ $this->params['breadcrumbs'][] = ['label' => '网站配置', 'url' => ['index']]
 
                         </tbody>
                     </table>
+
+                    <hr/>
+                    <h3>Seo 配置</h3>
+
+                    <?php $form = ActiveForm::begin(['action' => ['admin/center/seo'], 'method' => 'post']); ?>
+
+                    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'alt')->textInput(['maxlength' => true]) ?>
+
+                    <div class="form-group">
+
+                        <?= Html::submitButton('保存内容', ['class' => 'btn btn-primary']) ?>
+
+                        <?= Html::a('返回列表', ['/admin/center/seo'], ['class' => 'btn btn-primary']) ?>
+
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
 
                 </div>
             </div>

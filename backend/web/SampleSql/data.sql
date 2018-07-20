@@ -148,6 +148,16 @@ VALUES
 (NULL, 'EN8', 8, 'E1', 'guest', 'UP2', NULL, '采购中心', 'purchase/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
 
 /*
+  超级管理员
+*/
+(NULL, 'Super1', 1, 'M0', 'guest', NULL, NULL, '终极后台', NULL, NULL, 'cn', 'On', '#TIME#', '#TIME#'),
+
+(NULL, 'ESuper1', 1, 'Super1', 'guest', 'UU1', NULL, '后台管理', 'center/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper2', 2, 'Super1', 'guest', 'UU1', NULL, '模块管理', 'module/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper3', 3, 'Super1', 'guest', 'UU1', NULL, '网站配置', 'web/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper4', 4, 'Super1', 'guest', 'UU1', NULL, '代码调整', 'code/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
+
+/*
     后台管理 / Admin
 */
 (NULL, 'A3', 1, 'M0', 'admin', NULL, NULL, '后台管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
@@ -176,7 +186,7 @@ VALUES
 (NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '采供分类', 'psb-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加采供分类', 'psb-cls/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看提交价格', 'sp-offer/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'APPP12', 12, 'AP3', 'admin', 'UU1', NULL, '导航分类', 'nav-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'APPP12', 12, 'AP3', 'admin', 'UU1', NULL, '导航分类管理', 'nav-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'APPP13', 13, 'AP3', 'admin', 'UU1', NULL, '添加导航分类', 'nav-cls/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 (NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
@@ -205,14 +215,16 @@ VALUES
 (NULL, 'AUMV1', 1, 'AM1', 'admin', 'UU1', NULL, '所有菜单', 'menu/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'AUMV2', 2, 'AM1', 'admin', 'UU1', NULL, '创建菜单', 'menu/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
-(NULL, 'ACCC1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'center/conf', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
-(NULL, 'ACCC8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'center/conf', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter9', 9, 'AC2', 'admin', 'UU1', NULL, '访客管理', 'visitor/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ACenter10', 10, 'AC2', 'admin', 'UU1', NULL, '操作日志', 'operate/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 (NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色', 'role/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 (NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色', 'role/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),

@@ -6,7 +6,7 @@
  * Time: 11:36
  */
 
-namespace backend\controllers\admin;
+namespace backend\controllers\manage;
 
 use Yii;
 use common\models\Conf;
@@ -20,5 +20,37 @@ use yii\filters\AccessControl;
  */
 class CenterController extends BaseController
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+
+        ];
+    }
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
 
 }

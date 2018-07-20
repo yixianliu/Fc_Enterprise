@@ -42,7 +42,9 @@ class CenterController extends BaseController
 
     /**
      * Displays a single Conf model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -61,6 +63,7 @@ class CenterController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new Conf();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -76,7 +79,9 @@ class CenterController extends BaseController
     /**
      * Updates an existing Conf model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -135,7 +140,9 @@ class CenterController extends BaseController
     /**
      * Deletes an existing Conf model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -154,7 +161,9 @@ class CenterController extends BaseController
     /**
      * Finds the Conf model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Conf the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -176,13 +185,13 @@ class CenterController extends BaseController
     {
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $confData = Conf::findByData(null, Yii::$app->session['language']);
 
         if (!empty($confData)) {
             foreach ($confData as $key => $value) {
-                $result[ $value['c_key'] ] = $value['parameter'];
+                $result[$value['c_key']] = $value['parameter'];
             }
         }
 
@@ -198,17 +207,23 @@ class CenterController extends BaseController
     {
 
         // 初始化
-        $result = array();
+        $result = [];
+
+        if (Yii::$app->request->isPost) {
+
+        }
 
         $confData = Conf::findByData(null, Yii::$app->session['language']);
 
         if (!empty($confData)) {
             foreach ($confData as $key => $value) {
-                $result[ $value['c_key'] ] = $value['parameter'];
+                $result[$value['c_key']] = $value['parameter'];
             }
         }
 
-        return $this->render('seo', ['result' => $result]);
+        $model = new \backend\models\SeoForm();
+
+        return $this->render('seo', ['result' => $result, 'model' => $model]);
     }
 
     /**
