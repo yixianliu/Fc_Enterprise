@@ -11,10 +11,10 @@
 
 namespace backend\controllers\admin;
 
-use backend\models\TplForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\TplForm;
 
 /**
  * DownloadController implements the CRUD actions for Download model.
@@ -102,20 +102,23 @@ class TplController extends BaseController
     /**
      * 获取某个目录下所有文件
      *
-     * @param $path
+     * @param      $path
      * @param bool $child
+     *
      * @return array|null
      */
     public function getFiles($path, $child = false)
     {
-        $files = array();
+        $files = [];
 
         if (!$child) {
+            
             if (is_dir($path)) {
                 $dp = dir($path);
             } else {
                 return null;
             }
+
             while ($file = $dp->read()) {
                 if ($file != "." && $file != ".." && is_file($path . $file)) {
                     $files[] = $file;
@@ -124,7 +127,7 @@ class TplController extends BaseController
             $dp->close();
 
         } else {
-            $this->scanfiles($files, $path);
+            $this->scanFiles($files, $path);
         }
 
         return $files;
@@ -133,23 +136,25 @@ class TplController extends BaseController
     /**
      * 扫描目录
      *
-     * @param $files
-     * @param $path
+     * @param      $files
+     * @param      $path
      * @param bool $childDir
      */
-    public function scanfiles(&$files, $path, $childDir = false)
+    public function scanFiles(&$files, $path, $childDir = false)
     {
 
         $dp = dir($path);
 
         while ($file = $dp->read()) {
             if ($file != "." && $file != "..") {
-                if (is_file($path . $file)) {//当前为文件
+
+                //当前为文件
+                if (is_file($path . $file)) {
                     $files[] = $file;
                 } else {
 
                     // 当前为目录
-                    $this->scanfiles($files[ $file ], $path . $file . DIRECTORY_SEPARATOR, $file);
+                    $this->scanFiles($files[$file], $path . $file . DIRECTORY_SEPARATOR, $file);
                 }
             }
         }
