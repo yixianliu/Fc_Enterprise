@@ -69,6 +69,7 @@ class AdminLog extends Model
         }
 
         $user = $dom->addChild('Log');
+
         $user->addChild('email', 'test');
         $user->addChild('time', 'test');
         $user->addChild('ip', '127.0.0.1');

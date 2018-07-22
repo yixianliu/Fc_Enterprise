@@ -55,7 +55,7 @@ class TplController extends BaseController
         $dir = Yii::$app->basePath . '/../frontend/views/';
 
         // 获取文件
-        $result = $this->getFiles($dir, true);
+        $result = TplForm::getFiles($dir, true);
 
         return $this->render('/admin/center/tpl', ['result' => $result]);
     }
@@ -97,69 +97,6 @@ class TplController extends BaseController
         }
 
         return $this->render('/admin/center/editTpl', ['model' => $model]);
-    }
-
-    /**
-     * 获取某个目录下所有文件
-     *
-     * @param      $path
-     * @param bool $child
-     *
-     * @return array|null
-     */
-    public function getFiles($path, $child = false)
-    {
-        $files = [];
-
-        if (!$child) {
-            
-            if (is_dir($path)) {
-                $dp = dir($path);
-            } else {
-                return null;
-            }
-
-            while ($file = $dp->read()) {
-                if ($file != "." && $file != ".." && is_file($path . $file)) {
-                    $files[] = $file;
-                }
-            }
-            $dp->close();
-
-        } else {
-            $this->scanFiles($files, $path);
-        }
-
-        return $files;
-    }
-
-    /**
-     * 扫描目录
-     *
-     * @param      $files
-     * @param      $path
-     * @param bool $childDir
-     */
-    public function scanFiles(&$files, $path, $childDir = false)
-    {
-
-        $dp = dir($path);
-
-        while ($file = $dp->read()) {
-            if ($file != "." && $file != "..") {
-
-                //当前为文件
-                if (is_file($path . $file)) {
-                    $files[] = $file;
-                } else {
-
-                    // 当前为目录
-                    $this->scanFiles($files[$file], $path . $file . DIRECTORY_SEPARATOR, $file);
-                }
-            }
-        }
-
-        $dp->close();
     }
 
 }
