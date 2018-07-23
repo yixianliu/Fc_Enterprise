@@ -9,6 +9,24 @@ class BaseController extends \yii\web\Controller
 
     public $layout = 'manage';
 
+    /**
+     * 前置函数
+     *
+     * @param $action
+     *
+     * @return bool|void|\yii\web\Response
+     * @throws \yii\web\UnauthorizedHttpException
+     */
+    public function beforeAction($action)
+    {
+
+        if (!file_exists(Yii::getAlias('@webroot') . '/' . Yii::$app->params['RD_FILE'])) {
+            return $this->redirect(['/mount/member/login']);
+        }
+
+        return true;
+    }
+
     public function init()
     {
 

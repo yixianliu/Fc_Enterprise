@@ -3,7 +3,7 @@
 namespace backend\controllers\manage;
 
 use Yii;
-use common\models\Conf;
+use common\models\Module;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,9 +11,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * WebController implements the CRUD actions for Conf model.
+ * ModuleController implements the CRUD actions for Module model.
  */
-class WebController extends Controller
+class ModuleController extends Controller
 {
 
     /**
@@ -43,14 +43,15 @@ class WebController extends Controller
         ];
     }
 
+
     /**
-     * Lists all Conf models.
+     * Lists all Module models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Conf::find(),
+            'query' => Module::find(),
         ]);
 
         return $this->render('index', [
@@ -59,7 +60,7 @@ class WebController extends Controller
     }
 
     /**
-     * Displays a single Conf model.
+     * Displays a single Module model.
      *
      * @param integer $id
      *
@@ -68,18 +69,19 @@ class WebController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', ['model' => $this->findModel($id),]);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
-     * Creates a new Conf model.
+     * Creates a new Module model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-
-        $model = new Conf();
+        $model = new Module();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -91,7 +93,7 @@ class WebController extends Controller
     }
 
     /**
-     * Updates an existing Conf model.
+     * Updates an existing Module model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
      * @param integer $id
@@ -101,18 +103,19 @@ class WebController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', ['model' => $model,]);
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Conf model.
+     * Deletes an existing Module model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -123,21 +126,22 @@ class WebController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Conf model based on its primary key value.
+     * Finds the Module model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return Conf the loaded model
+     * @return Module the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Conf::findOne($id)) !== null) {
+        if (($model = Module::findOne($id)) !== null) {
             return $model;
         }
 

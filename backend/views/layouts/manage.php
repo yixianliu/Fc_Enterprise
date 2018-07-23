@@ -43,38 +43,10 @@ $this->beginPage();
             <ul class="info-menu right-links list-inline list-unstyled">
                 <li class="profile">
 
-                    <a href="#" data-toggle="dropdown" class="toggle">
-                        <?= Html::img(Url::to('@web/themes/data/profile/user.jpg'), ['class' => 'img-circle img-inline']); ?>
-                        <span><i class="fa fa-angle-down"></i></span>
-                    </a>
-
                     <ul class="dropdown-menu profile animated fadeIn">
-                        <li>
-                            <a href="#settings">
-                                <i class="fa fa-wrench"></i>
-                                站点设置
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<?= Url::to(['/admin/faq/index']) ?>">
-                                <i class="fa fa-info"></i>
-                                站点帮助
-                            </a>
-                        </li>
-
-                        <li class="last">
-                            <a href="<?= Url::to(['/admin/member/logout']) ?>">
-                                <i class="fa fa-lock"></i>
-                                注销用户
-                            </a>
-                        </li>
+                        <li><a href="<?= Url::to(['/manage/center/conf']) ?>"><i class="fa fa-wrench"></i>站点设置</a></li>
+                        <li class="last"><a href="<?= Url::to(['/manage/member/logout']) ?>"><i class="fa fa-lock"></i>注销用户</a></li>
                     </ul>
-                </li>
-
-                <li>
-                    <a href="<?= Yii::$app->request->hostInfo ?>" target="_blank">站点首页</a>
-                </li>
 
             </ul>
         </div>

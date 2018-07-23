@@ -102,6 +102,22 @@ VALUES
 (NULL, 'bid', '投标中心', NULL, 'On', '#TIME#', '#TIME#');
 
 /**
+ * 模块
+ */
+INSERT INTO `#DB_PREFIX#Module`
+VALUES
+  (NULL, 'product', 1, '产品中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'news', 2, '新闻中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'purchase', 3, '采购中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'supply', 3, '供应中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'pages', 4, '单页面', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'map', 5, '地图页面', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'job', 6, '招聘中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'download', 7, '下载中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'user', 8, '用户中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+  (NULL, 'comment', 9, '评论中心', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#');
+
+/**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 菜单
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -150,12 +166,15 @@ VALUES
 /*
     超级管理员
 */
-(NULL, 'Super1', 1, 'M0', 'guest', NULL, NULL, '终极后台', NULL, NULL, 'cn', 'On', '#TIME#', '#TIME#'),
+(NULL, 'Super1', 1, 'M0', 'guest', NULL, NULL, '终极后台', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
-(NULL, 'ESuper1', 1, 'Super1', 'guest', 'UU1', NULL, '后台管理', 'center/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
-(NULL, 'ESuper2', 2, 'Super1', 'guest', 'UU1', NULL, '模块管理', 'module/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
-(NULL, 'ESuper3', 3, 'Super1', 'guest', 'UU1', NULL, '网站配置', 'web/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
-(NULL, 'ESuper4', 4, 'Super1', 'guest', 'UU1', NULL, '硬盘资源', 'disk/index', 'index', 'cn', 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper1', 1, 'Super1', 'admin', 'UU1', NULL, '后台管理', 'manage/center/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper2', 2, 'Super1', 'admin', 'UU1', NULL, '模块管理', NULL, NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper3', 3, 'Super1', 'admin', 'UU1', NULL, '网站配置', 'manage/web/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'ESuper4', 4, 'Super1', 'admin', 'UU1', NULL, '硬盘资源', 'manage/disk/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+
+(NULL, 'Module1', 1, 'ESuper2', 'admin', 'UU1', NULL, '模块列表', 'manage/module/index', NULL, NULL, 'On', '#TIME#', '#TIME#'),
+(NULL, 'Module2', 2, 'ESuper2', 'admin', 'UU1', NULL, '添加模块', 'manage/module/create', NULL, NULL, 'On', '#TIME#', '#TIME#'),
 
 /*
     后台管理 / Admin

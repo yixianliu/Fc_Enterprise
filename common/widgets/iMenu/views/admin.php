@@ -65,10 +65,9 @@ function recursionHtmlMenu($data)
 
         <?php if (!empty($value['name'])): ?>
 
-            <li class='<?php if (!empty($value['open']) && $value['open'] == 'On'): ?>open<?php endif; ?>'
-                title='<?= $value['name'] ?>'>
+            <li class='<?php if (!empty($value['open']) && $value['open'] == 'On'): ?>open<?php endif; ?>' title='<?= $value['name'] ?>'>
 
-                <a title='<?= $value['name'] ?>' href='<?= Url::to([$value['url']]) ?>' class='dropdown-toggle' data-toggle='dropdown'>
+                <a title='<?= $value['name'] ?>' href='<?= Url::to([$value['url']]) ?>' class='dropdown-toggle' <?php if (empty($value['url'])): ?>data-toggle='dropdown'<?php endif; ?>>
 
                     <?= $value['name'] ?>
 
