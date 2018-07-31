@@ -26,6 +26,7 @@ if (!empty($dataProvider)) {
  * 递归菜单
  *
  * @param $data
+ *
  * @return array|void
  */
 function recursionCls($data)
@@ -62,28 +63,26 @@ function recursionCls($data)
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
 
         <div class="content-body">
-            <div class="row">
 
-                <p>
-                    <?= Html::a('创建下载分类', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('发布文件', ['admin/download/create'], ['class' => 'btn btn-success']) ?>
-                </p>
+            <p>
+                <?= Html::a('创建下载分类', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('发布下载资料', ['admin/download/create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-                <hr/>
+            <hr/>
 
-                <?php if (!empty($result)): ?>
+            <?php if (!empty($result)): ?>
 
-                    <ul class="uk-nestable" style="font-size: 13px;">
-                        <?= $result ?>
-                    </ul>
+                <ul class="uk-nestable" style="font-size: 13px;">
+                    <?= $result ?>
+                </ul>
 
-                <?php else: ?>
+            <?php else: ?>
 
-                    <h3>暂无任何分类 !!</h3>
+                <h3>暂无任何分类 !!</h3>
 
-                <?php endif; ?>
+            <?php endif; ?>
 
-            </div>
         </div>
     </section>
 </div>

@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
                                     'data'          => $result['classify'],
                                     'options'       => ['placeholder' => '新闻分类...'],
                                     'pluginOptions' => [
-                                        'allowClear' => true
+                                        'allowClear' => true,
                                     ],
                                 ]);
                                 ?>
@@ -71,9 +71,5 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-<?php else: ?>
-
-    <h3>没有新闻分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">新闻分类</a> !!</h3>
 
 <?php endif ?>

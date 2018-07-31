@@ -48,7 +48,7 @@ use kartik\select2\Select2;
                                     'data'          => $result['classify'],
                                     'options'       => ['placeholder' => '产品分类...'],
                                     'pluginOptions' => [
-                                        'allowClear' => true
+                                        'allowClear' => true,
                                     ],
                                 ]);
                                 ?>
@@ -72,9 +72,5 @@ use kartik\select2\Select2;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-<?php else: ?>
-
-    <h3>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a> !!</h3>
 
 <?php endif ?>

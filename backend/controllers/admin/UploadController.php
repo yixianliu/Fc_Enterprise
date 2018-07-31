@@ -217,6 +217,7 @@ class UploadController extends BaseController
      *
      * @param $name
      * @param $type
+     *
      * @return string
      */
     public function actionImageDelete($name, $type)

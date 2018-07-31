@@ -34,7 +34,7 @@ class ProductController extends BaseController
             ],
 
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -53,7 +53,7 @@ class ProductController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $dataCls = ProductClassify::findByAll();
 
@@ -62,9 +62,9 @@ class ProductController extends BaseController
         }
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'result' => $result,
+            'result'       => $result,
         ]);
     }
 
@@ -111,7 +111,7 @@ class ProductController extends BaseController
         $model->product_id = self::getRandomString();
 
         return $this->render('create', [
-            'model' => $model,
+            'model'  => $model,
             'result' => $this->getData(),
         ]);
     }
@@ -139,7 +139,7 @@ class ProductController extends BaseController
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'  => $model,
             'result' => $this->getData(),
         ]);
     }
@@ -185,7 +185,7 @@ class ProductController extends BaseController
     public function getData()
     {
         // 初始化
-        $result = array();
+        $result = [];
 
         // 所有版块
         $dataSection = Section::findAll(['is_using' => 'On']);

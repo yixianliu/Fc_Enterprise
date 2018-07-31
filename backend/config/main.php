@@ -54,7 +54,7 @@ return [
         'urlManager'   => [
             'enablePrettyUrl' => true,
             'showScriptName'  => true,
-            "rules"           => [
+            'rules'           => [
 
                 // 默认
                 '' => 'admin/center/index',

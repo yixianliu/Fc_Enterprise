@@ -18,70 +18,73 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
         <div class="content-body">
-            <div class="row">
 
-                <p>
-                    <?= Html::a('发布文件', ['create']) ?> /
-                    <?= Html::a('发布下载分类', ['admin/download-cls/create']) ?>
-                </p>
 
-                <hr/>
+            <p>
+                <?= Html::a('发布文件', ['create']) ?> /
+                <?= Html::a('发布下载分类', ['admin/download-cls/create']) ?>
+            </p>
 
-                <?=
-                GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns'      => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        [
-                            'attribute' => 'c_key',
-                            'value'     => function ($model) {
+            <hr/>
 
-                                $data = \common\models\DownloadCls::findOne(['c_key' => $model->c_key]);
+            <?=
+            GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns'      => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'attribute' => 'c_key',
+                        'value'     => function ($model) {
 
-                                if (empty($data)) {
-                                    return '没有分类';
-                                }
+                            $data = \common\models\DownloadCls::findOne(['c_key' => $model->c_key]);
 
-                                return $data->name;
-                            },
-                        ],
-                        'title',
-                        [
-                            'attribute' => 'is_using',
-                            'value'     => function ($model) {
+                            if (empty($data)) {
+                                return '没有分类';
+                            }
 
-                                $state = [
-                                    'On'  => '开启',
-                                    'Off' => '未启用',
-                                ];
-
-                                return $state[ $model->is_using ];
-                            },
-                            'options'   => ['width' => 120]
-                        ],
-                        [
-                            'attribute' => 'created_at',
-                            'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->created_at);
-                            },
-                            'options'   => ['width' => 180]
-                        ],
-                        [
-                            'attribute' => 'updated_at',
-                            'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->updated_at);
-                            },
-                            'options'   => ['width' => 180]
-                        ],
-                        [
-                            'class'   => 'yii\grid\ActionColumn',
-                            'options' => ['width' => 100]
-                        ],
+                            return $data->name;
+                        },
                     ],
-                ]);
-                ?>
+                    'title',
+                    [
+                        'attribute' => 'is_using',
+                        'value'     => function ($model) {
 
-            </div>
+                            $state = [
+                                'On'  => '开启',
+                                'Off' => '未启用',
+                            ];
+
+                            return $state[$model->is_using];
+                        },
+                        'options'   => ['width' => 120],
+                    ],
+                    [
+                        'attribute' => 'created_at',
+                        'value'     => function ($model) {
+                            return date('Y - m -d , H:i:s', $model->created_at);
+                        },
+                        'options'   => ['width' => 180],
+                    ],
+                    [
+                        'attribute' => 'updated_at',
+                        'value'     => function ($model) {
+                            return date('Y - m -d , H:i:s', $model->updated_at);
+                        },
+                        'options'   => ['width' => 180],
+                    ],
+                    [
+                        'class'   => 'yii\grid\ActionColumn',
+                        'options' => ['width' => 100],
+                    ],
+                ],
+                'tableOptions' => ['class' => 'table table-hover'],
+                'pager'        => [
+                    'options' => ['class' => 'pagination'],
+                ],
+            ]);
+            ?>
+
         </div>
     </section>
 </div>
