@@ -98,7 +98,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null, $type = 'Supply')
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_cly_id[$type] : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         return static::find()->where(['parent_id' => $parent_id, 'is_type' => $type])
             ->orderBy('sort_id', SORT_DESC)
@@ -115,10 +115,10 @@ class PsbClassify extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function getClsSelect($type = 'Supply', $one = 'On')
+    public static function getClsSelect($type = 'Supply', $one = 'On', $parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_cly_id[$type] : $parent_id;
+        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         // 初始化
         $result = [];
@@ -127,11 +127,11 @@ class PsbClassify extends \yii\db\ActiveRecord
         $dataClassify = static::findByAll($parent_id, $type);
 
         if ($one == 'On')
-            $result[static::$parent_cly_id[$type]] = '顶级分类 !!';
+            $result[ static::$parent_cly_id[ $type ] ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
-            $result[$value['c_key']] = $value['name'];
+            $result[ $value['c_key'] ] = $value['name'];
 
             $child = static::recursionClsSelect($value);
 
@@ -173,9 +173,9 @@ class PsbClassify extends \yii\db\ActiveRecord
 
         foreach ($child as $key => $value) {
 
-            $result[$value['c_key']] = $symbol . $value['name'];
+            $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = static::recursionClsSelect($value, ($num + 1));
+            $childData = static::recursionClsSelect($value, ( $num + 1 ));
 
             if (empty($childData))
                 continue;

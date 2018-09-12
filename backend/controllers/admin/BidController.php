@@ -8,6 +8,7 @@ use common\models\Bid;
 use common\models\BidSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * BidController implements the CRUD actions for Bid model.
@@ -20,12 +21,24 @@ class BidController extends BaseController
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+
         ];
     }
 
@@ -77,7 +90,7 @@ class BidController extends BaseController
         return $this->render('create', [
             'model'  => $model,
             'result' => [
-                'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Bid'], 'Purchase'),
+                'classify' => PsbClassify::getClsSelect('Bid', 'Off'),
             ]
         ]);
     }

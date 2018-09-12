@@ -250,8 +250,7 @@ CREATE TABLE `#DB_PREFIX#Document_Conf` (
     `description` VARCHAR(255) NOT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
-    PRIMARY
-    KEY (`conf_id`),
+    PRIMARY KEY (`conf_id`),
     KEY `r_key` (`r_key`),
     UNIQUE `path` (`path`),
     UNIQUE KEY `p_key` (`p_key`)
