@@ -37,6 +37,7 @@ class CenterController extends BaseController
                     'delete' => ['POST'],
                 ],
             ],
+
         ];
     }
 
@@ -66,7 +67,7 @@ class CenterController extends BaseController
 
         $model = new Conf();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,7 +91,7 @@ class CenterController extends BaseController
 
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -150,7 +151,7 @@ class CenterController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->is_language == '')
+        if ( $model->is_language == '' )
             return $this->redirect(['/admin/center/conf', 'type' => 'system']);
 
         $model->delete();
@@ -169,7 +170,7 @@ class CenterController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Conf::findOne($id)) !== null) {
+        if ( ($model = Conf::findOne($id)) !== null ) {
             return $model;
         }
 
@@ -189,9 +190,9 @@ class CenterController extends BaseController
 
         $confData = Conf::findByData(null, Yii::$app->session['language']);
 
-        if (!empty($confData)) {
+        if ( !empty($confData) ) {
             foreach ($confData as $key => $value) {
-                $result[$value['c_key']] = $value['parameter'];
+                $result[ $value['c_key'] ] = $value['parameter'];
             }
         }
 
@@ -209,15 +210,15 @@ class CenterController extends BaseController
         // 初始化
         $result = [];
 
-        if (Yii::$app->request->isPost) {
+        if ( Yii::$app->request->isPost ) {
 
         }
 
         $confData = Conf::findByData(null, Yii::$app->session['language']);
 
-        if (!empty($confData)) {
+        if ( !empty($confData) ) {
             foreach ($confData as $key => $value) {
-                $result[$value['c_key']] = $value['parameter'];
+                $result[ $value['c_key'] ] = $value['parameter'];
             }
         }
 
@@ -252,7 +253,7 @@ class CenterController extends BaseController
         $session = Yii::$app->session;
 
         // 检查session是否开启
-        if (!$session->isActive) {
+        if ( !$session->isActive ) {
             throw new NotFoundHttpException('请联系网站管理员, Session 功能有误 !!');
         }
 
@@ -264,6 +265,13 @@ class CenterController extends BaseController
         $session->set('language_name', $result);
 
         return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionError(){
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', ['exception' => $exception]);
+        }
     }
 
 }
