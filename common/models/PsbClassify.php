@@ -115,7 +115,7 @@ class PsbClassify extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function getClsSelect($parent_id = null, $type = 'Supply', $one = 'On')
+    public static function getClsSelect($type = 'Supply', $one = 'On')
     {
 
         $parent_id = empty($parent_id) ? static::$parent_cly_id[$type] : $parent_id;

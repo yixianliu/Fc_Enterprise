@@ -138,7 +138,7 @@ class NewsClsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = NewsClassify::findOne($id)) !== null) {
+        if (($model = NewsClassify::findOne(['c_key' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
