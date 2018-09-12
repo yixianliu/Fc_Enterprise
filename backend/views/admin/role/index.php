@@ -14,18 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('创建角色', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('角色', ['index'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('权限', ['admin/power/index'], ['class' => 'btn btn-success']) ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('创建角色', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('角色', ['index'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('权限', ['admin/power/index'], ['class' => 'btn btn-success']) ?>
-                </p>
 
                 <?=
                 GridView::widget([
@@ -67,6 +66,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class'   => 'yii\grid\ActionColumn',
                             'options' => ['width' => 100]
                         ],
+                    ],
+                    'tableOptions' => ['class' => 'table table-hover'],
+                    'pager'        => [
+                        'options' => ['class' => 'pagination'],
                     ],
                 ]);
                 ?>

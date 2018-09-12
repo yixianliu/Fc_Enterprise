@@ -15,17 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('发布文件', ['create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('发布下载分类', ['admin/download-cls/create'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
+
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
-
-
-            <p>
-                <?= Html::a('发布文件', ['create']) ?> /
-                <?= Html::a('发布下载分类', ['admin/download-cls/create']) ?>
-            </p>
-
-            <hr/>
 
             <?=
             GridView::widget([

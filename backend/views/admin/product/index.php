@@ -15,6 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('添加产品分类', ['admin/product-cls/create'], ['class' => 'btn btn-success']) ?>
+
     <section class="box ">
 
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
@@ -22,11 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
 
             <?php if (!empty($result['classify']) && is_array($result['classify'])): ?>
-
-                <p>
-                    <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('添加产品分类', ['admin/product-cls/create'], ['class' => 'btn btn-success']) ?>
-                </p>
 
                 <?=
                 GridView::widget([

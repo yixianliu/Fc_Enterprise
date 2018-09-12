@@ -15,21 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="col-lg-12">
 
+    <?= Html::a('创建用户', ['create'], ['class' => 'btn btn-success']) ?>
+
+    <?= Html::a('查看普通用户', ['index'], ['class' => 'btn btn-success']) ?>
+
+    <?= Html::a('查看管理员', ['admin/admin/index'], ['class' => 'btn btn-success']) ?>
+
     <section class="box ">
 
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
 
         <div class="content-body">
-
-            <p>
-
-                <?= Html::a('创建用户', ['create'], ['class' => 'btn btn-success']) ?>
-
-                <?= Html::a('查看普通用户', ['index'], ['class' => 'btn btn-success']) ?>
-
-                <?= Html::a('查看管理员', ['admin/admin/index'], ['class' => 'btn btn-success']) ?>
-
-            </p>
 
             <?=
             GridView::widget([

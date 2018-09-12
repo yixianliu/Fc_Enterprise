@@ -399,6 +399,11 @@ function menuHtml($data, $type)
 <?php $this->registerCssFile('@web/themes/assets/plugins/uikit/css/components/nestable.min.css'); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('创建菜单', ['create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('创建单页面', ['admin/pages/create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('创建单页面分类', ['admin/pages-cls/create'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
 
         <header class="panel_header">
@@ -408,14 +413,6 @@ function menuHtml($data, $type)
         <div class="content-body">
             <div class="row">
 
-                <p>
-                    <?= Html::a('创建菜单', ['create']) . ' / ' ?>
-                    <?= Html::a('创建单页面', ['admin/pages/create']) . ' / ' ?>
-                    <?= Html::a('创建单页面分类', ['admin/pages-cls/create']) . ' / ' ?>
-                </p>
-
-                <hr/>
-
                 <?php if (!empty($dataProvider)): ?>
 
                     <ul class="uk-nestable" style="font-size: 13px;">
@@ -424,7 +421,7 @@ function menuHtml($data, $type)
 
                 <?php else: ?>
 
-                    <h3>没有菜单 !!</h3>
+                    <h3>没有菜单!</h3>
 
                 <?php endif; ?>
 

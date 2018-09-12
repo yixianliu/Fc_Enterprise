@@ -58,28 +58,27 @@ function recursionCls($data)
 <?php $this->registerCssFile('@web/themes/assets/plugins/uikit/css/components/nestable.min.css'); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('创建新闻分类', ['create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('发布新闻', ['admin/news/create'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('创建新闻分类', ['create'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('发布新闻', ['admin/news/create'], ['class' => "collapsed"]) . ' / ' ?>
-                </p>
-
-                <hr/>
 
                 <ul class="uk-nestable" style="font-size: 13px;">
 
                     <?php if (!empty($result)): ?>
+
                         <?= $result ?>
+
                     <?php else: ?>
+
                         <h3>暂无分类 !!</h3>
+
                     <?php endif; ?>
 
                 </ul>

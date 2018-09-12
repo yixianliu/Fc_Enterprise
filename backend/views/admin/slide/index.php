@@ -11,19 +11,16 @@ $this->title = '幻灯片管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
+
+    <?= Html::a('创建幻灯片', ['create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('创建幻灯片', ['create'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => "collapsed"]) . ' / ' ?>
-                </p>
-
-                <hr/>
 
                 <?=
                 GridView::widget([

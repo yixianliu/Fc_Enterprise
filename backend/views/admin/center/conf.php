@@ -17,26 +17,21 @@ $this->title = '网站配置';
 ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "btn btn-primary"]) ?>
+
+    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "btn btn-primary"]) ?>
+
+    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => "btn btn-primary"]) ?>
+
+    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
 
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
 
         <div class="content-body">
             <div class="row">
-
-                <p>
-
-                    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "collapsed"]) . ' / ' ?>
-
-                    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "collapsed"]) . ' / ' ?>
-
-                    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => "collapsed"]) . ' / ' ?>
-
-                    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => "collapsed"]) . ' / ' ?>
-
-                </p>
-
-                <hr/>
 
                 <?=
                 GridView::widget([

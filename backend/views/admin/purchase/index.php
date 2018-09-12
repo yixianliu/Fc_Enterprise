@@ -14,21 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('发布采购信息', ['create'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('发布采购信息', ['create']) ?> /
-                    <?= Html::a('发布采购信息分类', ['/admin/psb-cls/index', 'id' => 'P0']) ?> /
-                </p>
-
-                <hr/>
 
                 <?=
                 GridView::widget([
@@ -83,6 +78,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class'   => 'yii\grid\ActionColumn',
                             'options' => ['width' => 100]
                         ],
+                    ],
+                    'tableOptions' => ['class' => 'table table-hover'],
+                    'pager'        => [
+                        'options' => ['class' => 'pagination'],
                     ],
                 ]);
                 ?>
