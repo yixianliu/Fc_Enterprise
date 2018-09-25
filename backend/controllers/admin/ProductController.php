@@ -50,7 +50,7 @@ class ProductController extends BaseController
     {
 
         $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
         // 初始化
         $result = [];
@@ -58,14 +58,14 @@ class ProductController extends BaseController
         $dataCls = ProductClassify::findByAll();
 
         foreach ($dataCls as $value) {
-            $result['classify'][$value['c_key']] = $value['name'];
+            $result['classify'][ $value['c_key'] ] = $value['name'];
         }
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             'result'       => $result,
-        ]);
+        ] );
     }
 
     /**
@@ -77,9 +77,9 @@ class ProductController extends BaseController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -100,20 +100,20 @@ class ProductController extends BaseController
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            self::ImageDelete($model->path, $oldFile, $model->product_id);
+            self::ImageDelete( $model->path, $oldFile, $model->product_id );
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect( ['view', 'id' => $model->id] );
 
         }
 
         $model->product_id = self::getRandomString();
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model'  => $model,
             'result' => $this->getData(),
-        ]);
+        ] );
     }
 
     /**
@@ -126,22 +126,22 @@ class ProductController extends BaseController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            self::ImageDelete($model->path, $oldFile, $model->product_id);
+            self::ImageDelete( $model->path, $oldFile, $model->product_id );
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model'  => $model,
             'result' => $this->getData(),
-        ]);
+        ] );
     }
 
     /**
@@ -154,9 +154,9 @@ class ProductController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
@@ -170,10 +170,10 @@ class ProductController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Product::findOne( $id )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException( 'The requested page does not exist.' );
         }
     }
 
@@ -188,30 +188,30 @@ class ProductController extends BaseController
         $result = [];
 
         // 所有版块
-        $dataSection = Section::findAll(['is_using' => 'On']);
+        $dataSection = Section::findAll( ['is_using' => 'On'] );
 
         $result['section']['S0'] = '暂无';
 
         foreach ($dataSection as $value) {
-            $result['section'][$value['s_key']] = $value['name'];
+            $result['section'][ $value['s_key'] ] = $value['name'];
         }
 
         // 产品分类
-        $dataClassify = ProductClassify::findAll(['is_using' => 'On', 'parent_id' => 'C0']);
+        $dataClassify = ProductClassify::findAll( ['is_using' => 'On', 'parent_id' => 'C0'] );
 
         // 产品分类
         $Cls = new ProductClassify();
 
         foreach ($dataClassify as $key => $value) {
 
-            $result['classify'][$value['c_key']] = $value['name'];
+            $result['classify'][ $value['c_key'] ] = $value['name'];
 
-            $child = $Cls->recursionClsSelect($value);
+            $child = $Cls->recursionClsSelect( $value );
 
-            if (empty($child))
+            if (empty( $child ))
                 continue;
 
-            $result['classify'] = array_merge($result['classify'], $child);
+            $result['classify'] = array_merge( $result['classify'], $child );
         }
 
         return $result;

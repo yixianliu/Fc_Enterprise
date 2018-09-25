@@ -43,7 +43,7 @@ $this->title = '网站配置';
                         ],
                         [
                             'attribute' => 'name',
-                            'options'   => ['width' => 110]
+                            'options'   => ['width' => 180]
                         ],
                         'parameter',
                         [
@@ -61,6 +61,13 @@ $this->title = '网站配置';
                                 return $state[ $model->is_language ];
                             },
                             'options'   => ['width' => 100]
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'value'     => function ($model) {
+                                return date('Y - m -d , h:i', $model->created_at);
+                            },
+                            'options'   => ['width' => 160]
                         ],
                         [
                             'attribute' => 'updated_at',

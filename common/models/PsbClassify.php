@@ -98,10 +98,10 @@ class PsbClassify extends \yii\db\ActiveRecord
     static public function findByAll($parent_id = null, $type = 'Supply')
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
+        $parent_id = empty( $parent_id ) ? static::$parent_cly_id[ $type ] : $parent_id;
 
-        return static::find()->where(['parent_id' => $parent_id, 'is_type' => $type])
-            ->orderBy('sort_id', SORT_DESC)
+        return static::find()->where( ['parent_id' => $parent_id, 'is_type' => $type] )
+            ->orderBy( 'sort_id', SORT_DESC )
             ->asArray()
             ->all();
     }
@@ -118,27 +118,27 @@ class PsbClassify extends \yii\db\ActiveRecord
     public static function getClsSelect($type = 'Supply', $one = 'On', $parent_id = null)
     {
 
-        $parent_id = empty($parent_id) ? static::$parent_cly_id[ $type ] : $parent_id;
+        $parent_id = empty( $parent_id ) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         // 初始化
         $result = [];
 
         // 所有分类
-        $dataClassify = static::findByAll($parent_id, $type);
+        $dataClassify = static::findByAll( $parent_id, $type );
 
         if ($one == 'On')
-            $result[ static::$parent_cly_id[ $type ] ] = '顶级分类 !!';
+            $result[ $parent_id ] = '顶级分类 !!';
 
         foreach ($dataClassify as $key => $value) {
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = static::recursionClsSelect($value);
+            $child = static::recursionClsSelect( $value );
 
-            if (empty($child))
+            if (empty( $child ))
                 continue;
 
-            $result = array_merge($result, $child);
+            $result = array_merge( $result, $child );
         }
 
         return $result;
@@ -153,16 +153,16 @@ class PsbClassify extends \yii\db\ActiveRecord
     public static function recursionClsSelect($data, $num = 1)
     {
 
-        if (empty($data))
+        if (empty( $data ))
             return;
 
         // 初始化
         $result = [];
         $symbol = null;
 
-        $child = static::findByAll($data['c_key']);
+        $child = static::findByAll( $data['c_key'] );
 
-        if (empty($child))
+        if (empty( $child ))
             return;
 
         if ($num != 0) {
@@ -175,12 +175,12 @@ class PsbClassify extends \yii\db\ActiveRecord
 
             $result[ $value['c_key'] ] = $symbol . $value['name'];
 
-            $childData = static::recursionClsSelect($value, ( $num + 1 ));
+            $childData = static::recursionClsSelect( $value, ($num + 1) );
 
-            if (empty($childData))
+            if (empty( $childData ))
                 continue;
 
-            $result = array_merge($result, $childData);
+            $result = array_merge( $result, $childData );
         }
 
         return $result;
@@ -201,13 +201,13 @@ class PsbClassify extends \yii\db\ActiveRecord
         // 初始化
         $mobile = null;
 
-        if (empty($data['Purchase']['is_send_msg']) || $data['Purchase']['is_send_msg'] != 'On') {
+        if (empty( $data['Purchase']['is_send_msg'] ) || $data['Purchase']['is_send_msg'] != 'On') {
             return false;
         }
 
-        $user = User::findAll(['is_type' => 'purchase']);
+        $user = User::findAll( ['is_type' => 'purchase'] );
 
-        if (empty($user)) {
+        if (empty( $user )) {
             return false;
         }
 
@@ -218,7 +218,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             $mobile .= $value . ',';
         }
 
-        if (!Yii::$app->smser->send($mobile, $content))
+        if (!Yii::$app->smser->send( $mobile, $content ))
             return false;
 
         return true;

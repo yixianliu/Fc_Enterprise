@@ -30,7 +30,7 @@ class ProductClsController extends BaseController
                 ],
             ],
 
-            'verbs'  => [
+            'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
@@ -50,21 +50,23 @@ class ProductClsController extends BaseController
 
         $dataProvider = $Cls->getCls();
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'dataProvider' => $dataProvider,
-        ]);
+        ] );
     }
 
     /**
      * Displays a single ProductClassify model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -79,73 +81,79 @@ class ProductClsController extends BaseController
 
         $model->c_key = self::getRandomString();
 
-        $model->parent_id = Yii::$app->request->get('id', 'C0');
+        $model->parent_id = Yii::$app->request->get( 'id', 'C0' );
 
         // 所属语言类别
-        $model->is_language =  Yii::$app->session['language'];
+        $model->is_language = Yii::$app->session['language'];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->c_key] );
         } else {
 
-            return $this->render('create', [
+            return $this->render( 'create', [
                 'model'  => $model,
                 'result' => [
                     'classify' => $model->getClsSelect(),
-                ]
-            ]);
+                ],
+            ] );
         }
     }
 
     /**
      * Updates an existing ProductClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->c_key] );
         } else {
 
-            return $this->render('update', [
+            return $this->render( 'update', [
                 'model'  => $model,
                 'result' => [
                     'classify' => $model->getClsSelect(),
-                ]
-            ]);
+                ],
+            ] );
         }
     }
 
     /**
      * Deletes an existing ProductClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
      * Finds the ProductClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return ProductClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductClassify::findOne(['c_key' => $id])) !== null) {
+        if (($model = ProductClassify::findOne( ['c_key' => $id] )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException( 'The requested page does not exist.' );
         }
     }
 }

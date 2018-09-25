@@ -52,9 +52,9 @@ class CenterController extends BaseController
     public function actionView($id)
     {
 
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -67,14 +67,14 @@ class CenterController extends BaseController
 
         $model = new Conf();
 
-        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model' => $model,
-            'type'  => Yii::$app->request->get('type', 'cn'),
-        ]);
+            'type'  => Yii::$app->request->get( 'type', 'cn' ),
+        ] );
     }
 
     /**
@@ -89,16 +89,16 @@ class CenterController extends BaseController
     public function actionUpdate($id)
     {
 
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model' => $model,
-            'type'  => Yii::$app->request->get('type', 'cn'),
-        ]);
+            'type'  => Yii::$app->request->get( 'type', 'cn' ),
+        ] );
     }
 
     /**
@@ -108,7 +108,7 @@ class CenterController extends BaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render( 'index' );
     }
 
     /**
@@ -120,12 +120,12 @@ class CenterController extends BaseController
     {
 
         $searchModel = new ConfSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->request->get('type', 'cn'));
+        $dataProvider = $searchModel->search( Yii::$app->request->queryParams, Yii::$app->request->get( 'type', 'cn' ) );
 
-        return $this->render('conf', [
+        return $this->render( 'conf', [
             'dataProvider' => $dataProvider,
-            'type'         => Yii::$app->request->get('type', 'cn'),
-        ]);
+            'type'         => Yii::$app->request->get( 'type', 'cn' ),
+        ] );
     }
 
     /**
@@ -135,7 +135,7 @@ class CenterController extends BaseController
      */
     public function actionSetpassword()
     {
-        return $this->render('setpassword');
+        return $this->render( 'setpassword' );
     }
 
     /**
@@ -149,14 +149,14 @@ class CenterController extends BaseController
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ( $model->is_language == '' )
-            return $this->redirect(['/admin/center/conf', 'type' => 'system']);
+        if ($model->is_language == '')
+            return $this->redirect( ['/admin/center/conf', 'type' => 'system'] );
 
         $model->delete();
 
-        return $this->redirect(['/admin/center/conf']);
+        return $this->redirect( ['/admin/center/conf'] );
     }
 
     /**
@@ -170,11 +170,11 @@ class CenterController extends BaseController
      */
     protected function findModel($id)
     {
-        if ( ($model = Conf::findOne($id)) !== null ) {
+        if (($model = Conf::findOne( $id )) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException( 'The requested page does not exist.' );
     }
 
     /**
@@ -188,15 +188,15 @@ class CenterController extends BaseController
         // 初始化
         $result = [];
 
-        $confData = Conf::findByData(null, Yii::$app->session['language']);
+        $confData = Conf::findByData( null, Yii::$app->session['language'] );
 
-        if ( !empty($confData) ) {
+        if (!empty( $confData )) {
             foreach ($confData as $key => $value) {
                 $result[ $value['c_key'] ] = $value['parameter'];
             }
         }
 
-        return $this->render('info', ['result' => $result]);
+        return $this->render( 'info', ['result' => $result] );
     }
 
     /**
@@ -210,13 +210,13 @@ class CenterController extends BaseController
         // 初始化
         $result = [];
 
-        if ( Yii::$app->request->isPost ) {
+        if (Yii::$app->request->isPost) {
 
         }
 
-        $confData = Conf::findByData(null, Yii::$app->session['language']);
+        $confData = Conf::findByData( null, Yii::$app->session['language'] );
 
-        if ( !empty($confData) ) {
+        if (!empty( $confData )) {
             foreach ($confData as $key => $value) {
                 $result[ $value['c_key'] ] = $value['parameter'];
             }
@@ -224,7 +224,7 @@ class CenterController extends BaseController
 
         $model = new \backend\models\SeoForm();
 
-        return $this->render('seo', ['result' => $result, 'model' => $model]);
+        return $this->render( 'seo', ['result' => $result, 'model' => $model] );
     }
 
     /**
@@ -236,7 +236,7 @@ class CenterController extends BaseController
     public function actionLanguage()
     {
 
-        $type = Yii::$app->request->get('type', 'cn');
+        $type = Yii::$app->request->get( 'type', 'cn' );
 
         switch ($type) {
 
@@ -253,26 +253,27 @@ class CenterController extends BaseController
         $session = Yii::$app->session;
 
         // 检查session是否开启
-        if ( !$session->isActive ) {
-            throw new NotFoundHttpException('请联系网站管理员, Session 功能有误 !!');
+        if (!$session->isActive) {
+            throw new NotFoundHttpException( '请联系网站管理员, Session 功能有误 !!' );
         }
 
         // 开启session
         $session->open();
 
         // 设置一个session变量，以下用法是相同的：
-        $session->set('language', $type);
-        $session->set('language_name', $result);
+        $session->set( 'language', $type );
+        $session->set( 'language_name', $result );
 
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect( Yii::$app->request->referrer );
     }
 
-    public function actionError(){
+    public function actionError()
+    {
 
         $exception = Yii::$app->errorHandler->exception;
 
         if ($exception !== null) {
-            return $this->render('error', ['exception' => $exception]);
+            return $this->render( 'error', ['exception' => $exception] );
         }
     }
 

@@ -69,14 +69,15 @@ class Product extends \yii\db\ActiveRecord
             [['content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'images'], 'string'],
             [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
             [['images', 'path'], 'string', 'max' => 255],
-            [['c_key', 's_key', 'product_id', ], 'string', 'max' => 85],
+            [['c_key', 's_key', 'product_id'], 'string', 'max' => 85],
             [['title'], 'string', 'max' => 125],
             [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 150],
             [['title', 'product_id'], 'unique'],
 
             // 默认值
-            [['images', 's_key', 'path'], 'default', 'value' => null],
+            [['images', 'path'], 'default', 'value' => null],
+            [['s_key'], 'default', 'value' => 'S0'],
             [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend', 'is_field',], 'default', 'value' => 'Off'],
             [['is_audit', 'is_comments'], 'default', 'value' => 'On'],

@@ -14,59 +14,59 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use dosamigos\fileupload\FileUploadUI;
 
-if (empty($model) || empty($form))
-    exit(false);
+if (empty( $model ) || empty( $form ) || Yii::$app->user->isGuest)
+    exit( false );
 
-$attribute = empty($attribute) ? 'path' : $attribute;
+$attribute = empty( $attribute ) ? 'path' : $attribute;
 
-$id = empty($id) ? null : $id;
+$id = empty( $id ) ? null : $id;
 
 // 用户 Id
-$user_id = empty($user_id) ? Yii::$app->user->identity->user_id : $user_id;
+$user_id = empty( $user_id ) ? Yii::$app->user->identity->user_id : $user_id;
 
 // 上传文件后缀名
-$uploadType = empty($uploadType) ? 'image' : $uploadType;
+$uploadType = empty( $uploadType ) ? 'image' : $uploadType;
 
 // 数量
-$num = empty($num) ? 5 : $num;
+$num = empty( $num ) ? 5 : $num;
 
 // 初始化
 $images = [];
 
 // 取出图片,存储为数组
-if (!empty($model->$attribute)) {
+if (!empty( $model->$attribute )) {
 
-    $imagesArray = explode(',', $model->$attribute);
+    $imagesArray = explode( ',', $model->$attribute );
 
     foreach ($imagesArray as $value) {
 
-        if (empty($value))
+        if (empty( $value ))
             break;
 
         $images[] = $value;
     }
 }
 
-$text = empty($text) ? '没有描述' : $text;
+$text = empty( $text ) ? '没有描述' : $text;
 
 // 图片路径
-$imgPathArray = explode('/', Yii::$app->controller->id);
+$imgPathArray = explode( '/', Yii::$app->controller->id );
 
 
 switch ($imgPathArray[1]) {
 
     case 'download':
     case 'slide':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1];
+        $imgPath = Url::to( '@web/../../frontend/web/temp/' ) . explode( '/', Yii::$app->controller->id )[1];
         break;
 
     case 'sp-offer':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . $user_id . '/sp_offer/';
+        $imgPath = Url::to( '@web/../../frontend/web/temp/' ) . $user_id . '/sp_offer/';
         break;
 
     default:
     case 'product':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $id;
+        $imgPath = Url::to( '@web/../../frontend/web/temp/' ) . explode( '/', Yii::$app->controller->id )[1] . '/' . $id;
         break;
 
 }
@@ -87,10 +87,10 @@ switch ($imgPathArray[1]) {
     <label><?= $text ?></label>
 
     <?=
-    FileUploadUI::widget([
+    FileUploadUI::widget( [
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
+        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode( '/', Yii::$app->controller->id )[1], 'attribute' => $attribute, 'ext' => $uploadType],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*',
@@ -142,10 +142,10 @@ switch ($imgPathArray[1]) {
                       
                             }',
         ],
-    ]);
+    ] );
     ?>
 
-    <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
+    <?= $form->field( $model, $attribute )->textInput( ['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'] )->label( false ) ?>
 
 </div>
 
@@ -163,7 +163,7 @@ switch ($imgPathArray[1]) {
 
 <div class="form-group">
 
-    <?php if (!empty($images) && is_array($images)): ?>
+    <?php if (!empty( $images ) && is_array( $images )): ?>
 
         <div class="row">
 
@@ -171,7 +171,7 @@ switch ($imgPathArray[1]) {
 
                 <div class="col-md-3">
 
-                    <?= Html::img($imgPath . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                    <?= Html::img( $imgPath . '/' . $value, ['width' => 350, 'height' => 150] ); ?>
 
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 

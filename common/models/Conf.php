@@ -42,13 +42,14 @@ class Conf extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'name', 'parameter', 'is_using'], 'required'],
+            [['c_key', 'name', 'parameter'], 'required'],
             [['description', 'is_using', 'is_language'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['parameter'], 'string', 'max' => 255],
 
             [['is_language'], 'default', 'value' => null],
+            [['is_using'], 'default', 'value' => 'On'],
         ];
     }
 
@@ -80,10 +81,10 @@ class Conf extends \yii\db\ActiveRecord
     public static function findByData($status = null, $language = 'cn')
     {
 
-        $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
+        $array = !empty( $status ) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
 
-        return static::find()->where($array)
-            ->andWhere(['is_language' => $language])
+        return static::find()->where( $array )
+            ->andWhere( ['is_language' => $language] )
             ->asArray()
             ->all();
     }
@@ -99,13 +100,13 @@ class Conf extends \yii\db\ActiveRecord
     public static function findByConfArray($language = 'cn', $status = 'On')
     {
 
-        $data = static::findByData($status, $language);
+        $data = static::findByData( $status, $language );
 
         // 初始化
         $confArray = [];
 
         foreach ($data as $value) {
-            $confArray[$value['c_key']] = $value['parameter'];
+            $confArray[ $value['c_key'] ] = $value['parameter'];
         }
 
         return $confArray;

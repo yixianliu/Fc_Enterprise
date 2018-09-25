@@ -10,21 +10,14 @@ $this->title = '价格中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12">
+
+    <?= Html::a('采购价格', ['index', 'type' => 'Purchase'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('供应价格', ['index', 'type' => 'Supply'], ['class' => 'btn btn-success']) ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">
-                <?= Html::encode($this->title) ?>
-            </h2>
-        </header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('采购价格', ['index', 'type' => 'Purchase']) ?> /
-                    <?= Html::a('供应价格', ['index', 'type' => 'Supply']) ?>
-                </p>
-
-                <br/>
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,

@@ -46,30 +46,32 @@ class PsbClsController extends BaseController
     public function actionIndex()
     {
 
-        $id = Yii::$app->request->get('id', 'S0');
+        $id = Yii::$app->request->get( 'id', 'S0' );
 
-        $type = Yii::$app->request->get('type', 'Supply');
+        $type = Yii::$app->request->get( 'type', 'Supply' );
 
-        $dataProvider = PsbClassify::findByAll($id, $type);
+        $dataProvider = PsbClassify::findByAll( $id, $type );
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'dataProvider' => $dataProvider,
             'id'           => $id,
             'type'         => $type,
-        ]);
+        ] );
     }
 
     /**
      * Displays a single PsbClassify model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -83,78 +85,84 @@ class PsbClsController extends BaseController
 
         $model->c_key = self::getRandomString();
 
-        $id = Yii::$app->request->get('id', 'S0');
+        $id = Yii::$app->request->get( 'id', 'S0' );
 
-        $model->is_type = Yii::$app->request->get('type', 'Supply');
+        $model->is_type = Yii::$app->request->get( 'type', 'Supply' );
 
-        $model->parent_id = Yii::$app->request->get('parent_id', null);
+        $model->parent_id = Yii::$app->request->get( 'parent_id', null );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->c_key] );
         }
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => PsbClassify::getClsSelect($id, $model->is_type),
-            ]
-        ]);
+                'classify' => PsbClassify::getClsSelect( $model->is_type, 'On', $id ),
+            ],
+        ] );
     }
 
     /**
      * Updates an existing PsbClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->c_key]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->c_key] );
         }
 
-        $id = Yii::$app->request->get('pid', 'S0');
+        $id = Yii::$app->request->get( 'pid', 'S0' );
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => PsbClassify::getClsSelect($id, $model->is_type),
-            ]
-        ]);
+                'classify' => PsbClassify::getClsSelect( $id, $model->is_type ),
+            ],
+        ] );
     }
 
     /**
      * Deletes an existing PsbClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
      * Finds the PsbClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return PsbClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PsbClassify::findOne(['c_key' => $id])) !== null) {
+        if (($model = PsbClassify::findOne( ['c_key' => $id] )) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException( 'The requested page does not exist.' );
     }
 }
