@@ -3,26 +3,26 @@ return [
 
     'adminEmail' => 'admin@example.com',
 
-    'Username'              => 'yixianliu',
-    'Password'              => 'yixianliu',
+    'Username'    => 'yixianliu',
+    'Password'    => 'yixianliu',
 
     // +----------------------------------------------------------------------
     // | 站点资讯
     // +----------------------------------------------------------------------
-    'NAME'                  => 'YXL - 企业电商平台',
-    'TITLE'                 => '正己然后可以正物，自治然后可以治人。',
-    'SITE_URL'              => 'http://www.yxlcms.com',
-    'KEYWORDS'              => '地摊、微商、发布、共享、资讯、网络、创意、手工、DIY',
-    'ICP'                   => '粤ICP备xxxxxxxxx号',
-    'DESCRIPTION'           => '本企业建站系统是一款适合企业网站建设的开源CMS系统，可在线试用海量模板和一键开通企业官网，自2009年至今，全球已有超过50万用户。',
-    'DEVELOPERS'            => '用尽全力, 竭诚为您服务',
-    'PHONE'                 => '+8613400000043',
-    'COPYRIGHT'             => 'Y.x.L',
-    'EMAIL'                 => 'admin@yxlcms.com', // 管理员邮箱
-    'FIXPHONE'              => '+861340000000043', // 传真
-    'ADDRESS'               => '暂无', // 地址
-    'PERSON'                => '暂无', // 负责人
+    'NAME'        => '企业网站系统',
+    'TITLE'       => '正己然后可以正物，自治然后可以治人。',
+    'SITE_URL'    => 'http://www.yxlcms.com',
+    'KEYWORDS'    => '企业建站、网络营销、小程序开发、微信运营、网络资讯、微商城、创意、全网推广、订制开发',
+    'ICP'         => '粤ICP备18118234号',
+    'DESCRIPTION' => '每天，都有大量的创业者怀揣着梦想上路，如何成就他们的梦想，正是我为之努力的方向。',
+    'DEVELOPERS'  => 'Y.x.L',
+    'PHONE'       => '+8615119551165',
+    'COPYRIGHT'   => 'Y.x.L',
+    'EMAIL'       => 'admin@yxlcms.com', // 管理员邮箱
+    'FIXPHONE'    => '+8615119551165', // 传真
+    'ADDRESS'     => '广东省湛江市赤坎区东园西村18号301房', // 地址
+    'PERSON'      => 'Z.c.c', // 负责人
 
     // 安装文件
-    'RD_FILE'               => 'FcCalendar.rd',
+    'RD_FILE'     => 'FcCalendar.rd',
 ];

@@ -65,14 +65,14 @@ class UploadController extends BaseController
     public function actionImageUpload($id = null, $type, $ext, $attribute = 'images')
     {
 
-        if (empty($type) || empty($ext))
-            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '参数错误 !!']);
+        if ( empty($type) || empty($ext) )
+            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '参数错误!']);
 
         switch ($type) {
 
             // 配置
             case 'conf':
-                $model = new \common\models\Conf();
+                $model = new Conf();
                 break;
 
             // 新闻
@@ -120,29 +120,29 @@ class UploadController extends BaseController
                 break;
 
             default:
-                return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '没有此模型 !!',]);
+                return Json::encode(['error' => '没有此模型!']);
                 break;
         }
 
         // 上传组件对应model
-        if (!($imageFile = UploadedFile::getInstance($model, $attribute)))
-            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传组件文件异常 !!']);
+        if ( ($imageFile = UploadedFile::getInstance($model, $attribute)) )
+            return Json::encode(['error' => '上传组件文件异常!']);
 
         // 验证后缀名
-        if (!static::UploadExt($ext, $imageFile->extension))
-            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传格式有问题 !!']);
+        if ( static::UploadExt($ext, $imageFile->extension) )
+            return Json::encode(['error' => '上传格式有问题!']);
 
         // 上传路径
         $directory = Yii::getAlias('@backend/../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR;
 
-        if (!is_dir($directory))
+        if ( is_dir($directory) )
             FileHelper::createDirectory($directory);
 
         $fileName = self::getRandomString() . '.' . $imageFile->extension;
 
         $filePath = $directory . $fileName;
 
-        if ($imageFile->saveAs($filePath)) {
+        if ( $imageFile->saveAs($filePath) ) {
 
             $path = Yii::getAlias('@web/../../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . $fileName;
 
@@ -159,7 +159,7 @@ class UploadController extends BaseController
             ]);
         }
 
-        return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传失败 !!']);
+        return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '上传失败!']);
     }
 
     /**
@@ -168,38 +168,38 @@ class UploadController extends BaseController
      * @param $ext
      * @param $fileExt
      *
-     * @return array
+     * @return bool
      */
     public static function UploadExt($ext, $fileExt)
     {
 
-        if (empty($ext) || empty($fileExt))
+        if ( empty($ext) || empty($fileExt) )
             return false;
 
         // 初始化
         $result = [];
 
-        $confData = Conf::find()->where(['is_using' => 'On', 'is_language' => null])->asArray()->all();
+        $confData = Conf::find()->where(['is_using' => 'On', 'is_type' => 'system'])->asArray()->all();
 
-        if (empty($confData))
+        if ( empty($confData) )
             return false;
 
         foreach ($confData as $value) {
-            $result[$value['c_key']] = $value['parameter'];
+            $result[ $value['c_key'] ] = $value['parameter'];
         }
 
         switch ($ext) {
 
             case 'image':
 
-                if (empty($result['IMAGE_UPLOAD_TYPE']) || strpos($result['IMAGE_UPLOAD_TYPE'], $fileExt) === false) {
+                if ( empty($result['IMAGE_UPLOAD_TYPE']) || strpos($result['IMAGE_UPLOAD_TYPE'], $fileExt) === false ) {
                     return false;
                 }
                 break;
 
             case 'file':
 
-                if (empty($result['FILE_UPLOAD_TYPE']) || strpos($result['FILE_UPLOAD_TYPE'], $fileExt) === false) {
+                if ( empty($result['FILE_UPLOAD_TYPE']) || strpos($result['FILE_UPLOAD_TYPE'], $fileExt) === false ) {
                     return false;
                 }
                 break;
@@ -223,13 +223,13 @@ class UploadController extends BaseController
     public function actionImageDelete($name, $type)
     {
 
-        if (empty($name) || empty($type)) {
-            return Json::encode(['message' => '参数有误 !!']);
+        if ( empty($name) || empty($type) ) {
+            return Json::encode(['message' => '参数有误!']);
         }
 
         $directory = Yii::getAlias('@frontend/web/temp/') . Yii::$app->user->identity->user_id . DIRECTORY_SEPARATOR . $type;
 
-        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
+        if ( is_file($directory . DIRECTORY_SEPARATOR . $name) ) {
             unlink($directory . DIRECTORY_SEPARATOR . $name);
         }
 

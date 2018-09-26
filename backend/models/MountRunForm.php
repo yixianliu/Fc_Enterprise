@@ -2,7 +2,7 @@
 
 /**
  * @abstract 挂载中心表单模型
- * @author Yxl <zccem@163.com>
+ * @author   Yxl <zccem@163.com>
  */
 
 namespace backend\models;

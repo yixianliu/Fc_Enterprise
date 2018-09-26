@@ -18,10 +18,6 @@ switch ($type) {
         $typeName = '英文';
         break;
 
-    case 'system':
-        $typeName = '系统配置';
-        break;
-
     default:
         $typeName = '???';
         break;
@@ -39,25 +35,17 @@ switch ($type) {
 
                 <?php $form = ActiveForm::begin(); ?>
 
-                <?php if ($type != 'system'): ?>
-
-                    <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
-
-                <?php else: ?>
-
-                    <?= $form->field($model, 'c_key')->hiddenInput(['value' => 'Custom_' . time() . '_' . rand(100, 999)])->label(false); ?>
-
-                <?php endif; ?>
+                <?= $form->field($model, 'c_key')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?php if ($model->c_key != 'CODE_IMG'): ?>
+                <?php if ( $model->is_type != 'images' ): ?>
 
                     <?= $form->field($model, 'parameter')->textarea(['rows' => 6]) ?>
 
                 <?php else: ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'parameter', 'type' => 'conf', 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'form' => $form, 'attribute' => 'parameter', 'num' => 1, 'text' => '上传图片']); ?>
 
                 <?php endif; ?>
 
@@ -68,30 +56,36 @@ switch ($type) {
                     'data'          => ['On' => '启用', 'Off' => '未启用'],
                     'options'       => ['placeholder' => '选择...'],
                     'pluginOptions' => [
-                        'allowClear' => true
+                        'allowClear' => true,
                     ],
                 ]);
                 ?>
 
-                <?php if (!empty($model->is_language) && empty($model->id)): ?>
+                <?=
+                $form->field($model, 'is_language')->widget(Select2::classname(), [
+                    'data'          => ['cn' => '中文', 'en' => '英文'],
+                    'options'       => ['placeholder' => '多语言...'],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ]);
+                ?>
 
-                    <?=
-                    $form->field($model, 'is_language')->widget(Select2::classname(), [
-                        'data'          => ['cn' => '中文', 'en' => '英文'],
-                        'options'       => ['placeholder' => '多语言...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
-
-                <?php endif; ?>
+                <?=
+                $form->field($model, 'is_type')->widget(Select2::classname(), [
+                    'data'          => ['web' => '网站配置', 'images' => '图片配置', 'system' => '系统配置'],
+                    'options'       => ['placeholder' => '配置类型...'],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ]);
+                ?>
 
                 <div class="form-group">
 
                     <?= Html::submitButton($model->isNewRecord ? '添加网站配置' : '更新网站配置', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-                    <?= Html::a('返回列表', ['conf', 'type' => (empty($type) ? 'system' : $type)], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('返回列表', ['index', 'type' => (empty($type) ? \common\models\Conf::$webDefault : $type)], ['class' => 'btn btn-primary']) ?>
 
                 </div>
 
@@ -104,5 +98,14 @@ switch ($type) {
 
     </section>
 </div>
+
+<script type="text/javascript">
+
+    $('#conf-is_type').change(function () {
+
+
+    })
+
+</script>
 
 

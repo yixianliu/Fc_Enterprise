@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]);
                         ?>
-                        <?= Html::a('返回列表', ['conf', 'type' => (empty($model->is_language) ? 'system' : $model->is_language)], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('返回列表', ['index', 'type' => (empty($model->is_language) ? \common\models\Conf::$webDefault : $model->is_language)], ['class' => 'btn btn-primary']) ?>
                     </p>
 
                     <?=
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format'    => 'html',
                                 'value'     => function ($model) {
 
-                                    if ($model->c_key == 'CODE_IMG') {
+                                    if ( $model->c_key == 'CODE_IMG' ) {
                                         return '<img width=300 height=300 src="' . Yii::getAlias('@web') . '/temp/conf/' . $model->parameter . '" /><br /><br />';
                                     }
 
@@ -64,6 +64,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ];
 
                                     return $state[ $model->is_language ];
+                                },
+                            ],
+                            [
+                                'attribute' => 'is_type',
+                                'value'     => function ($model) {
+                                    $state = [
+                                        'web'    => '网站配置',
+                                        'images' => '图片配置',
+                                        'system' => '系统配置',
+                                    ];
+
+                                    return $state[ $model->is_type ];
                                 },
                             ],
                             [

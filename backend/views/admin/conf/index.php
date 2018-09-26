@@ -24,8 +24,6 @@ $this->title = '网站配置';
 
     <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => "btn btn-primary"]) ?>
 
-    <?= Html::a('系统配置', ['conf', 'type' => 'system'], ['class' => "btn btn-primary"]) ?>
-
     <section class="box ">
 
         <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
@@ -60,7 +58,20 @@ $this->title = '网站配置';
 
                                 return $state[ $model->is_language ];
                             },
-                            'options'   => ['width' => 100]
+                            'options'   => ['width' => 120]
+                        ],
+                        [
+                            'attribute' => 'is_type',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'web'    => '网站配置',
+                                    'images' => '图片配置',
+                                    'system' => '系统配置',
+                                ];
+
+                                return $state[ $model->is_type ];
+                            },
+                            'options'   => ['width' => 120]
                         ],
                         [
                             'attribute' => 'created_at',
@@ -80,6 +91,10 @@ $this->title = '网站配置';
                             'class'   => 'yii\grid\ActionColumn',
                             'options' => ['width' => 80]
                         ],
+                    ],
+                    'tableOptions' => ['class' => 'table table-hover'],
+                    'pager'        => [
+                        'options' => ['class' => 'pagination'],
                     ],
                 ]);
                 ?>

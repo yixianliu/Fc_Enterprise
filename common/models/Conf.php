@@ -18,6 +18,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class Conf extends \yii\db\ActiveRecord
 {
+
+    public static $webDefault = 'cn';
+
+    public static $systemDefault = 'web';
+
     /**
      * @inheritdoc
      */
@@ -43,12 +48,13 @@ class Conf extends \yii\db\ActiveRecord
     {
         return [
             [['c_key', 'name', 'parameter'], 'required'],
-            [['description', 'is_using', 'is_language'], 'string'],
+            [['description', 'is_using', 'is_language', 'is_type'], 'string'],
             [['c_key'], 'string', 'max' => 55],
             [['name'], 'string', 'max' => 80],
             [['parameter'], 'string', 'max' => 255],
 
-            [['is_language'], 'default', 'value' => null],
+            [['is_language'], 'default', 'value' => static::$webDefault],
+            [['is_type'], 'default', 'value' => static::$systemDefault],
             [['is_using'], 'default', 'value' => 'On'],
         ];
     }
@@ -65,6 +71,7 @@ class Conf extends \yii\db\ActiveRecord
             'description' => '配置描述',
             'is_using'    => '是否启用',
             'is_language' => '语言分类',
+            'is_type'     => '配置类型',
             'created_at'  => '添加数据时间',
             'updated_at'  => '更新数据时间',
         ];
@@ -81,10 +88,10 @@ class Conf extends \yii\db\ActiveRecord
     public static function findByData($status = null, $language = 'cn')
     {
 
-        $array = !empty( $status ) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
+        $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
 
-        return static::find()->where( $array )
-            ->andWhere( ['is_language' => $language] )
+        return static::find()->where($array)
+            ->andWhere(['is_language' => $language])
             ->asArray()
             ->all();
     }
@@ -100,7 +107,7 @@ class Conf extends \yii\db\ActiveRecord
     public static function findByConfArray($language = 'cn', $status = 'On')
     {
 
-        $data = static::findByData( $status, $language );
+        $data = static::findByData($status, $language);
 
         // 初始化
         $confArray = [];
