@@ -111,7 +111,7 @@ switch ($imgPathArray[1]) {
                 var num = ' . $num . ';
                 
                 var html = "";
-                
+            
                 if (data.result.error == "") {
                 
                     if (num > 1) {
@@ -139,8 +139,8 @@ switch ($imgPathArray[1]) {
             }',
 
             'fileuploadfail' => 'function(e, data) {
-                                return false;
-                            }',
+                return false;
+            }',
         ],
     ]);
     ?>

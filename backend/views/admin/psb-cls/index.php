@@ -55,8 +55,8 @@ function recursionCls($data, $type, $id)
     $html = '<li class="">';
     $html .= '    <div class="uk-nestable-item" style="padding: 5px;">▸';
 
-    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key'], 'pid' => $id]) . ' / ' . '&nbsp;' .
-        Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type]) . ' / ';
+    $html .= $data['name'] . '&nbsp;&nbsp;' . Html::a('编辑', ['update', 'id' => $data['c_key'], 'pid' => $id]) . '&nbsp;' .
+        Html::a('添加子分类', ['create', 'id' => $id, 'parent_id' => $data['c_key'], 'type' => $type]);
 
     $html .= '    </div>';
 
@@ -81,21 +81,18 @@ function recursionCls($data, $type, $id)
 <?php $this->registerCssFile('@web/themes/assets/plugins/uikit/css/components/nestable.min.css'); ?>
 
 <div class="col-lg-12">
+
+    <?= Html::a('发布分类 - ' . $this->title, ['create', 'type' => $type, 'id' => $id], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => "btn btn-primary"]) ?>
+
     <section class="box ">
         <header class="panel_header">
             <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
         </header>
         <div class="content-body">
             <div class="row">
-
-                <p>
-                    <?= Html::a('发布分类 - ' . $this->title, ['create', 'type' => $type, 'id' => $id], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('供应中心分类', ['index', 'type' => 'Supply', 'id' => 'S0'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('采购中心分类', ['index', 'type' => 'Purchase', 'id' => 'P0'], ['class' => "collapsed"]) . ' / ' ?>
-                    <?= Html::a('投标中心分类', ['index', 'type' => 'Bid', 'id' => 'B0'], ['class' => "collapsed"]) . ' / ' ?>
-                </p>
-
-                <hr/>
 
                 <ul class="uk-nestable" style="font-size: 13px;">
                     <?php if (!empty($result)): ?>
