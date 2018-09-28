@@ -26,7 +26,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string  $is_hot
  * @property string  $is_winnow
  * @property string  $is_recommend
- * @property string  $is_audit
+ * @property string  $is_using
  * @property string  $is_comments
  * @property string  $is_img
  * @property string  $is_thumb
@@ -60,7 +60,7 @@ class News extends \yii\db\ActiveRecord
         return [
             [['c_key', 'title', 'content'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
-            [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'string'],
+            [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_using', 'is_comments', 'is_img', 'is_thumb'], 'string'],
             [['news_id'], 'string', 'max' => 85],
             [['c_key'], 'string', 'max' => 55],
             [['title'], 'string', 'max' => 125],
@@ -71,7 +71,7 @@ class News extends \yii\db\ActiveRecord
 
             // 若 "level" 为空，则设其为 1
             [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend',], 'default', 'value' => 'Off'],
-            [['is_audit', 'is_comments'], 'default', 'value' => 'On'],
+            [['is_using', 'is_comments'], 'default', 'value' => 'On'],
             [['introduction'], 'default', 'value' => null],
             [['sort_id'], 'default', 'value' => 1],
         ];
@@ -91,8 +91,8 @@ class News extends \yii\db\ActiveRecord
             'content'      => '新闻内容',
             'introduction' => '新闻导读',
             'keywords'     => '新闻关键词',
-            'path'         => '新闻图片',
-            'images'       => '新闻缩略图',
+            'thumbnail'    => '新闻缩略图',
+            'images'       => '新闻图片',
             'praise'       => '赞',
             'forward'      => '转发',
             'collection'   => '收藏',
@@ -103,10 +103,8 @@ class News extends \yii\db\ActiveRecord
             'is_hot'       => '热门状态',
             'is_winnow'    => '精选状态',
             'is_recommend' => '推荐状态',
-            'is_audit'     => '是否审核',
+            'is_using'     => '是否审核',
             'is_comments'  => '是否开启评论',
-            'is_img'       => '是否上传图片',
-            'is_thumb'     => '缩略图',
             'created_at'   => '添加数据时间',
             'updated_at'   => '更新数据时间',
         ];
@@ -122,9 +120,9 @@ class News extends \yii\db\ActiveRecord
     public static function findByAll($num = null)
     {
 
-        if (!empty($num) && is_numeric($num)) {
+        if ( !empty($num) && is_numeric($num) ) {
 
-            return static::find()->where(['is_audit' => 'On'])
+            return static::find()->where(['is_using' => 'On'])
                 ->orderBy('sort_id', SORT_DESC)
                 ->asArray()
                 ->limit($num)
@@ -132,7 +130,7 @@ class News extends \yii\db\ActiveRecord
         }
 
         // 所有数据
-        return static::find()->where(['is_audit' => 'On'])
+        return static::find()->where(['is_using' => 'On'])
             ->orderBy('news_id', SORT_DESC)
             ->asArray()
             ->all();
@@ -149,7 +147,7 @@ class News extends \yii\db\ActiveRecord
     public static function findByRecommend($num = 5)
     {
 
-        return static::find()->where(['is_audit' => 'On', 'is_recommend' => 'On'])
+        return static::find()->where(['is_using' => 'On', 'is_recommend' => 'On'])
             ->orderBy('news_id', SORT_DESC)
             ->asArray()
             ->limit($num)
@@ -168,9 +166,9 @@ class News extends \yii\db\ActiveRecord
     {
 
         // 只有一条记录
-        if ($num == 1) {
+        if ( $num == 1 ) {
 
-            return static::find()->where(['is_audit' => 'On', 'is_hot' => 'On'])
+            return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'])
                 ->orderBy('news_id', SORT_DESC)
                 ->joinWith('user')
                 ->joinWith('admin')
@@ -179,7 +177,7 @@ class News extends \yii\db\ActiveRecord
 
         }
 
-        return static::find()->where(['is_audit' => 'On', 'is_hot' => 'On'])
+        return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'])
             ->orderBy('news_id', SORT_DESC)
             ->joinWith('user')
             ->joinWith('admin')

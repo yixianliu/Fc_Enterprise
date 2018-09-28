@@ -55,9 +55,9 @@ if ( empty($result['classify']) ) {
                     ]);
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传缩略图', 'form' => $form, 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品缩略图', 'attribute' => 'thumbnail', 'form' => $form, 'id' => $model->product_id, 'num' => 1]); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品图片', 'form' => $form, 'id' => $model->product_id]); ?>
+                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品图片', 'attribute' => 'images', 'form' => $form, 'id' => $model->product_id]); ?>
 
                     <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
 
@@ -185,7 +185,7 @@ if ( empty($result['classify']) ) {
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_audit')->widget(ICheck::className(), [
+                                    <?= $form->field($model, 'is_using')->widget(ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -223,7 +223,7 @@ if ( empty($result['classify']) ) {
 
                 <?php else: ?>
 
-                    <h1>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a></h1>
+                    <h4>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a></h4>
 
                 <?php endif ?>
 

@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
-            [['product_id', 'user_id', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'path', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
+            [['product_id', 'user_id', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'images', 'images', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
         ];
     }
 
@@ -91,17 +91,15 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'introduction', $this->introduction])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'path', $this->images])
+            ->andFilterWhere(['like', 'path', $this->images])
             ->andFilterWhere(['like', 'is_promote', $this->is_promote])
             ->andFilterWhere(['like', 'is_hot', $this->is_hot])
             ->andFilterWhere(['like', 'is_classic', $this->is_classic])
             ->andFilterWhere(['like', 'is_winnow', $this->is_winnow])
             ->andFilterWhere(['like', 'is_recommend', $this->is_recommend])
-            ->andFilterWhere(['like', 'is_audit', $this->is_audit])
-            ->andFilterWhere(['like', 'is_field', $this->is_field])
-            ->andFilterWhere(['like', 'is_comments', $this->is_comments])
-            ->andFilterWhere(['like', 'is_img', $this->is_img])
-            ->andFilterWhere(['like', 'is_thumb', $this->is_thumb]);
+            ->andFilterWhere(['like', 'is_audit', $this->is_using])
+            ->andFilterWhere(['like', 'is_comments', $this->is_comments]);
 
         return $dataProvider;
     }

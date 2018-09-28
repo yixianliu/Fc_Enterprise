@@ -35,7 +35,7 @@ class BaseController extends Controller
 
         $session = Yii::$app->session;
 
-        if (!$session->has('language')) {
+        if ( !$session->has('language') ) {
 
             // 设置一个session变量，以下用法是相同的：
             $session->set('language', 'cn');
@@ -65,7 +65,7 @@ class BaseController extends Controller
     public function isUser()
     {
 
-        if (Yii::$app->user->isGuest) {
+        if ( Yii::$app->user->isGuest ) {
             echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to(['/member/login']) . '"; </script> ';
             exit(false);
         }
@@ -94,7 +94,7 @@ class BaseController extends Controller
                     "imageRoot"            => Yii::getAlias("@webroot"),
                     "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
                 ],
-            ]
+            ],
         ];
     }
 
@@ -102,6 +102,7 @@ class BaseController extends Controller
      * 左边的侧边栏的内容
      *
      * @param null $system
+     *
      * @return array
      */
     public static function WebConf($system = null)

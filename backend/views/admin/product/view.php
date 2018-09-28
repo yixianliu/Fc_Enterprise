@@ -55,26 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'introduction',
                         'keywords',
                         [
-                            'attribute' => 'path',
-                            'format'    => 'html',
-                            'value'     => function ($model) {
-
-                                $imgArray = explode(',', $model->path);
-
-                                $data = null;
-
-                                foreach ($imgArray as $value) {
-
-                                    if (empty($value))
-                                        continue;
-
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $value . '" /><br /><br />';
-                                }
-
-                                return $data;
-                            },
-                        ],
-                        [
                             'attribute' => 'images',
                             'format'    => 'html',
                             'value'     => function ($model) {
@@ -85,20 +65,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 foreach ($imgArray as $value) {
 
-                                    if (empty($value))
+                                    if ( empty($value) )
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . DIRECTORY_SEPARATOR . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
                             },
                         ],
-//                        'praise',
-//                        'forward',
-//                        'collection',
-//                        'share',
-//                        'attention',
+                        [
+                            'attribute' => 'thumbnail',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                if ( empty($model->thumbnail) )
+                                    return;
+
+                                return '<img width="200" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail . '" />';;
+                            },
+                        ],
+                        'praise',
+                        'forward',
+                        'collection',
+                        'share',
+                        'attention',
                         [
                             'attribute' => 'is_language',
                             'value'     => function ($model) {
@@ -107,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'en' => '英文',
                                 ];
 
-                                return $state[$model->is_language];
+                                return $state[ $model->is_language ];
                             },
                         ],
                         [
@@ -118,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_promote];
+                                return $state[ $model->is_promote ];
                             },
                         ],
                         [
@@ -129,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_hot];
+                                return $state[ $model->is_hot ];
                             },
                         ],
                         [
@@ -140,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_classic];
+                                return $state[ $model->is_classic ];
                             },
                         ],
                         [
@@ -151,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_winnow];
+                                return $state[ $model->is_winnow ];
                             },
                         ],
                         [
@@ -162,29 +153,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_recommend];
+                                return $state[ $model->is_recommend ];
                             },
                         ],
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '通过审核',
                                     'Off' => '未通过审核',
                                 ];
 
-                                return $state[$model->is_audit];
-                            },
-                        ],
-                        [
-                            'attribute' => 'is_field',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '已生成',
-                                    'Off' => '未生成',
-                                ];
-
-                                return $state[$model->is_field];
+                                return $state[ $model->is_using ];
                             },
                         ],
                         [
@@ -195,33 +175,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未开启',
                                 ];
 
-                                return $state[$model->is_comments];
+                                return $state[ $model->is_comments ];
                             },
                         ],
-                        [
-                            'attribute' => 'is_img',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '已上传图片',
-                                    'Off' => '未上传图片',
-                                ];
-
-                                return $state[$model->is_img];
-                            },
-                        ],
-                        [
-                            'attribute' => 'is_thumb',
-                            'value'     => function ($model) {
-                                $state = [
-                                    'On'  => '已生成',
-                                    'Off' => '未生成',
-                                ];
-
-                                return $state[$model->is_thumb];
-                            },
-                        ],
-//                        'grade',
-//                        'user_grade',
+                        'grade',
+                        'user_grade',
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {

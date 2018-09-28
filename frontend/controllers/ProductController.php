@@ -70,13 +70,20 @@ class ProductController extends BaseController
 
     /**
      * Displays a single Product model.
-     * @param integer $id
-     * @return mixed
+     *
+     * @param $id
+     *
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
 
-        $model = Product::findOne(['product_id' => $id]);
+        $model = Product::findByOne($id);
+
+        if (empty($model)) {
+            throw new NotFoundHttpException( '没有此产品!' );
+        }
 
         return $this->render('view', [
             'model' => $model,

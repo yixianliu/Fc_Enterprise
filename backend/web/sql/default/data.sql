@@ -195,9 +195,13 @@ VALUES
 (NULL, 'AD1', 9, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AOrder1', 12, 'A3', 'admin', 'UU1', NULL, '订单管理', NULL, NULL, NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, NULL, 'On', #TIME#, #TIME#),
+
+(NULL, 'AOrderList1', 1, 'AOrder1', 'admin', 'UU1', NULL, '订单列表', 'order/index', NULL, NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AOrderList2', 2, 'AOrder1', 'admin', 'UU1', NULL, '退款', 'order/refund', NULL, NULL, 'On', #TIME#, #TIME#),
 
 (NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'APPP2', 2, 'AP3', 'admin', 'UU1', NULL, '添加采购', 'purchase/create', NULL, NULL, 'On', #TIME#, #TIME#),

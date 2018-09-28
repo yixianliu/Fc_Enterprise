@@ -32,7 +32,7 @@ class CenterController extends BaseController
     {
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $result['product-cls'] = ProductClassify::findByAll();
 
@@ -45,7 +45,7 @@ class CenterController extends BaseController
 
         foreach ($result['data'] as $key => $value) {
 
-            if (empty($value['path']))
+            if ( empty($value['path']) )
                 continue;
 
             $imgArray = explode(',', $value['path']);
@@ -83,7 +83,7 @@ class CenterController extends BaseController
 
         $message = Yii::$app->errorHandler->exception->getMessage();
 
-        if ($exception !== null) {
+        if ( $exception !== null ) {
             return $this->render('error', ['exception' => $exception, 'message' => $message]);
         }
 
@@ -98,7 +98,7 @@ class CenterController extends BaseController
 
         $language = \Yii::$app->request->get('lang');
 
-        if (isset($language)) {
+        if ( isset($language) ) {
             \Yii::$app->session['language'] = $language;
         }
 

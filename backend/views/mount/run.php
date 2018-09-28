@@ -42,7 +42,7 @@ use kartik\select2\Select2;
                 <?= $form->field($model, 'address')->textarea(['value' => Yii::$app->params['ADDRESS']]); ?>
 
                 <p class="submit">
-                    <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
+                    <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <?php ActiveForm::end() ?>

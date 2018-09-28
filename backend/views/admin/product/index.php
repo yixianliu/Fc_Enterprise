@@ -36,6 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class'   => 'yii\grid\SerialColumn',
                             'options' => ['width' => 50],
                         ],
+                        [
+                            'attribute' => 'thumbnail',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                if ( empty($model->thumbnail) )
+                                    return;
+
+                                return '<img width="80" height="80" src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail . '" />';;
+                            },
+                            'options'   => ['width' => 100],
+                        ],
                         'title',
                         [
                             'attribute' => 'c_key',
@@ -63,14 +75,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options'   => ['width' => 110],
                         ],
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '启用',
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[$model->is_audit];
+                                return $state[$model->is_using];
+                            },
+                            'options'   => ['width' => 100],
+                        ],
+                        [
+                            'attribute' => 'is_language',
+                            'value'     => function ($model) {
+                                $state = [
+                                    'cn' => '中文',
+                                    'en' => '英文',
+                                ];
+
+                                return $state[$model->is_language];
                             },
                             'options'   => ['width' => 100],
                         ],
@@ -88,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php else: ?>
 
-                <h3>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a> !!</h3>
+                <h5>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a> !!</h5>
 
             <?php endif ?>
 

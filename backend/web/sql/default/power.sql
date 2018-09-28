@@ -76,6 +76,9 @@ VALUES
 (NULL, 'indexTpl', '模板管理', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'editTpl', '编辑模板', NULL, NULL, 2, 1, #TIME#, #TIME#),
 
+(NULL, 'indexOrder', '订单列表', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'refundOrder', '退款列表', NULL, NULL, 2, 1, #TIME#, #TIME#),
+
 (NULL, 'createConf', '发布网站配置', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'updateConf', '更新网站配置', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'indexConf', '网站配置', NULL, NULL, 2, 1, #TIME#, #TIME#),

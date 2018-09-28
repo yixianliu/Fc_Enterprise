@@ -98,14 +98,13 @@ class ProductController extends BaseController
         $model->is_language = Yii::$app->session['language'];
 
         // 旧路径
-        $oldFile = $model->path;
+        $oldFile = $model->images;
 
         if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            self::ImageDelete( $model->path, $oldFile, $model->product_id );
+            self::ImageDelete( $model->images, $oldFile, $model->product_id );
 
             return $this->redirect( ['view', 'id' => $model->id] );
-
         }
 
         $model->product_id = self::getRandomString();

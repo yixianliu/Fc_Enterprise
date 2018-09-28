@@ -267,13 +267,14 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `s_key` VARCHAR(55) NOT NULL COMMENT '版块KEY,版块默认为S0,意思是没有分配好相关版块.',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
+    `field` TEXT NOT NULL COMMENT '产品参数',
     `price` INT(11) UNSIGNED NOT NULL COMMENT '一口价',
     `discount` INT(11) UNSIGNED NULL COMMENT '折扣价',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取产品介绍第一段.',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `shop_url` VARCHAR(125) NULL COMMENT '商城链接(针对有线上商城的客户)',
-    `path` VARCHAR(125) NULL COMMENT '产品文件路径',
-    `images` VARCHAR(255) NULL COMMENT '产品缩略图',
+    `images` VARCHAR(255) NULL COMMENT '产品图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '产品缩略图',
     `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
     `forward` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '转发数量',
     `collection` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '收藏数量',
@@ -285,11 +286,8 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `is_classic` SET('On', 'Off') NOT NULL COMMENT '经典',
     `is_winnow` SET('On', 'Off') NOT NULL COMMENT '精选',
     `is_recommend` SET('On', 'Off') NOT NULL COMMENT '推荐',
-    `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
-    `is_field` SET('On', 'Off') NOT NULL COMMENT '是否生成字段JSON文件,没有生成的话,产品异常!',
+    `is_using` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
     `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
-    `is_img` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否上传图片',
-    `is_thumb` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
     `grade` INT(6) UNSIGNED NOT NULL COMMENT '本站评分,由我们网站人员进行评估.',
     `user_grade` INT(6) UNSIGNED NULL COMMENT '用户评分,由本站用户进行评估.',
     `created_at` integer NOT NULL DEFAULT '0',
@@ -298,8 +296,7 @@ CREATE TABLE `#DB_PREFIX#Product` (
     UNIQUE KEY `product_id` (`product_id`),
     UNIQUE `title` (`title`),
     KEY `user_id` (`user_id`),
-    KEY `c_key` (`c_key`),
-    KEY `s_key` (`s_key`)
+    KEY `c_key` (`c_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
@@ -332,15 +329,15 @@ CREATE TABLE `#DB_PREFIX#Product_Classify` (
 DROP TABLE IF EXISTS `#DB_PREFIX#News`;
 CREATE TABLE `#DB_PREFIX#News` (
     `id` INT(11) NULL AUTO_INCREMENT,
-    `news_id` VARCHAR(85) NOT NULL COMMENT '产品编号,唯一识别码',
+    `news_id` VARCHAR(85) NOT NULL COMMENT '唯一识别码',
     `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
     `c_key` VARCHAR(55) NOT NULL COMMENT '新闻分类KEY',
     `sort_id` INT(11) UNSIGNED NULL COMMENT '排序',
     `title` VARCHAR(125) NOT NULL COMMENT '产品标题',
     `content` TEXT NOT NULL COMMENT '新闻内容',
     `introduction` VARCHAR(255) NULL COMMENT '导读,获取介绍第一段.',
-    `path` VARCHAR(125) NULL COMMENT '新闻文件路径',
-    `images` VARCHAR(255) NULL COMMENT '缩略图',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `praise` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '赞数量',
     `forward` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '转发数量',
@@ -352,10 +349,9 @@ CREATE TABLE `#DB_PREFIX#News` (
     `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
     `is_winnow` SET('On', 'Off') NOT NULL COMMENT '精选',
     `is_recommend` SET('On', 'Off') NOT NULL COMMENT '推荐',
-    `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
+    `is_using` SET('On', 'Off', 'Not') NOT NULL COMMENT '审核',
     `is_comments` SET('On', 'Off') NOT NULL COMMENT '是否启用评论',
     `is_img` SET('On', 'Off') NOT NULL COMMENT '是否上传图片',
-    `is_thumb` SET('On', 'Off') NOT NULL COMMENT '是否生成缩略图,发布产品可以上传图片,但最后审核通过了,才会生成缩略图',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
@@ -460,22 +456,25 @@ CREATE TABLE `#DB_PREFIX#Purchase` (
     `purchase_id` VARCHAR(85) NOT NULL COMMENT '编号',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
-    `content` TEXT NOT NULL COMMENT '内容',
+    `content` TEXT NULL COMMENT '内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
     `unit` VARCHAR(125) NOT NULL COMMENT '单位',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
     `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
     `start_at` VARCHAR(125) NOT NULL COMMENT '起始时间',
     `end_at` VARCHAR(125) NOT NULL COMMENT '结束时间',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `is_using` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
-    UNIQUE KEY `purchase_id` (`purchase_id`)
+    UNIQUE KEY `purchase_id` (`purchase_id`),
+    UNIQUE `title` (`title`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**
@@ -488,8 +487,10 @@ CREATE TABLE `#DB_PREFIX#Supply` (
     `supply_id` VARCHAR(85) NOT NULL COMMENT '编号',
     `user_id` VARCHAR(85) NOT NULL COMMENT '用户ID',
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
-    `content` TEXT NOT NULL COMMENT '内容',
+    `content` TEXT NULL COMMENT '内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
     `unit` VARCHAR(125) NOT NULL COMMENT '单位',
@@ -498,7 +499,7 @@ CREATE TABLE `#DB_PREFIX#Supply` (
     `start_at` VARCHAR(125) NOT NULL COMMENT '起始时间',
     `end_at` VARCHAR(125) NOT NULL COMMENT '结束时间',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
-    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `is_using` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
@@ -518,6 +519,8 @@ CREATE TABLE `#DB_PREFIX#Bid` (
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
@@ -540,6 +543,8 @@ CREATE TABLE `#DB_PREFIX#Tender` (
     `title` VARCHAR(125) NOT NULL COMMENT '标题',
     `content` TEXT NOT NULL COMMENT '内容',
     `path` VARCHAR(125) NULL COMMENT '上传文件',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
@@ -784,3 +789,46 @@ CREATE TABLE `#DB_PREFIX#Module` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `m_key` (`m_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 订单中心
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Order`;
+CREATE TABLE `#DB_PREFIX#Order` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `order_id` VARCHAR(85) NOT NULL COMMENT '订单编号,唯一识别码',
+    `user_id` VARCHAR(55) NOT NULL COMMENT '用户ID',
+    `title` VARCHAR(125) NOT NULL COMMENT '订单标题',
+    `content` TEXT NOT NULL COMMENT '订单内容',
+    `price` INT(11) UNSIGNED NOT NULL COMMENT '订单价格',
+    `images` VARCHAR(255) NULL COMMENT '相关图片',
+    `path` VARCHAR(255) NULL COMMENT '相关文件',
+    `pay_type` SET('wechat', 'alipay', 'cash') NOT NULL COMMENT '支付方式',
+    `is_using` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '订单状态',
+    `created_at` integer NOT NULL DEFAULT '0',
+    `updated_at` integer NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `order_id` (`order_id`),
+    UNIQUE `title` (`title`),
+    KEY `user_id` (`user_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**
+ * 订单字段 / 例如 : 购买的产品有哪些
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Order_Field`;
+CREATE TABLE `#DB_PREFIX#Order_Field` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `field_id` VARCHAR(85) NOT NULL COMMENT '订单字段编号',
+    `order_id` VARCHAR(85) NOT NULL COMMENT '订单编号',
+    `product_id` VARCHAR(55) NOT NULL COMMENT '产品ID',
+    `price` INT(11) UNSIGNED NOT NULL COMMENT '订单价格',
+    `num` INT(11) UNSIGNED NOT NULL COMMENT '产品数量',
+    `created_at` integer NOT NULL DEFAULT '0',
+    `updated_at` integer NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `field_id` (`field_id`),
+    UNIQUE KEY `order_id` (`order_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

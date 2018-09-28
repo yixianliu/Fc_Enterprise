@@ -18,10 +18,10 @@ use yii\helpers\Html;
     <div class="list-img">
         <a href="<?= Url::to(['view', 'id' => $model->product_id]) ?>">
 
-            <?php if (empty($model->images)): ?>
+            <?php if ( empty($model->thumbnail) ): ?>
                 <?= Html::img(Url::to('@web/themes/qijian/not.jpg'), ['alt' => $model->title]); ?>
             <?php else: ?>
-                <?= Html::img(Url::to('@web/../../backend/web/temp/product/' . $model->images), ['alt' => $model->title]); ?>
+                <?= Html::img(Url::to('@web/temp/product/' . $model->product_id . '/' . $model->thumbnail), ['alt' => $model->title]); ?>
             <?php endif; ?>
 
         </a>
