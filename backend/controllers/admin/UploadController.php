@@ -66,7 +66,7 @@ class UploadController extends BaseController
     {
 
         if ( empty($type) || empty($ext) )
-            return Json::encode(['error' => 8003, 'success' => false, 'status' => false, 'message' => '参数错误!']);
+            return Json::encode(['error' => '参数错误!']);
 
         switch ($type) {
 
@@ -125,17 +125,17 @@ class UploadController extends BaseController
         }
 
         // 上传组件对应model
-        if ( ($imageFile = UploadedFile::getInstance($model, $attribute)) )
+        if ( !($imageFile = UploadedFile::getInstance($model, $attribute)) )
             return Json::encode(['error' => '上传组件文件异常!']);
 
         // 验证后缀名
-        if ( static::UploadExt($ext, $imageFile->extension) )
+        if ( !static::UploadExt($ext, $imageFile->extension) )
             return Json::encode(['error' => '上传格式有问题!']);
 
         // 上传路径
         $directory = Yii::getAlias('@backend/../frontend/web/temp') . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR;
 
-        if ( is_dir($directory) )
+        if ( !is_dir($directory) )
             FileHelper::createDirectory($directory);
 
         $fileName = self::getRandomString() . '.' . $imageFile->extension;

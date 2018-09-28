@@ -46,8 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format'    => 'html',
                                 'value'     => function ($model) {
 
-                                    if ( $model->c_key == 'CODE_IMG' ) {
-                                        return '<img width=300 height=300 src="' . Yii::getAlias('@web') . '/temp/conf/' . $model->parameter . '" /><br /><br />';
+                                    if ( $model->is_type == 'images' ) {
+
+                                        if ( $model->c_key == 'WEB_LOGO' ) {
+                                            return '<img width="300" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/conf/') . $model->parameter . '" />';
+                                        }
+
+                                        return '<img width="200" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/conf/') . $model->parameter . '" />';
                                     }
 
                                     return $model->parameter;
@@ -102,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                         ],
+                        'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                     ]);
                     ?>
 

@@ -23,8 +23,9 @@
         "codeception/specify": "*",
         "kartik-v/yii2-widget-select2": "@dev",
         "kucha/ueditor": "*",
+        "daixianceng/yii2-smser": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
-        "daixianceng/yii2-smser": "*"
+        "phpnt/yii2-icheck": "^0.0.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

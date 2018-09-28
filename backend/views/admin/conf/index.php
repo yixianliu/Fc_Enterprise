@@ -12,17 +12,17 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-$this->title = '网站配置';
+$this->title = '网站配置 - ' . $type;
 
 ?>
 
 <div class="col-lg-12">
 
-    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('添加网站配置', ['create', 'type' => $type], ['class' => "btn btn-primary", 'onclick' => "return false"]) ?>
 
-    <?= Html::a('中文版', ['conf', 'type' => 'cn'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('中文版', ['index', 'type' => 'cn'], ['class' => "btn btn-primary"]) ?>
 
-    <?= Html::a('英文版', ['conf', 'type' => 'en'], ['class' => "btn btn-primary"]) ?>
+    <?= Html::a('英文版', ['index', 'type' => 'en'], ['class' => "btn btn-primary"]) ?>
 
     <section class="box ">
 
@@ -37,18 +37,34 @@ $this->title = '网站配置';
                     'columns'      => [
                         [
                             'class'   => 'yii\grid\SerialColumn',
-                            'options' => ['width' => 50]
+                            'options' => ['width' => 50],
                         ],
                         [
                             'attribute' => 'name',
-                            'options'   => ['width' => 180]
+                            'options'   => ['width' => 180],
                         ],
-                        'parameter',
+                        [
+                            'attribute' => 'parameter',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                if ( $model->is_type == 'images' ) {
+
+                                    if ( $model->c_key == 'WEB_LOGO' ) {
+                                        return '<img width="300" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/conf/') . $model->parameter . '" />';
+                                    }
+
+                                    return '<img width="200" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/conf/') . $model->parameter . '" />';
+                                }
+
+                                return $model->parameter;
+                            },
+                        ],
                         [
                             'attribute' => 'is_language',
                             'value'     => function ($model) {
 
-                                if (empty($model->is_language))
+                                if ( empty($model->is_language) )
                                     return '系统配置';
 
                                 $state = [
@@ -58,7 +74,7 @@ $this->title = '网站配置';
 
                                 return $state[ $model->is_language ];
                             },
-                            'options'   => ['width' => 120]
+                            'options'   => ['width' => 120],
                         ],
                         [
                             'attribute' => 'is_type',
@@ -71,25 +87,25 @@ $this->title = '网站配置';
 
                                 return $state[ $model->is_type ];
                             },
-                            'options'   => ['width' => 120]
+                            'options'   => ['width' => 120],
                         ],
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->created_at);
                             },
-                            'options'   => ['width' => 160]
+                            'options'   => ['width' => 160],
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
                                 return date('Y - m -d , h:i', $model->updated_at);
                             },
-                            'options'   => ['width' => 160]
+                            'options'   => ['width' => 160],
                         ],
                         [
                             'class'   => 'yii\grid\ActionColumn',
-                            'options' => ['width' => 80]
+                            'options' => ['width' => 80],
                         ],
                     ],
                     'tableOptions' => ['class' => 'table table-hover'],

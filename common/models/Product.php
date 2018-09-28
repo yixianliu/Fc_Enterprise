@@ -100,6 +100,7 @@ class Product extends \yii\db\ActiveRecord
             'discount'     => '折扣价',
             'introduction' => '产品导读',
             'keywords'     => '产品关键词',
+            'shop_url'     => '产品商城链接',
             'path'         => '产品图片',
             'images'       => '产品缩略图',
             'praise'       => 'Praise',

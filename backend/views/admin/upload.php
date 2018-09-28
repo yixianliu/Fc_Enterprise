@@ -106,13 +106,16 @@ switch ($imgPathArray[1]) {
 
             'fileuploaddone' => 'function(e, data) {
             
+                console.log(e);
+                console.log(data);
+            
                 var ImagesContent = $("#ImagesContent_' . $attribute . '");
                 
                 var num = ' . $num . ';
                 
                 var html = "";
             
-                if (data.result.error == "") {
+                if (data.result.error == "" || data.result.error == null) {
                 
                     if (num > 1) {
                     
@@ -130,16 +133,14 @@ switch ($imgPathArray[1]) {
                 }
                  
                 if (data.result.error != "") {
-                
-                    alert(data.result.error);
                     $(".error").show().append(data.result.error);
                 }
                 
-                return true;
             }',
 
             'fileuploadfail' => 'function(e, data) {
-                return false;
+                console.log(e);
+                console.log(data);
             }',
         ],
     ]);
