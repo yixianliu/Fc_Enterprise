@@ -45,4 +45,19 @@ class OrderController extends BaseController
 
         throw new NotFoundHttpException('异常提交!');
     }
+
+    /**
+     * 确认订单
+     *
+     * @param $id
+     *
+     * @return string
+     */
+    public function actionView($id)
+    {
+
+        $model = Product::findOne(['product_id' => $id]);
+
+        return $this->render('view', ['model' => $model]);
+    }
 }

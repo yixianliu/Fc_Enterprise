@@ -90,7 +90,7 @@ foreach ($imgArray as $key => $value) {
                         <p>产品折扣价: <?= $model->discount ?></p>
                         <p><?= $model->introduction ?></p>
 
-                        <?php $form = ActiveForm::begin(); ?>
+                        <?php $form = ActiveForm::begin(['action' => Url::to(['order/view', 'id' => $model->product_id])]); ?>
                         <p>
                             <?= Html::submitButton('购买', ['class' => 'btn btn-success']) ?>
                         </p>
