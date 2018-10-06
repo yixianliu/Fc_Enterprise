@@ -138,6 +138,11 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getAdmin()
     {
-        return $this->hasMany(Management::className(), ['username' => 'user_id']);
+        return $this->hasOne(Management::className(), ['username' => 'user_id']);
+    }
+
+    public function getCls()
+    {
+        return $this->hasOne(ProductClassify::className(), ['c_key' => 'c_key']);
     }
 }

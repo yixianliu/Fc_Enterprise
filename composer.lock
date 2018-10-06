@@ -359,21 +359,20 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ],
-            "time": "2016-07-25T15:51:55+00:00"
+            ]
         },
         {
             "name": "bower-asset/icheck",
-            "version": "1.0.2",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fronteed/icheck.git",
-                "reference": "8a6eb37bd7dab1e843c1b630c91c6398ff409d05"
+                "reference": "e62c7714a9745b6145b0ac131ddf676bde5f6189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fronteed/icheck/zipball/8a6eb37bd7dab1e843c1b630c91c6398ff409d05",
-                "reference": "8a6eb37bd7dab1e843c1b630c91c6398ff409d05",
+                "url": "https://api.github.com/repos/fronteed/icheck/zipball/e62c7714a9745b6145b0ac131ddf676bde5f6189",
+                "reference": "e62c7714a9745b6145b0ac131ddf676bde5f6189",
                 "shasum": ""
             },
             "require": {
@@ -411,7 +410,7 @@
                 "skins",
                 "ui"
             ],
-            "time": "2014-03-03T17:36:28+00:00"
+            "time": "2013-12-19T13:38:02+00:00"
         },
         {
             "name": "bower-asset/inputmask",
@@ -531,8 +530,7 @@
                     "node_modules",
                     "package.json"
                 ]
-            },
-            "time": "2014-10-22T12:02:42+00:00"
+            }
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -3792,8 +3790,7 @@
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/typeahead.bundle.js"
-            },
-            "time": "2015-04-27T04:02:14+00:00"
+            }
         },
         {
             "name": "codeception/verify",

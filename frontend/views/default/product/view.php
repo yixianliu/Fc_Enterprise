@@ -2,7 +2,6 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -90,11 +89,19 @@ foreach ($imgArray as $key => $value) {
                         <p>产品折扣价: <?= $model->discount ?></p>
                         <p><?= $model->introduction ?></p>
 
-                        <?php $form = ActiveForm::begin(['action' => Url::to(['order/view', 'id' => $model->product_id])]); ?>
+                        <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
+
                         <p>
-                            <?= Html::submitButton('购买', ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('购买', Url::to(['order/view', 'id' => $model->product_id]), ['class' => 'btn btn-success']) ?>
                         </p>
-                        <?php ActiveForm::end(); ?>
+
+                        <?php else: ?>
+
+                            <p>
+                                <?= Html::a('登录后购买', Url::to(['member/reg']), ['class' => 'btn btn-success']) ?>
+                            </p>
+
+                        <?php endif; ?>
 
                     </div>
                     <!-- #产品参数 -->

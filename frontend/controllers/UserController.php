@@ -24,9 +24,9 @@ class UserController extends BaseController
         // 判断用户
         $this->isUser();
 
-        $web = Yii::getAlias('@web');
+        $web = Yii::getAlias( '@web' );
 
-        Yii::setAlias('@web', $web . '/frontend/web');
+        Yii::setAlias( '@web', $web . '/frontend/web' );
 
         return true;
     }
@@ -38,9 +38,9 @@ class UserController extends BaseController
     {
 
         // 初始化
-        $result['product'] = Product::findAll(['is_audit' => 'On']);
+        $result['product'] = Product::findAll( ['is_using' => 'On'] );
 
-        return $this->render('index', ['result' => $result]);
+        return $this->render( 'index', ['result' => $result] );
     }
 
     /**
@@ -50,7 +50,7 @@ class UserController extends BaseController
      */
     public function actionCheck()
     {
-        return $this->render('check');
+        return $this->render( 'check' );
     }
 
     /**
@@ -61,25 +61,25 @@ class UserController extends BaseController
     public function actionSupplier()
     {
 
-        $model = UserSupply::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+        $model = UserSupply::findOne( ['user_id' => Yii::$app->user->identity->user_id] );
 
-        if (empty($model))
+        if (empty( $model ))
             $model = new UserSupply();
 
         $model->user_id = Yii::$app->user->identity->user_id;
 
         // 是否存在
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load( Yii::$app->request->post() )) {
 
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', '修改资料成功 !!');
-                return $this->redirect(['user/supplier']);
+                Yii::$app->getSession()->setFlash( 'success', '修改资料成功 !!' );
+                return $this->redirect( ['user/supplier'] );
             } else {
-                Yii::$app->getSession()->setFlash('error', '修改资料有误 !!');
+                Yii::$app->getSession()->setFlash( 'error', '修改资料有误 !!' );
             }
         }
 
-        return $this->render('supplier', ['model' => $model]);
+        return $this->render( 'supplier', ['model' => $model] );
     }
 
     /**
@@ -90,22 +90,22 @@ class UserController extends BaseController
     public function actionInfo()
     {
 
-        $model = User::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+        $model = User::findOne( ['user_id' => Yii::$app->user->identity->user_id] );
 
         $model->scenario = 'info';
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load( Yii::$app->request->post() )) {
 
             if (!$model->save()) {
-                Yii::$app->getSession()->setFlash('error', '修改资料有误 !!');
+                Yii::$app->getSession()->setFlash( 'error', '修改资料有误 !!' );
             } else {
 
-                Yii::$app->getSession()->setFlash('success', '修改资料成功 !!');
-                return $this->redirect(['info']);
+                Yii::$app->getSession()->setFlash( 'success', '修改资料成功 !!' );
+                return $this->redirect( ['info'] );
             }
         }
 
-        return $this->render('info', ['model' => $model]);
+        return $this->render( 'info', ['model' => $model] );
     }
 
     /**
@@ -116,7 +116,7 @@ class UserController extends BaseController
     public function actionSetpassword()
     {
 
-        $model = User::findOne(['user_id' => Yii::$app->user->identity->user_id]);
+        $model = User::findOne( ['user_id' => Yii::$app->user->identity->user_id] );
 
         $model->scenario = 'setpsw';
 
@@ -125,17 +125,17 @@ class UserController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if (!$model->setPsw($data['User']['password'])) {
-                Yii::$app->getSession()->setFlash('error', '原密码有误 !!');
+        if ($model->load( Yii::$app->request->post() )) {
+            if (!$model->setPsw( $data['User']['password'] )) {
+                Yii::$app->getSession()->setFlash( 'error', '原密码有误 !!' );
             } else {
 
-                Yii::$app->getSession()->setFlash('error', '修改资料成功 !!');
-                return $this->redirect(['index']);
+                Yii::$app->getSession()->setFlash( 'error', '修改资料成功 !!' );
+                return $this->redirect( ['index'] );
             }
         }
 
-        return $this->render('setpassword', ['model' => $model]);
+        return $this->render( 'setpassword', ['model' => $model] );
     }
 
 }

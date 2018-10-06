@@ -120,18 +120,18 @@ class News extends \yii\db\ActiveRecord
     public static function findByAll($num = null)
     {
 
-        if ( !empty($num) && is_numeric($num) ) {
+        if (!empty( $num ) && is_numeric( $num )) {
 
-            return static::find()->where(['is_using' => 'On'])
-                ->orderBy('sort_id', SORT_DESC)
+            return static::find()->where( ['is_using' => 'On'] )
+                ->orderBy( 'sort_id', SORT_DESC )
                 ->asArray()
-                ->limit($num)
+                ->limit( $num )
                 ->all();
         }
 
         // 所有数据
-        return static::find()->where(['is_using' => 'On'])
-            ->orderBy('news_id', SORT_DESC)
+        return static::find()->where( ['is_using' => 'On'] )
+            ->orderBy( 'news_id', SORT_DESC )
             ->asArray()
             ->all();
 
@@ -147,10 +147,10 @@ class News extends \yii\db\ActiveRecord
     public static function findByRecommend($num = 5)
     {
 
-        return static::find()->where(['is_using' => 'On', 'is_recommend' => 'On'])
-            ->orderBy('news_id', SORT_DESC)
+        return static::find()->where( ['is_using' => 'On', 'is_recommend' => 'On'] )
+            ->orderBy( 'news_id', SORT_DESC )
             ->asArray()
-            ->limit($num)
+            ->limit( $num )
             ->all();
 
     }
@@ -166,23 +166,23 @@ class News extends \yii\db\ActiveRecord
     {
 
         // 只有一条记录
-        if ( $num == 1 ) {
+        if ($num == 1) {
 
-            return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'])
-                ->orderBy('news_id', SORT_DESC)
-                ->joinWith('user')
-                ->joinWith('admin')
+            return static::find()->where( [static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'] )
+                ->orderBy( 'news_id', SORT_DESC )
+                ->joinWith( 'user' )
+                ->joinWith( 'admin' )
                 ->asArray()
                 ->one();
 
         }
 
-        return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'])
-            ->orderBy('news_id', SORT_DESC)
-            ->joinWith('user')
-            ->joinWith('admin')
+        return static::find()->where( [static::tableName() . '.is_using' => 'On', static::tableName() . '.is_hot' => 'On'] )
+            ->orderBy( 'news_id', SORT_DESC )
+            ->joinWith( 'user' )
+            ->joinWith( 'admin' )
             ->asArray()
-            ->limit($num)
+            ->limit( $num )
             ->all();
     }
 
@@ -191,7 +191,7 @@ class News extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasMany(User::className(), ['user_id' => 'user_id']);
+        return $this->hasMany( User::className(), ['user_id' => 'user_id'] );
     }
 
     /**
@@ -199,7 +199,7 @@ class News extends \yii\db\ActiveRecord
      */
     public function getAdmin()
     {
-        return $this->hasMany(Management::className(), ['user_id' => 'user_id']);
+        return $this->hasMany( Management::className(), ['user_id' => 'user_id'] );
     }
 
 }
