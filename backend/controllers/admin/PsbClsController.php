@@ -127,7 +127,7 @@ class PsbClsController extends BaseController
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => PsbClassify::getClsSelect( $id, $model->is_type ),
+                'classify' => PsbClassify::getClsSelect( $model->is_type, 'On', $id ),
             ],
         ] );
     }
