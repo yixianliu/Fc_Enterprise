@@ -10,7 +10,7 @@ return [
     'id'                  => 'app-frontend',
     'basePath'            => dirname(__DIR__),
     'language'            => 'zh-CN',
-    'bootstrap'           => ['log'],
+    'bootstrap'           => [ 'log' ],
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl'             => '/',
 
@@ -45,7 +45,7 @@ return [
         'user' => [
             'identityClass'   => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie'  => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie'  => [ 'name' => '_identity-frontend', 'httpOnly' => true ],
         ],
 
         'session' => [
@@ -58,7 +58,7 @@ return [
             'targets'    => [
                 [
                     'class'  => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => [ 'error', 'warning' ],
                 ],
             ],
         ],
@@ -83,6 +83,10 @@ return [
 
         // 管理样式文件
         'assetManager' => [
+
+            // 设置存放assets的文件目录位置
+            'basePath' => '@frontend/web/assets',
+
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset'       => [
                     'css'        => [],  // 去除 bootstrap.css
