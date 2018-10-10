@@ -9,20 +9,23 @@
  * Time: 9:51
  */
 
-use yii\helpers\Url;
 use yii\helpers\Html;
+
+if ( empty($conf) || !is_array($conf) ) {
+    return false;
+}
 
 ?>
 
-<title><?= Html::encode($result['title']) ?> - <?= $result['Conf']['NAME'] ?> - <?= $result['Conf']['TITLE'] ?></title>
+<title><?= Html::encode($this->title) ?> - <?= $conf[ 'NAME' ] ?> - <?= $conf[ 'TITLE' ] ?></title>
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-<meta content="<?= $result['Conf']['DESCRIPTION'] ?>" name="description"/>
-<meta content="<?= $result['Conf']['DEVELOPERS'] ?>" name="author"/>
-<meta content="<?= $result['Conf']['KEYWORDS'] ?>" name="keywords"/>
+<meta name="description" content="<?= $conf[ 'DESCRIPTION' ] ?>" />
+<meta name="author" content="<?= $conf[ 'DEVELOPERS' ] ?>" />
+<meta name="keywords" content="<?= $conf[ 'KEYWORDS' ] ?>" />
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 

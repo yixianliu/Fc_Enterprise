@@ -8,8 +8,8 @@ use yii\widgets\ListView;
 /* @var $searchModel common\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '新闻中心';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $this->params[ 'MenuArray' ][ 'name' ];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 
 ?>
 
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_left'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_left.php', [ 'MenuArray' => $this->params[ 'MenuArray' ] ]); ?>
 
     <div class="right">
 

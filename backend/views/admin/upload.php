@@ -53,11 +53,11 @@ $text = empty($text) ? '没有描述' : $text;
 $imgPathArray = explode('/', Yii::$app->controller->id);
 
 
-switch ($imgPathArray[1]) {
+switch ($imgPathArray[ 1 ]) {
 
     case 'download':
     case 'slide':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1];
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[ 1 ];
         break;
 
     case 'sp-offer':
@@ -66,7 +66,7 @@ switch ($imgPathArray[1]) {
 
     default:
     case 'product':
-        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[1] . '/' . $id;
+        $imgPath = Url::to('@web/../../frontend/web/temp/') . explode('/', Yii::$app->controller->id)[ 1 ] . '/' . $id;
         break;
 
 }
@@ -90,7 +90,7 @@ switch ($imgPathArray[1]) {
     FileUploadUI::widget([
         'model'         => $model,
         'attribute'     => $attribute,
-        'url'           => ['admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[1], 'attribute' => $attribute, 'ext' => $uploadType],
+        'url'           => [ 'admin/upload/image-upload', 'id' => $id, 'type' => explode('/', Yii::$app->controller->id)[ 1 ], 'attribute' => $attribute, 'ext' => $uploadType ],
         'gallery'       => false,
         'fieldOptions'  => [
             'accept' => $uploadType . '/*',
@@ -139,6 +139,7 @@ switch ($imgPathArray[1]) {
             }',
 
             'fileuploadfail' => 'function(e, data) {
+                
                 console.log(e);
                 console.log(data);
             }',
@@ -146,7 +147,7 @@ switch ($imgPathArray[1]) {
     ]);
     ?>
 
-    <?= $form->field($model, $attribute)->textInput(['id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;'])->label(false) ?>
+    <?= $form->field($model, $attribute)->textInput([ 'id' => 'ImagesContent_' . $attribute, 'style' => 'display:none;' ])->label(false) ?>
 
 </div>
 
@@ -162,7 +163,7 @@ switch ($imgPathArray[1]) {
 
                 <div class="col-md-3">
 
-                    <?= Html::img($imgPath . '/' . $value, ['width' => 350, 'height' => 150]); ?>
+                    <?= Html::img($imgPath . '/' . $value, [ 'width' => 350, 'height' => 150 ]); ?>
 
                     <div class="portfolio-info" style="margin-top: 10px;margin-bottom: 10px;">
 

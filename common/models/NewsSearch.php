@@ -19,7 +19,7 @@ class NewsSearch extends News
     {
         return [
             [['id', 'sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
-            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'keywords', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_audit', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
+            [['news_id', 'user_id', 'c_key', 'title', 'content', 'introduction', 'keywords', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_using', 'is_comments'], 'safe'],
         ];
     }
 
@@ -79,10 +79,8 @@ class NewsSearch extends News
             ->andFilterWhere(['like', 'is_hot', $this->is_hot])
             ->andFilterWhere(['like', 'is_winnow', $this->is_winnow])
             ->andFilterWhere(['like', 'is_recommend', $this->is_recommend])
-            ->andFilterWhere(['like', 'is_audit', $this->is_audit])
-            ->andFilterWhere(['like', 'is_comments', $this->is_comments])
-            ->andFilterWhere(['like', 'is_img', $this->is_img])
-            ->andFilterWhere(['like', 'is_thumb', $this->is_thumb]);
+            ->andFilterWhere(['like', 'is_audit', $this->is_using])
+            ->andFilterWhere(['like', 'is_comments', $this->is_comments]);
 
         return $dataProvider;
     }

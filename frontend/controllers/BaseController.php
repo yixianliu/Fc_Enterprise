@@ -21,7 +21,7 @@ class BaseController extends Controller
 {
 
     // 布局
-    public $layout = 'qijian';
+    public $layout = 'default';
 
     // 构造
     public function init()
@@ -66,7 +66,7 @@ class BaseController extends Controller
     {
 
         if ( Yii::$app->user->isGuest ) {
-            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to(['/member/login']) . '"; </script> ';
+            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to([ '/member/login' ]) . '"; </script> ';
             exit(false);
         }
 
@@ -90,9 +90,9 @@ class BaseController extends Controller
                 'class'  => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"       => Yii::$app->request->getHostInfo() . '/', // 图片访问路径前缀
-                    "imagePathFormat"      => "/UEditor/temp/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
+                    "imagePathFormat"      => "/UEditor/{yyyy}{mm}{dd}/{time}{rand:6}", // 上传保存路径
                     "imageRoot"            => Yii::getAlias("@webroot"),
-                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor/product",
+                    "imageManagerListPath" => Yii::getAlias("@web") . "/UEditor",
                 ],
             ],
         ];
@@ -107,7 +107,7 @@ class BaseController extends Controller
      */
     public static function WebConf($system = null)
     {
-        return (empty($system)) ? Conf::findByData('On', Yii::$app->session['language']) : Conf::findByConfArray(Yii::$app->session['language']);
+        return (empty($system)) ? Conf::findByData('On', Yii::$app->session[ 'language' ]) : Conf::findByConfArray(Yii::$app->session[ 'language' ]);
     }
 
     /**
@@ -145,7 +145,7 @@ class BaseController extends Controller
     {
 
         // 底部菜单
-        $result = Menu::findByAll(Menu::$frontend_parent_id, Yii::$app->session['language']);
+        $result = Menu::findByAll(Menu::$frontend_parent_id, Yii::$app->session[ 'language' ]);
 
         return $result;
     }

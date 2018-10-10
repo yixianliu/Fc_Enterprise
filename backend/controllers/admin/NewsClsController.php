@@ -25,7 +25,7 @@ class NewsClsController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [ '@' ],
                     ],
                 ],
             ],
@@ -33,7 +33,7 @@ class NewsClsController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -57,7 +57,9 @@ class NewsClsController extends BaseController
 
     /**
      * Displays a single NewsClassify model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -80,15 +82,15 @@ class NewsClsController extends BaseController
 
         $model->c_key = self::getRandomString();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
+            return $this->redirect([ 'view', 'id' => $model->c_key ]);
         } else {
 
             return $this->render('create', [
                 'model'  => $model,
                 'result' => [
                     'classify' => $model->getClsSelect('On'),
-                ]
+                ],
             ]);
         }
     }
@@ -96,22 +98,24 @@ class NewsClsController extends BaseController
     /**
      * Updates an existing NewsClassify model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
+            return $this->redirect([ 'view', 'id' => $model->id ]);
         } else {
 
             return $this->render('update', [
                 'model'  => $model,
                 'result' => [
                     'classify' => $model->getClsSelect('On'),
-                ]
+                ],
             ]);
         }
     }
@@ -119,29 +123,33 @@ class NewsClsController extends BaseController
     /**
      * Deletes an existing NewsClassify model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect([ 'index' ]);
     }
 
     /**
      * Finds the NewsClassify model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return NewsClassify the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = NewsClassify::findOne(['c_key' => $id])) !== null) {
+        if ( ($model = NewsClassify::findOne([ 'c_key' => $id ])) !== null ) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('数据异常,请联系管理员.');
         }
     }
 }

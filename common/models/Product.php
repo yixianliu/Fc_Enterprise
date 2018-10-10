@@ -34,22 +34,22 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_key', 'title', 'content', 'user_id',], 'required'],
-            [['title', 'content', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_using', 'is_comments', 'images', 'thumbnail'], 'string'],
-            [['price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
-            [['images', 'thumbnail'], 'string', 'max' => 255],
-            [['c_key', 's_key', 'product_id'], 'string', 'max' => 85],
-            [['title'], 'string', 'max' => 125],
-            [['introduction'], 'string', 'max' => 255],
-            [['keywords'], 'string', 'max' => 150],
-            [['title', 'product_id'], 'unique'],
+            [ [ 'c_key', 'title', 'content', 'user_id', ], 'required' ],
+            [ [ 'title', 'content', 'shop_url', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_using', 'is_comments', 'images', 'thumbnail' ], 'string' ],
+            [ [ 'price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade' ], 'integer' ],
+            [ [ 'images', 'thumbnail' ], 'string', 'max' => 255 ],
+            [ [ 'c_key', 's_key', 'product_id' ], 'string', 'max' => 85 ],
+            [ [ 'title' ], 'string', 'max' => 125 ],
+            [ [ 'introduction' ], 'string', 'max' => 255 ],
+            [ [ 'keywords' ], 'string', 'max' => 150 ],
+            [ [ 'title', 'product_id' ], 'unique' ],
 
             // 默认值
-            [['images', 'thumbnail'], 'default', 'value' => null],
-            [['s_key'], 'default', 'value' => 'S0'],
-            [['price', 'grade', 'user_grade', 'discount'], 'default', 'value' => 0],
-            [['is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend'], 'default', 'value' => 'Off'],
-            [['is_using', 'is_comments'], 'default', 'value' => 'On'],
+            [ [ 'images', 'thumbnail', 'shop_url' ], 'default', 'value' => null ],
+            [ [ 's_key' ], 'default', 'value' => 'S0' ],
+            [ [ 'price', 'grade', 'user_grade', 'discount' ], 'default', 'value' => 0 ],
+            [ [ 'is_winnow', 'is_hot', 'is_promote', 'is_classic', 'is_winnow', 'is_recommend' ], 'default', 'value' => 'Off' ],
+            [ [ 'is_using', 'is_comments' ], 'default', 'value' => 'On' ],
         ];
     }
 
@@ -104,7 +104,7 @@ class Product extends \yii\db\ActiveRecord
     {
         if ( !empty($num) && is_numeric($num) ) {
 
-            return static::find()->where(['is_using' => 'On'])
+            return static::find()->where([ 'is_using' => 'On' ])
                 ->orderBy('sort_id', SORT_DESC)
                 ->asArray()
                 ->limit($num)
@@ -112,7 +112,7 @@ class Product extends \yii\db\ActiveRecord
         }
 
         // 所有数据
-        return static::find()->where(['is_using' => 'On'])
+        return static::find()->where([ 'is_using' => 'On' ])
             ->orderBy('sort_id', SORT_DESC)
             ->asArray()
             ->all();
@@ -127,7 +127,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public static function findByOne($id)
     {
-        return static::find()->where([static::tableName() . '.is_using' => 'On', static::tableName() . '.product_id' => $id])
+        return static::find()->where([ static::tableName() . '.is_using' => 'On', static::tableName() . '.product_id' => $id ])
             ->joinWith('admin')
             ->one();
 
@@ -138,11 +138,11 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getAdmin()
     {
-        return $this->hasOne(Management::className(), ['username' => 'user_id']);
+        return $this->hasOne(Management::className(), [ 'username' => 'user_id' ]);
     }
 
     public function getCls()
     {
-        return $this->hasOne(ProductClassify::className(), ['c_key' => 'c_key']);
+        return $this->hasOne(ProductClassify::className(), [ 'c_key' => 'c_key' ]);
     }
 }

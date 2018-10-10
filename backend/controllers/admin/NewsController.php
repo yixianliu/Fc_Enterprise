@@ -27,7 +27,7 @@ class NewsController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [ '@' ],
                     ],
                 ],
             ],
@@ -35,7 +35,7 @@ class NewsController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -84,21 +84,21 @@ class NewsController extends BaseController
         $model = new News();
 
         // 所属语言类别
-        $model->is_language = Yii::$app->session['language'];
+        $model->is_language = Yii::$app->session[ 'language' ];
 
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ( $model->load(Yii::$app->request->post()) ) {
 
-            if (!$model->save()) {
+            if ( !$model->save() ) {
 
                 Yii::$app->getSession()->setFlash('error', $model->getErrors());
             }
 
             self::ImageDelete($model->path, $oldFile, $model->news_id);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([ 'view', 'id' => $model->id ]);
         }
 
         $model->user_id = Yii::$app->user->identity->user_id;
@@ -129,11 +129,11 @@ class NewsController extends BaseController
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
 
             self::ImageDelete($model->path, $oldFile, $model->news_id);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([ 'view', 'id' => $model->id ]);
         }
 
         return $this->render('update', [
@@ -156,7 +156,7 @@ class NewsController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect([ 'index' ]);
     }
 
     /**
@@ -170,7 +170,7 @@ class NewsController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = News::findOne($id)) !== null) {
+        if ( ($model = News::findOne($id)) !== null ) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

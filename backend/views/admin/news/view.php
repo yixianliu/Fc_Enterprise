@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model common\models\News */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '新闻', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = [ 'label' => '新闻', 'url' => [ 'index' ] ];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 
 ?>
 
@@ -21,9 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('更新', [ 'update', 'id' => $model->id ], [ 'class' => 'btn btn-primary' ]) ?>
                     <?=
-                    Html::a('删除', ['delete', 'id' => $model->id], [
+                    Html::a('删除', [ 'delete', 'id' => $model->id ], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => '确认要删除这条新闻吗?',
@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ])
                     ?>
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('返回列表', [ 'index' ], [ 'class' => 'btn btn-primary' ]) ?>
+                    <?= Html::a('继续添加', [ 'create' ], [ 'class' => 'btn btn-success' ]) ?>
                 </p>
 
                 <?=
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
-                                $data = \common\models\NewsClassify::findOne(['c_key' => $model->c_key]);
+                                $data = \common\models\NewsClassify::findOne([ 'c_key' => $model->c_key ]);
                                 return $data->name;
                             },
                         ],
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 foreach ($imgArray as $value) {
 
-                                    if (empty($value))
+                                    if ( empty($value) )
                                         continue;
 
                                     $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 foreach ($imgArray as $value) {
 
-                                    if (empty($value))
+                                    if ( empty($value) )
                                         continue;
 
                                     $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
@@ -90,11 +90,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $data;
                             },
                         ],
-//                        'praise',
-//                        'forward',
-//                        'collection',
-//                        'share',
-//                        'attention',
+                        'praise',
+                        'forward',
+                        'collection',
+                        'share',
+                        'attention',
                         [
                             'attribute' => 'is_promote',
                             'value'     => function ($model) {
@@ -140,14 +140,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         [
-                            'attribute' => 'is_audit',
+                            'attribute' => 'is_using',
                             'value'     => function ($model) {
                                 $state = [
                                     'On'  => '已通过审核',
                                     'Off' => '未通过审核',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_using ];
                             },
                         ],
                         [
@@ -175,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'content:html',
                     ],
-                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
                 ]);
                 ?>
 

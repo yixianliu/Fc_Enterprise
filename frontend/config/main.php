@@ -69,14 +69,22 @@ return [
         ],
 
         'urlManager'   => [
-            'enablePrettyUrl' => true,
-            'showScriptName'  => false,
-            'suffix'          => '.html',
-            'rules'           => [
+            // 是否开启美化效果
+            'enablePrettyUrl'     => true,
+            // 是否或略脚本名index.php
+            'showScriptName'      => false,
+            // 是否开启严格解析路由
+            'enableStrictParsing' => true,
+            'suffix'              => '.html',
+            'rules'               => [
 
                 // 默认
                 ''       => 'center/index',
                 'mobile' => 'mobile/center/index',
+
+                '<controller:\w+>/<id:\d+>'                => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<page:\d+>' => '<controller>/<action>',
+                "<controller:\w+>/<action:\w+>"            => "<controller>/<action>",
 
             ],
         ],

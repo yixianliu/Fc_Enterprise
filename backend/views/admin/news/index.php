@@ -8,11 +8,11 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '新闻列表';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = $this->title;
 
 ?>
 
-<?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+<?= $this->render('_search', [ 'model' => $searchModel, 'result' => $result ]); ?>
 
 <div class="col-lg-12">
     <section class="box ">
@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content-body">
             <div class="row">
 
-                <?php if (!empty($result['classify'])): ?>
+                <?php if ( !empty($result[ 'classify' ]) ): ?>
 
                     <p>
-                        <?= Html::a('添加新闻', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('添加新闻', [ 'create' ], [ 'class' => 'btn btn-success' ]) ?>
                     </p>
 
                     <?=
@@ -34,25 +34,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns'      => [
                             [
                                 'class'   => 'yii\grid\SerialColumn',
-                                'options' => ['width' => 100],
+                                'options' => [ 'width' => 100 ],
                             ],
                             [
                                 'attribute' => 'c_key',
                                 'value'     => function ($model) {
 
-                                    $data = \common\models\NewsClassify::findOne(['c_key' => $model->c_key]);
+                                    $data = \common\models\NewsClassify::findOne([ 'c_key' => $model->c_key ]);
 
-                                    return $data['name'];
+                                    return $data[ 'name' ];
                                 },
                             ],
                             [
                                 'attribute' => 'sort_id',
-                                'options'   => ['width' => 100],
+                                'options'   => [ 'width' => 100 ],
 
                             ],
                             'title',
                             [
-                                'attribute' => 'is_audit',
+                                'attribute' => 'is_using',
                                 'value'     => function ($model) {
                                     $state = [
                                         'On'  => '启用',
@@ -61,32 +61,32 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'Not' => '未审核',
                                     ];
 
-                                    return $state[$model->is_audit];
+                                    return $state[ $model->is_using ];
                                 },
-                                'options'   => ['width' => 110],
+                                'options'   => [ 'width' => 110 ],
                             ],
                             [
                                 'attribute' => 'updated_at',
                                 'value'     => function ($model) {
                                     return date('Y - m -d , h:i', $model->updated_at);
                                 },
-                                'options'   => ['width' => 180],
+                                'options'   => [ 'width' => 180 ],
                             ],
                             [
                                 'class'   => 'yii\grid\ActionColumn',
-                                'options' => ['width' => 100],
+                                'options' => [ 'width' => 100 ],
                             ],
                         ],
-                        'tableOptions' => ['class' => 'table table-hover'],
+                        'tableOptions' => [ 'class' => 'table table-hover' ],
                         'pager'        => [
-                            'options' => ['class' => 'pagination'],
+                            'options' => [ 'class' => 'pagination' ],
                         ],
                     ]);
                     ?>
 
                 <?php else: ?>
 
-                    <h3>请添加分类, 点<a href="<?= \yii\helpers\Url::to(['admin/news-cls/create']) ?>">这里</a> !!</h3>
+                    <h3>请添加分类, 点<a href="<?= \yii\helpers\Url::to([ 'admin/news-cls/create' ]) ?>">这里</a> !!</h3>
 
                 <?php endif ?>
 
