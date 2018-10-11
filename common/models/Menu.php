@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%menu}}".
@@ -532,7 +533,7 @@ class Menu extends \yii\db\ActiveRecord
                     break;
                 }
 
-                $urls = empty($data[ 'url' ]) ? [ '/pages/' . $data[ 'is_type' ], 'id' => $data[ 'pages' ][ 'page_id' ] ] : [ $data[ 'url' ] ];
+                $urls = empty($data[ 'url' ]) ? [ '/pages/' . $data[ 'is_type' ], 'mid' => $data[ 'pages' ][ 'page_id' ] ] : [ $data[ 'url' ] ];
 
                 break;
 
@@ -752,19 +753,22 @@ class Menu extends \yii\db\ActiveRecord
      * 左边栏目,HTML版本(最多支持一级目录)
      *
      * @param $menu
+     * @param $id
      *
      * @return array|bool
      */
     public static function getLeftMenuHtml($menu)
     {
 
-        if ( empty($type) ) {
+        if ( empty($menu) || !is_array($menu) ) {
             return false;
         }
 
-        $result = [];
+        $html = null;
 
-        switch ($type) {
+        $id = Yii::$app->request->get('id', null);
+
+        switch ($menu[ 'menuModel' ][ 'url_key' ]) {
 
             // 新闻
             case 'news':
@@ -772,27 +776,33 @@ class Menu extends \yii\db\ActiveRecord
                 $classify = NewsClassify::findByAll();
 
                 foreach ($classify as $key => $value) {
-                    $classify[ $key ][ 'url' ] = Url::to([ '/news/index', 'id' => $value[ 'c_key' ] ]);
-                }
 
-                $result[ 'name' ] = '新闻中心';
+                    $html .= '<a href="' . Url::to([ $menu[ 'menuModel' ][ 'url_key' ] . '/index', 'id' => $value[ 'c_key' ], 'mid' => $menu[ 'm_key' ] ]) . '" title="' . $value[ 'name' ] . '">';
+
+                    if ( $value[ 'c_key' ] == $id ) {
+                        $html .= '<div class="cur" title="' . $value[ 'name' ] . '">' . $value[ 'name' ] . '</div>';
+                    } else {
+                        $html .= '<div title="' . $value[ 'name' ] . '">' . $value[ 'name' ] . '</div>';
+                    }
+
+                    $html .= '</a>';
+
+                }
 
                 break;
 
             // 招聘
             case 'job':
-                $result[ 'name' ] = '招聘中心';
+
                 break;
 
-            // 产品中心
-            case 'product':
-                $result[ 'name' ] = '产品中心';
+                // 产品中心
+
+
                 break;
 
             // 下载中心
             case 'download':
-
-                $result[ 'name' ] = '下载中心';
 
                 $classify = DownloadCls::findByAll();
 
@@ -804,12 +814,12 @@ class Menu extends \yii\db\ActiveRecord
 
             // 公司地图
             case 'map':
-                $result[ 'name' ] = '公司地图';
+
                 break;
 
             // 在线留言
             case 'comment':
-                $result[ 'name' ] = '在线留言';
+
                 break;
 
             // 单页面
@@ -829,15 +839,12 @@ class Menu extends \yii\db\ActiveRecord
                 // 为一级目录
                 if ( $currentPagesData[ 'menu' ][ 'parent_id' ] == Menu::$frontend_parent_id ) {
 
-                    $result[ 'name' ] = $currentPagesData[ 'menu' ][ 'name' ];
-
                     $classify = Menu::findByAll($currentPagesData[ 'menu' ][ 'm_key' ], Yii::$app->session[ 'language' ]);
 
                 } else {
 
                     $classify = Menu::findByAll($currentPagesData[ 'menu' ][ 'parent_id' ], Yii::$app->session[ 'language' ]);
 
-                    $result[ 'name' ] = $parentMenuData[ 'name' ];
                 }
 
                 foreach ($classify as $key => $value) {
@@ -861,15 +868,13 @@ class Menu extends \yii\db\ActiveRecord
                     $classify[ $key ][ 'url' ] = Url::to([ '/purchase/index', 'id' => $value[ 'c_key' ] ]);
                 }
 
-                $result[ 'name' ] = '采购中心';
-
                 break;
 
             default:
                 return false;
         }
 
-        return $result;
+        return $html;
     }
 
 }

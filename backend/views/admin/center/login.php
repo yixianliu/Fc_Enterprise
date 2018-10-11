@@ -24,7 +24,7 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-    <?= ConfList::widget(['config' => ['登录', 'head']]); ?>
+
 
     <?php $this->head() ?>
 

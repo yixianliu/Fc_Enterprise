@@ -20,8 +20,6 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-    <?= ConfList::widget(['config' => [$this->title, 'head']]); ?>
-
     <?php $this->head() ?>
 
 </head>

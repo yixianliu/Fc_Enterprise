@@ -20,10 +20,6 @@ $dataSlide = Slide::getData($PageId);
 if (empty($dataSlide))
     return false;
 
-$Conf = \common\models\Conf::findByConfArray(Yii::$app->session['language']);
-
-$alt = empty($alt) ? $Conf['KEYWORDS'] : $alt;
-
 ?>
 
 <?php if (is_array($dataSlide)): ?>
@@ -53,8 +49,8 @@ $alt = empty($alt) ? $Conf['KEYWORDS'] : $alt;
         </div>
 
         <?php if (count($dataSlide) > 1): ?>
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev" title="<?= $Conf['NAME'] ?>">&lsaquo;</a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next" title="<?= $Conf['NAME'] ?>">&rsaquo;</a>
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev" title="<?= Yii::$app->view->params[ 'ConfArray' ]['NAME'] ?>">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next" title="<?= Yii::$app->view->params[ 'ConfArray' ]['NAME'] ?>">&rsaquo;</a>
         <?php endif; ?>
 
     </div>

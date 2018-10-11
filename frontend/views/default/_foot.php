@@ -21,15 +21,15 @@ use yii\helpers\Html;
 <div class="col-xs-12 foot-cont">
 
     <div class="col-xs-10">
-        <p style="font-size: 24px;font-weight: bold;"><?= $conf[ 'PHONE' ] ?></p>
+        <p style="font-size: 24px;font-weight: bold;"><?= Yii::$app->view->params[ 'ConfArray' ][ 'PHONE' ] ?></p>
         <p style="font-weight: bold;">欢迎来电咨询</p>
-        <p>地址 : <?= $conf[ 'ADDRESS' ] ?></p>
+        <p>地址 : <?= Yii::$app->view->params[ 'ConfArray' ][ 'ADDRESS' ] ?></p>
     </div>
 
     <div class="col-xs-2">
-        <?= Html::img(Url::to('@web/temp/conf/' . $conf['QR_WX_CODE']), [ 'alt' => $conf[ 'NAME' ], 'width' => 150, 'height' => 150 ]); ?>
+        <?= Html::img(Url::to('@web/temp/conf/' . Yii::$app->view->params[ 'ConfArray' ]['QR_WX_CODE']), [ 'alt' => Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ], 'width' => 150, 'height' => 150 ]); ?>
     </div>
 
 </div>
 
-<div class="col-xs-12 copy">@2018 <?= $conf[ 'ICP' ] ?></div>
+<div class="col-xs-12 copy">@2018 <?= Yii::$app->view->params[ 'ConfArray' ][ 'ICP' ] ?></div>

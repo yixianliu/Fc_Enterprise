@@ -3,11 +3,8 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use frontend\assets\QijianAsset;
-use common\widgets\iConf\ConfList;
 
 QijianAsset::register($this);
-
-$confData = \common\models\Conf::findByConfArray(Yii::$app->session[ 'language' ], 'On');
 
 $this->beginPage();
 
@@ -17,7 +14,7 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-    <?= Yii::$app->view->renderFile('@app/views/default/_head.php', [ 'conf' => $confData ]); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_head.php'); ?>
 
     <?php $this->head() ?>
 
@@ -39,7 +36,7 @@ $this->beginPage();
 
         <div class="pull-left">
             <a class="navbar-brand" title="" href="<?= Url::to([ 'center/index' ]) ?>">
-                <?= Html::img(Url::to('@web/temp/conf/' . $confData[ 'WEB_LOGO' ]), [ 'alt' => $confData[ 'NAME' ] ]); ?>
+                <?= Html::img(Url::to('@web/temp/conf/' . Yii::$app->view->params[ 'ConfArray' ][ 'WEB_LOGO' ]), [ 'alt' => Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ] ]); ?>
             </a>
         </div>
 
@@ -54,7 +51,7 @@ $this->beginPage();
 
 <div class="container-fluid foot">
     <div class="container">
-        <?= Yii::$app->view->renderFile('@app/views/default/_foot.php', [ 'conf' => $confData ]); ?>
+        <?= Yii::$app->view->renderFile('@app/views/default/_foot.php'); ?>
     </div>
 </div>
 

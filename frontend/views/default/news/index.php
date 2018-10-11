@@ -19,15 +19,15 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
     }
 </style>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php'); ?>
 
 <div class="container content">
 
-    <?= Yii::$app->view->renderFile('@app/views/default/_left.php', [ 'MenuArray' => $this->params[ 'MenuArray' ] ]); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_left.php'); ?>
 
     <div class="right">
 
-        <?= $this->render('../_nav'); ?>
+        <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
         <div class="content_news_list">
 

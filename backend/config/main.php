@@ -11,7 +11,7 @@ return [
     'basePath'            => dirname(__DIR__),
     'language'            => 'zh-CN',
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap'           => ['log'],
+    'bootstrap'           => [ 'log' ],
     'modules'             => [],
     'homeUrl'             => '/admin',
 
@@ -24,7 +24,7 @@ return [
         'user' => [
             'identityClass'   => 'common\models\Management',
             'enableAutoLogin' => true,
-            'loginUrl'        => ['admin/member/login'],
+            'loginUrl'        => [ 'admin/member/login' ],
             'identityCookie'  => [
                 'name'     => '_identity-backend',
                 'path'     => '/admin',
@@ -42,22 +42,33 @@ return [
             'targets'    => [
                 [
                     'class'  => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => [ 'error', 'warning' ],
                 ],
             ],
         ],
 
         'errorHandler' => [
-            'errorAction' => 'admin/center/error',
+            'errorAction'    => 'admin/center/error',
+            'maxSourceLines' => 20,
         ],
 
+        // Urls
         'urlManager'   => [
-            'enablePrettyUrl' => true,
-            'showScriptName'  => true,
-            'rules'           => [
+            // 是否开启美化效果
+            'enablePrettyUrl'     => true,
+            // 是否或略脚本名index.php
+            'showScriptName'      => false,
+            // 是否开启严格解析路由
+            'enableStrictParsing' => true,
+            'suffix'              => '.html',
+            'rules'               => [
 
                 // 默认
                 '' => 'admin/center/index',
+
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                "<controller:\w+>/<action:\w+>"          => "<controller>/<action>",
+
             ],
         ],
 
@@ -65,7 +76,7 @@ return [
         // PhpManager将权限关系保存在文件里,这里使用的是DbManager方式,将权限关系保存在数据库.
         'authManager'  => [
             'class'           => 'yii\rbac\DbManager',
-            'defaultRoles'    => ['guest'],
+            'defaultRoles'    => [ 'guest' ],
 
             // Mysql 表
             'itemTable'       => 'fc_auth_role', // 角色 + 权限

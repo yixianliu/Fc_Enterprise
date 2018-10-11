@@ -69,7 +69,7 @@ function recursionHtmlMenu($data)
 
                 <li class='<?php if ( !empty($value[ 'child' ]) ): ?>dropdown<?php endif; ?> <?php if ( !empty($value[ 'open' ]) && $value[ 'open' ] == 'On' ): ?>active<?php endif; ?>' title='<?= $value[ 'name' ] ?>'>
 
-                    <a title='<?= $value[ 'name' ] ?>' href='<?= Url::to((!is_array($value[ 'url' ]) ? [ $value[ 'url' ], 'id' => $value[ 'm_key' ] ] : $value[ 'url' ])) ?>'>
+                    <a title='<?= $value[ 'name' ] ?>' href='<?= Url::to((!is_array($value[ 'url' ]) ? [ $value[ 'url' ], 'mid' => $value[ 'm_key' ] ] : $value[ 'url' ])) ?>'>
 
                         <?= $value[ 'name' ] ?>
 

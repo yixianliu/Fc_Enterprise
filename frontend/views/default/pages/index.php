@@ -10,33 +10,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
 <style type="text/css">
     .summary {
         display: none;
     }
 </style>
 
-<?= $this->render('../_slide', ['PageId' => $model['page_id']]); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php', ['PageId' => $model['page_id']]); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_left'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_left.php'); ?>
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../_nav'); ?>
+        <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">
+
             <div class="conY_tit"><?= $result['menu']['name'] ?></div>
             <div class="conY_dat">作者：admin&nbsp;&nbsp;&nbsp;时间：<?= date('Y - m - d', $model['updated_at']) ?></div>
 
             <div class="conY_text">
                 <?= $model['content'] ?>
             </div>
-
 
             <div class="conY_fanye">
                 <div class="conY_fanyel">

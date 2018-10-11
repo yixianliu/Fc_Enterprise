@@ -68,6 +68,7 @@ return [
             'maxSourceLines' => 20,
         ],
 
+        // Urls
         'urlManager'   => [
             // 是否开启美化效果
             'enablePrettyUrl'     => true,
@@ -82,9 +83,8 @@ return [
                 ''       => 'center/index',
                 'mobile' => 'mobile/center/index',
 
-                '<controller:\w+>/<id:\d+>'                => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<page:\d+>' => '<controller>/<action>',
-                "<controller:\w+>/<action:\w+>"            => "<controller>/<action>",
+                '<controller:\w+>/<action:\w+>/<mid:\d+>' => '<controller>/<action>',
+                "<controller:\w+>/<action:\w+>"           => "<controller>/<action>",
 
             ],
         ],
@@ -107,18 +107,6 @@ return [
             ],
         ],
 
-        'i18n' => [
-            'translations' => [
-                'app*' => [
-                    'class'    => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/messages',
-                    'fileMap'  => [
-                        'app'       => 'common.php',
-                        'app/error' => 'error.php',
-                    ],
-                ],
-            ],
-        ],
     ],
 
     'params' => $params,

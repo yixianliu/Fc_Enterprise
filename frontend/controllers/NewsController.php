@@ -33,20 +33,6 @@ class NewsController extends BaseController
         ];
     }
 
-    public function init()
-    {
-
-        parent::init();
-
-        $id = Yii::$app->request->get('id', null);
-
-        if (empty($id)) {
-            throw new NotFoundHttpException('无法识别新闻菜单!');
-        }
-
-        Yii::$app->view->params['MenuArray'] = Menu::findByOne($id);
-    }
-
     /**
      * Lists all News models.
      *
@@ -68,11 +54,8 @@ class NewsController extends BaseController
             ],
         ]);
 
-        $result[ 'classify' ] = NewsClassify::findAll([ 'is_using' => 'On' ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'result'       => $result,
             'id'           => $id,
         ]);
     }

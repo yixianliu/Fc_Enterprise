@@ -14,8 +14,6 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
-use common\models\Conf;
-use common\models\Menu;
 
 class BaseController extends Controller
 {
@@ -52,6 +50,15 @@ class BaseController extends Controller
                 Yii::$app->language = 'en-US';
                 break;
 
+        }
+
+        Yii::$app->view->params[ 'ConfArray' ] = \common\models\Conf::findByConfArray(Yii::$app->session[ 'language' ], 'On');
+
+        // 菜单MID
+        $id = Yii::$app->request->get('mid', null);
+
+        if ( !empty($id) ) {
+            Yii::$app->view->params[ 'MenuArray' ] = \common\models\Menu::findByOne($id);
         }
 
         return true;
@@ -99,18 +106,6 @@ class BaseController extends Controller
     }
 
     /**
-     * 左边的侧边栏的内容
-     *
-     * @param null $system
-     *
-     * @return array
-     */
-    public static function WebConf($system = null)
-    {
-        return (empty($system)) ? Conf::findByData('On', Yii::$app->session[ 'language' ]) : Conf::findByConfArray(Yii::$app->session[ 'language' ]);
-    }
-
-    /**
      * 随机生成关键KEY
      *
      * @param      $len
@@ -134,20 +129,6 @@ class BaseController extends Controller
         $str = $str . '_' . time() . '_' . rand(0000, 9999);
 
         return $str;
-    }
-
-    /**
-     * 底部菜单链接
-     *
-     * @return string
-     */
-    public static function footConf()
-    {
-
-        // 底部菜单
-        $result = Menu::findByAll(Menu::$frontend_parent_id, Yii::$app->session[ 'language' ]);
-
-        return $result;
     }
 
 }

@@ -24,7 +24,7 @@ class PagesController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -34,23 +34,28 @@ class PagesController extends BaseController
      * Lists all Pages models.
      *
      * @param $id
+     *
      * @return string|\yii\web\Response
      */
     public function actionIndex()
     {
 
-        $id = Yii::$app->request->get('id', null);
+        // 菜单 ID
+        $id = Yii::$app->request->get('mid', null);
 
         $model = Pages::findByOne($id);
 
-        if (empty($model))
-            return $this->redirect(['/']);
+        if ( empty($model) )
+            return $this->redirect([ '/' ]);
+
+        // 菜单内容,如果不赋值的话,菜单没有任何数据
+        Yii::$app->view->params[ 'MenuArray' ] = Menu::findByOne($model['menu']['m_key']);
 
         // 初始化
-        $result = array();
+        $result = [];
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $id]);
+        $result[ 'menu' ] = Menu::findOne([ 'is_using' => 'On', 'custom_key' => $id ]);
 
         return $this->render('index', [
             'model'  => $model,
@@ -60,20 +65,22 @@ class PagesController extends BaseController
 
     /**
      * Displays a single Pages model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
 
-        $model = Pages::findOne(['is_using' => 'On', 'page_id' => $id]);
+        $model = Pages::findOne([ 'is_using' => 'On', 'page_id' => $id ]);
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model->m_key]);
+        $result[ 'menu' ] = Menu::findOne([ 'is_using' => 'On', 'm_key' => $model->m_key ]);
 
         // 父类
-        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
+        $result[ 'parent' ] = Menu::findByOne($result[ 'menu' ][ 'parent_id' ]);
 
         return $this->render('view', [
             'model'  => $model,
@@ -85,28 +92,29 @@ class PagesController extends BaseController
      * 单页面列表
      *
      * @param $id
+     *
      * @return string
      */
     public function actionList($id)
     {
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $model = Pages::findByOne($id);
 
-        $result['content'] = PagesList::find()->where(['is_using' => 'On', 'page_id' => $id])->all();
+        $result[ 'content' ] = PagesList::find()->where([ 'is_using' => 'On', 'page_id' => $id ])->all();
 
-        $result['classify'] = PagesClassify::findByAll($id);
+        $result[ 'classify' ] = PagesClassify::findByAll($id);
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model['m_key']]);
+        $result[ 'menu' ] = Menu::findOne([ 'is_using' => 'On', 'm_key' => $model[ 'm_key' ] ]);
 
         // 父类菜单
-        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
+        $result[ 'parent' ] = Menu::findByOne($result[ 'menu' ][ 'parent_id' ]);
 
         // 列表
-        $result['data'] = PagesList::findByAll($id);
+        $result[ 'data' ] = PagesList::findByAll($id);
 
         return $this->render('list', [
             'model'  => $model,
@@ -118,18 +126,19 @@ class PagesController extends BaseController
      * 单页面内容详情
      *
      * @param $id
+     *
      * @return string
      */
     public function actionDetails($id)
     {
 
-        $model = PagesList::findOne(['is_using' => 'On', 'id' => $id]);
+        $model = PagesList::findOne([ 'is_using' => 'On', 'id' => $id ]);
 
         // 列表
-        $result['parent'] = Pages::findOne(['is_using' => 'On', 'page_id' => $model->page_id]);
+        $result[ 'parent' ] = Pages::findOne([ 'is_using' => 'On', 'page_id' => $model->page_id ]);
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'custom_key' => $result['parent']['m_key']]);
+        $result[ 'menu' ] = Menu::findOne([ 'is_using' => 'On', 'custom_key' => $result[ 'parent' ][ 'm_key' ] ]);
 
         return $this->render('details', [
             'model'  => $model,
@@ -148,16 +157,16 @@ class PagesController extends BaseController
         $model = Pages::findByOne(Yii::$app->request->get('id', null));
 
         // 所属菜单
-        $result['menu'] = Menu::findOne(['is_using' => 'On', 'm_key' => $model['m_key']]);
+        $result[ 'menu' ] = Menu::findOne([ 'is_using' => 'On', 'm_key' => $model[ 'm_key' ] ]);
 
         // 父类菜单
-        $result['parent'] = Menu::findByOne($result['menu']['parent_id']);
+        $result[ 'parent' ] = Menu::findByOne($result[ 'menu' ][ 'parent_id' ]);
 
-        $result['img'] = explode(',', $model['path']);
+        $result[ 'img' ] = explode(',', $model[ 'path' ]);
 
         return $this->render('show', [
                 'model'  => $model,
-                'result' => $result
+                'result' => $result,
             ]
         );
     }

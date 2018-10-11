@@ -41,6 +41,14 @@ class MenuList extends InputWidget
         return $this->render('list', ['result' => $result]);
     }
 
+    /**
+     * 菜单数据
+     *
+     * @param        $pid
+     * @param string $language
+     *
+     * @return mixed
+     */
     public function MenuNavList($pid, $language = 'cn')
     {
 
