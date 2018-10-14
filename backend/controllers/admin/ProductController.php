@@ -28,7 +28,7 @@ class ProductController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [ '@' ],
                     ],
                 ],
             ],
@@ -36,7 +36,7 @@ class ProductController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -104,7 +104,7 @@ class ProductController extends BaseController
 
             self::ImageDelete( $model->images, $oldFile, $model->product_id );
 
-            return $this->redirect( ['view', 'id' => $model->id] );
+            return $this->redirect( [ 'view', 'id' => $model->id ] );
         }
 
         $model->product_id = self::getRandomString();
@@ -128,13 +128,13 @@ class ProductController extends BaseController
         $model = $this->findModel( $id );
 
         // 旧路径
-        $oldFile = $model->path;
+        $oldFile = $model->images;
 
         if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            self::ImageDelete( $model->path, $oldFile, $model->product_id );
+            self::ImageDelete( $model->images, $oldFile, $model->product_id );
 
-            return $this->redirect( ['view', 'id' => $model->id] );
+            return $this->redirect( [ 'view', 'id' => $model->id ] );
         }
 
         return $this->render( 'update', [
@@ -155,7 +155,7 @@ class ProductController extends BaseController
     {
         $this->findModel( $id )->delete();
 
-        return $this->redirect( ['index'] );
+        return $this->redirect( [ 'index' ] );
     }
 
     /**
@@ -172,7 +172,7 @@ class ProductController extends BaseController
         if (($model = Product::findOne( $id )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException( 'The requested page does not exist.' );
+            throw new NotFoundHttpException( '页面输出异常.' );
         }
     }
 
@@ -187,7 +187,7 @@ class ProductController extends BaseController
         $result = [];
 
         // 所有版块
-        $dataSection = Section::findAll( ['is_using' => 'On'] );
+        $dataSection = Section::findAll( [ 'is_using' => 'On' ] );
 
         $result['section']['S0'] = '暂无';
 
@@ -196,7 +196,7 @@ class ProductController extends BaseController
         }
 
         // 产品分类
-        $dataClassify = ProductClassify::findAll( ['is_using' => 'On', 'parent_id' => 'C0'] );
+        $dataClassify = ProductClassify::findAll( [ 'is_using' => 'On', 'parent_id' => 'C0' ] );
 
         // 产品分类
         $Cls = new ProductClassify();

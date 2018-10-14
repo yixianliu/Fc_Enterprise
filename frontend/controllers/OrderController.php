@@ -31,7 +31,7 @@ class OrderController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
 
@@ -68,7 +68,7 @@ class OrderController extends BaseController
                 'detail'     => $productData['content'], // 商品详情
                 'goods_tag'  => '', // 商品标记
                 'time_start' => date( 'YmdHis' ), // 订单生成时间，格式为yyyyMMddHHmmss
-                'scene_info' => \GuzzleHttp\json_encode( ['h5_info' => ['type' => 'web', 'wap_url' => $url, 'web_name' => '购买产品 - ' . $productData['title']]] ), // 该字段用于上报支付的场景信息,针对H5支付有以下三种场景,请根据对应场景上报
+                'scene_info' => \GuzzleHttp\json_encode( [ 'h5_info' => [ 'type' => 'web', 'wap_url' => $url, 'web_name' => '购买产品 - ' . $productData['title'] ] ] ), // 该字段用于上报支付的场景信息,针对H5支付有以下三种场景,请根据对应场景上报
             ];
 
             $curl = new curl\Curl();
@@ -89,7 +89,7 @@ class OrderController extends BaseController
                 // 回滚事务
                 $transaction->rollback();
 
-                return Yii::$app->response->data = ['status' => false, 'msg' => '没有连接上平台!',];
+                return Yii::$app->response->data = [ 'status' => false, 'msg' => '没有连接上平台!', ];
             }
 
             $response = json_decode( $curl->response, true );
@@ -99,7 +99,7 @@ class OrderController extends BaseController
                 // 回滚事务
                 $transaction->rollback();
 
-                return Yii::$app->response->data = ['status' => false, 'msg' => $response['msg']];
+                return Yii::$app->response->data = [ 'status' => false, 'msg' => $response['msg'] ];
             }
 
             $orderModel->price = $productData['price'];
@@ -113,12 +113,12 @@ class OrderController extends BaseController
                 // 回滚事务
                 $transaction->rollback();
 
-                return Yii::$app->response->data = ['status' => false, 'msg' => '保存订单异常!'];
+                return Yii::$app->response->data = [ 'status' => false, 'msg' => '保存订单异常!' ];
             }
 
             $transaction->commit();
 
-            return Yii::$app->response->data = ['status' => true, 'msg' => $response['msg']];
+            return Yii::$app->response->data = [ 'status' => true, 'msg' => $response['msg'] ];
         }
 
         throw new NotFoundHttpException( '异常提交!' );
@@ -134,12 +134,12 @@ class OrderController extends BaseController
     public function actionView($id)
     {
 
-        $modelProduct = Product::findOne( ['product_id' => $id] );
+        $modelProduct = Product::findOne( [ 'product_id' => $id ] );
 
         $model = new Order();
 
         $model->order_id = self::getRandomString();
 
-        return $this->render( 'view', ['model' => $model, 'modelProduct' => $modelProduct] );
+        return $this->render( 'view', [ 'model' => $model, 'modelProduct' => $modelProduct ] );
     }
 }

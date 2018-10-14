@@ -32,9 +32,9 @@ class CenterController extends BaseController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -44,12 +44,12 @@ class CenterController extends BaseController
     {
 
         // 初始化
-        $result = array();
+        $result = [];
 
         $result['product'] = Product::findByAll();
 
         $result['news'] = News::findByAll();
 
-        return $this->render('index', ['result' => $result]);
+        return $this->render( 'index', [ 'result' => $result ] );
     }
 }

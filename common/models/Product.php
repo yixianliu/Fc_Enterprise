@@ -102,18 +102,18 @@ class Product extends \yii\db\ActiveRecord
      */
     public static function findByAll($num = null)
     {
-        if ( !empty($num) && is_numeric($num) ) {
+        if (!empty( $num ) && is_numeric( $num )) {
 
-            return static::find()->where([ 'is_using' => 'On' ])
-                ->orderBy('sort_id', SORT_DESC)
+            return static::find()->where( [ 'is_using' => 'On' ] )
+                ->orderBy( 'sort_id', SORT_DESC )
                 ->asArray()
-                ->limit($num)
+                ->limit( $num )
                 ->all();
         }
 
         // 所有数据
-        return static::find()->where([ 'is_using' => 'On' ])
-            ->orderBy('sort_id', SORT_DESC)
+        return static::find()->where( [ 'is_using' => 'On' ] )
+            ->orderBy( 'product_id', SORT_DESC )
             ->asArray()
             ->all();
     }
@@ -127,8 +127,8 @@ class Product extends \yii\db\ActiveRecord
      */
     public static function findByOne($id)
     {
-        return static::find()->where([ static::tableName() . '.is_using' => 'On', static::tableName() . '.product_id' => $id ])
-            ->joinWith('admin')
+        return static::find()->where( [ static::tableName() . '.is_using' => 'On', static::tableName() . '.product_id' => $id ] )
+            ->joinWith( 'admin' )
             ->one();
 
     }
@@ -138,11 +138,11 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getAdmin()
     {
-        return $this->hasOne(Management::className(), [ 'username' => 'user_id' ]);
+        return $this->hasOne( Management::className(), [ 'username' => 'user_id' ] );
     }
 
     public function getCls()
     {
-        return $this->hasOne(ProductClassify::className(), [ 'c_key' => 'c_key' ]);
+        return $this->hasOne( ProductClassify::className(), [ 'c_key' => 'c_key' ] );
     }
 }

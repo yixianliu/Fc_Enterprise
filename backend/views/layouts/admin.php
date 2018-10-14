@@ -22,6 +22,8 @@ $this->beginPage();
 
     <?php $this->head() ?>
 
+    <?= Yii::$app->view->renderFile('@app/views/admin/_head.php'); ?>
+
 </head>
 <body class=" ">
 

@@ -7,48 +7,48 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
+$this->params['breadcrumbs'][] = [ 'label' => '产品中心', 'url' => [ 'index' ] ];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
 
-        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode( $this->title ) ?></h2></header>
 
         <div class="content-body">
             <div class="row">
 
-                <h1><?= Html::encode($this->title) ?></h1>
+                <h1><?= Html::encode( $this->title ) ?></h1>
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a( '更新', [ 'update', 'id' => $model->id ], [ 'class' => 'btn btn-primary' ] ) ?>
                     <?=
-                    Html::a('删除', ['delete', 'id' => $model->id], [
+                    Html::a( '删除', [ 'delete', 'id' => $model->id ], [
                         'class' => 'btn btn-danger',
                         'data'  => [
                             'confirm' => '是否删除这条记录?',
                             'method'  => 'post',
                         ],
-                    ])
+                    ] )
                     ?>
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a( '返回列表', [ 'index' ], [ 'class' => 'btn btn-primary' ] ) ?>
+                    <?= Html::a( '继续添加', [ 'create' ], [ 'class' => 'btn btn-primary' ] ) ?>
                 </p>
 
                 <?=
-                DetailView::widget([
+                DetailView::widget( [
                     'model'      => $model,
                     'attributes' => [
                         'user_id',
                         [
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
-                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
+                                $data = \common\models\ProductClassify::findOne( [ 'c_key' => $model->c_key ] );
                                 return $data->name;
                             },
                         ],
-//                        's_key',
+                        's_key',
                         'title',
                         'price',
                         'discount',
@@ -59,16 +59,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                $imgArray = explode(',', $model->images);
+                                $imgArray = explode( ',', $model->images );
 
                                 $data = null;
 
                                 foreach ($imgArray as $value) {
 
-                                    if ( empty($value) )
+                                    if (empty( $value ))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias( '@web/../../frontend/web/temp/product/' ) . $model->product_id . '/' . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -79,10 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                if ( empty($model->thumbnail) )
+                                if (empty( $model->thumbnail ))
                                     return;
 
-                                return '<img width="200" height="200" src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail . '" />';;
+                                return '<img width="200" height="200" src="' . Yii::getAlias( '@web/../../frontend/web/temp/product/' ) . $model->product_id . '/' . $model->thumbnail . '" />';;
                             },
                         ],
                         'praise',
@@ -183,19 +183,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'created_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->created_at);
+                                return date( 'Y - m -d , H:i:s', $model->created_at );
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
                             'value'     => function ($model) {
-                                return date('Y - m -d , H:i:s', $model->updated_at);
+                                return date( 'Y - m -d , H:i:s', $model->updated_at );
                             },
                         ],
                         'content:html',
                     ],
                     'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
-                ]);
+                ] );
                 ?>
 
             </div>

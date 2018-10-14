@@ -16,7 +16,7 @@ use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
 // $this 代表视图对象
-MobileAsset::register($this);
+MobileAsset::register( $this );
 
 $this->beginPage();
 
@@ -26,7 +26,7 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-    <?= ConfList::widget(['config' => [$this->title, 'head']]); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/default/_head.php' ); ?>
 
     <?php $this->head() ?>
 

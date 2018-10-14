@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id'                  => 'app-backend',
-    'basePath'            => dirname(__DIR__),
+    'basePath'            => dirname( __DIR__ ),
     'language'            => 'zh-CN',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap'           => [ 'log' ],
@@ -54,13 +54,11 @@ return [
 
         // Urls
         'urlManager'   => [
+
             // 是否开启美化效果
             'enablePrettyUrl'     => true,
             // 是否或略脚本名index.php
-            'showScriptName'      => false,
-            // 是否开启严格解析路由
-            'enableStrictParsing' => true,
-            'suffix'              => '.html',
+            'showScriptName'      => true,
             'rules'               => [
 
                 // 默认

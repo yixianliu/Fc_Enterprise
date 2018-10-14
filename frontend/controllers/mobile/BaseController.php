@@ -25,7 +25,7 @@ class BaseController extends Controller
     public function init()
     {
 
-        if (!file_exists(Yii::getAlias('@webroot') . '/FcCalendar.md')) {
+        if (!file_exists( Yii::getAlias( '@webroot' ) . '/FcCalendar.md' )) {
             return false;
         }
 
@@ -41,8 +41,8 @@ class BaseController extends Controller
     {
 
         if (Yii::$app->user->isGuest) {
-            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to(['/mobile/member/login']) . '"; </script> ';
-            exit(false);
+            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to( [ '/mobile/member/login' ] ) . '"; </script> ';
+            exit( false );
         }
 
         return true;

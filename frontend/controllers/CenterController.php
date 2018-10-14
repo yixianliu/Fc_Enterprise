@@ -12,6 +12,7 @@ use Yii;
 use common\models\News;
 use common\models\PagesList;
 use common\models\ProductClassify;
+use yii\helpers\Url;
 
 class CenterController extends BaseController
 {
