@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= Html::cssFile('@web/themes/qijian/css/purzoom.css') ?>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php'); ?>
 
 <style type="text/css">
     .summary {
@@ -25,11 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_left'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_left.php'); ?>
 
     <div class="right">
 
-        <?= $this->render('../_nav'); ?>
+        <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
         <div class="corre-nav">
             <ul class="nav nav-pills">

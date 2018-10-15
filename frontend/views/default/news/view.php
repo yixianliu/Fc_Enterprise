@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Url;
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\News */
 
@@ -18,18 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php'); ?>
 
 <div class="container content">
 
     <!-- 左边 -->
-    <?= $this->render('../_left'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_left.php'); ?>
     <!-- #左边 -->
 
     <!-- 右边 -->
     <div class="right">
 
-        <?= $this->render('../_nav'); ?>
+        <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
         <!-- 可变化内容 -->
         <div class="conY">

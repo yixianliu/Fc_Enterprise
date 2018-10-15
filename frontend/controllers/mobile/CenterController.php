@@ -11,12 +11,9 @@
 
 namespace frontend\controllers\mobile;
 
-use common\models\Product;
 use Yii;
 use common\models\News;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use common\models\Product;
 use yii\filters\VerbFilter;
 
 /**

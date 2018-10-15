@@ -12,7 +12,6 @@ use Yii;
 use common\models\News;
 use common\models\PagesList;
 use common\models\ProductClassify;
-use yii\helpers\Url;
 
 class CenterController extends BaseController
 {
@@ -37,25 +36,25 @@ class CenterController extends BaseController
 
         $result['product-cls'] = ProductClassify::findByAll();
 
-        $result['news'] = News::findByAll(5);
+        $result['news'] = News::findByAll( 5 );
 
         $result['newsTop'] = News::findByHot();
 
         // 工程案例
-        $result['data'] = PagesList::findByAll('1519630269_1502');
+        $result['data'] = PagesList::findByAll( '1519630269_1502' );
 
         foreach ($result['data'] as $key => $value) {
 
-            if ( empty($value['path']) )
+            if (empty( $value['path'] ))
                 continue;
 
-            $imgArray = explode(',', $value['path']);
+            $imgArray = explode( ',', $value['path'] );
 
             $result['data'][ $key ]['img'] = $imgArray[0];
 
         }
 
-        return $this->render('index', ['result' => $result]);
+        return $this->render( 'index', ['result' => $result] );
     }
 
     /**
@@ -66,7 +65,7 @@ class CenterController extends BaseController
     public function actionAbout()
     {
 
-        return $this->render('about');
+        return $this->render( 'about' );
     }
 
     /**
@@ -74,7 +73,7 @@ class CenterController extends BaseController
      */
     public function actionWeek()
     {
-        return $this->render('week');
+        return $this->render( 'week' );
     }
 
     public function actionError()
@@ -84,8 +83,8 @@ class CenterController extends BaseController
 
         $message = Yii::$app->errorHandler->exception->getMessage();
 
-        if ( $exception !== null ) {
-            return $this->render('error', ['exception' => $exception, 'message' => $message]);
+        if ($exception !== null) {
+            return $this->render( 'error', ['exception' => $exception, 'message' => $message] );
         }
 
         return;
@@ -97,14 +96,14 @@ class CenterController extends BaseController
     public function actionLanguage()
     {
 
-        $language = \Yii::$app->request->get('lang');
+        $language = \Yii::$app->request->get( 'lang' );
 
-        if ( isset($language) ) {
+        if (isset( $language )) {
             \Yii::$app->session['language'] = $language;
         }
 
         //切换完语言哪来的返回到哪里
-        $this->goBack(\Yii::$app->request->headers['Referer']);
+        $this->goBack( \Yii::$app->request->headers['Referer'] );
 
         return;
     }

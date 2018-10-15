@@ -41,7 +41,7 @@ if (empty($dataSlide))
             <?php foreach ($dataSlide as $key => $value): ?>
 
                 <div class="item <?php if ($key == 0): ?>active<?php endif; ?>">
-                    <?= Html::img(Url::to('@web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
+                    <?= Html::img(Url::to('@web/web/temp/slide/') . $value, ['class' => '', 'alt' => $alt]); ?>
                 </div>
 
             <?php endforeach; ?>

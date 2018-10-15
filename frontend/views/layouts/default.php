@@ -2,9 +2,9 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use frontend\assets\QijianAsset;
+use frontend\assets\DefaultAsset;
 
-QijianAsset::register($this);
+DefaultAsset::register($this);
 
 $this->beginPage();
 

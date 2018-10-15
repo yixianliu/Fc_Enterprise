@@ -1,7 +1,5 @@
 <?php
 
-use yii\helpers\Url;
-use yii\helpers\Html;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
@@ -19,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php'); ?>
 
 <div class="container content">
 

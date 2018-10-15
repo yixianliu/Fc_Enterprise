@@ -75,13 +75,13 @@ return [
             // 是否或略脚本名index.php
             'showScriptName'      => false,
             // 是否开启严格解析路由
-            'enableStrictParsing' => true,
+            'enableStrictParsing' => false,
             'suffix'              => '.html',
             'rules'               => [
 
                 // 默认
                 ''       => 'center/index',
-                'mobile' => 'mobile/center/index',
+                'mobile/' => 'mobile/center/index',
 
                 '<controller:\w+>/<action:\w+>/<mid:\d+>' => '<controller>/<action>',
                 "<controller:\w+>/<action:\w+>"           => "<controller>/<action>",

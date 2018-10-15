@@ -10,28 +10,28 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '产品中心', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$imgArray = explode(',', $model->images);
+$imgArray = explode( ',', $model->images );
 
 foreach ($imgArray as $key => $value) {
 
-    if ( empty($imgArray[ $key ]) )
-        unset($imgArray[ $key ]);
+    if (empty( $imgArray[ $key ] ))
+        unset( $imgArray[ $key ] );
 }
 
 ?>
 
-<?= Html::cssFile('@web/themes/qijian/css/product.css') ?>
-<?= Html::cssFile('@web/themes/qijian/css/prozoom.css') ?>
-<?= Html::jsFile('@web/themes/qijian/js/jqzoom/jquery.jqzoom.js') ?>
-<?= Html::jsFile('@web/themes/qijian/js/jqzoom/base.js') ?>
+<?= Html::cssFile( '@web/themes/qijian/css/product.css' ) ?>
+<?= Html::cssFile( '@web/themes/qijian/css/prozoom.css' ) ?>
+<?= Html::jsFile( '@web/themes/qijian/js/jqzoom/jquery.jqzoom.js' ) ?>
+<?= Html::jsFile( '@web/themes/qijian/js/jqzoom/base.js' ) ?>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile( '@app/views/default/_slide.php' ); ?>
 
 <!-- 内容中心 -->
 <div class="container content">
 
     <!-- 当前位置 -->
-    <?= $this->render('../_nav'); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/default/_nav.php' ); ?>
     <!-- #当前位置 -->
 
     <!-- 可变化内容 -->
@@ -48,10 +48,10 @@ foreach ($imgArray as $key => $value) {
                 <div class="tendcont">
                     <div class="tend-left">
 
-                        <?php if ( !empty($imgArray) ): ?>
+                        <?php if (!empty( $imgArray )): ?>
                             <!-- 大图 -->
                             <div id="preview" class="spec-preview">
-                                <span class="jqzoom"><?= Html::img(Url::to('@web/temp/product/' . $model->product_id . '/' . $imgArray[0]), ['alt' => $model->title]); ?></span>
+                                <span class="jqzoom"><?= Html::img( Url::to( '@web/temp/product/' . $model->product_id . '/' . $imgArray[0] ), ['alt' => $model->title] ); ?></span>
                             </div>
                             <!-- #大图 -->
 
@@ -65,7 +65,7 @@ foreach ($imgArray as $key => $value) {
                                         <?php foreach ($imgArray as $value): ?>
 
                                             <li>
-                                                <?= Html::img(Url::to('@web/temp/product/' . $model->product_id . '/' . $value), ['alt' => $model->title, 'onmousemove' => 'preview(this);']); ?>
+                                                <?= Html::img( Url::to( '@web/temp/product/' . $model->product_id . '/' . $value ), ['alt' => $model->title, 'onmousemove' => 'preview(this);'] ); ?>
                                             </li>
 
                                         <?php endforeach; ?>
@@ -77,7 +77,7 @@ foreach ($imgArray as $key => $value) {
 
                         <?php else: ?>
 
-                            <?= Html::img(Url::to('@web/themes/qijian/images/ser-left-1.jpg'), ['alt' => $model->title, 'width' => 400, 'height' => 280]); ?>
+                            <?= Html::img( Url::to( '@web/themes/qijian/images/ser-left-1.jpg' ), ['alt' => $model->title, 'width' => 400, 'height' => 280] ); ?>
 
                         <?php endif; ?>
 
@@ -89,16 +89,16 @@ foreach ($imgArray as $key => $value) {
                         <p>产品折扣价: <?= $model->discount ?></p>
                         <p><?= $model->introduction ?></p>
 
-                        <?php if (!empty(Yii::$app->user->identity->user_id)): ?>
+                        <?php if (!empty( Yii::$app->user->identity->user_id )): ?>
 
-                        <p>
-                            <?= Html::a('购买', Url::to(['order/view', 'id' => $model->product_id]), ['class' => 'btn btn-success']) ?>
-                        </p>
+                            <p>
+                                <?= Html::a( '购买', Url::to( ['order/view', 'id' => $model->product_id] ), ['class' => 'btn btn-success'] ) ?>
+                            </p>
 
                         <?php else: ?>
 
                             <p>
-                                <?= Html::a('登录后购买', Url::to(['member/reg']), ['class' => 'btn btn-success']) ?>
+                                <?= Html::a( '登录后购买', Url::to( ['member/reg'] ), ['class' => 'btn btn-success'] ) ?>
                             </p>
 
                         <?php endif; ?>

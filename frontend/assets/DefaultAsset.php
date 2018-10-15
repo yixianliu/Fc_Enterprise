@@ -16,10 +16,10 @@ use yii\web\AssetBundle;
 /**
  * Main frontend application asset bundle.
  */
-class QijianAsset extends AssetBundle
+class DefaultAsset extends AssetBundle
 {
 
-    public $basePath = '@webroot';
+    public $basePath = '@webroot/frontend/web';
 
     public $baseUrl = '@web';
 

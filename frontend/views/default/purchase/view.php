@@ -22,11 +22,11 @@ $this->registerJsFile('@web/themes/qijian/js/jqzoom/base.js');
 
 ?>
 
-<?= $this->render('../_slide'); ?>
+<?= Yii::$app->view->renderFile('@app/views/default/_slide.php'); ?>
 
 <div class="container content">
 
-    <?= $this->render('../_nav'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
     <div class="conY">
 

@@ -25,27 +25,16 @@ class BaseController extends Controller
     public function init()
     {
 
-        $web = Yii::getAlias( '@web' );
-
-        Yii::setAlias( '@web', $web . '/frontend/web' );
-
-        if (!Yii::$app->session->has( 'language' )) {
-
-            // 设置一个session变量，以下用法是相同的：
-            Yii::$app->session->set( 'language', 'cn' );
+        // 判断访问模式
+        if (static::isMobile()) {
+            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to( ['/mobile/center/index'] ) . '"; </script> ';
+            exit( false );
         }
 
-        switch (Yii::$app->session->get( 'language' )) {
-
-            default:
-            case 'cn':
-                Yii::$app->language = 'zh-CN';
-                break;
-
-            case 'en':
-                Yii::$app->language = 'en-US';
-                break;
-
+        // 多语言
+        if (!Yii::$app->session->has( 'language' )) {
+            // 设置一个session变量，以下用法是相同的：
+            Yii::$app->session->set( 'language', 'zh-CN' );
         }
 
         Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
@@ -69,7 +58,7 @@ class BaseController extends Controller
     {
 
         if (Yii::$app->user->isGuest) {
-            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to( [ '/member/login' ] ) . '"; </script> ';
+            echo '<script language="javascript" type="text/javascript">window.location.href="' . Url::to( ['/member/login'] ) . '"; </script> ';
             exit( false );
         }
 
@@ -127,4 +116,38 @@ class BaseController extends Controller
         return $str;
     }
 
+    public static function isMobile()
+    {
+
+        // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
+        if (isset( $_SERVER['HTTP_X_WAP_PROFILE'] )) {
+            return true;
+        }
+
+        // 如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
+        if (isset( $_SERVER['HTTP_VIA'] )) {
+            // 找不到为flase,否则为true
+            return stristr( $_SERVER['HTTP_VIA'], "wap" ) ? true : false;
+        }
+
+        // 脑残法，判断手机发送的客户端标志,兼容性有待提高。其中'MicroMessenger'是电脑微信
+        if (isset( $_SERVER['HTTP_USER_AGENT'] )) {
+            $clientkeywords = ['nokia', 'sony', 'ericsson', 'mot', 'samsung', 'htc', 'sgh', 'lg', 'sharp', 'sie-', 'philips', 'panasonic', 'alcatel', 'lenovo', 'iphone', 'ipod', 'blackberry', 'meizu', 'android', 'netfront', 'symbian', 'ucweb', 'windowsce', 'palm', 'operamini', 'operamobi', 'openwave', 'nexusone', 'cldc', 'midp', 'wap', 'mobile', 'MicroMessenger'];
+            // 从HTTP_USER_AGENT中查找手机浏览器的关键字
+            if (preg_match( "/(" . implode( '|', $clientkeywords ) . ")/i", strtolower( $_SERVER['HTTP_USER_AGENT'] ) )) {
+                return true;
+            }
+        }
+
+        // 协议法，因为有可能不准确，放到最后判断
+        if (isset ( $_SERVER['HTTP_ACCEPT'] )) {
+            // 如果只支持wml并且不支持html那一定是移动设备
+            // 如果支持wml和html但是wml在html之前则是移动设备
+            if ((strpos( $_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml' ) !== false) && (strpos( $_SERVER['HTTP_ACCEPT'], 'text/html' ) === false || (strpos( $_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml' ) < strpos( $_SERVER['HTTP_ACCEPT'], 'text/html' )))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -11,11 +11,11 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use frontend\assets\QijianAsset;
+use frontend\assets\DefaultAsset;
 use common\models\Menu;
 use common\widgets\iConf\ConfList;
 
-QijianAsset::register($this);
+DefaultAsset::register($this);
 
 $footMenu = Menu::findByAll('E1');
 
