@@ -8,24 +8,24 @@
  */
 INSERT INTO `#DB_PREFIX#Conf`
 VALUES
-(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'ADDRESS', '公司地址', '#ADDRESS#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'PERSON', '公司负责人', '#PERSON#', NULL, 'On', 'cn', #TIME#, #TIME#),
+(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'ADDRESS', '公司地址', '#ADDRESS#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'PERSON', '公司负责人', '#PERSON#', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
 
 /* 网站配置 */
-(NULL, 'TIME_FORMAT', '时间格式', 'm . d . Y', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'THEME_NAME', '主题名称', '默认', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'THEME_CUSTOMIZE_PATH', '主题路径', NULL, NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'system', #TIME#, #TIME#),
+(NULL, 'TIME_FORMAT', '时间格式', 'm . d . Y', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'THEME_NAME', '主题名称', '默认', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'THEME_CUSTOMIZE_PATH', '主题路径', NULL, NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
 (NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', 'system', #TIME#, #TIME#),
 (NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', 'system', #TIME#, #TIME#),
 (NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', 'system', #TIME#, #TIME#),
@@ -38,25 +38,12 @@ VALUES
 (NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', 'system', #TIME#, #TIME#),
 (NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'system', #TIME#, #TIME#),
 (NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'QR_WX_CODE', '公众号二维码', '/themes/qijian/images/logo.jpg', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'QR_MINIPROGRAM_CODE', '小程序二维码', '/themes/qijian/images/logo.jpg', NULL, 'On', 'system', #TIME#, #TIME#),
-(NULL, 'WEB_LOGO', '小程序二维码', '/themes/qijian/images/logo.jpg', NULL, 'On', 'system', #TIME#, #TIME#),
-
-/* 英文版 */
-(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'cn', #TIME#, #TIME#),
-(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'ADDRESS', '公司地址', 'On', NULL, 'On', 'en', #TIME#, #TIME#),
-(NULL, 'PERSON', '公司负责人', 'On', NULL, 'On', 'en', #TIME#, #TIME#);
+(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'System', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'QR_WX_CODE', '公众号二维码', '/themes/qijian/images/logo.jpg', NULL, 'On', 'QR', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'QR_MINIPROGRAM_CODE', '小程序二维码', '/themes/qijian/images/logo.jpg', NULL, 'On', 'QR', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'WEB_FOOT_LOGO', '网站底部Logo', '/themes/qijian/images/logo.jpg', NULL, 'On', 'Logo', 'zh-CN', #TIME#, #TIME#),
+(NULL, 'WEB_LOGO', '网站Logo', '/themes/qijian/images/logo.jpg', NULL, 'On', 'Logo', 'zh-CN', #TIME#, #TIME#);
 
 /**
  * 管理员

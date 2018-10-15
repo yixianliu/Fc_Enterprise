@@ -110,7 +110,8 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     `parameter` TEXT NOT NULL COMMENT '值 / 参数',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    `is_language` SET('cn', 'en') NULL COMMENT '多语言类别',
+    `is_type` SET('Web', 'System', 'QR', 'Logo') NOT NULL COMMENT '网站配置类型',
+    `is_language` SET('zh-cn', 'en-us') NULL COMMENT '多语言类别',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
