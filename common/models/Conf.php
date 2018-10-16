@@ -104,7 +104,7 @@ class Conf extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function findByConfArray($language = 'cn', $status = 'On')
+    public static function findByConfArray($language, $status = 'On')
     {
 
         $data = static::findByData($status, $language);

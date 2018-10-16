@@ -110,11 +110,28 @@ CREATE TABLE `#DB_PREFIX#Conf` (
     `parameter` TEXT NOT NULL COMMENT '值 / 参数',
     `description` TEXT NULL COMMENT '描述',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
-    `is_language` SET('zh-CN', 'en-US', 'ru-RU') NULL COMMENT '多语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '多语言类别',
     `is_type` SET('system', 'logo', 'qr', 'parameter', 'images') NULL COMMENT '网站配置类型',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
+
+/**
+ * 版块
+ */
+DROP TABLE IF EXISTS `#DB_PREFIX#Language`;
+CREATE TABLE `#DB_PREFIX#Language` (
+    `id` INT(11) NULL AUTO_INCREMENT,
+    `lang_key` VARCHAR(55) NOT NULL COMMENT '语言关键KEY',
+    `name` VARCHAR(55) NOT NULL COMMENT '名称',
+    `parameter` VARCHAR(25) NOT NULL COMMENT '值 / 参数',
+    `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
+    `created_at` integer NOT NULL DEFAULT '0',
+    `updated_at` integer NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE `name` (`name`),
+    UNIQUE KEY `lang_key` (`lang_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -129,6 +146,7 @@ CREATE TABLE `#DB_PREFIX#Online_Msg` (
     `address` VARCHAR(255)  NULL COMMENT '联系地址',
     `title` VARCHAR(155) NULL COMMENT '留言标题',
     `content` TEXT NOT NULL COMMENT '留言内容',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '多语言类别',
     `is_audit` SET('On', 'Off') NOT NULL COMMENT '是否审核',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -201,12 +219,12 @@ CREATE TABLE `#DB_PREFIX#User_Supply` (
 DROP TABLE IF EXISTS `#DB_PREFIX#User_Problems`;
 CREATE TABLE `#DB_PREFIX#User_Problems` (
     `security_id` INT(11) NULL AUTO_INCREMENT,
-    `skey` VARCHAR(55) NOT NULL COMMENT '安全问题KEY',
+    `s_key` VARCHAR(55) NOT NULL COMMENT '安全问题KEY',
     `name` VARCHAR(85) NOT NULL COMMENT '问题',
     `is_using` SET('On', 'Off') NULL DEFAULT 'On' COMMENT '是否启用',
     `published` INT(11) UNSIGNED NOT NULL COMMENT '发布时间',
     PRIMARY KEY (`security_id`),
-    UNIQUE KEY `skey` (`skey`)
+    UNIQUE KEY `s_key` (`s_key`)
 )ENGINE=InnoDB DEFAULT CHARSET=#DB_CODE#;
 
 /**
@@ -226,7 +244,7 @@ CREATE TABLE `#DB_PREFIX#Menu` (
     `name` VARCHAR(85) NOT NULL COMMENT '菜单名称',
     `url` VARCHAR(85) NULL COMMENT '菜单超链接',
     `is_type` SET('index', 'list', 'view', 'show', 'center') NULL COMMENT '单页面类型, 首页, 列表, 内容, 展示, 中心,',
-    `is_language` SET('zh-CN', 'en-US', 'ru-RU') NULL DEFAULT 'zh-CN' COMMENT '多语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '多语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -280,7 +298,7 @@ CREATE TABLE `#DB_PREFIX#Product` (
     `collection` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '收藏数量',
     `share` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '分享数量',
     `attention` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '关注数量',
-    `is_language` VARCHAR(55) NOT NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_promote` SET('On', 'Off') NOT NULL COMMENT '推广',
     `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
     `is_classic` SET('On', 'Off') NOT NULL COMMENT '经典',
@@ -312,7 +330,7 @@ CREATE TABLE `#DB_PREFIX#Product_Classify` (
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -344,7 +362,7 @@ CREATE TABLE `#DB_PREFIX#News` (
     `collection` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '收藏数量',
     `share` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '分享数量',
     `attention` INT(11) UNSIGNED NULL DEFAULT 0 COMMENT '关注数量',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_promote` SET('On', 'Off') NOT NULL COMMENT '推广',
     `is_hot` SET('On', 'Off') NOT NULL COMMENT '热门',
     `is_winnow` SET('On', 'Off') NOT NULL COMMENT '精选',
@@ -374,7 +392,7 @@ CREATE TABLE `#DB_PREFIX#News_Classify` (
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -397,7 +415,7 @@ CREATE TABLE `#DB_PREFIX#Job` (
     `content` TEXT NOT NULL COMMENT '内容',
     `keywords` VARCHAR(120) NULL COMMENT '关键字',
     `images` VARCHAR(255) NULL COMMENT '招聘图片',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL DEFAULT 'cn' COMMENT '语言类别',
     `is_audit` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '审核',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -463,6 +481,7 @@ CREATE TABLE `#DB_PREFIX#Purchase` (
     `unit` VARCHAR(125) NOT NULL COMMENT '单位',
     `images` VARCHAR(255) NULL COMMENT '相关图片',
     `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
     `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
     `start_at` VARCHAR(125) NOT NULL COMMENT '起始时间',
@@ -494,6 +513,7 @@ CREATE TABLE `#DB_PREFIX#Supply` (
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
     `num` INT(11) UNSIGNED NOT NULL COMMENT '数量',
     `unit` VARCHAR(125) NOT NULL COMMENT '单位',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_type` SET('Long', 'Short') NOT NULL COMMENT '类型 (分为长期 / 短期)',
     `is_status` SET('On', 'Off') NOT NULL COMMENT '采购状态',
     `start_at` VARCHAR(125) NOT NULL COMMENT '起始时间',
@@ -522,6 +542,7 @@ CREATE TABLE `#DB_PREFIX#Bid` (
     `images` VARCHAR(255) NULL COMMENT '相关图片',
     `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
@@ -546,6 +567,7 @@ CREATE TABLE `#DB_PREFIX#Tender` (
     `images` VARCHAR(255) NULL COMMENT '相关图片',
     `thumbnail` VARCHAR(255) NULL COMMENT '相关缩略图',
     `price` VARCHAR(85) NOT NULL COMMENT '目标价格',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_send_msg` SET('On', 'Off') NOT NULL COMMENT '是否群发短信',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
@@ -568,6 +590,7 @@ CREATE TABLE `#DB_PREFIX#PSB_Classify` (
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_type` SET('Supply', 'Purchase', 'Bid') NOT NULL COMMENT '类型,采购方还是供应方',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
@@ -608,6 +631,7 @@ CREATE TABLE `#DB_PREFIX#Download` (
     `title` VARCHAR(85) NOT NULL COMMENT '下载标题',
     `path` VARCHAR(85) NOT NULL COMMENT '文件路径',
     `content` TEXT NOT NULL COMMENT '文件描述',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '多语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -629,6 +653,7 @@ CREATE TABLE `#DB_PREFIX#Download_Classify` (
     `keywords` VARCHAR(155) NOT NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NOT NULL COMMENT '父类ID',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -651,7 +676,7 @@ CREATE TABLE `#DB_PREFIX#Slide` (
     `c_key` VARCHAR(55) NOT NULL COMMENT '幻灯片关键KEY,假如为单页面的话,值为Pages',
     `path` VARCHAR(255) NOT NULL COMMENT '幻灯片图片路径',
     `description` TEXT NULL COMMENT '描述',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -687,7 +712,7 @@ CREATE TABLE `#DB_PREFIX#Pages` (
     `content` TEXT NULL COMMENT '单页面内容',
     `parent_id` VARCHAR(85) NULL COMMENT '父类,为空的话,为顶级',
     `path` VARCHAR(255) NULL COMMENT '页面相关图片和文件',
-    `is_language` SET('cn', 'en') NULL DEFAULT 'cn' COMMENT '语言类别',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否可用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -758,6 +783,7 @@ CREATE TABLE `#DB_PREFIX#Nav_Classify` (
     `keywords` VARCHAR(155) NULL COMMENT '关键字',
     `json_data` VARCHAR(255) NULL COMMENT 'Json数据',
     `parent_id` VARCHAR(55) NULL COMMENT '父类ID',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '多语言类别',
     `is_using` SET('On', 'Off') NOT NULL COMMENT '是否启用',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
@@ -807,6 +833,7 @@ CREATE TABLE `#DB_PREFIX#Order` (
     `path` VARCHAR(255) NULL COMMENT '相关文件',
     `pay_type` SET('wechat', 'alipay', 'cash') NOT NULL COMMENT '支付方式',
     `is_using` SET('On', 'Off', 'Out', 'Not') NOT NULL COMMENT '订单状态',
+    `is_language` VARCHAR(25) NOT NULL COMMENT '语言类别',
     `created_at` integer NOT NULL DEFAULT '0',
     `updated_at` integer NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),

@@ -8,42 +8,51 @@
  */
 INSERT INTO `#DB_PREFIX#Conf`
 VALUES
-(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'ADDRESS', '公司地址', '#ADDRESS#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'PERSON', '公司负责人', '#PERSON#', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
+(NULL, 'NAME', '网站名称', '#NAME#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'SITE_URL', '网站地址', '#SITE_URL#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'DEVELOPERS', '开发团队', '#DEVELOPERS#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'TITLE', '网站标题', '#TITLE#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'EMAIL', '网站邮箱', '#EMAIL#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'DESCRIPTION', '网站描述', '#DESCRIPTION#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'ICP', '网站ICP', '#ICP#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'PHONE', '联系电话', '#PHONE#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'COPYRIGHT', '网站版权', '#COPYRIGHT#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'KEYWORDS', '网站关键字', '#KEYWORDS#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'ADDRESS', '公司地址', '#ADDRESS#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'PERSON', '公司负责人', '#PERSON#', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
 
 /* 网站配置 */
-(NULL, 'TIME_FORMAT', '时间格式', 'm . d . Y', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'THEME_NAME', '主题名称', '默认', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'THEME_CUSTOMIZE_PATH', '主题路径', NULL, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'COMMENT_NUM', '留言列表页数量', 50, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'POST_VIEW_NUM', '帖子列表页数量', 25, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'PRODUCT_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'MIC_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'zh-CN', 'system', #TIME#, #TIME#),
-(NULL, 'QR_WX_CODE', '公众号二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'zh-CN', 'qr', #TIME#, #TIME#),
-(NULL, 'QR_MINIPROGRAM_CODE', '小程序二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'zh-CN', 'qr', #TIME#, #TIME#),
-(NULL, 'WEB_LOGO', '网站Logo', '/themes/default/images/logo.jpg', NULL, 'On', 'zh-CN', 'logo', #TIME#, #TIME#),
-(NULL, 'WEB_FOOT_LOGO', '网站底部Logo', '/themes/default/images/logo.jpg', NULL, 'On', 'zh-CN', 'logo', #TIME#, #TIME#);
+(NULL, 'TIME_FORMAT', '时间格式', 'm . d . Y', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'THEME_NAME', '主题名称', '默认', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'THEME_CUSTOMIZE_PATH', '主题路径', NULL, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_TYPE', '上传文件格式', 'zip,gz,rar,iso,doc,xsl,ppt,wps', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_TYPE', '上传图片格式', 'jpg,gif,png', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'FILE_UPLOAD_SIZE', '上传文件大小', 5000000, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'IMAGE_UPLOAD_SIZE', '上传图片大小', 5000000, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'JUMP_SUCCEED_NUM', '成功跳转', 5, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'JUMP_ERROR_NUM', '错误跳转', 5, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'COMMENT_NUM', '留言列表页数量', 50, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'POST_VIEW_NUM', '帖子列表页数量', 25, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'PRODUCT_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'MIC_VIEW_NUM', '产品列表页数量', 25, NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'TIME_FORMAT', '是否启用时间格式', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'CODE_STATUS', '是否启用验证码', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'QR_WX_CODE', '公众号二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'qr', #TIME#, #TIME#),
+(NULL, 'QR_MINIPROGRAM_CODE', '小程序二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'qr', #TIME#, #TIME#),
+(NULL, 'WEB_LOGO', '网站Logo', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'logo', #TIME#, #TIME#),
+(NULL, 'WEB_FOOT_LOGO', '网站底部Logo', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'logo', #TIME#, #TIME#);
+
+/**
+ * 语言
+ */
+INSERT INTO `#DB_PREFIX#Language`
+VALUES
+(NULL, 'LCN', '中文', 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'LRU', '俄文', 'ru-RU', 'On', #TIME#, #TIME#),
+(NULL, 'LEN', '英文', 'en-US', 'On', #TIME#, #TIME#);
 
 /**
  * 管理员
@@ -115,9 +124,9 @@ VALUES
 
 INSERT INTO `#DB_PREFIX#Pages`
 VALUES
-(NULL, '1519630269_1500', 'EN2', 'EN_1519630269_1', NULL, NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, '1519630269_1501', 'EN7', 'EN_1519630269_2', NULL, NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, '1519630269_1502', 'EN5', 'EN_1519630269_3', NULL, NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#);
+(NULL, '1519630269_1500', 'EN2', 'EN_1519630269_1', NULL, NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, '1519630269_1501', 'EN7', 'EN_1519630269_2', NULL, NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, '1519630269_1502', 'EN5', 'EN_1519630269_3', NULL, NULL, NULL, 'LCN', 'On', #TIME#, #TIME#);
 
 INSERT INTO `#DB_PREFIX#Menu_Model`
 VALUES
@@ -142,109 +151,109 @@ VALUES
 /*
     企业网站 - 前台
 */
-(NULL, 'E1', 1, 'M0', 'guest', NULL, NULL, '企业文化', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'E1', 1, 'M0', 'guest', NULL, NULL, '企业文化', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'EN1', 1, 'E1', 'guest', 'UU1', NULL, '首页', 'center/index', 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN2', 2, 'E1', 'guest', 'UC1', NULL, '企业简介', NULL, 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', 'product/index', 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', 'news/index', 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN5', 5, 'E1', 'guest', 'UC1', NULL, '微信商城', NULL, 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '人才汇聚', 'job/index', 'index', 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN7', 7, 'E1', 'guest', 'UC1', NULL, '会员中心', 'member/reg', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'EN8', 8, 'E1', 'guest', 'UC1', NULL, '小程序', NULL, 'index', 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'EN1', 1, 'E1', 'guest', 'UU1', NULL, '首页', 'center/index', 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN2', 2, 'E1', 'guest', 'UC1', NULL, '企业简介', NULL, 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN3', 3, 'E1', 'guest', 'UP1', NULL, '产品中心', 'product/index', 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN4', 4, 'E1', 'guest', 'UN1', NULL, '新闻资讯', 'news/index', 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN5', 5, 'E1', 'guest', 'UC1', NULL, '微信商城', NULL, 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN6', 6, 'E1', 'guest', 'UJ1', NULL, '人才汇聚', 'job/index', 'index', 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN7', 7, 'E1', 'guest', 'UC1', NULL, '会员中心', 'member/reg', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'EN8', 8, 'E1', 'guest', 'UC1', NULL, '小程序', NULL, 'index', 'LCN', 'On', #TIME#, #TIME#),
 
 /*
     超级管理员
 */
-(NULL, 'Super1', 1, 'M0', 'guest', NULL, NULL, '终极后台', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'Super1', 1, 'M0', 'guest', NULL, NULL, '终极后台', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ESuper1', 1, 'Super1', 'admin', 'UU1', NULL, '后台管理', 'manage/center/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ESuper2', 2, 'Super1', 'admin', 'UU1', NULL, '模块管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ESuper3', 3, 'Super1', 'admin', 'UU1', NULL, '网站配置', 'manage/web/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ESuper4', 4, 'Super1', 'admin', 'UU1', NULL, '硬盘资源', 'manage/disk/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'ESuper1', 1, 'Super1', 'admin', 'UU1', NULL, '后台管理', 'manage/center/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ESuper2', 2, 'Super1', 'admin', 'UU1', NULL, '模块管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ESuper3', 3, 'Super1', 'admin', 'UU1', NULL, '网站配置', 'manage/web/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ESuper4', 4, 'Super1', 'admin', 'UU1', NULL, '硬盘资源', 'manage/disk/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'Module1', 1, 'ESuper2', 'admin', 'UU1', NULL, '模块列表', 'manage/module/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'Module2', 2, 'ESuper2', 'admin', 'UU1', NULL, '添加模块', 'manage/module/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'Module1', 1, 'ESuper2', 'admin', 'UU1', NULL, '模块列表', 'manage/module/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'Module2', 2, 'ESuper2', 'admin', 'UU1', NULL, '添加模块', 'manage/module/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 /*
     后台管理 / Admin
 */
-(NULL, 'A3', 1, 'M0', 'admin', NULL, NULL, '后台管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'A3', 1, 'M0', 'admin', NULL, NULL, '后台管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AC2', 1, 'A3', 'admin', 'UU1', NULL, '管理中心', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AP3', 2, 'A3', 'admin', 'UU1', NULL, '采购管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AU1', 3, 'A3', 'admin', 'UU1', NULL, '用户管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AP2', 4, 'A3', 'admin', 'UU1', NULL, '产品管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AN1', 5, 'A3', 'admin', 'UU1', NULL, '新闻管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AM1', 6, 'A3', 'admin', 'UU1', NULL, '菜单管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AR1', 7, 'A3', 'admin', 'UU1', NULL, '角色管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AJ1', 8, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AD1', 9, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AOrder1', 12, 'A3', 'admin', 'UU1', NULL, '订单管理', NULL, NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AC2', 1, 'A3', 'admin', 'UU1', NULL, '管理中心', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AP3', 2, 'A3', 'admin', 'UU1', NULL, '采购管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AU1', 3, 'A3', 'admin', 'UU1', NULL, '用户管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AP2', 4, 'A3', 'admin', 'UU1', NULL, '产品管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AN1', 5, 'A3', 'admin', 'UU1', NULL, '新闻管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AM1', 6, 'A3', 'admin', 'UU1', NULL, '菜单管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AR1', 7, 'A3', 'admin', 'UU1', NULL, '角色管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AJ1', 8, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AD1', 9, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AOrder1', 12, 'A3', 'admin', 'UU1', NULL, '订单管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AOrderList1', 1, 'AOrder1', 'admin', 'UU1', NULL, '订单列表', 'order/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AOrderList2', 2, 'AOrder1', 'admin', 'UU1', NULL, '退款', 'order/refund', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AOrderList1', 1, 'AOrder1', 'admin', 'UU1', NULL, '订单列表', 'order/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AOrderList2', 2, 'AOrder1', 'admin', 'UU1', NULL, '退款', 'order/refund', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP2', 2, 'AP3', 'admin', 'UU1', NULL, '添加采购', 'purchase/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP3', 3, 'AP3', 'admin', 'UU1', NULL, '供求列表', 'supply/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP4', 4, 'AP3', 'admin', 'UU1', NULL, '添加供求', 'supply/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP5', 5, 'AP3', 'admin', 'UU1', NULL, '投标管理', 'bid/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP6', 6, 'AP3', 'admin', 'UU1', NULL, '添加投标', 'bid/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '采购 / 供应 / 投标 - 分类', 'psb-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加 - 采购 / 供应 / 投标 - 分类', 'psb-cls/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看提交价格', 'sp-offer/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP12', 12, 'AP3', 'admin', 'UU1', NULL, '导航分类管理', 'nav-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'APPP13', 13, 'AP3', 'admin', 'UU1', NULL, '添加导航分类', 'nav-cls/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP1', 1, 'AP3', 'admin', 'UU1', NULL, '采购列表', 'purchase/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP2', 2, 'AP3', 'admin', 'UU1', NULL, '添加采购', 'purchase/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP3', 3, 'AP3', 'admin', 'UU1', NULL, '供求列表', 'supply/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP4', 4, 'AP3', 'admin', 'UU1', NULL, '添加供求', 'supply/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP5', 5, 'AP3', 'admin', 'UU1', NULL, '投标管理', 'bid/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP6', 6, 'AP3', 'admin', 'UU1', NULL, '添加投标', 'bid/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP9', 9, 'AP3', 'admin', 'UU1', NULL, '采购 / 供应 / 投标 - 分类', 'psb-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP10', 10, 'AP3', 'admin', 'UU1', NULL, '添加 - 采购 / 供应 / 投标 - 分类', 'psb-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP11', 11, 'AP3', 'admin', 'UU1', NULL, '查看提交价格', 'sp-offer/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP12', 12, 'AP3', 'admin', 'UU1', NULL, '导航分类管理', 'nav-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'APPP13', 13, 'AP3', 'admin', 'UU1', NULL, '添加导航分类', 'nav-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ADDD3', 3, 'AD1', 'admin', 'UU1', NULL, '下载中心分类', 'download-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ADDD4', 4, 'AD1', 'admin', 'UU1', NULL, '添加下载中心分类', 'download-cls/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD1', 1, 'AD1', 'admin', 'UU1', NULL, '下载中心列表', 'download/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD2', 2, 'AD1', 'admin', 'UU1', NULL, '添加下载内容', 'download/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD3', 3, 'AD1', 'admin', 'UU1', NULL, '下载中心分类', 'download-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ADDD4', 4, 'AD1', 'admin', 'UU1', NULL, '添加下载中心分类', 'download-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AMMV1', 1, 'AP2', 'admin', 'UU1', NULL, '所有产品', 'product/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV2', 2, 'AP2', 'admin', 'UU1', NULL, '添加产品', 'product/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV3', 3, 'AP2', 'admin', 'UU1', NULL, '产品分类', 'product-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AMMV4', 4, 'AP2', 'admin', 'UU1', NULL, '添加产品分类', 'product-cls/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV1', 1, 'AP2', 'admin', 'UU1', NULL, '所有产品', 'product/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV2', 2, 'AP2', 'admin', 'UU1', NULL, '添加产品', 'product/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV3', 3, 'AP2', 'admin', 'UU1', NULL, '产品分类', 'product-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMV4', 4, 'AP2', 'admin', 'UU1', NULL, '添加产品分类', 'product-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 (NULL, 'AMMC1', 1, 'AN1', 'admin', 'UU1', NULL, '所有新闻', 'news/index', NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AMMC2', 2, 'AN1', 'admin', 'UU1', NULL, '添加新闻', 'news/create', NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AMMC4', 4, 'AN1', 'admin', 'UU1', NULL, '新闻分类', 'news-cls/index', NULL, NULL, 'On', #TIME#, #TIME#),
 (NULL, 'AMMC5', 5, 'AN1', 'admin', 'UU1', NULL, '添加新闻分类', 'news-cls/create', NULL, NULL, 'On', #TIME#, #TIME#),
 
-(NULL, 'AUMV1', 1, 'AM1', 'admin', 'UU1', NULL, '所有菜单', 'menu/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AUMV2', 2, 'AM1', 'admin', 'UU1', NULL, '创建菜单', 'menu/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AUMV1', 1, 'AM1', 'admin', 'UU1', NULL, '所有菜单', 'menu/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AUMV2', 2, 'AM1', 'admin', 'UU1', NULL, '创建菜单', 'menu/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ACenter1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'conf/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter9', 9, 'AC2', 'admin', 'UU1', NULL, '访客管理', 'visitor/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter10', 10, 'AC2', 'admin', 'UU1', NULL, '操作日志', 'operate/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter1', 1, 'AC2', 'admin', 'UU1', NULL, '管理中心', 'center/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'conf/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter9', 9, 'AC2', 'admin', 'UU1', NULL, '访客管理', 'visitor/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter10', 10, 'AC2', 'admin', 'UU1', NULL, '操作日志', 'operate/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色', 'role/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色', 'role/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AURR3', 3, 'AR1', 'admin', 'UU1', NULL, '所有权限', 'power/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AURR4', 4, 'AR1', 'admin', 'UU1', NULL, '添加权限', 'power/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
+(NULL, 'AURR1', 1, 'AR1', 'admin', 'UU1', NULL, '所有角色', 'role/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AURR2', 2, 'AR1', 'admin', 'UU1', NULL, '添加角色', 'role/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AURR3', 3, 'AR1', 'admin', 'UU1', NULL, '所有权限', 'power/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AURR4', 4, 'AR1', 'admin', 'UU1', NULL, '添加权限', 'power/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AJJV1', 1, 'AJ1', 'admin', 'UU1', NULL, '所有招聘', 'job/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'UU1', NULL, '添加招聘', 'job/create', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV3', 3, 'AJ1', 'admin', 'UU1', NULL, '人才简历', 'resume/index', NULL, 'zh-CN', 'On', #TIME#, #TIME#),
-(NULL, 'AJJV4', 4, 'AJ1', 'admin', 'UU1', NULL, '用户应聘', 'job/users', NULL, 'zh-CN', 'On', #TIME#, #TIME#)
+(NULL, 'AJJV1', 1, 'AJ1', 'admin', 'UU1', NULL, '所有招聘', 'job/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV2', 2, 'AJ1', 'admin', 'UU1', NULL, '添加招聘', 'job/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV3', 3, 'AJ1', 'admin', 'UU1', NULL, '人才简历', 'resume/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AJJV4', 4, 'AJ1', 'admin', 'UU1', NULL, '用户应聘', 'job/users', NULL, 'LCN', 'On', #TIME#, #TIME#)

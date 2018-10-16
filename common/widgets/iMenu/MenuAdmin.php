@@ -52,7 +52,7 @@ class MenuAdmin extends InputWidget
     public static function MenuNavList($pid = null)
     {
 
-        $result['menu'] = Menu::findMenuNav($pid);
+        $result['menu'] = Menu::findMenuNav($pid, $language = 'zh-CN');
 
         static::MenuFindActive($result['menu']);
 

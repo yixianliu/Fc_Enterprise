@@ -26,7 +26,7 @@ class DownloadClsController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [ '@' ],
                     ],
                 ],
             ],
@@ -34,7 +34,7 @@ class DownloadClsController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => [ 'POST' ],
                 ],
             ],
         ];
@@ -49,20 +49,22 @@ class DownloadClsController extends BaseController
 
         $dataProvider = DownloadCls::getCls();
 
-        return $this->render('index', ['dataProvider' => $dataProvider,]);
+        return $this->render( 'index', [ 'dataProvider' => $dataProvider, ] );
     }
 
     /**
      * Displays a single DownloadCls model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -76,71 +78,77 @@ class DownloadClsController extends BaseController
 
         $model->c_key = self::getRandomString();
 
-        $model->parent_id = Yii::$app->request->get('id', 'C0');
+        $model->parent_id = Yii::$app->request->get( 'id', 'C0' );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( [ 'view', 'id' => $model->id ] );
         }
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model'  => $model,
             'result' => [
                 'classify' => $model->getClsSelect(),
-            ]
-        ]);
+            ],
+        ] );
     }
 
     /**
      * Updates an existing DownloadCls model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( [ 'view', 'id' => $model->id ] );
         }
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model'  => $model,
             'result' => [
                 'classify' => $model->getClsSelect(),
-            ]
-        ]);
+            ],
+        ] );
     }
 
     /**
      * Deletes an existing DownloadCls model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
 
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( [ 'index' ] );
     }
 
     /**
      * Finds the DownloadCls model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return DownloadCls the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DownloadCls::findOne($id)) !== null) {
+        if (($model = DownloadCls::findOne( $id )) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException( 'The requested page does not exist.' );
     }
 }

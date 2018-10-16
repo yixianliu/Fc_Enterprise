@@ -14,6 +14,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
+use common\models\Language;
 
 class BaseController extends Controller
 {
@@ -33,16 +34,15 @@ class BaseController extends Controller
 
         // 多语言
         if (!Yii::$app->session->has( 'language' )) {
-            // 设置一个session变量，以下用法是相同的：
-            Yii::$app->session->set( 'language', 'zh-CN' );
+            Yii::$app->session->set( 'language', Language::findByAll() );
         }
+
+        Yii::$app->language = Yii::$app->session['language'];
 
         // 重置 @web 路径
         Yii::setAlias('@web', '@web/frontend/web');
 
-        Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
-
-        Yii::$app->language = Yii::$app->session['language'];
+        Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Language::$default_key, 'On' );
 
         // 菜单MID
         $id = Yii::$app->request->get( 'mid', null );

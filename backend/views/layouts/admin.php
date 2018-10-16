@@ -56,11 +56,11 @@ $this->beginPage();
                 </li>
 
                 <li>
-                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'cn']) ?>">中文版</a> /
+                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'zh-CN']) ?>">中文版</a> /
                 </li>
 
                 <li>
-                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'en']) ?>">英文版</a> /
+                    <a href="<?= Url::to(['/admin/center/language', 'type' => 'en-US']) ?>">英文版</a> /
                 </li>
 
                 <li>

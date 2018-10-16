@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 use backend\assets\AppAsset;
 use common\widgets\iConf\ConfList;
 
-AppAsset::register($this); // $this 代表视图对象
+AppAsset::register( $this ); // $this 代表视图对象
 
 $this->beginPage();
 
@@ -24,7 +24,7 @@ $this->beginPage();
 <html lang="zh-CN">
 <head>
 
-
+    <?= Yii::$app->view->renderFile( '@app/views/admin/_head.php' ); ?>
 
     <?php $this->head() ?>
 
@@ -36,25 +36,25 @@ $this->beginPage();
 <div class="login-wrapper">
     <div id="login" class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
 
-        <h1><a href="#" title="<?= Yii::$app->params['Conf']['NAME'] ?>" tabindex="-1"><?= Yii::$app->params['Conf']['NAME'] ?></a></h1>
+        <h1><a href="#" title="<?= Yii::$app->view->params['ConfArray']['NAME'] ?>" tabindex="-1"><?= Yii::$app->view->params['ConfArray']['NAME'] ?></a></h1>
 
-        <?php $form = ActiveForm::begin(['action' => ['admin/member/login'], 'method' => 'post', 'id' => $model->formName()]); ?>
+        <?php $form = ActiveForm::begin( [ 'action' => [ 'admin/member/login' ], 'method' => 'post', 'id' => $model->formName() ] ); ?>
 
         <p>
-            <?= $form->field($model, 'username')->textInput(['class' => 'input', 'placeholder' => '帐号...'])->label('帐号'); ?>
+            <?= $form->field( $model, 'username' )->textInput( [ 'class' => 'input', 'placeholder' => '帐号...' ] )->label( '帐号' ); ?>
         </p>
 
         <p>
-            <?= $form->field($model, 'password')->passwordInput(['class' => 'input', 'placeholder' => '密码...'])->label('密码'); ?>
+            <?= $form->field( $model, 'password' )->passwordInput( [ 'class' => 'input', 'placeholder' => '密码...' ] )->label( '密码' ); ?>
         </p>
 
         <p class="submit">
-            <?= Html::submitButton('登录', ['class' => 'btn btn-orange btn-block']) ?>
+            <?= Html::submitButton( '登录', [ 'class' => 'btn btn-orange btn-block' ] ) ?>
         </p>
 
         <?php ActiveForm::end() ?>
 
-        <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+        <?= Yii::$app->view->renderFile( '@app/views/formMsg.php' ); ?>
 
     </div>
 </div>
