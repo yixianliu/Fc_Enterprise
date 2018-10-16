@@ -34,7 +34,7 @@ class BaseController extends Controller
         if (!$session->has( 'language' )) {
 
             // 设置一个session变量，以下用法是相同的：
-            $session->set( 'language', 'cn' );
+            $session->set( 'language', 'zh-CN' );
             $session->set( 'language_name', '中文版' );
         }
 

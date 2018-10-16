@@ -20,14 +20,14 @@ $this->params['breadcrumbs'][] = '登录';
 
 ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/member.css')?>
+<?= Html::cssFile( '@web/themes/qijian/css/member.css' ) ?>
 
 <div class="member-user-reg">
 
     <div class="user-reg-cont">
 
         <?php
-        $form = ActiveForm::begin([
+        $form = ActiveForm::begin( [
             'action'      => ['member/login'],
             'method'      => 'post',
             'id'          => $model->formName(),
@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = '登录';
                 'template'     => '<div>{input}</div>',
                 'inputOptions' => ['class' => 'form-control'],
             ],
-            'options'     => ['class' => 'form-horizontal']
-        ]);
+            'options'     => ['class' => 'form-horizontal'],
+        ] );
         ?>
 
         <div class="form-group">
@@ -45,9 +45,9 @@ $this->params['breadcrumbs'][] = '登录';
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <?=
-                    $form->field($model, 'username')
-                        ->textInput(['maxlength' => true, 'id' => 'username', 'aria-describedby' => '请输入用户名或手机号码', 'placeholder' => '请输入用户名或手机号码'])
-                        ->label(false)
+                    $form->field( $model, 'username' )
+                        ->textInput( ['maxlength' => true, 'id' => 'username', 'aria-describedby' => '请输入用户名或手机号码', 'placeholder' => '请输入用户名或手机号码'] )
+                        ->label( false )
                     ?>
                 </div>
             </div>
@@ -59,9 +59,9 @@ $this->params['breadcrumbs'][] = '登录';
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
                     <?=
-                    $form->field($model, 'password')
-                        ->passwordInput(['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'])
-                        ->label(false)
+                    $form->field( $model, 'password' )
+                        ->passwordInput( ['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'] )
+                        ->label( false )
                     ?>
                 </div>
             </div>
@@ -71,9 +71,9 @@ $this->params['breadcrumbs'][] = '登录';
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
 
-                <?= Html::submitButton('立即登录', ['class' => 'btn btn-red']) ?>
+                <?= Html::submitButton( Yii::t( 'app', 'login_button' ), ['class' => 'btn btn-red'] ) ?>
 
-                <?= Html::a('没账号,请注册', ['member/reg'], ['class' => 'btn btn-red']) ?>
+                <?= Html::a( Yii::t( 'app', 'login_user_msg' ), ['member/reg'], ['class' => 'btn btn-red'] ) ?>
 
             </div>
         </div>
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = '登录';
 
     </div>
 
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/default/formMsg.php' ); ?>
 
 </div>
 
@@ -98,13 +98,13 @@ $this->params['breadcrumbs'][] = '登录';
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
         <div class="item active">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
         <div class="item">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
         <div class="item">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
     </div>
 
@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = '登录';
         <div class="starter-template">
             <h1 class="text-center text-color"><span style="color: #cf0d15;font-weight: bold;">建筑辅材</span> 采购招标火热招募中</h1>
             <h5 class="text-center text-color">追求绿色环保、完美空间创造的精神</h5>
-            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to(['/purchase/center']) ?>">立即前往 >></a></h5>
+            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to( ['/purchase/center'] ) ?>">立即前往 >></a></h5>
         </div>
 
     </div>

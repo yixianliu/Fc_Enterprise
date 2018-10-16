@@ -8,9 +8,9 @@ $params = array_merge(
 
 return [
     'id'                  => 'app-frontend',
-    'basePath'            => dirname(__DIR__),
+    'basePath'            => dirname( __DIR__ ),
     'language'            => 'zh-CN',
-    'bootstrap'           => [ 'log' ],
+    'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl'             => '/',
 
@@ -45,7 +45,7 @@ return [
         'user' => [
             'identityClass'   => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie'  => [ 'name' => '_identity-frontend', 'httpOnly' => true ],
+            'identityCookie'  => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
 
         'session' => [
@@ -58,7 +58,7 @@ return [
             'targets'    => [
                 [
                     'class'  => 'yii\log\FileTarget',
-                    'levels' => [ 'error', 'warning' ],
+                    'levels' => ['error', 'warning'],
                 ],
             ],
         ],
@@ -80,7 +80,7 @@ return [
             'rules'               => [
 
                 // 默认
-                ''       => 'center/index',
+                ''        => 'center/index',
                 'mobile/' => 'mobile/center/index',
 
                 '<controller:\w+>/<action:\w+>/<mid:\d+>' => '<controller>/<action>',
@@ -103,6 +103,20 @@ return [
                 'yii\bootstrap\BootstrapPluginAsset' => [
                     'js'         => [],  // 去除 bootstrap.js
                     'sourcePath' => null,  // 防止在 frontend/web/asset 下生产文件
+                ],
+            ],
+        ],
+
+        // 多语言化
+        'i18n'         => [
+            'translations' => [
+                'app*' => [
+                    'class'          => 'yii\i18n\PhpMessageSource',
+                    'basePath'       => '@frontend/messages',
+                    'fileMap'        => [
+                        'app'       => 'common.php',
+                        'app/error' => 'error.php',
+                    ],
                 ],
             ],
         ],

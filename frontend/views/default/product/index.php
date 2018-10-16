@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container content">
 
-    <?= $this->render('../_nav'); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_nav.php'); ?>
 
     <!-- 相关分类 -->
-    <?= $this->render('../_cls', ['result' => $result]); ?>
+    <?= Yii::$app->view->renderFile('@app/views/default/_cls.php', ['result' => $result]); ?>
     <!-- #相关分类 -->
 
     <!-- 可变化内容 -->

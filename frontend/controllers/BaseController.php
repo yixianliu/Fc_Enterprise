@@ -37,7 +37,12 @@ class BaseController extends Controller
             Yii::$app->session->set( 'language', 'zh-CN' );
         }
 
+        // 重置 @web 路径
+        Yii::setAlias('@web', '@web/frontend/web');
+
         Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
+
+        Yii::$app->language = Yii::$app->session['language'];
 
         // 菜单MID
         $id = Yii::$app->request->get( 'mid', null );

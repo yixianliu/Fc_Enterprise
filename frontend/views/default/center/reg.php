@@ -12,7 +12,6 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 
 $this->title = '用户注册';
 
@@ -21,13 +20,13 @@ $this->params['breadcrumbs'][] = '注册';
 
 ?>
 
-<?=Html::cssFile('@web/themes/qijian/css/member.css')?>
+<?= Html::cssFile( '@web/themes/qijian/css/member.css' ) ?>
 
 <div class="member-user-reg">
     <div class="user-reg-cont">
 
         <?php
-        $form = ActiveForm::begin([
+        $form = ActiveForm::begin( [
             'action'      => ['member/reg'],
             'method'      => 'post',
             'id'          => $model->formName(),
@@ -35,79 +34,77 @@ $this->params['breadcrumbs'][] = '注册';
                 'template'     => '<div>{input}</div>',
                 'inputOptions' => ['class' => 'form-control'],
             ],
-            'options'     => ['class' => 'form-horizontal']
-        ]);
+            'options'     => ['class' => 'form-horizontal'],
+        ] );
         ?>
 
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">用户类型 : </label>
+            <label for="name" class="col-sm-3 control-label"><?= Yii::t( 'app', 'user_type' ); ?> : </label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <?=
-                    $form->field($model, 'is_type')
-                        ->widget(Select2::classname(), [
-                            'data'    => ['user' => '普通用户', 'supplier' => '供应商用户'],
-                            'options' => ['placeholder' => '用户类型...'],
-                        ])
-                        ->label(false);
+                    $form->field( $model, 'is_type' )->widget( \kartik\select2\Select2::classname(), [
+                        'data'    => ['user' => '普通用户', 'supplier' => '供应商用户'],
+                        'options' => ['placeholder' => '用户类型...'],
+                    ] )->label( false );
                     ?>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">用户名 : </label>
+            <label for="name" class="col-sm-3 control-label"><?= Yii::t( 'app', 'user_name' ); ?> : </label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <?=
-                    $form->field($model, 'username')
-                        ->textInput(['maxlength' => true, 'id' => 'username', 'aria-describedby' => '请输入用户名或手机号码', 'placeholder' => '请输入用户名或手机号码'])
-                        ->label(false)
+                    $form->field( $model, 'username' )
+                        ->textInput( ['maxlength' => true, 'id' => 'username', 'aria-describedby' => '请输入用户名或手机号码', 'placeholder' => '请输入用户名或手机号码'] )
+                        ->label( false )
                     ?>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">设置密码 : </label>
+            <label for="password" class="col-sm-3 control-label"><?= Yii::t( 'app', 'password' ); ?> : </label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
                     <?=
-                    $form->field($model, 'password')
-                        ->passwordInput(['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'])
-                        ->label(false)
+                    $form->field( $model, 'password' )
+                        ->passwordInput( ['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'] )
+                        ->label( false )
                     ?>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="confirmpasswork" class="col-sm-3 control-label">确认密码 : </label>
+            <label for="confirmpasswork" class="col-sm-3 control-label"><?= Yii::t( 'app', 're_password' ); ?> : </label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pass"></i></span>
                     <?=
-                    $form->field($model, 'repassword')
-                        ->passwordInput(['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'])
-                        ->label(false)
+                    $form->field( $model, 'repassword' )
+                        ->passwordInput( ['maxlength' => true, 'aria-describedby' => '请输入6-16位密码', 'placeholder' => '请输入6-16位密码'] )
+                        ->label( false )
                     ?>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="code" class="col-sm-3 control-label">验证码 : </label>
+            <label for="code" class="col-sm-3 control-label"><?= Yii::t( 'app', 'verification' ); ?> : </label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-code"></i></span>
                     <?=
-                    $form->field($model, 'msg')
-                        ->textInput(['maxlength' => 5, 'placeholder' => '请输入验证码', 'aria-describedby' => '请输入验证码'])
-                        ->label(false)
+                    $form->field( $model, 'msg' )
+                        ->textInput( ['maxlength' => 5, 'placeholder' => '请输入验证码', 'aria-describedby' => '请输入验证码'] )
+                        ->label( false )
                     ?>
-                    <a id="SendMsg" class="input-group-addon code-red codeBtn" href="#">获取验证码</a>
+                    <a id="SendMsg" class="input-group-addon code-red codeBtn" href="#"><?= Yii::t( 'app', 'get_verification' ); ?></a>
                 </div>
             </div>
         </div>
@@ -116,9 +113,9 @@ $this->params['breadcrumbs'][] = '注册';
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
 
-                <?= Html::submitButton('免费注册', ['class' => 'btn btn-red']) ?>
+                <?= Html::submitButton( Yii::t( 'app', 'reg_button' ), ['class' => 'btn btn-red'] ) ?>
 
-                <?= Html::a('有账号? 请登录', ['member/login'], ['class' => 'btn btn-red']) ?>
+                <?= Html::a( Yii::t( 'app', 'login_user_msg' ), ['member/login'], ['class' => 'btn btn-red'] ) ?>
 
             </div>
         </div>
@@ -127,7 +124,7 @@ $this->params['breadcrumbs'][] = '注册';
 
     </div>
 
-    <?= Yii::$app->view->renderFile('@app/views/default/formMsg.php'); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/default/formMsg.php' ); ?>
 
 </div>
 
@@ -143,13 +140,13 @@ $this->params['breadcrumbs'][] = '注册';
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
         <div class="item active">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
         <div class="item">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
         <div class="item">
-            <?= Html::img(Url::to('@web/themes/qijian/images/banar3.jpg'), ['alt' => '']); ?>
+            <?= Html::img( Url::to( '@web/themes/qijian/images/banar3.jpg' ), ['alt' => ''] ); ?>
         </div>
     </div>
 
@@ -166,7 +163,7 @@ $this->params['breadcrumbs'][] = '注册';
         <div class="starter-template">
             <h1 class="text-center text-color"><span style="color: #cf0d15;font-weight: bold;">建筑辅材</span> 采购招标火热招募中</h1>
             <h5 class="text-center text-color">追求绿色环保、完美空间创造的精神</h5>
-            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to(['/purchase/center']) ?>">立即前往 >></a></h5>
+            <h5 class="text-center"><a class="hjob-btn" title="" href="<?= Url::to( ['/purchase/center'] ) ?>">立即前往 >></a></h5>
         </div>
 
     </div>
@@ -192,7 +189,7 @@ $this->params['breadcrumbs'][] = '注册';
         // $(this).text('已发送,1个小时内有效.').attr('disabled', 'disabled');
 
         $.ajax({
-            url: '<?= Url::to(['member/send']) ?>',
+            url: '<?= Url::to( ['member/send'] ) ?>',
             type: 'POST', // GET
             async: false,    // 或false,是否异步
             dataType: 'json',
@@ -217,9 +214,10 @@ $this->params['breadcrumbs'][] = '注册';
     });
 
     // 设置等待验证码时间
-    var countdown=10;
+    var countdown = 10;
+
     // 验证码倒计时
-    function settime(){
+    function settime() {
         if (countdown == 0) {
             $('.codeBtn').removeAttr("disabled");
             $('.codeBtn').css("cursor", "pointer");
@@ -227,14 +225,14 @@ $this->params['breadcrumbs'][] = '注册';
             countdown = 10;
             return;
         } else {
-            $('.codeBtn').attr("disabled",true);
+            $('.codeBtn').attr("disabled", true);
             $('.codeBtn').css("cursor", "default");
             $('.codeBtn').html("重新发送(" + countdown + ")");
             countdown--;
         }
         // 倒数效果
-        setTimeout(function() {
+        setTimeout(function () {
             settime();
-        },1000)
+        }, 1000)
     }
 </script>

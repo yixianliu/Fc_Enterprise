@@ -19,7 +19,7 @@ use yii\web\AssetBundle;
 class DefaultAsset extends AssetBundle
 {
 
-    public $basePath = '@webroot/frontend/web';
+    public $basePath = '@webroot';
 
     public $baseUrl = '@web';
 

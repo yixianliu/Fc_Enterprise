@@ -37,7 +37,7 @@ foreach ($imgArray as $key => $value) {
     <!-- 可变化内容 -->
     <div class="conY">
         <div class="conY_tit"><?= $model->title ?></div>
-        <div class="conY_dat">作者：<?= $model->user_id ?>&nbsp;&nbsp;&nbsp;时间：2018-1-30</div>
+        <div class="conY_dat"><?= Yii::t( 'app', 'publisher' ); ?> ：<?= $model->user_id ?>&nbsp;&nbsp;&nbsp; <?= Yii::t( 'app', 'publisher_time' ); ?> ：2018-1-30</div>
 
         <div class="conY_text">
 
@@ -85,20 +85,20 @@ foreach ($imgArray as $key => $value) {
 
                     <!-- 产品参数 -->
                     <div class="tend-right">
-                        <p>产品价格: <?= $model->price ?></p>
-                        <p>产品折扣价: <?= $model->discount ?></p>
+                        <p><?= Yii::t( 'app', 'price' ); ?> : <?= $model->price ?></p>
+                        <p><?= Yii::t( 'app', 'discount' ); ?> : <?= $model->discount ?></p>
                         <p><?= $model->introduction ?></p>
 
                         <?php if (!empty( Yii::$app->user->identity->user_id )): ?>
 
                             <p>
-                                <?= Html::a( '购买', Url::to( ['order/view', 'id' => $model->product_id] ), ['class' => 'btn btn-success'] ) ?>
+                                <?= Html::a( Yii::t( 'app', 'purchase' ), Url::to( ['order/view', 'id' => $model->product_id] ), ['class' => 'btn btn-success'] ) ?>
                             </p>
 
                         <?php else: ?>
 
                             <p>
-                                <?= Html::a( '登录后购买', Url::to( ['member/reg'] ), ['class' => 'btn btn-success'] ) ?>
+                                <?= Html::a( Yii::t( 'app', 'login_purchase' ), Url::to( ['member/reg'] ), ['class' => 'btn btn-success'] ) ?>
                             </p>
 
                         <?php endif; ?>
@@ -116,7 +116,7 @@ foreach ($imgArray as $key => $value) {
                     <!-- 切换按钮 -->
                     <ul class="tab clearfix">
                         <li onclick="tabs('#comment',0)" class="curr">
-                            商品详情<strong></strong>
+                            <?= Yii::t( 'app', 'details' ); ?><strong></strong>
                         </li>
                     </ul>
                     <!-- #切换按钮 -->
