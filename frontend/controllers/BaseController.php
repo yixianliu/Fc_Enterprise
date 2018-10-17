@@ -32,24 +32,37 @@ class BaseController extends Controller
             exit( false );
         }
 
-        // 多语言
-        if (!Yii::$app->session->has( 'language' )) {
-            Yii::$app->session->set( 'language', Language::findByAll() );
-        }
-
-        Yii::$app->language = Yii::$app->session['language'];
+        static::isLanguage();
 
         // 重置 @web 路径
         Yii::setAlias('@web', '@web/frontend/web');
 
-        Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Language::$default_key, 'On' );
+        Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
 
         // 菜单MID
+
         $id = Yii::$app->request->get( 'mid', null );
 
         if (!empty( $id )) {
             Yii::$app->view->params['MenuArray'] = \common\models\Menu::findByOne( $id );
         }
+
+        return true;
+    }
+
+    /**
+     * 判断语言类别
+     *
+     * @return bool
+     */
+    public static function isLanguage()
+    {
+
+        $data = Language::findOne(['lang_key' => (!Yii::$app->session->has( 'language' ) ? Language::$default_key : Yii::$app->session['language'])]) ;
+
+        Yii::$app->session->set( 'language', $data->lang_key );
+
+        Yii::$app->language = $data->parameter;
 
         return true;
     }

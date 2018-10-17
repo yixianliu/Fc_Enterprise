@@ -85,10 +85,12 @@ class Conf extends \yii\db\ActiveRecord
      *
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function findByData($status = null, $language = 'cn')
+    public static function findByData($status = null, $language = null)
     {
 
         $array = !empty($status) ? ['is_using' => $status] : ['!=', 'is_using', 'null'];
+
+        $language = empty($language) ? Language::$default_key : $language;
 
         return static::find()->where($array)
             ->andWhere(['is_language' => $language])
@@ -104,8 +106,10 @@ class Conf extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function findByConfArray($language, $status = 'On')
+    public static function findByConfArray($language = null, $status = 'On')
     {
+
+        $language = empty($language) ? Language::$default_key : $language;
 
         $data = static::findByData($status, $language);
 

@@ -54,18 +54,18 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [ [ 'm_key', 'name', 'parent_id', 'model_key' ], 'required' ],
-            [ [ 'is_using', 'rp_key' ], 'string' ],
-            [ [ 'sort_id', ], 'integer' ],
-            [ [ 'm_key', 'parent_id' ], 'string', 'max' => 55 ],
-            [ [ 'rp_key', 'model_key', 'name' ], 'string', 'max' => 85 ],
-            [ [ 'm_key' ], 'unique' ],
+            [['m_key', 'name', 'parent_id', 'model_key'], 'required'],
+            [['is_using', 'rp_key'], 'string'],
+            [['sort_id',], 'integer'],
+            [['m_key', 'parent_id'], 'string', 'max' => 55],
+            [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
+            [['m_key'], 'unique'],
 
             // 默认
-            [ [ 'custom_key', 'url', 'rp_key', 'is_type', ], 'default', 'value' => null ],
-            [ [ 'is_using', ], 'default', 'value' => 'On' ],
-            [ [ 'rp_key', ], 'default', 'value' => 'guest' ],
-            [ [ 'sort_id', ], 'default', 'value' => 1 ],
+            [['custom_key', 'url', 'rp_key', 'is_type',], 'default', 'value' => null],
+            [['is_using',], 'default', 'value' => 'On'],
+            [['rp_key',], 'default', 'value' => 'guest'],
+            [['sort_id',], 'default', 'value' => 1],
         ];
     }
 
@@ -94,26 +94,29 @@ class Menu extends \yii\db\ActiveRecord
      * 列表
      *
      * @param null   $parent
-     * @param null   $type
+     * @param null   $language
      * @param string $relevance
      * @param string $is_using
      *
      * @return array|Menu[]|NewsClassify[]|\yii\db\ActiveRecord[]
      */
-    public static function findByAll($parent = null, $type = 'zh-CN', $relevance = 'Off', $is_using = 'On')
+    public static function findByAll($parent = null, $language = null, $relevance = 'Off', $is_using = 'On')
     {
+
+        $language = empty( $type ) ? Language::$default_key : $language;
 
         $parent = empty( $parent ) ? static::$frontend_parent_id : $parent;
 
         if ($relevance == 'On')
-            return static::find()->where( [ 'is_using' => $is_using, 'parent_id' => $parent ] )->asArray()->all();
+            return static::find()->where( ['is_using' => $is_using, 'parent_id' => $parent] )->asArray()->all();
 
-        return static::find()->where( [ self::tableName() . '.is_using' => $is_using, self::tableName() . '.parent_id' => $parent ] )
-            ->andWhere( [ self::tableName() . '.is_language' => $type ] )
+        return static::find()->where( [self::tableName() . '.is_using' => $is_using, self::tableName() . '.parent_id' => $parent] )
+            ->andWhere( [self::tableName() . '.is_language' => $language] )
             ->orderBy( 'sort_id', 'ASC' )
             ->joinWith( 'role' )
             ->joinWith( 'menuModel' )
             ->joinWith( 'pages' )
+            ->joinWith( 'language' )
             ->asArray()
             ->all();
     }
@@ -132,9 +135,9 @@ class Menu extends \yii\db\ActiveRecord
             return false;
 
         if ($relevance == 'On')
-            return static::find()->where( [ 'is_using' => 'On', 'm_key' => $id ] )->asArray()->one();
+            return static::find()->where( ['is_using' => 'On', 'm_key' => $id] )->asArray()->one();
 
-        return static::find()->where( [ self::tableName() . '.m_key' => $id ] )
+        return static::find()->where( [self::tableName() . '.m_key' => $id] )
             ->joinWith( 'role' )
             ->joinWith( 'menuModel' )
             ->joinWith( 'pages' )
@@ -145,19 +148,25 @@ class Menu extends \yii\db\ActiveRecord
     // 菜单模型
     public function getMenuModel()
     {
-        return $this->hasOne( MenuModel::className(), [ 'model_key' => 'model_key' ] );
+        return $this->hasOne( MenuModel::className(), ['model_key' => 'model_key'] );
     }
 
     // 角色
     public function getRole()
     {
-        return $this->hasOne( Role::className(), [ 'name' => 'rp_key' ] );
+        return $this->hasOne( Role::className(), ['name' => 'rp_key'] );
     }
 
     // 角色
     public function getPages()
     {
-        return $this->hasOne( Pages::className(), [ 'm_key' => 'm_key' ] );
+        return $this->hasOne( Pages::className(), ['m_key' => 'm_key'] );
+    }
+
+    // 角色
+    public function getLanguage()
+    {
+        return $this->hasOne( Language::className(), ['lang_key' => 'is_language'] );
     }
 
     /**
@@ -190,7 +199,7 @@ class Menu extends \yii\db\ActiveRecord
                     if (Yii::$app->controller->id == 'job')
                         $array['open'] = 'On';
 
-                    $array['url'] = [ '/download/index' ];
+                    $array['url'] = ['/download/index'];
                     $array['child'] = static::recursionJobMenu( $value, $type );
                     break;
 
@@ -200,7 +209,7 @@ class Menu extends \yii\db\ActiveRecord
                     if (Yii::$app->controller->id == 'job')
                         $array['open'] = 'On';
 
-                    $array['url'] = [ '/job/index' ];
+                    $array['url'] = ['/job/index'];
                     $array['child'] = static::recursionJobMenu( $value, $type );
                     break;
 
@@ -221,10 +230,10 @@ class Menu extends \yii\db\ActiveRecord
                 // 供应模型
                 case 'supply':
 
-                    $product = PsbClassify::findAll( [ 'is_using' => 'On', 'is_type' => 'Supply' ] );
+                    $product = PsbClassify::findAll( ['is_using' => 'On', 'is_type' => 'Supply'] );
 
                     foreach ($product as $key => $values) {
-                        $array['child'][ $key ]['url'] = [ '/supply/index', 'id' => $values['c_key'] ];
+                        $array['child'][ $key ]['url'] = ['/supply/index', 'id' => $values['c_key']];
                         $array['child'][ $key ]['child'] = static::recursionMenu( $values, $type );
                     }
                     break;
@@ -232,10 +241,10 @@ class Menu extends \yii\db\ActiveRecord
                 // 投标模型
                 case 'bid':
 
-                    $product = PsbClassify::findAll( [ 'is_using' => 'On', 'parent_id' => 'C0' ] );
+                    $product = PsbClassify::findAll( ['is_using' => 'On', 'parent_id' => 'C0'] );
 
                     foreach ($product as $key => $values) {
-                        $array['child'][ $key ]['url'] = [ '/bid/index', 'id' => $values['c_key'] ];
+                        $array['child'][ $key ]['url'] = ['/bid/index', 'id' => $values['c_key']];
                         $array['child'][ $key ]['child'] = static::recursionMenu( $values, $type );
                     }
                     break;
@@ -306,7 +315,7 @@ class Menu extends \yii\db\ActiveRecord
             return;
 
         foreach ($child as $key => $value) {
-            $child[ $key ]['url'] = [ 'product/index', 'id' => $value['c_key'] ];
+            $child[ $key ]['url'] = ['product/index', 'id' => $value['c_key']];
             $child[ $key ]['child'] = static::recursionProductMenu( $value, null, $type );
         }
 
@@ -338,7 +347,7 @@ class Menu extends \yii\db\ActiveRecord
             return;
 
         foreach ($child as $key => $value) {
-            $child[ $key ]['url'] = [ 'news/index', 'id' => $value['c_key'] ];
+            $child[ $key ]['url'] = ['news/index', 'id' => $value['c_key']];
             $child[ $key ]['child'] = static::recursionNewsMenu( $value, null, $type );
         }
 
@@ -418,7 +427,7 @@ class Menu extends \yii\db\ActiveRecord
             return;
 
         foreach ($child as $key => $value) {
-            $child[ $key ]['url'] = [ $value['menuModel']['url_key'] ];
+            $child[ $key ]['url'] = [$value['menuModel']['url_key']];
             $child[ $key ]['child'] = static::recursionMenu( $value, $type );
         }
 
@@ -520,7 +529,7 @@ class Menu extends \yii\db\ActiveRecord
 
             // 采购页面
             case 'purchase':
-                $urls = [ '/purchase/' . $data['is_type'] ];
+                $urls = ['/purchase/' . $data['is_type']];
                 break;
 
             // 自定义页面
@@ -529,27 +538,27 @@ class Menu extends \yii\db\ActiveRecord
                 // 输出调整路径
                 if (strpos( $data['url'], ',' ) !== false) {
                     $urlData = explode( ',', $data['url'] );
-                    $urls = [ $urlData[0], 'id' => $urlData[1] ];
+                    $urls = [$urlData[0], 'id' => $urlData[1]];
                     break;
                 }
 
-                $urls = empty( $data['url'] ) ? [ '/pages/' . $data['is_type'], 'mid' => $data['pages']['page_id'] ] : [ $data['url'] ];
+                $urls = empty( $data['url'] ) ? ['/pages/' . $data['is_type'], 'mid' => $data['pages']['page_id']] : [$data['url']];
 
                 break;
 
             // 在线留言
             case 'comment':
-                $urls = [ '/comment/index' ];
+                $urls = ['/comment/index'];
                 break;
 
             // 在线地图
             case 'map':
-                $urls = [ '/map/index' ];
+                $urls = ['/map/index'];
                 break;
 
             // 招聘
             case 'job':
-                $urls = [ '/job/' . $data['is_type'] ];
+                $urls = ['/job/' . $data['is_type']];
                 break;
 
             // 超链接
@@ -684,13 +693,13 @@ class Menu extends \yii\db\ActiveRecord
                 $html .= ' <li>';
 
                 if ($value['menuModel']['url_key'] == 'pages') {
-                    $html .= Html::a( $value['name'], [ 'pages/' . $value['is_type'], 'id' => $value['pages']['page_id'] ], [ 'title' => $value['name'] ] );
+                    $html .= Html::a( $value['name'], ['pages/' . $value['is_type'], 'id' => $value['pages']['page_id']], ['title' => $value['name']] );
                 }// 超链接
                 else if ($value['menuModel']['url_key'] == 'urls') {
-                    $html .= Html::a( $value['name'], [ $value['url'] ], [ 'title' => $value['name'] ] );
+                    $html .= Html::a( $value['name'], [$value['url']], ['title' => $value['name']] );
                 } // 基本
                 else {
-                    $html .= Html::a( $value['name'], [ $value['menuModel']['url_key'] . '/' . $value['is_type'] ], [ 'title' => $value['name'] ] );
+                    $html .= Html::a( $value['name'], [$value['menuModel']['url_key'] . '/' . $value['is_type']], ['title' => $value['name']] );
                 }
 
                 // 二级
@@ -736,7 +745,7 @@ class Menu extends \yii\db\ActiveRecord
 
             foreach ($dataCls as $values) {
                 $html .= ' <li>';
-                $html .= Html::a( $values['name'], [ $menu['menuModel']['url_key'] . '/index', 'id' => $menu['m_key'] ], [ 'title' => $menu['name'] ] );
+                $html .= Html::a( $values['name'], [$menu['menuModel']['url_key'] . '/index', 'id' => $menu['m_key']], ['title' => $menu['name']] );
                 $html .= '</li>';
             }
 
@@ -777,7 +786,7 @@ class Menu extends \yii\db\ActiveRecord
 
                 foreach ($classify as $key => $value) {
 
-                    $html .= '<a href="' . Url::to( [ $menu['menuModel']['url_key'] . '/index', 'id' => $value['c_key'], 'mid' => $menu['m_key'] ] ) . '" title="' . $value['name'] . '">';
+                    $html .= '<a href="' . Url::to( [$menu['menuModel']['url_key'] . '/index', 'id' => $value['c_key'], 'mid' => $menu['m_key']] ) . '" title="' . $value['name'] . '">';
 
                     if ($value['c_key'] == $id) {
                         $html .= '<div class="cur" title="' . $value['name'] . '">' . $value['name'] . '</div>';
@@ -807,7 +816,7 @@ class Menu extends \yii\db\ActiveRecord
                 $classify = DownloadCls::findByAll();
 
                 foreach ($classify as $key => $value) {
-                    $classify[ $key ]['url'] = Url::to( [ '/download/index', 'id' => $value['c_key'] ] );
+                    $classify[ $key ]['url'] = Url::to( ['/download/index', 'id' => $value['c_key']] );
                 }
 
                 break;
@@ -854,7 +863,7 @@ class Menu extends \yii\db\ActiveRecord
                         continue;
                     }
 
-                    $classify[ $key ]['url'] = Url::to( [ '/pages/' . $value['is_type'], 'id' => $value['pages']['page_id'] ] );
+                    $classify[ $key ]['url'] = Url::to( ['/pages/' . $value['is_type'], 'id' => $value['pages']['page_id']] );
                 }
 
                 break;
@@ -865,7 +874,7 @@ class Menu extends \yii\db\ActiveRecord
                 $classify = PsbClassify::findByAll( 'P0', 'purchase' );
 
                 foreach ($classify as $key => $value) {
-                    $classify[ $key ]['url'] = Url::to( [ '/purchase/index', 'id' => $value['c_key'] ] );
+                    $classify[ $key ]['url'] = Url::to( ['/purchase/index', 'id' => $value['c_key']] );
                 }
 
                 break;

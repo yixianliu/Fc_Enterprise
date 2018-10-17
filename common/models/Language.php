@@ -45,13 +45,13 @@ class Language extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [ [ 'lang_key', 'name', 'parameter', 'is_using' ], 'required' ],
-            [ [ 'is_using' ], 'string' ],
-            [ [ 'created_at', 'updated_at' ], 'integer' ],
-            [ [ 'lang_key', 'name' ], 'string', 'max' => 55 ],
-            [ [ 'parameter' ], 'string', 'max' => 25 ],
-            [ [ 'name' ], 'unique' ],
-            [ [ 'lang_key' ], 'unique' ],
+            [['lang_key', 'name', 'parameter', 'is_using'], 'required'],
+            [['is_using'], 'string'],
+            [['created_at', 'updated_at'], 'integer'],
+            [['lang_key', 'name'], 'string', 'max' => 55],
+            [['parameter'], 'string', 'max' => 25],
+            [['name'], 'unique'],
+            [['lang_key'], 'unique'],
         ];
     }
 
@@ -73,8 +73,8 @@ class Language extends \yii\db\ActiveRecord
     public static function findByAll($key = null)
     {
 
-        $key = empty($key) ? static::$default_key : $key;
+        $key = empty( $key ) ? static::$default_key : $key;
 
-        return static::find()->where( [ 'lang_key' => $key ] )->all();
+        return static::find()->where( ['lang_key' => $key] )->all();
     }
 }

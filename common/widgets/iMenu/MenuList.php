@@ -49,7 +49,7 @@ class MenuList extends InputWidget
      *
      * @return mixed
      */
-    public function MenuNavList($pid, $language = 'zh-CN')
+    public function MenuNavList($pid, $language = null)
     {
 
         $result['menu'] = Menu::findMenuNav($pid, $language);

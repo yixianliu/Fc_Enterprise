@@ -30,6 +30,8 @@ class BaseController extends Controller
             exit( false );
         }
 
+        \frontend\controllers\BaseController::isLanguage();
+
         if (!file_exists( Yii::getAlias( '@webroot' ) . '/FcCalendar.md' )) {
             return false;
         }
