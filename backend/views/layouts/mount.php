@@ -13,7 +13,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
 
-AppAsset::register($this); // $this 代表视图对象
+AppAsset::register( $this );
 
 $this->beginPage();
 
@@ -25,7 +25,7 @@ $this->beginPage();
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
     <meta charset="utf-8"/>
-    <title><?= Yii::$app->params['NAME'] ?> - <?= Yii::$app->params['TITLE'] ?></title>
+    <title><?= $this->title ?> - <?= Yii::$app->params['NAME'] ?> - <?= Yii::$app->params['TITLE'] ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
@@ -58,7 +58,7 @@ $this->beginPage();
 
                 <li class="profile">
                     <a href="#" data-toggle="dropdown" class="toggle">
-                        <?= Html::img(Url::to('@web/themes/data/profile/profile.png'), ['class' => 'img-circle img-inline']); ?>
+                        <?= Html::img( Url::to( '@web/themes/data/profile/profile.png' ), ['class' => 'img-circle img-inline'] ); ?>
                     </a>
                 </li>
 
@@ -75,20 +75,20 @@ $this->beginPage();
 
                 <div class="profile-image col-md-4 col-sm-4 col-xs-4">
                     <a href="#">
-                        <?= Html::img(Url::to('@web/themes/data/profile/profile.png'), ['class' => 'img-responsive img-circle']); ?>
+                        <?= Html::img( Url::to( '@web/themes/data/profile/profile.png' ), ['class' => 'img-responsive img-circle'] ); ?>
                     </a>
                 </div>
 
                 <div class="profile-details col-md-8 col-sm-8 col-xs-8">
 
                     <h3>
-                        <a href="#"><?= Yii::$app->session->get('MountSession')['Username'] ?></a>
+                        <a href="#"><?= Yii::$app->session->get( 'MountSession' )['Username'] ?></a>
 
                         <!-- Available statuses: online, idle, busy, away and offline -->
                         <span class="profile-status online"></span>
                     </h3>
 
-                    <p class="profile-title"><?= Yii::$app->formatter->asTime(Yii::$app->session->get('MountSession')['time']) ?></p>
+                    <p class="profile-title"><?= Yii::$app->formatter->asTime( Yii::$app->session->get( 'MountSession' )['time'] ) ?></p>
 
                 </div>
 
@@ -97,19 +97,23 @@ $this->beginPage();
             <ul class='wraplist'>
 
                 <li class="open">
-                    <a href="<?= Url::to(['mount/center/view']) ?>"><i class="fa fa-dashboard"></i><span class="title">首页</span></a>
+                    <a href="<?= Url::to( ['mount/center/view'] ) ?>"><i class="fa fa-dashboard"></i><span class="title">首页</span></a>
                 </li>
 
                 <li class="">
-                    <a href="<?= Url::to(['mount/center/run']) ?>"><i class="fa fa-th"></i><span class="title">1. 挂载中心</span></a>
+                    <a href="<?= Url::to( ['mount/center/run'] ) ?>"><i class="fa fa-th"></i><span class="title">1. 挂载中心</span></a>
                 </li>
 
                 <li class="">
-                    <a href="<?= Url::to(['mount/center/setpower']) ?>"><i class="fa fa-th"></i><span class="title">2. 设置权限</span></a>
+                    <a href="<?= Url::to( ['mount/center/setpower'] ) ?>"><i class="fa fa-th"></i><span class="title">2. 设置权限</span></a>
                 </li>
 
                 <li class="">
-                    <a href="<?= Url::to(['mount/member/logout']) ?>"><i class="fa fa-th"></i><span class="title">注销</span></a>
+                    <a href="<?= Url::to( ['mount/repair'] ) ?>"><i class="fa fa-th"></i><span class="title">修复数据库</span></a>
+                </li>
+
+                <li class="">
+                    <a href="<?= Url::to( ['mount/member/logout'] ) ?>"><i class="fa fa-th"></i><span class="title">注销</span></a>
                 </li>
 
             </ul>

@@ -12,11 +12,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\assets\AppAsset;
-use common\widgets\iConf\ConfList;
 
 AppAsset::register( $this ); // $this 代表视图对象
 
 $this->beginPage();
+
+$this->title = '登陆';
 
 ?>
 
@@ -38,18 +39,18 @@ $this->beginPage();
 
         <h1><a href="#" title="<?= Yii::$app->view->params['ConfArray']['NAME'] ?>" tabindex="-1"><?= Yii::$app->view->params['ConfArray']['NAME'] ?></a></h1>
 
-        <?php $form = ActiveForm::begin( [ 'action' => [ 'admin/member/login' ], 'method' => 'post', 'id' => $model->formName() ] ); ?>
+        <?php $form = ActiveForm::begin( ['action' => ['admin/member/login'], 'method' => 'post', 'id' => $model->formName()] ); ?>
 
         <p>
-            <?= $form->field( $model, 'username' )->textInput( [ 'class' => 'input', 'placeholder' => '帐号...' ] )->label( '帐号' ); ?>
+            <?= $form->field( $model, 'username' )->textInput( ['class' => 'input', 'placeholder' => '帐号...'] )->label( '帐号' ); ?>
         </p>
 
         <p>
-            <?= $form->field( $model, 'password' )->passwordInput( [ 'class' => 'input', 'placeholder' => '密码...' ] )->label( '密码' ); ?>
+            <?= $form->field( $model, 'password' )->passwordInput( ['class' => 'input', 'placeholder' => '密码...'] )->label( '密码' ); ?>
         </p>
 
         <p class="submit">
-            <?= Html::submitButton( '登录', [ 'class' => 'btn btn-orange btn-block' ] ) ?>
+            <?= Html::submitButton( '登录', ['class' => 'btn btn-orange btn-block'] ) ?>
         </p>
 
         <?php ActiveForm::end() ?>

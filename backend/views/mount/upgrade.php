@@ -1,12 +1,9 @@
 <?php
 /**
- *
- * 存入权限
- *
  * Created by Yxl.
  * User: <zccem@163.com>.
- * Date: 2017/11/14
- * Time: 14:54
+ * Date: 2018/10/18
+ * Time: 10:17
  */
 
 use yii\helpers\Html;
@@ -22,10 +19,10 @@ use yii\widgets\ActiveForm;
         <div class="content-body">
             <div class="row">
 
-                <?php$form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]); ?>
+                <?php $form = ActiveForm::begin(['action' => ['mount/upgrade/index'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
                 <p class="submit">
-                    <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>
+                    <?= Html::submitButton('确认升级', ['class' => 'btn btn-primary btn-block']) ?>
                 </p>
 
                 <?php ActiveForm::end() ?>
@@ -36,3 +33,4 @@ use yii\widgets\ActiveForm;
         </div>
     </section>
 </div>
+

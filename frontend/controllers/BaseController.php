@@ -32,7 +32,7 @@ class BaseController extends Controller
             exit( false );
         }
 
-        static::isLanguage();
+        \common\models\Language::isLanguage();
 
         // 重置 @web 路径
         Yii::setAlias('@web', '@web/frontend/web');

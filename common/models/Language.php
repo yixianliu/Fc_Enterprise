@@ -70,11 +70,38 @@ class Language extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 列表
+     *
+     * @param null $key
+     *
+     * @return array|Conf[]|Language[]|\yii\db\ActiveRecord[]
+     */
     public static function findByAll($key = null)
     {
 
         $key = empty( $key ) ? static::$default_key : $key;
 
         return static::find()->where( ['lang_key' => $key] )->all();
+    }
+
+    /**
+     * 判断语言类别
+     *
+     * @return bool
+     */
+    public static function isLanguage()
+    {
+
+        $data = static::findOne( ['lang_key' => (!Yii::$app->session->has( 'language' ) ? static::$default_key : Yii::$app->session['language'])] );
+
+        if (empty( $data ))
+            return false;
+
+        Yii::$app->session->set( 'language', $data->lang_key );
+
+        Yii::$app->language = $data->parameter;
+
+        return true;
     }
 }

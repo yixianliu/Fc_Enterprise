@@ -37,9 +37,7 @@ class MemberController extends Controller
             return $this->redirect( [ '/admin/center/index' ] );
         }
 
-        if (!Yii::$app->session->has( 'language' )) {
-            Yii::$app->session->set( 'language', 'zh-CN' );
-        }
+        \common\models\Language::isLanguage();
 
         Yii::$app->view->params['ConfArray'] = Conf::findByConfArray( Yii::$app->session['language'], 'On' );
 

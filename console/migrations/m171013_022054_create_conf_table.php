@@ -12,9 +12,11 @@ class m171013_022054_create_conf_table extends Migration
      */
     public function up()
     {
-        $this->createTable('conf', [
+        $this->createTable( 'conf', [
+
             'id' => $this->primaryKey(),
-        ]);
+
+        ] );
     }
 
     /**
@@ -22,6 +24,6 @@ class m171013_022054_create_conf_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('conf');
+        $this->dropTable( 'conf' );
     }
 }

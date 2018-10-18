@@ -26,9 +26,7 @@ class BaseController extends Controller
             return $this->redirect( [ '/admin/member/login' ] );
         }
 
-        if (!Yii::$app->session->has( 'language' )) {
-            Yii::$app->session->set( 'language', 'zh-CN' );
-        }
+        \common\models\Language::isLanguage();
 
         Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
 
