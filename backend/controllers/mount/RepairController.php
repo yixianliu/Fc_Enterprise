@@ -23,14 +23,16 @@ class RepairController extends BaseController
     /**
      * 网站配置表
      *
-     * @return bool
+     * @return array
      * @throws \yii\db\Exception
      */
     public function actionConf()
     {
 
-        if (!Yii::$app->request->isAjax) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
+        if (!Yii::$app->request->isAjax) {
+            return ['status' => false, 'msg' => '提交异常!'];
         }
 
         $tableSchema = Yii::$app->db->schema->getTableSchema( Conf::tableName() );
@@ -47,11 +49,23 @@ class RepairController extends BaseController
             Yii::$app->db->createCommand( 'alter table ' . Conf::tableName() . ' modify column is_language varchar(25)' )->execute();
         }
 
-        return true;
+        return ['status' => true, 'msg' => '修复成功!'];
     }
 
+    /**
+     * 菜单表
+     *
+     * @return array
+     * @throws \yii\db\Exception
+     */
     public function actionMenu()
     {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (!Yii::$app->request->isAjax) {
+            return ['status' => false, 'msg' => '提交异常!'];
+        }
 
         $tableSchema = Yii::$app->db->schema->getTableSchema( Menu::tableName() );
 
@@ -67,6 +81,23 @@ class RepairController extends BaseController
             Yii::$app->db->createCommand( 'alter table ' . Conf::tableName() . ' modify column is_language varchar(25)' )->execute();
         }
 
-        return true;
+        return ['status' => true, 'msg' => '修复成功!'];
+    }
+
+    /**
+     * 产品表
+     *
+     * @return array
+     */
+    public function actionProduct()
+    {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (!Yii::$app->request->isAjax) {
+            return ['status' => false, 'msg' => '提交异常!'];
+        }
+
+        return ['status' => true, 'msg' => '修复成功!'];
     }
 }
