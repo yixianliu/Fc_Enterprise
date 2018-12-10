@@ -75,7 +75,7 @@ return [
             // 是否或略脚本名index.php
             'showScriptName'      => false,
             // 是否开启严格解析路由
-            'enableStrictParsing' => false,
+            'enableStrictParsing' => true,
             'suffix'              => '.html',
             'rules'               => [
 
@@ -83,7 +83,7 @@ return [
                 ''        => 'center/index',
                 'mobile/' => 'mobile/center/index',
 
-                '<controller:\w+>/<action:\w+>/<mid:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>-<mid:\d+>' => '<controller>/<action>-<mid>',
                 "<controller:\w+>/<action:\w+>"           => "<controller>/<action>",
 
             ],
@@ -111,9 +111,9 @@ return [
         'i18n'         => [
             'translations' => [
                 'app*' => [
-                    'class'          => 'yii\i18n\PhpMessageSource',
-                    'basePath'       => '@frontend/messages',
-                    'fileMap'        => [
+                    'class'    => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'fileMap'  => [
                         'app'       => 'common.php',
                         'app/error' => 'error.php',
                     ],

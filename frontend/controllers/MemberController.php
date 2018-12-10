@@ -18,8 +18,6 @@ class MemberController extends BaseController
     public function init()
     {
 
-        parent::init();
-
         if (!file_exists( Yii::getAlias( '@backend' ) . '/web/' . Yii::$app->params['RD_FILE'] )) {
             exit( 'Null' );
         }
