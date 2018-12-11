@@ -52,7 +52,6 @@ $text = empty($text) ? '没有描述' : $text;
 // 图片路径
 $imgPathArray = explode('/', Yii::$app->controller->id);
 
-
 switch ($imgPathArray[ 1 ]) {
 
     case 'download':

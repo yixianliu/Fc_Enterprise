@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         <div class="content-body">
             <div class="row">
 
-                <?php$form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]); ?>
+                <?php $form = ActiveForm::begin(['action' => ['mount/center/setpower'], 'method' => 'post', 'id' => $model->formName()]); ?>
 
                 <p class="submit">
                     <?= Html::submitButton('确认挂载', ['class' => 'btn btn-primary btn-block']) ?>

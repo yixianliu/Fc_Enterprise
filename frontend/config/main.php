@@ -70,6 +70,7 @@ return [
 
         // Urls
         'urlManager'   => [
+
             // 是否开启美化效果
             'enablePrettyUrl'     => true,
             // 是否或略脚本名index.php
@@ -83,8 +84,8 @@ return [
                 ''        => 'center/index',
                 'mobile/' => 'mobile/center/index',
 
-                '<controller:\w+>/<action:\w+>-<mid:\d+>' => '<controller>/<action>-<mid>',
                 "<controller:\w+>/<action:\w+>"           => "<controller>/<action>",
+                "<controller:\w+>/<action:\w+>-<mid:\w+>" => "<controller>/<action>",
 
             ],
         ],
