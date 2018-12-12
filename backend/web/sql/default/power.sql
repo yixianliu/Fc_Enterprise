@@ -85,6 +85,12 @@ VALUES
 (NULL, 'viewConf', '查看网站配置', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'deleteConf', '删除网站配置', NULL, NULL, 2, 1, #TIME#, #TIME#),
 
+(NULL, 'createLanguage', '发布语言类别', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'updateLanguage', '更新语言类别', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'indexLanguage', '语言类别', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'viewLanguage', '查看语言类别', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'deleteLanguage', '删除语言类别', NULL, NULL, 2, 1, #TIME#, #TIME#),
+
 (NULL, 'createMsg', '发布留言', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'updateMsg', '更新留言', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'indexMsg', '留言列表', NULL, NULL, 2, 1, #TIME#, #TIME#),

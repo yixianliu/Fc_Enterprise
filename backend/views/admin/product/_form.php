@@ -9,7 +9,7 @@ use phpnt\ICheck\ICheck;
 /* @var $model common\models\Product */
 /* @var $form yii\widgets\ActiveForm */
 
-if ( empty($result['classify']) ) {
+if (empty( $result['classify'] )) {
     $result['classify'] = null;
 }
 ?>
@@ -22,29 +22,29 @@ if ( empty($result['classify']) ) {
 
     <section class="box ">
 
-        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode( $this->title ) ?></h2></header>
 
         <div class="content-body">
             <div class="row">
 
-                <?php if ( !empty($result['classify']) && is_array($result['classify']) ): ?>
+                <?php if (!empty( $result['classify'] ) && is_array( $result['classify'] )): ?>
 
                     <?php $form = ActiveForm::begin(); ?>
 
                     <?=
-                    $form->field($model, 'c_key')->widget(Select2::classname(), [
+                    $form->field( $model, 'c_key' )->widget( Select2::classname(), [
                         'data'          => $result['classify'],
                         'options'       => ['placeholder' => '选择产品分类...'],
                         'pluginOptions' => [
                             'allowClear' => true,
                         ],
-                    ]);
+                    ] );
                     ?>
 
-                    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field( $model, 'title' )->textInput( ['maxlength' => true] ) ?>
 
                     <?=
-                    $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                    $form->field( $model, 'content' )->widget( 'kucha\ueditor\UEditor', [
                         'clientOptions' => [
                             //设置语言
                             'lang'               => 'zh-cn',
@@ -52,22 +52,22 @@ if ( empty($result['classify']) ) {
                             'elementPathEnabled' => false,
                             'wordCount'          => false,
                         ],
-                    ]);
+                    ] );
                     ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品缩略图', 'attribute' => 'thumbnail', 'form' => $form, 'id' => $model->product_id, 'num' => 1]); ?>
+                    <?= Yii::$app->view->renderFile( '@app/views/admin/upload.php', ['model' => $model, 'text' => '上传产品缩略图', 'attribute' => 'thumbnail', 'form' => $form, 'id' => $model->product_id, 'num' => 1] ); ?>
 
-                    <?= $this->render('../upload', ['model' => $model, 'text' => '上传产品图片', 'attribute' => 'images', 'form' => $form, 'id' => $model->product_id]); ?>
+                    <?= Yii::$app->view->renderFile( '@app/views/admin/upload.php', ['model' => $model, 'text' => '上传产品图片', 'attribute' => 'images', 'form' => $form, 'id' => $model->product_id] ); ?>
 
-                    <?= $form->field($model, 'user_id')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false); ?>
+                    <?= $form->field( $model, 'user_id' )->hiddenInput( ['value' => Yii::$app->user->identity->username] )->label( false ); ?>
 
-                    <?= $form->field($model, 'product_id')->hiddenInput(['value' => $model->product_id])->label(false); ?>
+                    <?= $form->field( $model, 'product_id' )->hiddenInput( ['value' => $model->product_id] )->label( false ); ?>
 
                     <div class="form-group">
 
-                        <?= Html::submitButton($model->isNewRecord ? '发布产品' : '更新产品', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        <?= Html::submitButton( $model->isNewRecord ? '发布产品' : '更新产品', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'] ) ?>
 
-                        <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a( '返回列表', ['index'], ['class' => 'btn btn-primary'] ) ?>
 
                         <a class="btn btn-danger" data-toggle="modal" href="#ultraModal-3">高级配置</a>
 
@@ -86,15 +86,15 @@ if ( empty($result['classify']) ) {
 
                                 <div class="modal-body">
 
-                                    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field( $model, 'price' )->textInput( ['maxlength' => true] ) ?>
 
-                                    <?= $form->field($model, 'shop_url')->textarea(['maxlength' => true, 'rows' => 2]) ?>
+                                    <?= $form->field( $model, 'shop_url' )->textarea( ['maxlength' => true, 'rows' => 2] ) ?>
 
-                                    <?= $form->field($model, 'discount')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field( $model, 'discount' )->textInput( ['maxlength' => true] ) ?>
 
-                                    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field( $model, 'keywords' )->textInput( ['maxlength' => true] ) ?>
 
-                                    <?= $form->field($model, 'introduction')->textarea(['maxlength' => true, 'rows' => 6]) ?>
+                                    <?= $form->field( $model, 'introduction' )->textarea( ['maxlength' => true, 'rows' => 6] ) ?>
 
                                 </div>
                                 <div class="modal-footer">
@@ -115,7 +115,7 @@ if ( empty($result['classify']) ) {
 
                                 <div class="modal-body">
 
-                                    <?= $form->field($model, 'is_promote')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_promote' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -124,12 +124,12 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_promote' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_promote' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_hot')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_hot' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -138,12 +138,12 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_hot' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_hot' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_classic')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_classic' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -152,12 +152,12 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_classic' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_classic' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_winnow')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_winnow' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -166,12 +166,12 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_winnow' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_winnow' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_recommend')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_recommend' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -180,26 +180,26 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_recommend' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_recommend' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_using')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_using' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
                                         'color'   => 'red',                  // цвет
                                         'options' => [
                                             'item' => function ($index, $label, $name, $checked, $value) {
-                                                return '<input type="radio" id="is_audit' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_audit' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
+                                                return '<input type="radio" id="is_using' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_using' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                     <hr/>
 
-                                    <?= $form->field($model, 'is_comments')->widget(ICheck::className(), [
+                                    <?= $form->field( $model, 'is_comments' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -208,7 +208,7 @@ if ( empty($result['classify']) ) {
                                             'item' => function ($index, $label, $name, $checked, $value) {
                                                 return '<input type="radio" id="is_comments' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="is_comments' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
                                             },
-                                        ]])
+                                        ]] )
                                     ?>
 
                                 </div>
@@ -223,7 +223,7 @@ if ( empty($result['classify']) ) {
 
                 <?php else: ?>
 
-                    <h4>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a></h4>
+                    <h4>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to( ['admin/product-cls/create'] ) ?>">产品分类</a></h4>
 
                 <?php endif ?>
 
@@ -231,6 +231,6 @@ if ( empty($result['classify']) ) {
         </div>
     </section>
 
-    <?= $this->render('../../formMsg'); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/formMsg.php' ); ?>
 
 </div>

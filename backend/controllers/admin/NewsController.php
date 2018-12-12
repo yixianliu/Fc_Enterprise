@@ -87,16 +87,15 @@ class NewsController extends BaseController
         $model->is_language = Yii::$app->session[ 'language' ];
 
         // 旧路径
-        $oldFile = $model->path;
+        $oldFile = $model->images;
 
         if ( $model->load(Yii::$app->request->post()) ) {
 
             if ( !$model->save() ) {
-
                 Yii::$app->getSession()->setFlash('error', $model->getErrors());
             }
 
-            self::ImageDelete($model->path, $oldFile, $model->news_id);
+            self::ImageDelete($model->images, $oldFile, $model->news_id);
 
             return $this->redirect([ 'view', 'id' => $model->id ]);
         }

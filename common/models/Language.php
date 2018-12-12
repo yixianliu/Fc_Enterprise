@@ -104,4 +104,25 @@ class Language extends \yii\db\ActiveRecord
 
         return true;
     }
+
+    /**
+     * 获取分类(选项框)
+     *
+     * @return array
+     */
+    public static function getClsSelect()
+    {
+
+        // 初始化
+        $result = array();
+
+        // 产品分类
+        $dataClassify = static::findAll(['is_using' => 'On']);
+
+        foreach ($dataClassify as $key => $value) {
+            $result[ $value['lang_key'] ] = $value['name'];
+        }
+
+        return $result;
+    }
 }

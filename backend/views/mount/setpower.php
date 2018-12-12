@@ -12,12 +12,14 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+$this->title = '权限及挂载操作';
+
 ?>
 
 <div class="col-lg-12">
     <section class="box ">
 
-        <header class="panel_header"><h2 class="title pull-left">网站挂载中心</h2></header>
+        <header class="panel_header"><h2 class="title pull-left">权限及挂载操作</h2></header>
 
         <div class="content-body">
             <div class="row">

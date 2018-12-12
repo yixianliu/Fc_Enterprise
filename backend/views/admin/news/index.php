@@ -37,6 +37,20 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                                 'options' => [ 'width' => 100 ],
                             ],
                             [
+                                'attribute' => 'thumbnail',
+                                'format'    => 'html',
+                                'value'     => function ($model) {
+
+                                    $filename = Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $model->thumbnail;
+
+                                    if ( empty($model->thumbnail) && !file_exists($filename) )
+                                        $filename = Yii::getAlias('@web/../../frontend/web/img/not.jpg');
+
+                                    return '<img width="280" height="150" src="' . $filename . '" />';
+                                },
+                                'options'   => ['width' => 100],
+                            ],
+                            [
                                 'attribute' => 'c_key',
                                 'value'     => function ($model) {
 

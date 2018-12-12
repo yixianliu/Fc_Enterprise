@@ -35,12 +35,11 @@ class BaseController extends Controller
         \common\models\Language::isLanguage();
 
         // 重置 @web 路径
-        Yii::setAlias('@web', '@web/frontend/web');
+        Yii::setAlias( '@web', '@web/frontend/web' );
 
         Yii::$app->view->params['ConfArray'] = \common\models\Conf::findByConfArray( Yii::$app->session['language'], 'On' );
 
         // 菜单MID
-
         $id = Yii::$app->request->get( 'mid', null );
 
         if (!empty( $id )) {
@@ -58,7 +57,7 @@ class BaseController extends Controller
     public static function isLanguage()
     {
 
-        $data = Language::findOne(['lang_key' => (!Yii::$app->session->has( 'language' ) ? Language::$default_key : Yii::$app->session['language'])]) ;
+        $data = Language::findOne( ['lang_key' => (!Yii::$app->session->has( 'language' ) ? Language::$default_key : Yii::$app->session['language'])] );
 
         Yii::$app->session->set( 'language', $data->lang_key );
 

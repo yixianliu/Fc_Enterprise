@@ -12,6 +12,8 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+$alt = empty($alt) ? Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ] : $alt;
+
 ?>
 
 <div class="left">
@@ -27,10 +29,10 @@ use yii\helpers\Html;
         <?= Html::img(Url::to('@web/themes/qijian/images/contact.jpg'), [ 'alt' => $this->title ]); ?>
 
         <ul class="contact_us">
-            <li><a><?= Yii::t('app', 'company') ?> ：<?= Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ] ?></a></li>
-            <li><a><?= Yii::t('app', 'contacts') ?> ：<?= Yii::$app->view->params[ 'ConfArray' ][ 'PERSON' ] ?></a></li>
-            <li><a><?= Yii::t('app', 'phone') ?> ：<span><?= Yii::$app->view->params[ 'ConfArray' ][ 'PHONE' ] ?></span></a></li>
-            <li><a><?= Yii::t('app', 'address') ?> ：<span><?= Yii::$app->view->params[ 'ConfArray' ][ 'ADDRESS' ] ?></span></a></li>
+            <li><a title="<?= $alt ?>"><?= Yii::t('app', 'company') ?> ：<?= Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ] ?></a></li>
+            <li><a title="<?= $alt ?>"><?= Yii::t('app', 'contacts') ?> ：<?= Yii::$app->view->params[ 'ConfArray' ][ 'PERSON' ] ?></a></li>
+            <li><a title="<?= $alt ?>"><?= Yii::t('app', 'phone') ?> ：<span><?= Yii::$app->view->params[ 'ConfArray' ][ 'PHONE' ] ?></span></a></li>
+            <li><a title="<?= $alt ?>"><?= Yii::t('app', 'address') ?> ：<span><?= Yii::$app->view->params[ 'ConfArray' ][ 'ADDRESS' ] ?></span></a></li>
         </ul>
 
     </div>

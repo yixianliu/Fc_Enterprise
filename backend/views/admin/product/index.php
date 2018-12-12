@@ -41,10 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                if ( empty($model->thumbnail) )
-                                    return;
+                                $filename = Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail;
 
-                                return '<img width="80" height="80" src="' . Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail . '" />';;
+                                if ( empty($model->thumbnail) && !file_exists($filename) )
+                                    $filename = Yii::getAlias('@web/../../frontend/web/img/not.jpg');
+
+                                return '<img width="280" height="150" src="' . $filename . '" />';
                             },
                             'options'   => ['width' => 100],
                         ],
@@ -89,12 +91,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'is_language',
                             'value'     => function ($model) {
-                                $state = [
-                                    'cn' => '中文',
-                                    'en' => '英文',
-                                ];
-
-                                return $state[$model->is_language];
+                                $data = \common\models\Language::findOne(['lang_key' => $model->is_language]);
+                                return $data->name;
                             },
                             'options'   => ['width' => 100],
                         ],

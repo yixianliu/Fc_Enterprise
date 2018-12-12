@@ -60,17 +60,18 @@ class News extends \yii\db\ActiveRecord
         return [
             [['c_key', 'title', 'content'], 'required'],
             [['sort_id', 'praise', 'forward', 'collection', 'share', 'attention'], 'integer'],
-            [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_using', 'is_comments', 'is_img', 'is_thumb'], 'string'],
+            [['content', 'is_promote', 'is_hot', 'is_winnow', 'is_recommend', 'is_using', 'is_comments', 'is_img'], 'string'],
             [['news_id'], 'string', 'max' => 85],
             [['c_key'], 'string', 'max' => 55],
             [['title'], 'string', 'max' => 125],
-            [['introduction', 'images', 'path'], 'string', 'max' => 255],
+            [['images', 'thumbnail'], 'string', 'max' => 1000],
+            [['introduction'], 'string', 'max' => 255],
             [['keywords'], 'string', 'max' => 120],
             [['news_id'], 'unique'],
             [['title'], 'unique'],
 
             // 若 "level" 为空，则设其为 1
-            [['is_thumb', 'is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend',], 'default', 'value' => 'Off'],
+            [['is_img', 'is_winnow', 'is_hot', 'is_promote', 'is_recommend'], 'default', 'value' => 'Off'],
             [['is_using', 'is_comments'], 'default', 'value' => 'On'],
             [['introduction'], 'default', 'value' => null],
             [['sort_id'], 'default', 'value' => 1],

@@ -20,6 +20,8 @@ $dataSlide = Slide::getData($PageId);
 if (empty($dataSlide))
     return false;
 
+$alt = empty($alt) ? Yii::$app->view->params[ 'ConfArray' ][ 'NAME' ] : $alt;
+
 ?>
 
 <?php if (is_array($dataSlide)): ?>

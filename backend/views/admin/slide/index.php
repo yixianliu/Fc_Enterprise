@@ -103,6 +103,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => ['width' => 100]
                         ],
                     ],
+                    'tableOptions' => ['class' => 'table table-hover'],
+                    'pager'        => [
+                        'options' => ['class' => 'pagination'],
+                    ],
                 ]);
                 ?>
 

@@ -51,40 +51,37 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         'introduction',
                         'keywords',
                         [
-                            'attribute' => 'images',
+                            'attribute' => 'thumbnail',
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                $imgArray = explode(',', $model->images);
+                                if (empty( $model->thumbnail ))
+                                    return;
 
-                                $data = null;
-
-                                foreach ($imgArray as $value) {
-
-                                    if ( empty($value) )
-                                        continue;
-
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
-                                }
+                                $data = '<div class="col-md-12">';
+                                $data .= '<img width="350" height="220" src="' . Yii::getAlias( '@web/../../frontend/web/temp/news/' ) . $model->news_id . '/' . $model->thumbnail . '" />';
+                                $data .= '</div>';
 
                                 return $data;
                             },
                         ],
                         [
-                            'attribute' => 'path',
+                            'attribute' => 'images',
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                $imgArray = explode(',', $model->path);
+                                $imgArray = explode( ',', $model->images );
 
                                 $data = null;
 
                                 foreach ($imgArray as $value) {
 
-                                    if ( empty($value) )
+                                    if (empty( $value ))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/news/') . $model->news_id . '/' . $value . '" /><br /><br />';
+                                    $data .= '<div class="col-md-3">';
+                                    $data .= '<img width="320" height="170" src="' . Yii::getAlias( '@web/../../frontend/web/temp/news/' ) . $model->news_id . '/' . $value . '" />';
+                                    $data .= '</div>';
                                 }
 
                                 return $data;
@@ -103,7 +100,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                                     'Off' => '未开启推广状态',
                                 ];
 
-                                return $state[ $model->is_audit ];
+                                return $state[ $model->is_promote ];
                             },
                         ],
                         [

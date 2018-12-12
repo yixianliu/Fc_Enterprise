@@ -18,9 +18,7 @@ class MemberController extends BaseController
     public function init()
     {
 
-        if (!file_exists( Yii::getAlias( '@backend' ) . '/web/' . Yii::$app->params['RD_FILE'] )) {
-            exit( 'Null' );
-        }
+        parent::init();
 
         if (!Yii::$app->user->isGuest) {
             return $this->redirect( ['/user/index'] );

@@ -42,9 +42,9 @@ class JobSearch extends Job
     {
 
         if (empty($id)) {
-            $query = Job::find();
+            $query = Job::find()->orderBy(['updated_at' => SORT_DESC]);
         } else {
-            $query = Job::find()->where(['user_id' => $id]);
+            $query = Job::find()->where(['user_id' => $id])->orderBy(['updated_at' => SORT_DESC]);
         }
 
         // add conditions that should always apply here

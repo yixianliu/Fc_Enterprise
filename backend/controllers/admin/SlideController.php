@@ -50,30 +50,32 @@ class SlideController extends BaseController
     public function actionIndex()
     {
         // add conditions that should always apply here
-        $query = Slide::find()->where(['is_language' => Yii::$app->session['language']]);
+        $query = Slide::find()->where( ['is_language' => Yii::$app->session['language']] )->orderBy(['updated_at' => SORT_DESC]);
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider( [
             'query' => $query,
-        ]);
+        ] );
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'dataProvider' => $dataProvider,
-        ]);
+        ] );
     }
 
     /**
      * Displays a single Slide model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
     {
 
-        $model = Slide::findByOne($id);
+        $model = Slide::findByOne( $id );
 
-        return $this->render('view', [
+        return $this->render( 'view', [
             'model' => $model,
-        ]);
+        ] );
     }
 
     /**
@@ -92,56 +94,58 @@ class SlideController extends BaseController
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            self::ImageDelete($model->path, $oldFile);
+            self::ImageDelete( $model->path, $oldFile );
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect( ['view', 'id' => $model->id] );
 
         } else {
 
-            return $this->render('create', [
+            return $this->render( 'create', [
                 'model'  => $model,
                 'result' => $this->page(),
-            ]);
+            ] );
         }
     }
 
     /**
      * Updates an existing Slide model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
     {
 
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->id] );
         } else {
 
-            if (!empty($model->getErrors())) {
-                Yii::$app->getSession()->setFlash('error', $model->getErrors());
+            if (!empty( $model->getErrors() )) {
+                Yii::$app->getSession()->setFlash( 'error', $model->getErrors() );
             }
 
             $result = $this->page();
 
-            $dataImg = explode(',', $model->path);
+            $dataImg = explode( ',', $model->path );
 
             foreach ($dataImg as $value) {
 
-                if (empty($value))
+                if (empty( $value ))
                     break;
 
                 $result['img'][] = $value;
             }
 
-            return $this->render('update', [
+            return $this->render( 'update', [
                 'model'  => $model,
                 'result' => $result,
-            ]);
+            ] );
         }
     }
 
@@ -154,10 +158,10 @@ class SlideController extends BaseController
     {
 
         // 初始化
-        $result = array();
+        $result = [];
 
         // 幻灯片分类
-        $dataPageCls = SlideClassify::findAll(['is_using' => 'On']);
+        $dataPageCls = SlideClassify::findAll( ['is_using' => 'On'] );
 
         foreach ($dataPageCls as $value) {
             $result['page'][ $value['c_key'] ] = $value['name'];
@@ -176,15 +180,17 @@ class SlideController extends BaseController
     /**
      * Deletes an existing Slide model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
     {
 
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
@@ -192,15 +198,16 @@ class SlideController extends BaseController
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
+     *
      * @return Slide the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Slide::findOne($id)) !== null) {
+        if (($model = Slide::findOne( $id )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException( 'The requested page does not exist.' );
         }
     }
 }

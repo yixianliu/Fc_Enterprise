@@ -28,7 +28,9 @@
     "codeception/specify": "*",
     "kartik-v/yii2-widget-select2": "@dev",
     "kucha/ueditor": "*",
-    "phpnt/yii2-icheck": "^0.0.2"
+    "kartik-v/yii2-date-range": "*",
+    "phpnt/yii2-icheck": "^0.0.2",
+    "2amigos/yii2-file-upload-widget": "~1.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",
@@ -49,7 +51,7 @@
   "repositories": {
     "packagist": {
       "type": "composer",
-      "url": "https://asset-packagist.org"
+      "url": "https://packagist.phpcomposer.com"
     }
   }
 }

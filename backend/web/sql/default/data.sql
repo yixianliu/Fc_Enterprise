@@ -184,7 +184,7 @@ VALUES
 (NULL, 'AP3', 2, 'A3', 'admin', 'UU1', NULL, '采购管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AU1', 3, 'A3', 'admin', 'UU1', NULL, '用户管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AP2', 4, 'A3', 'admin', 'UU1', NULL, '产品管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'AN1', 5, 'A3', 'admin', 'UU1', NULL, '新闻管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ANews1', 5, 'A3', 'admin', 'UU1', NULL, '新闻管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AM1', 6, 'A3', 'admin', 'UU1', NULL, '菜单管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AR1', 7, 'A3', 'admin', 'UU1', NULL, '角色管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AJ1', 8, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
@@ -192,6 +192,10 @@ VALUES
 (NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AOrder1', 12, 'A3', 'admin', 'UU1', NULL, '订单管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ALanguage1', 13, 'A3', 'admin', 'UU1', NULL, '语言类别管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+
+(NULL, 'ALLanguage1', 1, 'ALanguage1', 'admin', 'UU1', NULL, '语言类别列表', 'language/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ALLanguage2', 2, 'ALanguage1', 'admin', 'UU1', NULL, '添加语言类别', 'language/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
@@ -229,10 +233,10 @@ VALUES
 (NULL, 'AMMV3', 3, 'AP2', 'admin', 'UU1', NULL, '产品分类', 'product-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AMMV4', 4, 'AP2', 'admin', 'UU1', NULL, '添加产品分类', 'product-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'AMMC1', 1, 'AN1', 'admin', 'UU1', NULL, '所有新闻', 'news/index', NULL, NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AMMC2', 2, 'AN1', 'admin', 'UU1', NULL, '添加新闻', 'news/create', NULL, NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AMMC4', 4, 'AN1', 'admin', 'UU1', NULL, '新闻分类', 'news-cls/index', NULL, NULL, 'On', #TIME#, #TIME#),
-(NULL, 'AMMC5', 5, 'AN1', 'admin', 'UU1', NULL, '添加新闻分类', 'news-cls/create', NULL, NULL, 'On', #TIME#, #TIME#),
+(NULL, 'AMMC1', 1, 'ANews1', 'admin', 'UU1', NULL, '所有新闻', 'news/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC2', 2, 'ANews1', 'admin', 'UU1', NULL, '添加新闻', 'news/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC3', 4, 'ANews1', 'admin', 'UU1', NULL, '新闻分类', 'news-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMC4', 5, 'ANews1', 'admin', 'UU1', NULL, '添加新闻分类', 'news-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 (NULL, 'AUMV1', 1, 'AM1', 'admin', 'UU1', NULL, '所有菜单', 'menu/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AUMV2', 2, 'AM1', 'admin', 'UU1', NULL, '创建菜单', 'menu/create', NULL, 'LCN', 'On', #TIME#, #TIME#),

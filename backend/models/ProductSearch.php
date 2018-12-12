@@ -42,26 +42,16 @@ class ProductSearch extends Product
     public function search($params)
     {
 
-        $query = Product::find()->where(['is_language' => Yii::$app->session['language']]);
+        $query = Product::find()
+            ->where( ['is_language' => Yii::$app->session['language']] )
+            ->orderBy( ['updated_at' => SORT_DESC] );
 
         // add conditions that should always apply here
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider( [
             'query' => $query,
-        ]);
+        ] );
 
-        // 排序
-        $dataProvider->setSort([
-            'attributes' => [
-                'product_id' => [
-                    'asc'   => ['product_id' => SORT_DESC],
-                    'desc'  => ['product_id' => SORT_DESC],
-                    'default' => SORT_DESC,
-                    'label' => '产品ID'
-                ],
-            ]
-        ]);
-
-        $this->load($params);
+        $this->load( $params );
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -70,7 +60,7 @@ class ProductSearch extends Product
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        $query->andFilterWhere( [
             'id'         => $this->id,
             'price'      => $this->price,
             'discount'   => $this->discount,
@@ -81,25 +71,25 @@ class ProductSearch extends Product
             'attention'  => $this->attention,
             'grade'      => $this->grade,
             'user_grade' => $this->user_grade,
-        ]);
+        ] );
 
-        $query->andFilterWhere(['like', 'product_id', $this->product_id])
-            ->andFilterWhere(['like', 'user_id', $this->user_id])
-            ->andFilterWhere(['like', 'c_key', $this->c_key])
-            ->andFilterWhere(['like', 's_key', $this->s_key])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'introduction', $this->introduction])
-            ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'path', $this->images])
-            ->andFilterWhere(['like', 'path', $this->images])
-            ->andFilterWhere(['like', 'is_promote', $this->is_promote])
-            ->andFilterWhere(['like', 'is_hot', $this->is_hot])
-            ->andFilterWhere(['like', 'is_classic', $this->is_classic])
-            ->andFilterWhere(['like', 'is_winnow', $this->is_winnow])
-            ->andFilterWhere(['like', 'is_recommend', $this->is_recommend])
-            ->andFilterWhere(['like', 'is_audit', $this->is_using])
-            ->andFilterWhere(['like', 'is_comments', $this->is_comments]);
+        $query->andFilterWhere( ['like', 'product_id', $this->product_id] )
+            ->andFilterWhere( ['like', 'user_id', $this->user_id] )
+            ->andFilterWhere( ['like', 'c_key', $this->c_key] )
+            ->andFilterWhere( ['like', 's_key', $this->s_key] )
+            ->andFilterWhere( ['like', 'title', $this->title] )
+            ->andFilterWhere( ['like', 'content', $this->content] )
+            ->andFilterWhere( ['like', 'introduction', $this->introduction] )
+            ->andFilterWhere( ['like', 'keywords', $this->keywords] )
+            ->andFilterWhere( ['like', 'path', $this->images] )
+            ->andFilterWhere( ['like', 'path', $this->images] )
+            ->andFilterWhere( ['like', 'is_promote', $this->is_promote] )
+            ->andFilterWhere( ['like', 'is_hot', $this->is_hot] )
+            ->andFilterWhere( ['like', 'is_classic', $this->is_classic] )
+            ->andFilterWhere( ['like', 'is_winnow', $this->is_winnow] )
+            ->andFilterWhere( ['like', 'is_recommend', $this->is_recommend] )
+            ->andFilterWhere( ['like', 'is_audit', $this->is_using] )
+            ->andFilterWhere( ['like', 'is_comments', $this->is_comments] );
 
         return $dataProvider;
     }

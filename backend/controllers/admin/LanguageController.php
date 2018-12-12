@@ -2,18 +2,17 @@
 
 namespace backend\controllers\admin;
 
-use common\models\Menu;
 use Yii;
-use common\models\SlideClassify;
+use common\models\Language;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
 
 /**
- * SlideClsController implements the CRUD actions for SlideClassify model.
+ * LanguageController implements the CRUD actions for Language model.
  */
-class SlideClsController extends BaseController
+class LanguageController extends BaseController
 {
     /**
      * @inheritdoc
@@ -42,17 +41,13 @@ class SlideClsController extends BaseController
     }
 
     /**
-     * Lists all SlideClassify models.
+     * Lists all Language models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $query = SlideClassify::find()->orderBy(['updated_at' => SORT_DESC]);
-
-        // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider( [
-            'query' => $query,
+            'query' => Language::find(),
         ] );
 
         return $this->render( 'index', [
@@ -61,7 +56,7 @@ class SlideClsController extends BaseController
     }
 
     /**
-     * Displays a single SlideClassify model.
+     * Displays a single Language model.
      *
      * @param integer $id
      *
@@ -76,28 +71,25 @@ class SlideClsController extends BaseController
     }
 
     /**
-     * Creates a new SlideClassify model.
+     * Creates a new Language model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-
-        $model = new SlideClassify();
+        $model = new Language();
 
         if ($model->load( Yii::$app->request->post() ) && $model->save()) {
             return $this->redirect( ['view', 'id' => $model->id] );
         }
 
         return $this->render( 'create', [
-            'model'  => $model,
-            'type'   => Yii::$app->request->get( 'type', 'default' ),
-            'result' => $this->setType(),
+            'model' => $model,
         ] );
     }
 
     /**
-     * Updates an existing SlideClassify model.
+     * Updates an existing Language model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
      * @param integer $id
@@ -119,7 +111,7 @@ class SlideClsController extends BaseController
     }
 
     /**
-     * Deletes an existing SlideClassify model.
+     * Deletes an existing Language model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -135,40 +127,20 @@ class SlideClsController extends BaseController
     }
 
     /**
-     * Finds the SlideClassify model based on its primary key value.
+     * Finds the Language model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return SlideClassify the loaded model
+     * @return Language the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SlideClassify::findOne( $id )) !== null) {
+        if (($model = Language::findOne( $id )) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException( 'The requested page does not exist.' );
-    }
-
-    public function setType()
-    {
-
-        // 初始化
-        $result = [];
-
-        $type = Yii::$app->request->get( 'type', 'default' );
-
-        if ($type == 'pages') {
-
-            $classify = Menu::findAll( ['model_key' => 'UC1'] );
-
-            foreach ($classify as $value) {
-                $result['classify'][ $value->pages->page_id ] = $value->name;
-            }
-        }
-
-        return $result;
     }
 }

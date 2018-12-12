@@ -13,13 +13,18 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 
+$this->title = '网站挂载中心';
+
 ?>
 
 <div class="col-lg-12">
+
+    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
     <section class="box ">
-        <header class="panel_header">
-            <h2 class="title pull-left">网站挂载中心</h2>
-        </header>
+
+        <header class="panel_header"><h2 class="title pull-left">网站挂载中心</h2></header>
+
         <div class="content-body">
             <div class="row">
 
@@ -47,9 +52,10 @@ use kartik\select2\Select2;
 
                 <?php ActiveForm::end() ?>
 
-                <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
-
             </div>
         </div>
     </section>
+
+    <?= Yii::$app->view->renderFile('@app/views/formMsg.php'); ?>
+
 </div>

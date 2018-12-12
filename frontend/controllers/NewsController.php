@@ -26,7 +26,7 @@ class NewsController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => [ 'POST' ],
+                    'delete' => ['POST'],
                 ],
             ],
 
@@ -43,21 +43,21 @@ class NewsController extends BaseController
     public function actionIndex()
     {
 
-        $id = Yii::$app->request->get('id', null);
+        $id = Yii::$app->request->get( 'id', null );
 
-        $model = empty($id) ? News::find() : News::find()->where([ 'c_key' => $id ]);
+        $model = empty( $id ) ? News::find()->orderBy( ['updated_at' => SORT_DESC] ) : News::find()->where( ['c_key' => $id] )->orderBy( ['updated_at' => SORT_DESC] );
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider( [
             'query'      => $model,
             'pagination' => [
                 'pageSize' => 20,
             ],
-        ]);
+        ] );
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'dataProvider' => $dataProvider,
             'id'           => $id,
-        ]);
+        ] );
     }
 
     /**
@@ -70,9 +70,9 @@ class NewsController extends BaseController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render( 'view', [
+            'model' => $this->findModel( $id ),
+        ] );
     }
 
     /**
@@ -83,17 +83,17 @@ class NewsController extends BaseController
     public function actionCreate()
     {
 
-        exit(false);
+        exit( false );
 
         $model = new News();
 
-        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
-            return $this->redirect([ 'view', 'id' => $model->id ]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model' => $model,
-        ]);
+        ] );
     }
 
     /**
@@ -108,17 +108,17 @@ class NewsController extends BaseController
     public function actionUpdate($id)
     {
 
-        exit(false);
+        exit( false );
 
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
-        if ( $model->load(Yii::$app->request->post()) && $model->save() ) {
-            return $this->redirect([ 'view', 'id' => $model->id ]);
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model' => $model,
-        ]);
+        ] );
     }
 
     /**
@@ -132,9 +132,9 @@ class NewsController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect([ 'index' ]);
+        return $this->redirect( ['index'] );
     }
 
     /**
@@ -148,10 +148,10 @@ class NewsController extends BaseController
      */
     protected function findModel($id)
     {
-        if ( ($model = News::find()->where([ 'news_id' => $id, 'is_audit' => 'On' ])->joinWith('admin')->one()) !== null ) {
+        if (($model = News::find()->where( ['news_id' => $id, 'is_audit' => 'On'] )->joinWith( 'admin' )->one()) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException( 'The requested page does not exist.' );
     }
 }

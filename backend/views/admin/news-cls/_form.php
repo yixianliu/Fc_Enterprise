@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
+use phpnt\ICheck\ICheck;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\NewsClassify */
@@ -30,8 +31,6 @@ use kartik\select2\Select2;
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
-
                 <?=
                 $form->field($model, 'description')->widget('kucha\ueditor\UEditor', [
                         'clientOptions' => [
@@ -44,13 +43,21 @@ use kartik\select2\Select2;
                     ]);
                 ?>
 
+                <?= $form->field($model, 'sort_id')->textInput(['maxlength' => true]) ?>
+
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
                 <?=
-                $form->field($model, 'is_using')->widget(Select2::classname(), [
-                    'data'    => ['On' => '启用', 'Off' => '未启用'],
-                    'options' => ['placeholder' => '是否启用...'],
-                ]);
+                $form->field( $model, 'is_using' )->widget( ICheck::className(), [
+                    'type'    => ICheck::TYPE_RADIO_LIST,
+                    'style'   => ICheck::STYLE_SQUARE,
+                    'items'   => ['On' => '开启', 'Off' => '关闭'],
+                    'color'   => 'red',
+                    'options' => [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            return '<input type="radio" id="coupon_type' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="coupon_type' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
+                        },
+                    ]] )
                 ?>
 
                 <div class="form-group">

@@ -55,32 +55,34 @@ class JobController extends BaseController
     public function actionIndex()
     {
 
-        $model = Job::find()->where(['is_audit' => 'On']);
+        $model = Job::find()->where( ['is_audit' => 'On'] );
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider( [
             'query'      => $model,
             'pagination' => [
                 'pageSize' => 20,
             ],
-        ]);
+        ] );
 
-        return $this->render('index', ['dataProvider' => $dataProvider,]);
+        return $this->render( 'index', ['dataProvider' => $dataProvider,] );
     }
 
     /**
      * Displays a single Job model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
     {
 
-        $model = Job::findOne(['job_id' => $id, 'is_audit' => 'On']);
+        $model = Job::findOne( ['job_id' => $id, 'is_audit' => 'On'] );
 
         // 判断该用户是否存在简历
-        $modelResume = !Yii::$app->user->isGuest ? Resume::findOne(['user_id' => Yii::$app->user->identity->user_id]) : null;
+        $modelResume = !Yii::$app->user->isGuest ? Resume::findOne( ['user_id' => Yii::$app->user->identity->user_id] ) : null;
 
-        if (empty($modelResume))
+        if (empty( $modelResume ))
             $modelResume = new Resume();
 
         // User Id
@@ -92,17 +94,17 @@ class JobController extends BaseController
             $tr = Yii::$app->db->beginTransaction();
 
             // 没有简历的情况下,添加
-            if (empty($modelResume->title)) {
+            if (empty( $modelResume->title )) {
 
-                if ($modelResume->load(Yii::$app->request->post())) {
+                if ($modelResume->load( Yii::$app->request->post() )) {
 
                     if (!$modelResume->save()) {
 
                         $tr->rollBack();
 
-                        Yii::$app->getSession()->setFlash('error', '已存在相关简历 !!');
+                        Yii::$app->getSession()->setFlash( 'error', '已存在相关简历 !!' );
 
-                        return $this->redirect(['view', 'id' => $model->job_id]);
+                        return $this->redirect( ['view', 'id' => $model->job_id] );
                     }
 
                 }
@@ -119,25 +121,25 @@ class JobController extends BaseController
 
                 $tr->commit();
 
-                Yii::$app->getSession()->setFlash('success', '投递简历成功 !!');
+                Yii::$app->getSession()->setFlash( 'success', '投递简历成功 !!' );
 
-                return $this->redirect(['index']);
+                return $this->redirect( ['index'] );
             }
 
-            Yii::$app->getSession()->setFlash('error', '投递简历失败 !!');
+            Yii::$app->getSession()->setFlash( 'error', '投递简历失败 !!' );
 
         }
 
-        $result = JobApplyFor::findByOne($modelResume->user_id, $model->job_id);
+        $result = JobApplyFor::findByOne( $modelResume->user_id, $model->job_id );
 
-        if (empty($model))
-            return $this->redirect(['index']);
+        if (empty( $model ))
+            return $this->redirect( ['index'] );
 
-        return $this->render('view', [
+        return $this->render( 'view', [
             'model'       => $model,
             'modelResume' => $modelResume,
             'result'      => $result,
-        ]);
+        ] );
     }
 
     /**
@@ -149,23 +151,23 @@ class JobController extends BaseController
     {
         $model = new Job();
 
-        $model->job_id = time() . '_' . rand(0000, 9999);
+        $model->job_id = time() . '_' . rand( 0000, 9999 );
 
         $model->user_id = Yii::$app->user->identity->user_id;
 
-        if (!empty($model->getErrors())) {
-            Yii::$app->getSession()->setFlash('error', $model->getErrors());
+        if (!empty( $model->getErrors() )) {
+            Yii::$app->getSession()->setFlash( 'error', $model->getErrors() );
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            return $this->redirect(['user/index']);
+            return $this->redirect( ['user/index'] );
 
         } else {
 
-            return $this->render('create', [
+            return $this->render( 'create', [
                 'model' => $model,
-            ]);
+            ] );
 
         }
     }
@@ -174,35 +176,36 @@ class JobController extends BaseController
      * 更改简历
      *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate()
     {
 
-        $id = Yii::$app->request->get('id', null);
+        $id = Yii::$app->request->get( 'id', null );
 
-        $model = Resume::findOne(['user_id' => $id]);
+        $model = Resume::findOne( ['user_id' => $id] );
 
-        if (empty($model)) {
-            return $this->redirect(['job/create']);
+        if (empty( $model )) {
+            return $this->redirect( ['job/create'] );
         } // 简历 id 和用户 id无法对应
         else {
             if ($model->user_id != Yii::$app->user->identity->user_id) {
-                return $this->redirect(['index']);
+                return $this->redirect( ['index'] );
             }
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
 
-            Yii::$app->getSession()->setFlash('success', '修改简历成功 !!');
+            Yii::$app->getSession()->setFlash( 'success', '修改简历成功 !!' );
 
-            return $this->redirect(['user/index']);
+            return $this->redirect( ['user/index'] );
 
         } else {
 
-            return $this->render('update', [
+            return $this->render( 'update', [
                 'model' => $model,
-            ]);
+            ] );
 
         }
     }
@@ -210,30 +213,34 @@ class JobController extends BaseController
     /**
      * Deletes an existing Job model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
     {
-        throw new NotFoundHttpException('The requested page does not exist. ' . $id);
-        $this->findModel($id)->delete();
+        throw new NotFoundHttpException( 'The requested page does not exist. ' . $id );
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
      * Finds the Job model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Job the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Job::findOne($id)) !== null) {
+        if (($model = Job::findOne( $id )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException( 'The requested page does not exist.' );
         }
     }
 }

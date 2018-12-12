@@ -54,8 +54,8 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['m_key', 'name', 'parent_id', 'model_key'], 'required'],
-            [['is_using', 'rp_key'], 'string'],
+            [['m_key', 'name', 'parent_id', 'model_key', 'is_language'], 'required'],
+            [['is_using', 'rp_key', 'is_language'], 'string'],
             [['sort_id',], 'integer'],
             [['m_key', 'parent_id'], 'string', 'max' => 55],
             [['rp_key', 'model_key', 'name'], 'string', 'max' => 85],
@@ -75,18 +75,19 @@ class Menu extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'm_key'      => '菜单关键KEY',
-            'is_type'    => '菜单类型',
-            'sort_id'    => '菜单排序',
-            'parent_id'  => '父类菜单',
-            'rp_key'     => '角色关键KEY',
-            'model_key'  => '菜单模型',
-            'name'       => '菜单名称',
-            'url'        => '菜单外部链接',
-            'is_using'   => '是否启用',
-            'custom_key' => '自定义页面分类KEY',
-            'created_at' => '添加数据时间',
-            'updated_at' => '更新数据时间',
+            'm_key'       => '菜单关键KEY',
+            'is_type'     => '菜单类型',
+            'sort_id'     => '菜单排序',
+            'parent_id'   => '父类菜单',
+            'rp_key'      => '角色类别',
+            'model_key'   => '菜单模型',
+            'name'        => '菜单名称',
+            'url'         => '菜单外部链接',
+            'is_using'    => '是否启用',
+            'is_language' => '语言类别',
+            'custom_key'  => '自定义页面分类KEY',
+            'created_at'  => '添加数据时间',
+            'updated_at'  => '更新数据时间',
         ];
     }
 
@@ -196,7 +197,7 @@ class Menu extends \yii\db\ActiveRecord
                 // 下载中心
                 case 'download':
 
-                    if (Yii::$app->controller->id == 'job')
+                    if (Yii::$app->controller->id == 'download')
                         $array['open'] = 'On';
 
                     $array['url'] = ['/download/index'];
@@ -209,7 +210,7 @@ class Menu extends \yii\db\ActiveRecord
                     if (Yii::$app->controller->id == 'job')
                         $array['open'] = 'On';
 
-                    $array['url'] = ['/job/index'];
+                    $array['url'] = ['/job/index', 'mid' => $value['m_key']];
                     $array['child'] = static::recursionJobMenu( $value, $type );
                     break;
 
