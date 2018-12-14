@@ -15,49 +15,66 @@ $this->params['breadcrumbs'][] = $this->title;
     <section class="box ">
 
         <header class="panel_header">
-            <h2 class="title pull-left"><?= Html::encode($this->title) ?></h2>
+            <h2 class="title pull-left"><?= Html::encode( $this->title ) ?></h2>
         </header>
 
         <div class="content-body">
             <div class="row">
 
-                <h1><?= Html::encode($this->title) ?></h1>
+                <h1><?= Html::encode( $this->title ) ?></h1>
 
                 <p>
-                    <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('删除', ['delete', 'id' => $model->id], [
+                    <?= Html::a( '更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary'] ) ?>
+                    <?= Html::a( '删除', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
-                        'data' => [
+                        'data'  => [
                             'confirm' => '是否删除这条记录?',
-                            'method' => 'post',
+                            'method'  => 'post',
                         ],
-                    ]) ?>
-                    <?= Html::a('返回列表', ['index'], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('继续添加', ['create'], ['class' => 'btn btn-success']) ?>
+                    ] ) ?>
+                    <?= Html::a( '返回列表', ['index'], ['class' => 'btn btn-primary'] ) ?>
+                    <?= Html::a( '继续添加', ['create'], ['class' => 'btn btn-success'] ) ?>
                 </p>
 
                 <?=
-                DetailView::widget([
-                    'model' => $model,
+                DetailView::widget( [
+                    'model'      => $model,
                     'attributes' => [
                         'purchase_id',
                         'user_id',
                         'title',
                         [
-                            'attribute' => 'path',
-                            'format' => 'html',
-                            'value' => function ($model) {
+                            'attribute' => 'thumbnail',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
 
-                                $imgArray = explode(',', $model->path);
+                                if (empty( $model->thumbnail ))
+                                    return;
+
+                                $data = '<div class="col-md-12">';
+                                $data .= '<img width="350" height="220" src="' . Yii::getAlias( '@web/../../frontend/web/temp/purchase/' ) . $model->purchase_id . '/' . $model->thumbnail . '" />';
+                                $data .= '</div>';
+
+                                return $data;
+                            },
+                        ],
+                        [
+                            'attribute' => 'images',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $imgArray = explode( ',', $model->images );
 
                                 $data = null;
 
                                 foreach ($imgArray as $value) {
 
-                                    if (empty($value))
+                                    if (empty( $value ))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web/../../frontend/web/temp/purchase/') . $model->purchase_id . '/' . $value . '" /><br /><br />';
+                                    $data .= '<div class="col-md-3">';
+                                    $data .= '<img width="320" height="170" src="' . Yii::getAlias( '@web/../../frontend/web/temp/purchase/' ) . $model->purchase_id . '/' . $value . '" />';
+                                    $data .= '</div>';
                                 }
 
                                 return $data;
@@ -68,38 +85,38 @@ $this->params['breadcrumbs'][] = $this->title;
                         'unit',
                         [
                             'attribute' => 'is_send_msg',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 $state = [
-                                    'On' => '群发供应商',
+                                    'On'  => '群发供应商',
                                     'Off' => '不群发',
                                 ];
 
-                                return $state[$model->is_send_msg];
+                                return $state[ $model->is_send_msg ];
                             },
                         ],
                         [
                             'attribute' => 'is_type',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 $state = [
-                                    'Long' => '长期采购', 'Short' => '短期采购'
+                                    'Long' => '长期采购', 'Short' => '短期采购',
                                 ];
 
-                                return $state[$model->is_type];
+                                return $state[ $model->is_type ];
                             },
                         ],
                         [
                             'attribute' => 'is_status',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 $state = [
-                                    'On' => '采购中', 'Off' => '关闭'
+                                    'On' => '采购中', 'Off' => '关闭',
                                 ];
 
-                                return $state[$model->is_status];
+                                return $state[ $model->is_status ];
                             },
                         ],
                         [
                             'attribute' => 'start_at',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 return $model->start_at;
                             },
                         ],
@@ -111,31 +128,31 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        ],
                         [
                             'attribute' => 'is_using',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 $state = [
-                                    'On' => '已启用',
+                                    'On'  => '已启用',
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[$model->is_using];
+                                return $state[ $model->is_using ];
                             },
                         ],
                         [
                             'attribute' => 'created_at',
-                            'value' => function ($model) {
-                                return date('Y-m-d H:i', $model->created_at);
+                            'value'     => function ($model) {
+                                return date( 'Y-m-d H:i', $model->created_at );
                             },
                         ],
                         [
                             'attribute' => 'updated_at',
-                            'value' => function ($model) {
-                                return date('Y-m-d H:i', $model->updated_at);
+                            'value'     => function ($model) {
+                                return date( 'Y-m-d H:i', $model->updated_at );
                             },
                         ],
                         'content:html',
                     ],
-                    'template' => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
-                ])
+                    'template'   => '<tr><th width="200">{label}</th><td>{value}</td></tr>',
+                ] )
                 ?>
 
             </div>
@@ -146,32 +163,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <h3>采购信息下的价格</h3>
 
-                <?= GridView::widget([
+                <?= GridView::widget( [
                     'dataProvider' => $result['offer'],
-                    'columns' => [
+                    'columns'      => [
                         [
-                            'class' => 'yii\grid\SerialColumn',
-                            'options' => ['width' => 100]
+                            'class'   => 'yii\grid\SerialColumn',
+                            'options' => ['width' => 100],
                         ],
                         [
                             'attribute' => 'price',
-                            'options' => ['width' => 150]
+                            'options'   => ['width' => 150],
                         ],
                         [
                             'attribute' => 'path',
-                            'format' => 'html',
-                            'value' => function ($model) {
+                            'format'    => 'html',
+                            'value'     => function ($model) {
 
-                                $imgArray = explode(',', $model->path);
+                                $imgArray = explode( ',', $model->path );
 
                                 $data = null;
 
                                 foreach ($imgArray as $value) {
 
-                                    if (empty($value))
+                                    if (empty( $value ))
                                         continue;
 
-                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias('@web') . '/temp/sp-offer/' . $value . '" /><br /><br />';
+                                    $data .= '<img width=350 height=150 src="' . Yii::getAlias( '@web' ) . '/temp/sp-offer/' . $value . '" /><br /><br />';
                                 }
 
                                 return $data;
@@ -179,22 +196,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'is_using',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 $state = [
-                                    'On' => '已采纳',
+                                    'On'  => '已采纳',
                                     'Off' => '未采纳',
                                 ];
 
-                                return $state[$model->is_using];
+                                return $state[ $model->is_using ];
                             },
-                            'options' => ['width' => 100]
+                            'options'   => ['width' => 100],
                         ],
                         [
-                            'class' => 'yii\grid\ActionColumn',
-                            'options' => ['width' => 100]
+                            'class'   => 'yii\grid\ActionColumn',
+                            'options' => ['width' => 100],
                         ],
                     ],
-                ]); ?>
+                ] ); ?>
 
             </div>
         </div>

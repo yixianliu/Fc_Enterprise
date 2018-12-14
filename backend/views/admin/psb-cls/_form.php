@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use phpnt\ICheck\ICheck;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PsbClassify */
@@ -64,13 +65,16 @@ switch ($model->is_type) {
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
                 <?=
-                $form->field($model, 'is_using')->widget(kartik\select2\Select2::classname(), [
-                    'data'          => ['On' => '开启', 'Off' => '关闭'],
-                    'options'       => ['placeholder' => '选择...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);
+                $form->field( $model, 'is_using' )->widget( ICheck::className(), [
+                    'type'    => ICheck::TYPE_RADIO_LIST,
+                    'style'   => ICheck::STYLE_SQUARE,
+                    'items'   => ['On' => '开启', 'Off' => '关闭'],
+                    'color'   => 'red',
+                    'options' => [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            return '<input type="radio" id="coupon_type' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="coupon_type' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
+                        },
+                    ]] )
                 ?>
 
                 <div class="form-group">

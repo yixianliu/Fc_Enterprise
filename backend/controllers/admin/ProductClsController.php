@@ -93,7 +93,7 @@ class ProductClsController extends BaseController
             return $this->render( 'create', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $model->getClsSelect(),
+                    'classify' => ProductClassify::getClsSelect(),
                 ],
             ] );
         }
@@ -118,7 +118,7 @@ class ProductClsController extends BaseController
             return $this->render( 'update', [
                 'model'  => $model,
                 'result' => [
-                    'classify' => $model->getClsSelect(),
+                    'classify' => ProductClassify::getClsSelect(),
                 ],
             ] );
         }

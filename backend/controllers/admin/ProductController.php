@@ -8,7 +8,6 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use common\models\Product;
 use common\models\ProductClassify;
-use common\models\Section;
 use backend\models\ProductSearch;
 
 /**
@@ -28,7 +27,7 @@ class ProductController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => [ '@' ],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -36,7 +35,7 @@ class ProductController extends BaseController
             'verbs' => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => [ 'POST' ],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -104,14 +103,16 @@ class ProductController extends BaseController
 
             self::ImageDelete( $model->images, $oldFile, $model->product_id );
 
-            return $this->redirect( [ 'view', 'id' => $model->id ] );
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
         $model->product_id = self::getRandomString();
 
         return $this->render( 'create', [
             'model'  => $model,
-            'result' => $this->getData(),
+            'result' => [
+                'classify' => ProductClassify::getClsSelect(),
+            ],
         ] );
     }
 
@@ -134,12 +135,14 @@ class ProductController extends BaseController
 
             self::ImageDelete( $model->images, $oldFile, $model->product_id );
 
-            return $this->redirect( [ 'view', 'id' => $model->id ] );
+            return $this->redirect( ['view', 'id' => $model->id] );
         }
 
         return $this->render( 'update', [
             'model'  => $model,
-            'result' => $this->getData(),
+            'result' => [
+                'classify' => ProductClassify::getClsSelect(),
+            ],
         ] );
     }
 
@@ -155,7 +158,7 @@ class ProductController extends BaseController
     {
         $this->findModel( $id )->delete();
 
-        return $this->redirect( [ 'index' ] );
+        return $this->redirect( ['index'] );
     }
 
     /**
@@ -177,43 +180,70 @@ class ProductController extends BaseController
     }
 
     /**
-     * 获取分类和版块
+     * 批量复制
      *
-     * @return array
+     * @return array|\yii\web\Response
+     * @throws \yii\db\Exception
      */
-    public function getData()
+    public function actionBatchCreate()
     {
-        // 初始化
-        $result = [];
-
-        // 所有版块
-        $dataSection = Section::findAll( [ 'is_using' => 'On' ] );
-
-        $result['section']['S0'] = '暂无';
-
-        foreach ($dataSection as $value) {
-            $result['section'][ $value['s_key'] ] = $value['name'];
+        if (!Yii::$app->request->isAjax) {
+            Yii::$app->getSession()->setFlash( 'error', '非法提交模式!' );
+            return $this->redirect( 'index' );
         }
 
-        // 产品分类
-        $dataClassify = ProductClassify::findAll( [ 'is_using' => 'On', 'parent_id' => 'C0' ] );
+        // 需要复制的 Id
+        $id = Yii::$app->request->get( 'id', null );
 
-        // 产品分类
-        $Cls = new ProductClassify();
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        foreach ($dataClassify as $key => $value) {
+        if (empty( $id )) {
+            return ['status' => false, 'msg' => '没有选择内容'];
+        }
 
-            $result['classify'][ $value['c_key'] ] = $value['name'];
+        $arrayId = explode( ',', $id );
 
-            $child = $Cls->recursionClsSelect( $value );
+        $connection = Yii::$app->db->beginTransaction();
 
-            if (empty( $child ))
+        foreach ($arrayId as $value) {
+
+            if (empty( $value ))
                 continue;
 
-            $result['classify'] = array_merge( $result['classify'], $child );
+            $modelDef['Product'] = Product::findOne( ['id' => $value] )->toArray();
+
+            $modelDef['Product']['title'] = $modelDef['Product']['title'] . '_' . '复制内容' . '_' . self::getRandomString();
+            $modelDef['Product']['product_id'] = self::getRandomString();
+            $modelDef['Product']['images'] = null;
+            $modelDef['Product']['thumbnail'] = null;
+
+            $model = new Product();
+
+            if (!$model->load($modelDef, 'Product')) {
+                $connection->rollBack();
+                return ['status' => false, 'msg' => '无法载入数据!'];
+            }
+
+            if (!$model->save()) {
+                $connection->rollBack();
+                return ['status' => false, 'msg' => '内容无法复制!'];
+            }
+
         }
 
-        return $result;
+        $connection->commit();
+
+        return ['status' => true, 'msg' => '复制成功'];
+    }
+
+    public function actionBatchMovie()
+    {
+
+    }
+
+    public function actionBatchDelete()
+    {
+
     }
 
 }

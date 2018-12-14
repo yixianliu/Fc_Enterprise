@@ -151,6 +151,9 @@ VALUES
 (NULL, 'indexProduct', '产品列表', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'viewProduct', '查看产品', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'deleteProduct', '删除产品', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'batch-createProduct', '批量复制产品', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'batch-deleteProduct', '批量删除产品', NULL, NULL, 2, 1, #TIME#, #TIME#),
+(NULL, 'batch-movieProduct', '批量移动产品', NULL, NULL, 2, 1, #TIME#, #TIME#),
 
 (NULL, 'createProduct-cls', '添加产品分类', NULL, NULL, 2, 1, #TIME#, #TIME#),
 (NULL, 'updateProduct-cls', '更新产品分类', NULL, NULL, 2, 1, #TIME#, #TIME#),

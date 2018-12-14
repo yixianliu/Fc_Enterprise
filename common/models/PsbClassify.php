@@ -29,6 +29,12 @@ class PsbClassify extends \yii\db\ActiveRecord
         'Bid'      => 'B0',
     ];
 
+    static public $parent_cly_name = [
+        'Supply'   => '供应类型',
+        'Purchase' => '采购类型',
+        'Bid'      => '投标类型',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -101,7 +107,7 @@ class PsbClassify extends \yii\db\ActiveRecord
         $parent_id = empty( $parent_id ) ? static::$parent_cly_id[ $type ] : $parent_id;
 
         return static::find()->where( ['parent_id' => $parent_id, 'is_type' => $type] )
-            ->orderBy( 'sort_id', SORT_DESC )
+            ->orderBy( ['sort_id' => SORT_DESC] )
             ->asArray()
             ->all();
     }
@@ -115,25 +121,27 @@ class PsbClassify extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function getClsSelect($type = 'Supply', $one = 'On', $parent_id = null)
+    public static function getClsSelect($type = 'Supply', $one = 'On')
     {
 
-        $parent_id = empty( $parent_id ) ? static::$parent_cly_id[ $type ] : $parent_id;
+        if (empty($type)) {
+            return false;
+        }
 
         // 初始化
         $result = [];
 
         // 所有分类
-        $dataClassify = static::findByAll( $parent_id, $type );
+        $dataClassify = static::findByAll( static::$parent_cly_id[ $type ], $type );
 
         if ($one == 'On')
-            $result[ $parent_id ] = '顶级分类 !!';
+            $result[ static::$parent_cly_id[ $type ] ] = '顶级分类!!';
 
         foreach ($dataClassify as $key => $value) {
 
             $result[ $value['c_key'] ] = $value['name'];
 
-            $child = static::recursionClsSelect( $value );
+            $child = static::recursionClsSelect( $value, $type );
 
             if (empty( $child ))
                 continue;
@@ -148,34 +156,37 @@ class PsbClassify extends \yii\db\ActiveRecord
      * 无限分类(选项框)
      *
      * @param     $data
+     * @param     $type
      * @param int $num
+     *
+     * @return array|void
      */
-    public static function recursionClsSelect($data, $num = 1)
+    public static function recursionClsSelect($data, $type, $num = 1)
     {
 
-        if (empty( $data ))
+        if (empty( $data ) || empty($type))
             return;
 
         // 初始化
         $result = [];
         $symbol = null;
 
-        $child = static::findByAll( $data['c_key'] );
+        $child = static::findByAll( $data['c_key'], $type );
 
         if (empty( $child ))
             return;
 
         if ($num != 0) {
             for ($i = 0; $i <= $num; $i++) {
-                $symbol .= '――';
+                $symbol .= '--';
             }
         }
 
         foreach ($child as $key => $value) {
 
-            $result[ $value['c_key'] ] = $symbol . $value['name'];
+            $result[ $value['c_key'] ] = $symbol . '[子类]-->' . $value['name'];
 
-            $childData = static::recursionClsSelect( $value, ($num + 1) );
+            $childData = static::recursionClsSelect( $value, $type, ($num + 1) );
 
             if (empty( $childData ))
                 continue;

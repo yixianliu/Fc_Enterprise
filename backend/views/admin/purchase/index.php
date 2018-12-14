@@ -30,8 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         [
+                            'class'   => 'yii\grid\CheckboxColumn',
+                            'name'    => 'id',
+                            'options' => ['width' => 40],
+                        ],
+                        [
                             'class'   => 'yii\grid\SerialColumn',
                             'options' => ['width' => 100]
+                        ],
+                        [
+                            'attribute' => 'thumbnail',
+                            'format'    => 'html',
+                            'value'     => function ($model) {
+
+                                $filename = Yii::getAlias('@web/../../frontend/web/temp/purchase/') . $model->purchase_id . '/' . $model->thumbnail;
+
+                                if ( empty($model->thumbnail) && !file_exists($filename) )
+                                    $filename = Yii::getAlias('@web/../../frontend/web/img/not.jpg');
+
+                                return '<img width="280" height="150" src="' . $filename . '" />';
+                            },
+                            'options'   => ['width' => 100],
                         ],
                         'title',
                         [

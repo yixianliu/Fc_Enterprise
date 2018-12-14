@@ -12,26 +12,39 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('_search', ['model' => $searchModel, 'result' => $result]); ?>
+<?= $this->render( '_search', ['model' => $searchModel, 'result' => $result] ); ?>
 
 <div class="col-lg-12">
 
-    <?= Html::a('添加产品', ['create'], ['class' => 'btn btn-success']) ?>
-    <?= Html::a('添加产品分类', ['admin/product-cls/create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a( '添加产品', ['create'], ['class' => 'btn btn-success'] ) ?>
+    <?= Html::a( '添加产品分类', ['admin/product-cls/create'], ['class' => 'btn btn-success'] ) ?>
+    <?= Html::button( '批量复制', ['class' => 'btn btn-success', 'id' => 'BatchCreate'] ) ?>
+    <?= Html::button( '批量移动', ['class' => 'btn btn-success', 'id' => 'BatchMovie'] ) ?>
+    <?= Html::button( '批量删除', ['class' => 'btn btn-success', 'id' => 'BatchDelete'] ) ?>
+
+    <br/>
+    <br/>
+
+    <?= Yii::$app->view->renderFile( '@app/views/formMsg.php' ); ?>
 
     <section class="box ">
 
-        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode($this->title) ?></h2></header>
+        <header class="panel_header"><h2 class="title pull-left"><?= Html::encode( $this->title ) ?></h2></header>
 
         <div class="content-body">
 
-            <?php if (!empty($result['classify']) && is_array($result['classify'])): ?>
+            <?php if (!empty( $result['classify'] ) && is_array( $result['classify'] )): ?>
 
                 <?=
-                GridView::widget([
+                GridView::widget( [
                     'dataProvider' => $dataProvider,
                     'options'      => ['class' => 'table table-hover'],
                     'columns'      => [
+                        [
+                            'class'   => 'yii\grid\CheckboxColumn',
+                            'name'    => 'id',
+                            'options' => ['width' => 40],
+                        ],
                         [
                             'class'   => 'yii\grid\SerialColumn',
                             'options' => ['width' => 50],
@@ -41,10 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format'    => 'html',
                             'value'     => function ($model) {
 
-                                $filename = Yii::getAlias('@web/../../frontend/web/temp/product/') . $model->product_id . '/' . $model->thumbnail;
+                                $filename = Yii::getAlias( '@web/../../frontend/web/temp/product/' ) . $model->product_id . '/' . $model->thumbnail;
 
-                                if ( empty($model->thumbnail) && !file_exists($filename) )
-                                    $filename = Yii::getAlias('@web/../../frontend/web/img/not.jpg');
+                                if (empty( $model->thumbnail ) && !file_exists( $filename ))
+                                    $filename = Yii::getAlias( '@web/../../frontend/web/img/not.jpg' );
 
                                 return '<img width="280" height="150" src="' . $filename . '" />';
                             },
@@ -55,9 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'c_key',
                             'value'     => function ($model) {
 
-                                $data = \common\models\ProductClassify::findOne(['c_key' => $model->c_key]);
+                                $data = \common\models\ProductClassify::findOne( ['c_key' => $model->c_key] );
 
-                                if (empty($data)) {
+                                if (empty( $data )) {
                                     return '没有分类';
                                 }
 
@@ -72,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[$model->is_comments];
+                                return $state[ $model->is_comments ];
                             },
                             'options'   => ['width' => 110],
                         ],
@@ -84,14 +97,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'Off' => '未启用',
                                 ];
 
-                                return $state[$model->is_using];
+                                return $state[ $model->is_using ];
                             },
                             'options'   => ['width' => 100],
                         ],
                         [
                             'attribute' => 'is_language',
                             'value'     => function ($model) {
-                                $data = \common\models\Language::findOne(['lang_key' => $model->is_language]);
+                                $data = \common\models\Language::findOne( ['lang_key' => $model->is_language] );
                                 return $data->name;
                             },
                             'options'   => ['width' => 100],
@@ -105,15 +118,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'pager'        => [
                         'options' => ['class' => 'pagination'],
                     ],
-                ]);
+                ] );
                 ?>
 
             <?php else: ?>
 
-                <h5>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to(['admin/product-cls/create']) ?>">产品分类</a> !!</h5>
+                <h5>没有产品分类, 赶紧添加 <a href="<?= \yii\helpers\Url::to( ['admin/product-cls/create'] ) ?>">产品分类</a>!!</h5>
 
             <?php endif ?>
 
         </div>
     </section>
+
+    <?= Yii::$app->view->renderFile( '@app/views/_ajax.php', ['url' => \yii\helpers\Url::to(['batch-create'], true)] ); ?>
+
 </div>
+

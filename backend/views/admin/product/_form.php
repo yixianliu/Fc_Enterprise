@@ -115,7 +115,8 @@ if (empty( $result['classify'] )) {
 
                                 <div class="modal-body">
 
-                                    <?= $form->field( $model, 'is_promote' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_promote' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -129,7 +130,8 @@ if (empty( $result['classify'] )) {
 
                                     <hr/>
 
-                                    <?= $form->field( $model, 'is_hot' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_hot' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -143,7 +145,8 @@ if (empty( $result['classify'] )) {
 
                                     <hr/>
 
-                                    <?= $form->field( $model, 'is_classic' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_classic' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -157,7 +160,8 @@ if (empty( $result['classify'] )) {
 
                                     <hr/>
 
-                                    <?= $form->field( $model, 'is_winnow' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_winnow' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],
@@ -171,7 +175,8 @@ if (empty( $result['classify'] )) {
 
                                     <hr/>
 
-                                    <?= $form->field( $model, 'is_recommend' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_recommend' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],

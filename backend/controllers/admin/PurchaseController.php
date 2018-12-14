@@ -2,16 +2,15 @@
 
 namespace backend\controllers\admin;
 
-use common\models\SpOffer;
 use Yii;
 use common\models\Purchase;
 use common\models\PurchaseSearch;
 use common\models\PsbClassify;
-use common\models\User;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
+use common\models\SpOffer;
 
 /**
  * PurchaseController implements the CRUD actions for Purchase model.
@@ -51,12 +50,12 @@ class PurchaseController extends BaseController
     public function actionIndex()
     {
         $searchModel = new PurchaseSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
-        return $this->render('index', [
+        return $this->render( 'index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ] );
     }
 
     /**
@@ -69,20 +68,20 @@ class PurchaseController extends BaseController
     public function actionView($id)
     {
 
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
         // 价格
-        $result['offer'] = new ActiveDataProvider([
-            'query'      => SpOffer::find()->where(['offer_id' => $model->purchase_id]),
+        $result['offer'] = new ActiveDataProvider( [
+            'query'      => SpOffer::find()->where( ['offer_id' => $model->purchase_id] ),
             'pagination' => [
                 'pageSize' => 20,
             ],
-        ]);
+        ] );
 
-        return $this->render('view', [
+        return $this->render( 'view', [
             'model'  => $model,
             'result' => $result,
-        ]);
+        ] );
     }
 
     /**
@@ -99,37 +98,37 @@ class PurchaseController extends BaseController
 
         $data = Yii::$app->request->post();
 
-        if (!empty($data)) {
-            if (!($data = static::setDate($data)))
-                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        if (!empty( $data )) {
+            if (!($data = static::setDate( $data )))
+                Yii::$app->getSession()->setFlash( 'error', '时间设置有误 !!' );
         }
 
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load($data) && $model->save()) {
+        if ($model->load( $data ) && $model->save()) {
 
             // 群发短信
-            PsbClassify::smsSend($data);
+            PsbClassify::smsSend( $data );
 
-            self::ImageDelete($model->path, $oldFile, $model->purchase_id);
+            self::ImageDelete( $model->path, $oldFile, $model->purchase_id );
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect( ['view', 'id' => $model->id] );
 
         }
 
-        if (!empty($model->getErrors())) {
-            Yii::$app->getSession()->setFlash('error', $model->getErrors());
+        if (!empty( $model->getErrors() )) {
+            Yii::$app->getSession()->setFlash( 'error', $model->getErrors() );
         }
 
         $model->purchase_id = self::getRandomString();
 
-        return $this->render('create', [
+        return $this->render( 'create', [
             'model'  => $model,
             'result' => [
-                'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase', 'Off'),
+                'classify' => PsbClassify::getClsSelect( 'Purchase', 'Off' ),
             ],
-        ]);
+        ] );
     }
 
     /**
@@ -143,41 +142,41 @@ class PurchaseController extends BaseController
     public function actionUpdate($id)
     {
 
-        $model = $this->findModel($id);
+        $model = $this->findModel( $id );
 
         $data = Yii::$app->request->post();
 
-        if (!empty($data)) {
-            if (!($data = static::setDate($data)))
-                Yii::$app->getSession()->setFlash('error', '时间设置有误 !!');
+        if (!empty( $data )) {
+            if (!($data = static::setDate( $data )))
+                Yii::$app->getSession()->setFlash( 'error', '时间设置有误 !!' );
         }
 
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load($data) && $model->save()) {
+        if ($model->load( $data ) && $model->save()) {
 
-            PsbClassify::smsSend($data);
+            PsbClassify::smsSend( $data );
 
-            self::ImageDelete($model->path, $oldFile, $model->purchase_id);
+            self::ImageDelete( $model->path, $oldFile, $model->purchase_id );
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect( ['view', 'id' => $model->id] );
 
         }
 
-        if (!empty($model->getErrors())) {
-            Yii::$app->getSession()->setFlash('error', $model->getErrors());
+        if (!empty( $model->getErrors() )) {
+            Yii::$app->getSession()->setFlash( 'error', $model->getErrors() );
         }
 
 //        $model->start_at = date('Y-m-d H:i', $model->start_at);
 //        $model->end_at = date('Y-m-d H:i', $model->end_at);
 
-        return $this->render('update', [
+        return $this->render( 'update', [
             'model'  => $model,
             'result' => [
-                'classify' => PsbClassify::getClsSelect(PsbClassify::$parent_cly_id['Purchase'], 'Purchase', 'Off'),
+                'classify' => PsbClassify::getClsSelect( PsbClassify::$parent_cly_id['Purchase'], 'Purchase', 'Off' ),
             ],
-        ]);
+        ] );
     }
 
     /**
@@ -190,9 +189,9 @@ class PurchaseController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel( $id )->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( ['index'] );
     }
 
     /**
@@ -206,10 +205,10 @@ class PurchaseController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Purchase::findOne($id)) !== null) {
+        if (($model = Purchase::findOne( $id )) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('无法找到相关网页.');
+            throw new NotFoundHttpException( '无法找到相关网页.' );
         }
     }
 
@@ -223,7 +222,7 @@ class PurchaseController extends BaseController
     public static function setDate($data)
     {
 
-        if (empty($data['Purchase']))
+        if (empty( $data['Purchase'] ))
             return false;
 
 //        $data['Purchase']['start_at'] = strtotime($data['Purchase']['start_at']);

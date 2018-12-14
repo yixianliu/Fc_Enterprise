@@ -56,6 +56,7 @@ class PsbClsController extends BaseController
             'dataProvider' => $dataProvider,
             'id'           => $id,
             'type'         => $type,
+            'class_name'   => PsbClassify::$parent_cly_name,
         ] );
     }
 
@@ -99,7 +100,7 @@ class PsbClsController extends BaseController
             'model'  => $model,
             'id'     => $id,
             'result' => [
-                'classify' => PsbClassify::getClsSelect( $model->is_type, 'On', $id ),
+                'classify' => PsbClassify::getClsSelect( $model->is_type, 'On'),
             ],
         ] );
     }

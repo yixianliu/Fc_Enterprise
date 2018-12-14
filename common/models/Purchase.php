@@ -9,21 +9,21 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%purchase}}".
  *
  * @property integer $id
- * @property string $purchase_id
- * @property string $user_id
- * @property string $title
- * @property string $content
- * @property string $path
- * @property string $price
- * @property string $num
- * @property string $unit
- * @property string $is_type
- * @property string $is_status
- * @property string $start_at
- * @property string $end_at
- * @property string $is_using
- * @property string $created_at
- * @property string $updated_at
+ * @property string  $purchase_id
+ * @property string  $user_id
+ * @property string  $title
+ * @property string  $content
+ * @property string  $path
+ * @property string  $price
+ * @property string  $num
+ * @property string  $unit
+ * @property string  $is_type
+ * @property string  $is_status
+ * @property string  $start_at
+ * @property string  $end_at
+ * @property string  $is_using
+ * @property string  $created_at
+ * @property string  $updated_at
  */
 class Purchase extends \yii\db\ActiveRecord
 {
@@ -55,11 +55,12 @@ class Purchase extends \yii\db\ActiveRecord
     {
         return [
             [['purchase_id', 'c_key', 'user_id', 'title', 'content', 'price', 'start_at'], 'required'],
-            [['content', 'is_type', 'is_status', 'is_using', 'unit', 'path', 'is_send_msg',], 'string'],
+            [['content', 'is_type', 'is_status', 'is_using', 'unit', 'path', 'is_send_msg', 'images', 'thumbnail'], 'string'],
             [['num'], 'integer'],
             [['purchase_id', 'user_id', 'price', 'is_using', 'is_type', 'is_status', 'unit',], 'string', 'max' => 85],
-            [['title',], 'string', 'max' => 125],
-            [['path',], 'string', 'max' => 1500],
+            [['title'], 'string', 'max' => 125],
+            [['images', 'path'], 'string', 'max' => 1500],
+            [['thumbnail'], 'string', 'max' => 300],
             [['purchase_id'], 'unique'],
 
             // 默认
@@ -84,6 +85,8 @@ class Purchase extends \yii\db\ActiveRecord
             'title'       => '采购标题',
             'content'     => '采购内容',
             'path'        => '采购相关文件',
+            'images'      => '采购图片',
+            'thumbnail'   => '缩略图',
             'price'       => '采购价格',
             'num'         => '采购数量',
             'unit'        => '单位',
@@ -103,6 +106,6 @@ class Purchase extends \yii\db\ActiveRecord
      */
     public function getPsb()
     {
-        return $this->hasMany(PsbClassify::className(), ['c_key' => 'c_key']);
+        return $this->hasMany( PsbClassify::className(), ['c_key' => 'c_key'] );
     }
 }
