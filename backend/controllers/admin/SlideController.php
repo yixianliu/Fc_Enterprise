@@ -2,8 +2,6 @@
 
 namespace backend\controllers\admin;
 
-
-use common\models\SlideClassify;
 use Yii;
 use common\models\Slide;
 use common\models\Pages;
@@ -11,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
+use common\models\SlideClassify;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -50,7 +49,7 @@ class SlideController extends BaseController
     public function actionIndex()
     {
         // add conditions that should always apply here
-        $query = Slide::find()->where( ['is_language' => Yii::$app->session['language']] )->orderBy(['updated_at' => SORT_DESC]);
+        $query = Slide::find()->where( ['is_language' => Yii::$app->session['language']] )->orderBy( ['updated_at' => SORT_DESC] );
 
         $dataProvider = new ActiveDataProvider( [
             'query' => $query,
@@ -94,9 +93,22 @@ class SlideController extends BaseController
         // 旧路径
         $oldFile = $model->path;
 
-        if ($model->load( Yii::$app->request->post() ) && $model->save()) {
+        if ($model->load( Yii::$app->request->post() )) {
 
             self::ImageDelete( $model->path, $oldFile );
+
+            $cKeyArray = Yii::$app->request->post( 'Slide' );
+
+            $model->c_key = null;
+
+            foreach ($cKeyArray['c_key'] as $value) {
+                $model->c_key = $value . ',' . $model->c_key;
+            }
+
+            if (!$model->save()) {
+                Yii::$app->getSession()->setFlash( 'error', '配置异常!' );
+                return $this->redirect( ['create'] );
+            }
 
             return $this->redirect( ['view', 'id' => $model->id] );
 
@@ -104,7 +116,9 @@ class SlideController extends BaseController
 
             return $this->render( 'create', [
                 'model'  => $model,
-                'result' => $this->page(),
+                'result' => [
+                    'page' => SlideClassify::getSlideSelect(),
+                ],
             ] );
         }
     }
@@ -147,34 +161,6 @@ class SlideController extends BaseController
                 'result' => $result,
             ] );
         }
-    }
-
-    /**
-     * 固定单页面
-     *
-     * @return array
-     */
-    public function page()
-    {
-
-        // 初始化
-        $result = [];
-
-        // 幻灯片分类
-        $dataPageCls = SlideClassify::findAll( ['is_using' => 'On'] );
-
-        foreach ($dataPageCls as $value) {
-            $result['page'][ $value['c_key'] ] = $value['name'];
-        }
-
-        // 单页面
-        $dataPage = Pages::findByAll();
-
-        foreach ($dataPage as $value) {
-            $result['page'][ $value['page_id'] ] = $value['menu']['name'];
-        }
-
-        return $result;
     }
 
     /**

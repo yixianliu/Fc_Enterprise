@@ -48,7 +48,7 @@ class SlideClsController extends BaseController
     public function actionIndex()
     {
 
-        $query = SlideClassify::find()->orderBy(['updated_at' => SORT_DESC]);
+        $query = SlideClassify::find()->orderBy( ['updated_at' => SORT_DESC] );
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider( [
@@ -152,23 +152,4 @@ class SlideClsController extends BaseController
         throw new NotFoundHttpException( 'The requested page does not exist.' );
     }
 
-    public function setType()
-    {
-
-        // 初始化
-        $result = [];
-
-        $type = Yii::$app->request->get( 'type', 'default' );
-
-        if ($type == 'pages') {
-
-            $classify = Menu::findAll( ['model_key' => 'UC1'] );
-
-            foreach ($classify as $value) {
-                $result['classify'][ $value->pages->page_id ] = $value->name;
-            }
-        }
-
-        return $result;
-    }
 }

@@ -32,25 +32,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'c_key',
+                            'format'    => 'html',
                             'value'     => function ($model) {
 
-                                $state = array();
+                                $html = null;
 
-                                $data = \common\models\SlideClassify::findAll(['is_using' => 'On']);
-
-                                foreach ($data as $value) {
-                                    $state[ $value['c_key'] ] = $value['name'];
-                                }
-
-                                $data = \common\models\Pages::findByAll(['is_using' => 'On']);
+                                $data = explode( ',', $model->c_key );
 
                                 foreach ($data as $value) {
-                                    $state[ $value['page_id'] ] = $value['menu']['name'];
+
+                                    if (empty($value))
+                                        continue;
+
+                                    $dataArray = \common\models\SlideClassify::findOne( ['c_key' => $value] );
+
+                                    $html .= '<div class="btn btn-md btn-primary">' . $dataArray->name . '</div>';
                                 }
 
-                                return $state[ $model->c_key ];
+                                return $html;
                             },
-                            'options' => ['width' => 150]
+                            'options' => ['width' => 350]
                         ],
                         [
                             'attribute' => 'path',

@@ -64,4 +64,52 @@ class SlideClassify extends \yii\db\ActiveRecord
             'updated_at'  => '更新数据时间',
         ];
     }
+
+    /**
+     * 固定单页面
+     *
+     * @return array
+     */
+    public static function getSlideSelect()
+    {
+
+        // 初始化
+        $result = [];
+
+        // 幻灯片分类
+        $dataPageCls = static::findAll( ['is_using' => 'On'] );
+
+        foreach ($dataPageCls as $value) {
+            $result[ $value['c_key'] ] = $value['name'];
+        }
+
+        // 单页面
+        $dataPage = Pages::findByAll();
+
+        foreach ($dataPage as $value) {
+            $result[ $value['page_id'] ] = $value['menu']['name'];
+        }
+
+        return $result;
+    }
+
+    public static function setType()
+    {
+
+        // 初始化
+        $result = [];
+
+        $type = Yii::$app->request->get( 'type', 'default' );
+
+        if ($type == 'pages') {
+
+            $classify = Menu::findAll( ['model_key' => 'UC1'] );
+
+            foreach ($classify as $value) {
+                $result['classify'][ $value->pages->page_id ] = $value->name;
+            }
+        }
+
+        return $result;
+    }
 }

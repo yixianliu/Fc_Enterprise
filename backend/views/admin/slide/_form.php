@@ -21,20 +21,25 @@ use phpnt\ICheck\ICheck;
                 <?php $form = ActiveForm::begin( ['options' => ['enctype' => 'multipart/form-data']] ); ?>
 
                 <?=
-                $form->field( $model, 'c_key' )->widget( kartik\select2\Select2::classname(), [
-                    'data'          => $result['page'],
-                    'options'       => ['placeholder' => '选择相对应的页面...'],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                    ],
-                ] );
+                $form->field( $model, 'c_key' )->widget( ICheck::className(), [
+                    'type'    => ICheck::TYPE_CHECBOX_LIST,
+                    'style'   => ICheck::STYLE_SQUARE,
+                    'items'   => $result['page'],
+                    'color'   => 'red',                  // цвет
+                    'options' => [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            return '<input type="checkbox" id="c_key' . $index . '" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : false) . '> <label for="c_key' . $index . '">' . $label . '</label>&nbsp;&nbsp;';
+                        },
+                    ]] )
                 ?>
+
 
                 <?= Yii::$app->view->renderFile( '@app/views/admin/upload.php', ['model' => $model, 'form' => $form, 'text' => '幻灯片图片上传'] ); ?>
 
                 <?= $form->field( $model, 'description' )->textarea( ['rows' => 6] ) ?>
 
-                <?= $form->field( $model, 'is_using' )->widget( ICheck::className(), [
+                <?=
+                $form->field( $model, 'is_using' )->widget( ICheck::className(), [
                     'type'    => ICheck::TYPE_RADIO_LIST,
                     'style'   => ICheck::STYLE_SQUARE,
                     'items'   => ['On' => '开启', 'Off' => '关闭'],
