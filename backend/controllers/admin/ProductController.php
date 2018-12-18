@@ -187,6 +187,7 @@ class ProductController extends BaseController
      */
     public function actionBatchCreate()
     {
+
         if (!Yii::$app->request->isAjax) {
             Yii::$app->getSession()->setFlash( 'error', '非法提交模式!' );
             return $this->redirect( 'index' );
@@ -195,10 +196,15 @@ class ProductController extends BaseController
         // 需要复制的 Id
         $id = Yii::$app->request->get( 'id', null );
 
+        if (empty( $id )) {
+            return ['status' => false, 'msg' => '请选择内容!'];
+        }
+
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         if (empty( $id )) {
-            return ['status' => false, 'msg' => '没有选择内容'];
+            Yii::$app->getSession()->setFlash( 'error', '没有选择内容!' );
+            return ['status' => false];
         }
 
         $arrayId = explode( ',', $id );
@@ -212,38 +218,92 @@ class ProductController extends BaseController
 
             $modelDef['Product'] = Product::findOne( ['id' => $value] )->toArray();
 
-            $modelDef['Product']['title'] = $modelDef['Product']['title'] . '_' . '复制内容' . '_' . self::getRandomString();
+            if (empty( $modelDef['Product'] ))
+                continue;
+
+            $title = explode( '_', $modelDef['Product']['title'] );
+
+            $modelDef['Product']['title'] = $title[0] . '_' . '复制内容' . '_' . self::getRandomString();
             $modelDef['Product']['product_id'] = self::getRandomString();
             $modelDef['Product']['images'] = null;
             $modelDef['Product']['thumbnail'] = null;
 
             $model = new Product();
 
-            if (!$model->load($modelDef, 'Product')) {
+            if (!$model->load( $modelDef, 'Product' )) {
                 $connection->rollBack();
-                return ['status' => false, 'msg' => '无法载入数据!'];
+                Yii::$app->getSession()->setFlash( 'error', '无法载入数据!' );
+                return ['status' => false];
             }
 
-            if (!$model->save()) {
+            if (!$model->save( false )) {
                 $connection->rollBack();
-                return ['status' => false, 'msg' => '内容无法复制!'];
+                Yii::$app->getSession()->setFlash( 'error', '内容无法复制!' );
+                return ['status' => false];
             }
 
         }
 
         $connection->commit();
 
-        return ['status' => true, 'msg' => '复制成功'];
+        Yii::$app->getSession()->setFlash( 'success', '复制成功!' );
+
+        return ['status' => true];
     }
 
+    /**
+     * 移动分类
+     *
+     * @return string
+     */
     public function actionBatchMovie()
     {
 
+        $id = Yii::$app->request->get( 'id', null );
+
+        if (empty( $id )) {
+            Yii::$app->getSession()->setFlash( 'error', '请选择内容!' );
+            return $this->redirect( ['index'] );
+        }
+
+        if (Yii::$app->request->isPost) {
+
+        }
+
+        $model = new Product();
+
+        $data = [];
+
+        $dataId = explode( ',', $id );
+
+        foreach ($dataId as $key => $value) {
+
+            if (empty( $value ))
+                continue;
+
+            $data[$key] = Product::findOne( ['id' => $value] );
+
+            // 缩略图
+            $filename = Yii::getAlias( '@web/../../frontend/web/temp/product/' ) . $data[$key]->product_id . '/' . $data[$key]->thumbnail;
+
+            if (empty( $model->thumbnail ) && !file_exists( $filename ))
+                $filename = Yii::getAlias( '@web/../../frontend/web/img/not.jpg' );
+
+            $data[$key]['thumbnail'] = $filename;
+        }
+
+        return $this->render( 'movie', ['model' => $model, 'result' => [
+            'classify' => ProductClassify::getClsSelect(),
+            'data'     => $data,
+        ]] );
     }
 
     public function actionBatchDelete()
     {
 
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        return ['status' => true, 'msg' => '删除成功!'];
     }
 
 }

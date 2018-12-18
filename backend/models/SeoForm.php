@@ -8,15 +8,12 @@
 
 namespace backend\models;
 
-use Yii;
 use yii\base\Model;
 
 class SeoForm extends Model
 {
 
-    public $title = null;
-
-    public $alt = null;
+    public $content = null;
 
     /**
      * 验证规则
@@ -24,7 +21,7 @@ class SeoForm extends Model
     public function rules()
     {
         return [
-            [['alt', 'title'], 'required'],
+            [['content'], 'required'],
         ];
     }
 
@@ -34,8 +31,7 @@ class SeoForm extends Model
     public function attributeLabels()
     {
         return [
-            'alt'   => 'Alt 属性',
-            'title' => 'Title 属性',
+            'content' => 'Js 属性',
         ];
     }
 

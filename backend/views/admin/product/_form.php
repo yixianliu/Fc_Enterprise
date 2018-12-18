@@ -204,7 +204,8 @@ if (empty( $result['classify'] )) {
 
                                     <hr/>
 
-                                    <?= $form->field( $model, 'is_comments' )->widget( ICheck::className(), [
+                                    <?=
+                                    $form->field( $model, 'is_comments' )->widget( ICheck::className(), [
                                         'type'    => ICheck::TYPE_RADIO_LIST,
                                         'style'   => ICheck::STYLE_SQUARE,
                                         'items'   => ['On' => '开启', 'Off' => '关闭'],

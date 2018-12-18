@@ -23,7 +23,7 @@ class BaseController extends Controller
     {
 
         if (Yii::$app->user->isGuest) {
-            return $this->redirect( [ '/admin/member/login' ] );
+            return $this->redirect( ['/admin/member/login'] );
         }
 
         \common\models\Language::isLanguage();
@@ -45,11 +45,11 @@ class BaseController extends Controller
     {
 
         if (!file_exists( Yii::getAlias( '@webroot' ) . '/' . Yii::$app->params['RD_FILE'] )) {
-            return $this->redirect( [ '/mount/member/login' ] );
+            return $this->redirect( ['/mount/member/login'] );
         }
 
         if (Yii::$app->user->isGuest) {
-            return $this->redirect( [ '/admin/member/login' ] );
+            return $this->redirect( ['/admin/member/login'] );
         }
 
         $power = Yii::$app->controller->action->id . ucfirst( explode( '/', Yii::$app->controller->id )[1] );
@@ -59,7 +59,7 @@ class BaseController extends Controller
         }
 
         if (!Yii::$app->user->can( $power ) && Yii::$app->getErrorHandler()->exception === null) {
-            throw new \yii\web\UnauthorizedHttpException( '对不起，您现在还没获此操作的权限!' );
+//            throw new \yii\web\UnauthorizedHttpException( '对不起，您现在还没获此操作的权限!' );
         }
 
         return true;

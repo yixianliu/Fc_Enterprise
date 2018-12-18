@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-lg-12">
 
     <?= Html::a('创建幻灯片', ['create'], ['class' => "btn btn-primary"]) ?>
-    <?= Html::a('幻灯片分类', ['admin/slide-cls/index'], ['class' => "btn btn-primary"]) ?>
 
     <section class="box ">
 

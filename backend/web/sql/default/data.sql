@@ -40,6 +40,7 @@ VALUES
 (NULL, 'REG_STATUS', '是否启用注册', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
 (NULL, 'WEB_STATUS', '是否启用网站状态', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
 (NULL, 'LOGIN_STATUS', '是否启用登陆', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
+(NULL, 'SEO_JS_STATUS', '是否启用SEO Js', 'On', NULL, 'On', 'LCN', 'system', #TIME#, #TIME#),
 (NULL, 'QR_WX_CODE', '公众号二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'qr', #TIME#, #TIME#),
 (NULL, 'QR_MINIPROGRAM_CODE', '小程序二维码', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'qr', #TIME#, #TIME#),
 (NULL, 'WEB_LOGO', '网站Logo', '/themes/default/images/logo.jpg', NULL, 'On', 'LCN', 'logo', #TIME#, #TIME#),
@@ -171,6 +172,21 @@ VALUES
 (NULL, 'ESuper2', 2, 'Super1', 'admin', 'UU1', NULL, '模块管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ESuper3', 3, 'Super1', 'admin', 'UU1', NULL, '网站配置', 'manage/web/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ESuper4', 4, 'Super1', 'admin', 'UU1', NULL, '硬盘资源', 'manage/disk/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AS1', 10, 'Super1', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ALanguage1', 13, 'Super1', 'admin', 'UU1', NULL, '语言类别管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ACenter7', 7, 'Super1', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMenuModel7', 8, 'Super1', 'admin', 'UU1', NULL, '菜单模型管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+
+(NULL, 'AMMenuModel1', 1, 'AMenuModel7', 'admin', 'UU1', NULL, '菜单模型列表', 'menu-model/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'AMMenuModel2', 2, 'AMenuModel7', 'admin', 'UU1', NULL, '添加菜单模型', 'menu-model/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+
+(NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+
+(NULL, 'ALLanguage1', 1, 'ALanguage1', 'admin', 'UU1', NULL, '语言类别列表', 'language/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ALLanguage2', 2, 'ALanguage1', 'admin', 'UU1', NULL, '添加语言类别', 'language/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 (NULL, 'Module1', 1, 'ESuper2', 'admin', 'UU1', NULL, '模块列表', 'manage/module/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'Module2', 2, 'ESuper2', 'admin', 'UU1', NULL, '添加模块', 'manage/module/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
@@ -189,13 +205,12 @@ VALUES
 (NULL, 'AR1', 7, 'A3', 'admin', 'UU1', NULL, '角色管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AJ1', 8, 'A3', 'admin', 'UU1', NULL, '招聘管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AD1', 9, 'A3', 'admin', 'UU1', NULL, '下载中心', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'AS1', 10, 'A3', 'admin', 'UU1', NULL, '单页面管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AC1', 11, 'A3', 'admin', 'UU1', NULL, '留言管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AOrder1', 12, 'A3', 'admin', 'UU1', NULL, '订单管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ALanguage1', 13, 'A3', 'admin', 'UU1', NULL, '语言类别管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASeo1', 13, 'A3', 'admin', 'UU1', NULL, 'S.E.O 管理', NULL, NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ALLanguage1', 1, 'ALanguage1', 'admin', 'UU1', NULL, '语言类别列表', 'language/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ALLanguage2', 2, 'ALanguage1', 'admin', 'UU1', NULL, '添加语言类别', 'language/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSeo1', 1, 'ASeo1', 'admin', 'UU1', NULL, 'Js 设置', 'seo/js', NULL, 'LCN', 'On', #TIME#, #TIME#),
+(NULL, 'ASSeo2', 2, 'ASeo1', 'admin', 'UU1', NULL, 'MIP 设置', 'seo/mip', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
 (NULL, 'ACMM1', 1, 'AC1', 'admin', 'UU1', NULL, '留言列表', 'msg/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACMM2', 2, 'AC1', 'admin', 'UU1', NULL, '添加留言', 'msg/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
@@ -220,11 +235,6 @@ VALUES
 (NULL, 'ADDD3', 3, 'AD1', 'admin', 'UU1', NULL, '下载中心分类', 'download-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ADDD4', 4, 'AD1', 'admin', 'UU1', NULL, '添加下载中心分类', 'download-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
-(NULL, 'ASSS3', 3, 'AS1', 'admin', 'UU1', NULL, '单页面分类', 'pages-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS4', 4, 'AS1', 'admin', 'UU1', NULL, '添加单页面分类', 'pages-cls/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS7', 7, 'AS1', 'admin', 'UU1', NULL, '单页面数据', 'pages-list/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ASSS8', 8, 'AS1', 'admin', 'UU1', NULL, '添加单页面数据', 'pages-list/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
-
 (NULL, 'AUUV1', 1, 'AU1', 'admin', 'UU1', NULL, '所有用户', 'user/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'AUUV2', 2, 'AU1', 'admin', 'UU1', NULL, '添加用户', 'user/create', NULL, 'LCN', 'On', #TIME#, #TIME#),
 
@@ -245,9 +255,7 @@ VALUES
 (NULL, 'ACenter2', 2, 'AC2', 'admin', 'UU1', NULL, '网站配置', 'conf/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter3', 3, 'AC2', 'admin', 'UU1', NULL, '备份数据', 'backup/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter4', 4, 'AC2', 'admin', 'UU1', NULL, '网站档案', 'center/info', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter5', 5, 'AC2', 'admin', 'UU1', NULL, '网站SEO设置', 'center/seo', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter6', 6, 'AC2', 'admin', 'UU1', NULL, '轮播图管理', 'slide/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
-(NULL, 'ACenter7', 7, 'AC2', 'admin', 'UU1', NULL, '轮播图分类管理', 'slide-cls/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter8', 8, 'AC2', 'admin', 'UU1', NULL, '模板管理', 'tpl/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter9', 9, 'AC2', 'admin', 'UU1', NULL, '访客管理', 'visitor/index', NULL, 'LCN', 'On', #TIME#, #TIME#),
 (NULL, 'ACenter10', 10, 'AC2', 'admin', 'UU1', NULL, '操作日志', 'operate/index', NULL, 'LCN', 'On', #TIME#, #TIME#),

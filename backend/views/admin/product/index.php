@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </section>
 
-    <?= Yii::$app->view->renderFile( '@app/views/_ajax.php', ['url' => \yii\helpers\Url::to(['batch-create'], true)] ); ?>
+    <?= Yii::$app->view->renderFile( '@app/views/_BatchAjax.php', ['url' => \yii\helpers\Url::to(['batch-create'], true)] ); ?>
 
 </div>
 
