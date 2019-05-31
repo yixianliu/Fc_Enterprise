@@ -109,7 +109,7 @@ class PurchaseController extends BaseController
         if ($model->load( $data ) && $model->save()) {
 
             // 群发短信
-            PsbClassify::smsSend( $data );
+            Sms::send( $data );
 
             self::ImageDelete( $model->path, $oldFile, $model->purchase_id );
 

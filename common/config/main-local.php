@@ -5,9 +5,9 @@ return [
         // 数据库
         'db' => [
             'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=localhost;dbname=fc_calendar',
-            'username'    => 'root',
-            'password'    => 'root',
+            'dsn'         => 'mysql:host=localhost;dbname=sql249488',
+            'username'    => 'sql249488',
+            'password'    => 'dae6c026',
             'charset'     => 'utf8',
             'tablePrefix' => 'fc_',   //加入前缀名称fc_
         ],

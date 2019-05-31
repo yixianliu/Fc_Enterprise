@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
@@ -18,8 +18,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade'], 'integer'],
-            [['product_id', 'user_id', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'images', 'images', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
+            [['id', 'price', 'discount', 'praise', 'forward', 'collection', 'share', 'attention', 'grade', 'user_grade', 'created_at', 'updated_at'], 'integer'],
+            [['product_id', 'user_id', 'c_key', 's_key', 'title', 'content', 'introduction', 'keywords', 'path', 'is_promote', 'is_hot', 'is_classic', 'is_winnow', 'is_recommend', 'is_audit', 'is_field', 'is_comments', 'is_img', 'is_thumb'], 'safe'],
         ];
     }
 
@@ -41,17 +41,15 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-
-        $query = Product::find()
-            ->where( ['is_language' => Yii::$app->session['language']] )
-            ->orderBy( ['updated_at' => SORT_DESC] );
+        $query = Product::find();
 
         // add conditions that should always apply here
-        $dataProvider = new ActiveDataProvider( [
-            'query' => $query,
-        ] );
 
-        $this->load( $params );
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -60,36 +58,40 @@ class ProductSearch extends Product
         }
 
         // grid filtering conditions
-        $query->andFilterWhere( [
-            'id'         => $this->id,
-            'price'      => $this->price,
-            'discount'   => $this->discount,
-            'praise'     => $this->praise,
-            'forward'    => $this->forward,
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'praise' => $this->praise,
+            'forward' => $this->forward,
             'collection' => $this->collection,
-            'share'      => $this->share,
-            'attention'  => $this->attention,
-            'grade'      => $this->grade,
+            'share' => $this->share,
+            'attention' => $this->attention,
+            'grade' => $this->grade,
             'user_grade' => $this->user_grade,
-        ] );
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
 
-        $query->andFilterWhere( ['like', 'product_id', $this->product_id] )
-            ->andFilterWhere( ['like', 'user_id', $this->user_id] )
-            ->andFilterWhere( ['like', 'c_key', $this->c_key] )
-            ->andFilterWhere( ['like', 's_key', $this->s_key] )
-            ->andFilterWhere( ['like', 'title', $this->title] )
-            ->andFilterWhere( ['like', 'content', $this->content] )
-            ->andFilterWhere( ['like', 'introduction', $this->introduction] )
-            ->andFilterWhere( ['like', 'keywords', $this->keywords] )
-            ->andFilterWhere( ['like', 'path', $this->images] )
-            ->andFilterWhere( ['like', 'path', $this->images] )
-            ->andFilterWhere( ['like', 'is_promote', $this->is_promote] )
-            ->andFilterWhere( ['like', 'is_hot', $this->is_hot] )
-            ->andFilterWhere( ['like', 'is_classic', $this->is_classic] )
-            ->andFilterWhere( ['like', 'is_winnow', $this->is_winnow] )
-            ->andFilterWhere( ['like', 'is_recommend', $this->is_recommend] )
-            ->andFilterWhere( ['like', 'is_audit', $this->is_using] )
-            ->andFilterWhere( ['like', 'is_comments', $this->is_comments] );
+        $query->andFilterWhere(['like', 'product_id', $this->product_id])
+            ->andFilterWhere(['like', 'user_id', $this->user_id])
+            ->andFilterWhere(['like', 'c_key', $this->c_key])
+            ->andFilterWhere(['like', 's_key', $this->s_key])
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(['like', 'introduction', $this->introduction])
+            ->andFilterWhere(['like', 'keywords', $this->keywords])
+            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'is_promote', $this->is_promote])
+            ->andFilterWhere(['like', 'is_hot', $this->is_hot])
+            ->andFilterWhere(['like', 'is_classic', $this->is_classic])
+            ->andFilterWhere(['like', 'is_winnow', $this->is_winnow])
+            ->andFilterWhere(['like', 'is_recommend', $this->is_recommend])
+            ->andFilterWhere(['like', 'is_audit', $this->is_audit])
+            ->andFilterWhere(['like', 'is_field', $this->is_field])
+            ->andFilterWhere(['like', 'is_comments', $this->is_comments])
+            ->andFilterWhere(['like', 'is_img', $this->is_img])
+            ->andFilterWhere(['like', 'is_thumb', $this->is_thumb]);
 
         return $dataProvider;
     }

@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%psb_classify}}".
@@ -20,7 +21,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $created_at
  * @property string $updated_at
  */
-class PsbClassify extends \yii\db\ActiveRecord
+class PsbClassify extends ActiveRecord
 {
 
     static public $parent_cly_id = [
@@ -62,8 +63,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             [['name', 'parent_id', 'is_type'], 'required'],
             [['sort_id',], 'integer'],
             [['description', 'is_using'], 'string'],
-            [['c_key', 'parent_id'], 'string', 'max' => 55],
-            [['name'], 'string', 'max' => 85],
+            [['name', 'c_key', 'parent_id'], 'string', 'max' => 85],
             [['keywords'], 'string', 'max' => 155],
             [['json_data'], 'string', 'max' => 255],
 
@@ -85,7 +85,7 @@ class PsbClassify extends \yii\db\ActiveRecord
             'description' => '分类描述',
             'keywords'    => '分类关键词',
             'json_data'   => 'Json 数据',
-            'parent_id'   => '父类分类',
+            'parent_id'   => '所属分类',
             'is_using'    => '是否启用',
             'is_type'     => '分类类型',
             'created_at'  => '添加数据时间',
@@ -99,7 +99,7 @@ class PsbClassify extends \yii\db\ActiveRecord
      * @param null   $parent_id
      * @param string $type
      *
-     * @return array|PsbClassify[]|\yii\db\ActiveRecord[]
+     * @return array|PsbClassify[]|ActiveRecord[]
      */
     static public function findByAll($parent_id = null, $type = 'Supply')
     {
@@ -115,7 +115,6 @@ class PsbClassify extends \yii\db\ActiveRecord
     /**
      * 获取分类 (选项卡)
      *
-     * @param null   $parent_id
      * @param string $type
      * @param string $one
      *
@@ -124,18 +123,15 @@ class PsbClassify extends \yii\db\ActiveRecord
     public static function getClsSelect($type = 'Supply', $one = 'On')
     {
 
-        if (empty($type)) {
-            return false;
-        }
-
         // 初始化
         $result = [];
 
         // 所有分类
         $dataClassify = static::findByAll( static::$parent_cly_id[ $type ], $type );
 
-        if ($one == 'On')
-            $result[ static::$parent_cly_id[ $type ] ] = '顶级分类!!';
+        if ($one == 'On') {
+            $result[ static::$parent_cly_id[ $type ] ] = '一级分类';
+        }
 
         foreach ($dataClassify as $key => $value) {
 
@@ -164,7 +160,7 @@ class PsbClassify extends \yii\db\ActiveRecord
     public static function recursionClsSelect($data, $type, $num = 1)
     {
 
-        if (empty( $data ) || empty($type))
+        if (empty( $data ) || empty( $type ))
             return;
 
         // 初始化
@@ -197,41 +193,4 @@ class PsbClassify extends \yii\db\ActiveRecord
         return $result;
     }
 
-
-    /**
-     * 群发 sms 信息
-     *
-     * @param        $data
-     * @param string $type
-     *
-     * @return bool
-     */
-    public static function smsSend($data, $type = 'purchase')
-    {
-
-        // 初始化
-        $mobile = null;
-
-        if (empty( $data['Purchase']['is_send_msg'] ) || $data['Purchase']['is_send_msg'] != 'On') {
-            return false;
-        }
-
-        $user = User::findAll( ['is_type' => 'purchase'] );
-
-        if (empty( $user )) {
-            return false;
-        }
-
-        $content = '【湛江沃噻网络】我司发布了一条新的采购信息 : "' . $data['title'] . '"。如果符合你公司的供应货品,请致电联系我司客服进行沟通.';
-
-        // 接收的手机号,多个手机号用英文逗号隔开
-        foreach ($user as $value) {
-            $mobile .= $value . ',';
-        }
-
-        if (!Yii::$app->smser->send( $mobile, $content ))
-            return false;
-
-        return true;
-    }
 }
