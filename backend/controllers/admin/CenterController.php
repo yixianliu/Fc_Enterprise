@@ -25,7 +25,9 @@ class CenterController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        // 设置 actions 的操作是允许访问还是拒绝访问
                         'allow' => true,
+                        // @ 当前规则针对认证过的用户， ？所有用户均可访问
                         'roles' => ['@'],
                     ],
                 ],
@@ -33,6 +35,7 @@ class CenterController extends BaseController
 
             'verbs' => [
                 'class'   => VerbFilter::className(),
+                //VerbFilter指定CRUD动作所允许的请求方式
                 'actions' => [
                     'delete' => ['POST'],
                 ],
