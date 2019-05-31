@@ -4,7 +4,6 @@ namespace backend\controllers\admin;
 
 use Yii;
 use common\models\Purchase;
-use common\models\PurchaseSearch;
 use common\models\PsbClassify;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

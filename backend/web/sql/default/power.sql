@@ -4,60 +4,67 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_role`;
-CREATE TABLE `#DB_PREFIX#auth_role` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `name` varchar(80) NOT NULL DEFAULT '' COMMENT '角色名称',
-    `description` varchar(80) NOT NULL DEFAULT '' COMMENT '权限描述',
-    `rule_name` varchar(80) NULL DEFAULT NULL COMMENT '规则',
-    `data` varchar(80) NULL DEFAULT NULL COMMENT '数据',
-    `type` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：角色 2：权限',
-    `status` smallint NOT NULL DEFAULT 0 COMMENT '状态 1：有效 0：无效',
-    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
-    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
+CREATE TABLE `#DB_PREFIX#auth_role`
+(
+    `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `name`        varchar(80)      NOT NULL DEFAULT '' COMMENT '角色名称',
+    `description` varchar(80)      NOT NULL DEFAULT '' COMMENT '权限描述',
+    `rule_name`   varchar(80)      NULL     DEFAULT NULL COMMENT '规则',
+    `data`        varchar(80)      NULL     DEFAULT NULL COMMENT '数据',
+    `type`        smallint         NOT NULL DEFAULT 0 COMMENT '状态 1：角色 2：权限',
+    `status`      smallint         NOT NULL DEFAULT 0 COMMENT '状态 1：有效 0：无效',
+    `updated_at`  integer          NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
+    `created_at`  integer          NOT NULL DEFAULT '0' COMMENT '插入时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`),
     UNIQUE KEY `description` (`description`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限表';
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='角色权限表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_user_role`;
-CREATE TABLE `#DB_PREFIX#auth_user_role` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` varchar(80) NOT NULL COMMENT '用户id',
-    `role_id` varchar(80) NOT NULL COMMENT '角色ID',
-    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
-    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
+CREATE TABLE `#DB_PREFIX#auth_user_role`
+(
+    `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `user_id`    varchar(80)      NOT NULL COMMENT '用户id',
+    `role_id`    varchar(80)      NOT NULL COMMENT '角色ID',
+    `created_at` integer          NOT NULL DEFAULT '0' COMMENT '插入时间',
+    `updated_at` integer          NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
     PRIMARY KEY (`id`),
     KEY `user_id` (`user_id`),
     KEY `role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='用户角色关联表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_role_permisson`;
-CREATE TABLE `#DB_PREFIX#auth_role_permisson` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `parent` varchar(80) NOT NULL COMMENT '角色名称',
-    `child` varchar(80) NOT NULL COMMENT '权限名称',
+CREATE TABLE `#DB_PREFIX#auth_role_permisson`
+(
+    `id`     int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `parent` varchar(80)      NOT NULL COMMENT '角色名称',
+    `child`  varchar(80)      NOT NULL COMMENT '权限名称',
     PRIMARY KEY (`id`),
     KEY `parent` (`parent`),
     KEY `child` (`child`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='角色权限关联表';
 
 DROP TABLE IF EXISTS `#DB_PREFIX#auth_rule`;
-CREATE TABLE `#DB_PREFIX#auth_rule` (
-    `name` varchar(80) NOT NULL,
-    `data` blob,
-    `updated_at` integer NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
-    `created_at` integer NOT NULL DEFAULT '0' COMMENT '插入时间',
+CREATE TABLE `#DB_PREFIX#auth_rule`
+(
+    `name`       varchar(80) NOT NULL,
+    `data`       blob,
+    `updated_at` integer     NOT NULL DEFAULT '0' COMMENT '最后一次更新时间',
+    `created_at` integer     NOT NULL DEFAULT '0' COMMENT '插入时间',
     primary key (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规则表';
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='规则表';
 
 /**
  * 插入数据
  */
 
 INSERT INTO `#DB_PREFIX#auth_user_role`
-VALUES
-(NULL, 1, 'admin', #TIME#, #TIME#),
-(NULL, 2, 'admin', #TIME#, #TIME#);
+VALUES (NULL, 1, 'admin', #TIME#, #TIME#),
+        (NULL, 2, 'admin', #TIME#, #TIME#);
 
 INSERT INTO `#DB_PREFIX#auth_role`
 VALUES
